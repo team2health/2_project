@@ -1,0 +1,47 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+.container {
+	width: 70vw;
+	background-color: rgb(210, 210, 210);
+	margin: 0 auto;
+}
+
+.btn-img {
+	width: 10vw;
+}
+
+.div-display-lnlineBlock {
+	display: inline-block;
+}
+
+.display-flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+.font-weight {
+	font-size: 1.2rem;
+	font-weight: 900;
+}
+
+.font-small {
+	font-size: 0.6rem;
+}
+
+.font-color {
+	color: #FF9900;
+}
+
+.display-flex-center {
+	display: flex;
+	align-items: center;
+}
