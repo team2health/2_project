@@ -1,0 +1,106 @@
+.mypage_body { 
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+    } 
+
+.maincalendar {
+    background-color : white;
+    height: auto;
+    width: 400px;
+    margin: 0px;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius:5px;
+    box-shadow:0px 40px 30px -20px rgba(0,0,0,0.3);
+}
+
+td {
+    width: 50px;
+    height: 50px;
+}
+
+.Calendar {
+    text-align: center;
+}
+
+.Calendar>thead>tr:first-child>td {
+    font-family: 'Questrial', sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.Calendar>thead>tr:last-child>td {
+    font-family: 'Questrial', sans-serif;
+    font-weight: 600;     
+}
+
+.Calendar>tbody>tr>td>p {
+    font-family: 'Montserrat', sans-serif;
+    height: 45px;
+    width: 45px;
+    border-radius: 45px;
+    transition-duration: .2s;
+    line-height: 45px;
+    margin: 2.5px;
+    display: block;
+    text-align: center;
+}        
+
+.pastDay {
+    color: lightgray;
+}
+
+.today {
+    background-color: #ffa459;            
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.futureDay {
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.futureDay:hover{
+    background:#eee;
+}
+
+.futureDay.choiceDay,
+.today.choiceDay {
+    background: #F5D042; 
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+.calendarNone {
+    display: none;
+}
+.mypage-title {
+    font-weight: 600;
+    font-size: 2rem;
+}
+.mypage-btn-layout {
+    text-align: center;
+}
+.mypage-btn {
+    font-size: 1.5rem;
+    background-color: #FFFFFF;
+    border: 0.5px solid #C5C5C5;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+.calendarBtn {
+    padding: 5px 10px;
+    color: #ffa459;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+.mypage-second {
+    display: inline-block;
+}
