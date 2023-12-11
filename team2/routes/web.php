@@ -21,6 +21,11 @@ Route::get('/mypage', function () {
     return view('mypage');
 });
 
+Route::get('/timeline', function () {
+    return view('timeline');
+});
+
+
 Route::get('/lastboard', function () {
     return view('lastboard');
 });
