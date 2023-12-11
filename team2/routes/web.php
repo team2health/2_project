@@ -31,6 +31,10 @@ Route::get('/lastboard', function () {
     return view('lastboard');
 });
 
+Route::get('/insert', function () {
+    return view('insert');
+});
+
 Route::get('/login', function () {
     return view('login');
 });
