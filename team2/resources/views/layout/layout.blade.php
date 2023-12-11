@@ -12,5 +12,7 @@
 <body>
 	@include('layout.header')
     @yield('main')
+
+	<script src="/js/main.js"></script>
 </body>
 </html>

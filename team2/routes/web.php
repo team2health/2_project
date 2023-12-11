@@ -30,3 +30,7 @@ Route::get('/timeline', function () {
 Route::get('/lastboard', function () {
     return view('lastboard');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
