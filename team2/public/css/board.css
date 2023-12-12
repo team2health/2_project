@@ -3,6 +3,9 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
+/* -------- lastboard -------- */
+
 .last_main{
     width: 70vW;
     margin: 0 auto;
@@ -53,6 +56,8 @@ textarea{
     justify-content: space-between;
 }
 
+/* -------- detail board -------- */
+
 .detail_container{
     
     border: 3px solid rgba(128, 128, 128, 0.369);
@@ -99,3 +104,87 @@ textarea{
 li{
     list-style-type: none;
 }
+
+/* -------- insert board -------- */
+
+.insert_main{
+    width: 70vW;
+    margin: 10px auto;    
+    background-color: rgba(128, 128, 128, 0.369) ;
+}
+.insert_hidden_container{
+    margin: 10px;
+    padding:10px;
+}
+.insert_container{
+    width: 80%;
+    height: 80%;
+    margin: 20px auto;  
+    border-radius: 5px; 
+    background-color: white;
+    border: 0.5px solid #c5c5c5;
+}
+.insert_img {    
+    margin: 0px auto;
+    width: 10%;
+    height: auto;    
+}
+.insert_img img{    
+    width: 100%;
+    height: auto;    
+}
+
+.insert_select_container{
+    margin: 10px auto;
+    padding: 10px;
+    width:70%;
+    border-radius: 15px;
+    background-color: rgba(128, 128, 128, 0.230) ;
+}
+.insert_select{
+    border: none;
+    background-color: rgba(128, 128, 128, 0) ;
+}
+ .insert_input_container,.insert_textarea_container{
+    margin: 10px auto;
+    padding: 10px;
+    width:70%;    
+}
+.insert_input{
+    width:100%;   
+    min-height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.369);
+}
+.insert_textarea{
+    width:100%;
+    min-height: 300px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.369);
+}
+.insert_hashtag_container{
+    margin: 10px auto;
+    padding: 10px;
+    width:70%;    
+}
+.insert_hashtag{
+    width:100%;  
+    min-height: 30px;  
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.369);
+    color: rgba(128, 128, 128, 0.369) ;
+}
+.insert_bottom_button{
+    display: flex;
+    justify-content: end;
+    box-sizing: content-box;
+    margin: 20px 30px ;  
+}
+.insert_btn{
+    border: 1px solid rgba(128, 128, 128, 0.369);
+    margin: 0px 10px;
+    width: 70px;
+    border-radius: 5px;
+    background-color: white;
+}
+
