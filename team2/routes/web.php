@@ -34,3 +34,11 @@ Route::get('/lastboard', function () {
 Route::get('/insert', function () {
     return view('insert');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/regist', function () {
+    return view('regist');
+});

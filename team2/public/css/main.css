@@ -9,6 +9,12 @@ a {
 	text-decoration: none;
 }
 
+button {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
 .container {
 	width: 70vw;
 	margin: 0 auto;
@@ -28,7 +34,7 @@ a {
 }
 
 .btn-img {
-	width: 10vw;
+	width: 5vw;
 }
 
 .div-display-lnlineBlock {
@@ -41,12 +47,12 @@ a {
 }
 
 .font-weight {
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	font-weight: 900;
 }
 
 .font-small {
-	font-size: 0.6rem;
+	font-size: 0.8rem;
 }
 
 .font-color {
@@ -63,7 +69,13 @@ a {
 	justify-content: space-around;
 }
 
-@media only screen and (max-width:700px) {
+.mini-container {
+	width: 30vw;
+	margin: 0 auto;
+	text-align: center;
+}
+
+@media only screen and (max-width:1000px) {
 	.display-none {
 		display: none;
 	}
@@ -74,4 +86,185 @@ a {
 	.container {
 		width: 100vw;
 	}
+	.mini-container {
+		width: 100vw;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.font-weight {
+		font-size: 1.7rem;
+		font-weight: 900;
+	}
+	.font-small {
+		font-size: 0.8rem;
+	}
+	.btn-img {
+		width: 15vw;
+	}
+}
+
+.text-center {
+	text-align: center;
+	font-weight: 900;
+}
+
+.bc-purple {
+	background-color: #F2EFF6;
+}
+
+.text-part {
+	background-color: #2C2B71;
+	border-radius: 10px;
+	padding: 5px;
+	color: #fff;
+}
+
+.login-input {
+	width: 90%;
+	height: 6vh;
+	margin-top: 10px;
+}
+
+.lr-box {
+	margin-top: 70px;
+}
+
+.login-button {
+	width: 90%;
+	height: 6vh;
+	margin-top: 20px;
+	background-color: #FFDDAA;
+	border-radius: 10px;
+	font-size: 1.3rem;
+	font-weight: 900;
+}
+
+.div-margin-auto {
+	margin: 20px auto;
+}
+
+.img-width {
+	width: 200px;
+}
+
+.lr-text {
+	margin: 20px;
+}
+
+.regist-container p {
+	font-size: 1.2rem;
+	font-weight: 500;
+	color: #000000;
+	opacity: 0.6;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.adress-short {
+	width: 300px;
+	height: 6vh;
+	margin-top: 10px;
+}
+
+.adress-btn {
+	border: none;
+	background: none;
+	cursor: pointer;
+	background-color: #F5F5F5;
+	border: 1px solid #bbbbbb;
+	border-radius: 10px;	
+	width: 140px;
+	height: 6vh;
+	margin-top: 10px;
+}
+
+.adress-box {
+	margin: 10px 0;
+}
+
+.input-radio {
+	width: 220px;
+	height: 6vh;
+	background-color: #F5F5F5;
+	border: 1px solid #bbbbbb;
+	border-radius: 10px;	
+	appearance: none;
+}
+
+.input-radio:checked {
+	background-color: #FF9900;
+}
+
+.adress-long {
+	width: 450px;
+	height: 6vh;
+	margin-top: 10px;
+}
+
+.gender-box {
+	position: relative;
+}
+
+.gender-text {
+	font-size: 1.5rem;
+	font-weight: 600;
+	position: absolute;
+}
+
+.male {
+	left: 125px;
+	top: 10px;
+}
+
+.female {
+	right: 125px;
+	top: 10px;
+}
+
+.regist-button {
+	display: inline-block;
+	width: 220px;
+	height: 6vh;
+	margin-top: 10px;
+	background-color: #FFDDAA;
+	border-radius: 10px;
+	font-size: 1.6rem;
+	font-weight: 600;
+	line-height: 6vh;
+}
+
+#symptom-display {
+	display: none;
+}
+
+#disease-display {
+	display: none;
+}
+
+#map-display {
+	display: none;
+}
+
+.part-box div {
+	margin: 5px auto;
+	border: 1px solid #bbbbbb;
+	border-radius: 20px;
+	width: 80px;
+	height: 30px;
+}
+
+.check-button {
+	display: inline-block;
+	width: 150px;
+	height: 6vh;
+	background-color: #FFDDAA;
+	border-radius: 10px;
+	font-size: 1.4rem;
+	font-weight: 600;
+	line-height: 6vh;
+	margin: 10px 0;
+}
+
+.part-box div, .display-flex span {
+	cursor: pointer;
 }
