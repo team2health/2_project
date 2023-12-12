@@ -9,6 +9,10 @@
 		<form method="POST"  action="" enctype="multipart/form-data">
 			@include('layout.errorlayout')
 			@csrf
+			<div class="form-group">
+    			<label for="img"></label>
+    			<input type="file" name="img" class="form-control-file">
+			</div>
             <label for="board">게시판 선택:</label>
 				<select name="board" id="board">
 					<option value="freelist">자유게시판</option>
