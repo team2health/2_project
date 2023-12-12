@@ -65,6 +65,7 @@ function weekendshow() {
 
         let weekendindiv = document.createElement('div');
         weekendindiv.classList.add('datebar');
+        weekendindiv.id = 'weekend'+date;
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')
         let weekendinsdot = document.createElement('span')
@@ -88,17 +89,14 @@ function weekendshow() {
         if( date == thismonthtoday) {
             weekendindiv.classList.add('datebartoday');
         }
+
+        weekendindiv.onclick = function() {
+            alert('클릭되었을 경우 처리');
+        };
     }
 }
 
-const clickElements = document.querySelectorAll('.datebar');
 
-// NodeList를 배열로 변환하고 각 요소에 이벤트 리스너를 추가합니다.
-Array.from(clickElements).forEach(element => {
-    element.addEventListener('click', function() {
-        alert('Hi');
-    });
-});
 
 
 // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
@@ -178,12 +176,19 @@ function leftPad(value) {
 
 // 삭제 모달
 function recorddeletemodalopen() {
-    let modalopen = document.getElementById('recordDeleteModal');
+    let modalopen = document.getElementById('mypageFourth');
     modalopen.style.display = 'block';
 }
 
 // 삭제 모달 닫기
 function deletemodalclose() {
-    let modalclose = document.getElementById('recordDeleteModal');
+    let modalclose = document.getElementById('mypageFourth');
     modalclose.style.display = 'none';
+}
+
+// 삭제 모달 확인 버튼 
+function recorddeletebtn() {
+    let recorddelete = document.getElementById('recordDeleteTest');
+    recorddelete.style.display = 'none';
+    deletemodalclose();
 }

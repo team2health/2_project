@@ -16,29 +16,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('main');
-});
+})->name('main');
 
 Route::get('/mypage', function () {
     return view('mypage');
-});
+})->name('mypage');
 
 Route::get('/timeline', function () {
     return view('timeline');
-});
+})->name('timeline');
 
 
 Route::get('/lastboard', function () {
     return view('lastboard');
-});
+})->name('lastboard');
 
 Route::get('/insert', function () {
     return view('insert');
-});
+})->name('insert');
 
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
 
 Route::get('/regist', function () {
     return view('regist');
-});
+})->name('regist');
