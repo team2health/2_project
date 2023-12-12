@@ -1,9 +1,17 @@
-.mypage_body { 
+.timelinemain { 
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
-    user-select:none
+    user-select:none;
+    display: grid;
+    grid-gap: 30px;
+    justify-content: center;
+    margin-top: 30px;
     } 
+.mypage-first {
+    display: grid;
+    justify-content: center;
+}
 
 .maincalendar {
     background-color : white;
@@ -103,4 +111,158 @@ td {
 }
 .mypage-second {
     display: inline-block;
+}
+
+/* 날짜별 */
+.mypage-second {
+    display: grid;
+    min-width: 520px;
+    max-width: 840px;
+    margin: 0 auto;
+    white-space:nowrap;
+    text-align: center;
+    overflow-x: scroll;
+    /* 넘치는거 삭제 */
+    -ms-overflow-style: none;
+    grid-gap: 10px;
+    grid-template-columns: repeat(7, 1fr);
+}
+/* 스크롤바 삭제 */
+.mypage-second::-webkit-scrollbar{
+    display:none;
+}
+.datebar {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    height: 120px;
+    /* width: 8vw; */
+    width: 110px;
+    grid-row: 1;
+    display: block;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+}
+.datebartoday {
+    background-color: rgb(248, 199, 126, 0.35);
+    color: #D75208;
+    font-weight: 900;
+}
+
+@media screen and (max-width: 800px) {
+    .mypage-second {
+        max-width: 400px;
+    }
+    .datebar {
+        background-color: #F6F6F6;
+        border-radius: 10px;
+        height: 120px;
+        width: 65px;
+        grid-row: 1;
+        display: block;
+        font-weight: 400;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*  유저 검색기록 */
+.mypage-third {
+    margin-bottom: 100px;
+}
+.recordsection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+    justify-items: center;
+    margin-top: 30px;
+}
+.user-record {
+    width: 90%;
+    height: 110px;
+    background-color: #F6F6F6;
+    border-radius: 30px;
+    display: inline-block;
+    padding-top: 10px;
+    position: relative;
+}
+.recordcircleimg {
+    width: 20px;
+}
+.recordtext {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-left: 40px;
+}
+.recordtime {
+    margin-left: 40px;
+    font-size: 1.0rem;
+    color: #9A9A9A;
+}
+.recorddeletebtn {
+    font-size: 2rem;
+    position: absolute;
+    right: 20px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* 마이페이지 삭제 모달 */
+
+#recordDeleteModal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+
+}
+.mypage-delete-modal {
+    background-color: #fefefe;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    height: 200px;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.record-delete-cancel {
+    padding: 15px 17%;
+    border-radius: 15px;
+    border: 0.5px solid #C5C5C5;
+    background-color: #fff;
+    display: inline-block;
+    display: inline-block;
+    cursor: pointer;
+}
+.record-delete-ok {
+    padding: 15px 17%;
+    border-radius: 15px;
+    border: 0.5px solid #C5C5C5;
+    background-color: #FF9900;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.delete-message {
+    padding: 30px 0 20px 0;
+    font-weight: 600;
 }
