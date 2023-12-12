@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 @extends('layout.layout');
 
 @section('title','mypage');
@@ -16,14 +14,5 @@
 </div>
 
 <div class="mypage-title">내가 찜한 관심 태그</div>
-=======
-@extends('layout.layout')
-
-@section('title','Mypage')
-
-@section('main')
-
-
->>>>>>> 727cc369d5565b5f48c2e023b302af90ecfb8a0d
 
 @endsection

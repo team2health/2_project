@@ -1,7 +1,7 @@
 <header>
 	@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 	<div class="container">
-		<div class="div-margin">
+		<div style="color: rgb(182, 182, 182)" class="div-margin font-small">
 			<div>2023.12.11</div>
 			<div>월요일</div>
 		</div>
@@ -27,7 +27,7 @@
 					<div class="div-display-lnlineBlock"><img src="../img/f-img.png" alt="" class="btn-img"></div>
 					<div class="div-display-lnlineBlock">
 						<a href="/mypage"><span class="font-weight font-color">동글이</span>님 안녕하세요</a>
-						<a href="/" class="display-flex font-small">
+						<a href="/mypage" class="display-flex font-small">
 							<span>welcome</span>
 							<span class="font-color">마이페이지 이동</span>
 						</a>
