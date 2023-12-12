@@ -38,3 +38,7 @@ Route::get('/insert', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::get('/regist', function () {
+    return view('regist');
+});
