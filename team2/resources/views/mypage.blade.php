@@ -11,7 +11,42 @@
 
     <div class="mypage-content">
         <div class="mypage-myboards">
-    
+            <span>2023-12-12</span>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
+        </div>
+        <div class="mypage-myboards">
+            <span>2023-12-11</span>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
+            <div class="mypage-boardbox">
+                <div class="mypage-bord-title">제목입니다.</div>
+                <div class="mypage-bord-detailbox">상세내용입니다.</div>
+            </div>
         </div>
         <div class="mypage-mycoments">
     

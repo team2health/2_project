@@ -282,7 +282,32 @@ td {
 }
 
 /* 마이페이지 */
+.mypage-content {
+    width: 874px;
+    height: 100vw;
+}
 
+.mypage-boardbox {
+    border-radius: 8px;
+    border: 1px solid #C5C5C5;
+    width: 400px;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mypage-bord-title {
+    padding: 0 13px 15px 13px;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+.mypage-bord-detailbox {
+    border-radius: 8px;
+    border: 1px solid #C5C5C5;
+    width: 370px;
+    height: 100px;
+}
 .mypage-btn {
     width: 140px;
     height: 50px;
