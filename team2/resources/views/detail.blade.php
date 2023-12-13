@@ -29,6 +29,12 @@
                 내용
                 </div>                
             </div>
+            <div>
+                
+                <div>
+                    #기침 #두통
+                </div>
+            </div>
         </div>
     </div>
     <div class="detail_bottom_button">

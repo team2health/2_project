@@ -42,3 +42,20 @@ Route::get('/login', function () {
 Route::get('/regist', function () {
     return view('regist');
 })->name('regist');
+
+Route::get('/detail', function () {
+    return view('detail');
+})->name('detail');
+
+Route::get('/update', function () {
+    return view('update');
+})->name('update');
+
+Route::get('/categoryboard', function () {
+    return view('categoryboard');
+})->name('categoryboard');
+
+Route::get('/community', function () {
+    return view('community');
+})->name('community');
+
