@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('board_imgs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('board_img_id');
+            $table->integer('board_id');
+            $table->string('img_address')->nullable();
         });
     }
 

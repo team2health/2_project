@@ -68,3 +68,49 @@ function mapDisplay() {
 	MAP.removeAttribute('display');
 	MAP.style.display = 'block';
 }
+
+let USERNAME = document.getElementById('user_name');
+let ERRORNAME = document.getElementById('error_name');
+let USERID = document.getElementById('user_id');
+let ERRORID = document.getElementById('error_id');
+let USERPASSWORD = document.getElementById('user_password');
+let ERRORPASSWORD = document.getElementById('error_password');
+let USERPASSWORDCHECK = document.getElementById('user_password_check');
+let ERRORPASSWORDCHECK = document.getElementById('error_password_check');
+
+USERNAME.addEventListener('input', function() {
+    const value = USERNAME.value;
+    const regex = /^[가-힣a-zA-Z0-9]+$/;
+
+    if (!regex.test(value)) {
+        ERRORNAME.innerHTML='닉네임을 다시 입력해주세요'
+    } else {
+		ERRORNAME.innerHTML=''
+	}
+});
+
+USERID.addEventListener('input', function() {
+    const value = USERNAME.value;
+    const regex = /^[가-힣a-zA-Z0-9]+$/;
+
+    if (!regex.test(value)) {
+        ERRORID.innerHTML='아이디를 다시 입력해주세요'
+    } else {
+		ERRORID.innerHTML=''
+	}
+});
+
+USERPASSWORDCHECK.addEventListener('input', function() {
+    const value = USERPASSWORD.value;
+    const regex = USERPASSWORDCHECK.value;
+
+    if (value !== regex) {
+        ERRORPASSWORDCHECK.innerHTML='비밀번호와 일치하지 않습니다'
+    } else {
+		ERRORPASSWORDCHECK.innerHTML=''
+	}
+});
+
+// function registgo() {
+
+// }

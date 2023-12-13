@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -35,27 +36,9 @@ Route::get('/insert', function () {
     return view('insert');
 })->name('insert');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
 
-Route::get('/regist', function () {
-    return view('regist');
-})->name('regist');
-
-Route::get('/detail', function () {
-    return view('detail');
-})->name('detail');
-
-Route::get('/update', function () {
-    return view('update');
-})->name('update');
-
-Route::get('/categoryboard', function () {
-    return view('categoryboard');
-})->name('categoryboard');
-
-Route::get('/community', function () {
-    return view('community');
-})->name('community');
-
+// Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
+// Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
+Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
+Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
+// Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');

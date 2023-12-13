@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('favorite_tags', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('favorite_id');
+            $table->integer('hash_id');
+            $table->integer('u_id');
+            $table->timestamps(); // created_at만 사용
+            $table->softDeletes();
         });
     }
 

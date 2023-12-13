@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('parts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('part_id');
+            $table->string('part_name')->unique();
+
+            $table->primary('part_id');
         });
     }
 

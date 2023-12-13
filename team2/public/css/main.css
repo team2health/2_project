@@ -35,6 +35,12 @@ button {
 
 .btn-img {
 	width: 5vw;
+	height: 5vw;
+	overflow: hidden;
+}
+
+.b-radius {
+	border-radius: 50%;
 }
 
 .div-display-lnlineBlock {
@@ -73,34 +79,6 @@ button {
 	width: 30vw;
 	margin: 0 auto;
 	text-align: center;
-}
-
-@media only screen and (max-width:1000px) {
-	.display-none {
-		display: none;
-	}
-	.display-flex-center {
-		display: inline-block;
-		margin: 0 auto;
-	}
-	.container {
-		width: 100vw;
-	}
-	.mini-container {
-		width: 100vw;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.font-weight {
-		font-size: 1.7rem;
-		font-weight: 900;
-	}
-	.font-small {
-		font-size: 0.8rem;
-	}
-	.btn-img {
-		width: 15vw;
-	}
 }
 
 .text-center {
@@ -152,16 +130,16 @@ button {
 }
 
 .regist-container p {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	font-weight: 500;
 	color: #000000;
 	opacity: 0.6;
+	margin-left: 25px;
 	text-align: left;
-	margin-left: 30px;
 }
 
 .adress-short {
-	width: 300px;
+	width: 60%;
 	height: 6vh;
 	margin-top: 10px;
 }
@@ -172,8 +150,8 @@ button {
 	cursor: pointer;
 	background-color: #F5F5F5;
 	border: 1px solid #bbbbbb;
-	border-radius: 10px;	
-	width: 140px;
+	border-radius: 10px;
+	width: 30%;
 	height: 6vh;
 	margin-top: 10px;
 }
@@ -183,7 +161,7 @@ button {
 }
 
 .input-radio {
-	width: 220px;
+	width: 44%;
 	height: 6vh;
 	background-color: #F5F5F5;
 	border: 1px solid #bbbbbb;
@@ -196,7 +174,7 @@ button {
 }
 
 .adress-long {
-	width: 450px;
+	width: 90%;
 	height: 6vh;
 	margin-top: 10px;
 }
@@ -223,7 +201,7 @@ button {
 
 .regist-button {
 	display: inline-block;
-	width: 220px;
+	width: 44%;
 	height: 6vh;
 	margin-top: 10px;
 	background-color: #FFDDAA;
@@ -267,4 +245,47 @@ button {
 
 .part-box div, .display-flex span {
 	cursor: pointer;
+}
+
+@media only screen and (max-width:1000px) {
+	.display-none {
+		display: none;
+	}
+	.display-flex-center {
+		display: inline-block;
+		margin: 0 auto;
+	}
+	.container {
+		width: 100vw;
+	}
+	.mini-container {
+		width: 100vw;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.font-weight {
+		font-size: 1.7rem;
+		font-weight: 900;
+	}
+	.font-small {
+		font-size: 0.8rem;
+	}
+	.btn-img {
+		width: 15vw;
+		height: 15vw;
+		overflow: hidden;
+	}
+}
+
+.ptag {
+	display: inline-block;
+	float: left;
+}
+
+.error {
+	color: red;
+	font-size: 0.7rem;
+	line-height: 30px;
+	float: left;
+	height: 20px;
 }
