@@ -7,10 +7,10 @@ window.addEventListener('load', function() {
     weekendshow(); //일주일을 불러오는 함수
 });
 window.addEventListener('load', function() {
-    yearshowdiv(); //일주일을 불러오는 함수
+    yearshowdiv(); //달력 날짜를 표시하는 함수
 });
 window.addEventListener('load', function() {
-    datescrollbar(); //일주일을 불러오는 함수
+    datescrollbar(); //일주일 스크롤을 설정하는 함수
 });
 
 
@@ -201,4 +201,23 @@ function recorddeletebtn() {
     let recorddelete = document.getElementById('recordDeleteTest');
     recorddelete.style.display = 'none';
     deletemodalclose();
+}
+
+// 정보 수정 창으로 교체
+function userinforupdate() {
+    let mypagecontent = document.getElementById('mypageContent');
+    mypagecontent.style.display = 'none';
+
+    let userinfomodify = document.getElementById('mypageContent2');
+    userinfomodify.style.display = 'block';
+
+}
+
+// 나의 게시글 창으로 교체
+function userboardshow() {
+    let userinfomodify = document.getElementById('mypageContent2');
+    userinfomodify.style.display = 'none';
+
+    let mypagecontent = document.getElementById('mypageContent');
+    mypagecontent.style.display = 'block';
 }

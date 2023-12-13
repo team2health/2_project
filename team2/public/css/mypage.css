@@ -1,3 +1,7 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+* {
+    font-family: 'NanumSquare', sans-serif;
+}
 .timelinemain { 
     -webkit-user-select:none;
     -moz-user-select:none;
@@ -90,7 +94,7 @@ td {
 .calendarNone {
     display: none;
 }
-.mypage-title {
+.mypage-hashtag-title {
     font-weight: 600;
     font-size: 2rem;
 }
@@ -183,12 +187,6 @@ td {
         display: flex;
         flex-direction: column;
     }
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
 }
 
 /*  유저 검색기록 */
@@ -302,41 +300,68 @@ td {
 
 /* 마이페이지 그리드 */
 
-.mypage-all {
+.mypage-grid {
     display: grid;
     justify-content: center;
-    grid-template-columns: 874px 440px;
+    grid-template-columns: 46vw 23vw;
+    gap: 1vw;
+    justify-items: end;
+    margin: 70px auto;
 }
-
-.mypage-content {
-    width: 874px;
-    height: 100vw;
+.mypage-content, .mypage-content2 {
+    border: 1px solid #C5C5C5;
+    border-radius: 8px;
+    width: 100%;
+    /* display: grid;
+    grid-template-rows: 50px 1fr 50px 1fr;
+    align-items: center;
+    justify-items: center; */
 }
-
+.mypage-content2 {
+    display: none;
+}
+.mypage-board-date {
+    margin-left: 13px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    font-size: 0.9rem;
+}
 .mypage-boardbox {
     border-radius: 8px;
     border: 1px solid #C5C5C5;
     width: 400px;
     height: 190px;
+    box-shadow: 0px 0px 5px 3px rgb(196, 196, 196, 0.3);
+    display: inline-block;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 0px 5px 3px rgb(196, 196, 196, 0.3);
+    flex-direction: column;
+}
+.mypage-boards-part {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 13px;
 }
 .mypage-bord-title {
     padding: 0 13px 15px 13px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 800;
+    margin-left: -230px;
 }
 .mypage-bord-detailbox {
     border-radius: 8px;
     border: 1px solid #C5C5C5;
     width: 370px;
     height: 100px;
+    font-size: 1.1rem;
+    padding: 15px;
 }
-.mypage-btn {
-    width: 140px;
+.mypage-btn, .mypage-btn-plus  {
+    width: 150px;
     height: 50px;
     background-color: #ffffff;
     border: 1px solid #C5C5C5;
@@ -345,8 +370,10 @@ td {
     text-align: center;
     line-height: 50px;
     display: inline-block;
+    margin-top: 40px;
+    cursor: pointer;
 }
-.mypage-btn2 {
+.mypage-btn2, .favorite-tag-plus {
     width: 310px;
     height: 50px;
     background-color: #ffffff;
@@ -355,5 +382,86 @@ td {
     font-size: 1.1rem;
     text-align: center;
     line-height: 50px;
+    cursor: pointer;
+}
+.mypage-mainbar {
+    display: grid;
+    grid-template-rows: 200px 1fr;
+    justify-content: center;
+
+}
+.mypage-btn-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.mypage-btn-plus  {
+    background-color: #FF9900;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
 
+@media screen and (max-width: 1000px) {
+    .mypage-content {
+        display: none;
+    }
+    .mypage-grid {
+        display: block;
+    }
+}
+@media screen and (max-width: 1100px) {
+    .mypage-boardbox {
+        display: none;
+    }
+    .mypage-date-today {
+        display: none;
+    }
+    .mypage-btn-plus {
+        display: none;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .mypage-content {
+        border: none;
+    }
+}
+.favorite-tag-plus {
+    background-color: #FF9900;
+}
+/* .mypage-hashtag > span {
+    display: inline-block;
+    background-color: #ffffff;
+    border: 1px solid #C5C5C5;
+    border-radius: 10px;
+    width: 100px;
+} */
+
+/* 유저 정보 수정창 */
+
+.profile-photo-btn {
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid #000000;
+    display: inline-block;
+}
+.user-info-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #FAFAFA;
+    border: 1px solid #C5C5C5;
+    display: inline-block;
+    cursor: pointer;
+}
+/* .user-info-modify {
+    display: grid;
+    justify-content: center;
+} */
+
+- 닉네임 수정
+- 비밀번호 수정
+- 비밀번호 확인
+- 프로필 사진
+- 주소
+- 생년월일
