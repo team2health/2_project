@@ -24,7 +24,7 @@
 			@endif
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="display-flex-center">
-					<div class="div-display-lnlineBlock"><img src="../img/f-img.png" alt="" class="btn-img"></div>
+					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="../img/default_f.png" alt="" class="btn-img b-radius"></div>
 					<div class="div-display-lnlineBlock">
 						<a href="/mypage"><span class="font-weight font-color">동글이</span>님 안녕하세요</a>
 						<a href="/mypage" class="display-flex font-small">

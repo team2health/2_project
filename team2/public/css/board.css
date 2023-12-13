@@ -126,12 +126,17 @@ li{
 }
 .insert_img {    
     margin: 0px auto;
-    width: 10%;
-    height: auto;    
+    width: 50%;
+    height: auto;  
+    display: grid;
+    grid-gap: 5px; 
+    grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+	gap: 1rem;    
 }
 .insert_img img{    
     width: 100%;
-    height: auto;    
+    height: auto; 
+    grid-gap: 5px;   
 }
 
 .insert_select_container{
@@ -175,16 +180,23 @@ li{
     color: rgba(128, 128, 128, 0.369) ;
 }
 .insert_bottom_button{
-    display: flex;
-    justify-content: end;
-    box-sizing: content-box;
-    margin: 20px 30px ;  
+   display: grid;     
+   justify-content: end;      
+   grid-template-columns: repeat(2,70px);
+   grid-gap: 50px;  
+   margin: 0px auto;
+   width: 70%; 
+   
 }
 .insert_btn{
-    border: 1px solid rgba(128, 128, 128, 0.369);
-    margin: 0px 10px;
+    border: 1px solid rgba(128, 128, 128, 0.369);   
     width: 70px;
+    margin: 0 10px;
+    height: 40px;
     border-radius: 5px;
     background-color: white;
+}
+.insert_btn:hover{
+    background-color: #ff9950;
 }
 
