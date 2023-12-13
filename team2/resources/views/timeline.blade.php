@@ -36,11 +36,12 @@
         <br>
         
     </div>
+
     <div class="mypage-second" id="mypageSecond">
     </div>
-    <div class="mypage-third" id="mypageSecond">
 
-        <div class="recordsection">
+    <div class="mypage-third">
+        <div class="recordsection" id="recordDeleteTest">
             <img src="/img/circle.png" class="recordcircleimg" alt="">
             <div class="user-record">
                 <span class="recordtime">3:10</span>
@@ -67,10 +68,9 @@
                 <span class="recordtext">#인후통</span>
             </div>
         </div>
-
     </div>
 
-    <div class="mypage-fourth">
+    <div class="mypage-fourth" id="mypageFourth">
         <div id="recordDeleteModal">
             <div class="mypage-delete-modal">
                 <div class="delete-message">
@@ -78,7 +78,7 @@
                 </div>
                 <div>
                     <div class="record-delete-cancel" onclick="deletemodalclose(); return false;">취소</div>
-                    <div class="record-delete-ok">확인</div>
+                    <div class="record-delete-ok" onclick="recorddeletebtn(); return false;">확인</div>
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@
 .mypage-first {
     display: grid;
     justify-content: center;
+    position: relative;
 }
 
 .maincalendar {
@@ -22,6 +23,10 @@
     margin: 0 auto;
     border-radius:5px;
     box-shadow:0px 40px 30px -20px rgba(0,0,0,0.3);
+    position: absolute;
+    z-index: 1;
+    left: 25%;
+    top: 50%;
 }
 
 td {
@@ -89,18 +94,6 @@ td {
     font-weight: 600;
     font-size: 2rem;
 }
-.mypage-btn-layout {
-    text-align: center;
-}
-.mypage-btn {
-    font-size: 1.5rem;
-    background-color: #FFFFFF;
-    border: 0.5px solid #C5C5C5;
-    border-radius: 10px;
-    display: inline-block;
-    padding: 10px 20px;
-}
-
 .calendarBtn {
     padding: 5px 10px;
     color: #ffa459;
@@ -132,7 +125,8 @@ td {
     display:none;
 }
 .datebar {
-    background-color: #F6F6F6;
+    /* background-color: #F6F6F6; */
+    border: 1px solid #eeeeee;;
     border-radius: 10px;
     height: 120px;
     /* width: 8vw; */
@@ -141,11 +135,19 @@ td {
     display: block;
     font-weight: 400;
     display: flex;
+    justify-content: center;
     flex-direction: column;
+    cursor: pointer;
+}
+.datebar:hover {
+    background-color: rgb(248, 199, 124, 0.3);
+}
+.datebar > span {
+    margin: 5px 0;
 }
 .datebartoday {
-    background-color: rgb(248, 199, 126, 0.35);
-    color: #D75208;
+    background-color: rgba(255, 201, 120, 0.5);
+    color: #f15908;
     font-weight: 900;
 }
 
@@ -179,18 +181,21 @@ td {
 .recordsection {
     width: 100%;
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 80px 1fr;
     align-items: center;
     justify-items: center;
     margin-top: 30px;
+}
+.user-record:hover {
+    background: #bfbfbf;
 }
 .user-record {
     width: 90%;
     height: 110px;
     background-color: #F6F6F6;
-    border-radius: 30px;
+    border-radius: 20px;
     display: inline-block;
-    padding-top: 10px;
+    padding-top: 20px;
     position: relative;
 }
 .recordcircleimg {
@@ -211,11 +216,15 @@ td {
     position: absolute;
     right: 20px;
     border: 0;
+    top: 10px;
     background-color: transparent;
     cursor: pointer;
 }
 
 /* 마이페이지 삭제 모달 */
+.mypage-fourth {
+    display: none;
+}
 
 #recordDeleteModal {
     position: fixed;
@@ -225,7 +234,8 @@ td {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none;
+    display: flex;
+    align-items: center;
 
 }
 .mypage-delete-modal {
@@ -239,8 +249,6 @@ td {
     font-size: 1.3rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
     text-align: center;
 }
 
@@ -252,6 +260,12 @@ td {
     display: inline-block;
     display: inline-block;
     cursor: pointer;
+}
+.record-delete-cancel:hover {
+    background-color: rgb(217, 217, 217);
+}
+.record-delete-ok:hover {
+    background-color: rgb(190, 46, 17)
 }
 .record-delete-ok {
     padding: 15px 17%;
@@ -265,4 +279,53 @@ td {
 .delete-message {
     padding: 30px 0 20px 0;
     font-weight: 600;
+}
+
+/* 마이페이지 */
+.mypage-content {
+    width: 874px;
+    height: 100vw;
+}
+
+.mypage-boardbox {
+    border-radius: 8px;
+    border: 1px solid #C5C5C5;
+    width: 400px;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mypage-bord-title {
+    padding: 0 13px 15px 13px;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+.mypage-bord-detailbox {
+    border-radius: 8px;
+    border: 1px solid #C5C5C5;
+    width: 370px;
+    height: 100px;
+}
+.mypage-btn {
+    width: 140px;
+    height: 50px;
+    background-color: #ffffff;
+    border: 1px solid #C5C5C5;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 50px;
+    display: inline-block;
+}
+.mypage-btn2 {
+    width: 310px;
+    height: 50px;
+    background-color: #ffffff;
+    border: 1px solid #C5C5C5;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 50px;
 }
