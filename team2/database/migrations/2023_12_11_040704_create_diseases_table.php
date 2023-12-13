@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('diseases', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('disease_id');
+            $table->string('disease_name')->unique();
+            $table->string('disease_info');
+
+            $table->primary('disease_id');
         });
     }
 
