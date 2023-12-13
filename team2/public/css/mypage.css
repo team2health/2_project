@@ -120,10 +120,23 @@ td {
     grid-gap: 10px;
     grid-template-columns: repeat(7, 1fr);
 }
-/* 스크롤바 삭제 */
-.mypage-second::-webkit-scrollbar{
-    display:none;
+
+.mypage-second::-webkit-scrollbar {
+    width: 10px;
 }
+
+.mypage-second::-webkit-scrollbar-thumb {
+    background: rgb(245, 196, 171); /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥근 테두리 */
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.mypage-second::-webkit-scrollbar-track {
+    background: rgba(191, 189, 188, 0.1);  /*스크롤바 뒷 배경 색상*/
+    border-radius: 10px;
+}
+
 .datebar {
     /* background-color: #F6F6F6; */
     border: 1px solid #eeeeee;;
@@ -155,8 +168,12 @@ td {
     .mypage-second {
         max-width: 400px;
     }
+    /* 스크롤바 삭제 */
+    .mypage-second::-webkit-scrollbar{
+        display:none;
+    }
     .datebar {
-        background-color: #F6F6F6;
+        border: 1px solid #eeeeee;;
         border-radius: 10px;
         height: 120px;
         width: 65px;
@@ -221,7 +238,7 @@ td {
     cursor: pointer;
 }
 
-/* 마이페이지 삭제 모달 */
+/* 타임라인 검색기록 삭제 모달 */
 .mypage-fourth {
     display: none;
 }
@@ -282,6 +299,15 @@ td {
 }
 
 /* 마이페이지 */
+
+/* 마이페이지 그리드 */
+
+.mypage-all {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 874px 440px;
+}
+
 .mypage-content {
     width: 874px;
     height: 100vw;
@@ -296,6 +322,7 @@ td {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 0px 5px 3px rgb(196, 196, 196, 0.3);
 }
 .mypage-bord-title {
     padding: 0 13px 15px 13px;
@@ -329,3 +356,4 @@ td {
     text-align: center;
     line-height: 50px;
 }
+

@@ -11,12 +11,12 @@
             <table class="Calendar">
                 <thead>
                     <tr>
-                        <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+                        <td onclick="prevCalendar(); return false;" style="cursor:pointer;">&#60;</td>
                         <td colspan="5">
                             <span id="calYear"></span>년
                             <span id="calMonth"></span>월
                         </td>
-                        <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+                        <td onclick="nextCalendar(); return false;" style="cursor:pointer;">&#62;</td>
                     </tr>
                     <tr>
                         <td>일</td>
@@ -38,6 +38,7 @@
     </div>
 
     <div class="mypage-second" id="mypageSecond">
+        
     </div>
 
     <div class="mypage-third">
