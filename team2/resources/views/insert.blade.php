@@ -11,7 +11,11 @@
 			@csrf
 			<div class="insert_container">
 				<div class="insert_img">
-					<label for="img"><img src="../img/camera.png" alt=""></label>
+					<label for="img"><img src="../img/plus.png" alt=""></label>
+					<input type="file" name="img" style="display:none;">
+					<label for="img"><img src="../img/camera2.png" alt=""></label>
+					<input type="file" name="img" style="display:none;">
+					<label for="img"><img src="../img/camera2.png" alt=""></label>
 					<input type="file" name="img" style="display:none;">
 				</div>
 				<!-- <label for="board">카테고리:</label> -->
