@@ -1,6 +1,6 @@
-@extends('layout.layout');
+@extends('layout.layout')
 
-@section('title','mypage');
+@section('title','mypage')
     
 
 @section('main')

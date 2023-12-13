@@ -9,6 +9,9 @@ window.addEventListener('load', function() {
 window.addEventListener('load', function() {
     yearshowdiv(); //일주일을 불러오는 함수
 });
+window.addEventListener('load', function() {
+    datescrollbar(); //일주일을 불러오는 함수
+});
 
 
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
@@ -95,7 +98,14 @@ function weekendshow() {
         };
     }
 }
-
+// 스크롤 이동 javascript
+function datescrollbar() {
+    let todaydiv = today.getDate();
+    let scrollbar = document.getElementById('weekend' + todaydiv);
+    // 특정 element를 기준으로 스크롤을 이동
+    scrollbar.scrollIntoView({behavior: "auto", block: "center", inline: "center"});
+    // scrollbar.scrollTo({left:1070, top:100})
+}
 
 
 
