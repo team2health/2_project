@@ -130,12 +130,12 @@ button {
 }
 
 .regist-container p {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	font-weight: 500;
 	color: #000000;
 	opacity: 0.6;
+	margin-left: 25px;
 	text-align: left;
-	margin-left: 30px;
 }
 
 .adress-short {
@@ -275,4 +275,17 @@ button {
 		height: 15vw;
 		overflow: hidden;
 	}
+}
+
+.ptag {
+	display: inline-block;
+	float: left;
+}
+
+.error {
+	color: red;
+	font-size: 0.7rem;
+	line-height: 30px;
+	float: left;
+	height: 20px;
 }

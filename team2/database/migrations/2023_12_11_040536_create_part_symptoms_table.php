@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('part_symptoms', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('part_symptom_id');
+            $table->integer('symptom_id');
+            $table->integer('part_id');
         });
     }
 

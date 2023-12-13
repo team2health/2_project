@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('board_tags', function (Blueprint $table) {
             $table->id('boardtag_id');
-            $table->integer('b_id');
+            $table->integer('board_id');
             $table->integer('hash_id');
         });
     }

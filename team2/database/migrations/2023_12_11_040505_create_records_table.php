@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('search_record');
+            $table->integer('u_id');
+            $table->integer('Symptom_id');
+            $table->timestamps(); // record_date
+            $table->softDeletes();
         });
     }
 
