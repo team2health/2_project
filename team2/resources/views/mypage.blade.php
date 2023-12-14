@@ -10,27 +10,35 @@
             <div class="mypage-board-show-btn">내가 쓴 게시글</div>
             <div class="mypage-comment-show-btn">내가 쓴 댓글</div>
         {{-- 게시글 창 --}}
-            <div class="mypage-date-today">
-                <span class="mypage-board-date">2023-12-12</span>
-            </div>
             <div class="mypage-boards-part">
-                <div class="mypage-boardbox">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
+                @forelse ($data as $index => $item)
+                    @php
+                    $previousitem = $index - 2;
+                    $presentitem = $index - 1;
+                    @endphp
+                    @if ( $index > 1)
+                        @if ($data[$presentitem]->created_at !== $data[$previousitem]->created_at)
+                        <div class="mypage-date-today">
+                            <span class="mypage-board-date">{{$item->created_at}}</span>
+                        </div>
+                        @else
+                            <div class="mypa+ge-boardbox">
+                                <div class="mypage-bord-title">{{$item->board_title}}</div>
+                                <div class="mypage-bord-detailbox">{{$item->board_content}}.</div>
+                            </div>
+                        @endif
+                        <span class="mypage-board-date">{{$item->created_at}}</span>
+                    @else
+                    <div class="mypage-boardbox">
+                        <div class="mypage-bord-title">{{$item->board_title}}</div>
+                        <div class="mypage-bord-detailbox">{{$item->board_content}}.</div>
+                    </div>
+                    @endif
+                @empty
+                    <div> 작성한 게시글이 없습니다. </div>
+                @endforelse
             </div>
+
             <div class="mypage-date-today">
                 <span class="mypage-board-date"></span>
             </div>
@@ -41,7 +49,6 @@
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
                 <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
                     <span class="mypage-boardbox-date">2023-12-12</span>
                     <div class="mypage-bord-title">제목입니다.</div>
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
@@ -98,7 +105,7 @@
                 </div>
                 <div class="mypage-btn-line-modify">
                     <button type="submit" class="mypage-btn">수정완료</button>
-                    <a href="{{route('mypage')}}"><div class="mypage-btn">취소</div></a>
+                    <a href="{{route('mypage.get')}}"><div class="mypage-btn">취소</div></a>
                 </div>
             </div>
         </form>
@@ -119,12 +126,12 @@
                 내가 찜한 관심 태그
             </div>
             <div class="mypage-hashtag">
-                <span>#자유게시판</span>
-                <span>#복통</span>
-                <span>#두통</span>
-                <span>#꾀병</span>
-                <span>#자유</span>
-                <span>#퇴근</span>
+                <div><span>#자유게시판</span> <span>x</span></div>
+                <div><span>#발열</span> <span>x</span></div>
+                <div><span>#두통</span> <span>x</span></div>
+                <div><span>#꾀병</span> <span>x</span></div>
+                <div><span>#자유</span> <span>x</span></div>
+                <div><span>#퇴근</span> <span>x</span></div>
             </div>
             <div class="favorite-tag-plus">
                 관심태그 추가하기

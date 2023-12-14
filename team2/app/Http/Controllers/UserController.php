@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\support\facades\DB;
 use App\Models\User;
+use App\Models\Board;
 
 class UserController extends Controller
 {
@@ -68,4 +70,22 @@ class UserController extends Controller
     //     }
     //     return response()->json(['nameChk' => '0']);
     // }
+
+    // 마이페이지 이동 시 로그인 유무확인 및 게시글 불러오기
+    public function mypageget(Request $request) {
+
+        $result = User::where('user_id', $request->user_id)->first();
+        var_dump($result);
+        if(Auth::check()) {
+            $boardresult = Board::where('u_id', $result)->get();
+            // var_dump($boardresult);
+            // exit;
+            var_dump($boardresult);
+            exit;
+            return view('mypage')->with('data', $boardresult);
+        } else {
+            return view('login');
+        }
+
+    }
 }

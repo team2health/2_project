@@ -614,7 +614,10 @@ display:none;
     font-weight: 600;
     font-size: 2rem;
 }
-.mypage-hashtag > span {
+.mypage-hashtag {
+    display: grid;
+}
+.mypage-hashtag > div {
     display: block;
     padding: 10px;
     background-color: #EDEDED;

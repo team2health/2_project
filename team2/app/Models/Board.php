@@ -11,6 +11,5 @@ class Board extends Model
     protected $fillable =[
         'board_title'
         ,'board_content'
-        
     ];
 }
