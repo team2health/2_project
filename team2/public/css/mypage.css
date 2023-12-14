@@ -311,10 +311,6 @@ td {
     border: 1px solid #C5C5C5;
     border-radius: 8px;
     width: 100%;
-    /* display: grid;
-    grid-template-rows: 50px 1fr 50px 1fr;
-    align-items: center;
-    justify-items: center; */
 }
 .mypage-content2 {
     display: none;
@@ -411,13 +407,6 @@ td {
 .favorite-tag-plus {
     background-color: #FF9900;
 }
-/* .mypage-hashtag > span {
-    display: inline-block;
-    background-color: #ffffff;
-    border: 1px solid #C5C5C5;
-    border-radius: 10px;
-    width: 100px;
-} */
 
 /* 유저 정보 수정창 */
 
@@ -437,10 +426,6 @@ td {
     display: inline-block;
     cursor: pointer;
 }
-/* .user-info-modify {
-    display: grid;
-    justify-content: center;
-} */
 
 .mypage-comment-show-btn {
     display: inline-block;
@@ -558,11 +543,22 @@ display:none;
     gap: 13px;
     width: 100vw;
 }
+.mypagegohome {
+    display: none;
+}
+
+/* 마이페이지용 헤더 그리드 */
+.inmypageheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mypagegohome {
+    margin-right: 10px;
+}
 
 
-
-
-
+/* 마이페이지 미디어쿼리 */
 @media screen and (min-width: 700px) {
     .UserboardModal {
         display: none;
@@ -571,14 +567,6 @@ display:none;
         display: none;
     }
 }
-/* @media screen and (max-width: 1000px) {
-    #boardDeleteModal {
-        display: none;
-    }
-    .mypage-content-modal {
-        display: none;
-    }
-} */
 @media screen and (max-width: 1100px) {
     .mypage-content {
         display: none;
@@ -603,6 +591,9 @@ display:none;
     }
     .mypage-board-show-btn, .mypage-comment-show-btn {
         display: none;
+    }
+    .mypagegohome {
+        display: block;
     }
 }
 @media screen and (max-width: 1400px) {
