@@ -37,6 +37,8 @@ Route::get('/insert', function () {
     return view('insert');
 })->name('insert');
 
+Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
+
 Route::resource('/board', BoardController::class);
 Route::get('/categoryboard',[BoardController::class,'categoryboard'])->name('categoryboard');
 

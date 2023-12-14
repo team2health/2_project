@@ -10,7 +10,7 @@
 	<div class="detail_container">		
         <div class="detail_hidden_container">
             <div>           
-                <p>{{route($data->board_title)}}</p>
+                <p>{{ $data->board_title }}</p>
             </div>         
             <div class="last_user">
                 <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
@@ -19,18 +19,18 @@
                         내가누군지물어보신다면대답해주는것이인지상정
                     </div>
                     <div>
-                        2023-12-12 15:59:59
+                        
                     </div>
                 </div>
             </div> 
             <div class="detail_content">
                 <img src="../img/필요한거 있나.jpg" alt="">
+                <br>
                 <div>
-                내용
+                
                 </div>                
             </div>
-            <div>
-                
+            <div>                
                 <div>
                     #기침 #두통
                 </div>
@@ -53,7 +53,7 @@
         <ul>
             <li>
                 <div class="last_user">
-                    <img class="community_icon"  src="../img/f-img.png" alt="" class="board_nic_img">                               
+                    <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
                     <div class="board_nic_text">
                         <div>
                             세모
@@ -70,7 +70,7 @@
             </li>
             <li>
                 <div class="last_user">
-                    <img class="community_icon"  src="../img/f-img.png" alt="" class="board_nic_img">                               
+                    <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
                     <div class="board_nic_text">
                         <div>
                             네모
