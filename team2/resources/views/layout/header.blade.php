@@ -8,7 +8,9 @@
 			</div>
 			@if (request()->url() == 'http://127.0.0.1:8000/mypage')
 			<div style="color: rgb(182, 182, 182)" class="mypagegohome">
-				<a href="{{route('main')}}">메인으로</a>
+				<a href="{{route('main')}}">
+				<img src="/img/home.png" alt="" width="50px;" style="margin-right: 20px;">
+			</a>
 			</div>
 			@endif
 		</div>
@@ -19,7 +21,7 @@
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="div-display-lnlineBlock display-none">
 					<a href="/">
-						<img src="../img/d.jpg" alt="" class="btn-img">
+						<img src="../img/home.png" alt="" class="btn-img">
 					</a>
 				</div>
 			@else
@@ -52,8 +54,8 @@
 		@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist'
 		&& request()->url() !== 'http://127.0.0.1:8000/mypage')
 			<div class="container-category display-flex-around div-padding">
-				<a href="/" class="div-display-lnlineBlock">증상 검색</a>
-				<a href="/" class="div-display-lnlineBlock">커뮤니티</a>
+				<a href="{{ route('main') }}" class="div-display-lnlineBlock">증상 검색</a>
+				<a href="{{ route('board.index') }}" class="div-display-lnlineBlock">커뮤니티</a>
 				<a href="{{ route('timeline') }}" class="div-display-lnlineBlock">타임라인</a>
 			</div>
 		@endif
