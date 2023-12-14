@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class UserController extends Controller
@@ -43,6 +44,12 @@ class UserController extends Controller
             return view('login');
         }
 
+        return redirect()->route('main');
+    }
+
+    public function logoutget() {
+        Session::flush();
+        Auth::logout();
         return redirect()->route('main');
     }
 
