@@ -12,7 +12,35 @@
             <a href="{{route('categoryboard')}}" class="cate_btn">커뮤니티 홈</a>            
         </div>
         
-        <div class="slider">
+		
+	
+		
+		<!-- <div class="slider">
+        @forelse ($data as $item)
+            <div class="slide">
+                <div>
+                    {{ $item->board_title}}
+                </div> 
+                <a href="{{route('board.show',['board'=>$item->board_id])}}" class="community_content">
+                    {{ $item->board_content}}
+                </a>
+                <div class="community_bottom">
+                    <div>
+                        {{ $item->board_hits}}
+                    </div>
+                    <div>
+                        댓글 35
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+	@empty
+	<div>게시글 없음</div>
+	@endforelse -->
+        
+         <div class="slider">
             <div class="slide">
                 <div>
                     제목입니다.
@@ -127,7 +155,7 @@
                 </div>
             </div>            
         </div>
-    </div> 
+    </div>
     <div class="favorite_slider-container">   
         <div class="favorite_slider">
             <div class="favorite_slide">

@@ -26,12 +26,12 @@
 				</div>
 				
 				<div class="insert_select_container">
-					<select name="board" id="board" class="insert_select">
+					<select name="category_id" id="category_id" class="insert_select">
 						<option value="">카테고리</option>
-						<option value="freelist">자유게시판</option>
-						<option value="questionlist">질문 게시판</option>
-						<option value="amitylist">친목 게시판</option>
-						<option value="informationlist">정보 게시판</option>
+						<option value="1">자유게시판</option>
+						<option value="2">정보 게시판</option>
+						<option value="3">친목 게시판</option>
+						<option value="4">질문 게시판</option>
 					</select>
 				</div>	
 			
