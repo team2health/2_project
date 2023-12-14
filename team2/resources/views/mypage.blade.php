@@ -7,7 +7,6 @@
 
 <div class="mypage-grid" id="mypageGrid">
     <div class="mypage-content" id="mypageContent">
-
             <div class="mypage-board-show-btn">내가 쓴 게시글</div>
             <div class="mypage-comment-show-btn">내가 쓴 댓글</div>
         {{-- 게시글 창 --}}
@@ -32,7 +31,6 @@
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
             </div>
-
             <div class="mypage-date-today">
                 <span class="mypage-board-date"></span>
             </div>
@@ -43,7 +41,7 @@
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
                 <div class="mypage-boardbox">
-                    <spa class="mypage-boardbox-date">2023-12-12</spa>
+                    <span class="mypage-boardbox-date">2023-12-12</span>
                     <div class="mypage-bord-title">제목입니다.</div>
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
@@ -58,7 +56,6 @@
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
             </div>
-
         <div class="mypage-btn-plus">더보기</div>
         {{-- 게시글 insert로 넘어감 --}}
         <a href="{{route('insert')}}">
@@ -127,6 +124,77 @@
     </div>
 </div>
 
+
+
+
+
+
+{{--  display 모달창 --}}
+<div class="UserboardModal" id="UserboardModal">
+    <div>
+        <div class="mypage-content-modal" id="mypageContentModal">
+        
+            <div class="mypage-board-modal-btn">내가 쓴 게시글</div>
+            <div class="mypage-comment-modal-btn">내가 쓴 댓글</div>
+
+            <div onclick="mypagemodalclosebtn(); return false;" class="mypage-modal-close-btn">x</div>
+        {{-- 게시글 창 --}}
+            <div class="mypage-date-today">
+                <span class="mypage-board-date-modal">2023-12-12</span>
+            </div>
+            <div class="mypage-boards-part2">
+                <div class="mypage-boardbox-modal">
+                    <div class="mypage-bord-title">제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+                <div class="mypage-boardbox-modal">
+                    <div class="mypage-bord-title">제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+                <div class="mypage-boardbox-modal">
+                    <div class="mypage-bord-title">제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+                <div class="mypage-boardbox-modal">
+                    <div class="mypage-bord-title">제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+            </div>
+        
+            <div class="mypage-date-today">
+                <span class="mypage-board-date"></span>
+            </div>
+            <div class="mypage-boards-part2">
+                <div class="mypage-boardbox">
+                    <span class="mypage-boardbox-date">2023-12-12</span>
+                    <div class="mypage-bord-title"> 댓글 view 제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+                <div class="mypage-boardbox">
+                    <spa class="mypage-boardbox-date">2023-12-12</spa>
+                    <div class="mypage-bord-title">제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+                <div class="mypage-boardbox">
+                    <span class="mypage-boardbox-date">2023-12-12</span>
+                    <div class="mypage-bord-title">제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+                <div class="mypage-boardbox">
+                    <span class="mypage-boardbox-date">2023-12-12</span>
+                    <div class="mypage-bord-title">제목입니다.</div>
+                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                </div>
+            </div>
+        
+            <div class="mypage-btn-plus">더보기</div>
+            {{-- 게시글 insert로 넘어감 --}}
+            <a href="{{route('insert')}}">
+                <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">
+            </a>
+        </div>
+    </div>
+</div>
 
 <script src="/js/mypage.js"></script>
 <script src="/js/main.js"></script>
