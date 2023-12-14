@@ -49,6 +49,7 @@
 textarea{
     vertical-align: top;
     resize: none;
+    padding: 20px;
 }
 #comment{
     width: 89%;  

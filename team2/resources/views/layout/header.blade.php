@@ -46,8 +46,8 @@
 		@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist'
 		&& request()->url() !== 'http://127.0.0.1:8000/mypage')
 			<div class="container-category display-flex-around div-padding">
-				<a href="/" class="div-display-lnlineBlock">증상 검색</a>
-				<a href="/" class="div-display-lnlineBlock">커뮤니티</a>
+				<a href="{{ route('main') }}" class="div-display-lnlineBlock">증상 검색</a>
+				<a href="{{ route('board.index') }}" class="div-display-lnlineBlock">커뮤니티</a>
 				<a href="{{ route('timeline') }}" class="div-display-lnlineBlock">타임라인</a>
 			</div>
 		@endif
