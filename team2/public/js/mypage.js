@@ -218,6 +218,6 @@ function userboardshow() {
     let userinfomodify = document.getElementById('mypageContent2');
     userinfomodify.style.display = 'none';
 
-    let mypagecontent = document.getElementById('mypageContent');
-    mypagecontent.style.display = 'block';
+    // let mypagecontent = document.getElementById('mypageContent');
+    // mypagecontent.style.display = 'block';
 }

@@ -103,6 +103,22 @@ button {
 	margin-top: 10px;
 }
 
+.login-input-short {
+	width: 60%;
+	height: 6vh;
+	margin-top: 10px;
+}
+
+.input-check {
+	display: inline-block;
+	width: 30%;
+	height: 6vh;
+	border: 1px solid #CFCFCF;
+	background-color: #FAFAFA;
+	border-radius: 10px;
+	line-height: 6vh;
+}
+
 .lr-box {
 	margin-top: 70px;
 }
@@ -160,15 +176,6 @@ button {
 	margin: 10px 0;
 }
 
-.input-radio {
-	width: 44%;
-	height: 6vh;
-	background-color: #F5F5F5;
-	border: 1px solid #bbbbbb;
-	border-radius: 10px;	
-	appearance: none;
-}
-
 .input-radio:checked {
 	background-color: #FF9900;
 }
@@ -181,22 +188,6 @@ button {
 
 .gender-box {
 	position: relative;
-}
-
-.gender-text {
-	font-size: 1.5rem;
-	font-weight: 600;
-	position: absolute;
-}
-
-.male {
-	left: 125px;
-	top: 10px;
-}
-
-.female {
-	right: 125px;
-	top: 10px;
 }
 
 .regist-button {
@@ -247,6 +238,46 @@ button {
 	cursor: pointer;
 }
 
+.ptag {
+	display: inline-block;
+	float: left;
+}
+
+#error_name, #error_id {
+	color: red;
+	font-size: 0.7rem;
+	line-height: 25px;
+	float: left;
+	height: 20px;
+	width: 210px;
+}
+
+#error_login_id {
+	color: red;
+	font-size: 0.7rem;
+	line-height: 25px;
+	float: left;
+	height: 20px;
+	width: 210px;
+	margin-left: 30px;
+}
+
+.gender-div {
+	display: inline-block;
+	width: 44%;
+	height: 6vh;
+	background-color: #F5F5F5;
+	border-radius: 10px;
+	font-size: 1.6rem;
+	font-weight: 600;
+	line-height: 6vh;
+	cursor: pointer;
+}
+
+.not-error-name, .not-error-id, .not-error-passwordchk, .not-login-id {
+	visibility: hidden;
+}
+
 @media only screen and (max-width:1000px) {
 	.display-none {
 		display: none;
@@ -257,11 +288,6 @@ button {
 	}
 	.container {
 		width: 100vw;
-	}
-	.mini-container {
-		width: 100vw;
-		margin: 0 auto;
-		text-align: center;
 	}
 	.font-weight {
 		font-size: 1.7rem;
@@ -277,15 +303,18 @@ button {
 	}
 }
 
-.ptag {
-	display: inline-block;
-	float: left;
+@media only screen and (max-width:1300px) {
+	.mini-container {
+		width: 50vw;
+		margin: 0 auto;
+		text-align: center;
+	}
 }
 
-.error {
-	color: red;
-	font-size: 0.7rem;
-	line-height: 30px;
-	float: left;
-	height: 20px;
+@media only screen and (max-width:650px) {
+	.mini-container {
+		width: 100vw;
+		margin: 0 auto;
+		text-align: center;
+	}
 }

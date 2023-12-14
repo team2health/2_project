@@ -43,7 +43,7 @@
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
                 <div class="mypage-boardbox">
-                    <spa class="mypage-boardbox-date">2023-12-12</spa>
+                    <span class="mypage-boardbox-date">2023-12-12</span>
                     <div class="mypage-bord-title">제목입니다.</div>
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
