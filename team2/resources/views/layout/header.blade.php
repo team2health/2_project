@@ -1,15 +1,17 @@
 <header>
 	@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 	<div class="container">
-		<div style="color: rgb(182, 182, 182)" class="div-margin font-small">
-			<div>2023.12.11</div>
-			<div>월요일</div>
+		<div class="inmypageheader">
+			<div style="color: rgb(182, 182, 182)" class="div-margin font-small">
+				<div>2023.12.11</div>
+				<div>월요일</div>
+			</div>
+			@if (request()->url() == 'http://127.0.0.1:8000/mypage')
+			<div style="color: rgb(182, 182, 182)" class="mypagegohome">
+				<a href="{{route('main')}}">메인으로</a>
+			</div>
+			@endif
 		</div>
-		@if (request()->url() == 'http://127.0.0.1:8000/mypage')
-		<div style="color: rgb(182, 182, 182)" class="mypagegohome">
-			<a href="{{route('main')}}">메인으로</a>
-		</div>
-		@endif
 	@else
 	<div class="mini-container">
 	@endif
