@@ -86,6 +86,5 @@
     </div>
 
 </div>
-<script src="/js/mypage.js"></script>
 
 @endsection
