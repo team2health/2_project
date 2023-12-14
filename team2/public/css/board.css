@@ -220,7 +220,7 @@ li{
    width: 70%; 
    
 }
-.insert_btn, .cate_btn{
+.insert_btn{
     border: 1px solid rgba(128, 128, 128, 0.369);   
     width: 70px;
     margin: 0 10px;
@@ -405,6 +405,16 @@ li{
             align-items: center;
             justify-content: center;
             cursor: pointer;            
+}
+.cate_btn{
+    border: 1px solid rgba(128, 128, 128, 0.369);   
+    width: 90px;
+    margin: 0 10px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    line-height: 40px;
 }
 
 

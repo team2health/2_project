@@ -6,19 +6,25 @@
 
 <main class="insert_main">
 	<div class="insert_hidden_container">
-		<form method="POST"  action="" enctype="multipart/form-data">
+		<form method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data">
 			@include('layout.errorlayout')
 			@csrf
 			<div class="insert_container">
 				<div class="insert_img">
-					<label for="img1" ><img src="../img/plus.png" alt=""></label>
-					<input type="file" name="img1" id="img1" style="display:none;">
-					<label for="img2" ><img src="../img/camera2.png" alt=""></label>
-					<input type="file" name="img2" id="img2" style="display:none;">
-					<label for="img3" ><img src="../img/camera2.png" alt=""></label>
-					<input type="file" name="img3" id="img3" style="display:none;">
+					<label for="img1" >
+						<img id="preview1"src="../img/plus.png" alt="">
+					</label>
+					<input type="file" name="img1" id="img1" style="display:none;" onchange="previewImage('img1', 'preview1')">
+					<label for="img2" >
+						<img id="preview2" src="{{ asset('img/camera2.png') }}" alt="">
+					</label>
+					<input type="file" name="img2" id="img2" style="display:none;" onchange="previewImage('img2', 'preview2')">
+					<label for="img3" >
+						<img id="preview3" src="{{ asset('img/camera2.png') }}" alt="">
+					</label>
+					<input type="file" name="img3" id="img3" style="display:none;" onchange="previewImage('img3', 'preview3')">
 				</div>
-				<!-- <label for="board">카테고리:</label> -->
+				
 				<div class="insert_select_container">
 					<select name="board" id="board" class="insert_select">
 						<option value="">카테고리</option>

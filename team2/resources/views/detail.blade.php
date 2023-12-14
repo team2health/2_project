@@ -10,7 +10,7 @@
 	<div class="detail_container">		
         <div class="detail_hidden_container">
             <div>           
-                <p>제모기다</p>
+                <p>{{route($data->board_title)}}</p>
             </div>         
             <div class="last_user">
                 <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
