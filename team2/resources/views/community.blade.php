@@ -6,12 +6,10 @@
 <main class="">    
     <div class="slider-container">
         <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
-        <a href="" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
+        <a href="{{route('insert')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
         <div class="community_headline">
-            <h2>HOT 게시글</h2>
-            <button type="submit" class="cate_btn">
-            정렬
-        </button>
+            <h2>🔥HOT 게시글</h2>
+            <a href="{{route('categoryboard')}}" class="cate_btn">커뮤니티 홈</a>            
         </div>
         
         <div class="slider">
@@ -34,6 +32,7 @@
             <div class="slide">
                 <div>
                     제목
+                
                 </div> 
                 <div class="community_content">
                     내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.
@@ -172,7 +171,7 @@
     <div class="community_tag_hidden">
         <div class="community_tag_container"> 
             <div class="">
-                <h2>관심 태그</h2>                    
+                <h2>⭐관심 태그</h2>                    
             </div>
             <div>
                 #기침 # 발열

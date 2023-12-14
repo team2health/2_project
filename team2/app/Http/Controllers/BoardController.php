@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\support\facades\DB;
+use App\Models\Board;
+
 
 class BoardController extends Controller
 {
@@ -12,10 +15,14 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {  
+        
+         $result=Board::get();
+        return view('community')->with('data',$result);
     }
-
+    public function categoryboard(){
+        return view('categoryboard');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +30,7 @@ class BoardController extends Controller
      */
     public function create()
     {
-        //
+        return view('insert');
     }
 
     /**
@@ -34,7 +41,10 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $arrData=$request->only('board_title','board_content');
+        // var_dump($arrData);
+        $result=Board::create($arrData);        
+        return redirect()->route('categoryboard');
     }
 
     /**
@@ -45,7 +55,7 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

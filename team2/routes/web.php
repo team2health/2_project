@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BoardController;
 
 
 /*
@@ -35,6 +36,9 @@ Route::get('/lastboard', function () {
 Route::get('/insert', function () {
     return view('insert');
 })->name('insert');
+
+Route::resource('/board', BoardController::class);
+Route::get('/categoryboard',[BoardController::class,'categoryboard'])->name('categoryboard');
 
 
 // Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
