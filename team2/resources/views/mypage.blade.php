@@ -65,35 +65,42 @@
 
     {{-- 정보수정창 --}}
     <div class="mypage-content2" id="mypageContent2">
-        <div class="user-info-modify modify-display" id="UserInfoModify">
-            <label for="profilephoto">
-                <div class="profile-photo-btn" style="background-image: url(/img/camera2.png);">
+        <form action="" class="user-info-modify" >
+            <div id="UserInfoModify">
+                <label for="profilephoto">
+                    <div class="profile-photo-btn" style="background-image: url(/img/camera2.png);">
+                    </div>
+                </label>
+                <input type="file" accept="image/*" style="display: none;" id="profilephoto">
+                <br>
+                <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
+                <div class="user-info-btn"> 삭제 </div>
+                <br>
+                <label for="usermodifyname">닉네임 수정</label>
+                <div class="user-info-btn-chk"> 닉네임 중복 확인 </div>
+                <input type="text" id="usermodifyname">
+                <br>
+                <label for="usermodifypassword">비밀번호 수정</label>
+                <input type="password" id="usermodifypassword">
+                <br>
+                <label for="usermodifypasswordchk">비밀번호 확인</label>
+                <input type="password" id="usermodifypasswordchk">
+                <br>
+                <br>
+                <div class="adress-box">
+                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호">
+                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn"><br>
+                    <span id="guide" style="color:#999;display:none"></span>
+                    <input class="adress-box-b" type="text" id="sample4_roadAddress" placeholder="도로명주소" name="user_adress_f">
+                    <br>
+                    <input class="adress-box-b" type="text" id="sample4_detailAddress" placeholder="상세주소" name="user_adress_s">
                 </div>
-            </label>
-            <input type="file" accept="image/*" style="display: none;" id="profilephoto">
-            <br>
-            <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
-            <div class="user-info-btn"> 삭제 </div>
-            <br>
-            <label for="usermodifyname">닉네임 수정</label>
-            <input type="text" id="usermodifyname">
-            <br>
-            <label for="usermodifypassword">비밀번호 수정</label>
-            <input type="password" id="usermodifypassword">
-            <br>
-            <label for="usermodifypasswordchk">비밀번호 확인</label>
-            <input type="password" id="usermodifypasswordchk">
-            <br>
-			<div class="adress-box">
-				<input type="text" id="sample4_postcode" placeholder="우편번호">
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn"><br>
-				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="user_adress_f">
-				<br>
-				<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="user_adress_s">
-			</div>
-            
-        </div>
+                <div class="mypage-btn-line-modify">
+                    <button type="submit" class="mypage-btn">수정완료</button>
+                    <a href="{{route('mypage')}}"><div class="mypage-btn">취소</div></a>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="mypage-mainbar">
@@ -107,6 +114,7 @@
 
         <div class="mypage-tag-title">
             <div class="mypage-hashtag-title">
+                <img src="/img/star.png" alt="">
                 내가 찜한 관심 태그
             </div>
             <div class="mypage-hashtag">
