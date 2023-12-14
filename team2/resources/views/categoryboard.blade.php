@@ -4,6 +4,8 @@
 
 @section('main')
 <main class="last_main">
+    <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
+    <a href="" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>자유게시판</h2>
         <button type="submit" class="cate_btn">
@@ -12,7 +14,7 @@
     </div>
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임
@@ -32,7 +34,7 @@
     
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임
@@ -51,7 +53,7 @@
     </div>
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임
@@ -70,7 +72,7 @@
     </div>
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임
@@ -89,7 +91,7 @@
     </div>    
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임
@@ -109,7 +111,7 @@
     
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임
@@ -128,7 +130,7 @@
     </div>
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임
@@ -147,7 +149,7 @@
     </div>
     <div class="last_container">
         <div class="last_user">
-            <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
                     닉네임

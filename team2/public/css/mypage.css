@@ -94,10 +94,6 @@ td {
 .calendarNone {
     display: none;
 }
-.mypage-hashtag-title {
-    font-weight: 600;
-    font-size: 2rem;
-}
 .calendarBtn {
     padding: 5px 10px;
     color: #ffa459;
@@ -251,7 +247,6 @@ td {
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
-
 }
 .mypage-delete-modal {
     background-color: #fefefe;
@@ -312,10 +307,6 @@ td {
     border: 1px solid #C5C5C5;
     border-radius: 8px;
     width: 100%;
-    /* display: grid;
-    grid-template-rows: 50px 1fr 50px 1fr;
-    align-items: center;
-    justify-items: center; */
 }
 .mypage-content2 {
     display: none;
@@ -409,73 +400,9 @@ td {
     border: 1px solid #dedede;
 }
 
-@media screen and (max-width: 1000px) {
-    .mypage-content {
-        display: none;
-    }
-    .mypage-grid {
-        display: block;
-    }
-}
-@media screen and (max-width: 1100px) {
-    .mypage-boardbox {
-        display: none;
-    }
-    .mypage-date-today {
-        display: none;
-    }
-    .mypage-btn-plus {
-        display: none;
-    }
-    .mypage-insert-btn {
-        display: none;
-    }
-    .mypage-board-show-btn {
-        display: none;
-    }
-    .mypage-comment-show-btn {
-        display: none;
-    }
-}
-@media screen and (max-width: 1400px) {
-    .mypage-content {
-        border: none;
-    }
-}
 .favorite-tag-plus {
     background-color: #FF9900;
 }
-/* .mypage-hashtag > span {
-    display: inline-block;
-    background-color: #ffffff;
-    border: 1px solid #C5C5C5;
-    border-radius: 10px;
-    width: 100px;
-} */
-
-/* 유저 정보 수정창 */
-
-.profile-photo-btn {
-    background-size: cover;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    border: 2px solid #000000;
-    display: inline-block;
-}
-.user-info-btn {
-    padding: 10px 20px;
-    border-radius: 10px;
-    background-color: #FAFAFA;
-    border: 1px solid #C5C5C5;
-    display: inline-block;
-    cursor: pointer;
-}
-/* .user-info-modify {
-    display: grid;
-    justify-content: center;
-} */
-
 .mypage-comment-show-btn {
     display: inline-block;
     width: 22.5vw;
@@ -516,4 +443,205 @@ td {
 .mypage-boardbox-date {
     font-size: 0.9rem;
     color: #888;
+}
+
+/* 유저 정보 수정창 */
+
+.profile-photo-btn {
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid #000000;
+    display: inline-block;
+}
+.user-info-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #FAFAFA;
+    border: 1px solid #C5C5C5;
+    display: inline-block;
+    cursor: pointer;
+}
+.user-info-modify {
+    margin: 15px auto;
+    display: grid;
+    justify-content: center;
+}
+.user-info-modify label{
+    color: #f15500;
+    font-weight: 700;
+    margin: 15px 0 10px 5px;
+    display: inline-block;
+}
+.user-info-modify .user-info-btn {
+    color: #000000;
+    font-weight: 400;
+}
+#UserInfoModify > .user-info-btn {
+    margin-top: 0;
+}
+#UserInfoModify > input{
+    height: 50px;
+    width: 100%;
+    font-size: 1rem;
+}
+.mypage-btn-line-modify > .mypage-btn {
+    width: 145px;
+}
+.adress-box > .adress-box-a {
+    height: 50px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+.adress-box > .adress-box-b {
+    height: 50px;
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+.mypage-btn-line-modify {
+    display: flex;
+    justify-content: space-around;
+}
+.user-info-btn-chk {
+    padding: 5px 5px;
+    border-radius: 10px;
+    background-color: #FAFAFA;
+    border: 1px solid #C5C5C5;
+    display: inline-block;
+    cursor: pointer;
+}
+.user-info-modify input:focus {
+    background-color: #FFF8DC;
+}
+/* 박스 모달 */
+.UserboardModal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+}
+.mypage-content-modal {
+    position: absolute;
+    top: 15vw;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 100%;
+    overflow: scroll;
+}
+.mypage-content-modal {
+    -ms-overflow-style: none;
+}
+.mypage-content-modal::-webkit-scrollbar{
+display:none;
+}
+.mypage-content-modal-block {
+    display: none;
+}
+.mypage-modal-close-btn {
+    cursor: pointer;
+    font-size: 2rem;
+}
+.mypage-boardbox-modal {
+    border-radius: 8px;
+    border: 1px solid #C5C5C5;
+    width: 400px;
+    height: 190px;
+    box-shadow: 0px 0px 5px 3px rgb(196, 196, 196, 0.3);
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.mypage-board-modal-btn, .mypage-comment-modal-btn {
+    display: inline-block;
+    width: 22.5vw;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 0.2vw;
+}
+.mypage-comment-modal-btn:hover, .mypage-board-modal-btn:hover {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    font-weight: 900;
+    color: #FF9900;
+}
+.mypage-comment-modal-btn:active, .mypage-board-modal-btn:active,
+.mypage-comment-modal-btn:focus, .mypage-board-modal-btn:focus {
+    background-color: #f5f5f5;
+    color: #f15500;
+    font-weight: 900;
+}
+.mypage-boards-part2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 13px;
+    width: 100vw;
+}
+.mypagegohome {
+    display: none;
+}
+
+/* 마이페이지용 헤더 그리드 */
+.inmypageheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mypagegohome {
+    margin-right: 10px;
+}
+
+/* 관심태그 목록 */
+.mypage-hashtag-title  {
+    margin-bottom: 15px;
+}
+.mypage-hashtag-title > img{
+    width: 30px;
+}
+.mypage-hashtag-title {
+    font-weight: 600;
+    font-size: 2rem;
+}
+.mypage-hashtag > span {
+    display: block;
+    padding: 10px;
+    background-color: #EDEDED;
+    margin-bottom: 5px;
+}
+
+
+/* 마이페이지 미디어쿼리 */
+@media screen and (min-width: 700px) {
+    .UserboardModal {
+        display: none;
+    }
+    .mypage-content-modal {
+        display: none;
+    }
+}
+@media screen and (max-width: 1100px) {
+    .mypage-grid, .mypagegohome {
+        display: block;
+    }
+    .mypage-content, .mypage-boardbox, .mypage-date-today, .mypage-btn-plus, .mypage-insert-btn
+    , .mypage-content, .mypage-board-show-btn, .mypage-comment-show-btn {
+        display: none;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .mypage-content, .mypage-content2 {
+        border: none;
+    }
 }

@@ -10,10 +10,10 @@
 	<div class="detail_container">		
         <div class="detail_hidden_container">
             <div>           
-                <p>제모기다</p>
+                <p>{{route($data->board_title)}}</p>
             </div>         
             <div class="last_user">
-                <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+                <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
                 <div class="board_nic_text">
                     <div>
                         내가누군지물어보신다면대답해주는것이인지상정
@@ -53,7 +53,7 @@
         <ul>
             <li>
                 <div class="last_user">
-                    <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+                    <img class="community_icon"  src="../img/f-img.png" alt="" class="board_nic_img">                               
                     <div class="board_nic_text">
                         <div>
                             세모
@@ -70,7 +70,7 @@
             </li>
             <li>
                 <div class="last_user">
-                    <img src="../img/f-img.png" alt="" class="board_nic_img">                               
+                    <img class="community_icon"  src="../img/f-img.png" alt="" class="board_nic_img">                               
                     <div class="board_nic_text">
                         <div>
                             네모

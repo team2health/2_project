@@ -19,38 +19,35 @@ const slider = document.querySelector('.slider');
     }
 
     setInterval(nextSlide, 3000);
-// const slider = document.querySelector('.slider');
-//     let isTransitioning = false;
+    const favoriteSlider = document.querySelector('.favorite_slider');
+    let isFavoriteTransitioning = false;
+    
+    function nextFavoriteSlide() {
+        if (!isFavoriteTransitioning) {
+            isFavoriteTransitioning = true;
+            favoriteSlider.style.transform = 'translateX(0)'; // 한 개의 슬라이드가 이동하는 거리 조절
+            setTimeout(() => {
+                favoriteSlider.appendChild(favoriteSlider.firstElementChild);
+                favoriteSlider.style.transform = 'translateX(0)';
+                isFavoriteTransitioning = false;
+            }, 5000); // 0.5초 뒤에 실행 (transition duration과 일치해야 함)
+        }
+    }
+    
+    setInterval(nextFavoriteSlide, 3000);
+    
+    function previewImage(inputId, previewId) {
+        var input = document.getElementById(inputId);
+        var preview = document.getElementById(previewId);
 
-//     function nextSlide() {
-//         if (!isTransitioning) {
-//             isTransitioning = true;
-//             slider.style.transform = 'translateX(-20%)'; // 한 개의 슬라이드가 이동하는 거리 조절
-//             setTimeout(() => {
-//                 slider.appendChild(slider.firstElementChild);
-//                 slider.style.transform = 'translateX(0)';
-//                 isTransitioning = false;
-//             }, 500); // 0.5초 뒤에 실행 (transition duration과 일치해야 함)
-//         }
-//     }
+        input.addEventListener('change', function () {
+            var file = input.files[0];
+            var reader = new FileReader();
 
-//     function prevSlide() {
-//         if (!isTransitioning) {
-//             isTransitioning = true;
-//             slider.insertBefore(slider.lastElementChild, slider.firstElementChild);
-//             slider.style.transform = 'translateX(-20%)';
-//             setTimeout(() => {
-//                 slider.style.transform = 'translateX(0)';
-//                 isTransitioning = false;
-//             }, 50); // 0.05초 뒤에 실행 (transition duration과 일치해야 함)
-//         }
-//     }
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
 
-//     // 스크롤바로 이동
-//     slider.addEventListener('wheel', (event) => {
-//         if (event.deltaY > 0) {
-//             nextSlide();
-//         } else {
-//             prevSlide();
-//         }
-//     });
+            reader.readAsDataURL(file);
+        });
+    }

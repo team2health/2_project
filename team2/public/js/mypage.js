@@ -1,4 +1,3 @@
-
 window.addEventListener('load', function() {
     buildCalendar();  //달력 불러오는 함수를 페이지를 로딩하자마자 실행
 });
@@ -11,6 +10,12 @@ window.addEventListener('load', function() {
 });
 window.addEventListener('load', function() {
     datescrollbar(); //일주일 스크롤을 설정하는 함수
+});
+window.addEventListener('load', function() {
+    datescrollbar(); //일주일 스크롤을 설정하는 함수
+});
+window.addEventListener('load', function() {
+    mypagemodalclosebtn(); //모달창 닫기
 });
 
 
@@ -210,14 +215,27 @@ function userinforupdate() {
 
     let userinfomodify = document.getElementById('mypageContent2');
     userinfomodify.style.display = 'block';
-
 }
 
 // 나의 게시글 창으로 교체
-function userboardshow() {
-    let userinfomodify = document.getElementById('mypageContent2');
-    userinfomodify.style.display = 'none';
+let userinfomodify = document.getElementById('mypageContent2');
+let mypagecontent = document.getElementById('mypageContent');
+let userboardmodal = document.getElementById('UserboardModal');
+let mypageContentModal = document.getElementById('mypageContentModal');
 
-    // let mypagecontent = document.getElementById('mypageContent');
-    // mypagecontent.style.display = 'block';
+function userboardshow() {
+        userinfomodify.style.display = 'none';
+        mypagecontent.style.display = 'block';
+
+    if ( window.innerWidth <= 700 ) {
+        userboardmodal.classList.toggle('UserboardModal');
+        mypageContentModal.classList.toggle('mypage-content-modal-block');
+        }
+}
+
+// 모달창 닫는 버튼
+function mypagemodalclosebtn() {
+    let userboardmodal = document.getElementById('UserboardModal');
+    userboardmodal.classList.toggle('UserboardModal');
+    mypageContentModal.classList.toggle('mypage-content-modal-block');
 }

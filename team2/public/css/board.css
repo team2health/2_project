@@ -4,6 +4,7 @@
 	box-sizing: border-box;
 }
 
+
 /* -------- lastboard -------- */
 
 .last_main{
@@ -20,7 +21,7 @@
 
 @media only screen and (max-width: 1000px) {
     .last_container {
-        width: 100vw;
+        width: 70vw;
     }
 }
 
@@ -75,7 +76,7 @@ textarea{
 
 @media only screen and (max-width: 1000px) {
     .detail_container {
-        width: 100vw;
+        width: 70vw;
     }
 }
 .detail_hidden_container{
@@ -130,7 +131,7 @@ li{
 }
 .insert_hidden_container{
     margin: 10px;
-    padding:10px;
+   padding: 10px;
 }
 .insert_container{
     width: 60vw;    
@@ -142,14 +143,18 @@ li{
 
 @media only screen and (max-width: 1000px) {
     .insert_container {
-        width: 100vw;
+        width: 60vw;        
     }
     .insert_hidden_container{
-        width: 100vw;
+        width: 70vw;
     }
     .insert_main{
-        width: 100vw;
+        width: 70vw;
     }
+    form{
+        width:60vw;
+    }
+    
 }
 .insert_img {    
     margin: 0px auto;
@@ -215,7 +220,7 @@ li{
    width: 70%; 
    
 }
-.insert_btn, .cate_btn{
+.insert_btn{
     border: 1px solid rgba(128, 128, 128, 0.369);   
     width: 70px;
     margin: 0 10px;
@@ -232,7 +237,7 @@ li{
 /* ---------커뮤니티------------------ */
 .slider-container {
     overflow: auto;
-    margin: 10px auto;
+    margin: 30px auto;
     width: 70vW;   
 }
 
@@ -258,6 +263,26 @@ li{
     margin: 6.5px;
     
 }
+.favorite_slider-container {
+    overflow: auto;
+    margin: 30px auto;
+    width: 60vW;   
+}
+.favorite_slider {   
+    width:800px;    
+    display: flex;   
+    transition: transform 2s ease-in-out;  
+     
+}
+
+.favorite_slide {
+    min-width: 48%;       
+    border: 1px solid #848484;
+    border-radius: 5px;
+    margin: 13px;    
+    background-color: #ff9950;
+    
+}
 .slider-container::-webkit-scrollbar {
     width: 12px; 
 }
@@ -268,6 +293,18 @@ li{
 }
 
 .slider-container::-webkit-scrollbar-track {
+    background-color: #f6f6f6; 
+}
+.favorite_slider-container::-webkit-scrollbar {
+    width: 12px; 
+}
+
+.favorite_slider-container::-webkit-scrollbar-thumb {
+    background-color: #d9d9d9; 
+    border-radius: 6px; 
+}
+
+.favorite_slider-container::-webkit-scrollbar-track {
     background-color: #f6f6f6; 
 }
 .community_content{    
@@ -289,6 +326,10 @@ li{
 .cate_btn:hover{
     background-color: #ff9950;
 }
+.community_tag_hidden{
+    background-color: #efefef;
+    margin-bottom:50px ;
+}
 
 .community_tag_container{
     width: 40%;
@@ -301,7 +342,7 @@ li{
     grid-template-columns: repeat(auto-fit,minmax(350px,1fr));    
     grid-gap: 5px;
 }
-.community_tag> div {
+.community_tag > div {
     border: 1px solid black;
     border-radius: 5px;
     margin: 10px auto;
@@ -315,9 +356,65 @@ li{
     max-height: 6em;      
     white-space: normal;     
 }
-.community_tag_container > div {
+.community_more_container{
     text-align: center;
-    margin-top: 20px; /* 원하는 만큼의 간격 조정 */
+    margin-bottom: 30px;
+}
+.community_more {
+    
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #ff9950;
+    width: 70px;
+    height: 35px;
+}
+.community_icon{
+    border-radius: 50%;
+    background-color: #ff9950;
+    width: 50px;
+    height: 50px;
+}
+.community_a{
+    position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background-color: #ff9950;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;            
+}
+.community_aplus{
+    position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff9950;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;            
+}
+.cate_btn{
+    border: 1px solid rgba(128, 128, 128, 0.369);   
+    width: 90px;
+    margin: 0 10px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    line-height: 40px;
 }
 
 
