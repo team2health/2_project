@@ -52,3 +52,30 @@ function mypagemodalclosebtn() {
     userboardmodal.classList.toggle('UserboardModal');
     mypageContentModal.classList.toggle('mypage-content-modal-block');
 }
+
+// 관심태그 삭제 버튼
+function favoritehashdelete(data) {
+
+    console.log(data);
+    if ( confirm("삭제하시겠습니까?") ) { 
+        alert("삭제되었습니다.");
+        let favoritetag = document.getElementById('favoriteHashtagId'+data);
+        favoritetag.style.display = 'none';
+        console.log(data);
+
+        let formData = new FormData();
+        formData.append('favorite_id', data);
+        
+        fetch('/myhashdelete', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)})
+        .catch(error => console.log(error));
+
+    } else {
+        // 취소 클릭시 false 가 리턴 되어 실행​    
+    } 
+}

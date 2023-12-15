@@ -298,8 +298,7 @@ td {
 .mypage-grid {
     display: grid;
     justify-content: center;
-    grid-template-columns: 46vw 23vw;
-    gap: 1vw;
+    grid-template-columns: 49vw 21vw;
     justify-items: end;
     margin: 70px auto;
 }
@@ -307,6 +306,7 @@ td {
     border: 1px solid #C5C5C5;
     border-radius: 8px;
     width: 100%;
+    background-color: #FFF8DC;
 }
 .mypage-content2 {
     display: none;
@@ -318,11 +318,12 @@ td {
     text-align: center;
     display: block;
     font-size: 0.9rem;
+    width: 100vw;
 }
 .mypage-boardbox {
     border-radius: 8px;
     border: 1px solid #C5C5C5;
-    width: 400px;
+    width: 370px;
     height: 190px;
     box-shadow: 0px 0px 5px 3px rgb(196, 196, 196, 0.3);
     display: inline-block;
@@ -330,6 +331,9 @@ td {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .mypage-boards-part {
     display: flex;
@@ -345,7 +349,7 @@ td {
 .mypage-bord-detailbox {
     border-radius: 8px;
     border: 1px solid #C5C5C5;
-    width: 370px;
+    width: 340px;
     height: 100px;
     font-size: 1.1rem;
     padding: 15px;
@@ -414,7 +418,7 @@ td {
 }
 .mypage-board-show-btn  {
     display: inline-block;
-    width: 22.5vw;
+    width: 25.5vw;
     height: 70px;
     line-height: 70px;
     text-align: center;
@@ -618,13 +622,19 @@ display:none;
     display: grid;
 }
 .mypage-hashtag > div {
-    display: block;
-    padding: 10px;
+    padding: 10px 20px;
     background-color: #EDEDED;
     margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin: 3px;
 }
-
-
+.mypage-hashtag > div:hover {
+    background-color: rgb(248, 199, 124, 0.3);
+}
+.mypage-hashtag > div > span {
+    cursor: pointer;
+}
 /* 마이페이지 미디어쿼리 */
 @media screen and (min-width: 700px) {
     .UserboardModal {
@@ -643,7 +653,7 @@ display:none;
         display: none;
     }
 }
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1500px) {
     .mypage-content, .mypage-content2 {
         border: none;
     }
