@@ -36,7 +36,7 @@ Route::get('/insert', function () {
 
 Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 
- Route::resource('/board', BoardController::class);
+Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  
 // POST            board ..................................... board.store › BoardController@store  
 // GET|HEAD        board/create .............................. board.create › BoardController@create  

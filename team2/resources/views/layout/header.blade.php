@@ -8,7 +8,7 @@
 			</div>
 			@if (request()->url() == 'http://127.0.0.1:8000/mypage')
 			<div style="color: rgb(182, 182, 182)" class="mypagegohome">
-				<a href="{{route('main')}}">
+				<a href="{{route('main.get')}}">
 				<img src="/img/home.png" alt="" width="50px;" style="margin-right: 20px;">
 			</a>
 			</div>
