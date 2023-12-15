@@ -12,6 +12,22 @@ function partCheck(index) {
 
 function symptomCheck(index) {
 	console.log(index);
+
+	let formData = new FormData();
+	formData.append('part_id', index);
+
+	fetch('/symptomselect', {
+		method: 'POST',
+		body: formData,
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	})
+	.catch(error => {
+		console.error('오류 발생:', error);
+	})
+	
 	SYMPTOM.style.display = 'none';
 	DISEASE.removeAttribute('display');
 	DISEASE.style.display = 'block';

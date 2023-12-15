@@ -47,6 +47,7 @@ Route::resource('/board', BoardController::class);
 Route::get('/categoryboard',[BoardController::class,'categoryboard'])->name('categoryboard');
 
 Route::get('/', [MainController::class, 'mainget'])->name('main.get');
+Route::post('/symptomselect', [MainController::class, 'symptomselectpost']);
 
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');

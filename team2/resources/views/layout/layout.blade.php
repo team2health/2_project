@@ -12,6 +12,7 @@
 <body>
 	@include('layout.header')
     @yield('main')
+	<br><br><br>
 	@include('layout.footer')
 	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

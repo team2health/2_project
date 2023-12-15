@@ -10,7 +10,7 @@ a {
 }
 
 .footer {
-	background-color: #F2EFF6;
+	background-color: #FF9900;
 	position: fixed;
 	bottom: 0;
 	height: 50px;
@@ -23,6 +23,10 @@ button {
 	border: none;
 	background: none;
 	cursor: pointer;
+}
+
+.main-line-height {
+	line-height: 20px;
 }
 
 .container {

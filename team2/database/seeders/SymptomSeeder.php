@@ -48,7 +48,7 @@ class SymptomSeeder extends Seeder
             , ['symptom_id' => 30, 'symptom_name' => '발열'] // 머리 감기, 목 인후염 또는 인두염
             , ['symptom_id' => 31, 'symptom_name' => '경련'] // 배, 눈, 입 안면연축 다리 국소성 근육 경련
             , ['symptom_id' => 32, 'symptom_name' => '건조함'] // 눈 안구 건조증, 입 구강 건조증
-            , ['symptom_id' => 33, 'symptom_name' => '가려움'] // 머리 지루성 피부염, 눈 결막염, 귀
+            , ['symptom_id' => 33, 'symptom_name' => '가려움'] // 머리 지루성 피부염, 눈 결막염
             , ['symptom_id' => 34, 'symptom_name' => '통증'] // 눈 각막염 입 혈관부종
             , ['symptom_id' => 35, 'symptom_name' => '복통'] // 배 과민성 대장 증후군
         ]);

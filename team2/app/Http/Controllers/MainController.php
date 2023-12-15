@@ -12,4 +12,9 @@ class MainController extends Controller
 
         return view('main')->with('data', $result);
     }
+
+    public function symptomselectpost(Request $request) {
+        $part_id = $request->part_id;
+        
+    }
 }
