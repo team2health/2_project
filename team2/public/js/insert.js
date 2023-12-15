@@ -1,3 +1,7 @@
+function openFile() {
+    document.getElementById('fileInput').click();
+}
+
 function previewImage(inputId, previewId) {
     var input = document.getElementById(inputId);
     var preview = document.getElementById(previewId);
