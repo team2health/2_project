@@ -86,5 +86,5 @@
     </div>
 
 </div>
-
+<script src="/js/timeline.js"></script>
 @endsection
