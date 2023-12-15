@@ -88,13 +88,16 @@ textarea{
     display: grid;
     justify-content: end;    
 }
-.d_btn{
+.d_btn {
     border: 1px solid rgba(128, 128, 128, 0.369);
     margin: 0px 10px;
     width: 70px;
+    height: 30px;
     border-radius: 5px;
     background-color: white;
 }
+
+
 .detail_content{
     border: 2px solid rgba(128, 128, 128, 0.230);
 }
@@ -236,8 +239,7 @@ li{
     color: rgba(128, 128, 128, 0.369) ;
 }
 /* ---------커뮤니티------------------ */
-.slider-container {
-    /* overflow: auto; */
+.slider-container {    
     margin: 30px auto;
     width: 70vW;   
 }
@@ -250,9 +252,8 @@ li{
 }
 
 .slider {    
-    width: 1000px;
-          
-    margin: 20px;    
+    width: 1000px;          
+    margin: 20px ;    
     /* transition: transform 2s ease-in-out;  */
     display: flex;
     overflow-x: auto;
@@ -269,14 +270,15 @@ li{
     
 }
 .favorite_slider-container {
-    overflow: auto;
+    
     margin: 30px auto;
     width: 60vW;   
 }
 .favorite_slider {   
     width:800px;    
     display: flex;   
-    transition: transform 2s ease-in-out;  
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;  
      
 }
 
@@ -334,6 +336,7 @@ li{
 .community_tag_hidden{
     background-color: #efefef;
     margin-bottom:50px ;
+    width: 100%;
 }
 
 .community_tag_container{

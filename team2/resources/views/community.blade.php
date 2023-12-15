@@ -10,154 +10,36 @@
         <div class="community_headline">
             <h2>🔥HOT 게시글</h2>
             <a href="{{route('categoryboard')}}" class="cate_btn">커뮤니티 홈</a>            
-        </div>
-        
-		
+        </div>		
 	
 		
-		<!-- <div class="slider">
-        @forelse ($data as $item)
-            <div class="slide">
-                <div>
-                    {{ $item->board_title}}
-                </div> 
-                <a href="{{route('board.show',['board'=>$item->board_id])}}" class="community_content">
-                    {{ $item->board_content}}
-                </a>
-                <div class="community_bottom">
+        <div class="slider" id="slider">
+            @forelse ($data as $item)
+                <div class="slide">
                     <div>
-                        {{ $item->board_hits}}
+                        {{ $item->board_title }}
                     </div>
-                    <div>
-                        댓글 35
-                    </div>  
+                    <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
+                    {{ $item->board_content }}
+                     </a>
+                    <div class="community_bottom">
+                        <div>
+                            {{ $item->board_hits }}
+                        </div>
+                        <div>
+                            댓글 35
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @empty
+                <div>게시글 없음</div>
+             @endforelse
         </div>
-    </div>
-
-	@empty
-	<div>게시글 없음</div>
-	@endforelse -->
+    </div>    
         
-         <div class="slider">
-            <div class="slide">
-                <div>
-                    제목입니다.
-                </div> 
-                <div class="community_content">
-                    내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.
-                </div>
-                <div class="community_bottom">
-                    <div>
-                        조회수 1315
-                    </div>
-                    <div>
-                        댓글 35
-                    </div>  
-                </div>
-            </div>
-            <div class="slide">
-                <div>
-                    제목
-                
-                </div> 
-                <div class="community_content">
-                    내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.
-                 </div>
-                <div class="community_bottom">
-                    <div>
-                        조회수 1315
-                    </div>
-                    <div>
-                        댓글 35
-                    </div>  
-                </div>
-            </div>
-             <div class="slide">
-                <div>
-                    제목
-                </div> 
-                <div class="community_content">
-                    흘러가는 물결 그늘아래 편지를 쓰고요~ 흘러가는 물결 그늘아래 열아홉살 아~름 다운 꿈속의 흘러가는 물결 그늘아래 편지를 쓰고요~ 흘러가는 물결 그늘아래 열아홉살 아~름 다운 꿈속의
-                </div>
-                <div class="community_bottom">
-                    <div>
-                        조회수 1315
-                    </div>
-                    <div>
-                        댓글 35
-                    </div>  
-                </div>
-            </div>
-            <div class="slide">
-                <div>
-                    제목
-                </div> 
-                <div class="community_content">
-                내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을    내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을    내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.
-                </div>
-                <div class="community_bottom">
-                    <div>
-                        조회수 1315
-                    </div>
-                    <div>
-                        댓글 35
-                    </div>  
-                </div>
-            </div>
-            <div class="slide">
-                <div>
-                    제목
-                </div> 
-                <div class="community_content">
-                    내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.
-                </div>
-                <div class="community_bottom">
-                    <div>
-                        조회수 1315
-                    </div>
-                    <div>
-                        댓글 35
-                    </div>  
-                </div>
-            </div>
-            <div class="slide">
-                <div>
-                    제목
-                </div> 
-                <div class="community_content">
-                    내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.
-                </div>
-                <div class="community_bottom">
-                    <div>
-                        조회수 1315
-                    </div>
-                    <div>
-                        댓글 35
-                    </div>  
-                </div>
-            </div>
-            <div class="slide">
-                <div>
-                    제목
-                </div> 
-                <div class="community_content">
-                    내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.내용을 써보자. 내용을 써보자,.
-                </div>
-                <div class="community_bottom">
-                    <div >
-                        조회수 1315
-                    </div>
-                    <div >
-                        댓글 35
-                    </div>  
-                </div>
-            </div>            
-        </div>
-    </div>
     <div class="favorite_slider-container">   
         <div class="favorite_slider">
+            
             <div class="favorite_slide">
                 <div>
                     COVID-19
@@ -287,5 +169,5 @@
     </div>
     
 </main>
-
+<script src="/js/community.js"></script>
 @endsection

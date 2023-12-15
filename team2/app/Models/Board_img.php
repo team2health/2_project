@@ -11,9 +11,6 @@ class Board_img extends Model
     protected $fillable = [
         'board_id', 'img_address'
     ];
-    public function boardImgs()
-{
-    return $this->hasMany(BoardImg::class);
-}
+
 }
 
