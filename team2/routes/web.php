@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\MainController;
 
 
 /*
@@ -15,10 +16,6 @@ use App\Http\Controllers\BoardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('main');
-})->name('main');
 
 Route::get('/mypage', function () {
     return view('mypage');
@@ -42,6 +39,7 @@ Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 Route::resource('/board', BoardController::class);
 Route::get('/categoryboard',[BoardController::class,'categoryboard'])->name('categoryboard');
 
+Route::get('/', [MainController::class, 'mainget'])->name('main.get');
 
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
@@ -50,4 +48,4 @@ Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::get('/mypage', [UserController::class, 'mypageget'])->name('mypage.get');
 
-// Route::post('/namechk', [UserController::class, 'namechkpost']);
+Route::post('/namechk', [UserController::class, 'namechkpost']);

@@ -71,7 +71,7 @@
 				<div class="display-flex-center">
 					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="../img/default_f.png" alt="" class="btn-img b-radius"></div>
 					<div class="div-display-lnlineBlock">
-						<a href="{{ route('login.get') }}"><span class="font-weight">로그인</span>을 해주세요.</a>
+						<a href="{{ route('login.get') }}"><span class="font-weight font-color">로그인</span>을 해주세요.</a>
 						@if (request()->url() !== 'http://127.0.0.1:8000/mypage')
 							<a href="{{ route('login.get') }}" class="display-flex font-small">
 								<span>welcome</span>
@@ -90,7 +90,7 @@
 		@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist'
 		&& request()->url() !== 'http://127.0.0.1:8000/mypage')
 			<div class="container-category display-flex-around div-padding">
-				<a href="{{ route('main') }}" class="div-display-lnlineBlock">증상 검색</a>
+				<a href="{{route('main.get')}}" class="div-display-lnlineBlock">증상 검색</a>
 				<a href="{{ route('board.index') }}" class="div-display-lnlineBlock">커뮤니티</a>
 				<a href="{{ route('timeline') }}" class="div-display-lnlineBlock">타임라인</a>
 			</div>

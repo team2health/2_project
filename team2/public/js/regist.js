@@ -55,10 +55,10 @@ let USERPASSWORDCHECK = document.getElementById('user_password_check');
 let ERRORNAME = document.getElementById('error_name');
 let ERRORID = document.getElementById('error_id');
 let ERRORPASSWORDCHECK = document.getElementById('error_password_check');
+let regex = /^[가-힣a-zA-Z0-9]+$/;
 
 USERNAME.addEventListener('input', function() {
     const value = USERNAME.value;
-    const regex = /^[가-힣a-zA-Z0-9]+$/;
 
     if (!regex.test(value)) {
 		ERRORNAME.removeAttribute('class');
@@ -69,7 +69,6 @@ USERNAME.addEventListener('input', function() {
 
 USERID.addEventListener('input', function() {
     const value = USERID.value;
-    const regex = /^[가-힣a-zA-Z0-9]+$/;
 
     if (!regex.test(value)) {
         ERRORID.removeAttribute('class');
@@ -117,8 +116,14 @@ function registgo() {
 	if(USERNAMEVALUE === '') {
 		alert('닉네임은 필수사항입니다.');
 		return false;
+	} else if(!regex.test(USERNAMEVALUE)) {
+		alert('닉네임을 다시 확인해주세요.');
+		return false;
 	} else if(USERIDVALUE === '') {
 		alert('아이디는 필수사항입니다.');
+		return false;
+	} else if(!regex.test(USERIDVALUE)) {
+		alert('아이디를 다시 확인해주세요.');
 		return false;
 	} else if(USERPASSWORDVALUE === '') {
 		alert('비밀번호는 필수사항입니다.');
@@ -143,23 +148,25 @@ function registgo() {
 	document.getElementById('regist_form').submit();
 }
 
-// function checkName() {
-// 	let nameChk = document.getElementById('user_name').value;
-// 	const formData = new FormData();
-// 	formData.append('user_name', nameChk);
-
-// 	fetch('/namechk', {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'multipart/form-data',
-// 		},
-// 		body: formData,
-// 	})
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		console.log(data);
-// 	})
-// 	.catch(error => {
-// 		console.error('오류 발생:', error);
-// 	})
-// }
+function checkName() {
+	let nameChk = document.getElementById('user_name').value;
+	const formData = new FormData();
+	formData.append('user_name', nameChk);
+	// console.log(nameChk);
+	// console.log(formData.get('username'));
+	fetch('/namechk', {
+		method: 'POST',
+		body: formData,
+	})
+	.then(response => response.json())
+	.then(data => {
+		if(data['nameChk'] === '0') {
+			alert('사용가능한 닉네임 입니다.');
+		} else if(data['nameChk'] === '1') {
+			alert('이미 존재하는 닉네임 입니다.');
+		}
+	})
+	.catch(error => {
+		console.error('오류 발생:', error);
+	})
+}

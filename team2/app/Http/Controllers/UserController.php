@@ -55,21 +55,22 @@ class UserController extends Controller
         return redirect()->route('main');
     }
 
-    // public function namechkpost(Request $request) {
-    //     Log::debug("*********** namechkpost start ***********");
-    //     // Log::debug("POST data".$_POST);
-    //     Log::debug("이거".$request->userName);
-    //     $username = $request->user_name;
-    //     Log::debug("user_name:".$username);
+    public function namechkpost(Request $request) {
+        Log::debug("*********** namechkpost start ***********");
+        // Log::debug("POST data".$_POST);
+        // Log::debug("이거", $request->all());
+        // Log::debug("이거".$request->user_name);
+        $username = $request->user_name;
+        // Log::debug("user_name:".$username);
 
-    //     $existingUser = User::where('user_name', $username)->first();
+        $existingUser = User::where('user_name', $username)->first();
 
-    //     if ($existingUser) {
-    //         return response()->json(['nameChk' => '1']);
-    //         exit;
-    //     }
-    //     return response()->json(['nameChk' => '0']);
-    // }
+        if ($existingUser) {
+            return response()->json(['nameChk' => '1']);
+            exit;
+        }
+        return response()->json(['nameChk' => '0']);
+    }
 
     // 마이페이지 이동 시 로그인 유무확인 및 게시글 불러오기
     public function mypageget(Request $request) {

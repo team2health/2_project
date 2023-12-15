@@ -9,7 +9,7 @@
 			@csrf
 			<p style="width: 60px;" class="ptag">닉네임</p><span id="error_name" class="not-error-name">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
 			<input type="text" class="login-input-short" name="user_name" id="user_name">
-			<div class="input-check">닉네임 확인</div>
+			<div class="input-check" onclick="checkName(); return false;">닉네임 확인</div>
 			<br>
 
 			<p style="width: 60px;" class="ptag">아이디</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>

@@ -10,16 +10,11 @@
 			<div><span class="text-part">#부위</span>를 선택해 주세요</div>
 			<br><br>
 			<div class="part-box">
-				<div onclick="partCheck(0); return false;">머리</div>
-				<div onclick="partCheck(1); return false;">눈</div>
-				<div onclick="partCheck(2); return false;">코</div>
-				<div onclick="partCheck(3); return false;">입</div>
-				<div onclick="partCheck(4); return false;">목</div>
-				<div onclick="partCheck(5); return false;">어깨</div>
-				<div onclick="partCheck(6); return false;">팔</div>
-				<div onclick="partCheck(7); return false;">손</div>
-				<div onclick="partCheck(8); return false;">다리</div>
-				<div onclick="partCheck(9); return false;">발</div>
+				@forelse ($data as $item)
+				<div onclick="partCheck({{$item->part_id}}); return false;">{{$item->part_name}}</div>
+				@empty
+					
+				@endforelse
 			</div>
 			<br><br>
 		</div>
@@ -47,7 +42,7 @@
 			<br><br>
 			<div id="map-display"><img style="width: 400px" src="../img/a.jpg" alt=""></div>
 			<div class="display-flex">
-				<a href="/" class="check-button">다시 검사</a>
+				<a href="{{route('main.get')}}" class="check-button">다시 검사</a>
 				<span class="check-button" onclick="mapDisplay(); return false;">병원 찾기</span>
 			</div>
 		</div>

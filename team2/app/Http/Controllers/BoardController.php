@@ -20,7 +20,7 @@ class BoardController extends Controller
         if(!Auth::check()){
         return redirect()->route('login.get');
         }
-         $result=Board::get();
+        $result=Board::get();
         return view('community')->with('data',$result);
     }
     public function categoryboard(){
