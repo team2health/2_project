@@ -24,6 +24,9 @@ class User extends Authenticatable
         'user_address',
         'user_gender',
     ];
+    public function boardid(){
+        return $this->hasMany(Board::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -24,7 +24,9 @@ class BoardController extends Controller
         return view('community')->with('data',$result);
     }
     public function categoryboard(){
-        return view('categoryboard');
+
+        $result=Board::get();
+        return view('categoryboard')->with('data',$result);
     }
     /**
      * Show the form for creating a new resource.
@@ -72,13 +74,10 @@ class BoardController extends Controller
      */
     public function show($board_id)
     {
-        $result=Board::find($board_id);
+        $result=Board::with('images')->find($board_id);
         
-
-        // 조회수 올리기
-        $result->board_hits++;//조회수 1증가
-        
-        // 업데이트 처리
+        $result->board_hits++;
+        $result->timestamps=false;        
         $result->save();
 
         return view('detail')->with('data',$result);
@@ -90,9 +89,10 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($board_id)
     {
-        //
+        $result=Board::find($board_id);
+        return view('update')->with('data',$result);
     }
 
     /**
@@ -102,9 +102,14 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $board_id)
     {
-        //
+        $result = Board::find($board_id);
+        $result->update([
+            'board_title' => $request->input('u_title'),
+            'board_content' => $request->input('u_content'),
+        ]);
+        return redirect()-> route('board.show',['board'=> $result->board_id]);
     }
 
     /**
@@ -113,8 +118,9 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($board_id)
     {
-        //
+        // Board::destroy($board_id);
+        // return redirect()-> route('categoryboard');
     }
 }

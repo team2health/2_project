@@ -6,10 +6,10 @@
 
 <main class="insert_main">
 	<div class="insert_hidden_container">
-		<form method="POST"  action="" enctype="multipart/form-data">
+		<form class="detail_form" method="POST"  action="{{route('board.update',['board'=>$data->board_id])}}" enctype="multipart/form-data">
 			@include('layout.errorlayout')
 			@csrf
-            
+			@method('PUT')            
 			<div class="insert_container">           
             
 				<div class="insert_img">
@@ -26,22 +26,22 @@
 				<div class="insert_select_container">
 					<select name="board" id="board" class="insert_select">
 						<option value="">카테고리</option>
-						<option value="freelist">자유게시판</option>
-						<option value="questionlist">질문 게시판</option>
-						<option value="amitylist">친목 게시판</option>
-						<option value="informationlist">정보 게시판</option>
+						<option value="1">자유게시판</option>
+						<option value="2">정보 게시판</option>
+						<option value="3">친목 게시판</option>
+						<option value="4">질문 게시판</option>
 					</select>
 				</div>	
 			
 			
 				<div class="insert_input_container">
 				<label for="u_title" class="">제목</label><br>
-				<input type="text" class="insert_input" id="u_title" name="u_title" value="디테일에서 가져온값">			  
+				<input type="text" class="insert_input" id="u_title" name="u_title" value="{{ $data->board_title }}">			  
 				</div>
 				
 				<div class="insert_textarea_container">
 					<label for="u_content" >내용</label><br>			  
-					<textarea name="u_content" id="u_content" class="insert_textarea" >디테일에서 가져온값</textarea>
+					<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $data->board_content }}</textarea>
 				</div>
 				
 				<div class="insert_hashtag_container">
@@ -58,3 +58,4 @@
 </main>
 
 @endsection
+<script src="/js/insert.js"></script>

@@ -10,34 +10,43 @@
             <div class="mypage-board-show-btn">내가 쓴 게시글</div>
             <div class="mypage-comment-show-btn">내가 쓴 댓글</div>
         {{-- 게시글 창 --}}
-            {{-- <div class="mypage-boards-part">
+            <div class="mypage-boards-part">
                 @forelse ($data as $index => $item)
                     @php
-                    $previousitem = $index - 2;
-                    $presentitem = $index - 1;
+                    $previous_item = $index - 1;
+                    $present_item = $index - 0;
+                    // $board_date = $data[$present_item]->created_at;
+                    // $timestamp = strtotime($board_date);
+                    // $create_date = date('y-m-d', $timestamp);
                     @endphp
-                    @if ( $index > 1)
-                        @if ($data[$presentitem]->created_at !== $data[$previousitem]->created_at)
+                    @if ( $index >= 1)
+                        @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
                         <div class="mypage-date-today">
                             <span class="mypage-board-date">{{$item->created_at}}</span>
                         </div>
+                        <div class="mypage-boardbox">
+                            <div class="mypage-bord-title">{{$item->board_title}}</div>
+                            <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                        </div>
                         @else
-                            <div class="mypa+ge-boardbox">
+                            <div class="mypage-boardbox">
                                 <div class="mypage-bord-title">{{$item->board_title}}</div>
-                                <div class="mypage-bord-detailbox">{{$item->board_content}}.</div>
+                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
                             </div>
                         @endif
-                        <span class="mypage-board-date">{{$item->created_at}}</span>
                     @else
+                    <div class="mypage-date-today">
+                        <span class="mypage-board-date">{{$item->created_at}}</span>
+                    </div>
                     <div class="mypage-boardbox">
                         <div class="mypage-bord-title">{{$item->board_title}}</div>
-                        <div class="mypage-bord-detailbox">{{$item->board_content}}.</div>
+                        <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
                     </div>
                     @endif
                 @empty
                     <div> 작성한 게시글이 없습니다. </div>
                 @endforelse
-            </div> --}}
+            </div>
 
             <div class="mypage-date-today">
                 <span class="mypage-board-date"></span>
@@ -96,8 +105,8 @@
                 <br>
                 <br>
                 <div class="adress-box">
-                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호">
-                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn"><br>
+                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" readonly>
+                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn" readonly><br>
                     <span id="guide" style="color:#999;display:none"></span>
                     <input class="adress-box-b" type="text" id="sample4_roadAddress" placeholder="도로명주소" name="user_adress_f">
                     <br>
@@ -126,12 +135,13 @@
                 내가 찜한 관심 태그
             </div>
             <div class="mypage-hashtag">
-                <div><span>#자유게시판</span> <span>x</span></div>
-                <div><span>#발열</span> <span>x</span></div>
-                <div><span>#두통</span> <span>x</span></div>
-                <div><span>#꾀병</span> <span>x</span></div>
-                <div><span>#자유</span> <span>x</span></div>
-                <div><span>#퇴근</span> <span>x</span></div>
+            @forelse ($user_hashtag as $item)
+                <div id="favoriteHashtagId{{$item->favorite_id}}"><span>{{$item->hash_name}}</span>
+                <span onclick="favoritehashdelete({{$item->favorite_id}}); return false;">x</span>
+                </div>
+            @empty
+                <div> 관심태그로 등록한 해시태그가 없습니다.</div>
+            @endforelse
             </div>
             <div class="favorite-tag-plus">
                 관심태그 추가하기
@@ -176,7 +186,7 @@
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
             </div>
-        
+
             <div class="mypage-date-today">
                 <span class="mypage-board-date"></span>
             </div>

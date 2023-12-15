@@ -16,33 +16,36 @@
                 <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
                 <div class="board_nic_text">
                     <div>
-                        내가누군지물어보신다면대답해주는것이인지상정
+                    {{ $data->user_name }}
                     </div>
                     <div>
-                        
+                        {{$data->created_at}}
                     </div>
                 </div>
             </div> 
             <div class="detail_content">
-                <img src="../img/필요한거 있나.jpg" alt="">
+            @foreach($data->images as $image)
+                <img src="{{ $image->img_address }}" alt="Board Image">
+            
+            @endforeach
                 <br>
                 <div>
-                
+                {{ $data->board_content }}
                 </div>                
             </div>
             <div>                
                 <div>
-                    #기침 #두통
+                #해시태그
                 </div>
             </div>
         </div>
     </div>
     <div class="detail_bottom_button">
-        <form action="" method = "POST">
+        <form class="detail_form" action="" method = "POST">
             @csrf
             @method('DELETE')
-            <button class="d_btn"><a class="a_cancel" href="{{url()->previous()}}">목록</a></button>	
-            <button class="d_btn"><a href="" class="a-update ">수정</a></button>
+            <button class="d_btn"><a class="a_cancel" href="{{route('categoryboard')}}">목록</a></button>	
+            <button class="d_btn"><a href="{{route('board.edit',['board'=>$data->board_id])}}" class="a_update ">수정</a></button>
             <button type="submit" class="d_btn">삭제</button>
         </form>
     </div>
