@@ -8,8 +8,8 @@
 			<form action="{{ route('login.post') }}" method="POST" id="login_form">
 				@csrf
 				<span id="error_login_id" class="not-login-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
-				<input type="text" class="login-input" placeholder="아이디" id="login_user_id" name="user_id" value="집가야돼">
-				<input type="password" class="login-input" placeholder="비밀번호" id="login_user_password" name="user_password" value="집가야돼">
+				<input type="text" class="login-input" placeholder="아이디" id="login_user_id" name="user_id">
+				<input type="password" class="login-input" placeholder="비밀번호" id="login_user_password" name="user_password">
 				<button type="button" class="login-button" onclick="logingo(); return false;">로그인</button>
 				<br>
 				<div class="display-flex lr-text">

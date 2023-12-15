@@ -254,7 +254,7 @@ button {
 	float: left;
 }
 
-#error_name, #error_id {
+#error_name, #error_id, #error_password_check {
 	color: red;
 	font-size: 0.7rem;
 	line-height: 25px;

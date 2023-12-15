@@ -50,13 +50,13 @@ class UserController extends Controller
             return view('login');
         }
 
-        return redirect()->route('main');
+        return redirect()->route('main.get');
     }
 
     public function logoutget() {
         Session::flush();
         Auth::logout();
-        return redirect()->route('main');
+        return redirect()->route('main.get');
     }
 
     public function namechkpost(Request $request) {
