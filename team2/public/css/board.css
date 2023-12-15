@@ -152,7 +152,7 @@ li{
     .insert_main{
         width: 70vw;
     }
-    form{
+    .detail_form{
         width:60vw;
     }
     
@@ -237,7 +237,7 @@ li{
 }
 /* ---------커뮤니티------------------ */
 .slider-container {
-    overflow: auto;
+    /* overflow: auto; */
     margin: 30px auto;
     width: 70vW;   
 }
@@ -251,17 +251,21 @@ li{
 
 .slider {    
     width: 1000px;
-    display: flex;      
+          
     margin: 20px;    
-    transition: transform 2s ease-in-out;  
+    /* transition: transform 2s ease-in-out;  */
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; 
      
 }
 
 .slide {
-    min-width: 27%;       
+    min-width: 22%;       
     border: 1px solid #848484;
     border-radius: 5px;
     margin: 6.5px;
+    scroll-snap-align: start;
     
 }
 .favorite_slider-container {
