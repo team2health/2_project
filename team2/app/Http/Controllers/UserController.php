@@ -41,7 +41,7 @@ class UserController extends Controller
 
         Auth::login($result);
         if(Auth::check()) {
-            session($result->only('user_id', 'auth'));
+            session($result->only('id', 'user_name'));
         } else {
             return view('login');
         }
@@ -91,5 +91,5 @@ class UserController extends Controller
             return view('login');
         }
 
-    }
+    // }
 }
