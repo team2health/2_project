@@ -10,7 +10,7 @@
             <div class="mypage-board-show-btn">내가 쓴 게시글</div>
             <div class="mypage-comment-show-btn">내가 쓴 댓글</div>
         {{-- 게시글 창 --}}
-            <div class="mypage-boards-part">
+            {{-- <div class="mypage-boards-part">
                 @forelse ($data as $index => $item)
                     @php
                     $previousitem = $index - 2;
@@ -37,7 +37,7 @@
                 @empty
                     <div> 작성한 게시글이 없습니다. </div>
                 @endforelse
-            </div>
+            </div> --}}
 
             <div class="mypage-date-today">
                 <span class="mypage-board-date"></span>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="mypage-btn-line-modify">
                     <button type="submit" class="mypage-btn">수정완료</button>
-                    <a href="{{route('mypage.get')}}"><div class="mypage-btn">취소</div></a>
+                    {{-- <a href="{{route('mypage.get')}}"><div class="mypage-btn">취소</div></a> --}}
                 </div>
             </div>
         </form>

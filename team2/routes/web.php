@@ -48,6 +48,6 @@ Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
 Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
-Route::get('/mypage', [UserController::class, 'mypageget'])->name('mypage.get');
+// Route::get('/mypage', [UserController::class, 'mypageget'])->name('mypage.get');
 
 // Route::post('/namechk', [UserController::class, 'namechkpost']);
