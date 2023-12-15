@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\support\facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use App\Models\Board;
+use App\Models\Favorite_tag;
+
+
 
 class UserController extends Controller
 {
@@ -72,26 +76,66 @@ class UserController extends Controller
     // }
 
     // 마이페이지 이동 시 로그인 유무확인 및 게시글 불러오기
-    public function mypageget(Request $request) {
+    public function mypageget() {
 
         // 사용자 ID 가져오기
-        $result2 = session('user_id');
-        $result1 = session('id');
+        $result = session('id');
 
-        $result = User::where('user_id', $request->user_id)->first();
-        // var_dump($result);
-        // var_dump($result2);
-        // exit;
         if(Auth::check()) {
-            $boardresult = Board::where('u_id', $result)->get();
-            // var_dump($boardresult);
-            // exit;
-            // var_dump($boardresult);
-            // exit;
-            return view('mypage')->with('data', $boardresult);
+
+            $board_result = DB::table('boards')
+                ->select(
+                'board_id'
+                ,'u_id'
+                ,'category_id'
+                ,'board_title'
+                ,'board_content'
+                ,'board_hits'
+                ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
+                ,'updated_at')
+                ->where('u_id',$result)
+                ->where('deleted_at', null)
+                ->get();
+            
+            $user_hashtag = DB::table('favorite_tags')
+                ->select(
+                'favorite_tags.favorite_id'
+                ,'favorite_tags.hash_id'
+                ,'hashtags.hash_name'
+                )
+                ->join('hashtags', 'hashtags.hash_id', '=', 'favorite_tags.hash_id')
+                ->where('favorite_tags.u_id', $result)
+                ->where('favorite_tags.deleted_at', null)
+                ->get();
+            
+            $user_info  = DB::table('users')
+                ->select(
+                    'id'
+                    ,'user_id'
+                    ,'user_name'
+                    ,'user_address'
+                    ,'user_img'
+                )
+                ->where('id', $result)
+                ->get();
+
+            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag);
         } else {
             return view('login');
         }
+    }
+
+    public function myhashdeletepost(Request $request) {
+        Log::debug("*********START*********");
+        Log::debug("받아온 거".$request->favorite_id);
+        $id = $request->favorite_id;
+        Log::debug("넣어준 거".$id);
+        Favorite_tag::destroy($id);
+        DB::commit();
+    }
+
+
+    public function myinfomodify() {
 
     }
 }

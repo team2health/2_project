@@ -49,5 +49,7 @@ Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::get('/mypage', [UserController::class, 'mypageget'])->name('mypage.get');
+Route::post('/myhashdelete', [UserController::class, 'myhashdeletepost'])->name('myhash.post');
+Route::post('/myinfo', [UserController::class, 'myinfomodify'])->name('myinfo.post');
 
 // Route::post('/namechk', [UserController::class, 'namechkpost']);
