@@ -21,14 +21,14 @@
 		<div class="display-flex">
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="div-display-lnlineBlock display-none">
-					<a href="/">
+					<a href="{{route('main.get')}}">
 						<img src="../img/home.png" alt="" class="btn-img">
 					</a>
 				</div>
 			@else
 				<div class="div-display-lnlineBlock div-margin-auto">
-					<a href="/">
-						<img src="../img/d.jpg" alt="" class="img-width">
+					<a href="{{route('main.get')}}">
+						<img src="../img/home.jpg" alt="" class="img-width">
 					</a>
 				</div>
 			@endif
@@ -63,7 +63,7 @@
 			@else
 				<div class="div-display-lnlineBlock div-margin-auto">
 					<a href="/">
-						<img src="../img/d.jpg" alt="" class="img-width">
+						<img src="../img/home.png" alt="" class="img-width">
 					</a>
 				</div>
 			@endif
