@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('boards', function (Blueprint $table) {
-            $table->id('board_id');
+            $table->increments('board_id');
             $table->integer('u_id');
             $table->integer('category_id');
             $table->string('board_title');

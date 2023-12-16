@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->id('search_record');
+            $table->increments('record_id');
             $table->integer('u_id');
             $table->integer('Symptom_id');
             $table->timestamps(); // record_date

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('diagnoses', function (Blueprint $table) {
-            $table->integer('hospital_id');
-            $table->string('hospital_name')->unique();
+            $table->integer('diagnosis_id');
+            $table->string('diagnosis_name')->unique();
 
-            $table->primary('hospital_id');
+            $table->primary('diagnosis_id');
         });
     }
 

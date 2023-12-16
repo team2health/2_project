@@ -10,7 +10,7 @@
 			<div><span class="text-part">#부위</span>를 선택해 주세요</div>
 			<br><br>
 			<div class="part-box">
-				@forelse ($data as $item)
+				@forelse ($part as $item)
 				<div onclick="partCheck({{$item->part_id}}); return false;">{{$item->part_name}}</div>
 				@empty
 					
@@ -26,10 +26,11 @@
 			<div><span class="text-part">#증상</span>을 선택해 주세요</div>
 			<br><br>
 			<div class="part-box">
-				<div onclick="symptomCheck(0); return false;">아포</div>
-				<div onclick="symptomCheck(1); return false;">아파이브</div>
-				<div onclick="symptomCheck(2); return false;">아식스</div>
-				<div onclick="symptomCheck(3); return false;">아세븐</div>
+				@forelse ($symptom as $item)
+				<div onclick="symptomCheck({{$item->symptom_id}}); return false;">{{$item->part_id}}</div>
+				@empty
+					
+				@endforelse
 			</div>
 			<br><br>
 		</div>
