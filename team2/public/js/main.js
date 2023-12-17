@@ -5,18 +5,12 @@ let MAP = document.getElementById('map-display');
 
 function partCheck(index) {
 	console.log(index);
-	PART.style.display = 'none';
-	SYMPTOM.removeAttribute('display');
-	SYMPTOM.style.display = 'block';
-}
-
-function symptomCheck(index) {
-	console.log(index);
 
 	let formData = new FormData();
 	formData.append('part_id', index);
 
-	fetch('/symptomselect', {
+	// console.log(formData.get('part_id'));
+	fetch('/partselect', {
 		method: 'POST',
 		body: formData,
 	})
@@ -28,6 +22,12 @@ function symptomCheck(index) {
 		console.error('오류 발생:', error);
 	})
 	
+	PART.style.display = 'none';
+	SYMPTOM.removeAttribute('display');
+	SYMPTOM.style.display = 'block';
+}
+
+function symptomCheck(index) {
 	SYMPTOM.style.display = 'none';
 	DISEASE.removeAttribute('display');
 	DISEASE.style.display = 'block';

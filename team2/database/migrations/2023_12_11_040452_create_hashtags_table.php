@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hashtags', function (Blueprint $table) {
-            $table->integer('hash_id');
-            $table->string('hash_name')->unique();
+            $table->integer('hashtag_id');
+            $table->string('hashtag_name')->unique();
             
-            $table->primary('hash_id');
+            $table->primary('hashtag_id');
         });
     }
 

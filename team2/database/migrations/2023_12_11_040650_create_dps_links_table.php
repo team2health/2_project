@@ -14,9 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('dps_links', function (Blueprint $table) {
-            $table->id('symptom-disease_id');
+            $table->integer('dps_id');
             $table->integer('disease_id');
             $table->integer('part_symptom_id');
+
+            $table->primary('dps_id');
         });
     }
 

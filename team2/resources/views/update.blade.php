@@ -7,7 +7,6 @@
 <main class="insert_main">
 	<div class="insert_hidden_container">
 		<form class="detail_form" method="POST"  action="{{route('board.update',['board'=>$data->board_id])}}" enctype="multipart/form-data">
-			@include('layout.errorlayout')
 			@csrf
 			@method('PUT')            
 			<div class="insert_container">           

@@ -100,11 +100,11 @@ class UserController extends Controller
             
             $user_hashtag = DB::table('favorite_tags')
                 ->select(
-                'favorite_tags.favorite_id'
-                ,'favorite_tags.hash_id'
-                ,'hashtags.hash_name'
+                'favorite_tags.favorite_tag_id'
+                ,'favorite_tags.hashtag_id'
+                ,'hashtags.hashtag_name'
                 )
-                ->join('hashtags', 'hashtags.hash_id', '=', 'favorite_tags.hash_id')
+                ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
                 ->where('favorite_tags.u_id', $result)
                 ->where('favorite_tags.deleted_at', null)
                 ->get();
