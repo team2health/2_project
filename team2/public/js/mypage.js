@@ -80,6 +80,28 @@ function favoritehashdelete(data) {
 }
 
 function addfavoritetag() {
-    let addfavoritediv = document.createElement('div');
-    
+    let createplustag = document.createElement('div');
+    createplustag.id = 'mypage-hashtag';
+
+    fetch('/allhashtag', {
+        method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        for(let i = 0; i < data.items.length; i++) {
+            const hashtagId = data.items[i].hashtag_id;
+            const hashtagName = data.items[i].hashtag_name;
+            console.log(`Hashtag ID: ${hashtagId}, Hashtag Name: ${hashtagName}`);
+            
+            let hashtagdiv = document.createElement('div');
+            let hashspan = document.createElement('span');
+            hashtagdiv.id = 'allHashtagId'+data.items[i].hash_id;
+            hashspan.innerHTML = data.items[i].hashtag_name;
+            hashtagdiv.appendChild(hashspan);
+            createplustag.appendChild(hashtagdiv);
+        }
+    })
+    .catch(error => console.error('Fetch Error:', error));
+
 }

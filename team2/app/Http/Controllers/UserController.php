@@ -126,6 +126,20 @@ class UserController extends Controller
         }
     }
 
+    public function allhashget(){
+    
+        $hashtag  = DB::table('hashtags')
+        ->select(
+            'hashtag_id'
+            ,'hashtag_name'
+        )
+        ->get();
+        var_dump($hashtag);
+        exit;
+
+        return response()->json($hashtag);
+    }
+
     public function myhashdeletepost(Request $request) {
         Log::debug("*********START*********");
         Log::debug("받아온 거".$request->favorite_id);

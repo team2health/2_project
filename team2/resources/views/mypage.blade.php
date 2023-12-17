@@ -136,8 +136,9 @@
             </div>
             <div class="mypage-hashtag">
             @forelse ($user_hashtag as $item)
-                <div id="favoriteHashtagId{{$item->favorite_tag_id}}"><span>{{$item->hashtag_name}}</span>
-                <span onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">x</span>
+                <div id="favoriteHashtagId{{$item->favorite_tag_id}}">
+                    <span>{{$item->hashtag_name}}</span>
+                    <span onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">x</span>
                 </div>
             @empty
                 <div> 관심태그로 등록한 해시태그가 없습니다.</div>
