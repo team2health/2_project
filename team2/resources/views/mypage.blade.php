@@ -143,9 +143,10 @@
                 <div> 관심태그로 등록한 해시태그가 없습니다.</div>
             @endforelse
             </div>
-            <div class="favorite-tag-plus">
+            <div class="favorite-tag-plus" onclick="addfavoritetag(); return false;">
                 관심태그 추가하기
             </div>
+
         </div>
     </div>
 </div>

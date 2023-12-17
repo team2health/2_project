@@ -56,7 +56,6 @@ function mypagemodalclosebtn() {
 // 관심태그 삭제 버튼
 function favoritehashdelete(data) {
 
-    console.log(data);
     if ( confirm("삭제하시겠습니까?") ) { 
         alert("삭제되었습니다.");
         let favoritetag = document.getElementById('favoriteHashtagId'+data);
@@ -78,4 +77,9 @@ function favoritehashdelete(data) {
     } else {
         // 취소 클릭시 false 가 리턴 되어 실행​    
     } 
+}
+
+function addfavoritetag() {
+    let addfavoritediv = document.createElement('div');
+    
 }
