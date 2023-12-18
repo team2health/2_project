@@ -25,12 +25,12 @@
 			<br><br>
 			<div><span class="text-part">#증상</span>을 선택해 주세요</div>
 			<br><br>
-			<div class="part-box">
-				@forelse ($symptom as $item)
-				<div onclick="symptomCheck({{$item->symptom_id}}); return false;">{{$item->part_id}}</div>
+			<div class="part-box" id="symptom-box">
+				{{-- @forelse ($symptom as $item)
+				<div onclick="symptomCheck({{$item->symptom_id}}); return false;">{{$item->symptom_id}}</div>
 				@empty
 					
-				@endforelse
+				@endforelse --}}
 			</div>
 			<br><br>
 		</div>
@@ -39,14 +39,18 @@
 		<br>
 		<div style="background-color: #F9F5F0" class="text-center">
 			<br><br>
-			<div>꾀병이오</div>
+			<div id="diesase-name"></div>
 			<br><br>
-			<div id="map-display"><img style="width: 400px" src="../img/a.jpg" alt=""></div>
+			<div style="font-weight: 500" id="diesase-info"></div>
+			<br><br>
+			<div id="map-display"><div id="map" style="width:100%; height:350px;"></div></div>
 			<div class="display-flex">
 				<a href="{{route('main.get')}}" class="check-button">다시 검사</a>
-				<span class="check-button" onclick="mapDisplay(); return false;">병원 찾기</span>
+				<span id="hospital" class="check-button">병원 찾기</span>
+				{{-- onclick="mapDisplay({{ json_encode(session('id')) }}); return false;" --}}
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script>
 	<script src="../js/main.js"></script>
 @endsection
