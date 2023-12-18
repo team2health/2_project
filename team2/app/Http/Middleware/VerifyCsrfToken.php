@@ -16,6 +16,8 @@ class VerifyCsrfToken extends Middleware
         '/myhashdelete',
         '/partselect',
         '/allhashtag',
-        '/comments'
+        '/addfavoritehashtag',
+        '/symptomselect',
+        '/useraddress',
     ];
 }

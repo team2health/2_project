@@ -50,6 +50,8 @@ Route::get('/categoryboard',[BoardController::class,'categoryboard'])->name('cat
 
 Route::get('/', [MainController::class, 'mainget'])->name('main.get');
 Route::post('/partselect', [MainController::class, 'partselectpost']);
+Route::post('/symptomselect', [MainController::class, 'symptomselectpost']);
+Route::post('/useraddress', [MainController::class, 'useraddresspost']);
 
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
@@ -60,6 +62,7 @@ Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::get('/mypage', [UserController::class, 'mypageget'])->name('mypage.get');
 Route::post('/myhashdelete', [UserController::class, 'myhashdeletepost'])->name('myhash.post');
 Route::get('/allhashtag', [UserController::class, 'allhashget'])->name('allhash.post');
+Route::post('/addfavoritehashtag', [UserController::class, 'addfavoritehashtagpost'])->name('allhash.post');
 Route::post('/myinfo', [UserController::class, 'myinfomodify'])->name('myinfo.post');
 
 Route::post('/namechk', [UserController::class, 'namechkpost']);

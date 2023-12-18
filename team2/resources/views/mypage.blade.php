@@ -89,6 +89,7 @@
                     </div>
                 </label>
                 <input type="file" accept="image/*" style="display: none;" id="profilephoto">
+                <a href="#">비밀번호 변경</a>
                 <br>
                 <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
                 <div class="user-info-btn"> 삭제 </div>
@@ -96,12 +97,12 @@
                 <label for="usermodifyname">닉네임 수정</label>
                 <div class="user-info-btn-chk"> 닉네임 중복 확인 </div>
                 <input type="text" id="usermodifyname">
-                <br>
+                {{-- <br>
                 <label for="usermodifypassword">비밀번호 수정</label>
                 <input type="password" id="usermodifypassword">
                 <br>
                 <label for="usermodifypasswordchk">비밀번호 확인</label>
-                <input type="password" id="usermodifypasswordchk">
+                <input type="password" id="usermodifypasswordchk"> --}}
                 <br>
                 <br>
                 <div class="adress-box">
@@ -129,7 +130,7 @@
             <div class="mypage-btn2" onclick="userboardshow(); return false;">나의 게시물</div>
         </div>
 
-        <div class="mypage-tag-title">
+        <div class="mypage-tag-title" id="mypageTagTitle">
             <div class="mypage-hashtag-title">
                 <img src="/img/star.png" alt="">
                 내가 찜한 관심 태그
@@ -144,7 +145,7 @@
                 <div> 관심태그로 등록한 해시태그가 없습니다.</div>
             @endforelse
             </div>
-            <div class="favorite-tag-plus" onclick="addfavoritetag(); return false;">
+            <div class="favorite-tag-plus" id="addallfavoritetag">
                 관심태그 추가하기
             </div>
 
