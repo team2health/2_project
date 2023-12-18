@@ -35,6 +35,7 @@ let userinfomodify = document.getElementById('mypageContent2');
 let mypagecontent = document.getElementById('mypageContent');
 let userboardmodal = document.getElementById('UserboardModal');
 let mypageContentModal = document.getElementById('mypageContentModal');
+let mypageTagTitle = document.getElementById('mypageTagTitle');
 
 function userboardshow() {
         userinfomodify.style.display = 'none';
@@ -60,7 +61,6 @@ function favoritehashdelete(data) {
         alert("삭제되었습니다.");
         let favoritetag = document.getElementById('favoriteHashtagId'+data);
         favoritetag.style.display = 'none';
-        console.log(data);
 
         let formData = new FormData();
         formData.append('favorite_id', data);
@@ -79,29 +79,90 @@ function favoritehashdelete(data) {
     } 
 }
 
-function addfavoritetag() {
-    let createplustag = document.createElement('div');
-    createplustag.id = 'mypage-hashtag';
+let addallfavoritetagevent = document.getElementById('addallfavoritetag');
+addallfavoritetagevent.addEventListener('click', addallfavoritetag);
 
-    fetch('/allhashtag', {
-        method: 'GET',
-    })
+function addallfavoritetag() {
+
+    let createtagmaindiv = document.createElement('div');
+    let createplustag = document.createElement('div');
+    createplustag.classList.add('mypage-hashtag');
+    let addtagbtndiv = document.createElement('mypage-btn-line');
+    let hashplusokbtn = document.createElement('span');
+    let hashplusclosebtn = document.createElement('span');
+    addtagbtndiv.classList.add('mypage-btn-line');
+    createtagmaindiv.id = 'creaTagMainDiv';
+    hashplusokbtn.innerHTML = '저장';
+    hashplusclosebtn.innerHTML = '취소';
+    hashplusokbtn.classList.add('mypage-btn');
+    hashplusclosebtn.classList.add('mypage-btn');
+
+    fetch('/allhashtag')
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        for(let i = 0; i < data.items.length; i++) {
-            const hashtagId = data.items[i].hashtag_id;
-            const hashtagName = data.items[i].hashtag_name;
-            console.log(`Hashtag ID: ${hashtagId}, Hashtag Name: ${hashtagName}`);
-            
-            let hashtagdiv = document.createElement('div');
-            let hashspan = document.createElement('span');
-            hashtagdiv.id = 'allHashtagId'+data.items[i].hash_id;
-            hashspan.innerHTML = data.items[i].hashtag_name;
-            hashtagdiv.appendChild(hashspan);
-            createplustag.appendChild(hashtagdiv);
+
+        for(let i = 0; i < data.length; i++) {
+
+                let hashtagdiv = document.createElement('div');
+                let hashspan = document.createElement('span');
+                let hashplusbtn = document.createElement('span');
+                hashtagdiv.id = 'allHashtagId'+data[i].hashtag_id;
+                // hashplusbtn.setAttribute("value", data[i].hashtag_id);
+                hashplusbtn.innerHTML = '+';
+                hashplusbtn.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
+                hashspan.innerHTML = data[i].hashtag_name;
+                hashtagdiv.appendChild(hashspan);
+                hashtagdiv.appendChild(hashplusbtn);
+                createplustag.appendChild(hashtagdiv);
+
         }
+        // if(data.length === 0) {
+        //     let a = getElementById('mypageTagTitle');
+        //     let hashtagdiv2 = document.createElement('div');
+        //     hashtagdiv2.innerHTML = '추가할 태그가 없습니다.';
+        //     a.appendChild(hashtagdiv2);
+        // }
+        mypageTagTitle.appendChild(createtagmaindiv);
+        createtagmaindiv.appendChild(createplustag);
+        addtagbtndiv.appendChild(hashplusokbtn);
+        addtagbtndiv.appendChild(hashplusclosebtn);
+        createtagmaindiv.appendChild(addtagbtndiv);
     })
-    .catch(error => console.error('Fetch Error:', error));
+    .catch(error => console.error(error));
+
+    hashplusclosebtn.addEventListener('click', closeoption);
 
 }
+
+function closeoption(){
+    addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
+    let creaTagMainDiv = document.getElementById('creaTagMainDiv');
+    creaTagMainDiv.remove();
+}
+
+function addhashtag(data) {
+    console.log(data);
+    let formData = new FormData();
+    formData.append('tag_id', data);
+    
+    let allHashtagId = document.getElementById('allHashtagId'+data);
+    allHashtagId.remove();
+
+    fetch('/addfavoritehashtag', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        console.log(response);
+        response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => console.log(error));
+}
+
+// 1. 저장/취소 버튼 구현
+// 관심태그 추가하기 여러번 반복 되도록
+// insert구문 create로 변경

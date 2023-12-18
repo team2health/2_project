@@ -7,7 +7,7 @@
 <main class="insert_main">
 	<div class="insert_hidden_container">
 		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data">
-			@include('layout.errorlayout')
+			{{-- @include('layout.errorlayout') --}}
 			@csrf
 			<div class="insert_container">
 				<div class="insert_img">

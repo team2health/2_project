@@ -96,6 +96,7 @@ class UserController extends Controller
                 ,'updated_at')
                 ->where('u_id',$result)
                 ->where('deleted_at', null)
+                ->orderBy('board_id', 'DESC')
                 ->get();
             
             $user_hashtag = DB::table('favorite_tags')
@@ -107,6 +108,7 @@ class UserController extends Controller
                 ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
                 ->where('favorite_tags.u_id', $result)
                 ->where('favorite_tags.deleted_at', null)
+                ->orderBy('hashtags.hashtag_id')
                 ->get();
             
             $user_info  = DB::table('users')
@@ -126,29 +128,55 @@ class UserController extends Controller
         }
     }
 
+
     public function allhashget(){
-    
+
+        $result = session('id');
+
+        $user_hashtag = DB::table('favorite_tags')
+        ->select(
+        'favorite_tags.hashtag_id'
+        )
+        ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+        ->where('favorite_tags.u_id', $result)
+        ->where('favorite_tags.deleted_at', null)
+        ->orderBy('hashtags.hashtag_id')
+        ->get();
+
+        foreach ($user_hashtag as $key => $value) {
+            $result2[] = $value->hashtag_id;;
+        }
+
         $hashtag  = DB::table('hashtags')
         ->select(
-            'hashtag_id'
-            ,'hashtag_name'
+            'hashtags.hashtag_id'
+            ,'hashtags.hashtag_name'
         )
+        ->whereNotIn('hashtags.hashtag_id', $result2)
+        ->orderBy('hashtags.hashtag_id')
         ->get();
-        var_dump($hashtag);
-        exit;
+
 
         return response()->json($hashtag);
     }
 
     public function myhashdeletepost(Request $request) {
-        Log::debug("*********START*********");
-        Log::debug("받아온 거".$request->favorite_id);
         $id = $request->favorite_id;
-        Log::debug("넣어준 거".$id);
         Favorite_tag::destroy($id);
         DB::commit();
     }
 
+    public function addfavoritehashtagpost(Request $request) {
+        Log::debug("asdfasdfa", $request->all());
+        $favorite_id = $request->tag_id;
+        $result = session('id');
+        Log::debug("session", ['id' => $result]);
+        $hashtag = DB::table('favorite_tags')->insert([
+            'hashtag_id' => $favorite_id,
+            'u_id' => $result
+        ]);
+        return response()->json($hashtag);
+    }
 
     public function myinfomodify() {
 

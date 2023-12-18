@@ -58,6 +58,7 @@ Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::get('/mypage', [UserController::class, 'mypageget'])->name('mypage.get');
 Route::post('/myhashdelete', [UserController::class, 'myhashdeletepost'])->name('myhash.post');
 Route::get('/allhashtag', [UserController::class, 'allhashget'])->name('allhash.post');
+Route::post('/addfavoritehashtag', [UserController::class, 'addfavoritehashtagpost'])->name('allhash.post');
 Route::post('/myinfo', [UserController::class, 'myinfomodify'])->name('myinfo.post');
 
 Route::post('/namechk', [UserController::class, 'namechkpost']);
