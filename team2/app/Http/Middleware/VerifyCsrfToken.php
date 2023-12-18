@@ -17,5 +17,7 @@ class VerifyCsrfToken extends Middleware
         '/partselect',
         '/allhashtag',
         '/addfavoritehashtag',
+        '/symptomselect',
+        '/useraddress',
     ];
 }

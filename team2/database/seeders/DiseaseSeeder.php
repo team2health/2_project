@@ -40,6 +40,7 @@ class DiseaseSeeder extends Seeder
             , ['disease_id' => 22, 'disease_name' => '소화 장애', 'disease_info' => '소화 장애는 음식물을 소화하는 과정에서 발생하는 문제로, 소화 시스템에서 발생하는 다양한 증상을 나타냅니다. ']
             , ['disease_id' => 23, 'disease_name' => '림프부종', 'disease_info' => '림프부종은 림프관에 림프액이 쌓여 발생하는 상태를 가리킵니다. 림프부종은 일반적으로 림프관의 손상이나 블록이 발생하여 림프액의 정상적인 흐름이 차단될 때 발생합니다. ']
             , ['disease_id' => 24, 'disease_name' => '국소성 근육 경련', 'disease_info' => '국소성 근육 경련은 특정 근육 또는 근육 그룹에서 발생하는 갑작스러운 근육 수축으로, 일반적으로 통증과 함께 발생합니다.']
+            , ['disease_id' => 25, 'disease_name' => '혈관부종', 'disease_info' => '혈관 부종은 피하 조직 부위가 붓는 것을 말하며 때로는 얼굴과 목에 영향을 줍니다.']
         ]);
     }
 }
