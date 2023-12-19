@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use App\Models\Board;
 use App\Models\Favorite_tag;
+use Carbon\Carbon;
 
 
 
@@ -108,7 +109,7 @@ class UserController extends Controller
                 ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
                 ->where('favorite_tags.u_id', $result)
                 ->where('favorite_tags.deleted_at', null)
-                ->orderBy('hashtags.hashtag_id')
+                ->orderBy('favorite_tags.created_at')
                 ->get();
             
             $user_info  = DB::table('users')
@@ -167,15 +168,28 @@ class UserController extends Controller
     }
 
     public function addfavoritehashtagpost(Request $request) {
+
+        $currentDateTime = Carbon::now();
         Log::debug("asdfasdfa", $request->all());
         $favorite_id = $request->tag_id;
         $result = session('id');
         Log::debug("session", ['id' => $result]);
         $hashtag = DB::table('favorite_tags')->insert([
             'hashtag_id' => $favorite_id,
-            'u_id' => $result
+            'u_id' => $result,
+            'created_at' => $currentDateTime,
+            'updated_at' => $currentDateTime
         ]);
-        return response()->json($hashtag);
+        Log::debug("시좍*************************************");
+        $hashtaginfo = DB::table('hashtags')
+        ->select(
+            'hashtag_id'
+            ,'hashtag_name'
+        )
+        ->where('hashtag_id', $favorite_id)
+        ->get();
+        Log::debug($hashtaginfo);
+        return response()->json($hashtaginfo);
     }
 
     public function myinfomodify() {

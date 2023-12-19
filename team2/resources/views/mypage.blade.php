@@ -24,24 +24,30 @@
                         <div class="mypage-date-today">
                             <span class="mypage-board-date">{{$item->created_at}}</span>
                         </div>
-                        <div class="mypage-boardbox">
-                            <div class="mypage-bord-title">{{$item->board_title}}</div>
-                            <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
-                        </div>
-                        @else
+                        <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
                                 <div class="mypage-bord-title">{{$item->board_title}}</div>
                                 <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
                             </div>
+                        </a>
+                        @else
+                        <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                            <div class="mypage-boardbox">
+                                <div class="mypage-bord-title">{{$item->board_title}}</div>
+                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                            </div>
+                        </a>
                         @endif
                     @else
                     <div class="mypage-date-today">
                         <span class="mypage-board-date">{{$item->created_at}}</span>
                     </div>
-                    <div class="mypage-boardbox">
-                        <div class="mypage-bord-title">{{$item->board_title}}</div>
-                        <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
-                    </div>
+                    <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                        <div class="mypage-boardbox">
+                            <div class="mypage-bord-title">{{$item->board_title}}</div>
+                            <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                        </div>
+                    </a>
                     @endif
                 @empty
                     <div> 작성한 게시글이 없습니다. </div>
@@ -162,13 +168,15 @@
 <div class="UserboardModal" id="UserboardModal">
     <div>
         <div class="mypage-content-modal" id="mypageContentModal">
-        
-            <div class="mypage-board-modal-btn">내가 쓴 게시글</div>
-            <div class="mypage-comment-modal-btn">내가 쓴 댓글</div>
-
             <div onclick="mypagemodalclosebtn(); return false;" class="mypage-modal-close-btn">x</div>
+            <div class="modal-board-show-btn">
+                <div class="mypage-board-modal-btn">내가 쓴 게시글</div>
+                <div class="mypage-comment-modal-btn">내가 쓴 댓글</div>
+            </div>
+
         {{-- 게시글 창 --}}
-            <div class="mypage-date-today">
+        
+            {{-- <div class="mypage-date-today">
                 <span class="mypage-board-date-modal">2023-12-12</span>
             </div>
             <div class="mypage-boards-part2">
@@ -188,8 +196,51 @@
                     <div class="mypage-bord-title">제목입니다.</div>
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
+            </div> --}}
+            <div class="mypage-boards-part">
+                @forelse ($data as $index => $item)
+                    @php
+                    $previous_item = $index - 1;
+                    $present_item = $index - 0;
+                    // $board_date = $data[$present_item]->created_at;
+                    // $timestamp = strtotime($board_date);
+                    // $create_date = date('y-m-d', $timestamp);
+                    @endphp
+                    @if ( $index >= 1)
+                        @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
+                        <div class="mypage-date-today">
+                            <span class="mypage-board-date">{{$item->created_at}}</span>
+                        </div>
+                        <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                            <div class="mypage-boardbox-modal">
+                                <div class="mypage-bord-title">{{$item->board_title}}</div>
+                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                            </div>
+                        </a>
+                        @else
+                        <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                            <div class="mypage-boardbox-modal">
+                                <div class="mypage-bord-title">{{$item->board_title}}</div>
+                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                            </div>
+                        </a>
+                        @endif
+                    @else
+                    <div class="mypage-date-today">
+                        <span class="mypage-board-date">{{$item->created_at}}</span>
+                    </div>
+                    <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                        <div class="mypage-boardbox-modal">
+                            <div class="mypage-bord-title">{{$item->board_title}}</div>
+                            <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                        </div>
+                    </a>
+                    @endif
+                @empty
+                    <div> 작성한 게시글이 없습니다. </div>
+                @endforelse
             </div>
-
+{{-- 
             <div class="mypage-date-today">
                 <span class="mypage-board-date"></span>
             </div>
@@ -214,7 +265,7 @@
                     <div class="mypage-bord-title">제목입니다.</div>
                     <div class="mypage-bord-detailbox">상세내용입니다.</div>
                 </div>
-            </div>
+            </div> --}}
         
             <div class="mypage-btn-plus">더보기</div>
             {{-- 게시글 insert로 넘어감 --}}
