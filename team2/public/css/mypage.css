@@ -112,8 +112,8 @@ td {
     min-width: 520px;
     max-width: 840px;
     margin: 0 auto;
-    white-space:nowrap;
     text-align: center;
+    white-space:nowrap;
     overflow-x: scroll;
     /* 넘치는거 삭제 */
     -ms-overflow-style: none;
@@ -165,8 +165,11 @@ td {
 }
 
 @media screen and (max-width: 800px) {
-    .mypage-second {
-        max-width: 400px;
+    .timelinemain {
+        width: 400px;
+    }
+    .mypage-second, .mypage-first {
+        width: 400px;
     }
     /* 스크롤바 삭제 */
     .mypage-second::-webkit-scrollbar{
@@ -176,7 +179,7 @@ td {
         border: 1px solid #eeeeee;;
         border-radius: 10px;
         height: 120px;
-        width: 65px;
+        width: 80px;
         grid-row: 1;
         display: block;
         font-weight: 400;
