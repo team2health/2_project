@@ -88,21 +88,22 @@
 
     {{-- 정보수정창 --}}
     <div class="mypage-content2" id="mypageContent2">
-        <form action="" class="user-info-modify" >
+        <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+            @csrf
             <div id="UserInfoModify">
                 <label for="profilephoto">
                     <div class="profile-photo-btn" style="background-image: url(/img/camera2.png);">
                     </div>
                 </label>
-                <input type="file" accept="image/*" style="display: none;" id="profilephoto">
-                <a href="#">비밀번호 변경</a>
+                <input type="file" accept="image/*" style="display: none;" id="profilephoto" name="user_img">
+                {{-- <a href="#">비밀번호 변경</a> --}}
                 <br>
                 <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
                 <div class="user-info-btn"> 삭제 </div>
                 <br>
                 <label for="usermodifyname">닉네임 수정</label>
-                <div class="user-info-btn-chk"> 닉네임 중복 확인 </div>
-                <input type="text" id="usermodifyname">
+                <div class="user-info-btn-chk" onclick="nameChange(); return false;"> 닉네임 중복 확인 </div>
+                <input type="text" id="usermodifyname" name="user_name">
                 {{-- <br>
                 <label for="usermodifypassword">비밀번호 수정</label>
                 <input type="password" id="usermodifypassword">
@@ -113,14 +114,15 @@
                 <br>
                 <div class="adress-box">
                     <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" readonly>
-                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn" readonly><br>
+                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn"><br>
                     <span id="guide" style="color:#999;display:none"></span>
-                    <input class="adress-box-b" type="text" id="sample4_roadAddress" placeholder="도로명주소" name="user_adress_f">
+                    <input class="adress-box-b" type="text" id="sample4_roadAddress" placeholder="도로명주소" readonly>
                     <br>
-                    <input class="adress-box-b" type="text" id="sample4_detailAddress" placeholder="상세주소" name="user_adress_s">
+                    <input class="adress-box-b" type="text" id="sample4_detailAddress" placeholder="상세주소">
+                    <input type="hidden" id="adress-fullname" name="user_address">
                 </div>
                 <div class="mypage-btn-line-modify">
-                    <button type="submit" class="mypage-btn">수정완료</button>
+                    <button type="button" class="mypage-btn" onclick="userinfoupdate(); return false;">수정완료</button>
                     {{-- <a href="{{route('mypage.get')}}"><div class="mypage-btn">취소</div></a> --}}
                 </div>
             </div>
@@ -131,7 +133,7 @@
         <div class="mypage-btn-layout">
             <div class="mypage-btn-line">
                 <div class="mypage-btn" onclick="userinforupdate(); return false;">정보수정</div>
-                <a href="{{route('timeline')}}"><div class="mypage-btn">타임라인</div></a>
+                <a href="{{route('todaytimeline.get')}}"><div class="mypage-btn">타임라인</div></a>
             </div>
             <div class="mypage-btn2" onclick="userboardshow(); return false;">나의 게시물</div>
         </div>
@@ -173,38 +175,11 @@
                 <div class="mypage-board-modal-btn">내가 쓴 게시글</div>
                 <div class="mypage-comment-modal-btn">내가 쓴 댓글</div>
             </div>
-
-        {{-- 게시글 창 --}}
-        
-            {{-- <div class="mypage-date-today">
-                <span class="mypage-board-date-modal">2023-12-12</span>
-            </div>
-            <div class="mypage-boards-part2">
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-            </div> --}}
             <div class="mypage-boards-part">
                 @forelse ($data as $index => $item)
                     @php
                     $previous_item = $index - 1;
                     $present_item = $index - 0;
-                    // $board_date = $data[$present_item]->created_at;
-                    // $timestamp = strtotime($board_date);
-                    // $create_date = date('y-m-d', $timestamp);
                     @endphp
                     @if ( $index >= 1)
                         @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)

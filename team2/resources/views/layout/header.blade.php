@@ -84,7 +84,7 @@
 			<div class="container-category display-flex-around div-padding">
 				<a href="{{route('main.get')}}" class="div-display-lnlineBlock main-line-height">증상 검색</a>
 				<a href="{{ route('board.index') }}" class="div-display-lnlineBlock main-line-height">커뮤니티</a>
-				<a href="{{ route('timeline') }}" class="div-display-lnlineBlock main-line-height">타임라인</a>
+				<a href="{{ route('todaytimeline.get') }}" class="div-display-lnlineBlock main-line-height">타임라인</a>
 			</div>
 		@endif
 		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard')

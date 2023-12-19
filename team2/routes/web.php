@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MypageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,6 @@ use App\Http\Controllers\CommentController;
 Route::get('/mypage', function () {
     return view('mypage');
 })->name('mypage');
-
-Route::get('/timeline', function () {
-    return view('timeline');
-})->name('timeline');
-
 
 Route::get('/lastboard', function () {
     return view('lastboard');
@@ -60,11 +56,16 @@ Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 
-Route::get('/mypage', [UserController::class, 'mypageget'])->name('mypage.get');
-Route::post('/myhashdelete', [UserController::class, 'myhashdeletepost'])->name('myhash.post');
-Route::get('/allhashtag', [UserController::class, 'allhashget'])->name('allhash.post');
-Route::post('/addfavoritehashtag', [UserController::class, 'addfavoritehashtagpost'])->name('allhash.post');
-Route::post('/myinfo', [UserController::class, 'myinfomodify'])->name('myinfo.post');
+// mypage
+Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get');
+Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->name('myhash.post');
+Route::get('/allhashtag', [MypageController::class, 'allhashget'])->name('allhash.post');
+Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost'])->name('allhash.post');
+Route::post('/namechange', [MypageController::class, 'namechangepost']);
+Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);
+
+Route::get('/timeline', [MypageController::class, 'todaytimelineget'])->name('todaytimeline.get');
+Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name('daytimeline.post');
 
 Route::post('/namechk', [UserController::class, 'namechkpost']);
 Route::post('/idchk', [UserController::class, 'idchkpost']);

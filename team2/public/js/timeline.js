@@ -3,20 +3,20 @@ window.addEventListener('load', function() {
 });
 
 window.addEventListener('load', function() {
-    weekendshow(); //일주일을 불러오는 함수
+    weekendShow(); //일주일을 불러오는 함수
 });
 window.addEventListener('load', function() {
-    yearshowdiv(); //달력 날짜를 표시하는 함수
+    yearShowDiv(); //달력 날짜를 표시하는 함수
 });
 window.addEventListener('load', function() {
-    datescrollbar(); //일주일 스크롤을 설정하는 함수
+    dateScrollbar(); //일주일 스크롤을 설정하는 함수
 });
 
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
 let today = new Date();     // 페이지를 로드한 날짜를 저장
 today.setHours(0, 0, 0, 0);    // 비교 편의를 위해 today의 시간을 초기화
 
-function yearshowdiv() {
+function yearShowDiv() {
     let showyear = today.getFullYear();
     let showmonth = today.getMonth()+1;
 
@@ -30,13 +30,14 @@ function calendarshow() {
     calendarView.classList.toggle('calendarNone');
 } //캘린더 보여주는 버튼
 
-function weekendshow() {
+function weekendShow() {
 
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
 
     let thismonth = today.getFullYear(); // 올해 날짜 가져옴
     let thismonthday = today.getMonth(); // 이번달
     let thismonthtoday = today.getDate();
+    let iddate = thismonth + '-' + thismonthday + '-';
 
     let monthlast = new Date(thismonth, thismonthday+1, 0); //월의 마지막 날짜 가져오기
     let monthfirstday = new Date(thismonth, thismonthday, 1); //월의 마지막 날짜 가져오기
@@ -67,6 +68,7 @@ function weekendshow() {
         let weekendindiv = document.createElement('div');
         weekendindiv.classList.add('datebar');
         weekendindiv.id = 'weekend'+date;
+        weekendindiv.onclick = function () { selectDate(iddate + date); }
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')
         let weekendinsdot = document.createElement('span')
@@ -90,14 +92,26 @@ function weekendshow() {
         if( date == thismonthtoday) {
             weekendindiv.classList.add('datebartoday');
         }
-
-        weekendindiv.onclick = function() {
-            alert('클릭되었을 경우 처리');
-        };
     }
 }
+
+function selectDate(data) {
+    console.log(data);
+    let formData = new FormData();
+    formData.append('date', data);
+
+    fetch('/daytimeline', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)})
+    .catch(error => console.log(error));
+}
+
 // 스크롤 이동 javascript
-function datescrollbar() {
+function dateScrollbar() {
     let todaydiv = today.getDate();
     let scrollbar = document.getElementById('weekend' + todaydiv);
     // 특정 element를 기준으로 스크롤을 이동
