@@ -75,15 +75,18 @@ textarea{
 }
 .detail_bottom_button{
     display: grid;
-    justify-content: end;    
+    justify-content: end;  
+    
 }
 .d_btn{
     border: 1px solid rgba(128, 128, 128, 0.369);
     margin: 0px 10px;
     width: 60px;
-    height: 30px;
+    height: 31px;
+    align-items: center;
     border-radius: 5px;
     background-color: white;
+    font-size:medium
     
 }
 .a_cancel, .a_update{
@@ -472,7 +475,83 @@ li{
         width: 80vw;
     }
 }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* 배경을 어둡게 만들어줌 */
+}
 
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    height: 300px;
+    text-align: center;
+    line-height: 100px;
+}
+
+/* 확인, 취소 버튼 스타일 (예시에 맞게 수정 가능) */
+#confirmDelete,
+#cancelDelete {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#cancelDelete {
+    background-color: #f44336;
+    margin-left: 10px;
+}
+.commentDeleteBtn {
+    cursor: pointer;
+}
+
+.confirmCommentDeleteModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.confirmCommentDeleteModal button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.confirmCommentDeleteModal button.confirm {
+    background-color: #ff9950;
+    color: white;
+    border: none;
+}
+
+.confirmCommentDeleteModal button.cancel {
+    background-color: #ccc;
+    color: white;
+    border: none;
+}
 
 
 

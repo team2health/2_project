@@ -37,11 +37,8 @@ class CommentController extends Controller
 
     public function destroy($comment_id)
     {
-        $comment = Comment::find($comment_id);
+        Comment::destroy($comment_id);
 
-        $comment->delete();
-
-        return redirect()->route('categoryboard', ['board' => $comment->board_id])->with('success', '댓글이 성공적으로 삭제되었습니다.');
+        return response()->json(['message' => 'Comment deleted successfully.']);
     }
-
 }

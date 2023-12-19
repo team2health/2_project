@@ -56,6 +56,7 @@
             <button type="button" id="openModal" class="d_btn">삭제</button>
         </form>
     </div>
+    <input type="hidden" id="commentIdToDelete" name="comment_id" value="">
     <div class="detail_comment">
         <div class="comment_bottom">
         <p>댓글{{ count($data->comments ?? []) }}개</p>
@@ -77,10 +78,19 @@
                 <div>
                     <p>{{ $comment->comment_content }}</p>
                 </div>
+                <span class="commentDeleteBtn" data-comment-id="{{ $comment->id }}">x</span>
             </li>
         @endforeach
         </ul>
-    
+        
+        <div id="confirmCommentDeleteModal" class="modal">
+            <div class="modal-content">
+                <p>삭제하시겠습니까?</p>
+                <button id="confirmDelete">확인</button>
+                <button id="cancelDelete">취소</button>
+            </div>
+        </div>
+            
         <div class="detail_comment_insert">
         <form action="{{ route('comments', ['boardId' => $data->board_id]) }}" method="post" id="commentForm">
             @csrf
@@ -92,4 +102,5 @@
         </div>
 </main>
 <script src="/js/detail.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 @endsection
