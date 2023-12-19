@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\MainController;
-
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +35,8 @@ Route::get('/insert', function () {
 })->name('insert');
 
 Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  

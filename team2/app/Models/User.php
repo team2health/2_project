@@ -27,6 +27,10 @@ class User extends Authenticatable
     public function boardid(){
         return $this->hasMany(Board::class);
     }
+    public function commentsid()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

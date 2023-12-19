@@ -135,10 +135,10 @@
                 <img src="/img/star.png" alt="">
                 내가 찜한 관심 태그
             </div>
-            <div class="mypage-hashtag">
+            <div class="mypage-hashtag" id="mypageHashtag">
             @forelse ($user_hashtag as $item)
                 <div id="favoriteHashtagId{{$item->favorite_tag_id}}">
-                    <span>{{$item->hashtag_name}}</span>
+                    <span id="favoritehashtext{{$item->favorite_tag_id}}" value="{{$item->hashtag_name}}">{{$item->hashtag_name}}</span>
                     <span onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">x</span>
                 </div>
             @empty

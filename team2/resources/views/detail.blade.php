@@ -44,53 +44,45 @@
         <form class="detail_form" action="" method = "POST">
             @csrf
             @method('DELETE')
-            <button class="d_btn"><a class="a_cancel" href="{{route('categoryboard')}}">목록</a></button>	
-            <button class="d_btn"><a href="{{route('board.edit',['board'=>$data->board_id])}}" class="a_update ">수정</a></button>
+            <a href="{{route('categoryboard')}}" class="a_cancel" >목록</a>
+            <a href="{{route('board.edit',['board'=>$data->board_id])}}" class="a_update ">수정</a>
             <button type="submit" class="d_btn">삭제</button>
         </form>
     </div>
     <div class="detail_comment">
         <div class="comment_bottom">
-            <p>댓글2개</p>
+        <p>댓글{{ count($data->comments ?? []) }}개</p>
         </div>
         <ul>
+        @foreach($data->comments ?? [] as $comment)
             <li>
                 <div class="last_user">
-                    <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
+                    <img class="community_icon" src="../img/default_f.png" alt="" class="board_nic_img">
                     <div class="board_nic_text">
                         <div>
-                            세모
+                            <span>{{ optional($comment->user)->user_name }}</span> <!-- optional 함수 사용 -->
                         </div>
                         <div>
-                            2023-12-12
+                            {{ $comment->created_at }}
                         </div>
                     </div>
                 </div>
                 <div>
-                    <p>ㅋㅋㅋㅎㅎㅎㅋㅋㅋㅎㅎㅎㅋㅋㅋㅎㅎㅎㅋㅋㅋㅎㅎㅎㅋㅋㅋㅎㅎㅎㅋㅋㅋㅎㅎㅎㅋㅋㅋㅎㅎㅎㅋㅋㅋㅎㅎㅎ</p>
-                    
-                </div> 
+                    <p>{{ $comment->comment_content }}</p>
+                </div>
             </li>
-            <li>
-                <div class="last_user">
-                    <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-                    <div class="board_nic_text">
-                        <div>
-                            네모
-                        </div>
-                        <div>
-                        2023-12-12
-                        </div>
-                    </div>
-                </div> 
-                <p>ㅋㅋㅋㅎㅎㅎ</p> 
-            </li>
+        @endforeach
         </ul>
-    </div>
-    <div class="detail_comment_insert">
-        <textarea name="comment" id="comment"></textarea>
-        <button type="submit"class="detail_comment_insert_complete">입력</button>
-    </div>
-</main>
+    
+        <div class="detail_comment_insert">
+        <form action="{{ route('comments', ['boardId' => $data->board_id]) }}" method="post" id="commentForm">
+            @csrf
+            <input type="hidden" name="board_id" value="{{ $data->board_id }}">
+            <textarea name="comment_content" id="comment_content"></textarea>
+            <button type="submit" class="detail_comment_insert_complete">입력</button>
+        </form>
 
+        </div>
+</main>
+<script src="/js/detail.js"></script>
 @endsection

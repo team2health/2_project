@@ -25,7 +25,16 @@ class Board extends Model
          return $this->belongsToMany(Board_tag::class, 'boardtag_id', 'board_id', 'hash_id');
      }
      public function usersid(){
-        return $this->belongTo(user::class,);
+        return $this->belongsTo(user::class,);        
     }
+   public function comments()
+    {
+        return $this->hasMany(Comment::class, 'board_id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'category_id');
+    }
+
     
 }

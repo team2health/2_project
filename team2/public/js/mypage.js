@@ -82,6 +82,12 @@ function favoritehashdelete(data) {
 let addallfavoritetagevent = document.getElementById('addallfavoritetag');
 addallfavoritetagevent.addEventListener('click', addallfavoritetag);
 
+addallfavoritetagevent.addEventListener('click', function(){
+    addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
+    let createtagmaindiv = document.getElementById('creaTagMainDiv');
+    createtagmaindiv.style.display = 'block';
+});
+
 function addallfavoritetag() {
 
     let createtagmaindiv = document.createElement('div');
@@ -103,7 +109,6 @@ function addallfavoritetag() {
         console.log(data);
 
         for(let i = 0; i < data.length; i++) {
-
                 let hashtagdiv = document.createElement('div');
                 let hashspan = document.createElement('span');
                 let hashplusbtn = document.createElement('span');
@@ -117,12 +122,6 @@ function addallfavoritetag() {
                 createplustag.appendChild(hashtagdiv);
 
         }
-        // if(data.length === 0) {
-        //     let a = getElementById('mypageTagTitle');
-        //     let hashtagdiv2 = document.createElement('div');
-        //     hashtagdiv2.innerHTML = '추가할 태그가 없습니다.';
-        //     a.appendChild(hashtagdiv2);
-        // }
         mypageTagTitle.appendChild(createtagmaindiv);
         createtagmaindiv.appendChild(createplustag);
         addtagbtndiv.appendChild(hashplusokbtn);
@@ -130,15 +129,16 @@ function addallfavoritetag() {
         createtagmaindiv.appendChild(addtagbtndiv);
     })
     .catch(error => console.error(error));
-
+    
     hashplusclosebtn.addEventListener('click', closeoption);
 
 }
 
+
+
 function closeoption(){
-    addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
-    let creaTagMainDiv = document.getElementById('creaTagMainDiv');
-    creaTagMainDiv.remove();
+    let createtagmaindiv = document.getElementById('creaTagMainDiv');
+    createtagmaindiv.style.display = 'none';
 }
 
 function addhashtag(data) {
@@ -146,6 +146,7 @@ function addhashtag(data) {
     let formData = new FormData();
     formData.append('tag_id', data);
     
+    let deletefavoritehashtext = document.getElementById('favoritehashtext'+data).value;
     let allHashtagId = document.getElementById('allHashtagId'+data);
     allHashtagId.remove();
 
@@ -161,6 +162,22 @@ function addhashtag(data) {
         console.log(data);
     })
     .catch(error => console.log(error));
+
+    // 즉시 추가
+    let mypageHashtag = document.getElementById('mypageHashtag');
+    let deletedfavoritehashtag = document.createElement('div')
+    let makefavoritespan = document.createElement('span');
+    let makefavoritespan2 = document.createElement('span');
+
+    deletedfavoritehashtag.id = 'favoriteHashtagId' + data;
+    makefavoritespan.id = 'favoritehashtext'+data;
+    makefavoritespan.innerhtml = deletefavoritehashtext;
+    makefavoritespan.setAttribute('value', deletefavoritehashtext );
+    makefavoritespan2.setAttribute('onclick', `favoritehashdelete(${data})`);
+    makefavoritespan2.innerHTML = 'x';
+    deletedfavoritehashtag.appendChild(makefavoritespan);
+    deletedfavoritehashtag.appendChild(makefavoritespan2);
+    mypageHashtag.appendChild(deletedfavoritehashtag);
 }
 
 // 1. 저장/취소 버튼 구현

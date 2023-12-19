@@ -43,3 +43,4 @@
 
 
 @endsection
+<script src="/js/categoryboard.js"></script>

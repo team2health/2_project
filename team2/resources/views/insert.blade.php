@@ -27,7 +27,7 @@
 				
 				<div class="insert_select_container">
 					<select name="category_id" id="category_id" class="insert_select">
-						<option value="">카테고리</option>
+						
 						<option value="1">자유게시판</option>
 						<option value="2">정보 게시판</option>
 						<option value="3">친목 게시판</option>
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="insert_bottom_button">
-				<button class="insert_btn"><a class="a_cancel" href="{{url()->previous()}}">취소</a></button>			
+				<button class="insert_btn"><a href="{{url()->previous()}}">취소</a></button>			
 				<button type="submit" class="insert_btn">작성완료</button>	
 			</div>				
 		</form>		
