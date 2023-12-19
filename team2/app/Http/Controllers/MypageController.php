@@ -59,8 +59,11 @@ class MypageController extends Controller
                     )
                     ->where('id', $result)
                     ->get();
+
+                    // Log::debug("유저", ['name' => $user_info]);
+                    
     
-                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag);
+                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);;
             } else {
                 return view('login');
             }
@@ -240,11 +243,21 @@ log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
                 ->orderBy('favorite_tags.created_at')
                 ->get();
 
-            $user_info = User::find($result);
+            $user_info  = DB::table('users')
+                ->select(
+                    'id'
+                    ,'user_id'
+                    ,'user_name'
+                    ,'user_address'
+                    ,'user_img'
+                )
+                ->where('id', $result)
+                ->get();
                 
             // Log::debug("이름", ['name' => $user_info]);
-            session(['user_name' => $user_info->user_name]);
+            session(['user_name' => $user_info[0]->user_name]);
+            // Log::debug("유저", ['name' => $user_info]);
 
-            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag);
+            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
         }
 }

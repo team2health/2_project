@@ -248,6 +248,7 @@ function addhashtag(data) {
 // 저장 버튼이 구현가능하도록 추가와 db저장을 따로 분리함
 // value값 변경해야함
 
+let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
 
 function nameChange() {
 	let nameChk = document.getElementById('usermodifyname').value;
@@ -255,7 +256,10 @@ function nameChange() {
 	if(nameChk === '') {
 		alert('닉네임을 입력해주세요');
 		return false;
-	}
+	} else if(!regex.test(nameChk)) {
+        alert('닉네임을 다시 확인해주세요.');
+        return false;
+    }
 
 	const formData = new FormData();
 	formData.append('user_name', nameChk);
@@ -289,3 +293,14 @@ function userinfoupdate() {
 
 	document.getElementById('userinfo_form').submit();
 }
+
+function userimgremove() {
+    // document.getElementById('profilephoto').files[0] = '../img/default_f.png';
+
+}
+
+// let userImgSelect = document.getElementById('profilephoto').files[0];
+// let userImgName = document.getElementById('user_img_name');
+// console.log(userImgSelect);
+
+// userImgName.innerHTML = userImgSelect;

@@ -61,8 +61,10 @@ Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get'
 Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->name('myhash.post');
 Route::get('/allhashtag', [MypageController::class, 'allhashget'])->name('allhash.post');
 Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost'])->name('allhash.post');
+
 Route::post('/namechange', [MypageController::class, 'namechangepost']);
 Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);
+Route::post('/userimgremove', [MypageController::class, 'userimgremovepost']);
 
 Route::get('/timeline', [MypageController::class, 'todaytimelineget'])->name('todaytimeline.get');
 Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name('daytimeline.post');

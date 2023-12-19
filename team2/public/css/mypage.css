@@ -664,6 +664,7 @@ display:none;
 .mypage-hashtag > div > span {
     cursor: pointer;
 }
+
 /* 마이페이지 미디어쿼리 */
 @media screen and (min-width: 700px) {
     .UserboardModal {

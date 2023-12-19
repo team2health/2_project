@@ -92,18 +92,18 @@
             @csrf
             <div id="UserInfoModify">
                 <label for="profilephoto">
-                    <div class="profile-photo-btn" style="background-image: url(/img/camera2.png);">
-                    </div>
+                    <div class="profile-photo-btn" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
+                    <span id="user_img_name"></span>
                 </label>
                 <input type="file" accept="image/*" style="display: none;" id="profilephoto" name="user_img">
                 {{-- <a href="#">비밀번호 변경</a> --}}
                 <br>
                 <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
-                <div class="user-info-btn"> 삭제 </div>
+                <div class="user-info-btn" onclick="userimgremove(); return false;"> 삭제 </div>
                 <br>
                 <label for="usermodifyname">닉네임 수정</label>
                 <div class="user-info-btn-chk" onclick="nameChange(); return false;"> 닉네임 중복 확인 </div>
-                <input type="text" id="usermodifyname" name="user_name">
+                <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
                 {{-- <br>
                 <label for="usermodifypassword">비밀번호 수정</label>
                 <input type="password" id="usermodifypassword">

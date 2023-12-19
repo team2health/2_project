@@ -1,6 +1,6 @@
 let LOGINUSERID = document.getElementById('login_user_id');
 let ERRORLOGINID = document.getElementById('error_login_id');
-let regex = /^[가-힣a-zA-Z0-9]+$/;
+let regex = /^[가-힣a-zA-Z0-9]{4,}$/;
 
 LOGINUSERID.addEventListener('input', function() {
     const value = LOGINUSERID.value;
