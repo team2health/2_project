@@ -11,4 +11,9 @@ class Record extends Model
 
     public $timestamps = ["created_at"]; //only want to used created_at column
 	const UPDATED_AT = null; //and updated by default null set
+
+    protected $fillable = [
+        'u_id',
+        'symptom_id',
+    ];
 }

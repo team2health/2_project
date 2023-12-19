@@ -14,7 +14,7 @@
 
 			<p style="width: 60px;" class="ptag">아이디</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
 			<input type="text" class="login-input-short" name="user_id" id="user_id">
-			<div class="input-check">아이디 확인</div>
+			<div class="input-check" onclick="checkId(); return false;">아이디 확인</div>
 			<br>
 
 			<p style="width: 80px;" class="ptag">비밀번호</p>
@@ -26,10 +26,10 @@
 			<br>
 			
 			<div class="adress-box">
-				<input type="text" id="sample4_postcode" placeholder="우편번호" class="adress-short">
+				<input type="text" id="sample4_postcode" placeholder="우편번호" class="adress-short" readonly>
 				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="adress-btn"><br>
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" class="adress-long" name="user_adress_f">
+				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" class="adress-long" name="user_adress_f" readonly>
 				<br>
 				<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="adress-long" name="user_adress_s">
 				<input type="hidden" name="user_address" id="adress-fullname">

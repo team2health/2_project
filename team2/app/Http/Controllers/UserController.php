@@ -18,6 +18,10 @@ use App\Models\Favorite_tag;
 class UserController extends Controller
 {
     public function registget() {
+        if(Auth::check()) {
+            return redirect()->route('main.get');
+        }
+        
         return view('regist');
     }
 
@@ -34,6 +38,10 @@ class UserController extends Controller
     }
 
     public function loginget() {
+        if(Auth::check()) {
+            return redirect()->route('main.get');
+        }
+
         return view('login');
     }
 
@@ -74,6 +82,23 @@ class UserController extends Controller
             exit;
         }
         return response()->json(['nameChk' => '0']);
+    }
+
+    public function idchkpost(Request $request) {
+        Log::debug("*********** idchkpost start ***********");
+        // Log::debug("POST data".$_POST);
+        // Log::debug("이거", $request->all());
+        // Log::debug("이거".$request->user_name);
+        $userid = $request->user_id;
+        // Log::debug("user_name:".$username);
+
+        $existingUser = User::where('user_id', $userid)->first();
+
+        if ($existingUser) {
+            return response()->json(['idChk' => '1']);
+            exit;
+        }
+        return response()->json(['idChk' => '0']);
     }
 
     // 마이페이지 이동 시 로그인 유무확인 및 게시글 불러오기

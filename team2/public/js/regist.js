@@ -51,6 +51,8 @@ let USERPASSWORD = document.getElementById('user_password');
 let USERPASSWORDCHECK = document.getElementById('user_password_check');
 // let USERADRESSF = document.getElementById('sample4_roadAddress');
 // let USERADRESSS = document.getElementById('sample4_detailAddress');
+let namechkflg = 0;
+let idchkflg = 0;
 
 let ERRORNAME = document.getElementById('error_name');
 let ERRORID = document.getElementById('error_id');
@@ -116,11 +118,17 @@ function registgo() {
 	if(USERNAMEVALUE === '') {
 		alert('닉네임은 필수사항입니다.');
 		return false;
+	} else if(namechkflg === 0) {
+		alert('닉네임 중복확인을 해주세요.');
+		return false;
 	} else if(!regex.test(USERNAMEVALUE)) {
 		alert('닉네임을 다시 확인해주세요.');
 		return false;
 	} else if(USERIDVALUE === '') {
 		alert('아이디는 필수사항입니다.');
+		return false;
+	} else if(idchkflg === 0) {
+		alert('아이디 중복확인을 해주세요.');
 		return false;
 	} else if(!regex.test(USERIDVALUE)) {
 		alert('아이디를 다시 확인해주세요.');
@@ -150,6 +158,12 @@ function registgo() {
 
 function checkName() {
 	let nameChk = document.getElementById('user_name').value;
+
+	if(nameChk === '') {
+		alert('닉네임을 입력해주세요');
+		return false;
+	}
+
 	const formData = new FormData();
 	formData.append('user_name', nameChk);
 	// console.log(nameChk);
@@ -169,4 +183,36 @@ function checkName() {
 	.catch(error => {
 		console.error('오류 발생:', error);
 	})
+	namechkflg = 1;
+	// console.log(namechkflg);
+}
+
+function checkId() {
+	let idChk = document.getElementById('user_id').value;
+
+	if(idChk === '') {
+		alert('아이디를 입력해주세요');
+		return false;
+	}
+
+	const formData = new FormData();
+	formData.append('user_id', idChk);
+	// console.log(idChk);
+	// console.log(formData.get('user_id'));
+	fetch('/idchk', {
+		method: 'POST',
+		body: formData,
+	})
+	.then(response => response.json())
+	.then(data => {
+		if(data['idChk'] === '0') {
+			alert('사용가능한 아이디 입니다.');
+		} else if(data['idChk'] === '1') {
+			alert('이미 존재하는 아이디 입니다.');
+		}
+	})
+	.catch(error => {
+		console.error('오류 발생:', error);
+	})
+	idchkflg = 1;
 }
