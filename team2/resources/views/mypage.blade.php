@@ -173,38 +173,11 @@
                 <div class="mypage-board-modal-btn">내가 쓴 게시글</div>
                 <div class="mypage-comment-modal-btn">내가 쓴 댓글</div>
             </div>
-
-        {{-- 게시글 창 --}}
-        
-            {{-- <div class="mypage-date-today">
-                <span class="mypage-board-date-modal">2023-12-12</span>
-            </div>
-            <div class="mypage-boards-part2">
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox-modal">
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-            </div> --}}
             <div class="mypage-boards-part">
                 @forelse ($data as $index => $item)
                     @php
                     $previous_item = $index - 1;
                     $present_item = $index - 0;
-                    // $board_date = $data[$present_item]->created_at;
-                    // $timestamp = strtotime($board_date);
-                    // $create_date = date('y-m-d', $timestamp);
                     @endphp
                     @if ( $index >= 1)
                         @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
