@@ -24,6 +24,7 @@ class User extends Authenticatable
         'user_password',
         'user_address',
         'user_gender',
+        'user_img',
     ];
     public function boardid(){
         return $this->hasMany(Board::class);

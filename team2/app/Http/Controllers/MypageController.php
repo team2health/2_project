@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Favorite_tag;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class MypageController extends Controller
 {
@@ -129,5 +131,79 @@ class MypageController extends Controller
     
         public function myinfomodify() {
     
+        }
+
+        public function namechangepost(Request $request) {
+            // Log::debug("*********** namechkpost start ***********");
+            // Log::debug("POST data".$_POST);
+            // Log::debug("이거", $request->all());
+            // Log::debug("이거".$request->user_name);
+            $username = $request->user_name;
+            // Log::debug("user_name:".$username);
+    
+            $existingUser = User::where('user_name', $username)->first();
+    
+            if ($existingUser) {
+                return response()->json(['namechange' => '1']);
+                exit;
+            }
+            return response()->json(['namechange' => '0']);
+        }
+
+        public function userinfoupdatepost(Request $request) {
+            Log::debug("111111", $request->all());
+
+            // 사용자 ID 가져오기
+            $result = session('id');
+
+            $userinfo = User::find($result);
+
+            if($request->user_img) {
+                $imgName = Str::uuid().'.'.$request->user_img->extension();
+                $request->user_img->move(public_path('user_img'), $imgName);
+                $userinfo->user_img = $imgName;
+            }
+            if($request->user_name) {
+                $userinfo->user_name = $request->user_name;
+            }
+            if($request->user_address) {
+                $userinfo->user_address = $request->user_address;
+            }
+
+            $userinfo->save();
+    
+            $board_result = DB::table('boards')
+                ->select(
+                'board_id'
+                ,'u_id'
+                ,'category_id'
+                ,'board_title'
+                ,'board_content'
+                ,'board_hits'
+                ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
+                ,'updated_at')
+                ->where('u_id',$result)
+                ->where('deleted_at', null)
+                ->orderBy('board_id', 'DESC')
+                ->get();
+            
+            $user_hashtag = DB::table('favorite_tags')
+                ->select(
+                'favorite_tags.favorite_tag_id'
+                ,'favorite_tags.hashtag_id'
+                ,'hashtags.hashtag_name'
+                )
+                ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+                ->where('favorite_tags.u_id', $result)
+                ->where('favorite_tags.deleted_at', null)
+                ->orderBy('favorite_tags.created_at')
+                ->get();
+
+            $user_info = User::find($result);
+                
+            // Log::debug("이름", ['name' => $user_info]);
+            session(['user_name' => $user_info->user_name]);
+
+            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag);
         }
 }
