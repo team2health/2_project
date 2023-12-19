@@ -109,7 +109,6 @@ td {
 /* 날짜별 */
 .mypage-second {
     display: grid;
-    min-width: 520px;
     max-width: 840px;
     margin: 0 auto;
     text-align: center;
@@ -142,7 +141,7 @@ td {
     border: 1px solid #eeeeee;;
     border-radius: 10px;
     height: 120px;
-    /* width: 8vw; */
+    width: 65px;
     width: 110px;
     grid-row: 1;
     display: block;
@@ -165,11 +164,19 @@ td {
 }
 
 @media screen and (max-width: 800px) {
-    .timelinemain {
+    .recordsection {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 20px 1fr;
+    }
+    .mypage-second {
         width: 400px;
     }
-    .mypage-second, .mypage-first {
-        width: 400px;
+    .mypage-first {
+        display: flex;
+        position: relative;
+        align-items: stretch;
+        justify-content: center;
     }
     /* 스크롤바 삭제 */
     .mypage-second::-webkit-scrollbar{
@@ -179,7 +186,7 @@ td {
         border: 1px solid #eeeeee;;
         border-radius: 10px;
         height: 120px;
-        width: 80px;
+        width: 70px;
         grid-row: 1;
         display: block;
         font-weight: 400;
@@ -195,16 +202,17 @@ td {
 .recordsection {
     width: 100%;
     display: grid;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 50px 1fr;
     align-items: center;
     justify-items: center;
     margin-top: 30px;
+    grid-gap: 20px 0;
 }
 .user-record:hover {
     background: #bfbfbf;
 }
 .user-record {
-    width: 90%;
+    width: 95%;
     height: 110px;
     background-color: #F6F6F6;
     border-radius: 20px;
