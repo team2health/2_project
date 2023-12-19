@@ -37,13 +37,13 @@
 			
 			
 				<div class="insert_input_container">
-				<label for="u_title" class="">제목</label><br>
-				<input type="text" class="insert_input" id="u_title" name="u_title" required>			  
+				<label for="board_title" class="">제목</label><br>
+				<input type="text" class="insert_input" id="board_title" name="board_title" required>			  
 				</div>
 				
 				<div class="insert_textarea_container">
-					<label for="u_content" >내용</label><br>			  
-					<textarea name="u_content" id="u_content" class="insert_textarea" required ></textarea>
+					<label for="board_content" >내용</label><br>			  
+					<textarea name="board_content" id="board_content" class="insert_textarea" required ></textarea>
 				</div>
 				
 				<div class="insert_hashtag_container">

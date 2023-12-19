@@ -16,6 +16,7 @@ class Board extends Model
         ,'category_id'
         
     ];
+    
     public function images()
     {
         return $this->hasMany(Board_img::class, 'board_id', 'board_id');
@@ -24,8 +25,8 @@ class Board extends Model
      {
          return $this->belongsToMany(Board_tag::class, 'boardtag_id', 'board_id', 'hash_id');
      }
-     public function usersid(){
-        return $this->belongsTo(user::class,);        
+     public function user(){
+        return $this->belongsTo(User::class,'u_id', 'id');        
     }
    public function comments()
     {

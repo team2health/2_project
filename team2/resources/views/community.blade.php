@@ -27,13 +27,13 @@
                             {{ $item->board_hits }}
                         </div>
                         <div>
-                            댓글 35
+                            댓글 {{ $item->comments->count() }}
                         </div>
                     </div>
                 </div>
             @empty
                 <div>게시글 없음</div>
-             @endforelse
+            @endforelse
         </div>
     </div>    
         

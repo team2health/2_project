@@ -15,10 +15,10 @@
     <div class="last_container">
     @forelse ($data as $item)
         <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="{{ $item->user->user_img }}" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
-                {{ $item->u_id }}
+                {{ optional($item->user)->user_name }}
                 </div>
                 <div>
                 {{ $item->created_at }}
@@ -43,4 +43,4 @@
 
 
 @endsection
-<script src="/js/categoryboard.js"></script>
+<!-- <script src="/js/categoryboard.js"></script> -->

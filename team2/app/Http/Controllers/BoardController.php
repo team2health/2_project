@@ -46,23 +46,26 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        $arrData = [
-            'u_id' => Auth::id(),
-            'category_id' => $request->input('category_id'),
-        ];
+        // $arrData = [
+        //       'u_id' => Auth::id(),
+        //       'category_id' => $request->input('category_id'),
+        //   ];
     
         
-        if ($request->filled('u_title')) {
-            $arrData['board_title'] = $request->input('u_title');
-        }
+        //  if ($request->filled('board_title')) {
+        //      $arrData['board_title'] = $request->input('board_title');
+        //  }
     
-        if ($request->filled('u_content')) {
-            $arrData['board_content'] = $request->input('u_content');
-        } 
+        //  if ($request->filled('board_content')) {
+        //      $arrData['board_content'] = $request->input('board_content');
+        //  }  
+        $u_id = auth()->id();
         
-    
+         $arrData = $request->only('board_title','board_content');
+         $arrData['u_id'] = $u_id;
+         $arrData['category_id'] = $request->input('category_id', 1);
         $result = Board::create($arrData);
-    
+        
         return redirect()->route('categoryboard');
     }
 
@@ -74,13 +77,13 @@ class BoardController extends Controller
      */
     public function show($board_id)
     {
-        $result=Board::with('images')->find($board_id);
-        
+        $result = Board::with(['user', 'images'])->find($board_id);
+        // dd($result);
         $result->board_hits++;
-        $result->timestamps=false;        
+        $result->timestamps = false;        
         $result->save();
 
-        return view('detail')->with('data',$result);
+    return view('detail')->with('data', $result);
     }
 
     /**

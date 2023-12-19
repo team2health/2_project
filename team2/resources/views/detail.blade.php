@@ -35,7 +35,7 @@
             </div>
             <div>                
                 <div>
-                #해시태그
+                {{ $data->hashtag_id }}
                 </div>
             </div>
         </div>

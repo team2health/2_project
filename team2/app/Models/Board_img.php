@@ -12,5 +12,10 @@ class Board_img extends Model
         'board_id', 'img_address'
     ];
 
+    public function board()
+    {
+        return $this->belongsTo(Board::class, 'board_id', 'board_id');
+    }
+
 }
 
