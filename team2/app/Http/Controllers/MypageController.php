@@ -92,7 +92,6 @@ class MypageController extends Controller
             ->orderBy('hashtags.hashtag_id')
             ->get();
     
-    
             return response()->json($hashtag);
         }
     
@@ -115,7 +114,6 @@ class MypageController extends Controller
                 'created_at' => $currentDateTime,
                 'updated_at' => $currentDateTime
             ]);
-            Log::debug("시좍*************************************");
             $hashtaginfo = DB::table('hashtags')
             ->select(
                 'hashtag_id'
@@ -124,10 +122,49 @@ class MypageController extends Controller
             ->where('hashtag_id', $favorite_id)
             ->get();
             Log::debug($hashtaginfo);
+            Log::debug(response()->json($hashtaginfo));
             return response()->json($hashtaginfo);
         }
+
+    public function todaytimelineget(){
+
+        $created_start = Carbon::now()->format('Y-m-d');
+        $user_id = session('id');
+        $today_timeline = DB::table('symptoms')
+        ->select(
+            'symptoms.symptom_id'
+            ,'symptoms.symptom_name'
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%m") as created_at')
+        )
+        ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        ->where('records.u_id', $user_id)
+        ->where('records.created_at', 'like', $created_start.'%')
+        ->get();
+        Log::debug($today_timeline);
+        
+        return view('timeline')->with('data', $today_timeline);
+    }
+
+    public function daytimelinepost(Request $request) {
+log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
+        // $created_at = $request->only('date');
+        // Log::debug($created_at);
+        // $user_id = session('id');
+
+        // $timeline = DB::table('symptoms')
+        // ->select(
+        //     'symptoms.symptom_id'
+        //     ,'symptoms.symptom_name'
+        //     ,DB::raw('DATE_FORMAT(records.created_at, "%H:%m") as created_at')
+        // )
+        // ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        // ->where('records.u_id', $user_id)
+        // ->where('records.created_at', 'like', $created_at.'%')
+        // ->get();
+        // Log::debug($timeline);
+        
+        // return view('timeline')->with('data', $timeline);
+
+    }
     
-        public function myinfomodify() {
-    
-        }
 }

@@ -96,9 +96,10 @@ function favoritehashdelete(data) {
 }
 
 let addallfavoritetagevent = document.getElementById('addallfavoritetag');
-addallfavoritetagevent.addEventListener('click', addallfavoritetag);
+
 
 addallfavoritetagevent.addEventListener('click', function(){
+    addallfavoritetag();
     addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
     let createtagmaindiv = document.getElementById('creaTagMainDiv');
     createtagmaindiv.style.display = 'block';
@@ -106,7 +107,6 @@ addallfavoritetagevent.addEventListener('click', function(){
 
 // 관심 해시태그 목록 불러오기
 function addallfavoritetag() {
-
     let createtagmaindiv = document.createElement('div');
     let createplustag = document.createElement('div');
     createplustag.classList.add('mypage-hashtag');
@@ -177,19 +177,17 @@ function addhashtag(data) {
         method: 'POST',
         body: formData,
     })
-    .then(response => {
-        response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
-        console.log(response.hash_id);
-        console.log(response.hash_name);
+        console.log(data[0]);
+        // console.log(data.hash_id);
+        // console.log(data.hash_name);
         // 즉시 추가
-        deletedfavoritehashtag.id = 'favoriteHashtagId' + response.hash_id;
-        makefavoritespan.id = 'favoritehashtext'+response.hashtag_id;
+        deletedfavoritehashtag.id = 'favoriteHashtagId' + data[0].hashtag_id;
+        makefavoritespan.id = 'favoritehashtext'+data[0].hashtag_id;
         makefavoritespan.setAttribute('value', deletefavoritehashtext );
-        makefavoritespan2.setAttribute('onclick', `favoritehashdelete(${response.hashtag_id})`);
-        makefavoritespan.innerHTML = response.hash_name;
+        makefavoritespan2.setAttribute('onclick', `favoritehashdelete(${data[0].hashtag_id})`);
+        makefavoritespan.innerHTML = data[0].hashtag_name;
         makefavoritespan2.innerHTML = 'x';
     })
     .catch(error => console.log(error));

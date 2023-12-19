@@ -131,7 +131,7 @@
         <div class="mypage-btn-layout">
             <div class="mypage-btn-line">
                 <div class="mypage-btn" onclick="userinforupdate(); return false;">정보수정</div>
-                <a href="{{route('timeline')}}"><div class="mypage-btn">타임라인</div></a>
+                <a href="{{route('todaytimeline.get')}}"><div class="mypage-btn">타임라인</div></a>
             </div>
             <div class="mypage-btn2" onclick="userboardshow(); return false;">나의 게시물</div>
         </div>

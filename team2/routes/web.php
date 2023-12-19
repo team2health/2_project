@@ -22,11 +22,6 @@ Route::get('/mypage', function () {
     return view('mypage');
 })->name('mypage');
 
-Route::get('/timeline', function () {
-    return view('timeline');
-})->name('timeline');
-
-
 Route::get('/lastboard', function () {
     return view('lastboard');
 })->name('lastboard');
@@ -60,11 +55,14 @@ Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 
+// mypage
 Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get');
 Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->name('myhash.post');
 Route::get('/allhashtag', [MypageController::class, 'allhashget'])->name('allhash.post');
 Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost'])->name('allhash.post');
-Route::post('/myinfo', [MypageController::class, 'myinfomodify'])->name('myinfo.post');
+
+Route::get('/timeline', [MypageController::class, 'todaytimelineget'])->name('todaytimeline.get');
+Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name('daytimeline.post');
 
 Route::post('/namechk', [UserController::class, 'namechkpost']);
 Route::post('/idchk', [UserController::class, 'idchkpost']);

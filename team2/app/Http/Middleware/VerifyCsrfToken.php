@@ -22,5 +22,6 @@ class VerifyCsrfToken extends Middleware
         '/comment',
         '/selectaddtag',
         '/idchk',
+        '/daytimeline',
     ];
 }

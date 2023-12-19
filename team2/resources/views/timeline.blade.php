@@ -6,7 +6,7 @@
 @section('main')
 <div class="timelinemain">
     <div class="mypage-first">
-        <div class="calendarBtn" id="calendarBstn" onclick="calendarshow(); return false;">2023</div>
+        <div class="calendarBtn" id="calendarBtn" onclick="calendarshow(); return false;"></div>
         <div class="maincalendar calendarNone" id="calendarOpen">
             <table class="Calendar">
                 <thead>
@@ -43,31 +43,17 @@
 
     <div class="mypage-third">
         <div class="recordsection" id="recordDeleteTest">
+            @forelse ($data as $item)
             <img src="/img/circle.png" class="recordcircleimg" alt="">
             <div class="user-record">
-                <span class="recordtime">3:10</span>
-                <div class="recorddeletebtn" onclick="recorddeletemodalopen(); return false;">X</div>
+                <span class="recordtime">{{$item->created_at}}</span>
+                <div class="recorddeletebtn" onclick="recorddeletemodalopen({{$item->symptom_id}}); return false;">X</div>
                 <br>
-                <span class="recordtext">#인후통</span>
+                <span class="recordtext">{{$item->symptom_name}} </span>
             </div>
-        </div>
-        <div class="recordsection">
-            <img src="/img/circle.png" class="recordcircleimg" alt="">
-            <div class="user-record">
-                <span class="recordtime">3:10</span>
-                <div class="recorddeletebtn" onclick="recorddeletemodalopen(); return false;">X</div>
-                <br>
-                <span class="recordtext">#인후통</span>
-            </div>
-        </div>
-        <div class="recordsection">
-            <img src="/img/circle.png" class="recordcircleimg" alt="">
-            <div class="user-record">
-                <span class="recordtime">3:10</span>
-                <div class="recorddeletebtn" onclick="recorddeletemodalopen(); return false;">X</div>
-                <br>
-                <span class="recordtext">#인후통</span>
-            </div>
+            @empty
+                <div> 오늘은 검색기록이 없어요! </div>
+            @endforelse
         </div>
     </div>
 
