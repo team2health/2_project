@@ -22,7 +22,7 @@ class CommentController extends Controller
             'comment_content' => $request->comment_content,
         ]);
 
-        return redirect()->back();
+        return response()->json(['message' => '댓글이 성공적으로 작성되었습니다.']);
     }
 
     public function edit($id)

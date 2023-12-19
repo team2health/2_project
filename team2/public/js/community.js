@@ -1,23 +1,3 @@
-// const communitySlider = document.querySelector('.slider');
-//     let isCommunityTransitioning = false;
-
-//     function nextCommunitySlide() {
-//         if (!isCommunityTransitioning) {
-//             isCommunityTransitioning = true;
-//             communitySlider.style.transform = 'translateX(0)';
-//             setTimeout(() => {
-//                 communitySlider.appendChild(communitySlider.firstElementChild);
-//                 communitySlider.style.transform = 'translateX(0)';
-//                 isCommunityTransitioning = false;
-//             }, 5000);
-//         }
-//     }
-
-//     setInterval(nextCommunitySlide, 3000);
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     let startSlide = 0;
     let endSlide = 4; // 5개씩 보여주기 위해 endSlide 설정

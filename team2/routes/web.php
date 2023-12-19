@@ -37,6 +37,7 @@ Route::get('/insert', function () {
 Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::get('/getBoardByCategory/{categoryId}', [BoardController::class, 'getBoardByCategory']);
 
 Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  

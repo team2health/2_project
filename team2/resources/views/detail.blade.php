@@ -16,7 +16,7 @@
                 <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
                 <div class="board_nic_text">
                     <div>
-                    {{ $data->user_name }}
+                    {{ optional($data->user)->user_name }}
                     </div>
                     <div>
                         {{$data->created_at}}
@@ -40,13 +40,20 @@
             </div>
         </div>
     </div>
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <p>삭제하시겠습니까?</p>
+            <button id="confirmDelete">확인</button>
+            <button id="cancelDelete">취소</button>
+        </div>
+    </div>
     <div class="detail_bottom_button">
-        <form class="detail_form" action="" method = "POST">
+        <form class="detail_form" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm">
             @csrf
             @method('DELETE')
-            <a href="{{route('categoryboard')}}" class="a_cancel" >목록</a>
-            <a href="{{route('board.edit',['board'=>$data->board_id])}}" class="a_update ">수정</a>
-            <button type="submit" class="d_btn">삭제</button>
+            <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
+            <a href="{{ route('board.edit', ['board' => $data->board_id]) }}" class="a_update">수정</a>
+            <button type="button" id="openModal" class="d_btn">삭제</button>
         </form>
     </div>
     <div class="detail_comment">
@@ -60,7 +67,7 @@
                     <img class="community_icon" src="../img/default_f.png" alt="" class="board_nic_img">
                     <div class="board_nic_text">
                         <div>
-                            <span>{{ optional($comment->user)->user_name }}</span> <!-- optional 함수 사용 -->
+                            {{ optional($comment->user)->user_name }}
                         </div>
                         <div>
                             {{ $comment->created_at }}

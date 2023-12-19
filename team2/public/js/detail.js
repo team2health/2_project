@@ -1,6 +1,22 @@
 const token = "{{ csrf_token() }}";
 
 document.addEventListener('DOMContentLoaded', function () {
+    // 모달 열기
+    document.getElementById('openModal').addEventListener('click', function () {
+        document.getElementById('confirmModal').style.display = 'block';
+    });
+
+    // 모달 닫기
+    document.getElementById('cancelDelete').addEventListener('click', function () {
+        document.getElementById('confirmModal').style.display = 'none';
+    });
+
+    // 확인 버튼 클릭 시 폼 제출 (Soft Delete)
+    document.getElementById('confirmDelete').addEventListener('click', function () {
+        document.getElementById('deleteForm').submit();
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
     // 댓글 개수 업데이트
     function updateCommentCount() {
         // ... (이전 코드와 동일)
@@ -63,10 +79,10 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('서버 응답:', data);
+                console.log('서버 응답:', data);                
                 updateCommentCount(); // 댓글 개수 업데이트
                 // 댓글 추가 후 폼 초기화
-                commentForm.reset();
+                window.location.reload();
             })
             .catch(error => console.error('에러 발생:', error));
         });
@@ -94,5 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     
         commentList.appendChild(newCommentItem);}
+
     
 });

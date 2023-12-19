@@ -24,7 +24,7 @@
 				<!-- <label for="board">카테고리:</label> -->
 				<div class="insert_select_container">
 					<select name="board" id="board" class="insert_select">
-						<option value="">카테고리</option>
+						
 						<option value="1">자유게시판</option>
 						<option value="2">정보 게시판</option>
 						<option value="3">친목 게시판</option>
