@@ -66,3 +66,4 @@ Route::post('/addfavoritehashtag', [UserController::class, 'addfavoritehashtagpo
 Route::post('/myinfo', [UserController::class, 'myinfomodify'])->name('myinfo.post');
 
 Route::post('/namechk', [UserController::class, 'namechkpost']);
+Route::post('/idchk', [UserController::class, 'idchkpost']);

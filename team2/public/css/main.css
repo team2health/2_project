@@ -9,6 +9,16 @@ a {
 	text-decoration: none;
 }
 
+.gohome {
+	font-size: 1.2rem;
+	font-weight: 900;
+	color: #FF9900;
+	background-color: #F8F8F8;
+	border-radius: 15px;
+	padding: 15px;
+	display: inline-block;
+}
+
 .footer {
 	background-color: #FF9900;
 	position: fixed;
@@ -131,6 +141,7 @@ button {
 	background-color: #FAFAFA;
 	border-radius: 10px;
 	line-height: 6vh;
+	cursor: pointer;
 }
 
 .lr-box {
@@ -178,8 +189,9 @@ button {
 	border: none;
 	background: none;
 	cursor: pointer;
-	background-color: #F5F5F5;
-	border: 1px solid #bbbbbb;
+	border: 1px solid #CFCFCF;
+	background-color: #FAFAFA;
+	font-size: 1rem;
 	border-radius: 10px;
 	width: 30%;
 	height: 6vh;

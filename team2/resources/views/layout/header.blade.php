@@ -3,8 +3,8 @@
 	<div class="container">
 		<div class="inmypageheader">
 			<div style="color: rgb(182, 182, 182)" class="div-margin font-small">
-				<div>2023.12.11</div>
-				<div>월요일</div>
+				<div id="time-year"></div>
+				<div id="time-day"></div>
 			</div>
 			@if (request()->url() == 'http://127.0.0.1:8000/mypage')
 			<div style="color: rgb(182, 182, 182)" class="mypagegohome">
@@ -21,15 +21,11 @@
 		<div class="display-flex">
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="div-display-lnlineBlock display-none">
-					<a href="{{route('main.get')}}">
-						<img src="../img/home.png" alt="" class="btn-img">
-					</a>
+					<a href="{{route('main.get')}}" class="gohome">HOME</a>
 				</div>
 			@else
 				<div class="div-display-lnlineBlock div-margin-auto">
-					<a href="{{route('main.get')}}">
-						<img src="../img/home.jpg" alt="" class="img-width">
-					</a>
+					<a href="{{route('main.get')}}" class="gohome">HOME</a>
 				</div>
 			@endif
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
@@ -56,15 +52,11 @@
 		<div class="display-flex">
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="div-display-lnlineBlock display-none">
-					<a href="/">
-						<img src="../img/home.png" alt="" class="btn-img">
-					</a>
+					<a href="{{route('main.get')}}" class="gohome">HOME</a>
 				</div>
 			@else
 				<div class="div-display-lnlineBlock div-margin-auto">
-					<a href="/">
-						<img src="../img/home.png" alt="" class="img-width">
-					</a>
+					<a href="{{route('main.get')}}" class="gohome">HOME</a>
 				</div>
 			@endif
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
@@ -88,11 +80,19 @@
 	@endguest
 
 		@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist'
-		&& request()->url() !== 'http://127.0.0.1:8000/mypage')
+		&& request()->url() !== 'http://127.0.0.1:8000/mypage' && request()->url() !== 'http://127.0.0.1:8000/categoryboard')
 			<div class="container-category display-flex-around div-padding">
 				<a href="{{route('main.get')}}" class="div-display-lnlineBlock main-line-height">증상 검색</a>
 				<a href="{{ route('board.index') }}" class="div-display-lnlineBlock main-line-height">커뮤니티</a>
 				<a href="{{ route('timeline') }}" class="div-display-lnlineBlock main-line-height">타임라인</a>
+			</div>
+		@endif
+		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard')
+			<div class="container-category display-flex-around div-padding">
+				<a href="" class="div-display-lnlineBlock main-line-height">최근 게시글</a>
+				<a href="" class="div-display-lnlineBlock main-line-height">핫게시글</a>
+				<a href="" class="div-display-lnlineBlock main-line-height">관심태그</a>
+				<a href="" class="div-display-lnlineBlock main-line-height">카테고리</a>
 			</div>
 		@endif
 	</div>
