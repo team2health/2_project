@@ -64,6 +64,22 @@ function favoritehashdelete(data) {
 
         let formData = new FormData();
         formData.append('favorite_id', data);
+        // 즉시 추가
+        let deletefavoritehashtext = document.getElementById('favoritehashtext'+data).value;
+        let mypageHashtag = document.getElementById('mypageHashtagOpen');
+        let deletedfavoritehashtag = document.createElement('div')
+        let deletefavoritespan = document.createElement('span');
+        let deletefavoritespan2 = document.createElement('span');
+    
+        deletedfavoritehashtag.id = 'allHashtagtext' + data;
+        deletefavoritespan.id = 'favoritehashtext'+data;
+        deletefavoritespan.setAttribute('value', deletefavoritehashtext );
+        deletefavoritespan2.setAttribute('onclick', `addhashtag(${data})`);
+        deletefavoritespan.innerHTML = `${deletefavoritehashtext}`;
+        deletefavoritespan2.innerHTML = 'x';
+        deletedfavoritehashtag.appendChild(deletefavoritespan);
+        deletedfavoritehashtag.appendChild(deletefavoritespan2);
+        mypageHashtag.appendChild(deletedfavoritehashtag);
         
         fetch('/myhashdelete', {
             method: 'POST',
@@ -88,11 +104,13 @@ addallfavoritetagevent.addEventListener('click', function(){
     createtagmaindiv.style.display = 'block';
 });
 
+// 관심 해시태그 목록 불러오기
 function addallfavoritetag() {
 
     let createtagmaindiv = document.createElement('div');
     let createplustag = document.createElement('div');
     createplustag.classList.add('mypage-hashtag');
+    createplustag.id = 'mypageHashtagOpen'
     let addtagbtndiv = document.createElement('mypage-btn-line');
     let hashplusokbtn = document.createElement('span');
     let hashplusclosebtn = document.createElement('span');
@@ -106,7 +124,6 @@ function addallfavoritetag() {
     fetch('/allhashtag')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
 
         for(let i = 0; i < data.length; i++) {
                 let hashtagdiv = document.createElement('div');
@@ -116,6 +133,8 @@ function addallfavoritetag() {
                 // hashplusbtn.setAttribute("value", data[i].hashtag_id);
                 hashplusbtn.innerHTML = '+';
                 hashplusbtn.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
+                hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
+                hashspan.setAttribute('value', data[i].hashtag_name);
                 hashspan.innerHTML = data[i].hashtag_name;
                 hashtagdiv.appendChild(hashspan);
                 hashtagdiv.appendChild(hashplusbtn);
@@ -135,51 +154,51 @@ function addallfavoritetag() {
 }
 
 
-
+// 관심 해시태그 추가 창 닫기
 function closeoption(){
     let createtagmaindiv = document.getElementById('creaTagMainDiv');
     createtagmaindiv.style.display = 'none';
 }
 
+// 관심 해시태그 추가
 function addhashtag(data) {
-    console.log(data);
     let formData = new FormData();
     formData.append('tag_id', data);
     
-    let deletefavoritehashtext = document.getElementById('favoritehashtext'+data).value;
+    let deletefavoritehashtext = document.getElementById('allHashtagtext'+data).value;
     let allHashtagId = document.getElementById('allHashtagId'+data);
     allHashtagId.remove();
+    let mypageHashtag = document.getElementById('mypageHashtag');
+    let deletedfavoritehashtag = document.createElement('div')
+    let makefavoritespan = document.createElement('span');
+    let makefavoritespan2 = document.createElement('span');
 
     fetch('/addfavoritehashtag', {
         method: 'POST',
         body: formData,
     })
     .then(response => {
-        console.log(response);
         response.json();
     })
     .then(data => {
         console.log(data);
+        console.log(response.hash_id);
+        console.log(response.hash_name);
+        // 즉시 추가
+        deletedfavoritehashtag.id = 'favoriteHashtagId' + response.hash_id;
+        makefavoritespan.id = 'favoritehashtext'+response.hashtag_id;
+        makefavoritespan.setAttribute('value', deletefavoritehashtext );
+        makefavoritespan2.setAttribute('onclick', `favoritehashdelete(${response.hashtag_id})`);
+        makefavoritespan.innerHTML = response.hash_name;
+        makefavoritespan2.innerHTML = 'x';
     })
     .catch(error => console.log(error));
 
-    // 즉시 추가
-    let mypageHashtag = document.getElementById('mypageHashtag');
-    let deletedfavoritehashtag = document.createElement('div')
-    let makefavoritespan = document.createElement('span');
-    let makefavoritespan2 = document.createElement('span');
-
-    deletedfavoritehashtag.id = 'favoriteHashtagId' + data;
-    makefavoritespan.id = 'favoritehashtext'+data;
-    makefavoritespan.innerhtml = deletefavoritehashtext;
-    makefavoritespan.setAttribute('value', deletefavoritehashtext );
-    makefavoritespan2.setAttribute('onclick', `favoritehashdelete(${data})`);
-    makefavoritespan2.innerHTML = 'x';
     deletedfavoritehashtag.appendChild(makefavoritespan);
     deletedfavoritehashtag.appendChild(makefavoritespan2);
     mypageHashtag.appendChild(deletedfavoritehashtag);
+    
 }
 
-// 1. 저장/취소 버튼 구현
-// 관심태그 추가하기 여러번 반복 되도록
-// insert구문 create로 변경
+// 저장 버튼이 구현가능하도록 추가와 db저장을 따로 분리함
+// value값 변경해야함

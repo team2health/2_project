@@ -20,6 +20,7 @@ class VerifyCsrfToken extends Middleware
         '/symptomselect',
         '/useraddress',
         '/comment',
+        '/selectaddtag',
         '/idchk',
     ];
 }
