@@ -202,6 +202,13 @@ function buildCalendar() {
     let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
 
+    // 각 날짜에 id값 세팅
+    let getFullYear = nowMonth.getFullYear();
+    let getFullYearIn = String(getFullYear);
+    let getMonth = nowMonth.getMonth();
+    let getMonthIn = String(getMonth);
+    let inputDateId = getFullYearIn + getMonthIn;
+
     let tbody_Calendar = document.querySelector(".Calendar > tbody");
     document.getElementById("calYear").innerText = nowMonth.getFullYear();             // 연도 숫자 갱신
     document.getElementById("calMonth").innerText = leftPad(nowMonth.getMonth() + 1);  // 월 숫자 갱신
@@ -216,12 +223,18 @@ function buildCalendar() {
         let nowColumn = nowRow.insertCell();        // 열 추가
     }
 
+    let searchDate = 1;
     for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {   // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복  
-
+        
         let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
-
-
         let newDIV = document.createElement("p");
+
+        if(searchDate.length === 1) {
+            let searchDateZero1 = 
+            var searchDateZero = '0' + searchDate;
+        }
+        newDIV.id = inputDateId + searchDateZero;
+        searchDate++;
         newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
         nowColumn.appendChild(newDIV);
 
