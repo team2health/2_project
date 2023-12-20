@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
 use Illuminate\support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\Board;
 use App\Models\Board_img;
+use App\Models\Category;
 
 class BoardController extends Controller
 {
@@ -24,9 +26,14 @@ class BoardController extends Controller
         return view('community')->with('data',$result);
     }
     public function categoryboard(){
+        $category_board=Board::where('category_id', '1')->orderby('board_id', 'desc')->get();
 
-        $result=Board::get();
-        return view('categoryboard')->with('data',$result);
+        $category_id = Category::orderby('category_id', 'asc')->get();
+        $result = [$category_board, $category_id];
+
+        // Log::debug($category_id);
+
+        return view('categoryboard')->with('data', $result);
     }
     /**
      * Show the form for creating a new resource.
@@ -52,9 +59,9 @@ class BoardController extends Controller
         
         $u_id = auth()->id();
         
-         $arrData = $request->only('board_title','board_content');
-         $arrData['u_id'] = $u_id;
-         $arrData['category_id'] = $request->input('category_id', 1);
+        $arrData = $request->only('board_title','board_content');
+        $arrData['u_id'] = $u_id;
+        $arrData['category_id'] = $request->input('category_id', 1);
         $result = Board::create($arrData);
         $image = new Board_img(['img_address' => $path]);
         $result->images()->save($image);
@@ -123,9 +130,18 @@ class BoardController extends Controller
         Board::destroy($board_id);
         return redirect()-> route('categoryboard');
     }
-    public function getBoardByCategory($categoryId)
-    {
-        $result = Board::where('category_id', $categoryId)->get();
-        return response()->json($result);
+
+    public function boardcategoryget($categoryId) {
+        // Log::debug($categoryId);
+        $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->get();
+
+        $category_id = Category::orderby('category_id', 'asc')->get();
+
+        // Log::debug($result);
+        // Log::debug($category_id);
+        $result = [$category_board, $category_id];
+
+        return view('categoryboard')->with('data', $result);
     }
 }
+

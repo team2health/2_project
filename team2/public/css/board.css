@@ -18,6 +18,12 @@
     border-radius: 5px;
     
 }
+.last_container2 {
+    margin: 10px;
+    border: 3px solid rgba(128, 128, 128, 0.369);
+    border-radius: 5px;
+}
+
 .last_user{
     display: grid;
     flex-wrap: nowrap;
@@ -430,7 +436,7 @@ li{
     right: 0.1px;
 } 
 
- .dropdown-content a {
+ .dropdown-content div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -444,6 +450,7 @@ li{
 .show {
     display: block;
 }
+
 
 .modal {
     display: none;
@@ -525,10 +532,10 @@ li{
 
 @media only screen and (max-width: 1000px) {
     .slider-container {
-        width: 85vw;        
+        width: 80vw;        
     }
     .favorite_slider-container{
-        width: 85vw;
+        width: 80vw;
     }   
     .community_tag_container{
         width: 100vw;
@@ -538,24 +545,27 @@ li{
         min-width: 40%;        
     } 
     .insert_container {
-        width: 85vw;        
+        width: 70vw;        
     }
     .insert_hidden_container{
-        width: 85vw;
+        width: 80vw;
     }
     .insert_main{
-        width: 85vw;
+        width: 80vw;
     }
     .detail_form{
-        width:85vw;
+        width:70vw;
     }
     .detail_container {
-        width: 85vw;
+        width: 80vw;
     }
     .last_container {
+        width: 80vw;
+    }
+    .last_container2 {
         width: 85vw;
     }
     .last_main{
-        width: 90vw;
+        width: 85vw;
     }
 }
