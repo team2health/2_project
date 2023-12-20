@@ -3,7 +3,7 @@ now.getFullYear();
 let year = now.getFullYear();
 now.getMonth() + 1;
 let month = now.getMonth() + 1;
-console.log(year);
+// console.log(year);
 now.getDate();
 let date = now.getDate();
 now.getDay();

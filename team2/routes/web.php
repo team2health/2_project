@@ -32,7 +32,8 @@ Route::get('/insert', function () {
 
 Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments');
-Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
+Route::get('/getBoardByCategory/{categoryId}', [BoardController::class, 'getBoardByCategory']);
 
 Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  
@@ -60,6 +61,10 @@ Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get'
 Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->name('myhash.post');
 Route::get('/allhashtag', [MypageController::class, 'allhashget'])->name('allhash.post');
 Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost'])->name('allhash.post');
+
+Route::post('/namechange', [MypageController::class, 'namechangepost']);
+Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);
+Route::post('/userimgremove', [MypageController::class, 'userimgremovepost']);
 
 Route::get('/timeline', [MypageController::class, 'todaytimelineget'])->name('todaytimeline.get');
 Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name('daytimeline.post');

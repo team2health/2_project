@@ -20,9 +20,7 @@ a {
 }
 
 .footer {
-	background-color: #FF9900;
-	position: fixed;
-	bottom: 0;
+	background-color: #dedede;
 	height: 50px;
 	width: 100vw;
 	text-align: center;

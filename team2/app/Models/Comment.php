@@ -15,9 +15,9 @@ class Comment extends Model
 	// const UPDATED_AT = null; //and updated by default null set
     protected $fillable = ['u_id', 'board_id', 'comment_id', 'comment_content'];
 
-    public function usersid()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'u_id')->withDefault();
+        return $this->belongsTo(User::class, 'u_id','id')->withDefault();
     }
     public function board()
     {

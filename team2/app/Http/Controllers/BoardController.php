@@ -123,7 +123,12 @@ class BoardController extends Controller
      */
     public function destroy($board_id)
     {
-        // Board::destroy($board_id);
-        // return redirect()-> route('categoryboard');
+        Board::destroy($board_id);
+        return redirect()-> route('categoryboard');
+    }
+    public function getBoardByCategory($categoryId)
+    {
+        $result = Board::where('category_id', $categoryId)->get();
+        return response()->json($result);
     }
 }

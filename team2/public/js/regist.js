@@ -57,7 +57,8 @@ let idchkflg = 0;
 let ERRORNAME = document.getElementById('error_name');
 let ERRORID = document.getElementById('error_id');
 let ERRORPASSWORDCHECK = document.getElementById('error_password_check');
-let regex = /^[가-힣a-zA-Z0-9]+$/;
+let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
+let regex2 = /^[가-힣a-zA-Z0-9]{4,}$/;
 
 USERNAME.addEventListener('input', function() {
     const value = USERNAME.value;
@@ -72,7 +73,7 @@ USERNAME.addEventListener('input', function() {
 USERID.addEventListener('input', function() {
     const value = USERID.value;
 
-    if (!regex.test(value)) {
+    if (!regex2.test(value)) {
         ERRORID.removeAttribute('class');
     } else {
 		ERRORID.setAttribute('class', 'not-error-id');
@@ -130,7 +131,7 @@ function registgo() {
 	} else if(idchkflg === 0) {
 		alert('아이디 중복확인을 해주세요.');
 		return false;
-	} else if(!regex.test(USERIDVALUE)) {
+	} else if(!regex2.test(USERIDVALUE)) {
 		alert('아이디를 다시 확인해주세요.');
 		return false;
 	} else if(USERPASSWORDVALUE === '') {

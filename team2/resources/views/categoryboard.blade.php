@@ -5,15 +5,24 @@
 @section('main')
 <main class="last_main">
 <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
-        <a href="{{route('insert')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
+        <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>자유게시판</h2>
-        <button type="submit" class="cate_btn">
-            정렬
-        </button>
+        <div class="dropdown">
+            <button class="cate_btn" onclick="toggleDropdown()">정렬</button>
+            <div class="dropdown-content" id="myDropdown">
+                
+                <a href="#">자유 게시판</a>
+                <a href="#">정보 게시판</a>
+                <a href="#">질문 게시판</a>
+                <a href="#">친목 게시판</a>
+            </div>
+        </div>
     </div>
+
+    
+    @foreach ($data as $item)
     <div class="last_container">
-    @forelse ($data as $item)
         <div class="last_user">
             <img class="community_icon"  src="{{ $item->user->user_img }}" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
@@ -34,13 +43,12 @@
             </a>                   
         </div>  
     </div>
-    @empty
-    <div>게시글 없음</div>
-    @endforelse            
+   
+    @endforeach            
     
     
 </main>
 
 
 @endsection
-<!-- <script src="/js/categoryboard.js"></script> -->
+<script src="/js/categoryboard.js"></script>
