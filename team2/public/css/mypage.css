@@ -228,6 +228,11 @@ td {
     font-weight: 600;
     margin-left: 40px;
 }
+.none-recordtext {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-size: 1.5rem;
+}
 .recordtime {
     margin-left: 40px;
     font-size: 1.0rem;
@@ -540,6 +545,12 @@ td {
 .user-info-modify input:focus {
     background-color: #FFF8DC;
 }
+.user-now-address {
+    border: 1px solid #c8c8c8;
+    padding: 10px;
+    background-color: #fff;
+    color: #ababab;
+}
 /* 박스 모달 */
 .UserboardModal {
     position: fixed;
@@ -664,6 +675,7 @@ display:none;
 .mypage-hashtag > div > span {
     cursor: pointer;
 }
+
 /* 마이페이지 미디어쿼리 */
 @media screen and (min-width: 700px) {
     .UserboardModal {

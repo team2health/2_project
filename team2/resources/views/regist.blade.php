@@ -7,7 +7,7 @@
 	<div class="regist-container">
 		<form action="{{ route('regist.post') }}" method="POST" id="regist_form">
 			@csrf
-			<p style="width: 60px;" class="ptag">닉네임</p><span id="error_name" class="not-error-name">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
+			<p style="width: 60px;" class="ptag">닉네임</p><span id="error_name" class="not-error-name">한글, 영문, 숫자로 2글자 이상 입력해주세요</span>
 			<input type="text" class="login-input-short" name="user_name" id="user_name">
 			<div class="input-check" onclick="checkName(); return false;">닉네임 확인</div>
 			<br>
@@ -34,6 +34,7 @@
 				<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="adress-long" name="user_adress_s">
 				<input type="hidden" name="user_address" id="adress-fullname">
 			</div>
+			<br>
 
 			<p>성별</p>
 			<div class="gender-box">

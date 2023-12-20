@@ -35,7 +35,7 @@ function weekendShow() {
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
 
     let thismonth = today.getFullYear(); // 올해 날짜 가져옴
-    let thismonthday = today.getMonth(); // 이번달
+    let thismonthday = today.getMonth()+1; // 이번달
     let thismonthtoday = today.getDate();
     let iddate = thismonth + '-' + thismonthday + '-';
 
@@ -104,10 +104,22 @@ function selectDate(data) {
         method: 'POST',
         body: formData,
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log(response);
+        return response.json();
+    })
     .then(data => {
-        console.log(data)})
+        console.log(data);
+        // if(data) {
+        //     let recordCircleImg = getElementById('recordCircleImg');
+        //     recordCircleImg.remove();
+        //     let userRecord = getElementById('userRecord');
+        //     userRecord.remove();
+        // }
+    })
     .catch(error => console.log(error));
+    
+
 }
 
 // 스크롤 이동 javascript

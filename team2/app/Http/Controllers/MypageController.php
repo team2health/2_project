@@ -59,18 +59,21 @@ class MypageController extends Controller
                     )
                     ->where('id', $result)
                     ->get();
+
+                    // Log::debug("유저", ['name' => $user_info]);
+                    
     
-                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag);
+                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
             } else {
                 return view('login');
             }
         }
     
     
-        public function allhashget(){
-    
+        public function allhashget(Request $request){
+
+            Log::debug("allhashget", $request->all());
             $result = session('id');
-    
             $user_hashtag = DB::table('favorite_tags')
             ->select(
             'favorite_tags.hashtag_id'
@@ -80,21 +83,23 @@ class MypageController extends Controller
             ->where('favorite_tags.deleted_at', null)
             ->orderBy('hashtags.hashtag_id')
             ->get();
-    
             foreach ($user_hashtag as $key => $value) {
-                $result2[] = $value->hashtag_id;;
+                $result2[] = $value->hashtag_id;
             }
     
             $hashtag  = DB::table('hashtags')
             ->select(
                 'hashtags.hashtag_id'
                 ,'hashtags.hashtag_name'
-            )
-            ->whereNotIn('hashtags.hashtag_id', $result2)
-            ->orderBy('hashtags.hashtag_id')
-            ->get();
-    
-            return response()->json($hashtag);
+            );
+            
+            if( isset($result2)) {
+                $hashtag->whereNotIn('hashtags.hashtag_id', $result2);
+            }
+            $hashtag->orderBy('hashtags.hashtag_id');
+            $allhashtag = $hashtag->get();
+            Log::debug($allhashtag);
+            return response()->json($allhashtag);
         }
     
         public function myhashdeletepost(Request $request) {
@@ -136,7 +141,7 @@ class MypageController extends Controller
         ->select(
             'symptoms.symptom_id'
             ,'symptoms.symptom_name'
-            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%m") as created_at')
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
         )
         ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
         ->where('records.u_id', $user_id)
@@ -148,24 +153,25 @@ class MypageController extends Controller
     }
 
     public function daytimelinepost(Request $request) {
-log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
-        // $created_at = $request->only('date');
-        // Log::debug($created_at);
-        // $user_id = session('id');
+    log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
+        $created_at = $request->date;
+        Log::debug($created_at);
+        $user_id = session('id');
 
-        // $timeline = DB::table('symptoms')
-        // ->select(
-        //     'symptoms.symptom_id'
-        //     ,'symptoms.symptom_name'
-        //     ,DB::raw('DATE_FORMAT(records.created_at, "%H:%m") as created_at')
-        // )
-        // ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
-        // ->where('records.u_id', $user_id)
-        // ->where('records.created_at', 'like', $created_at.'%')
-        // ->get();
-        // Log::debug($timeline);
+        $timeline = DB::table('symptoms')
+        ->select(
+            'symptoms.symptom_id'
+            ,'symptoms.symptom_name'
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+        )
+        ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        ->where('records.u_id', $user_id)
+        ->where('records.created_at', 'like', $created_at.'%')
+        ->get();
         
-        // return view('timeline')->with('data', $timeline);
+        Log::debug($timeline);
+
+        return view('timeline')->with('data', $timeline);
 
     }
     
@@ -192,18 +198,24 @@ log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
         }
 
         public function userinfoupdatepost(Request $request) {
-            Log::debug("111111", $request->all());
+            // Log::debug("111111", $request->all());
 
             // 사용자 ID 가져오기
             $result = session('id');
 
+            $imgFlg = $request->imgFlg;
+            // Log::debug("efeeee", ['img' => $imgFlg]);
+
             $userinfo = User::find($result);
 
-            if($request->user_img) {
+            if($imgFlg == 1) {
                 $imgName = Str::uuid().'.'.$request->user_img->extension();
                 $request->user_img->move(public_path('user_img'), $imgName);
                 $userinfo->user_img = $imgName;
+            } else if($imgFlg == 2) {
+                $userinfo->user_img = '../img/default_f.png';
             }
+            
             if($request->user_name) {
                 $userinfo->user_name = $request->user_name;
             }
@@ -240,11 +252,22 @@ log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
                 ->orderBy('favorite_tags.created_at')
                 ->get();
 
-            $user_info = User::find($result);
+            $user_info  = DB::table('users')
+                ->select(
+                    'id'
+                    ,'user_id'
+                    ,'user_name'
+                    ,'user_address'
+                    ,'user_img'
+                )
+                ->where('id', $result)
+                ->get();
                 
             // Log::debug("이름", ['name' => $user_info]);
-            session(['user_name' => $user_info->user_name]);
+            session(['user_name' => $user_info[0]->user_name,
+                    'user_img' => $user_info[0]->user_img]);
+            // Log::debug("유저", ['name' => $user_info]);
 
-            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag);
+            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
         }
 }

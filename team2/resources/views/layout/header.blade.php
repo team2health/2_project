@@ -6,13 +6,11 @@
 				<div id="time-year"></div>
 				<div id="time-day"></div>
 			</div>
-			@if (request()->url() == 'http://127.0.0.1:8000/mypage')
 			<div style="color: rgb(182, 182, 182)" class="mypagegohome">
 				<a href="{{route('main.get')}}">
-				<img src="/img/home.png" alt="" width="50px;" style="margin-right: 20px;">
-			</a>
+				<span class="gohome header-margin-top">HOME</span>
+				</a>
 			</div>
-			@endif
 		</div>
 	@else
 	<div class="mini-container">
@@ -30,7 +28,7 @@
 			@endif
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="display-flex-center">
-					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="../img/default_f.png" alt="" class="btn-img b-radius"></div>
+					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="../user_img/{{ session('user_img') }}" alt="" class="btn-img b-radius"></div>
 					<div class="div-display-lnlineBlock">
 						<a href="/mypage"><span class="font-weight font-color">{{ session('user_name') }}</span>님 안녕하세요</a>
 						@if (request()->url() !== 'http://127.0.0.1:8000/mypage')

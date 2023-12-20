@@ -21,13 +21,10 @@ a {
 
 .footer {
 	background-color: #dedede;
-	position: fixed;
-	bottom: 0;
 	height: 50px;
 	width: 100vw;
 	text-align: center;
 	line-height: 50px;
-	z-index: -9999999;
 }
 
 button {
@@ -125,13 +122,13 @@ button {
 .login-input {
 	width: 90%;
 	height: 6vh;
-	margin-top: 10px;
+	margin: 3px 0 10px 0;
 }
 
 .login-input-short {
 	width: 60%;
 	height: 6vh;
-	margin-top: 10px;
+	margin: 3px 0 10px 0;
 }
 
 .input-check {
@@ -199,6 +196,10 @@ button {
 	margin-top: 10px;
 }
 
+.header-margin-top {
+	margin-top: 10px;
+}
+
 .adress-box {
 	margin: 10px 0;
 }
@@ -211,10 +212,6 @@ button {
 	width: 90%;
 	height: 6vh;
 	margin-top: 10px;
-}
-
-.gender-box {
-	position: relative;
 }
 
 .regist-button {
