@@ -451,6 +451,7 @@ li{
     display: block;
 }
 
+
 .modal {
     display: none;
     position: fixed;
@@ -531,10 +532,10 @@ li{
 
 @media only screen and (max-width: 1000px) {
     .slider-container {
-        width: 85vw;        
+        width: 80vw;        
     }
     .favorite_slider-container{
-        width: 85vw;
+        width: 80vw;
     }   
     .community_tag_container{
         width: 100vw;
@@ -544,27 +545,27 @@ li{
         min-width: 40%;        
     } 
     .insert_container {
-        width: 85vw;        
+        width: 70vw;        
     }
     .insert_hidden_container{
-        width: 85vw;
+        width: 80vw;
     }
     .insert_main{
-        width: 85vw;
+        width: 80vw;
     }
     .detail_form{
-        width:85vw;
+        width:70vw;
     }
     .detail_container {
-        width: 85vw;
+        width: 80vw;
     }
     .last_container {
-        width: 85vw;
+        width: 80vw;
     }
     .last_container2 {
         width: 85vw;
     }
     .last_main{
-        width: 90vw;
+        width: 85vw;
     }
 }
