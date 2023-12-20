@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div> 
-        <div>
+        <div style="width: 300px; margin-left: 10px;">
             {{ $item->board_title }}
         </div> 
         <div class="last_content">
