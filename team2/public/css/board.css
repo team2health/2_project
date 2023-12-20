@@ -44,7 +44,7 @@ textarea{
     resize: none;
     padding: 20px;
 }
-#comment{
+#comment,#comment_content{
     width: 89%;  
     height: 50px;  
 }
@@ -444,10 +444,10 @@ li{
 }
 @media only screen and (max-width: 1000px) {
     .slider-container {
-        width: 80vw;        
+        width: 85vw;        
     }
     .favorite_slider-container{
-        width: 80vw;
+        width: 85vw;
     }   
     .community_tag_container{
         width: 100vw;
@@ -457,22 +457,25 @@ li{
         min-width: 40%;        
     } 
     .insert_container {
-        width: 70vw;        
+        width: 85vw;        
     }
     .insert_hidden_container{
-        width: 80vw;
+        width: 85vw;
     }
     .insert_main{
-        width: 80vw;
+        width: 85vw;
     }
     .detail_form{
-        width:70vw;
+        width:85vw;
     }
     .detail_container {
-        width: 80vw;
+        width: 85vw;
     }
     .last_container {
-        width: 80vw;
+        width: 85vw;
+    }
+    .last_main{
+        width: 85vw;
     }
 }
 .modal {

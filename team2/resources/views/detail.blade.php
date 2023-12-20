@@ -9,9 +9,6 @@
 	
 	<div class="detail_container">		
         <div class="detail_hidden_container">
-            <div>           
-                <p>{{ $data->board_title }}</p>
-            </div>         
             <div class="last_user">
                 <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
                 <div class="board_nic_text">
@@ -23,11 +20,13 @@
                     </div>
                 </div>
             </div> 
+            <div>           
+                <p>{{ $data->board_title }}</p>
+            </div>         
             <div class="detail_content">
             @foreach($data->images as $image)
-                <img src="{{ $image->img_address }}" alt="Board Image">
-            
-            @endforeach
+            <img src="{{ asset('storage/img/' . $image->img_address) }}" alt="Board Image">
+            @endforeach           
                 <br>
                 <div>
                 {{ $data->board_content }}
@@ -40,23 +39,23 @@
             </div>
         </div>
     </div>
-    <div id="confirmModal" class="modal">
+    <!-- <div id="confirmModal" class="modal">
         <div class="modal-content">
             <p>삭제하시겠습니까?</p>
             <button id="confirmDelete">확인</button>
             <button id="cancelDelete">취소</button>
         </div>
-    </div>
+    </div> -->
     <div class="detail_bottom_button">
-        <form class="detail_form" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm">
+        <form class="detail_form" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
             @csrf
             @method('DELETE')
             <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
             <a href="{{ route('board.edit', ['board' => $data->board_id]) }}" class="a_update">수정</a>
-            <button type="button" id="openModal" class="d_btn">삭제</button>
+            <button type="submit" class="d_btn">삭제</button>            
         </form>
     </div>
-    <input type="hidden" id="commentIdToDelete" name="comment_id" value="">
+   
     <div class="detail_comment">
         <div class="comment_bottom">
         <p>댓글{{ count($data->comments ?? []) }}개</p>
@@ -78,19 +77,14 @@
                 <div>
                     <p>{{ $comment->comment_content }}</p>
                 </div>
-                <span class="commentDeleteBtn" data-comment-id="{{ $comment->id }}">x</span>
+                <form method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="delete-comment-btn">댓글 삭제</button>
+                </form>
             </li>
         @endforeach
-        </ul>
-        
-        <div id="confirmCommentDeleteModal" class="modal">
-            <div class="modal-content">
-                <p>삭제하시겠습니까?</p>
-                <button id="confirmDelete">확인</button>
-                <button id="cancelDelete">취소</button>
-            </div>
-        </div>
-            
+        </ul>           
         <div class="detail_comment_insert">
         <form action="{{ route('comments', ['boardId' => $data->board_id]) }}" method="post" id="commentForm">
             @csrf

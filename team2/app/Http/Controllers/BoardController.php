@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\support\facades\Auth;
-use Illuminate\support\facades\DB;
+use Illuminate\support\Facades\Auth;
+use Illuminate\support\Facades\DB;
 use App\Models\Board;
 
 
@@ -59,6 +59,8 @@ class BoardController extends Controller
         //  if ($request->filled('board_content')) {
         //      $arrData['board_content'] = $request->input('board_content');
         //  }  
+        $path = $request->file('file')->store('public');
+        
         $u_id = auth()->id();
         
          $arrData = $request->only('board_title','board_content');
@@ -66,7 +68,11 @@ class BoardController extends Controller
          $arrData['category_id'] = $request->input('category_id', 1);
         $result = Board::create($arrData);
         
+        
         return redirect()->route('categoryboard');
+    }
+    public function upload(Request $request){
+        $request->file->store('public');
     }
 
     /**

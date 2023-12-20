@@ -15,6 +15,7 @@ class Board extends Model
         ,'board_content'
         ,'u_id'
         ,'category_id'
+        ,'img_address'
         
     ];
     use SoftDeletes;
