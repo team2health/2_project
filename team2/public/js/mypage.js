@@ -172,19 +172,19 @@ function addallfavoritetag() {
     .then(data => {
 
         for(let i = 0; i < data.length; i++) {
-                let hashtagdiv = document.createElement('div');
-                let hashspan = document.createElement('span');
-                let hashplusbtn = document.createElement('span');
-                hashtagdiv.id = 'allHashtagId'+data[i].hashtag_id;
-                // hashplusbtn.setAttribute("value", data[i].hashtag_id);
-                hashplusbtn.innerHTML = '+';
-                hashplusbtn.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
-                hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
-                hashspan.setAttribute('value', data[i].hashtag_name);
-                hashspan.innerHTML = data[i].hashtag_name;
-                hashtagdiv.appendChild(hashspan);
-                hashtagdiv.appendChild(hashplusbtn);
-                createplustag.appendChild(hashtagdiv);
+            let hashtagdiv = document.createElement('div');
+            let hashspan = document.createElement('span');
+            let hashplusbtn = document.createElement('span');
+            hashtagdiv.id = 'allHashtagId'+data[i].hashtag_id;
+            // hashplusbtn.setAttribute("value", data[i].hashtag_id);
+            hashplusbtn.innerHTML = '+';
+            hashplusbtn.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
+            hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
+            hashspan.setAttribute('value', data[i].hashtag_name);
+            hashspan.innerHTML = data[i].hashtag_name;
+            hashtagdiv.appendChild(hashspan);
+            hashtagdiv.appendChild(hashplusbtn);
+            createplustag.appendChild(hashtagdiv);
 
         }
         mypageTagTitle.appendChild(createtagmaindiv);

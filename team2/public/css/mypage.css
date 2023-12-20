@@ -157,6 +157,11 @@ td {
 .datebar > span {
     margin: 5px 0;
 }
+.datebardayselect {
+    background-color: rgba(248, 207, 124, 0.3);
+    color: #f18900;
+    font-weight: 900;
+}
 .datebartoday {
     background-color: rgba(255, 201, 120, 0.5);
     color: #f15500;
@@ -196,6 +201,9 @@ td {
 }
 
 /*  유저 검색기록 */
+.notice-no-data {
+    display: none;
+}
 .mypage-third {
     margin-bottom: 100px;
 }
@@ -220,7 +228,7 @@ td {
     padding-top: 20px;
     position: relative;
 }
-.recordcircleimg {
+.record-circle-img {
     width: 20px;
 }
 .recordtext {
@@ -233,12 +241,12 @@ td {
     grid-column-end: 3;
     font-size: 1.5rem;
 }
-.recordtime {
+.record-time {
     margin-left: 40px;
     font-size: 1.0rem;
     color: #9A9A9A;
 }
-.recorddeletebtn {
+.record-delete-btn {
     font-size: 2rem;
     position: absolute;
     right: 20px;
@@ -685,6 +693,13 @@ display:none;
         display: none;
     }
 }
+@media screen and (max-width: 800px) {
+    .maincalendar {
+        left: 0%;
+        width: 380px;
+    }
+}
+
 @media screen and (max-width: 1100px) {
     .mypage-grid, .mypagegohome {
         display: block;
