@@ -26,15 +26,15 @@
                         </div>
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
-                                <div class="mypage-bord-title">{{$item->board_title}}</div>
-                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                                <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                                <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
                             </div>
                         </a>
                         @else
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
-                                <div class="mypage-bord-title">{{$item->board_title}}</div>
-                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                                <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                                <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
                             </div>
                         </a>
                         @endif
@@ -44,8 +44,8 @@
                     </div>
                     <a href="{{route('board.show', ['board' => $item->board_id])}}">
                         <div class="mypage-boardbox">
-                            <div class="mypage-bord-title">{{$item->board_title}}</div>
-                            <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
+                            <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                            <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
                         </div>
                     </a>
                     @endif
@@ -149,7 +149,7 @@
             <div class="mypage-hashtag" id="mypageHashtag">
             @forelse ($user_hashtag as $item)
                 <div id="favoriteHashtagId{{$item->favorite_tag_id}}">
-                    <span id="favoritehashtext{{$item->favorite_tag_id}}" value="{{$item->hashtag_name}}">{{$item->hashtag_name}}</span>
+                    <span id="favoritehashtext{{$item->favorite_tag_id}}" value="{{$item->favorite_tag_id}}">{{$item->hashtag_name}}</span>
                     <span onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">x</span>
                 </div>
             @empty

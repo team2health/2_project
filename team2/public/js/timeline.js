@@ -205,7 +205,7 @@ function buildCalendar() {
     // 각 날짜에 id값 세팅
     let getFullYear = nowMonth.getFullYear();
     let getFullYearIn = String(getFullYear);
-    let getMonth = nowMonth.getMonth();
+    let getMonth = nowMonth.getMonth()+1;
     let getMonthIn = String(getMonth);
     let inputDateId = getFullYearIn + getMonthIn;
 
@@ -228,14 +228,17 @@ function buildCalendar() {
         
         let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
         let newDIV = document.createElement("p");
-
-        if(searchDate.length === 1) {
-            let searchDateZero1 = 
-            var searchDateZero = '0' + searchDate;
+        
+        if(searchDate < 10) {
+            var searchDateZero = "0" + searchDate;
+            newDIV.id = inputDateId + searchDateZero;
+        } else {
+            newDIV.id = inputDateId + searchDate;
         }
-        newDIV.id = inputDateId + searchDateZero;
+        let newDivId = newDIV.id;
         searchDate++;
         newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
+        newDIV.onclick = function () { newCalendarReloard(newDivId); };
         nowColumn.appendChild(newDIV);
 
         if (nowDay.getDay() == 6) {                 // 토요일인 경우
@@ -253,6 +256,11 @@ function buildCalendar() {
             newDIV.className = "futureDay";
             newDIV.onclick = function () { choiceDate(this); }
         }
+    }
+
+    // 달력 날짜 선택하면 실행되는 함수
+    function newCalendarReloard(data) {
+        console.log(data);
     }
 }
 
@@ -284,13 +292,14 @@ function leftPad(value) {
     return value;
 }
 
+// 날짜 선택
+// 달력 닫히고
+// 그 달에 따른 1일부터 마지막 날짜까지 블럭 출력
+// 선택한 날짜에 hover
+// 그 날짜에 해당되는 검색기록 불러옴
 
 // 달력 날짜를 선택하면 한 달을 새로 불러오는 함수
 function newMonthblock(data) {
     
-    // 날짜 선택
-    // 달력 닫히고
-    // 그 달에 따른 1일부터 마지막 날짜까지 블럭 출력
-    // 선택한 날짜에 hover
-    // 그 날짜에 해당되는 검색기록 불러옴
+    
 }
