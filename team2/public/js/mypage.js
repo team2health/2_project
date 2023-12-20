@@ -246,22 +246,29 @@ function addhashtag(data) {
 // 저장 버튼이 구현가능하도록 추가와 db저장을 따로 분리함
 // value값 변경해야함
 
+let nameChk = document.getElementById('usermodifyname');
 let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
 let imgFlg = 0;
+let nameflg = 0;
+let nameinput = 0;
+let namechkflg = 0;
+
+nameChk.addEventListener('input', function() {
+    nameinput = 1;
+    // console.log('텍스트 값이 변경됨. nameflg 값:', namechkflg);
+});
 
 function nameChange() {
-	let nameChk = document.getElementById('usermodifyname').value;
-
-	if(nameChk === '') {
+	if(nameChk.value === '') {
 		alert('닉네임을 입력해주세요');
 		return false;
-	} else if(!regex.test(nameChk)) {
+	} else if(!regex.test(nameChk.value)) {
         alert('닉네임을 다시 확인해주세요.');
         return false;
     }
 
 	const formData = new FormData();
-	formData.append('user_name', nameChk);
+	formData.append('user_name', nameChk.value);
 	// console.log(nameChk);
 	// console.log(formData.get('username'));
 	fetch('/namechange', {
@@ -272,19 +279,23 @@ function nameChange() {
 	.then(data => {
 		if(data['namechange'] === '0') {
 			alert('사용가능한 닉네임 입니다.');
+            nameflg = 0;
 		} else if(data['namechange'] === '1') {
 			alert('이미 존재하는 닉네임 입니다.');
+            nameflg = 1;
 		}
 	})
 	.catch(error => {
 		console.error('오류 발생:', error);
 	})
+    namechkflg = 1;
 }
 
 let fileInput = document.getElementById('profilephoto');
+let userImgUrl = document.getElementById('user-img-url');
 
 fileInput.addEventListener('change', function() {
-    let userImgUrl = document.getElementById('user-img-url');
+    userImgUrl.innerHTML = '';
     userImgUrl.innerHTML = fileInput.files[0].name;
     // console.log(fileInput.files[0].name);
     if (fileInput.files.length > 0) {
@@ -294,9 +305,22 @@ fileInput.addEventListener('change', function() {
 
 function userimgremove() {
     imgFlg = 2;
+    userImgUrl.innerHTML = '';
+    userImgUrl.innerHTML = '사진이 삭제되었습니다.';
 }
 
 function userinfoupdate() {
+    if(nameinput === 1) {
+        if(namechkflg === 0) {
+            alert('닉네임 중복체크를 해주세요.');
+            return false;
+        }
+        if(nameflg === 1) {
+            alert('사용 중인 아이디입니다.\n아이디를 다시 입력해주세요.');
+            return false;
+        }
+    }
+
     let USERADRESSFVALUE = document.getElementById('sample4_roadAddress').value;
 	let USERADRESSSVALUE = document.getElementById('sample4_detailAddress').value;
     let IMGFLG = document.getElementById('imgflg');

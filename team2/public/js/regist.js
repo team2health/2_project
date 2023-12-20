@@ -53,6 +53,8 @@ let USERPASSWORDCHECK = document.getElementById('user_password_check');
 // let USERADRESSS = document.getElementById('sample4_detailAddress');
 let namechkflg = 0;
 let idchkflg = 0;
+let nameFlg = 0;
+let idFlg = 0;
 
 let ERRORNAME = document.getElementById('error_name');
 let ERRORID = document.getElementById('error_id');
@@ -125,7 +127,10 @@ function registgo() {
 	} else if(!regex.test(USERNAMEVALUE)) {
 		alert('닉네임을 다시 확인해주세요.');
 		return false;
-	} else if(USERIDVALUE === '') {
+	} else if(nameflg === 1) {
+        alert('사용 중인 닉네임입니다.\n닉네임을 다시 입력해주세요.');
+        return false;
+    } else if(USERIDVALUE === '') {
 		alert('아이디는 필수사항입니다.');
 		return false;
 	} else if(idchkflg === 0) {
@@ -134,7 +139,10 @@ function registgo() {
 	} else if(!regex2.test(USERIDVALUE)) {
 		alert('아이디를 다시 확인해주세요.');
 		return false;
-	} else if(USERPASSWORDVALUE === '') {
+	}  else if(idflg === 1) {
+        alert('사용 중인 아이디입니다.\n아이디를 다시 입력해주세요.');
+        return false;
+    } else if(USERPASSWORDVALUE === '') {
 		alert('비밀번호는 필수사항입니다.');
 		return false;
 	} else if(USERPASSWORDCHECKVALUE === '') {
@@ -177,8 +185,10 @@ function checkName() {
 	.then(data => {
 		if(data['nameChk'] === '0') {
 			alert('사용가능한 닉네임 입니다.');
+			nameFlg = 0;
 		} else if(data['nameChk'] === '1') {
 			alert('이미 존재하는 닉네임 입니다.');
+			nameFlg = 1;
 		}
 	})
 	.catch(error => {
@@ -208,8 +218,10 @@ function checkId() {
 	.then(data => {
 		if(data['idChk'] === '0') {
 			alert('사용가능한 아이디 입니다.');
+			idFlg = 0;
 		} else if(data['idChk'] === '1') {
 			alert('이미 존재하는 아이디 입니다.');
+			idFlg = 1;
 		}
 	})
 	.catch(error => {
