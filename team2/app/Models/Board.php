@@ -16,8 +16,11 @@ class Board extends Model
         ,'u_id'
         ,'category_id'
         ,'img_address'
+        ,'updated_at'
+        , 'created_at'
         
     ];
+    public $timestamps = true;
     use SoftDeletes;
     
     public function images()

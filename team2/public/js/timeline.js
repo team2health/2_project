@@ -104,18 +104,29 @@ function selectDate(data) {
         method: 'POST',
         body: formData,
     })
-    .then(response => {
-        console.log(response);
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         console.log(data);
-        // if(data) {
-        //     let recordCircleImg = getElementById('recordCircleImg');
-        //     recordCircleImg.remove();
-        //     let userRecord = getElementById('userRecord');
-        //     userRecord.remove();
-        // }
+        let recordDeleteTestValue = document.getElementById('recordDeleteTest').value;
+        let recordCircleImg = document.getElementById('recordCircleImg');
+        let userRecord = document.getElementById('userRecord');
+
+        for ( i = 0; i < recordDeleteTestValue; i++) {
+            recordCircleImg.remove();
+            userRecord.remove();
+        }
+        
+        if( data.length > 1) {
+            for ( i = 0; i < data.length; i++) {
+                recordCircleImg.remove();
+                userRecord.remove();
+            }
+            data.forEach(element => {
+                console.log(element);
+        })
+        } else {
+
+        }
     })
     .catch(error => console.log(error));
     
