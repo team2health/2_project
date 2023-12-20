@@ -148,12 +148,15 @@ class MypageController extends Controller
         ->where('records.created_at', 'like', $created_start.'%')
         ->get();
         Log::debug($today_timeline);
-        
-        return view('timeline')->with('data', $today_timeline);
+
+        $result_count = $today_timeline->count();
+
+        return view('timeline')->with('data', $today_timeline)->with('result_count', $result_count);
     }
 
     public function daytimelinepost(Request $request) {
-    log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
+
+    log::debug("daytimelinepost", $request->all());
         $created_at = $request->date;
         Log::debug($created_at);
         $user_id = session('id');
@@ -171,7 +174,7 @@ class MypageController extends Controller
         
         Log::debug($timeline);
 
-        return view('timeline')->with('data', $timeline);
+        return response()->json($timeline);
 
     }
     
