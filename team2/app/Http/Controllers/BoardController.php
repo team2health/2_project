@@ -28,9 +28,9 @@ class BoardController extends Controller
     }
     public function categoryboard(){
         $category_board=Board::where('category_id', '1')->orderby('board_id', 'desc')->get();
-
         $category_id = Category::orderby('category_id', 'asc')->get();
-        $result = [$category_board, $category_id];
+        $category_name = Category::where('category_id', '1')->get();
+        $result = [$category_board, $category_id, $category_name];
 
         // Log::debug($category_id);
 
@@ -149,7 +149,8 @@ class BoardController extends Controller
 
         // Log::debug($result);
         // Log::debug($category_id);
-        $result = [$category_board, $category_id];
+        $category_name = Category::where('category_id', $categoryId)->get();
+        $result = [$category_board, $category_id, $category_name];
 
         return view('categoryboard')->with('data', $result);
     }

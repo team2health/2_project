@@ -39,13 +39,13 @@ class UserController extends Controller
             return redirect()->route('main.get');
         }
 
-        return view('login');
+        return view('login')->with('passwordError','0');
     }
 
     public function loginpost(Request $request) {
         $result = User::where('user_id', $request->user_id)->first();
         if(!$result || !(Hash::check($request->user_password, $result->user_password))) {
-            return redirect()->route('login.get');
+            return view('login')->with('passwordError', '1');
         }
 
         Auth::login($result);

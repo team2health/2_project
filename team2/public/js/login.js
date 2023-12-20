@@ -2,6 +2,11 @@ let LOGINUSERID = document.getElementById('login_user_id');
 let ERRORLOGINID = document.getElementById('error_login_id');
 let regex = /^[가-힣a-zA-Z0-9]{4,}$/;
 
+let PASSWORDERROR = document.getElementById('passwordError');
+if(PASSWORDERROR.value === '1') {
+	alert('비밀번호가 일치하지 않습니다.');
+}
+
 LOGINUSERID.addEventListener('input', function() {
     const value = LOGINUSERID.value;
 

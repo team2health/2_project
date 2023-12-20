@@ -17,6 +17,7 @@
 					<a href="/regist">회원가입</a>
 				</div>
 			</form>
+			<input type="hidden" id="passwordError" value="{{$passwordError}}">
 		</div>
 	</div>
 	<script src="../js/login.js"></script>
