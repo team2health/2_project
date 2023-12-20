@@ -34,6 +34,7 @@
 				<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="adress-long" name="user_adress_s">
 				<input type="hidden" name="user_address" id="adress-fullname">
 			</div>
+			<br>
 
 			<p>성별</p>
 			<div class="gender-box">

@@ -540,6 +540,12 @@ td {
 .user-info-modify input:focus {
     background-color: #FFF8DC;
 }
+.user-now-address {
+    border: 1px solid #c8c8c8;
+    padding: 10px;
+    background-color: #fff;
+    color: #ababab;
+}
 /* 박스 모달 */
 .UserboardModal {
     position: fixed;

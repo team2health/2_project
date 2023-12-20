@@ -96,10 +96,12 @@
                     <span id="user_img_name"></span>
                 </label>
                 <input type="file" accept="image/*" style="display: none;" id="profilephoto" name="user_img">
+                <span id="user-img-url"></span>
                 {{-- <a href="#">비밀번호 변경</a> --}}
                 <br>
                 <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
                 <div class="user-info-btn" onclick="userimgremove(); return false;"> 삭제 </div>
+                <input type="hidden" name="imgFlg" id="imgflg">
                 <br>
                 <label for="usermodifyname">닉네임 수정</label>
                 <div class="user-info-btn-chk" onclick="nameChange(); return false;"> 닉네임 중복 확인 </div>
@@ -110,8 +112,9 @@
                 <br>
                 <label for="usermodifypasswordchk">비밀번호 확인</label>
                 <input type="password" id="usermodifypasswordchk"> --}}
-                <br>
-                <br>
+                <label>현재 주소지</label>
+                <div class="user-now-address">{{$user_info[0]->user_address}}</div>
+                <label>주소 변경</label>
                 <div class="adress-box">
                     <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" readonly>
                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn"><br>
