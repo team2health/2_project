@@ -42,9 +42,9 @@
     </div>
 
     <div class="mypage-third">
-        <div class="recordsection" id="recordDeleteTest">
+        <div class="recordsection" id="recordDeleteTest" value="{{$result_count}}">
             @forelse ($data as $item)
-            <img src="/img/circle.png" class="recordcircleimg" alt="" id="recordCircleImg">
+            <img src="/img/circle.png" class="recordcircleimg" id="recordCircleImg">
             <div class="user-record" id="userRecord">
                 <span class="recordtime">{{$item->created_at}}</span>
                 <div class="recorddeletebtn" onclick="recorddeletemodalopen({{$item->symptom_id}}); return false;">X</div>
