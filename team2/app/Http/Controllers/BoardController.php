@@ -7,6 +7,7 @@ use Illuminate\support\Facades\Auth;
 use Illuminate\support\Facades\DB;
 use App\Models\Board;
 use App\Models\Board_img;
+use Illuminate\Support\Str;
 
 class BoardController extends Controller
 {
@@ -45,26 +46,34 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
-        $path=$request->file('file')->store('public');
-        
-        
-        $u_id = auth()->id();
-        
-         $arrData = $request->only('board_title','board_content');
-         $arrData['u_id'] = $u_id;
-         $arrData['category_id'] = $request->input('category_id', 1);
-        $result = Board::create($arrData);
-        $image = new Board_img(['img_address' => $path]);
-        $result->images()->save($image);
-        
-        
+    {       
+        $u_id = auth()->id();        
+        $boardData = $request->only('board_title', 'board_content', 'category_id');
+        $boardData['u_id'] = $u_id;
+        $arrData['category_id'] = $request->input('category_id', 1);
+        $board = Board::create($boardData);
+
+        // Save Hashtag (if provided)
+       // $hashtag = $request->input('hashtag');
+        //if (!empty($hashtag)) {
+            // Save or update the hashtag logic goes here
+            // You may create a separate table for hashtags and associate them with boards
+        //}
+
+        // Save Images to Board_img
+        if ($request->hasFile('board_img')) {
+            $image = $request->file('board_img');
+            $imageName = Str::uuid().'.'.$image->extension();
+            $image->move(public_path('board_img'), $imageName);
+            
+            // Save the image path to the Board_img model
+            $boardImage = new Board_img(['img_address' => $imageName]);
+            $board->images()->save($boardImage);
+        }
+
         return redirect()->route('categoryboard');
     }
-    public function upload(Request $request){
-        $request->file->store('public');
-    }
+    
 
     /**
      * Display the specified resource.
@@ -75,7 +84,8 @@ class BoardController extends Controller
     public function show($board_id)
     {
         $result = Board::with(['user', 'images'])->find($board_id);
-        // dd($result);
+
+        //  dd($result->images);
         $result->board_hits++;
         $result->timestamps = false;        
         $result->save();

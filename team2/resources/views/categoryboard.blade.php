@@ -21,10 +21,12 @@
     </div>
 
     
-    @foreach ($data as $item)
+    <!-- @foreach ($data as $item)
     <div class="last_container">
         <div class="last_user">
-            <img class="community_icon"  src="{{ $item->user->user_img }}" alt="" class="board_nic_img">                               
+             <img class="community_icon"  src="{{ $item->user->user_img }}" alt="" class="board_nic_img">   
+            <img class="community_icon" src="{{ asset('public/user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">
+            <div>Debug: {{ $item->user->user_img }}</div>
             <div class="board_nic_text">
                 <div>
                 {{ optional($item->user)->user_name }}
@@ -44,11 +46,33 @@
         </div>  
     </div>
    
-    @endforeach            
-    
+    @endforeach -->           
+    @foreach ($data as $item)
+    <div class="last_container">
+        <div class="last_user">
+            <img class="community_icon" src="{{ asset('user_img/' . $item->user->user_img) }}" alt="User Image">                               
+            <div class="board_nic_text">
+                <div>
+                    {{ optional($item->user)->user_name }}
+                </div>
+                <div>
+                    {{ $item->created_at }}
+                </div>
+            </div>
+        </div> 
+        <div style="width: 300px; margin-left: 10px;">
+            {{ $item->board_title }}
+        </div> 
+        <div class="last_content">
+            <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
+                {{ $item->board_content }}
+            </a>                   
+        </div>  
+    </div>
+@endforeach
     
 </main>
 
 
 @endsection
-<script src="/js/categoryboard.js"></script>
+<script src="/js/categoryboard.js"></script> 
