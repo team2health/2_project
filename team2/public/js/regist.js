@@ -127,7 +127,7 @@ function registgo() {
 	} else if(!regex.test(USERNAMEVALUE)) {
 		alert('닉네임을 다시 확인해주세요.');
 		return false;
-	} else if(nameflg === 1) {
+	} else if(nameFlg === 1) {
         alert('사용 중인 닉네임입니다.\n닉네임을 다시 입력해주세요.');
         return false;
     } else if(USERIDVALUE === '') {
@@ -139,7 +139,7 @@ function registgo() {
 	} else if(!regex2.test(USERIDVALUE)) {
 		alert('아이디를 다시 확인해주세요.');
 		return false;
-	}  else if(idflg === 1) {
+	}  else if(idFlg === 1) {
         alert('사용 중인 아이디입니다.\n아이디를 다시 입력해주세요.');
         return false;
     } else if(USERPASSWORDVALUE === '') {
