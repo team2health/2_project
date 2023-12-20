@@ -247,6 +247,7 @@ function addhashtag(data) {
 // value값 변경해야함
 
 let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
+let imgFlg = 0;
 
 function nameChange() {
 	let nameChk = document.getElementById('usermodifyname').value;
@@ -278,23 +279,33 @@ function nameChange() {
 	.catch(error => {
 		console.error('오류 발생:', error);
 	})
-	namechkflg = 1;
-	// console.log(namechkflg);
+}
+
+let fileInput = document.getElementById('profilephoto');
+
+fileInput.addEventListener('change', function() {
+    let userImgUrl = document.getElementById('user-img-url');
+    userImgUrl.innerHTML = fileInput.files[0].name;
+    // console.log(fileInput.files[0].name);
+    if (fileInput.files.length > 0) {
+        imgFlg = 1;
+    }
+});
+
+function userimgremove() {
+    imgFlg = 2;
 }
 
 function userinfoupdate() {
     let USERADRESSFVALUE = document.getElementById('sample4_roadAddress').value;
 	let USERADRESSSVALUE = document.getElementById('sample4_detailAddress').value;
+    let IMGFLG = document.getElementById('imgflg');
+    IMGFLG.setAttribute('value', imgFlg);
 
     let ADRESS = document.getElementById('adress-fullname');
 	ADRESS.setAttribute('value', USERADRESSFVALUE+' '+USERADRESSSVALUE);
 
 	document.getElementById('userinfo_form').submit();
-}
-
-function userimgremove() {
-    // document.getElementById('profilephoto').files[0] = '../img/default_f.png';
-
 }
 
 // let userImgSelect = document.getElementById('profilephoto').files[0];

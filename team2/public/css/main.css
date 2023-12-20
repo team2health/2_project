@@ -122,13 +122,13 @@ button {
 .login-input {
 	width: 90%;
 	height: 6vh;
-	margin-top: 10px;
+	margin: 3px 0 10px 0;
 }
 
 .login-input-short {
 	width: 60%;
 	height: 6vh;
-	margin-top: 10px;
+	margin: 3px 0 10px 0;
 }
 
 .input-check {
@@ -208,10 +208,6 @@ button {
 	width: 90%;
 	height: 6vh;
 	margin-top: 10px;
-}
-
-.gender-box {
-	position: relative;
 }
 
 .regist-button {

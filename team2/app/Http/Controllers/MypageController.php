@@ -63,7 +63,7 @@ class MypageController extends Controller
                     // Log::debug("유저", ['name' => $user_info]);
                     
     
-                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);;
+                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
             } else {
                 return view('login');
             }
@@ -197,18 +197,24 @@ class MypageController extends Controller
         }
 
         public function userinfoupdatepost(Request $request) {
-            Log::debug("111111", $request->all());
+            // Log::debug("111111", $request->all());
 
             // 사용자 ID 가져오기
             $result = session('id');
 
+            $imgFlg = $request->imgFlg;
+            // Log::debug("efeeee", ['img' => $imgFlg]);
+
             $userinfo = User::find($result);
 
-            if($request->user_img) {
+            if($imgFlg == 1) {
                 $imgName = Str::uuid().'.'.$request->user_img->extension();
                 $request->user_img->move(public_path('user_img'), $imgName);
                 $userinfo->user_img = $imgName;
+            } else if($imgFlg == 2) {
+                $userinfo->user_img = '../img/default_f.png';
             }
+            
             if($request->user_name) {
                 $userinfo->user_name = $request->user_name;
             }
@@ -257,7 +263,8 @@ class MypageController extends Controller
                 ->get();
                 
             // Log::debug("이름", ['name' => $user_info]);
-            session(['user_name' => $user_info[0]->user_name]);
+            session(['user_name' => $user_info[0]->user_name,
+                    'user_img' => $user_info[0]->user_img]);
             // Log::debug("유저", ['name' => $user_info]);
 
             return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
