@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Favorite_tag;
-use App\Models\User;
+use Carbonuse\App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
