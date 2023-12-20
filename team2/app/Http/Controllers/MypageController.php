@@ -139,7 +139,8 @@ class MypageController extends Controller
         $user_id = session('id');
         $today_timeline = DB::table('symptoms')
         ->select(
-            'symptoms.symptom_id'
+            'records.record_id'
+            ,'symptoms.symptom_id'
             ,'symptoms.symptom_name'
             ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
         )
@@ -163,7 +164,8 @@ class MypageController extends Controller
 
         $timeline = DB::table('symptoms')
         ->select(
-            'symptoms.symptom_id'
+            'records.record_id'
+            ,'symptoms.symptom_id'
             ,'symptoms.symptom_name'
             ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
         )
