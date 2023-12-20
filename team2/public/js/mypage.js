@@ -144,7 +144,6 @@ function favoritehashdelete(data) {
 
 let addallfavoritetagevent = document.getElementById('addallfavoritetag');
 
-
 addallfavoritetagevent.addEventListener('click', function(){
     addallfavoritetag();
     addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
@@ -199,7 +198,6 @@ function addallfavoritetag() {
     hashplusclosebtn.addEventListener('click', closeoption);
 
 }
-
 
 // 관심 해시태그 추가 창 닫기
 function closeoption(){
