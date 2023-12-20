@@ -6,13 +6,11 @@
 				<div id="time-year"></div>
 				<div id="time-day"></div>
 			</div>
-			@if (request()->url() == 'http://127.0.0.1:8000/mypage')
 			<div style="color: rgb(182, 182, 182)" class="mypagegohome">
 				<a href="{{route('main.get')}}">
-				<img src="../user_img/{{ session('user_img') }}" alt="" width="50px;" style="margin-right: 20px;">
-			</a>
+				<span class="gohome header-margin-top">HOME</span>
+				</a>
 			</div>
-			@endif
 		</div>
 	@else
 	<div class="mini-container">
