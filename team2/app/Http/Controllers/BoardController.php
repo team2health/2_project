@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
 use Illuminate\support\Facades\DB;
 use App\Models\Board;
-
+use App\Models\Board_img;
 
 class BoardController extends Controller
 {
@@ -46,20 +46,9 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        // $arrData = [
-        //       'u_id' => Auth::id(),
-        //       'category_id' => $request->input('category_id'),
-        //   ];
-    
         
-        //  if ($request->filled('board_title')) {
-        //      $arrData['board_title'] = $request->input('board_title');
-        //  }
-    
-        //  if ($request->filled('board_content')) {
-        //      $arrData['board_content'] = $request->input('board_content');
-        //  }  
-        $path = $request->file('file')->store('public');
+        $path=$request->file('file')->store('public');
+        
         
         $u_id = auth()->id();
         
@@ -67,6 +56,8 @@ class BoardController extends Controller
          $arrData['u_id'] = $u_id;
          $arrData['category_id'] = $request->input('category_id', 1);
         $result = Board::create($arrData);
+        $image = new Board_img(['img_address' => $path]);
+        $result->images()->save($image);
         
         
         return redirect()->route('categoryboard');

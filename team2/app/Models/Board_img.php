@@ -9,8 +9,9 @@ class Board_img extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'board_id', 'img_address'
+        'board_id', 'img_address',
     ];
+    
 
     public function board()
     {
