@@ -228,6 +228,11 @@ td {
     font-weight: 600;
     margin-left: 40px;
 }
+.none-recordtext {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-size: 1.5rem;
+}
 .recordtime {
     margin-left: 40px;
     font-size: 1.0rem;

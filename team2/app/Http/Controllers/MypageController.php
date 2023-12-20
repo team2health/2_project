@@ -65,10 +65,9 @@ class MypageController extends Controller
         }
     
     
-        public function allhashget(){
+        public function allhashget(Request $request){
     
             $result = session('id');
-    
             $user_hashtag = DB::table('favorite_tags')
             ->select(
             'favorite_tags.hashtag_id'
@@ -78,21 +77,23 @@ class MypageController extends Controller
             ->where('favorite_tags.deleted_at', null)
             ->orderBy('hashtags.hashtag_id')
             ->get();
-    
             foreach ($user_hashtag as $key => $value) {
-                $result2[] = $value->hashtag_id;;
+                $result2[] = $value->hashtag_id;
             }
     
             $hashtag  = DB::table('hashtags')
             ->select(
                 'hashtags.hashtag_id'
                 ,'hashtags.hashtag_name'
-            )
-            ->whereNotIn('hashtags.hashtag_id', $result2)
-            ->orderBy('hashtags.hashtag_id')
-            ->get();
+            );
+            
+            if( isset($result2)) {
+                $hashtag->whereNotIn('hashtags.hashtag_id', $result2);
+            }
+            $hashtag->orderBy('hashtags.hashtag_id');
+            $allhashtag = $hashtag->get();
     
-            return response()->json($hashtag);
+            return response()->json($allhashtag);
         }
     
         public function myhashdeletepost(Request $request) {
@@ -134,7 +135,7 @@ class MypageController extends Controller
         ->select(
             'symptoms.symptom_id'
             ,'symptoms.symptom_name'
-            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%m") as created_at')
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
         )
         ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
         ->where('records.u_id', $user_id)
@@ -146,24 +147,25 @@ class MypageController extends Controller
     }
 
     public function daytimelinepost(Request $request) {
-log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
-        // $created_at = $request->only('date');
-        // Log::debug($created_at);
-        // $user_id = session('id');
+    log::debug("이이ㅣㅇ거ㅣㄴㅁ어리ㅏㅁㅇㄴㄹ", $request->all());
+        $created_at = $request->date;
+        Log::debug($created_at);
+        $user_id = session('id');
 
-        // $timeline = DB::table('symptoms')
-        // ->select(
-        //     'symptoms.symptom_id'
-        //     ,'symptoms.symptom_name'
-        //     ,DB::raw('DATE_FORMAT(records.created_at, "%H:%m") as created_at')
-        // )
-        // ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
-        // ->where('records.u_id', $user_id)
-        // ->where('records.created_at', 'like', $created_at.'%')
-        // ->get();
-        // Log::debug($timeline);
+        $timeline = DB::table('symptoms')
+        ->select(
+            'symptoms.symptom_id',
+            'symptoms.symptom_name',
+            DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+        )
+        ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        ->where('records.u_id', $user_id)
+        ->where('records.created_at', 'like', $created_at.'%')
+        ->get();
         
-        // return view('timeline')->with('data', $timeline);
+        Log::debug($timeline);
+
+        return view('timeline')->with('data', $timeline);
 
     }
     
