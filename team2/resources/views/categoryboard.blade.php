@@ -40,11 +40,13 @@
         <div style="width: 300px; margin-left: 10px;">
             {{ $item->board_title }}
         </div> 
-        <div class="last_content">
-            <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
+        <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
+            <div class="last_content">
+            
                 {{ $item->board_content }}
-            </a>                   
-        </div>  
+                                
+            </div>  
+        </a>
     </div>
     @endforeach
 </div>
@@ -78,3 +80,4 @@
 
 
 <script src="/js/categoryboard.js"></script> 
+@endsection

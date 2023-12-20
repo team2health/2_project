@@ -24,7 +24,7 @@
                      </a>
                     <div class="community_bottom">
                         <div>
-                            {{ $item->board_hits }}
+                           조회수 {{ $item->board_hits }}
                         </div>
                         <div>
                             댓글 {{ $item->comments->count() }}

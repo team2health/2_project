@@ -26,7 +26,7 @@
             <div class="detail_content">
             @foreach($data->images as $image)
             <div class="detail_board_content">
-                <img src="{{ asset('board_img/' . $image->img_address) }}" alt="Board Image">
+                <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
             </div>    
             @endforeach          
                 <br>
@@ -45,9 +45,13 @@
         <form class="detail_form" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
             @csrf
             @method('DELETE')
-            <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
-            <a href="{{ route('board.edit', ['board' => $data->board_id]) }}" class="a_update">수정</a>
-            <button type="submit" class="d_btn">삭제</button>            
+            @if(Auth::id() === $data->user->id)
+                <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
+                <a href="{{ route('board.edit', ['board' => $data->board_id]) }}" class="a_update">수정</a>
+                <button type="submit" class="d_btn">삭제</button>
+            @else
+                <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
+            @endif         
         </form>
     </div>
    
@@ -60,7 +64,7 @@
             <li>
                 <div class="last_user">
                     
-                <img class="community_icon" src="{{ asset('user_img/' . optional($data->user)->user_img) }}" alt="">
+                <img class="community_icon" src="{{ asset('user_img/' . optional($comment->user)->user_img) }}" alt="">
                         
                     <div class="board_nic_text">
                         <div>
@@ -77,7 +81,9 @@
                 <form method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
                     @csrf
                     @method('DELETE')
+                    @if(Auth::id() === $comment->u_id)
                     <button type="submit" class="delete-comment-btn">댓글 삭제</button>
+                    @endif
                 </form>
             </li>
         @endforeach
@@ -93,5 +99,5 @@
         </div>
 </main>
 <script src="/js/detail.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 @endsection

@@ -1,34 +1,6 @@
 const token = "{{ csrf_token() }}";
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     // 모달 열기
-//     document.getElementById('openModal').addEventListener('click', function () {
-//         document.getElementById('confirmModal').style.display = 'block';
-//         centerModal(); // 모달을 화면 중앙에 위치시키는 함수 호출
-//     });
 
-//     // 모달 닫기
-//     document.getElementById('cancelDelete').addEventListener('click', function () {
-//         document.getElementById('confirmModal').style.display = 'none';
-//     });
-
-//     // 창 크기 변경 시 모달 중앙 정렬
-//     window.addEventListener('resize', function () {
-//         centerModal();
-//     });
-
-//     // 확인 버튼 클릭 시 폼 제출 (Soft Delete)
-//     document.getElementById('confirmDelete').addEventListener('click', function () {
-//         document.getElementById('deleteForm').submit();
-//     });
-// });
-
-// // 모달을 화면 중앙에 위치시키는 함수
-// function centerModal() {
-//     var modal = document.getElementById('confirmModal');
-//     modal.style.top = Math.max(0, (window.innerHeight - modal.offsetHeight) / 2) + 'px';
-//     modal.style.left = Math.max(0, (window.innerWidth - modal.offsetWidth) / 2) + 'px';
-// }
 document.addEventListener('DOMContentLoaded', function () {
     // 댓글 개수 업데이트
     function updateCommentCount() {

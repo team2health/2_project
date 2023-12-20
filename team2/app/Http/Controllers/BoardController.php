@@ -23,7 +23,7 @@ class BoardController extends Controller
         if(!Auth::check()){
         return redirect()->route('login.get');
         }
-        $result=Board::get();
+        $result=Board::orderBy('board_hits', 'desc')->get();
         return view('community')->with('data',$result);
     }
     public function categoryboard(){
@@ -96,8 +96,8 @@ class BoardController extends Controller
         $result->board_hits++;
         $result->timestamps = false;        
         $result->save();
-
-    return view('detail')->with('data', $result);
+        
+        return view('detail')->with('data', $result);
     }
 
     /**
