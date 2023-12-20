@@ -18,6 +18,12 @@
     border-radius: 5px;
     
 }
+.last_container2 {
+    margin: 10px;
+    border: 3px solid rgba(128, 128, 128, 0.369);
+    border-radius: 5px;
+}
+
 .last_user{
     display: grid;
     flex-wrap: nowrap;
@@ -430,7 +436,7 @@ li{
     right: 0.1px;
 } 
 
- .dropdown-content a {
+ .dropdown-content div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -553,6 +559,9 @@ li{
         width: 85vw;
     }
     .last_container {
+        width: 85vw;
+    }
+    .last_container2 {
         width: 85vw;
     }
     .last_main{

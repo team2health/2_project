@@ -3,7 +3,7 @@
 @section('title','Categoryboard')
 
 @section('main')
-<main class="last_main">
+<div class="last_main" id='category-board'>
 <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
         <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
@@ -11,17 +11,20 @@
         <div class="dropdown">
             <button class="cate_btn" onclick="toggleDropdown()">정렬</button>
             <div class="dropdown-content" id="myDropdown">
-                
-                <a href="#">자유 게시판</a>
-                <a href="#">정보 게시판</a>
-                <a href="#">질문 게시판</a>
-                <a href="#">친목 게시판</a>
+                <form method="get" id="category_id_form">
+                    @csrf
+                    @forelse ($data[1] as $item)
+                        <div onclick="showBoard({{$item->category_id}}); return false;">{{$item->category_name}}</div>
+                    @empty
+                        
+                    @endforelse
+                </form>
             </div>
         </div>
     </div>
 
     
-    @foreach ($data as $item)
+    @foreach ($data[0] as $item)
     <div class="last_container">
         <div class="last_user">
             <img class="community_icon"  src="{{ $item->user->user_img }}" alt="" class="board_nic_img">                               
@@ -43,11 +46,35 @@
             </a>                   
         </div>  
     </div>
-   
-    @endforeach            
+    @endforeach
+</div>
+
+{{-- <div style="display: none;" class="last_main" id="category-board-modal">
+    <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
+            <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
+        <div class="last_headline">
+            <h2>정보</h2>
+            <div class="dropdown">
+                <button class="cate_btn" onclick="toggleDropdown2()">정렬</button>
+                <div class="dropdown-content" id="myDropdown2">
+                </div>
+            </div>
+        </div>
     
-    
-</main>
+        <div class="last_container">
+            <div class="last_user">
+                <img class="community_icon" src="" alt="" class="board_nic_img">                               
+                <div class="board_nic_text">
+                    <div>{{ optional($item->user)->user_name }}</div>
+                    <div>{{ $item->created_at }}</div>
+                </div>
+            </div> 
+            <div style="width: 300px; margin-left: 10px;">{{ $item->board_title }}</div> 
+            <div class="last_content">
+                <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">{{ $item->board_content }}</a>                   
+            </div>  
+        </div>
+</div> --}}
 
 
 @endsection
