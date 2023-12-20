@@ -11,18 +11,18 @@
 			@csrf
 			<div class="insert_container">
 				<div class="insert_img">
-					<label for="img1" >
+					<label for="file" >
 						<img id="preview1"src="../img/plus.png" alt="">
 					</label>
-					<input type="file" name="img1" id="img1" style="display:none;" onchange="previewImage('img1', 'preview1')" accept="image/*">
-					<label for="img2" >
+					<input type="file" name="file" id="file" style="display:none;" onchange="previewImage('img1', 'preview1')" accept="image/*">
+					<!-- <label for="file" >
 						<img id="preview2" src="{{ asset('img/camera2.png') }}" alt="">
 					</label>
-					<input type="file" name="img2" id="img2" style="display:none;" onchange="previewImage('img2', 'preview2')" accept="image/*">
-					<label for="img3" >
+					<input type="file" name="file" id="img2" style="display:none;" onchange="previewImage('img2', 'preview2')" accept="image/*">
+					<label for="file" >
 						<img id="preview3" src="{{ asset('img/camera2.png') }}" alt="">
 					</label>
-					<input type="file" name="img3" id="img3" style="display:none;" onchange="previewImage('img3', 'preview3')" accept="image/*">
+					<input type="file" name="file" id="img3" style="display:none;" onchange="previewImage('img3', 'preview3')" accept="image/*"> -->
 				</div>
 				
 				<div class="insert_select_container">
