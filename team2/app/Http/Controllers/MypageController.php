@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Favorite_tag;
-use Carbonuse\App\Models\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -71,7 +71,8 @@ class MypageController extends Controller
     
     
         public function allhashget(Request $request){
-    
+
+            Log::debug("allhashget", $request->all());
             $result = session('id');
             $user_hashtag = DB::table('favorite_tags')
             ->select(
@@ -97,7 +98,7 @@ class MypageController extends Controller
             }
             $hashtag->orderBy('hashtags.hashtag_id');
             $allhashtag = $hashtag->get();
-    
+            Log::debug($allhashtag);
             return response()->json($allhashtag);
         }
     
@@ -159,9 +160,9 @@ class MypageController extends Controller
 
         $timeline = DB::table('symptoms')
         ->select(
-            'symptoms.symptom_id',
-            'symptoms.symptom_name',
-            DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+            'symptoms.symptom_id'
+            ,'symptoms.symptom_name'
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
         )
         ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
         ->where('records.u_id', $user_id)

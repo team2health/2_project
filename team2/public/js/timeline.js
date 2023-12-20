@@ -104,10 +104,22 @@ function selectDate(data) {
         method: 'POST',
         body: formData,
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log(response);
+        return response.json();
+    })
     .then(data => {
-        console.log(data)})
+        console.log(data);
+        // if(data) {
+        //     let recordCircleImg = getElementById('recordCircleImg');
+        //     recordCircleImg.remove();
+        //     let userRecord = getElementById('userRecord');
+        //     userRecord.remove();
+        // }
+    })
     .catch(error => console.log(error));
+    
+
 }
 
 // 스크롤 이동 javascript

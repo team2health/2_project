@@ -44,8 +44,8 @@
     <div class="mypage-third">
         <div class="recordsection" id="recordDeleteTest">
             @forelse ($data as $item)
-            <img src="/img/circle.png" class="recordcircleimg" alt="">
-            <div class="user-record">
+            <img src="/img/circle.png" class="recordcircleimg" alt="" id="recordCircleImg">
+            <div class="user-record" id="userRecord">
                 <span class="recordtime">{{$item->created_at}}</span>
                 <div class="recorddeletebtn" onclick="recorddeletemodalopen({{$item->symptom_id}}); return false;">X</div>
                 <br>
