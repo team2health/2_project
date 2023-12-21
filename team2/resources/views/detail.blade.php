@@ -64,7 +64,7 @@
             <li>
                 <div class="last_user">
                     
-                <img class="community_icon" src="{{ asset('user_img/' . optional($comment->user)->user_img) }}" alt="">
+                <img class="community_icon" src="{{ asset('user_img/' . optional($comment->user)->user_img) }}" class="board_nic_img" alt="">
                         
                     <div class="board_nic_text">
                         <div>

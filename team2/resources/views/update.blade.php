@@ -10,15 +10,13 @@
 			@csrf
 			@method('PUT')            
 			<div class="insert_container">           
-            
-				<div class="insert_img">
-					<label for="img1"><img src="../img/plus.png" alt=""></label>
-					<input type="file" name="img1" id="img1" style="display:none;">
-					<label for="img2"><img src="../img/camera2.png" alt=""></label>
-					<input type="file" name="img2" id="img2" style="display:none;">
-					<label for="img3"><img src="../img/camera2.png" alt=""></label>
-					<input type="file" name="img3" id="img3" style="display:none;">
-				</div>
+            <div class="insert_img">
+			@foreach($data->images as $image)
+            <div class="detail_board_content">
+                <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
+            </div>    
+            @endforeach  
+			</div>
             
 
 				<!-- <label for="board">카테고리:</label> -->
@@ -40,7 +38,11 @@
 				
 				<div class="insert_textarea_container">
 					<label for="u_content" >내용</label><br>			  
-					<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $data->board_content }}</textarea>
+					<textarea name="u_content" id="u_content" class="insert_textarea" >		
+					
+					{{ $data->board_content }}
+							
+					</textarea>
 				</div>
 				
 				<div class="insert_hashtag_container">
@@ -49,7 +51,7 @@
 				</div>
 			</div>
 			<div class="insert_bottom_button">
-				<button class="insert_btn"><a class="a_cancel" href="{{url()->previous()}}">취소</a></button>			
+			<a href="{{url()->previous()}}"><button class="insert_btn">취소</button></a>		
 				<button type="submit" class="insert_btn">수정완료</button>	
 			</div>				
 		</form>		
