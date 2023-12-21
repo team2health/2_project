@@ -8,7 +8,9 @@ use Illuminate\support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Board;
 use App\Models\Board_img;
+use App\Models\Pandemic;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class BoardController extends Controller
@@ -20,12 +22,35 @@ class BoardController extends Controller
      */
     public function index()
     {  
+        $u_id = session('id');
+
         if(!Auth::check()){
         return redirect()->route('login.get');
         }
-        $result=Board::orderBy('board_hits', 'desc')->get();
+        $hotboard = Board::orderBy('board_hits', 'desc')->get();
+        $pandemicboard = Pandemic::get();
+        $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
+            ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
+            ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
+            ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
+            ->select('boards.board_title', 'boards.board_content')
+            ->where('users.id', $u_id)
+            ->orderby('boards.board_id', 'desc')
+            ->limit(4)
+            ->get();
+        $lastboard = Board::orderBy('board_id', 'desc')->limit(4)->get();
+        $favoritetag = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
+        ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
+        ->select('hashtags.hashtag_name')
+        ->where('users.id', $u_id)
+        ->orderby('hashtags.hashtag_id')
+        ->get();
+
+        $result = [$hotboard, $pandemicboard, $favoriteboard, $lastboard, $favoritetag];
+
         return view('community')->with('data',$result);
     }
+
     public function categoryboard(){
         $category_board=Board::where('category_id', '1')->orderby('board_id', 'desc')->get();
         $category_id = Category::orderby('category_id', 'asc')->get();

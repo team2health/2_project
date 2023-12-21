@@ -3,6 +3,7 @@
 @section('title', 'main')
 
 @section('main')
+<main class="wrapper">
 	<div class="container" id="part-display">
 		<br>
 		<div style="color: #2C2B71" class="text-center bc-purple">
@@ -51,6 +52,7 @@
 			</div>
 		</div>
 	</div>
+</main>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script>
 	<script src="../js/main.js"></script>
 @endsection

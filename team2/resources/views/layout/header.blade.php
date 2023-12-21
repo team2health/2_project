@@ -78,14 +78,14 @@
 	@endguest
 
 		@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist'
-		&& request()->url() !== 'http://127.0.0.1:8000/mypage' && request()->url() !== 'http://127.0.0.1:8000/categoryboard')
+		&& request()->url() !== 'http://127.0.0.1:8000/mypage' && request()->url() !== 'http://127.0.0.1:8000/categoryboard' && !Str::contains(request()->url(), 'boardcategory'))
 			<div class="container-category display-flex-around div-padding">
 				<a href="{{route('main.get')}}" class="div-display-lnlineBlock main-line-height">증상 검색</a>
 				<a href="{{ route('board.index') }}" class="div-display-lnlineBlock main-line-height">커뮤니티</a>
 				<a href="{{ route('todaytimeline.get') }}" class="div-display-lnlineBlock main-line-height">타임라인</a>
 			</div>
 		@endif
-		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard')
+		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard' || Str::contains(request()->url(), 'boardcategory'))
 			<div class="container-category display-flex-around div-padding">
 				<a href="" class="div-display-lnlineBlock main-line-height">최근 게시글</a>
 				<a href="" class="div-display-lnlineBlock main-line-height">핫게시글</a>

@@ -700,8 +700,14 @@ display:none;
     }
 }
 
+@media screen and (max-width: 1000px) {
+    .mypagegohome {
+        display: block;
+    }
+}
+
 @media screen and (max-width: 1100px) {
-    .mypage-grid, .mypagegohome {
+    .mypage-grid {
         display: block;
     }
     .mypage-content, .mypage-boardbox, .mypage-date-today, .mypage-btn-plus, .mypage-insert-btn

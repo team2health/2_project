@@ -4,6 +4,16 @@
 	box-sizing: border-box;
 }
 
+body {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 최소 화면 높이 */
+}
+
+.wrapper {
+    flex: 1; /* wrapper가 남은 공간을 모두 차지하도록 설정 */
+}
 
 /* -------- lastboard -------- */
 
@@ -260,37 +270,37 @@ li{
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory; 
-     
+    gap: 15px;
 }
 
 .slide {
-    min-width: 22%;       
+    padding: 20px;
+    min-width: 240px;       
     border: 1px solid #848484;
-    border-radius: 5px;
+    border-radius: 20px;
     margin: 6.5px;
     scroll-snap-align: start;
-    
+    height: 270px;
+    box-shadow: 0px 3px 5px 3px rgba(196, 196, 196, 0.6);
+    margin-bottom: 20px;
 }
 .favorite_slider-container {
-    
     margin: 30px auto;
     width: 60vW;   
 }
-.favorite_slider {   
-        
+.favorite_slider {
     display: flex;   
     overflow-x: auto;
     scroll-snap-type: x mandatory;  
-     
 }
 
 .favorite_slide {
     min-width: 48%;       
-    border: 1px solid #848484;
-    border-radius: 5px;
+    border: 1px solid #d0d0d0;
+    border-radius: 20px;
     margin: 13px;    
-    background-color: #ff9950;
-    
+    background-color: rgba(255, 153, 0, 0.2);
+    padding: 10px;
 }
 .slider-container::-webkit-scrollbar {
     width: 12px; 
@@ -316,6 +326,10 @@ li{
 .favorite_slider-container::-webkit-scrollbar-track {
     background-color: #f6f6f6; 
 }
+
+.favorite_slide .favorite_slide-name {
+    margin-left: 20px;
+}
 .community_content{    
     margin: 10px auto;
     /* padding: 10px; */
@@ -336,37 +350,45 @@ li{
     background-color: #ff9950;
 }
 .community_tag_hidden{
-    background-color: #efefef;
     margin-bottom:50px ;
-    width: 100%;
+    width: 100vw;
+}
+
+.board-bc-gray {
+    background-color: #efefef;
 }
 
 .community_tag_container{
-    width: 40%;
+    width: 60vw;
     margin: 0 auto;
+    padding: 30px;
 }
 
 .community_tag {
     display: grid;
-    
-    
-    grid-template-columns: repeat(auto-fit,minmax(350px,1fr));    
-    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit,minmax(390px,1fr));    
+    grid-gap: 20px;
+    margin-bottom: 15px;
 }
 .community_tag > div {
-    border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 10px auto;
     padding: 10px;
-    width:80%;   
+    width:100%;   
     text-overflow: ellipsis;
     overflow: hidden;  
     display: -webkit-box;   
     -webkit-line-clamp: 6;  
     -webkit-box-orient: vertical;
-    max-height: 6em;      
-    white-space: normal;     
+    white-space: normal;  
+    background-color: #fff;
+    height: 130px;
 }
+
+.border-line-color-gray > div {
+    border: 1px solid #d0d0d0;;
+}
+
 .community_more_container{
     text-align: center;
     margin-bottom: 30px;
@@ -376,8 +398,8 @@ li{
     border: 1px solid black;
     border-radius: 20px;
     background-color: #ff9950;
-    width: 70px;
-    height: 35px;
+    width: 100px;
+    height: 40px;
 }
 .community_icon{
     border-radius: 50%;
@@ -544,7 +566,20 @@ li{
     border: none;
 }
 
-@media only screen and (max-width: 1000px) {
+.board-display-flex {
+    display: flex;
+    align-content: space-between;
+}
+
+@media only screen and (max-width: 1450px) {
+    .community_tag {
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+        grid-gap: 15px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
     .slider-container {
         width: 80vw;        
     }
@@ -552,12 +587,9 @@ li{
         width: 80vw;
     }   
     .community_tag_container{
-        width: 100vw;
+        width: 80vw;
         margin: 0 auto;
-    }  
-    .slide {
-        min-width: 40%;        
-    } 
+    }
     .insert_container {
         width: 70vw;        
     }
@@ -581,5 +613,31 @@ li{
     }
     .last_main{
         width: 85vw;
+    }
+    .favorite_slider {
+        display: flex;   
+        overflow-x: auto;
+        scroll-snap-type: x mandatory; 
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .community_tag {
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+        grid-gap: 15px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .slider-container {
+        width: 100vw;        
+    }
+    .favorite_slider-container{
+        width: 90vw;
+    }   
+    .community_tag_container{
+        width: 100vw;
+        margin: 0 auto;
     }
 }
