@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     let startSlide = 0;
-    let endSlide = 4; // 5개씩 보여주기 위해 endSlide 설정
+    let endSlide = 10; // 5개씩 보여주기 위해 endSlide 설정
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
 

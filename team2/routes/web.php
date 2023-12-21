@@ -6,6 +6,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\HashTagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::get('/boardcategory/{categoryId}', [BoardController::class, 'boardcategoryget']);
+
 
 Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  
