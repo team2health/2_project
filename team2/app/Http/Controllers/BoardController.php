@@ -68,8 +68,9 @@ class BoardController extends Controller
      */
     public function create()
     {
+        
         return view('insert');
-    }
+    }    
 
     /**
      * Store a newly created resource in storage.
@@ -82,7 +83,7 @@ class BoardController extends Controller
         $u_id = auth()->id();        
         $boardData = $request->only('board_title', 'board_content', 'category_id');
         $boardData['u_id'] = $u_id;
-        $arrData['category_id'] = $request->input('category_id', 1);
+        // $boardData['category_id'] = $request->input('category_id', 1);
         $board = Board::create($boardData);
 
         // Save Hashtag (if provided)
@@ -93,14 +94,36 @@ class BoardController extends Controller
         //}
 
         // Save Images to Board_img
-        if ($request->hasFile('board_img')) {
-            $image = $request->file('board_img');
-            $imageName = Str::uuid().'.'.$image->extension();
-            $image->move(public_path('board_img'), $imageName);
+        //이미지넣기
+        // if ($request->hasFile('board_img')) {
+        //     $image = $request->file('board_img');
+        //     $imageName = Str::uuid().'.'.$image->extension();
+        //     $image->move(public_path('board_img'), $imageName);
             
-            // Save the image path to the Board_img model
-            $boardImage = new Board_img(['img_address' => $imageName]);
-            $board->images()->save($boardImage);
+        //     // Save the image path to the Board_img model
+        //     $boardImage = new Board_img(['img_address' => $imageName]);
+        //     $board->images()->save($boardImage);
+        // }
+        if ($request->hasFile('board_img')) {
+            $images = $request->file('board_img');
+    
+        //     // Limit the number of images to 3
+        //     $imageCount = count($images);
+        //     $maxImages = 3;
+        //     if ($imageCount > $maxImages) {
+        //         // If more than 3 images are uploaded, take the first 3
+        //         $images = array_slice($images, 0, $maxImages);
+        //     }
+    
+            foreach ($images as $image) {
+                $imageName = Str::uuid() . '.' . $image->extension();
+                $image->move(public_path('board_img'), $imageName);
+    
+                // Save the image path to the Board_img model
+                $boardImage = new Board_img(['img_address' => $imageName]);
+                $board->images()->save($boardImage);
+            }
+        
         }
 
         return redirect()->route('categoryboard');
@@ -151,6 +174,21 @@ class BoardController extends Controller
             'board_title' => $request->input('u_title'),
             'board_content' => $request->input('u_content'),
         ]);
+        if ($request->hasFile('board_img')) {
+        // 기존 이미지 삭제
+        $result->images()->delete();
+
+        $images = $request->file('board_img');
+
+        foreach ($images as $image) {
+            $imageName = Str::uuid() . '.' . $image->extension();
+            $image->move(public_path('board_img'), $imageName);
+
+            // Save the image path to the Board_img model
+            $boardImage = new Board_img(['img_address' => $imageName]);
+            $result->images()->save($boardImage);
+        }
+    }
         return redirect()-> route('board.show',['board'=> $result->board_id]);
     }
 

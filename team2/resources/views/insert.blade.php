@@ -7,15 +7,28 @@
 <main class="insert_main">
 	<div class="insert_hidden_container">
 		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data">
-			{{-- @include('layout.errorlayout') --}}
 			@csrf
+			{{-- @include('layout.errorlayout') --}}
 			<div class="insert_container">
 				<div class="insert_img">
-					<label for="file" >
-						<img id="preview1"src="../img/plus.png" alt="">
+					<label for="file0">
+						<img id="preview0" src="{{ asset('img/plus.png') }}" alt="">
 					</label>
-					<input type="file" name="board_img" id="file" style="display:none;" onchange="previewImage('img1', 'preview1')" accept="image/*">
-					
+					<input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*" >
+
+
+
+					<label for="file1">
+						<img id="preview1" src="{{ asset('img/plus.png') }}" alt="">
+					</label>
+					<input type="file" name="board_img[]" id="file1" style="display:none;" onchange="previewImage('file1', 'preview1')" accept="image/*" >
+
+
+
+					<label for="file2">
+						<img id="preview2" src="{{ asset('img/plus.png') }}" alt="">
+					</label>
+					<input type="file" name="board_img[]" id="file2" style="display:none;" onchange="previewImage('file2', 'preview2')" accept="image/*" >
 				</div>
 				
 				<div class="insert_select_container">
