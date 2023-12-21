@@ -14,7 +14,7 @@
 				@forelse ($part as $item)
 				<div onclick="partCheck({{$item->part_id}}); return false;">{{$item->part_name}}</div>
 				@empty
-					
+					<div>추가 될 예정입니다. 기다려주세용</div>
 				@endforelse
 			</div>
 			<br><br>

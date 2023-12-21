@@ -33,7 +33,7 @@ class BoardController extends Controller
             ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
             ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
             ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
-            ->select('boards.board_title', 'boards.board_content')
+            ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->where('users.id', $u_id)
             ->orderby('boards.board_id', 'desc')
             ->limit(4)

@@ -16,7 +16,7 @@
         <div class="slider" id="slider">
             @forelse ($data[0] as $item)
             <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
-                <div class="slide board-display-flex">
+                <div class="slide a-bordergo-hover">
                     <div>
                         <div>{{ $item->board_title }}</div>
                         <div>{{ $item->board_content }}</div>
@@ -37,7 +37,7 @@
         </div>
     </div>    
         
-    <div class="favorite_slider-container">   
+    <div class="favorite_slider-container"> 
         <div class="favorite_slider">
             @forelse ($data[1] as $item)
             <div class="favorite_slide">
@@ -66,12 +66,14 @@
                 등록된 관심태그가 없습니다
             @endforelse
             </div>
-            <div class="community_tag">
+            <div class="community_tag bordergo-hover">
                 @forelse ($data[2] as $item)
-                <div>
-                    <div style="margin-bottom: 30px;">{{$item->board_title}}</div>
-                    <div>{{$item->board_content}}</div>
-                </div>
+                <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
+                    <div>
+                        <div style="margin-bottom: 30px;">{{$item->board_title}}</div>
+                        <div>{{$item->board_content}}</div>
+                    </div>
+                </a>
                 @empty
             @endforelse
             </div>
@@ -84,12 +86,14 @@
         <div class="community_headline">
             <h2>최근 게시글</h2>                     
         </div>
-        <div class="community_tag border-line-color-gray">
+        <div class="community_tag border-line-color-gray bordergo-hover">
             @forelse ($data[3] as $item)
+            <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
                 <div>
                     <div style="margin-bottom: 30px">{{ $item->board_title }}</div>
                     <div>{{ $item->board_content }}</div>
                 </div>
+            </a>
             @empty
                 게시글이 없습니다.
             @endforelse
