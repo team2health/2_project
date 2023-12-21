@@ -29,8 +29,19 @@ class Board extends Model
     }
      public function tags()
      {
-         return $this->belongsToMany(Board_tag::class, 'boardtag_id', 'board_id', 'hash_id');
+         return $this->belongsToMany(Board_tag::class, 'boardtag_id', 'board_id', 'hash_id');         
      }
+     public function hashtags()
+    {
+        return $this->hasManyThrough(
+            Hashtag::class,
+            Board_tag::class,
+            'board_id',
+            'hashtag_id',
+            'id',
+            'id'
+        );
+    }
      public function user(){
         return $this->belongsTo(User::class,'u_id', 'id');        
     }

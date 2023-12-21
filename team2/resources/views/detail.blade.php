@@ -35,9 +35,9 @@
                 </div>                
             </div>
             <div>                
-                <div>
-                {{-- $data->hashtag_id --}}
-                </div>
+                @foreach ($data->hashtags as $hashtag)
+                    <span>{{ $hashtag->hashtag_name }}</span>
+                @endforeach
             </div>
         </div>
     </div>

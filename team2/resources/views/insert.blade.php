@@ -46,7 +46,18 @@
 				</div>				
 				<div class="insert_hashtag_container">
 					<label for="hashtag" class="label_hashtag">#해시태그</label>
-					<input type="text" class="insert_hashtag" id="hashtag" name="hashtag">			  
+					<input type="text" class="insert_hashtag" id="hashtag" name="hashtag">
+					<button type="button" id="toggleHashtagsBtn" onclick="toggleHashtags()">해시태그 펼치기/접기</button>
+                    
+                    <!-- Hidden container for hashtag data -->
+                    <div id="hiddenHashtags" style="display: none;">
+					@foreach ($data as $item)
+					<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
+    					@endforeach
+                    </div>
+                </div>
+            </div>	
+					
 				</div>
 			</div>
 			<div class="insert_bottom_button">
@@ -56,6 +67,6 @@
 		</form>		
 	</div>		
 </main>
-           
-@endsection
+       
 <script src="/js/insert.js"></script>
+@endsection

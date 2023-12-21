@@ -7,10 +7,12 @@ use Illuminate\support\Facades\Auth;
 use Illuminate\support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Board;
+use App\Models\Board_tag;
 use App\Models\Board_img;
 use App\Models\Pandemic;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Hashtag;
 use Illuminate\Support\Str;
 
 class BoardController extends Controller
@@ -56,6 +58,7 @@ class BoardController extends Controller
         $category_id = Category::orderby('category_id', 'asc')->get();
         $category_name = Category::where('category_id', '1')->get();
         $result = [$category_board, $category_id, $category_name];
+        
 
         // Log::debug($category_id);
 
@@ -68,8 +71,8 @@ class BoardController extends Controller
      */
     public function create()
     {
-        
-        return view('insert');
+        $result= Hashtag::all();
+        return view('insert')->with('data', $result);
     }    
 
     /**
@@ -86,13 +89,22 @@ class BoardController extends Controller
         // $boardData['category_id'] = $request->input('category_id', 1);
         $board = Board::create($boardData);
 
-        // Save Hashtag (if provided)
-       // $hashtag = $request->input('hashtag');
-        //if (!empty($hashtag)) {
-            // Save or update the hashtag logic goes here
-            // You may create a separate table for hashtags and associate them with boards
-        //}
+        $hashtags = $request->input('hashtag');
+if (!empty($hashtags)) {
+    // Split hashtags by comma and trim spaces
+    $hashtagsArray = array_map('trim', explode(',', $hashtags));
 
+    // Save each hashtag to the Hashtags table and link it to the board
+    foreach ($hashtagsArray as $hashtag) {
+        $hashtagModel = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
+        
+        // Save the relationship in the BoardTag pivot table
+        Board_tag::create([
+            'board_id' => $board->id,
+            'hashtag_id' => $hashtagModel->id,
+        ]);
+    }
+}
         // Save Images to Board_img
         //이미지넣기
         // if ($request->hasFile('board_img')) {
@@ -217,5 +229,6 @@ class BoardController extends Controller
 
         return view('categoryboard')->with('data', $result);
     }
+    
 }
 
