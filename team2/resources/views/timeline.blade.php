@@ -4,7 +4,7 @@
     
 
 @section('main')
-<div class="timelinemain">
+<div class="timelinemain" id="timelineMain">
     <div class="mypage-first">
         <div class="calendarBtn" id="calendarBtn" onclick="calendarshow(); return false;"></div>
         <div class="maincalendar calendarNone" id="calendarOpen">
@@ -45,15 +45,16 @@
         <div class="recordsection" id="recordDeleteTest">
             <input type="hidden" value="{{$result_count}}" id="recordTurn">
             @forelse ($data as $item)
-                <img src="/img/circle.png" class="record-circle-img" id="recordCircleImg">
-                <div class="user-record" id="userRecord">
-                    <span class="record-time">{{$item->created_at}}</span>
+                {{-- <input type="hidden" value="{{$item->created_at}}" id="recordCreatedAt"> --}}
+                <img src="/img/circle.png" class="record-circle-img" id="recordCircleImg{{$item->record_id}}">
+                <div class="user-record" id="userRecord{{$item->record_id}}">
+                    <span class="record-time">{{$item->created_date}}</span>
                     <div class="record-delete-btn" onclick="recorddeletemodalopen({{$item->record_id}}); return false;">X</div>
                     <br>
                     <span class="recordtext">{{$item->symptom_name}} </span>
                 </div>
             @empty
-                <div class="none-recordtext"> 오늘은 검색기록이 없어요!</div>
+                {{-- <div class="none-recordtext"> 오늘은 검색기록이 없어요!</div> --}}
             @endforelse
             <div class="none-recordtext notice-no-data" id="noticeNoData"> 오늘은 검색기록이 없어요!</div>
         </div>
@@ -74,5 +75,5 @@
     </div>
 
 </div>
-<script src="/js/timeline.js"></script>
+<script src="/js/timeline.js" async></script>
 @endsection

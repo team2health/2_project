@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Favorite_tag;
+use App\Models\Record;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -142,46 +143,23 @@ class MypageController extends Controller
             'records.record_id'
             ,'symptoms.symptom_id'
             ,'symptoms.symptom_name'
-            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_date')
+            ,'records.created_at'
         )
         ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
         ->where('records.u_id', $user_id)
         ->where('records.created_at', 'like', $created_start.'%')
+        ->where('records.deleted_at', null)
         ->get();
-        Log::debug($today_timeline);
 
         $result_count = $today_timeline->count();
 
         return view('timeline')->with('data', $today_timeline)->with('result_count', $result_count);
     }
 
-    public function daytimelinepost(Request $request) {
-
-    log::debug("daytimelinepost", $request->all());
-        $created_at = $request->date;
-        Log::debug($created_at);
-        $user_id = session('id');
-
-        $timeline = DB::table('symptoms')
-        ->select(
-            'records.record_id'
-            ,'symptoms.symptom_id'
-            ,'symptoms.symptom_name'
-            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
-        )
-        ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
-        ->where('records.u_id', $user_id)
-        ->where('records.created_at', 'like', $created_at.'%')
-        ->get();
-        
-        Log::debug($timeline);
-
-        return response()->json($timeline);
-
-    }
     
     
-        public function myinfomodify() {
+    public function myinfomodify() {
     
         }
 
@@ -192,9 +170,9 @@ class MypageController extends Controller
             // Log::debug("이거".$request->user_name);
             $username = $request->user_name;
             // Log::debug("user_name:".$username);
-    
+            
             $existingUser = User::where('user_name', $username)->first();
-    
+            
             if ($existingUser) {
                 return response()->json(['namechange' => '1']);
                 exit;
@@ -204,15 +182,15 @@ class MypageController extends Controller
 
         public function userinfoupdatepost(Request $request) {
             // Log::debug("111111", $request->all());
-
+            
             // 사용자 ID 가져오기
             $result = session('id');
-
+            
             $imgFlg = $request->imgFlg;
             // Log::debug("efeeee", ['img' => $imgFlg]);
-
+            
             $userinfo = User::find($result);
-
+            
             if($imgFlg == 1) {
                 $imgName = Str::uuid().'.'.$request->user_img->extension();
                 $request->user_img->move(public_path('user_img'), $imgName);
@@ -227,11 +205,11 @@ class MypageController extends Controller
             if($request->user_address) {
                 $userinfo->user_address = $request->user_address;
             }
-
+            
             $userinfo->save();
     
             $board_result = DB::table('boards')
-                ->select(
+            ->select(
                 'board_id'
                 ,'u_id'
                 ,'category_id'
@@ -244,8 +222,8 @@ class MypageController extends Controller
                 ->where('deleted_at', null)
                 ->orderBy('board_id', 'DESC')
                 ->get();
-            
-            $user_hashtag = DB::table('favorite_tags')
+                
+                $user_hashtag = DB::table('favorite_tags')
                 ->select(
                 'favorite_tags.favorite_tag_id'
                 ,'favorite_tags.hashtag_id'
@@ -256,8 +234,8 @@ class MypageController extends Controller
                 ->where('favorite_tags.deleted_at', null)
                 ->orderBy('favorite_tags.created_at')
                 ->get();
-
-            $user_info  = DB::table('users')
+                
+                $user_info  = DB::table('users')
                 ->select(
                     'id'
                     ,'user_id'
@@ -268,11 +246,53 @@ class MypageController extends Controller
                 ->where('id', $result)
                 ->get();
                 
-            // Log::debug("이름", ['name' => $user_info]);
-            session(['user_name' => $user_info[0]->user_name,
-                    'user_img' => $user_info[0]->user_img]);
-            // Log::debug("유저", ['name' => $user_info]);
+                // Log::debug("이름", ['name' => $user_info]);
+                session(['user_name' => $user_info[0]->user_name,
+                'user_img' => $user_info[0]->user_img]);
+                // Log::debug("유저", ['name' => $user_info]);
+                
+                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
+            }
+            
+            public function newcalendarblock() {
+                
+            }
 
-            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
+            public function daytimelinepost(Request $request) {
+
+                log::debug("daytimelinepost", $request->all());
+                $created_at = $request->date;
+                Log::debug($created_at);
+                $user_id = session('id');
+        
+                $timeline = DB::table('symptoms')
+                ->select(
+                    'records.record_id'
+                    ,'symptoms.symptom_id'
+                    ,'symptoms.symptom_name'
+                    ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+                )
+                ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+                ->where('records.u_id', $user_id)
+                ->where('records.created_at', 'like', $created_at.'%')
+                ->where('records.deleted_at', null)
+                ->get();
+                
+                Log::debug($timeline);
+        
+                return response()->json($timeline);
+        
+            }
+            
+            public function recorddelete(Request $request) {
+
+            $id = $request->record_id;
+            $created_at = $request->created_at;
+            Log::debug($id);
+            Log::debug($created_at);
+
+            Record::destroy($id);
+            DB::commit();
+            
         }
 }

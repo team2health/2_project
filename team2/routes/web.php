@@ -32,14 +32,14 @@ Route::get('/insert', function () {
 
 Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments');
-Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
-Route::get('/boardcategory/{categoryId}', [BoardController::class, 'boardcategoryget']);
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
+Route::get('/getBoardByCategory/{categoryId}', [BoardController::class, 'getBoardByCategory']);
 
 Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  
 // POST            board ..................................... board.store › BoardController@store  
 // GET|HEAD        board/create .............................. board.create › BoardController@create  
-// GET|HEAD        board/{board} ............................. board.show › BoardController@show
+// GET|HEAD        board/{board} ............................. board.show › BoardController@show  
 // PUT|PATCH       board/{board} ............................. board.update › BoardController@update  
 // DELETE          board/{board} ............................. board.destroy › BoardController@destroy  
 // GET|HEAD        board/{board}/edit ........................ board.edit › BoardController@edit  
@@ -61,6 +61,8 @@ Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get'
 Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->name('myhash.post');
 Route::get('/allhashtag', [MypageController::class, 'allhashget'])->name('allhash.post');
 Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost'])->name('allhash.post');
+Route::post('/newcalendarblock', [MypageController::class, 'newcalendarblock'])->name('allhash.post');
+
 
 Route::post('/namechange', [MypageController::class, 'namechangepost']);
 Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);
@@ -68,6 +70,8 @@ Route::post('/userimgremove', [MypageController::class, 'userimgremovepost']);
 
 Route::get('/timeline', [MypageController::class, 'todaytimelineget'])->name('todaytimeline.get');
 Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name('daytimeline.post');
+Route::post('/recorddelete', [MypageController::class, 'recorddelete'])->name('recorddelete.post');
+
 
 Route::post('/namechk', [UserController::class, 'namechkpost']);
 Route::post('/idchk', [UserController::class, 'idchkpost']);

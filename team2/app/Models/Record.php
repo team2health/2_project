@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Record extends Model
 {
+    use SoftDeletes;
     use HasFactory;
 
     public $timestamps = ["created_at"]; //only want to used created_at column
@@ -16,4 +19,6 @@ class Record extends Model
         'u_id',
         'symptom_id',
     ];
+    
+    protected $primaryKey = 'record_id';
 }
