@@ -449,8 +449,8 @@ li{
     display: block;
 } 
 
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
+.dropdown-content div:hover {
+    background-color: #FF9900;
 }
 
 .show {
@@ -506,6 +506,10 @@ li{
     margin-left: 10px;
 }
 .commentDeleteBtn {
+    cursor: pointer;
+}
+
+.board-mouse-cursor {
     cursor: pointer;
 }
 

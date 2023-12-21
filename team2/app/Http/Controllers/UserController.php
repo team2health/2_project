@@ -44,7 +44,11 @@ class UserController extends Controller
 
     public function loginpost(Request $request) {
         $result = User::where('user_id', $request->user_id)->first();
-        if(!$result || !(Hash::check($request->user_password, $result->user_password))) {
+        if(!$result) {
+            return view('login')->with('passwordError', '0');
+        }
+
+        if(!(Hash::check($request->user_password, $result->user_password))) {
             return view('login')->with('passwordError', '1');
         }
 

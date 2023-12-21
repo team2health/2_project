@@ -18,6 +18,7 @@
 				</div>
 			</form>
 			<input type="hidden" id="passwordError" value="{{$passwordError}}">
+			{{-- <input type="hidden" id="idError" value="{{$idError}}"> --}}
 		</div>
 	</div>
 	<script src="../js/login.js"></script>

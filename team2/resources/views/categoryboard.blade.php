@@ -14,7 +14,7 @@
                 <form method="get" id="category_id_form">
                     @csrf
                     @forelse ($data[1] as $item)
-                        <div onclick="showBoard({{$item->category_id}}); return false;">{{$item->category_name}}</div>
+                        <div class="board-mouse-cursor" onclick="showBoard({{$item->category_id}}); return false;">{{$item->category_name}}</div>
                     @empty
                         
                     @endforelse
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div> 
-        <div style="width: 300px; margin-left: 10px;">
+        <div style="width: 280px; margin-left: 10px;">
             {{ $item->board_title }}
         </div> 
         <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
