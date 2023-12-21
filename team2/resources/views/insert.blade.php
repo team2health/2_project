@@ -7,20 +7,26 @@
 <main class="insert_main">
 	<div class="insert_hidden_container">
 		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data">
-			{{-- @include('layout.errorlayout') --}}
 			@csrf
+			{{-- @include('layout.errorlayout') --}}
 			<div class="insert_container">
 				<div class="insert_img">
-					<label for="file" >
-						<img id="preview1"src="../img/plus.png" alt="">
+					<label for="file0">
+						<img id="preview0" src="{{ asset('img/plus.png') }}" alt="">
 					</label>
-					<input type="file" name="board_img" id="file" style="display:none;" onchange="previewImage('img1', 'preview1')" accept="image/*">
-					
+					<input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*" >
+					<label for="file1">
+						<img id="preview1" src="{{ asset('img/plus.png') }}" alt="">
+					</label>
+					<input type="file" name="board_img[]" id="file1" style="display:none;" onchange="previewImage('file1', 'preview1')" accept="image/*" >
+					<label for="file2">
+						<img id="preview2" src="{{ asset('img/plus.png') }}" alt="">
+					</label>
+					<input type="file" name="board_img[]" id="file2" style="display:none;" onchange="previewImage('file2', 'preview2')" accept="image/*" >
 				</div>
 				
 				<div class="insert_select_container">
-					<select name="category_id" id="category_id" class="insert_select">
-						
+					<select name="category_id" id="category_id" class="insert_select">						
 						<option value="1">자유게시판</option>
 						<option value="2">정보 게시판</option>
 						<option value="3">친목 게시판</option>
@@ -30,18 +36,17 @@
 			
 			
 				<div class="insert_input_container">
-				<label for="board_title" class="">제목</label><br>
-				<input type="text" class="insert_input" id="board_title" name="board_title" required>			  
+					<label for="board_title" class="">제목</label><br>
+					<input type="text" class="insert_input" id="board_title" name="board_title" required>			  
 				</div>
 				
 				<div class="insert_textarea_container">
 					<label for="board_content" >내용</label><br>			  
 					<textarea name="board_content" id="board_content" class="insert_textarea" required ></textarea>
-				</div>
-				
+				</div>				
 				<div class="insert_hashtag_container">
-				<label for="hashtag" class="label_hashtag">#해시태그</label>
-				<input type="text" class="insert_hashtag" id="hashtag" name="hashtag">			  
+					<label for="hashtag" class="label_hashtag">#해시태그</label>
+					<input type="text" class="insert_hashtag" id="hashtag" name="hashtag">			  
 				</div>
 			</div>
 			<div class="insert_bottom_button">

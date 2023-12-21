@@ -4,7 +4,7 @@
     
 
 @section('main')
-<div class="timelinemain" id="timelineMain">
+<div class="timelinemain wrapper" id="timelineMain">
     <div class="mypage-first">
         <div class="calendarBtn" id="calendarBtn" onclick="calendarshow(); return false;"></div>
         <div class="maincalendar calendarNone" id="calendarOpen">

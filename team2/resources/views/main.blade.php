@@ -3,6 +3,7 @@
 @section('title', 'main')
 
 @section('main')
+<main class="wrapper">
 	<div class="container" id="part-display">
 		<br>
 		<div style="color: #2C2B71" class="text-center bc-purple">
@@ -13,7 +14,7 @@
 				@forelse ($part as $item)
 				<div onclick="partCheck({{$item->part_id}}); return false;">{{$item->part_name}}</div>
 				@empty
-					
+					<div>추가 될 예정입니다. 기다려주세용</div>
 				@endforelse
 			</div>
 			<br><br>
@@ -51,6 +52,7 @@
 			</div>
 		</div>
 	</div>
+</main>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script>
 	<script src="../js/main.js"></script>
 @endsection
