@@ -164,7 +164,7 @@ li{
 }
 .insert_img {    
     margin: 0px auto;
-    width: 50%;
+    width: 70%;
     height: auto;  
     display: grid;    
     grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
@@ -457,7 +457,7 @@ li{
     display: block;
 }
 
-#preview1 {
+#preview1,#preview0,#preview2 {
     width: 100px;
     height: 100px;
     cursor: pointer;

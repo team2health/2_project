@@ -11,5 +11,8 @@ class Category extends Model
     protected $fillable = [
         'category_name',
     ];
-
+    public function boards()
+    {
+        return $this->hasMany(Board::class, 'category_id', 'category_id');
+    }
 }
