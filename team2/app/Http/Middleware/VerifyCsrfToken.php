@@ -25,5 +25,7 @@ class VerifyCsrfToken extends Middleware
         '/namechange',
         '/daytimeline',
         '/userimgremove',
+        '/boardcategory/{categoryId}',
+        '/recorddelete',
     ];
 }
