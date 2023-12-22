@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('hashtags', function (Blueprint $table) {
             $table->integer('hashtag_id');
-            $table->string('hashtag_name')->unique();
-            
+            $table->string('hashtag_name')->unique();            
             $table->primary('hashtag_id');
+            $table->timestamps(); 
+            $table->softDeletes(); 
         });
     }
 

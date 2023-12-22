@@ -82,7 +82,7 @@ let categoryFlg = 0;
         // })
         // .catch(error => {
         //     console.error('오류 발생:', error);
-        // })
+        // })  
         FORMACTION.submit();
     
         // 드랍다운 닫기

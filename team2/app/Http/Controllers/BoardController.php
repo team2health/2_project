@@ -54,7 +54,7 @@ class BoardController extends Controller
     }
 
     public function categoryboard(){
-        $category_board=Board::where('category_id', '1')->orderby('board_id', 'desc')->get();
+        $category_board=Board::where('category_id', '1',)->orderBy('board_id', 'desc')->paginate(5);
         $category_id = Category::orderby('category_id', 'asc')->get();
         $category_name = Category::where('category_id', '1')->get();
         $result = [$category_board, $category_id, $category_name];
@@ -105,17 +105,12 @@ class BoardController extends Controller
 //         ]);
 //     }
 //}$hashtags = $request->input('hashtag');
-if (!empty($hashtags)) {
-    // Split hashtags by comma and trim spaces
-    $hashtagsArray = array_map('trim', explode(',', $hashtags));
+$hashtags = explode(',', $request->input('hashtag'));
+    foreach ($hashtags as $hashtag) {
+        $tag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
+        $board->hashtags()->attach($tag->id);
+    }// 추가
 
-    // Save each hashtag to the Hashtags table
-    foreach ($hashtagsArray as $hashtag) {
-        $hashtagModel = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
-        // Attach the hashtag to the board using pivot table
-        $board->hashtags()->attach($hashtagModel->hashtag_id);
-    }
-}
         // Save Images to Board_img
         //이미지넣기
         // if ($request->hasFile('board_img')) {
@@ -128,16 +123,7 @@ if (!empty($hashtags)) {
         //     $board->images()->save($boardImage);
         // }
         if ($request->hasFile('board_img')) {
-            $images = $request->file('board_img');
-    
-        //     // Limit the number of images to 3
-        //     $imageCount = count($images);
-        //     $maxImages = 3;
-        //     if ($imageCount > $maxImages) {
-        //         // If more than 3 images are uploaded, take the first 3
-        //         $images = array_slice($images, 0, $maxImages);
-        //     }
-    
+            $images = $request->file('board_img');   
             foreach ($images as $image) {
                 $imageName = Str::uuid() . '.' . $image->extension();
                 $image->move(public_path('board_img'), $imageName);
@@ -229,7 +215,7 @@ if (!empty($hashtags)) {
 
     public function boardcategoryget($categoryId) {
         // Log::debug($categoryId);
-        $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->get();
+        $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->paginate(5);
 
         $category_id = Category::orderby('category_id', 'asc')->get();
 
