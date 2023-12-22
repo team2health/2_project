@@ -141,14 +141,13 @@ function selectDate(data, data2) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         
         if( data.length > 1) {
             noticeNoData.classList.add('notice-no-data');
             recordTurn.value = '';
             recordTurn.value = data.length;
 
-            for ( i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 let inputHiddenDate = document.createElement('input');
                 let inputHiddenRecordId = document.createElement('input');
                 let img = document.createElement('img');
@@ -157,9 +156,9 @@ function selectDate(data, data2) {
                 let recordDeleteDiv = document.createElement('div');
                 let br = document.createElement('br');
                 let textspan = document.createElement('span');
-
                 inputHiddenDate.setAttribute('value', data[i].created_at);
                 inputHiddenRecordId.setAttribute('value', data[i].record_id);
+                let inputHiddenRecordValue = inputHiddenRecordId.value;
                 img.classList.add('record-circle-img');
                 img.id = 'recordCircleImg'+data[i].record_id;
                 img.src = '/img/circle.png';
@@ -169,10 +168,14 @@ function selectDate(data, data2) {
                 timespan.innerHTML = data[i].created_at;
                 recordDeleteDiv.classList.add('record-delete-btn');
                 recordDeleteDiv.innerHTML = 'X';
-                recordDeleteDiv.onclick = function () {recorddeletemodalopen(data[i].record_id);}
+                recordDeleteDiv.id = data[i].record_id;
+                recordDeleteDiv.onclick = function (e) {recorddeletemodalopen(e.target.id);}
                 textspan.classList.add('recordtext');
                 textspan.innerHTML = data[i].symptom_name;
+                console.log('record_id');
                 console.log(data[i].record_id);
+                console.log('onclick아이디');
+                console.log(inputHiddenRecordValue);
 
                 recordDiv.appendChild(timespan);
                 recordDiv.appendChild(recordDeleteDiv);
@@ -373,7 +376,6 @@ function newCalendarReloard(data) {
         
         selectDateScrollbar(data);
     }
-
 
     calendarshow(); //캘린더 닫기
 }

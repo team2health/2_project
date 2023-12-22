@@ -6,9 +6,9 @@
 @section('main')
 
 <div class="timelinemain wrapper" id="timelineMain">
-    @guest
+    {{-- @guest
     <div class="block-mypage">로그인 후 이용가능합니다.</div>
-    @endguest
+    @endguest --}}
     <div class="mypage-first">
         <div class="calendarBtn" id="calendarBtn" onclick="calendarshow(); return false;"></div>
         <div class="maincalendar calendarNone" id="calendarOpen">
@@ -41,7 +41,7 @@
         
     </div>
 
-    <div class="mypage-second" id="mypageSecond">
+    <div class="mypage-second" id="mypageSecond"></div>
         
     <div class="mypage-third">
         <div class="recordsection" id="recordDeleteTest">
