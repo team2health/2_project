@@ -23,9 +23,9 @@ class UserController extends Controller
     }
 
     public function registpost(Request $request) {
-        // Log::debug("*********** registpost start ***********");
-        $data = $request->only('user_id', 'user_name', 'user_password', 'user_address', 'user_gender');
-        // Log::debug("request data", $data);
+        Log::debug("*********** registpost start ***********");
+        $data = $request->only('user_id', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
+        Log::debug("request data", $data);
         $data['user_password'] = Hash::make($data['user_password']);
 
         $result = User::create($data);
