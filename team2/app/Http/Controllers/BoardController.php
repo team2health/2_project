@@ -30,17 +30,22 @@ class BoardController extends Controller
         return redirect()->route('login.get');
         }
         $hotboard = Board::orderBy('board_hits', 'desc')->get();
+
         $pandemicboard = Pandemic::get();
+
         $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
             ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
             ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
             ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
             ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->where('users.id', $u_id)
+            ->where('favorite_tags.deleted_at', null)
             ->orderby('boards.board_id', 'desc')
             ->limit(4)
             ->get();
+
         $lastboard = Board::orderBy('board_id', 'desc')->limit(4)->get();
+
         $favoritetag = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
         ->select('hashtags.hashtag_name')
@@ -106,7 +111,7 @@ class BoardController extends Controller
 //         ]);
 //     }
 //}$hashtags = $request->input('hashtag');
-$hashtags = explode(',', $request->input('hashtag'));
+    $hashtags = explode(',', $request->input('hashtag'));
     foreach ($hashtags as $hashtag) {
         $tag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
         $board->hashtags()->attach($tag->id);

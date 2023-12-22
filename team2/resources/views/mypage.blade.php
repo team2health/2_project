@@ -107,7 +107,7 @@
             @csrf
             <div id="UserInfoModify">
                 <label for="profilephoto">
-                    <div class="profile-photo-btn" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
+                    <div id="profilephotoview" class="profile-photo-btn" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
                     <span id="user_img_name"></span>
                 </label>
                 <input type="file" accept="image/*" style="display: none;" id="profilephoto" name="user_img">

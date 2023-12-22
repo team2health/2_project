@@ -52,14 +52,14 @@ function toggleHashtags() {
 //             hashtagInput.value += (hashtagInput.value ? ', ' : '') + clickedTag;
 //         });
 //     });
-hiddenHashtags.querySelectorAll('.tag').forEach(function (tag) {
-    tag.addEventListener('click', function () {
-        // 클릭한 태그의 이름을 콘솔에 출력
-        var clickedTag = this.getAttribute('data-tag');
-        console.log("Clicked tag:", clickedTag);
+    hiddenHashtags.querySelectorAll('.tag').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+            // 클릭한 태그의 이름을 콘솔에 출력
+            var clickedTag = this.getAttribute('data-tag');
+            console.log("Clicked tag:", clickedTag);
 
-        // 클릭한 태그의 이름을 가져와서 입력 폼에 추가
-        hashtagInput.value += (hashtagInput.value ? ', ' : '') + clickedTag;
+            // 클릭한 태그의 이름을 가져와서 입력 폼에 추가
+            hashtagInput.value += (hashtagInput.value ? ', ' : '') + clickedTag;
+        });
     });
-});
- }
+}
