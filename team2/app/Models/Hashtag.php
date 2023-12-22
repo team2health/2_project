@@ -11,11 +11,11 @@ class Hashtag extends Model
     protected $primaryKey = "hashtag_id";
     protected $fillable = [
         'hashtag_name',
-        'hashtag_id'
     ];
-    protected $table = 'hashtags';
+
     public function boards()
     {
-        return $this->belongsToMany(Board::class, 'hashtag_id', 'hashtag_id');
+        return $this->belongsToMany(Board::class, 'board_tags', 'hashtag_id', 'board_id');
     }
+    public $incrementing = true;
 }

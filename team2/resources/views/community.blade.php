@@ -3,6 +3,7 @@
 @section('title','Community')
 
 @section('main')
+
 <main class="">    
     <div class="slider-container">
         <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>

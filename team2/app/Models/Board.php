@@ -28,21 +28,22 @@ class Board extends Model
     {
         return $this->hasMany(Board_img::class, 'board_id', 'board_id');
     }
-     public function tags()
-     {
-         return $this->belongsToMany(Board_tag::class, 'board_tag_id', 'board_id', 'hashtag_id');         
-     }
-     public function hashtags()
+
+    public function tags()
     {
-        return $this->belongsToMany(Hashtag::class, 'board_tag_id', 'board_id', 'hashtag_id');
+        return $this->belongsToMany(Hashtag::class, 'board_tags', 'board_id', 'hashtag_id');
     }
-     public function user(){
-        return $this->belongsTo(User::class,'u_id', 'id');        
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'u_id', 'id');
     }
-   public function comments()
+
+    public function comments()
     {
         return $this->hasMany(Comment::class, 'board_id');
     }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'category_id');

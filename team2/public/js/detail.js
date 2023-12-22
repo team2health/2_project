@@ -4,9 +4,7 @@ const token = "{{ csrf_token() }}";
 document.addEventListener('DOMContentLoaded', function () {
     // 댓글 개수 업데이트
     function updateCommentCount() {
-        // ... (이전 코드와 동일)
-
-        // 여기에서 board_id를 올바르게 추출하는 부분을 확인
+       // 여기에서 board_id를 올바르게 추출하는 부분을 확인
         const commentContentInput = commentForm.querySelector('textarea[name="comment_content"]');
         const commentContent = commentContentInput ? commentContentInput.value : '';
         const boardId = commentForm.querySelector('input[name="board_id"]').value;

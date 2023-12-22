@@ -4,6 +4,8 @@
 
 @section('main')
 
+
+
 <main class="insert_main">
 	<div class="insert_hidden_container">
 		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data">
@@ -52,9 +54,10 @@
                     <!-- Hidden container for hashtag data -->
                     <div id="hiddenHashtags" style="display: none;">
 					@foreach ($data as $item)
-					<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
+					<span class='tag' data-tag="{{ $item->hashtag_id }}">{{ $item->hashtag_name }}</span>
     					@endforeach
                     </div>
+					
                 </div>
             </div>	
 					

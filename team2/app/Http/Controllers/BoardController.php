@@ -83,12 +83,34 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {       
+    {      
+
         $u_id = auth()->id();        
         $boardData = $request->only('board_title', 'board_content', 'category_id');
         $boardData['u_id'] = $u_id;
-        // $boardData['category_id'] = $request->input('category_id', 1);
         $board = Board::create($boardData);
+
+        $board_id = $board->board_id;
+
+// 유저가 선택한 해시태그 목록 불러오기
+        $hashtag_id = DB::table('hashtags')
+        ->select(
+        'hashtags.hashtag_id'
+        )
+        ->where('hashtags.hashtag_id', $hash_id)
+        ->get();
+        
+        Log::debug($hashtag_id);
+// 유저가 선택한 해시태그 목록을 입력
+        $hashtag_insert = DB::table('board_tags')->insert([
+            'board_id' => $new_board_id,
+            'hashtag_id' => $hashtag_id,
+        ]);
+        Log::debug($hashtag_insert);
+        // 이부분 반복문 써서 완성
+
+        
+
 
 //         $hashtags = $request->input('hashtag');
 // if (!empty($hashtags)) {
@@ -105,14 +127,43 @@ class BoardController extends Controller
 //             'hashtag_id' => $hashtagModel->id,
 //         ]);
 //     }
-//}$hashtags = $request->input('hashtag');
-$hashtags = explode(',', $request->input('hashtag'));
-    foreach ($hashtags as $hashtag) {
-        $tag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
-        $board->hashtags()->attach($tag->id);
-    }// 추가
 
-        // Save Images to Board_img
+
+
+// $hashtags = explode(',', $request->input('hashtag'));
+
+// foreach ($hashtags as $hashtag) {
+//     $tag = Hashtag::where('hashtag_name', $hashtag)->first();
+
+//     if ($tag) {
+//         $board->tags()->attach($tag->hashtag_id);
+//     }}
+// $hashtags = explode(',', $request->input('hashtag'));
+// $board->tags()->detach();
+
+// // 그런 다음 sync 메서드를 사용하여 새로운 태그와의 관계를 설정합니다.
+// foreach ($hashtags as $hashtag) {
+//     $tag = Hashtag::where('hashtag_name', $hashtag)->first();
+
+//     if ($tag) {
+//         $tagIds[] = $tag->hashtag_id;
+//     }
+// }
+
+// $board->tags()->sync($tagIds); 
+// $hashtags = explode(',', $request->input('hashtag'));
+
+// foreach ($hashtags as $hashtag) {
+//     $tag = Hashtag::where('hashtag_name', $hashtag)->first();
+
+//     if ($tag) {
+//         $board->tags()->attach($tag->id);
+//     } else {
+//         // 해당 해시태그가 존재하지 않는 경우에 대한 처리
+//         // 예를 들어, 새로운 해시태그를 만들어서 사용하거나 다른 방법으로 처리할 수 있습니다.
+//     }
+// }
+// Save Images to Board_img
         //이미지넣기
         // if ($request->hasFile('board_img')) {
         //     $image = $request->file('board_img');
@@ -136,7 +187,32 @@ $hashtags = explode(',', $request->input('hashtag'));
         
         }
 
-        return redirect()->route('categoryboard');
+        // 유저가 선택한 해시태그 목록 불러오기
+        $board_detail_get = DB::table('board')
+        ->select(
+            'hashtags.hashtag_id'
+            ,'hashtags.hashtag_name'
+            ,'board.category_id'
+            ,'board.board_id'
+            ,'board.board_title'
+            ,'board.board_content'
+            ,'board.board_hits'
+            ,'board.created_at'
+        )
+        ->join('board_tags', 'board_tags.board_id', 'board.board_id')
+        ->join('hashtags', 'hashtags.hashtag_id', 'board_tags.hashtag_id')
+        ->where('board.board_id', $new_board_id)
+        ->get();
+
+        Log::debug($board_detail_get);
+
+        var_dump($board_id);
+        var_dump($hashtag_id);
+        var_dump($hashtag_insert);
+        var_dump($board_detail_get);
+        exit;
+
+        return redirect()->route('detail')->with('data', $hashtag_id);
     }
     
 

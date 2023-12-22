@@ -10,12 +10,13 @@ class Board_tag extends Model
     use HasFactory;
     public function board()
     {
-        return $this->belongsTo(Board::class, 'board_id','board_id');
+        return $this->belongsTo(Board::class, 'board_id', 'board_id');
     }
 
     public function hashtag()
     {
-        return $this->belongsTo(Hashtag::class, 'hashtag_id');
+        return $this->belongsTo(Hashtag::class, 'hashtag_id', 'hashtag_id');
     }
+
     protected $fillable = ['board_id', 'hashtag_id'];
 }
