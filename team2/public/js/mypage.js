@@ -321,13 +321,8 @@ function userinfoupdate() {
         }
     }
 
-    let USERADRESSFVALUE = document.getElementById('sample4_roadAddress').value;
-	let USERADRESSSVALUE = document.getElementById('sample4_detailAddress').value;
     let IMGFLG = document.getElementById('imgflg');
     IMGFLG.setAttribute('value', imgFlg);
-
-    let ADRESS = document.getElementById('adress-fullname');
-	ADRESS.setAttribute('value', USERADRESSFVALUE+' '+USERADRESSSVALUE);
 
 	document.getElementById('userinfo_form').submit();
 }
