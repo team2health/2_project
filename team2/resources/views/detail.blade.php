@@ -3,7 +3,7 @@
 @section('title','Detail')
 
 @section('main')
-
+ 
 <main class="last_main">
     
 	
@@ -35,7 +35,7 @@
                 </div>                
             </div>
             <div>                
-            @foreach(optional($data->hashtag)->hashtag_name ?? [] as $hashtag)
+            @foreach(optional($data->hashtag)->hashtag_name ?? [] as $hashtag)dd($data->hashtag)
                     <span>{{ $hashtag->hashtag_name }}</span>
                 @endforeach
             </div>

@@ -27,5 +27,7 @@ class VerifyCsrfToken extends Middleware
         '/userimgremove',
         '/boardcategory/{categoryId}',
         '/recorddelete',
+        '/nextboard',
+        '/favoritenextboard',
     ];
 }

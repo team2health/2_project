@@ -45,6 +45,7 @@ class BoardController extends Controller
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
         ->select('hashtags.hashtag_name')
         ->where('users.id', $u_id)
+        ->where('favorite_tags.deleted_at', null)
         ->orderby('hashtags.hashtag_id')
         ->get();
 
@@ -54,7 +55,7 @@ class BoardController extends Controller
     }
 
     public function categoryboard(){
-        $category_board=Board::where('category_id', '1')->orderby('board_id', 'desc')->get();
+        $category_board=Board::where('category_id', '1',)->orderBy('board_id', 'desc')->paginate(5);
         $category_id = Category::orderby('category_id', 'asc')->get();
         $category_name = Category::where('category_id', '1')->get();
         $result = [$category_board, $category_id, $category_name];
@@ -105,17 +106,12 @@ class BoardController extends Controller
 //         ]);
 //     }
 //}$hashtags = $request->input('hashtag');
-if (!empty($hashtags)) {
-    // Split hashtags by comma and trim spaces
-    $hashtagsArray = array_map('trim', explode(',', $hashtags));
+$hashtags = explode(',', $request->input('hashtag'));
+    foreach ($hashtags as $hashtag) {
+        $tag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
+        $board->hashtags()->attach($tag->id);
+    }// 추가
 
-    // Save each hashtag to the Hashtags table
-    foreach ($hashtagsArray as $hashtag) {
-        $hashtagModel = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
-        // Attach the hashtag to the board using pivot table
-        $board->hashtags()->attach($hashtagModel->hashtag_id);
-    }
-}
         // Save Images to Board_img
         //이미지넣기
         // if ($request->hasFile('board_img')) {
@@ -128,16 +124,7 @@ if (!empty($hashtags)) {
         //     $board->images()->save($boardImage);
         // }
         if ($request->hasFile('board_img')) {
-            $images = $request->file('board_img');
-    
-        //     // Limit the number of images to 3
-        //     $imageCount = count($images);
-        //     $maxImages = 3;
-        //     if ($imageCount > $maxImages) {
-        //         // If more than 3 images are uploaded, take the first 3
-        //         $images = array_slice($images, 0, $maxImages);
-        //     }
-    
+            $images = $request->file('board_img');   
             foreach ($images as $image) {
                 $imageName = Str::uuid() . '.' . $image->extension();
                 $image->move(public_path('board_img'), $imageName);
@@ -229,7 +216,7 @@ if (!empty($hashtags)) {
 
     public function boardcategoryget($categoryId) {
         // Log::debug($categoryId);
-        $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->get();
+        $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->paginate(5);
 
         $category_id = Category::orderby('category_id', 'asc')->get();
 
@@ -241,5 +228,35 @@ if (!empty($hashtags)) {
         return view('categoryboard')->with('data', $result);
     }
     
+    public function nextboardpost(Request $request) {
+        // Log::debug($request);
+
+        $result = Board::where('board_id', '<', $request->last_num)
+            ->orderby('board_id', 'desc')
+            ->limit(4)
+            ->get();
+
+        // Log::debug($result);
+        return response()->json($result);
+    }
+
+    public function favoritenextboardpost(Request $request) {
+        // Log::debug($request);
+        $u_id = session('id');
+
+        $result = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
+        ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
+        ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
+        ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
+        ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
+        ->where('users.id', $u_id)
+        ->where('boards.board_id', '<', $request->favorite_num)
+        ->orderby('boards.board_id', 'desc')
+        ->limit(4)
+        ->get();
+
+        Log::debug($result);
+        return response()->json($result);
+    }
 }
 

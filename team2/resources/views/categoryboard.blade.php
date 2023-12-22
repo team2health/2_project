@@ -4,7 +4,7 @@
 
 @section('main')
 <div class="last_main" id='category-board'>
-<a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
+    <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
         <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>{{$data[2][0]->category_name}}</h2>
@@ -81,6 +81,25 @@
         </div>
 </div> --}}
 
+<div class="pagination">    
+    @if ($data[0]->currentPage() > 1)
+        <a href="{{ $data[0]->url(1) }}">&lt;&lt;</a>
+        <a href="{{ $data[0]->previousPageUrl() }}"> 이전</a>
+    @endif
+
+    @for ($i = max(1, $data[0]->currentPage() - 2); $i <= min($data[0]->lastPage(), $data[0]->currentPage() + 3); $i++)
+        @if ($i == $data[0]->currentPage())
+            <span class="pagination-current">{{ $i }}</span>
+        @else
+            <a href="{{ $data[0]->url($i) }}" class="pagination-link">{{ $i }}</a>
+        @endif
+    @endfor
+
+    @if ($data[0]->currentPage() < $data[0]->lastPage())
+        <a href="{{ $data[0]->nextPageUrl() }}">다음 </a>
+        <a href="{{ $data[0]->url($data[0]->lastPage()) }}">&gt;&gt;</a>
+    @endif
+</div>
 
 <script src="/js/categoryboard.js"></script> 
 @endsection

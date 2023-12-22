@@ -128,15 +128,15 @@
                 <label for="usermodifypasswordchk">비밀번호 확인</label>
                 <input type="password" id="usermodifypasswordchk"> --}}
                 <label>현재 주소지</label>
-                <div class="user-now-address">{{$user_info[0]->user_address}}</div>
+                <div class="user-now-address">{{$user_info[0]->user_address}} {{$user_info[0]->user_address_detail}}</div>
                 <label>주소 변경</label>
                 <div class="adress-box">
-                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" name="user_adress_num" readonly>
+                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" name="user_address_num" readonly>
                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn"><br>
                     <span id="guide" style="color:#999;display:none"></span>
-                    <input class="adress-box-b" type="text" id="sample4_roadAddress" name="user_adress" placeholder="도로명주소" readonly>
+                    <input class="adress-box-b" type="text" id="sample4_roadAddress" name="user_address" placeholder="도로명주소" readonly>
                     <br>
-                    <input class="adress-box-b" type="text" id="sample4_detailAddress" name="user_adress_address" placeholder="상세주소">
+                    <input class="adress-box-b" type="text" id="sample4_detailAddress" name="user_address_detail" placeholder="상세주소">
                 </div>
                 <div class="mypage-btn-line-modify">
                     <button type="button" class="mypage-btn" onclick="userinfoupdate(); return false;">수정완료</button>

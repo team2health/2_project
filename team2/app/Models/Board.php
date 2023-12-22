@@ -16,6 +16,7 @@ class Board extends Model
         ,'u_id'
         ,'category_id'
         ,'img_address'
+        ,'hashtag_id'
         ,'updated_at'
         , 'created_at'
         
@@ -29,11 +30,11 @@ class Board extends Model
     }
      public function tags()
      {
-         return $this->belongsToMany(Board_tag::class, 'boardtag_id', 'board_id', 'hash_id');         
+         return $this->belongsToMany(Board_tag::class, 'board_tag_id', 'board_id', 'hashtag_id');         
      }
      public function hashtags()
     {
-        return $this->belongsToMany(Hashtag::class, 'board_tags', 'board_id', 'hashtag_id');
+        return $this->belongsToMany(Hashtag::class, 'board_tag_id', 'board_id', 'hashtag_id');
     }
      public function user(){
         return $this->belongsTo(User::class,'u_id', 'id');        
