@@ -17,13 +17,13 @@ class Board_tagSeeder extends Seeder
     {
         DB::table('board_tags')->insert([
 			['board_id' => '11', 'hashtag_id' => '5']
-            , ['board_id' => '12', 'hashtag_id' => '7']
-            , ['board_id' => '13', 'hashtag_id' => '6']
+            , ['board_id' => '12', 'hashtag_id' => '5']
+            , ['board_id' => '13', 'hashtag_id' => '5']
             , ['board_id' => '14', 'hashtag_id' => '7']
             , ['board_id' => '11', 'hashtag_id' => '4']
             , ['board_id' => '16', 'hashtag_id' => '9']
             , ['board_id' => '11', 'hashtag_id' => '8']
-            , ['board_id' => '12', 'hashtag_id' => '4']
+            , ['board_id' => '12', 'hashtag_id' => '8']
             , ['board_id' => '19', 'hashtag_id' => '8']
             , ['board_id' => '20', 'hashtag_id' => '6']
         ]);

@@ -330,6 +330,7 @@ function nameChange() {
 
 let fileInput = document.getElementById('profilephoto');
 let userImgUrl = document.getElementById('user-img-url');
+let PROFILEPHOTOVIEW = document.getElementById('profilephotoview');
 
 fileInput.addEventListener('change', function() {
     userImgUrl.innerHTML = '';
@@ -338,12 +339,25 @@ fileInput.addEventListener('change', function() {
     if (fileInput.files.length > 0) {
         imgFlg = 1;
     }
+
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        PROFILEPHOTOVIEW.style.backgroundImage = `url(${reader.result})`;
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 });
 
 function userimgremove() {
     imgFlg = 2;
     userImgUrl.innerHTML = '';
     userImgUrl.innerHTML = '사진이 삭제되었습니다.';
+    
+    PROFILEPHOTOVIEW.style.backgroundImage = " url(/user_img/default_f.png);";
 }
 
 function userinfoupdate() {
