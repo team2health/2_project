@@ -41,6 +41,7 @@ function toggleHashtags() {
 function handleTagClick(tag, hashtagInput) {
     // 클릭한 태그의 이름을 콘솔에 출력
     var clickedTag = tag.getAttribute('data-tag');
+    //var clickedTag = this.getAttribute('data-tag');
     console.log("Clicked tag:", clickedTag);
 // 태그들을 id가 아닌 hashtag_name으로 가져오기
     // 현재 입력 폼에 있는 태그들을 배열로 가져오기

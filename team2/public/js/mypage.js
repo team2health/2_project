@@ -160,13 +160,29 @@ function favoritehashdelete(data) {
 }
 
 let addallfavoritetagevent = document.getElementById('addallfavoritetag');
+let favoriteFlg = 0;
 
+// 관심 해시태그 추가 창 열기
 addallfavoritetagevent.addEventListener('click', function(){
-    addallfavoritetag();
-    addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
-    let createtagmaindiv = document.getElementById('creaTagMainDiv');
-    // createtagmaindiv.style.display = 'block';
+    if( favoriteFlg == 0) {
+        console.log(favoriteFlg);
+        addallfavoritetag();
+        addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
+        let createtagmaindiv = document.getElementById('creaTagMainDiv');
+        favoriteFlg = '1';
+    } else if ( favoriteFlg == 1 ) {
+        console.log(favoriteFlg);
+        addallfavoritetagevent.addEventListener('click', closeoption);
+    }
 });
+
+// 관심 해시태그 추가 창 닫기
+function closeoption(){
+    let createtagmaindiv = document.getElementById('creaTagMainDiv');
+    createtagmaindiv.remove();
+    favoriteFlg = '0';
+}
+
 
 // 관심 해시태그 목록 불러오기 및 추가
 function addallfavoritetag() {
@@ -223,11 +239,6 @@ function addallfavoritetag() {
 
 }
 
-// 관심 해시태그 추가 창 닫기
-function closeoption(){
-    let createtagmaindiv = document.getElementById('creaTagMainDiv');
-    createtagmaindiv.style.display = 'none';
-}
 
 // 관심 해시태그 추가
 function addhashtag(data) {
@@ -319,6 +330,7 @@ function nameChange() {
 
 let fileInput = document.getElementById('profilephoto');
 let userImgUrl = document.getElementById('user-img-url');
+let PROFILEPHOTOVIEW = document.getElementById('profilephotoview');
 
 fileInput.addEventListener('change', function() {
     userImgUrl.innerHTML = '';
@@ -327,12 +339,25 @@ fileInput.addEventListener('change', function() {
     if (fileInput.files.length > 0) {
         imgFlg = 1;
     }
+
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        PROFILEPHOTOVIEW.style.backgroundImage = `url(${reader.result})`;
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 });
 
 function userimgremove() {
     imgFlg = 2;
     userImgUrl.innerHTML = '';
     userImgUrl.innerHTML = '사진이 삭제되었습니다.';
+    
+    PROFILEPHOTOVIEW.style.backgroundImage = " url(/user_img/default_f.png);";
 }
 
 function userinfoupdate() {
