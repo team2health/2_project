@@ -14,13 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pandemics', function (Blueprint $table) {
-            $table->integer('pandemic_id');
+            $table->increments('pandemic_id');
             $table->string('pandemic_name')->unique();
             $table->string('pandemic_symptoms');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->primary('pandemic_id');
         });
     }
 

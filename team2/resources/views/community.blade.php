@@ -32,7 +32,7 @@
                 </div>
             </a>
             @empty
-                <div>게시글 없음</div>
+                게시글이 없습니다.
             @endforelse
         </div>
     </div>    

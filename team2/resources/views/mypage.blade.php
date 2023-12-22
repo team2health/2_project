@@ -116,13 +116,12 @@
                 <div class="user-now-address">{{$user_info[0]->user_address}}</div>
                 <label>주소 변경</label>
                 <div class="adress-box">
-                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" readonly>
+                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" name="user_adress_num" readonly>
                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="user-info-btn"><br>
                     <span id="guide" style="color:#999;display:none"></span>
-                    <input class="adress-box-b" type="text" id="sample4_roadAddress" placeholder="도로명주소" readonly>
+                    <input class="adress-box-b" type="text" id="sample4_roadAddress" name="user_adress" placeholder="도로명주소" readonly>
                     <br>
-                    <input class="adress-box-b" type="text" id="sample4_detailAddress" placeholder="상세주소">
-                    <input type="hidden" id="adress-fullname" name="user_address">
+                    <input class="adress-box-b" type="text" id="sample4_detailAddress" name="user_adress_address" placeholder="상세주소">
                 </div>
                 <div class="mypage-btn-line-modify">
                     <button type="button" class="mypage-btn" onclick="userinfoupdate(); return false;">수정완료</button>

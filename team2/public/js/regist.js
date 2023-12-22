@@ -115,7 +115,6 @@ function registgo() {
 	let USERPASSWORDVALUE = document.getElementById('user_password').value;
 	let USERPASSWORDCHECKVALUE = document.getElementById('user_password_check').value;
 	let USERADRESSFVALUE = document.getElementById('sample4_roadAddress').value;
-	let USERADRESSSVALUE = document.getElementById('sample4_detailAddress').value;
 	let GENDERINPUTVALUE = document.getElementById('gender-input');
 
 	if(USERNAMEVALUE === '') {
@@ -158,9 +157,6 @@ function registgo() {
 		alert('성별을 선택해주세요.');
 		return false;
 	}
-
-	let ADRESS = document.getElementById('adress-fullname');
-	ADRESS.setAttribute('value', USERADRESSFVALUE+' '+USERADRESSSVALUE);
 
 	document.getElementById('regist_form').submit();
 }
