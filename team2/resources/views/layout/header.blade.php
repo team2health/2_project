@@ -81,17 +81,29 @@
 		&& request()->url() !== 'http://127.0.0.1:8000/mypage' && request()->url() !== 'http://127.0.0.1:8000/categoryboard'
 		&& !Str::contains(request()->url(), 'boardcategory') && !Str::contains(request()->url(), 'board/'))
 			<div class="container-category display-flex-around div-padding">
-				<a href="{{route('main.get')}}" class="div-display-lnlineBlock main-line-height">증상 검색</a>
-				<a href="{{ route('board.index') }}" class="div-display-lnlineBlock main-line-height">커뮤니티</a>
-				<a href="{{ route('todaytimeline.get') }}" class="div-display-lnlineBlock main-line-height">타임라인</a>
+				@if (request()->url() === 'http://127.0.0.1:8000')
+					<a href="{{route('main.get')}}" class="div-display-lnlineBlock main-line-height page-select-font-color">증상 검색</a>
+				@else
+					<a href="{{route('main.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">증상 검색</a>
+				@endif
+				@if (request()->url() === 'http://127.0.0.1:8000/board')
+					<a href="{{ route('board.index') }}" class="div-display-lnlineBlock main-line-height category_font_hover page-select-font-color">커뮤니티</a>
+				@else
+					<a href="{{ route('board.index') }}" class="div-display-lnlineBlock main-line-height category_font_hover">커뮤니티</a>
+				@endif
+				@if (request()->url() === 'http://127.0.0.1:8000/timeline')
+					<a href="{{ route('todaytimeline.get') }}" class="div-display-lnlineBlock main-line-height category_font_hover page-select-font-color">타임라인</a>
+				@else
+					<a href="{{ route('todaytimeline.get') }}" class="div-display-lnlineBlock main-line-height category_font_hover">타임라인</a>
+				@endif
 			</div>
 		@endif
 		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard' || Str::contains(request()->url(), 'board/') || Str::contains(request()->url(), 'boardcategory'))
 			<div class="container-category display-flex-around div-padding">
-				<a href="" class="div-display-lnlineBlock main-line-height">최근 게시글</a>
-				<a href="" class="div-display-lnlineBlock main-line-height">핫게시글</a>
-				<a href="" class="div-display-lnlineBlock main-line-height">관심태그</a>
-				<a href="" class="div-display-lnlineBlock main-line-height">카테고리</a>
+				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">최근 게시글</a>
+				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">핫게시글</a>
+				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">관심태그</a>
+				<a class="div-display-lnlineBlock main-line-height cate_btn" onclick="toggleDropdown()">카테고리</a>
 			</div>
 		@endif
 	</div>

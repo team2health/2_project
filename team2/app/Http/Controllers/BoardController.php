@@ -41,6 +41,7 @@ class BoardController extends Controller
             ->where('users.id', $u_id)
             ->where('favorite_tags.deleted_at', null)
             ->orderby('boards.board_id', 'desc')
+            ->distinct()
             ->limit(4)
             ->get();
 

@@ -10,7 +10,7 @@
         <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
         <div class="community_headline">
             <h2>🔥HOT 게시글</h2>
-            <a href="{{route('categoryboard')}}" class="cate_btn">커뮤니티</a>            
+            <a href="{{route('categoryboard')}}" class="cate_btn_go">커뮤니티</a>            
         </div>		
 	
 		

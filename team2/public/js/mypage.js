@@ -357,7 +357,7 @@ function userimgremove() {
     userImgUrl.innerHTML = '';
     userImgUrl.innerHTML = '사진이 삭제되었습니다.';
     
-    PROFILEPHOTOVIEW.style.backgroundImage = " url(/user_img/default_f.png);";
+    PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
 }
 
 function userinfoupdate() {

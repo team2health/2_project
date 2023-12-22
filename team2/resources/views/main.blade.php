@@ -45,7 +45,7 @@
 			<div style="font-weight: 500" id="diesase-info"></div>
 			<br><br>
 			<div id="map-display"><div id="map" style="width:100%; height:350px;"></div></div>
-			<div class="display-flex">
+			<div class="display-flex-hospital">
 				<a href="{{route('main.get')}}" class="check-button">다시 검사</a>
 				<span id="hospital" class="check-button">병원 찾기</span>
 				{{-- onclick="mapDisplay({{ json_encode(session('id')) }}); return false;" --}}

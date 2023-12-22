@@ -74,6 +74,11 @@ button {
 	justify-content: space-between;
 }
 
+.display-flex-hospital {
+	display: flex;
+	justify-content: space-evenly;
+}
+
 .font-weight {
 	font-size: 1.4rem;
 	font-weight: 900;
@@ -81,6 +86,11 @@ button {
 
 .font-small {
 	font-size: 0.8rem;
+}
+
+.page-select-font-color {
+	color: #FF9900;
+	font-weight: 900;
 }
 
 .font-color {
@@ -128,7 +138,7 @@ button {
 .login-input-short {
 	width: 60%;
 	height: 6vh;
-	margin: 3px 0 10px 0;
+	margin: 3px 5px 10px 0;
 }
 
 .input-check {
@@ -204,6 +214,12 @@ button {
 	margin: 10px 0;
 }
 
+.input-div-box {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
 .input-radio:checked {
 	background-color: #FF9900;
 }
@@ -259,7 +275,7 @@ button {
 	margin: 10px 0;
 }
 
-.part-box div, .display-flex span {
+.part-box div, .display-flex-hospital span {
 	cursor: pointer;
 }
 

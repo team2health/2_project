@@ -8,13 +8,17 @@
 		<form action="{{ route('regist.post') }}" method="POST" id="regist_form">
 			@csrf
 			<p style="width: 60px;" class="ptag">닉네임</p><span id="error_name" class="not-error-name">한글, 영문, 숫자로 2글자 이상 입력해주세요</span>
-			<input type="text" class="login-input-short" name="user_name" id="user_name">
-			<div class="input-check" onclick="checkName(); return false;">닉네임 확인</div>
+			<div class="input-div-box">
+				<input type="text" class="login-input-short" name="user_name" id="user_name">
+				<div class="input-check" onclick="checkName(); return false;">닉네임 확인</div>
+			</div>
 			<br>
 
 			<p style="width: 60px;" class="ptag">아이디</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
-			<input type="text" class="login-input-short" name="user_id" id="user_id">
-			<div class="input-check" onclick="checkId(); return false;">아이디 확인</div>
+			<div class="input-div-box">
+				<input type="text" class="login-input-short" name="user_id" id="user_id">
+				<div class="input-check" onclick="checkId(); return false;">아이디 확인</div>
+			</div>
 			<br>
 
 			<p style="width: 80px;" class="ptag">비밀번호</p>
