@@ -125,7 +125,7 @@ function partCheck(index) {
 	.then(data => {
 		// console.log(data);
 
-		let SYMPTOMDIV = {};
+		let SYMPTOMDIV = [];
 		
 		for(let i = 0; i < data.length; i++) {
 			let SYMPTOMBOX = document.getElementById('symptom-box');

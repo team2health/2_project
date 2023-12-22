@@ -45,6 +45,7 @@ class BoardController extends Controller
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
         ->select('hashtags.hashtag_name')
         ->where('users.id', $u_id)
+        ->where('favorite_tags.deleted_at', null)
         ->orderby('hashtags.hashtag_id')
         ->get();
 
@@ -227,5 +228,35 @@ $hashtags = explode(',', $request->input('hashtag'));
         return view('categoryboard')->with('data', $result);
     }
     
+    public function nextboardpost(Request $request) {
+        // Log::debug($request);
+
+        $result = Board::where('board_id', '<', $request->last_num)
+            ->orderby('board_id', 'desc')
+            ->limit(4)
+            ->get();
+
+        // Log::debug($result);
+        return response()->json($result);
+    }
+
+    public function favoritenextboardpost(Request $request) {
+        // Log::debug($request);
+        $u_id = session('id');
+
+        $result = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
+        ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
+        ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
+        ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
+        ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
+        ->where('users.id', $u_id)
+        ->where('boards.board_id', '<', $request->favorite_num)
+        ->orderby('boards.board_id', 'desc')
+        ->limit(4)
+        ->get();
+
+        Log::debug($result);
+        return response()->json($result);
+    }
 }
 

@@ -56,13 +56,13 @@ class MypageController extends Controller
                         ,'user_id'
                         ,'user_name'
                         ,'user_address'
+                        ,'user_address_detail'
                         ,'user_img'
                     )
                     ->where('id', $result)
                     ->get();
 
                     // Log::debug("유저", ['name' => $user_info]);
-                    
     
                 return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
             } else {
@@ -233,6 +233,12 @@ class MypageController extends Controller
             }
             if($request->user_address) {
                 $userinfo->user_address = $request->user_address;
+
+                if($request->user_address_detail) {
+                    $userinfo->user_address_detail = $request->user_address_detail;
+                } else {
+                    $userinfo->user_address_detail = null;
+                }
             }
             
             $userinfo->save();
@@ -270,6 +276,7 @@ class MypageController extends Controller
                     ,'user_id'
                     ,'user_name'
                     ,'user_address'
+                    ,'user_address_detail'
                     ,'user_img'
                 )
                 ->where('id', $result)
@@ -279,6 +286,7 @@ class MypageController extends Controller
                 session(['user_name' => $user_info[0]->user_name,
                 'user_img' => $user_info[0]->user_img]);
                 // Log::debug("유저", ['name' => $user_info]);
+
                 
                 return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
             }

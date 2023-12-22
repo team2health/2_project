@@ -167,6 +167,9 @@ function checkName() {
 	if(nameChk === '') {
 		alert('닉네임을 입력해주세요');
 		return false;
+	} else if(!regex.test(nameChk)) {
+		alert('사용할 수 없는 닉네임입니다.');
+		return false;
 	}
 
 	const formData = new FormData();
@@ -199,6 +202,9 @@ function checkId() {
 
 	if(idChk === '') {
 		alert('아이디를 입력해주세요');
+		return false;
+	} else if(!regex2.test(idChk)) {
+		alert('사용할 수 없는 아이디입니다.');
 		return false;
 	}
 

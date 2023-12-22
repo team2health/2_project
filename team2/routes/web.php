@@ -35,6 +35,8 @@ Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::get('/boardcategory/{categoryId}', [BoardController::class, 'boardcategoryget']);
+Route::post('/nextboard', [BoardController::class, 'nextboardpost']);
+Route::post('/favoritenextboard', [BoardController::class, 'favoritenextboardpost']);
 
 
 Route::resource('/board', BoardController::class);
