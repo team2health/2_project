@@ -51,6 +51,7 @@
         </a>
     </div>
     @endforeach
+    
 </div>
 
 {{-- <div style="display: none;" class="last_main" id="category-board-modal">

@@ -54,7 +54,7 @@ class BoardController extends Controller
     }
 
     public function categoryboard(){
-        $category_board=Board::where('category_id', '1')->orderby('board_id', 'desc')->get();
+        $category_board=Board::where('category_id', '1')->orderby('board_id', 'desc')->paginate(8);
         $category_id = Category::orderby('category_id', 'asc')->get();
         $category_name = Category::where('category_id', '1')->get();
         $result = [$category_board, $category_id, $category_name];
