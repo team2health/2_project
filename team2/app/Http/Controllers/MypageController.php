@@ -104,30 +104,53 @@ class MypageController extends Controller
         }
     
         public function myhashdeletepost(Request $request) {
-            $id = $request->favorite_id;
+            Log::debug('**********************해시태그 삭제 start***********************');
+            Log::debug($request);
+            
+            $id = $request->myhashdelete;
+            // $user_id = session('id');
+            // Log::debug($id);
+            // Log::debug('유저아이디');
+            // Log::debug($user_id);
+
+            // $favoritetag_id =
+            // DB::table('favorite_tags')
+            // ->select('favorite_tags.favorite_tag_id')
+            // ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+            // ->where('favorite_tags.u_id', $user_id)
+            // ->where('favorite_tags.hashtag_id', $id)
+            // ->where('favorite_tags.deleted_at', null)
+            // ->get();
+
+            Log::debug($id);
+
             Favorite_tag::destroy($id);
-            DB::commit();
         }
     
         public function addfavoritehashtagpost(Request $request) {
     
             $currentDateTime = Carbon::now();
             Log::debug("asdfasdfa", $request->all());
-            $favorite_id = $request->tag_id;
+            $tag_id = $request->tag_id;
             $result = session('id');
             Log::debug("session", ['id' => $result]);
             $hashtag = DB::table('favorite_tags')->insert([
-                'hashtag_id' => $favorite_id,
+                'hashtag_id' => $tag_id,
                 'u_id' => $result,
                 'created_at' => $currentDateTime,
                 'updated_at' => $currentDateTime
             ]);
-            $hashtaginfo = DB::table('hashtags')
+
+            $hashtaginfo =
+            DB::table('favorite_tags')
             ->select(
-                'hashtag_id'
-                ,'hashtag_name'
-            )
-            ->where('hashtag_id', $favorite_id)
+                'favorite_tags.favorite_tag_id'
+                ,'hashtags.hashtag_id'
+                ,'hashtags.hashtag_name'
+                )
+            ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+            ->orderby('favorite_tag_id', 'desc')
+            ->limit(1)
             ->get();
             Log::debug($hashtaginfo);
             Log::debug(response()->json($hashtaginfo));
@@ -136,8 +159,12 @@ class MypageController extends Controller
 
     public function todaytimelineget(){
 
+        Log::debug('********************start*************');
         $created_start = Carbon::now()->format('Y-m-d');
         $user_id = session('id');
+        Log::debug($created_start);
+        Log::debug($user_id);
+
         $today_timeline = DB::table('symptoms')
         ->select(
             'records.record_id'
@@ -152,7 +179,9 @@ class MypageController extends Controller
         ->where('records.deleted_at', null)
         ->get();
 
+        Log::debug($today_timeline);
         $result_count = $today_timeline->count();
+        Log::debug($result_count);
 
         return view('timeline')->with('data', $today_timeline)->with('result_count', $result_count);
     }

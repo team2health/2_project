@@ -35,7 +35,7 @@
                 </div>                
             </div>
             <div>                
-                @foreach ($data->hashtags as $hashtag)
+            @foreach(optional($data->hashtag)->hashtag_name ?? [] as $hashtag)
                     <span>{{ $hashtag->hashtag_name }}</span>
                 @endforeach
             </div>

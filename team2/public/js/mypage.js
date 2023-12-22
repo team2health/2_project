@@ -101,33 +101,44 @@ function mypagemodalclosebtn() {
     mypageContentModal.classList.toggle('mypage-content-modal-block');
 }
 
-// 관심태그 삭제 버튼
+// 관심 해시태그 삭제 버튼
 function favoritehashdelete(data) {
 
     if ( confirm("삭제하시겠습니까?") ) { 
         alert("삭제되었습니다.");
-        let favoritetag = document.getElementById('favoriteHashtagId'+data);
-        favoritetag.style.display = 'none';
 
-        let formData = new FormData();
-        formData.append('favorite_id', data);
+        let favoritehashtext = document.getElementById('favoritehashtext' + data);
+        let favoritehashtextget = favoritehashtext.innerHTML;
+        let favoritetag = document.getElementById('favoriteHashtagId'+data);
+        favoritetag.remove();
+
         // 즉시 추가
-        let deletefavoritehashtext = document.getElementById('favoritehashtext'+data).value;
-        let mypageHashtag = document.getElementById('mypageHashtagOpen');
+        // let deletefavoritehashtext = document.getElementById('favoritehashtext'+data).value;
+        // let noticeThatFavoriteNone = document.createElement('noticeThatFavoriteNone');
+        // if (noticeThatFavoriteNone) {
+        //     noticeThatFavoriteNone.remove();
+        // }
         let deletedfavoritehashtag = document.createElement('div')
         let deletefavoritespan = document.createElement('span');
         let deletefavoritespan2 = document.createElement('span');
-    
+        
         deletedfavoritehashtag.id = 'allHashtagtext' + data;
         deletefavoritespan.id = 'favoritehashtext'+data;
-        deletefavoritespan.setAttribute('value', deletefavoritehashtext );
+        deletefavoritespan.setAttribute('value', data );
         deletefavoritespan2.setAttribute('onclick', `addhashtag(${data})`);
-        deletefavoritespan.innerHTML = `${deletefavoritehashtext}`;
+        deletefavoritespan.innerHTML = favoritehashtextget;
         deletefavoritespan2.innerHTML = 'x';
         deletedfavoritehashtag.appendChild(deletefavoritespan);
         deletedfavoritehashtag.appendChild(deletefavoritespan2);
-        mypageHashtag.appendChild(deletedfavoritehashtag);
         
+        let mypageHashtagOpen = document.getElementById('mypageHashtagOpen');
+        if (mypageHashtagOpen) {
+            mypageHashtagOpen.prepend(deletedfavoritehashtag);
+        }
+        
+        let formData = new FormData();
+        formData.append('myhashdelete', data);
+
         fetch('/myhashdelete', {
             method: 'POST',
             body: formData,
@@ -138,8 +149,14 @@ function favoritehashdelete(data) {
         .catch(error => console.log(error));
 
     } else {
-        // 취소 클릭시 false 가 리턴 되어 실행​    
+        //
     } 
+    // if (noticeThatFavoriteNone === null ) {
+    //     let noticeThatFavoriteDiv = document.createElement('div');
+    //     noticeThatFavoriteDiv.id = 'mypageHashtagOpen';
+    //     let mypageHashtag = document.getElementById('mypageHashtag');
+    //     mypageHashtag.appendChild(noticeThatFavoriteDiv);
+    // }
 }
 
 let addallfavoritetagevent = document.getElementById('addallfavoritetag');
@@ -148,10 +165,10 @@ addallfavoritetagevent.addEventListener('click', function(){
     addallfavoritetag();
     addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
     let createtagmaindiv = document.getElementById('creaTagMainDiv');
-    createtagmaindiv.style.display = 'block';
+    // createtagmaindiv.style.display = 'block';
 });
 
-// 관심 해시태그 목록 불러오기
+// 관심 해시태그 목록 불러오기 및 추가
 function addallfavoritetag() {
     let createtagmaindiv = document.createElement('div');
     let createplustag = document.createElement('div');
@@ -180,7 +197,7 @@ function addallfavoritetag() {
             hashplusbtn.innerHTML = '+';
             hashplusbtn.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
             hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
-            hashspan.setAttribute('value', data[i].hashtag_name);
+            hashspan.setAttribute('value', data[i].hashtag_id);
             hashspan.innerHTML = data[i].hashtag_name;
             hashtagdiv.appendChild(hashspan);
             hashtagdiv.appendChild(hashplusbtn);
@@ -192,6 +209,13 @@ function addallfavoritetag() {
         addtagbtndiv.appendChild(hashplusokbtn);
         addtagbtndiv.appendChild(hashplusclosebtn);
         createtagmaindiv.appendChild(addtagbtndiv);
+        
+        // let noticeThatFavoriteNone = document.createElement('noticeThatFavoriteNone');
+        // if (noticeThatFavoriteNone) {
+        //     noticeThatFavoriteNone.remove();
+        // }
+
+
     })
     .catch(error => console.error(error));
     
@@ -207,12 +231,14 @@ function closeoption(){
 
 // 관심 해시태그 추가
 function addhashtag(data) {
+
     let formData = new FormData();
     formData.append('tag_id', data);
-    
-    let deletefavoritehashtext = document.getElementById('allHashtagtext'+data).value;
+
+    // 추가할 해시태그 가져오기
     let allHashtagId = document.getElementById('allHashtagId'+data);
     allHashtagId.remove();
+    // let deletefavoritehashtext = document.getElementById('allHashtagtext'+data).value;
     let mypageHashtag = document.getElementById('mypageHashtag');
     let deletedfavoritehashtag = document.createElement('div')
     let makefavoritespan = document.createElement('span');
@@ -230,7 +256,7 @@ function addhashtag(data) {
         // 즉시 추가
         deletedfavoritehashtag.id = 'favoriteHashtagId' + data[0].hashtag_id;
         makefavoritespan.id = 'favoritehashtext'+data[0].hashtag_id;
-        makefavoritespan.setAttribute('value', deletefavoritehashtext );
+        makefavoritespan.setAttribute('value', data[0].hashtag_id );
         makefavoritespan2.setAttribute('onclick', `favoritehashdelete(${data[0].hashtag_id})`);
         makefavoritespan.innerHTML = data[0].hashtag_name;
         makefavoritespan2.innerHTML = 'x';
