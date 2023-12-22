@@ -5,11 +5,21 @@
 
 @section('main')
 
+
 <div class="mypage-grid" id="mypageGrid">
     <div class="mypage-content" id="mypageContent">
-            <div class="mypage-board-show-btn">내가 쓴 게시글</div>
-            <div class="mypage-comment-show-btn">내가 쓴 댓글</div>
-        {{-- 게시글 창 --}}
+        
+        <div class="tab">
+            <ul class="tab_list">
+                <li class="mypage-board-show-btn active" data-list="1">
+                    내가 쓴 게시글
+                </li>
+                <li class="mypage-board-show-btn" data-list="2">
+                    내가 쓴 댓글
+                </li>
+            </ul>
+            <div class="tab-contents tab-show" data-order="1">
+                        {{-- 게시글 창 --}}
             <div class="mypage-boards-part">
                 @forelse ($data as $index => $item)
                     @php
@@ -53,37 +63,42 @@
                     <div> 작성한 게시글이 없습니다. </div>
                 @endforelse
             </div>
+            </div>
+            <div class="tab-contents" data-order="2">
+                
+                <div class="mypage-date-today">
+                    <span class="mypage-board-date"></span>
+                </div>
+                <div class="mypage-boards-part">
+                    <div class="mypage-boardbox">
+                        <span class="mypage-boardbox-date">2023-12-12</span>
+                        <div class="mypage-bord-title"> 댓글 view 제목입니다.</div>
+                        <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                    </div>
+                    <div class="mypage-boardbox">
+                        <span class="mypage-boardbox-date">2023-12-12</span>
+                        <div class="mypage-bord-title">제목입니다.</div>
+                        <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                    </div>
+                    <div class="mypage-boardbox">
+                        <span class="mypage-boardbox-date">2023-12-12</span>
+                        <div class="mypage-bord-title">제목입니다.</div>
+                        <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                    </div>
+                    <div class="mypage-boardbox">
+                        <span class="mypage-boardbox-date">2023-12-12</span>
+                        <div class="mypage-bord-title">제목입니다.</div>
+                        <div class="mypage-bord-detailbox">상세내용입니다.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <div class="mypage-date-today">
-                <span class="mypage-board-date"></span>
-            </div>
-            <div class="mypage-boards-part">
-                <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
-                    <div class="mypage-bord-title"> 댓글 view 제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-            </div>
         <div class="mypage-btn-plus">더보기</div>
         {{-- 게시글 insert로 넘어감 --}}
-        <a href="{{route('insert')}}">
+        {{-- <a href="{{route('insert')}}">
             <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">
-        </a>
+        </a> --}}
     </div>
 
     {{-- 정보수정창 --}}

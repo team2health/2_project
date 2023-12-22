@@ -358,3 +358,22 @@ function userinfoupdate() {
 // console.log(userImgSelect);
 
 // userImgName.innerHTML = userImgSelect;
+
+const tab = document.querySelector(".tab");
+const tabListItem = document.querySelectorAll(".mypage-board-show-btn");
+const tabContent = document.querySelectorAll(".tab-contents");
+const active = document.querySelector(".tab-active");
+const showing = document.querySelector(".tab-show");
+
+tab.addEventListener("click", (e) => {
+    const ListOrder = e.target.dataset.list;
+    tabListItem.forEach(function (e) {
+    e.classList.remove("active");
+    });
+    e.target.classList.add("active");
+    tabContent.forEach(function (event) {
+        if (event.dataset.order == ListOrder) {
+        event.classList.add("tab-show");
+        } else event.classList.remove("tab-show");
+        });
+});

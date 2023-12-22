@@ -425,12 +425,6 @@ function leftPad(value) {
 // 선택한 날짜에 hover
 // 그 날짜에 해당되는 검색기록 불러옴
 
-// 달력 날짜를 선택하면 한 달을 새로 불러오는 함수
-function newMonthblock(data) {
-
-
-}
-
 
 //  검색기록 삭제
 function recorddeletemodalopen(data) {

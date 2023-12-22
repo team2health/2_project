@@ -37,6 +37,13 @@ class MypageController extends Controller
                     ->where('deleted_at', null)
                     ->orderBy('board_id', 'DESC')
                     ->get();
+
+                // $comment_result = DB::table('comments')
+                // ->select(
+
+                //     'u_id'
+                //     ,'board_id'
+                // )
                 
                 $user_hashtag = DB::table('favorite_tags')
                     ->select(
@@ -186,142 +193,134 @@ class MypageController extends Controller
         return view('timeline')->with('data', $today_timeline)->with('result_count', $result_count);
     }
 
-    
-    
-    public function myinfomodify() {
-    
-        }
 
-        public function namechangepost(Request $request) {
-            // Log::debug("*********** namechkpost start ***********");
-            // Log::debug("POST data".$_POST);
-            // Log::debug("이거", $request->all());
-            // Log::debug("이거".$request->user_name);
-            $username = $request->user_name;
-            // Log::debug("user_name:".$username);
-            
-            $existingUser = User::where('user_name', $username)->first();
-            
-            if ($existingUser) {
-                return response()->json(['namechange' => '1']);
-                exit;
-            }
-            return response()->json(['namechange' => '0']);
-        }
 
-        public function userinfoupdatepost(Request $request) {
-            // Log::debug("111111", $request->all());
+    public function namechangepost(Request $request) {
+        // Log::debug("*********** namechkpost start ***********");
+        // Log::debug("POST data".$_POST);
+        // Log::debug("이거", $request->all());
+        // Log::debug("이거".$request->user_name);
+        $username = $request->user_name;
+        // Log::debug("user_name:".$username);
+        
+        $existingUser = User::where('user_name', $username)->first();
+        
+        if ($existingUser) {
+            return response()->json(['namechange' => '1']);
+            exit;
+        }
+        return response()->json(['namechange' => '0']);
+    }
+
+    public function userinfoupdatepost(Request $request) {
+        // Log::debug("111111", $request->all());
+        
+        // 사용자 ID 가져오기
+        $result = session('id');
+        
+        $imgFlg = $request->imgFlg;
+        // Log::debug("efeeee", ['img' => $imgFlg]);
+        
+        $userinfo = User::find($result);
+        
+        if($imgFlg == 1) {
+            $imgName = Str::uuid().'.'.$request->user_img->extension();
+            $request->user_img->move(public_path('user_img'), $imgName);
+            $userinfo->user_img = $imgName;
+        } else if($imgFlg == 2) {
+            $userinfo->user_img = '../img/default_f.png';
+        }
+        
+        if($request->user_name) {
+            $userinfo->user_name = $request->user_name;
+        }
+        if($request->user_address) {
+            $userinfo->user_address = $request->user_address;
+        }
+        
+        $userinfo->save();
+
+        $board_result = DB::table('boards')
+        ->select(
+            'board_id'
+            ,'u_id'
+            ,'category_id'
+            ,'board_title'
+            ,'board_content'
+            ,'board_hits'
+            ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
+            ,'updated_at')
+            ->where('u_id',$result)
+            ->where('deleted_at', null)
+            ->orderBy('board_id', 'DESC')
+            ->get();
             
-            // 사용자 ID 가져오기
-            $result = session('id');
-            
-            $imgFlg = $request->imgFlg;
-            // Log::debug("efeeee", ['img' => $imgFlg]);
-            
-            $userinfo = User::find($result);
-            
-            if($imgFlg == 1) {
-                $imgName = Str::uuid().'.'.$request->user_img->extension();
-                $request->user_img->move(public_path('user_img'), $imgName);
-                $userinfo->user_img = $imgName;
-            } else if($imgFlg == 2) {
-                $userinfo->user_img = '../img/default_f.png';
-            }
-            
-            if($request->user_name) {
-                $userinfo->user_name = $request->user_name;
-            }
-            if($request->user_address) {
-                $userinfo->user_address = $request->user_address;
-            }
-            
-            $userinfo->save();
-    
-            $board_result = DB::table('boards')
+            $user_hashtag = DB::table('favorite_tags')
             ->select(
-                'board_id'
-                ,'u_id'
-                ,'category_id'
-                ,'board_title'
-                ,'board_content'
-                ,'board_hits'
-                ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
-                ,'updated_at')
-                ->where('u_id',$result)
-                ->where('deleted_at', null)
-                ->orderBy('board_id', 'DESC')
-                ->get();
-                
-                $user_hashtag = DB::table('favorite_tags')
-                ->select(
-                'favorite_tags.favorite_tag_id'
-                ,'favorite_tags.hashtag_id'
-                ,'hashtags.hashtag_name'
-                )
-                ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
-                ->where('favorite_tags.u_id', $result)
-                ->where('favorite_tags.deleted_at', null)
-                ->orderBy('favorite_tags.created_at')
-                ->get();
-                
-                $user_info  = DB::table('users')
-                ->select(
-                    'id'
-                    ,'user_id'
-                    ,'user_name'
-                    ,'user_address'
-                    ,'user_img'
-                )
-                ->where('id', $result)
-                ->get();
-                
-                // Log::debug("이름", ['name' => $user_info]);
-                session(['user_name' => $user_info[0]->user_name,
-                'user_img' => $user_info[0]->user_img]);
-                // Log::debug("유저", ['name' => $user_info]);
-                
-                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
-            }
+            'favorite_tags.favorite_tag_id'
+            ,'favorite_tags.hashtag_id'
+            ,'hashtags.hashtag_name'
+            )
+            ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+            ->where('favorite_tags.u_id', $result)
+            ->where('favorite_tags.deleted_at', null)
+            ->orderBy('favorite_tags.created_at')
+            ->get();
             
-            public function newcalendarblock() {
-                
-            }
-
-            public function daytimelinepost(Request $request) {
-
-                log::debug("daytimelinepost", $request->all());
-                $created_at = $request->date;
-                Log::debug($created_at);
-                $user_id = session('id');
-        
-                $timeline = DB::table('symptoms')
-                ->select(
-                    'records.record_id'
-                    ,'symptoms.symptom_id'
-                    ,'symptoms.symptom_name'
-                    ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
-                )
-                ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
-                ->where('records.u_id', $user_id)
-                ->where('records.created_at', 'like', $created_at.'%')
-                ->where('records.deleted_at', null)
-                ->get();
-                
-                Log::debug($timeline);
-        
-                return response()->json($timeline);
-        
-            }
+            $user_info  = DB::table('users')
+            ->select(
+                'id'
+                ,'user_id'
+                ,'user_name'
+                ,'user_address'
+                ,'user_img'
+            )
+            ->where('id', $result)
+            ->get();
             
-            public function recorddelete(Request $request) {
-
-            $id = $request->record_id;
-            $created_at = $request->created_at;
-            Log::debug($id);
-            Log::debug($created_at);
-
-            Record::destroy($id);
-            DB::commit();
+            // Log::debug("이름", ['name' => $user_info]);
+            session(['user_name' => $user_info[0]->user_name,
+            'user_img' => $user_info[0]->user_img]);
+            // Log::debug("유저", ['name' => $user_info]);
             
-        }
+            return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
+    }
+
+    public function daytimelinepost(Request $request) {
+
+        log::debug("daytimelinepost", $request->all());
+        $created_at = $request->date;
+        Log::debug($created_at);
+        $user_id = session('id');
+
+        $timeline = DB::table('symptoms')
+        ->select(
+            'records.record_id'
+            ,'symptoms.symptom_id'
+            ,'symptoms.symptom_name'
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+        )
+        ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        ->where('records.u_id', $user_id)
+        ->where('records.created_at', 'like', $created_at.'%')
+        ->where('records.deleted_at', null)
+        ->get();
+        
+        Log::debug($timeline);
+
+        return response()->json($timeline);
+
+    }
+            
+    public function recorddelete(Request $request) {
+
+    $id = $request->record_id;
+    $created_at = $request->created_at;
+    Log::debug($id);
+    Log::debug($created_at);
+
+    Record::destroy($id);
+    DB::commit();
+    
+    }
 }
