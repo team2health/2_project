@@ -35,7 +35,7 @@
                 </div>                
             </div>
             <div>                
-                @foreach ($data->hashtags as $hashtag)
+            @foreach(optional($data->hashtag)->hashtag_name ?? [] as $hashtag)
                     <span>{{ $hashtag->hashtag_name }}</span>
                 @endforeach
             </div>
@@ -45,7 +45,7 @@
         <form class="detail_form" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
             @csrf
             @method('DELETE')
-            @if(Auth::id() === $data->user->id)
+            @if(Auth::id() === $data->users->id)
                 <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
                 <a href="{{ route('board.edit', ['board' => $data->board_id]) }}" class="a_update">수정</a>
                 <button type="submit" class="d_btn">삭제</button>

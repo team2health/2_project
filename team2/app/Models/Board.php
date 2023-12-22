@@ -33,14 +33,7 @@ class Board extends Model
      }
      public function hashtags()
     {
-        return $this->hasManyThrough(
-            Hashtag::class,
-            Board_tag::class,
-            'board_id',
-            'hashtag_id',
-            'id',
-            'id'
-        );
+        return $this->belongsToMany(Hashtag::class, 'board_tags', 'board_id', 'hashtag_id');
     }
      public function user(){
         return $this->belongsTo(User::class,'u_id', 'id');        

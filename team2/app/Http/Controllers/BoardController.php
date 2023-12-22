@@ -89,20 +89,31 @@ class BoardController extends Controller
         // $boardData['category_id'] = $request->input('category_id', 1);
         $board = Board::create($boardData);
 
-        $hashtags = $request->input('hashtag');
+//         $hashtags = $request->input('hashtag');
+// if (!empty($hashtags)) {
+//     // Split hashtags by comma and trim spaces
+//     $hashtagsArray = array_map('trim', explode(',', $hashtags));
+
+//     // Save each hashtag to the Hashtags table and link it to the board
+//     foreach ($hashtagsArray as $hashtag) {
+//         $hashtagModel = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
+        
+//         // Save the relationship in the BoardTag pivot table
+//         Board_tag::create([
+//             'board_id' => $board->id,
+//             'hashtag_id' => $hashtagModel->id,
+//         ]);
+//     }
+//}$hashtags = $request->input('hashtag');
 if (!empty($hashtags)) {
     // Split hashtags by comma and trim spaces
     $hashtagsArray = array_map('trim', explode(',', $hashtags));
 
-    // Save each hashtag to the Hashtags table and link it to the board
+    // Save each hashtag to the Hashtags table
     foreach ($hashtagsArray as $hashtag) {
         $hashtagModel = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
-        
-        // Save the relationship in the BoardTag pivot table
-        Board_tag::create([
-            'board_id' => $board->id,
-            'hashtag_id' => $hashtagModel->id,
-        ]);
+        // Attach the hashtag to the board using pivot table
+        $board->hashtags()->attach($hashtagModel->hashtag_id);
     }
 }
         // Save Images to Board_img
