@@ -38,12 +38,17 @@ class MypageController extends Controller
                     ->orderBy('board_id', 'DESC')
                     ->get();
 
-                // $comment_result = DB::table('comments')
-                // ->select(
-
-                //     'u_id'
-                //     ,'board_id'
-                // )
+                $comment_result = DB::table('comments')
+                    ->select(
+                        'comments.comment_id'
+                        ,'comments.board_id'
+                        ,'comments.comment_content'
+                        ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
+                        ,'boards.board_title'
+                    )->join('boards', 'boards.board_id', 'comments.board_id')
+                    ->where('comments.u_id',$result)
+                    ->orderby('comments.comment_id', 'DESC')
+                    ->get();
                 
                 $user_hashtag = DB::table('favorite_tags')
                     ->select(
@@ -71,7 +76,10 @@ class MypageController extends Controller
 
                     // Log::debug("유저", ['name' => $user_info]);
     
-                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
+                return view('mypage')->with('data', $board_result)
+                ->with('user_hashtag', $user_hashtag)
+                ->with('user_info', $user_info)
+                ->with('comments', $comment_result);
             } else {
                 return view('login');
             }
