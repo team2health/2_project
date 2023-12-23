@@ -454,11 +454,12 @@ td {
     display: grid;
     grid-template-rows: 200px 1fr;
     justify-content: center;
-
+    justify-items: center;
+    max-width: 400px;
 }
 .mypage-btn-line {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
     margin-bottom: 8px;
 }
 .mypage-btn-plus2  {
@@ -473,6 +474,7 @@ td {
 
 .favorite-tag-plus {
     background-color: #FF9900;
+    margin: 30px 0;
 }
 .mypage-comment-show-btn {
     display: inline-block;
@@ -711,6 +713,9 @@ display:none;
 .mypage-hashtag-title  {
     margin-bottom: 15px;
 }
+.mypage-tag-title2 {
+    margin: 30px;
+}
 .mypage-hashtag-title > img{
     width: 30px;
 }
@@ -719,15 +724,19 @@ display:none;
     font-size: 2rem;
 }
 .mypage-hashtag {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10px;
 }
 .mypage-hashtag > div {
-    padding: 10px 20px;
+    padding: 12px 20px;
     background-color: #EDEDED;
     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
-    margin: 3px;
+    margin: 5px 15px 8px 0;
+    width: 130px;
+    border-radius: 18px;
 }
 .mypage-hashtag > div:hover {
     background-color: rgb(248, 199, 124, 0.3);

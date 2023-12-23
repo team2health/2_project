@@ -154,25 +154,26 @@
         </div>
 
         <div class="mypage-tag-title" id="mypageTagTitle">
-            <div class="mypage-hashtag-title">
-                <input type="hidden" value="0" id="favoriteFlg">
-                <img src="/img/star.png" alt="">
-                내가 찜한 관심 태그
-            </div>
-            <div class="mypage-hashtag" id="mypageHashtag">
-            @forelse ($user_hashtag as $item)
-                <div id="favoriteHashtagId{{$item->favorite_tag_id}}">
-                    <span id="favoritehashtext{{$item->favorite_tag_id}}" value="{{$item->favorite_tag_id}}">{{$item->hashtag_name}}</span>
-                    <span onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">x</span>
+            <div class="mypage-tag-title2" id="mypageTagTitle2">
+                <div class="mypage-hashtag-title">
+                    <input type="hidden" value="0" id="favoriteFlg">
+                    <img src="/img/star.png" alt="">
+                    내가 찜한 관심 태그
                 </div>
-            @empty
-                <div id="noticeThatFavoriteNone"> 관심태그로 등록한 해시태그가 없습니다.</div>
-            @endforelse
+                <div class="mypage-hashtag" id="mypageHashtag">
+                @forelse ($user_hashtag as $item)
+                    <div id="favoriteHashtagId{{$item->favorite_tag_id}}">
+                        <span id="favoritehashtext{{$item->favorite_tag_id}}" value="{{$item->favorite_tag_id}}">{{$item->hashtag_name}}</span>
+                        <span onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">x</span>
+                    </div>
+                @empty
+                    <div id="noticeThatFavoriteNone"> 관심태그로 등록한 해시태그가 없습니다.</div>
+                @endforelse
+                </div>
+                <div class="favorite-tag-plus" id="addallfavoritetag">
+                    관심태그 추가하기
+                </div>
             </div>
-            <div class="favorite-tag-plus" id="addallfavoritetag">
-                관심태그 추가하기
-            </div>
-
         </div>
     </div>
 </div>

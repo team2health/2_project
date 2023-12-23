@@ -82,7 +82,7 @@ let userinfomodify = document.getElementById('mypageContent2');
 let mypagecontent = document.getElementById('mypageContent');
 let userboardmodal = document.getElementById('UserboardModal');
 let mypageContentModal = document.getElementById('mypageContentModal');
-let mypageTagTitle = document.getElementById('mypageTagTitle');
+let mypageTagTitle = document.getElementById('mypageTagTitle2');
 
 function userboardshow() {
         userinfomodify.style.display = 'none';
