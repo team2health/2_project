@@ -198,7 +198,9 @@ class MypageController extends Controller
         $result_count = $today_timeline->count();
         Log::debug($result_count);
 
-        return view('timeline')->with('data', $today_timeline)->with('result_count', $result_count);
+        return view('timeline')
+        ->with('data', $today_timeline)
+        ->with('result_count', $result_count);
     }
 
 
@@ -220,91 +222,103 @@ class MypageController extends Controller
         return response()->json(['namechange' => '0']);
     }
 
-        public function userinfoupdatepost(Request $request) {
-            // Log::debug("111111", $request->all());
-            
-            // 사용자 ID 가져오기
-            $result = session('id');
-            
-            $imgFlg = $request->imgFlg;
-            // Log::debug("efeeee", ['img' => $imgFlg]);
-            
-            $userinfo = User::find($result);
-            
-            if($imgFlg == 1) {
-                $imgName = Str::uuid().'.'.$request->user_img->extension();
-                $request->user_img->move(public_path('user_img'), $imgName);
-                $userinfo->user_img = $imgName;
-            } else if($imgFlg == 2) {
-                $userinfo->user_img = '../img/default_f.png';
-            }
-            
-            if($request->user_name) {
-                $userinfo->user_name = $request->user_name;
-            }
-            if($request->user_address) {
-                $userinfo->user_address = $request->user_address;
+    public function userinfoupdatepost(Request $request) {
+        // Log::debug("111111", $request->all());
+        
+        // 사용자 ID 가져오기
+        $result = session('id');
+        
+        $imgFlg = $request->imgFlg;
+        // Log::debug("efeeee", ['img' => $imgFlg]);
+        
+        $userinfo = User::find($result);
+        
+        if($imgFlg == 1) {
+            $imgName = Str::uuid().'.'.$request->user_img->extension();
+            $request->user_img->move(public_path('user_img'), $imgName);
+            $userinfo->user_img = $imgName;
+        } else if($imgFlg == 2) {
+            $userinfo->user_img = '../img/default_f.png';
+        }
+        
+        if($request->user_name) {
+            $userinfo->user_name = $request->user_name;
+        }
+        if($request->user_address) {
+            $userinfo->user_address = $request->user_address;
 
-                if($request->user_address_detail) {
-                    $userinfo->user_address_detail = $request->user_address_detail;
-                } else {
-                    $userinfo->user_address_detail = null;
-                }
+            if($request->user_address_detail) {
+                $userinfo->user_address_detail = $request->user_address_detail;
+            } else {
+                $userinfo->user_address_detail = null;
             }
+        }
+        
+        $userinfo->save();
+
+        $board_result = DB::table('boards')
+        ->select(
+            'board_id'
+            ,'u_id'
+            ,'category_id'
+            ,'board_title'
+            ,'board_content'
+            ,'board_hits'
+            ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
+            ,'updated_at')
+            ->where('u_id',$result)
+            ->where('deleted_at', null)
+            ->orderBy('board_id', 'DESC')
+            ->get();
             
-            $userinfo->save();
-    
-            $board_result = DB::table('boards')
+            $user_hashtag = DB::table('favorite_tags')
             ->select(
-                'board_id'
-                ,'u_id'
-                ,'category_id'
-                ,'board_title'
-                ,'board_content'
-                ,'board_hits'
-                ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
-                ,'updated_at')
-                ->where('u_id',$result)
-                ->where('deleted_at', null)
-                ->orderBy('board_id', 'DESC')
-                ->get();
-                
-                $user_hashtag = DB::table('favorite_tags')
-                ->select(
-                'favorite_tags.favorite_tag_id'
-                ,'favorite_tags.hashtag_id'
-                ,'hashtags.hashtag_name'
-                )
-                ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
-                ->where('favorite_tags.u_id', $result)
-                ->where('favorite_tags.deleted_at', null)
-                ->orderBy('favorite_tags.created_at')
-                ->get();
-                
-                $user_info  = DB::table('users')
-                ->select(
-                    'id'
-                    ,'user_id'
-                    ,'user_name'
-                    ,'user_address'
-                    ,'user_address_detail'
-                    ,'user_img'
-                )
-                ->where('id', $result)
-                ->get();
-                
-                // Log::debug("이름", ['name' => $user_info]);
-                session(['user_name' => $user_info[0]->user_name,
-                'user_img' => $user_info[0]->user_img]);
-                // Log::debug("유저", ['name' => $user_info]);
-
-                
-                return view('mypage')->with('data', $board_result)->with('user_hashtag', $user_hashtag)->with('user_info', $user_info);
-            }
+            'favorite_tags.favorite_tag_id'
+            ,'favorite_tags.hashtag_id'
+            ,'hashtags.hashtag_name'
+            )
+            ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+            ->where('favorite_tags.u_id', $result)
+            ->where('favorite_tags.deleted_at', null)
+            ->orderBy('favorite_tags.created_at')
+            ->get();
             
-            public function newcalendarblock() {
-                
-            }
+            $user_info  = DB::table('users')
+            ->select(
+                'id'
+                ,'user_id'
+                ,'user_name'
+                ,'user_address'
+                ,'user_address_detail'
+                ,'user_img'
+            )
+            ->where('id', $result)
+            ->get();
+            
+            $comment_result = DB::table('comments')
+            ->select(
+                'comments.comment_id'
+                ,'comments.board_id'
+                ,'comments.comment_content'
+                ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
+                ,'boards.board_title'
+            )->join('boards', 'boards.board_id', 'comments.board_id')
+            ->where('comments.u_id',$result)
+            ->orderby('comments.comment_id', 'DESC')
+            ->get();
+
+            // Log::debug("이름", ['name' => $user_info]);
+            session(['user_name' => $user_info[0]->user_name,
+            'user_img' => $user_info[0]->user_img]);
+            // Log::debug("유저", ['name' => $user_info]);
+
+            
+            return view('mypage')
+            ->with('data', $board_result)
+            ->with('user_hashtag', $user_hashtag)
+            ->with('user_info', $user_info)
+            ->with('comments', $comment_result);
+        }
 
     public function daytimelinepost(Request $request) {
 

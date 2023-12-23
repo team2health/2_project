@@ -1,6 +1,16 @@
 // window.addEventListener('load', function() {
 //     buildCalendar();  //달력 불러오는 함수를 페이지를 로딩하자마자 실행
-// });
+// });.
+// const mediaQuery = window.matchMedia('(min-width: 800px)');
+
+// if (mediaQuery.matches) {
+//     dateScrollbar();
+//     console.log('노노노')
+// } else {
+//     console.log('애애앵')
+// }
+
+
 
 window.addEventListener('load', function() {
     weekendShow(); //일주일을 불러오는 함수
@@ -75,18 +85,18 @@ function weekendShow() {
         }
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')
-        let weekendinsdot = document.createElement('span')
+        // let weekendinsdot = document.createElement('span')
 
-        let mypagediv = document.getElementById('mypageSecond');
+        let mypagediv = document.getElementById('mypageSecondMargin');
         mypagediv.appendChild(weekendindiv);
 
         weekendinspan.innerHTML = date+'일';
         weekendinspan2.innerHTML =  monthdaytext;
-        weekendinsdot.innerHTML = '.';
+        // weekendinsdot.innerHTML = '.';
 
         weekendindiv.appendChild(weekendinspan2);
         weekendindiv.appendChild(weekendinspan);
-        weekendindiv.appendChild(weekendinsdot);
+        // weekendindiv.appendChild(weekendinsdot);
         monthday++;
         
         if(monthday > 6) {
@@ -351,18 +361,18 @@ function newCalendarReloard(data) {
         }
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')
-        let weekendinsdot = document.createElement('span')
+        // let weekendinsdot = document.createElement('span')
 
         let mypagediv = document.getElementById('mypageSecond');
         mypagediv.appendChild(weekendindiv);
 
         weekendinspan.innerHTML = date+'일';
         weekendinspan2.innerHTML =  monthdaytext;
-        weekendinsdot.innerHTML = '.';
+        // weekendinsdot.innerHTML = '.';
 
         weekendindiv.appendChild(weekendinspan2);
         weekendindiv.appendChild(weekendinspan);
-        weekendindiv.appendChild(weekendinsdot);
+        // weekendindiv.appendChild(weekendinsdot);
         mypageSecond.appendChild(weekendindiv);
         monthday++;
         

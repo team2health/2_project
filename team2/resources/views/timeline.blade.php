@@ -41,7 +41,11 @@
         
     </div>
 
-    <div class="mypage-second" id="mypageSecond"></div>
+    <div class="mypage-second" id="mypageSecond">
+        <div class="mypage-second-margin" id="mypageSecondMargin">
+
+        </div>
+    </div>
         
     <div class="mypage-third">
         <div class="recordsection" id="recordDeleteTest">
