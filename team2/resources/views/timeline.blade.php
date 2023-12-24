@@ -60,9 +60,9 @@
                     <span class="recordtext">{{$item->symptom_name}} </span>
                 </div>
             @empty
-                {{-- <div class="none-recordtext"> 오늘은 검색기록이 없어요!</div> --}}
+                <div class="none-recordtext"> 오늘은 검색기록이 없어요!</div>
             @endforelse
-            <div class="none-recordtext notice-no-data" id="noticeNoData"> 오늘은 검색기록이 없어요!</div>
+            {{-- <div class="none-recordtext notice-no-data" id="noticeNoData"> 오늘은 검색기록이 없어요!</div> --}}
         </div>
     </div>
 
