@@ -719,6 +719,11 @@ display:none;
 .mypage-hashtag-title > img{
     width: 30px;
 }
+.notice-that-favorite-none {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+}
 .mypage-hashtag-title {
     font-weight: 600;
     font-size: 2rem;

@@ -167,7 +167,7 @@
                         <span onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">x</span>
                     </div>
                 @empty
-                    <div id="noticeThatFavoriteNone"> 관심태그로 등록한 해시태그가 없습니다.</div>
+                    <span id="noticeThatFavoriteNone" class="notice-that-favorite-none"> 관심태그로 등록한 해시태그가 없습니다.</span>
                 @endforelse
                 </div>
                 <div class="favorite-tag-plus" id="addallfavoritetag">

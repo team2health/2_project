@@ -112,12 +112,6 @@ function favoritehashdelete(data) {
         let favoritetag = document.getElementById('favoriteHashtagId'+data);
         favoritetag.remove();
 
-        // 즉시 추가
-        // let deletefavoritehashtext = document.getElementById('favoritehashtext'+data).value;
-        // let noticeThatFavoriteNone = document.createElement('noticeThatFavoriteNone');
-        // if (noticeThatFavoriteNone) {
-        //     noticeThatFavoriteNone.remove();
-        // }
         let deletedfavoritehashtag = document.createElement('div')
         let deletefavoritespan = document.createElement('span');
         let deletefavoritespan2 = document.createElement('span');
@@ -151,12 +145,15 @@ function favoritehashdelete(data) {
     } else {
         //
     } 
-    // if (noticeThatFavoriteNone === null ) {
-    //     let noticeThatFavoriteDiv = document.createElement('div');
-    //     noticeThatFavoriteDiv.id = 'mypageHashtagOpen';
-    //     let mypageHashtag = document.getElementById('mypageHashtag');
-    //     mypageHashtag.appendChild(noticeThatFavoriteDiv);
-    // }
+
+    let mypageHashtagChk = document.getElementById('mypageHashtag');
+    if (mypageHashtagChk.innerHTML.trim() === '') {
+        let noticeThatFavoriteNone = document.createElement('span');
+        noticeThatFavoriteNone.id = 'noticeThatFavoriteNone';
+        noticeThatFavoriteNone.classList.add('notice-that-favorite-none');
+        noticeThatFavoriteNone.innerHTML = '관심태그로 등록한 해시태그가 없습니다.';
+        mypageHashtagChk.appendChild(noticeThatFavoriteNone);
+    }
 }
 
 let addallfavoritetagevent = document.getElementById('addallfavoritetag');
@@ -242,6 +239,11 @@ function addallfavoritetag() {
 
 // 관심 해시태그 추가
 function addhashtag(data) {
+
+    let deleteNotice = document.getElementById('noticeThatFavoriteNone');
+    if (deleteNotice) {
+        deleteNotice.remove();
+    }
 
     let formData = new FormData();
     formData.append('tag_id', data);
