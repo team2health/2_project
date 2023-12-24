@@ -9,8 +9,10 @@ class Hashtag extends Model
 {
     use HasFactory;
     protected $primaryKey = "hashtag_id";
+    
     protected $fillable = [
         'hashtag_name',
+        'hashtag_id',
     ];
 
     public function boards()
