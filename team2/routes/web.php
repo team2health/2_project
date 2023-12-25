@@ -19,11 +19,6 @@ use App\Http\Controllers\HashTagController;
 |
 */
 
-
-Route::get('/insert', function () {
-    return view('insert');
-})->name('insert');
-
 Route::get('/detail/{board}', [BoardController::class, 'show'])->name('detail');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
@@ -31,10 +26,10 @@ Route::get('/boardcategory/{categoryId}', [BoardController::class, 'boardcategor
 Route::post('/nextboard', [BoardController::class, 'nextboardpost']);
 Route::post('/favoritenextboard', [BoardController::class, 'favoritenextboardpost']);
 
-
 Route::get('/lastboard', [BoardController::class, 'lastboardget'])->name('lastboard.get');
 Route::get('/hotboard', [BoardController::class, 'hotboardget'])->name('hotboard.get');
 Route::get('/favoriteboard', [BoardController::class, 'favoriteboardget'])->name('favoriteboard.get');
+Route::get('/categoryboard',[BoardController::class,'categoryboard'])->name('categoryboard');
 
 Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  
@@ -44,18 +39,22 @@ Route::resource('/board', BoardController::class);
 // PUT|PATCH       board/{board} ............................. board.update › BoardController@update  
 // DELETE          board/{board} ............................. board.destroy › BoardController@destroy  
 // GET|HEAD        board/{board}/edit ........................ board.edit › BoardController@edit  
-Route::get('/categoryboard',[BoardController::class,'categoryboard'])->name('categoryboard');
 
+// main
 Route::get('/', [MainController::class, 'mainget'])->name('main.get');
 Route::post('/partselect', [MainController::class, 'partselectpost']);
 Route::post('/symptomselect', [MainController::class, 'symptomselectpost']);
 Route::post('/useraddress', [MainController::class, 'useraddresspost']);
 
+// user
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
 Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
+
+Route::post('/namechk', [UserController::class, 'namechkpost']);
+Route::post('/idchk', [UserController::class, 'idchkpost']);
 
 // mypage
 Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get');
@@ -63,7 +62,6 @@ Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->nam
 Route::get('/allhashtag', [MypageController::class, 'allhashget'])->name('allhash.post');
 Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost'])->name('allhash.post');
 Route::post('/newcalendarblock', [MypageController::class, 'newcalendarblock'])->name('allhash.post');
-
 
 Route::post('/namechange', [MypageController::class, 'namechangepost']);
 Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);
@@ -73,6 +71,3 @@ Route::get('/timeline', [MypageController::class, 'todaytimelineget'])->name('to
 Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name('daytimeline.post');
 Route::post('/recorddelete', [MypageController::class, 'recorddelete'])->name('recorddelete.post');
 
-
-Route::post('/namechk', [UserController::class, 'namechkpost']);
-Route::post('/idchk', [UserController::class, 'idchkpost']);
