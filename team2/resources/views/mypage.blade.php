@@ -188,11 +188,11 @@
     <div>
         <div class="mypage-content-modal" id="mypageContentModal">
             <div onclick="mypagemodalclosebtn(); return false;" class="mypage-modal-close-btn">x</div>
-            <div class="modal-board-show-btn">
+            {{-- <div class="modal-board-show-btn">
                 <div class="mypage-board-modal-btn">내가 쓴 게시글</div>
                 <div class="mypage-comment-modal-btn">내가 쓴 댓글</div>
-            </div>
-            <div class="mypage-boards-part">
+            </div> --}}
+            {{-- <div class="mypage-boards-part">
                 @forelse ($data as $index => $item)
                     @php
                     $previous_item = $index - 1;
@@ -231,39 +231,85 @@
                 @empty
                     <div> 작성한 게시글이 없습니다. </div>
                 @endforelse
-            </div>
-{{-- 
-            <div class="mypage-date-today">
-                <span class="mypage-board-date"></span>
-            </div>
-            <div class="mypage-boards-part2">
-                <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
-                    <div class="mypage-bord-title"> 댓글 view 제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <spa class="mypage-boardbox-date">2023-12-12</spa>
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
-                <div class="mypage-boardbox">
-                    <span class="mypage-boardbox-date">2023-12-12</span>
-                    <div class="mypage-bord-title">제목입니다.</div>
-                    <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                </div>
             </div> --}}
+            <div class="tab-modal">
+                <ul class="tab_list">
+                    <li class="mypage-board-modal-btn active" data-list="3">
+                        내가 쓴 게시글
+                    </li>
+                    <li class="mypage-comment-modal-btn" data-list="4">
+                        내가 쓴 댓글
+                    </li>
+                </ul>
+                <div class="tab-contents tab-show-modal" data-order="3">
+                    {{-- 게시글 창 --}}
+                    <div class="mypage-boards-part">
+                        왜 이게 아무것도 안나오지?
+                        @forelse ($data as $index => $item)
+                            @php
+                            if( $index >= 1 ) {
+                                $previous_item = $index - 1;
+                                $present_item = $index - 0;
+                            }
+                            @endphp
+                            @if ( $index >= 1)
+                                @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
+                                <div class="mypage-date-today">
+                                    <span class="mypage-board-date">{{$item->created_at}}</span>
+                                </div>
+                                <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                                    <div class="mypage-boardbox">
+                                        <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                                        <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                                    </div>
+                                </a>
+                                @else
+                                <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                                    <div class="mypage-boardbox">
+                                        <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                                        <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                                    </div>
+                                </a>
+                                @endif
+                            @else
+                            <div class="mypage-date-today">
+                                <span class="mypage-board-date">{{$item->created_at}}</span>
+                            </div>
+                            <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                                <div class="mypage-boardbox">
+                                    <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                                    <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                                </div>
+                            </a>
+                            @endif
+                        @empty
+                            <div> 작성한 게시글이 없습니다. </div>
+                        @endforelse
+                    </div>
+                </div>
+
+                <div class="tab-contents-modal" data-order="4">
+                    <div class="mypage-boards-part">
+                        @forelse ($comments as $index => $item)
+                            <a href="{{route('board.show', ['board' => $item->board_id])}}">
+                                <div class="mypage-boardbox">
+                                    <span class="mypage-boardbox-date">{{$item->created_at}}</span>
+                                    <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                                    <div class="mypage-bord-detailbox">{{Str::limit($item->comment_content, 75, '...')}}</div>
+                                </div>
+                            </a>
+                        @empty
+                            <div> 작성한 댓글이 없습니다. </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
         
             <div class="mypage-btn-plus">더보기</div>
             {{-- 게시글 insert로 넘어감 --}}
-            <a href="{{route('insert')}}">
+            {{-- <a href="{{route('insert')}}">
                 <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">
-            </a>
+            </a> --}}
         </div>
     </div>
 </div>

@@ -11,7 +11,6 @@
 // }
 
 
-
 window.addEventListener('load', function() {
     weekendShow(); //일주일을 불러오는 함수
 });
@@ -20,6 +19,10 @@ window.addEventListener('load', function() {
 });
 window.addEventListener('load', function() {
     dateScrollbar(); //일주일 스크롤을 설정하는 함수
+});
+
+window.addEventListener('load', function() {
+    showRecordToday();
 });
 
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
@@ -108,9 +111,20 @@ function weekendShow() {
         }
     }
 }
+// 날짜에 따른 검색기록 초기 화면 
+function showRecordToday () {
+    let noticeNoData = document.getElementById('noticeNoData');
+    let recordTurn = document.getElementById('recordTurn').value;
 
+    if(recordTurn == 0) {
+        noticeNoData.classList.remove('notice-no-data');
+    }
+
+}
 //날짜에 따른 검색기록 조회
 function selectDate(data, data2) {
+    console.log('data:   ' + data);
+    console.log('data2:   ' + data2);
 
     // 선택한 날을 제외한 다른 hover 삭제
     let parentElement = document.getElementById('mypageSecond');
@@ -119,8 +133,8 @@ function selectDate(data, data2) {
         childElements[i].classList.remove('datebardayselect');
     }
     
-    let weekendindiv = document.getElementById('weekend'+data2);
-    weekendindiv.classList.add('datebardayselect');
+    let weekendinthediv = document.getElementById('weekend'+data2);
+    weekendinthediv.classList.add('datebardayselect');
 
     selectDateScrollbar(data2);
 
@@ -132,14 +146,17 @@ function selectDate(data, data2) {
     let userRecordClass = document.querySelectorAll('.user-record');
     let noticeNoData = document.getElementById('noticeNoData');
 
-    for (let i = 0; i < recordTurnVal; i++){
-        recordCircleImg.forEach(function (recordCircleImg) {
-            recordCircleImg.remove();
-        });
 
-        userRecordClass.forEach(function (userRecord) {
-            userRecord.remove();
-        });
+    if( recordTurnVal > 0) {
+        for (let i = 0; i < recordTurnVal; i++){
+            recordCircleImg.forEach(function (recordCircleImg) {
+                recordCircleImg.remove();
+            });
+    
+            userRecordClass.forEach(function (userRecord) {
+                userRecord.remove();
+            });
+        }
     }
 
     let formData = new FormData();
@@ -151,7 +168,7 @@ function selectDate(data, data2) {
     })
     .then(response => response.json())
     .then(data => {
-        
+        console.log('검색기록결과' + data);
         if( data.length > 1) {
             noticeNoData.classList.add('notice-no-data');
             recordTurn.value = '';
@@ -229,9 +246,15 @@ function buildCalendar() {
     let getFullYear = nowMonth.getFullYear();
     let getFullYearIn = String(getFullYear);
     let getMonth = nowMonth.getMonth()+1;
-    let getMonthIn = String(getMonth);
-    let inputDateId = getFullYearIn + getMonthIn;
-    var testsearchDateZero ='';
+    let inputDateId = '';
+    let getMonthIn = '';
+    if(getMonth < 10) {
+        getMonthIn = "0" + getMonth;
+    } else {
+        getMonthIn = String(getMonth);
+    }
+    let testsearchDateZero ='';
+    inputDateId = getFullYearIn + getMonthIn;
 
     let tbody_Calendar = document.querySelector(".Calendar > tbody");
     document.getElementById("calYear").innerText = nowMonth.getFullYear();             // 연도 숫자 갱신
@@ -302,34 +325,27 @@ function buildCalendar() {
 // 달력 날짜 선택하면 실행되는 함수
 function newCalendarReloard(data) {
 
-    console.log(data);
-    nextCalendar()
+    // 기존 달의 데이터바 삭제
+    let mypageSecond = document.getElementById('mypageSecond');
+    let mypageSecondMargin = document.getElementById('mypageSecondMargin');
+    mypageSecondMargin.innerHTML = '';
+    // nextCalendar();
     let newCalendarYear = parseInt(data.substring(0, 4), 10);
     let newCalendarMonth = parseInt(data.substring(4, 6), 10) - 1; // 월은 0부터 시작하므로 1을 뺍니다.
     let newCalendarDay = parseInt(data.substring(6, 8), 10);
     
     // Date 객체를 생성합니다.
     let setNewCalendar = new Date(newCalendarYear, newCalendarMonth, newCalendarDay);
-    console.log(setNewCalendar);
-    console.log('해당 월 마지막 날짜 획득 : ' + setNewCalendar);
 
-    let mypageSecond = document.getElementById('mypageSecond');
-    mypageSecond.innerHTML = '';
 
     let thisyear = setNewCalendar.getFullYear(); // 불러온 년도
     let thismonthday = setNewCalendar.getMonth()+1; // 불러온 달
-    let thismonthtoday = setNewCalendar.getDate();
-
+    let thismonthtoday = setNewCalendar.getDate(); // 불러온 날짜
+    console.log('불러온 날짜' + thismonthtoday);
     let iddate = thisyear + '-' + thismonthday + '-'; // 날짜마다id 세팅
-
     let monthlast = new Date(thisyear, thismonthday, 0); //월의 마지막 날짜 가져오기
-    console.log('월의 마지막 날짜:' + monthlast)
-    
     let monthfirstday = new Date(thisyear, thismonthday-1, 1); //월의 첫번째 날짜 가져오기
-    console.log('월의 첫번째 날짜:' +monthfirstday);
-
     let totalmonthdate = monthlast.getDate(); //변수에 담기
-    console.log(totalmonthdate);
     let monthday = monthfirstday.getDay();
 
 
@@ -355,39 +371,33 @@ function newCalendarReloard(data) {
 
         let weekendindiv = document.createElement('div');
         weekendindiv.classList.add('datebar');
-        weekendindiv.id = 'weekend'+date;
+        weekendindiv.id = 'weekend'+a;
         weekendindiv.onclick = function () {
-            selectDate(iddate + date, date);
+            selectDate(iddate + a, a);
         }
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')
-        // let weekendinsdot = document.createElement('span')
-
-        let mypagediv = document.getElementById('mypageSecond');
-        mypagediv.appendChild(weekendindiv);
-
-        weekendinspan.innerHTML = date+'일';
+        
+        weekendinspan.innerHTML = a +'일';
         weekendinspan2.innerHTML =  monthdaytext;
-        // weekendinsdot.innerHTML = '.';
-
+        
         weekendindiv.appendChild(weekendinspan2);
         weekendindiv.appendChild(weekendinspan);
-        // weekendindiv.appendChild(weekendinsdot);
-        mypageSecond.appendChild(weekendindiv);
+        mypageSecondMargin.appendChild(weekendindiv);
+        mypageSecond.appendChild(mypageSecondMargin);
         monthday++;
         
         if(monthday > 6) {
             monthday = 0;
         }
 
-        if( date == thismonthtoday) {
-            weekendindiv.classList.add('datebartoday');
-        }
-        
-        selectDateScrollbar(data);
     }
+    // let data2 = thismonthtoday;
 
     calendarshow(); //캘린더 닫기
+    let weekendindiv = document.getElementById('calendarBtn');
+    weekendindiv.innerHTML = thisyear + '년 ' + thismonthday + '월';
+    selectDate(data , thismonthtoday);
 }
 
 // 날짜 선택
@@ -413,9 +423,10 @@ function nextCalendar() {
         let newDate = nowMonth.getDate();
         
         nowMonth = new Date(Year, Month, newDate);
-        
+        console.log('달력 리뉴얼'+nowMonth);
     } else {
         nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, nowMonth.getDate());   // 현재 달을 1 증가
+        console.log('달력 유지'+nowMonth);
     }
     buildCalendar();    // 달력 다시 생성
 }
@@ -428,13 +439,6 @@ function leftPad(value) {
     }
     return value;
 }
-
-// 날짜 선택
-// 달력 닫히고
-// 그 달에 따른 1일부터 마지막 날짜까지 블럭 출력
-// 선택한 날짜에 hover
-// 그 날짜에 해당되는 검색기록 불러옴
-
 
 //  검색기록 삭제
 function recorddeletemodalopen(data) {
