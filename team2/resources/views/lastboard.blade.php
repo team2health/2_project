@@ -9,167 +9,30 @@
     <a href="" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>자유게시판</h2>
-        <button type="submit" class="btn_last">
-            정렬
-        </button>
     </div>
+    @forelse ($data as $item)
     <div class="last_container">
         <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
+            <img class="community_icon"  src="{{ route('board.show',['board'=>$item->board_id]) }}" alt="" class="board_nic_img">                               
             <div class="board_nic_text">
                 <div>
-                    닉네임
+                    {{ optional($item->user)->user_name }}
                 </div>
                 <div>
-                    작성일자
+                    {{$item->created_at}}
                 </div>
             </div>
         </div> 
         <div>
-            제목
+            {{$item->board_title}}
         </div> 
         <div class="last_content">
-            내용
+            {{$item->board_content}}
         </div>  
     </div>
-    
-    <div class="last_container">
-        <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-            <div class="board_nic_text">
-                <div>
-                    닉네임
-                </div>
-                <div>
-                    작성일자
-                </div>
-            </div>
-        </div> 
-        <div>
-            제목
-        </div> 
-        <div class="last_content">
-            내용
-        </div>  
-    </div>
-    <div class="last_container">
-        <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-            <div class="board_nic_text">
-                <div>
-                    닉네임
-                </div>
-                <div>
-                    작성일자
-                </div>
-            </div>
-        </div> 
-        <div>
-            제목
-        </div> 
-        <div class="last_content">
-            내용
-        </div>  
-    </div>
-    <div class="last_container">
-        <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-            <div class="board_nic_text">
-                <div>
-                    닉네임
-                </div>
-                <div>
-                    작성일자
-                </div>
-            </div>
-        </div> 
-        <div>
-            제목
-        </div> 
-        <div class="last_content">
-            내용
-        </div>  
-    </div>
-    <div class="last_headline">
-        <h2>질문게시판</h2>        
-    </div>
-    <div class="last_container">
-        <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-            <div class="board_nic_text">
-                <div>
-                    닉네임
-                </div>
-                <div>
-                    작성일자
-                </div>
-            </div>
-        </div> 
-        <div>
-            제목
-        </div> 
-        <div class="last_content">
-            내용
-        </div>  
-    </div>
-    
-    <div class="last_container">
-        <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-            <div class="board_nic_text">
-                <div>
-                    닉네임
-                </div>
-                <div>
-                    작성일자
-                </div>
-            </div>
-        </div> 
-        <div>
-            제목
-        </div> 
-        <div class="last_content">
-            내용
-        </div>  
-    </div>
-    <div class="last_container">
-        <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-            <div class="board_nic_text">
-                <div>
-                    닉네임
-                </div>
-                <div>
-                    작성일자
-                </div>
-            </div>
-        </div> 
-        <div>
-            제목
-        </div> 
-        <div class="last_content">
-            내용
-        </div>  
-    </div>
-    <div class="last_container">
-        <div class="last_user">
-            <img class="community_icon"  src="../img/default_f.png" alt="" class="board_nic_img">                               
-            <div class="board_nic_text">
-                <div>
-                    닉네임
-                </div>
-                <div>
-                    작성일자
-                </div>
-            </div>
-        </div> 
-        <div>
-            제목
-        </div> 
-        <div class="last_content">
-            내용
-        </div>  
-    </div>
+    @empty
+        게시글이 없습니다.
+    @endforelse
 </main>
 
 @endsection

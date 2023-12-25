@@ -538,6 +538,7 @@ td {
 
 .User-info-modify {
     width: 90%;
+    margin: auto;
 }
 .profile-photo-btn {
     background-size: cover;
@@ -596,12 +597,12 @@ td {
     justify-content: space-around;
 }
 .user-info-btn-chk {
-    padding: 5px 5px;
+    padding: 8px;
     border-radius: 10px;
     background-color: #FAFAFA;
     border: 1px solid #C5C5C5;
-    display: inline-block;
     cursor: pointer;
+    float: right;
 }
 .user-info-modify input:focus {
     background-color: #FFF8DC;

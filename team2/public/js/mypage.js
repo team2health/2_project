@@ -286,14 +286,18 @@ function addhashtag(data) {
 // value값 변경해야함
 
 let nameChk = document.getElementById('usermodifyname');
+let NAMEINFOBTN = document.getElementById('name-info-btn');
 let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
 let imgFlg = 0;
 let nameflg = 0;
 let nameinput = 0;
 let namechkflg = 0;
 
+NAMEINFOBTN.style.visibility = 'hidden';
+
 nameChk.addEventListener('input', function() {
     nameinput = 1;
+    NAMEINFOBTN.style.visibility = 'visible';
     // console.log('텍스트 값이 변경됨. nameflg 값:', namechkflg);
 });
 
@@ -364,6 +368,10 @@ function userimgremove() {
 
 function userinfoupdate() {
     if(nameinput === 1) {
+        if(nameChk.value === '') {
+            alert('닉네임을 입력해주세요');
+            return false;
+        } 
         if(namechkflg === 0) {
             alert('닉네임 중복체크를 해주세요.');
             return false;
