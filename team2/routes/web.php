@@ -19,13 +19,6 @@ use App\Http\Controllers\HashTagController;
 |
 */
 
-Route::get('/mypage', function () {
-    return view('mypage');
-})->name('mypage');
-
-Route::get('/lastboard', function () {
-    return view('lastboard');
-})->name('lastboard');
 
 Route::get('/insert', function () {
     return view('insert');
@@ -38,6 +31,10 @@ Route::get('/boardcategory/{categoryId}', [BoardController::class, 'boardcategor
 Route::post('/nextboard', [BoardController::class, 'nextboardpost']);
 Route::post('/favoritenextboard', [BoardController::class, 'favoritenextboardpost']);
 
+
+Route::get('/lastboard', [BoardController::class, 'lastboardget'])->name('lastboard.get');
+Route::get('/hotboard', [BoardController::class, 'hotboardget'])->name('hotboard.get');
+Route::get('/favoriteboard', [BoardController::class, 'favoriteboardget'])->name('favoriteboard.get');
 
 Route::resource('/board', BoardController::class);
 // GET|HEAD        board ..................................... board.index › BoardController@index  

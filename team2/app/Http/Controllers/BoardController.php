@@ -415,5 +415,20 @@ return redirect()->route('detail', ['board' => $board_id])->with('data', $hashta
         Log::debug($result);
         return response()->json($result);
     }
+
+    public function lastboardget() {
+        $lastboard = Board::orderBy('board_id', 'desc')->get();
+
+        return view('lastboard')->with('data', $lastboard);
+    }
+
+    public function hotboardget() {
+        $hotboard = Board::orderBy('board_hits', 'desc')->get();
+
+        return view('hotboard')->with('data', $hotboard);
+    }
+
+    // public function favoriteboardget() {
+    // }
 }
 

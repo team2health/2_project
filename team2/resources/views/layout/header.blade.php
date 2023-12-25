@@ -100,9 +100,9 @@
 		@endif
 		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard' || Str::contains(request()->url(), 'board/') || Str::contains(request()->url(), 'boardcategory'))
 			<div class="container-category display-flex-around div-padding">
-				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">최근 게시글</a>
-				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">핫게시글</a>
-				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">관심태그</a>
+				<a href="{{route('lastboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">최근 게시글</a>
+				<a href="{{route('hotboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">핫게시글</a>
+				<a href="{{route('favoriteboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">관심태그</a>
 				<a class="div-display-lnlineBlock main-line-height cate_btn" onclick="toggleDropdown()">카테고리</a>
 			</div>
 		@endif

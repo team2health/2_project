@@ -117,7 +117,7 @@
                 <input type="hidden" name="imgFlg" id="imgflg">
                 <br>
                 <label for="usermodifyname">닉네임 수정</label>
-                <div class="user-info-btn-chk" onclick="nameChange(); return false;"> 닉네임 중복 확인 </div>
+                <span class="user-info-btn-chk" onclick="nameChange(); return false;" id="name-info-btn"> 닉네임 중복 확인 </span>
                 <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
                 {{-- <br>
                 <label for="usermodifypassword">비밀번호 수정</label>
