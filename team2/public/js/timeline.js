@@ -147,7 +147,7 @@ function selectDate(data, data2) {
     let noticeNoData = document.getElementById('noticeNoData');
 
 
-    if( recordTurnVal > 0) {
+    // if( recordTurnVal > 0) {
         for (let i = 0; i < recordTurnVal; i++){
             recordCircleImg.forEach(function (recordCircleImg) {
                 recordCircleImg.remove();
@@ -157,7 +157,7 @@ function selectDate(data, data2) {
                 userRecord.remove();
             });
         }
-    }
+    // }
 
     let formData = new FormData();
     formData.append('date', data);
@@ -347,7 +347,7 @@ function newCalendarReloard(data) {
     let monthfirstday = new Date(thisyear, thismonthday-1, 1); //월의 첫번째 날짜 가져오기
     let totalmonthdate = monthlast.getDate(); //변수에 담기
     let monthday = monthfirstday.getDay();
-
+    let iddate2 = thisyear + '-' + thismonthday + '-' + thismonthtoday; // ���� ��다
 
     for (let a = 1; a <= totalmonthdate; a++) {
         // 마지막 날짜만큼 for문 돌려서 1일부터 출력
@@ -397,7 +397,7 @@ function newCalendarReloard(data) {
     calendarshow(); //캘린더 닫기
     let weekendindiv = document.getElementById('calendarBtn');
     weekendindiv.innerHTML = thisyear + '년 ' + thismonthday + '월';
-    selectDate(data , thismonthtoday);
+    selectDate(iddate2 , thismonthtoday);
 }
 
 // 날짜 선택
