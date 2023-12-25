@@ -41,7 +41,7 @@ class BoardController extends Controller
             ->where('users.id', $u_id)
             ->where('favorite_tags.deleted_at', null)
             ->orderby('boards.board_id', 'desc')
-            ->distinct()
+            ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->limit(4)
             ->get();
 
@@ -285,5 +285,20 @@ class BoardController extends Controller
         Log::debug($result);
         return response()->json($result);
     }
+
+    public function lastboardget() {
+        $lastboard = Board::orderBy('board_id', 'desc')->get();
+
+        return view('lastboard')->with('data', $lastboard);
+    }
+
+    public function hotboardget() {
+        $hotboard = Board::orderBy('board_hits', 'desc')->get();
+
+        return view('hotboard')->with('data', $hotboard);
+    }
+
+    // public function favoriteboardget() {
+    // }
 }
 

@@ -79,7 +79,9 @@
 
 		@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist'
 		&& request()->url() !== 'http://127.0.0.1:8000/mypage' && request()->url() !== 'http://127.0.0.1:8000/categoryboard'
-		&& !Str::contains(request()->url(), 'boardcategory') && !Str::contains(request()->url(), 'board/'))
+		&& !Str::contains(request()->url(), 'boardcategory') && !Str::contains(request()->url(), 'board/') 
+		&& request()->url() !== 'http://127.0.0.1:8000/hotboard' && request()->url() !== 'http://127.0.0.1:8000/lastboard' && request()->url() !== 'http://127.0.0.1:8000/favoriteboard'
+		&& !Str::contains(request()->url(), '/detail/'))
 			<div class="container-category display-flex-around div-padding">
 				@if (request()->url() === 'http://127.0.0.1:8000')
 					<a href="{{route('main.get')}}" class="div-display-lnlineBlock main-line-height page-select-font-color">증상 검색</a>
@@ -98,12 +100,30 @@
 				@endif
 			</div>
 		@endif
-		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard' || Str::contains(request()->url(), 'board/') || Str::contains(request()->url(), 'boardcategory'))
+		@if (request()->url() === 'http://127.0.0.1:8000/categoryboard' || Str::contains(request()->url(), 'board/') || Str::contains(request()->url(), 'boardcategory') ||
+		request()->url() === 'http://127.0.0.1:8000/hotboard' || request()->url() === 'http://127.0.0.1:8000/lastboard' || request()->url() === 'http://127.0.0.1:8000/favoriteboard'
+		|| Str::contains(request()->url(), '/detail/'))
 			<div class="container-category display-flex-around div-padding">
-				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">최근 게시글</a>
-				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">핫게시글</a>
-				<a href="" class="div-display-lnlineBlock main-line-height category_font_hover">관심태그</a>
-				<a class="div-display-lnlineBlock main-line-height cate_btn" onclick="toggleDropdown()">카테고리</a>
+				@if (request()->url() === 'http://127.0.0.1:8000/lastboard')
+					<a href="{{route('lastboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover page-select-font-color">최근 게시글</a>
+				@else
+					<a href="{{route('lastboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">최근 게시글</a>
+				@endif
+				@if (request()->url() === 'http://127.0.0.1:8000/hotboard')
+					<a href="{{route('hotboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover page-select-font-color">핫게시글</a>
+				@else
+					<a href="{{route('hotboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">핫게시글</a>
+				@endif
+				@if (request()->url() === 'http://127.0.0.1:8000/favoriteboard')
+					<a href="{{route('favoriteboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover page-select-font-color">관심태그</a>
+				@else
+					<a href="{{route('favoriteboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">관심태그</a>
+				@endif
+				@if (request()->url() === 'http://127.0.0.1:8000/categoryboard')
+					<a class="div-display-lnlineBlock main-line-height cate_btn page-select-font-color" onclick="toggleDropdown()">카테고리</a>
+				@else
+					<a class="div-display-lnlineBlock main-line-height cate_btn" onclick="toggleDropdown()">카테고리</a>
+				@endif
 			</div>
 		@endif
 	</div>
