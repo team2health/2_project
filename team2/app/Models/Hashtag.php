@@ -12,7 +12,7 @@ class Hashtag extends Model
     
     protected $fillable = [
         'hashtag_name',
-        'hashtag_id',
+        
     ];
 
     public function boards()
@@ -20,4 +20,14 @@ class Hashtag extends Model
         return $this->belongsToMany(Board::class, 'board_tags', 'hashtag_id', 'board_id');
     }
     public $incrementing = true;
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->hashtag_id)) {
+                $model->hashtag_id = 0; // 또는 다른 기본값 설정
+            }
+        });
+    }
 }

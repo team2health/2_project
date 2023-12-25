@@ -24,11 +24,11 @@
                 <p>{{ $data->board_title }}</p>
             </div>         
             <div class="detail_content">
-            @foreach($data->images as $image)
-            <div class="detail_board_content">
-                <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
-            </div>    
-            @endforeach          
+                @foreach($data->images as $image)
+                <div class="detail_board_content">
+                    <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
+                </div>    
+                @endforeach          
                 <br>
                 <div>
                 {{$data->board_content}}                
@@ -36,10 +36,15 @@
             </div>
             <div>                
             <div>
-                @foreach(optional($data->tags)->pluck('hashtag_name') as $hashtag)
-                    <span>{{ $hashtag }}</span>
-                @endforeach
-            </div>
+            
+            <div>
+    
+        @foreach($data->hashtags as $hashtag)
+            <span>{{ $hashtag->hashtag_name }}</span>
+        @endforeach
+    
+</div>
+</div>
             </div>
         </div>
     </div>

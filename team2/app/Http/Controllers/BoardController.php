@@ -95,151 +95,7 @@ class BoardController extends Controller
         $boardData = $request->only('board_title', 'board_content', 'category_id');
         $boardData['u_id'] = $u_id;
         $board = Board::create($boardData);
-
-        $board_id = $board->board_id;
-
-// 유저가 선택한 해시태그 목록 불러오기
-        // $hashtag_id = DB::table('hashtags')
-        // ->select(
-        // 'hashtags.hashtag_id'
-        // )
-        // ->where('hashtags.hashtag_id', $hash_id)
-        // ->get();
         
-        // Log::debug($hashtag_id);
-// 유저가 선택한 해시태그 목록을 입력
-        // $hashtag_insert = DB::table('board_tags')->insert([
-        //     'board_id' => $new_board_id,
-        //     'hashtag_id' => $hashtag_id,
-        // ]);
-        // Log::debug($hashtag_insert);        
-        // 이부분 반복문 써서 완성
-        $hashtag_ids = explode(',', $request->input('hashtag'));
-
-        // 유저가 선택한 해시태그 목록을 입력
-        foreach ($hashtag_ids as $hashtag_id) {
-            DB::table('board_tags')->insert([
-                'board_id' => $board_id,
-                'hashtag_id' => $hashtag_id,
-            ]);
-        }
-//         $hashtag_ids = explode(',', $request->input('hashtag'));
-// $tagIds = [];
-
-// foreach ($hashtag_ids as $hashtag) {
-//     // 숫자만 추출
-//     $hashtag_id = filter_var($hashtag, FILTER_SANITIZE_NUMBER_INT);
-
-//     // 빈 문자열이 아닌 경우에만 처리
-//     if ($hashtag_id !== '') {
-//         DB::table('board_tags')->insert([
-//             'board_id' => $board_id,
-//             'hashtag_id' => $hashtag_id,
-//         ]);
-
-//         // 각 해시태그의 ID를 $tagIds 배열에 추가
-//         $tagIds[] = $hashtag_id;
-//     }
-// }
-//         $hashtag_names = explode(',', $request->input('hashtag'));
-
-// foreach ($hashtag_names as $hashtag_name) {
-//     // Find or create the Hashtag model
-//     $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
-    
-//     // Insert data into board_tags table
-//     DB::table('board_tags')->insert([
-//         'board_id' => $board_id,
-//         'hashtag_id' => $hashtag->hashtag_id,  
-//     ]);
-// }
-        // $hashtag_names = explode(',', $request->input('hashtag'));
-
-        // foreach ($hashtag_names as $hashtag_name) {
-        //     // Find or create the Hashtag model
-        //     $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
-        
-        //     // Insert data into board_tags table
-        //     DB::table('board_tags')->insert([
-        //         'board_id' => $board_id,
-        //         'hashtag_id' => $hashtag->hashtag_id,  // 또는 'id'에 따라 상황에 맞게 변경
-        //     ]);
-        // }
-// $hashtag_names = explode(',', $request->input('hashtag'));
-
-// 유저가 선택한 해시태그 목록을 입력
-// foreach ($hashtag_names as $hashtag_name) {
-//     // Find or create the Hashtag model
-//     $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
-
-//     // Insert data into board_tags table
-//     DB::table('board_tags')->insert([
-//         'board_id' => $board_id,
-//         'hashtag_id' => $hashtag->hashtag_id,
-//     ]);
-// }
-
-
-//         $hashtags = $request->input('hashtag');
-// if (!empty($hashtags)) {
-//     // Split hashtags by comma and trim spaces
-//     $hashtagsArray = array_map('trim', explode(',', $hashtags));
-
-//     // Save each hashtag to the Hashtags table and link it to the board
-//     foreach ($hashtagsArray as $hashtag) {
-//         $hashtagModel = Hashtag::firstOrCreate(['hashtag_name' => $hashtag]);
-        
-//         // Save the relationship in the BoardTag pivot table
-//         Board_tag::create([
-//             'board_id' => $board->id,
-//             'hashtag_id' => $hashtagModel->id,
-//         ]);
-//     }
-
-// $hashtags = explode(',', $request->input('hashtag'));
-
-// foreach ($hashtags as $hashtag) {
-//     $tag = Hashtag::where('hashtag_name', $hashtag)->first();
-
-//     if ($tag) {
-//         $board->tags()->attach($tag->hashtag_id);
-//     }}
-// $hashtags = explode(',', $request->input('hashtag'));
-// $board->tags()->detach();
-
-// // 그런 다음 sync 메서드를 사용하여 새로운 태그와의 관계를 설정합니다.
-// foreach ($hashtags as $hashtag) {
-//     $tag = Hashtag::where('hashtag_name', $hashtag)->first();
-
-//     if ($tag) {
-//         $tagIds[] = $tag->hashtag_id;
-//     }
-// }
-
-// $board->tags()->sync($tagIds); 
-// $hashtags = explode(',', $request->input('hashtag'));
-
-// foreach ($hashtags as $hashtag) {
-//     $tag = Hashtag::where('hashtag_name', $hashtag)->first();
-
-//     if ($tag) {
-//         $board->tags()->attach($tag->id);
-//     } else {
-//         // 해당 해시태그가 존재하지 않는 경우에 대한 처리
-//         // 예를 들어, 새로운 해시태그를 만들어서 사용하거나 다른 방법으로 처리할 수 있습니다.
-//     }
-// }
-// Save Images to Board_img
-        //이미지넣기
-        // if ($request->hasFile('board_img')) {
-        //     $image = $request->file('board_img');
-        //     $imageName = Str::uuid().'.'.$image->extension();
-        //     $image->move(public_path('board_img'), $imageName);
-            
-        //     // Save the image path to the Board_img model
-        //     $boardImage = new Board_img(['img_address' => $imageName]);
-        //     $board->images()->save($boardImage);
-        // }
         if ($request->hasFile('board_img')) {
             $images = $request->file('board_img');   
             foreach ($images as $image) {
@@ -251,24 +107,45 @@ class BoardController extends Controller
                 $board->images()->save($boardImage);
             }
         
-        }
+        }  
 
-        // 유저가 선택한 해시태그 목록 불러오기
-    //     $board_detail_get = DB::table('boards as b')
-    // ->select(
-    //     'hashtags.hashtag_id',
-    //     'hashtags.hashtag_name',
-    //     'b.category_id',
-    //     'b.board_id',
-    //     'b.board_title',
-    //     'b.board_content',
-    //     'b.board_hits',
-    //     'b.created_at'
-    // )
-    // ->join('board_tags as bt', 'bt.board_id', '=', 'b.board_id')
-    // ->join('hashtags', 'hashtags.hashtag_id', '=', 'bt.hashtag_id')
-    // ->where('b.board_id', $board_id)
-    // ->get();
+        $board_id = $board->board_id;
+
+        
+        // $hashtag_ids = explode(',', $request->input('hashtag'));
+        // $hashtag_ids = array_map('trim', $hashtag_ids); 
+        // 유저가 선택한 해시태그 목록을 입력
+        // foreach ($hashtag_ids as $hashtag_id) {
+        //     DB::table('board_tags')->insert([
+        //         'board_id' => $board_id,
+        //         'hashtag_id' => $hashtag_id,
+        //     ]);
+        // }
+        // foreach ($hashtag_ids as $hashtag_id) {
+        //     // 여기서 $hashtag_id가 문자열이 아니라 정수로 들어가도록 수정
+        //     DB::table('board_tags')->insert([
+        //         'board_id' => $board_id,
+        //         'hashtag_id' => (int) $hashtag_id,
+        //     ]);
+        // }
+        $hashtag_ids = explode(',', $request->input('hashtag'));
+        $hashtag_ids = array_map('trim', $hashtag_ids);
+        
+        foreach ($hashtag_ids as $hashtag_name) {
+            // Check if the hashtag already exists
+            $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
+        
+            // If not, create a new hashtag
+            if (!$hashtag) {
+                $hashtag = Hashtag::create(['hashtag_name' => $hashtag_name]);
+            }
+        
+            // Insert the relationship into board_tags table
+            DB::table('board_tags')->insert([
+                'board_id' => $board_id,
+                'hashtag_id' => $hashtag->hashtag_id,
+            ]);
+        }
     $board_detail_get = DB::table('boards as b')
     ->select(
         'hashtags.hashtag_id',
@@ -284,16 +161,9 @@ class BoardController extends Controller
     ->join('hashtags', 'hashtags.hashtag_id', '=', 'bt.hashtag_id')
     ->where('b.board_id', $board_id)
     ->get();
-// Log::debug($board_detail_get);
 
-// var_dump($board_id);
-// var_dump($hashtag_id);
-// var_dump($hashtag_insert);
-// var_dump($board_detail_get);
-// exit;
-return redirect()->route('detail', ['board' => $board_id])->with('data', $hashtag_id);
-//  return redirect()->route('detail', ['board' => $board_id])->with('data', $hashtag_id);
-
+    // return redirect()->route('detail', ['board' => $board_id])->with('data', $hashtag_id);
+    return redirect()->route('detail', ['board' => $board_id])->with('data', $board_detail_get);
 }
     
 

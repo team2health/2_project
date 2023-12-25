@@ -29,7 +29,7 @@ class Board extends Model
         return $this->hasMany(Board_img::class, 'board_id', 'board_id');
     }
 
-    public function tags()
+    public function hashtags()
     {
         return $this->belongsToMany(Hashtag::class, 'board_tags', 'board_id', 'hashtag_id');
     }
@@ -48,6 +48,7 @@ class Board extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
+    
 
     
 }
