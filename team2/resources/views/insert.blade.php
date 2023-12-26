@@ -72,7 +72,18 @@
 
 					<!-- Input for selected hashtags -->
 					<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
-				</div>		
+				</div>
+				<!-- <div class="insert_hashtag_container">
+					<label for="hashtag" class="label_hashtag">#해시태그</label>
+					<div class="insert_hashtag" id="hashtagContainer"></div>
+					<button type="button" id="toggleHashtagsBtn" onclick="toggleHashtags()">해시태그 펼치기/접기</button>
+
+					Hidden container for hashtag data
+					<div id="hiddenHashtags" style="display: none;">
+						@foreach ($data as $item)
+							<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
+						@endforeach
+					</div>		 -->
 			</div>
 			<div class="insert_bottom_button">
 				<button type="button"class="insert_btn"><a href="{{url()->previous()}}">취소</a></button>			
