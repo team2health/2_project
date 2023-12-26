@@ -9,8 +9,13 @@
     <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
     <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
-        <h2>관심태그</h2>        
+        <h2>관심태그</h2>
     </div>
+    @forelse ($tag as $item)
+        <span>{{ $item->hashtag_name }}</span>
+    @empty
+        
+    @endforelse
     @forelse ($data as $item)
         <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
         <div class="last_container">
@@ -30,6 +35,13 @@
             </div> 
             <div class="last_content">
                 {{$item->board_content}}
+                <div style="margin-top: 20px; text-align: right;">
+                @forelse ($item->board_tag as $value)
+                    {{$value->hashtag_name}}
+                @empty
+                    
+                @endforelse
+                </div>
             </div>  
         </div>
     </a>

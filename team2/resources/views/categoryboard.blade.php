@@ -15,9 +15,7 @@
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
     <div class="last_container">
         <div class="last_user">  
-                        
-            <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">            
-            
+            <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">   
             <div class="board_nic_text">
                 <div>
                 {{ optional($item->user)->user_name }}
