@@ -185,7 +185,6 @@
 
 {{--  display 모달창 --}}
 <div class="UserboardModal" id="UserboardModal">
-    <div>
         <div class="mypage-content-modal" id="mypageContentModal">
             <div onclick="mypagemodalclosebtn(); return false;" class="mypage-modal-close-btn">x</div>
             {{-- <div class="modal-board-show-btn">
@@ -234,17 +233,16 @@
             </div> --}}
             <div class="tab-modal">
                 <ul class="tab_list">
-                    <li class="mypage-board-modal-btn active" data-list="3">
+                    <li class="mypage-board-modal-btn tab-active" data-list="3">
                         내가 쓴 게시글
                     </li>
-                    <li class="mypage-comment-modal-btn" data-list="4">
+                    <li class="mypage-board-modal-btn" data-list="4">
                         내가 쓴 댓글
                     </li>
                 </ul>
-                <div class="tab-contents tab-show-modal" data-order="3">
+                <div class="tab-contents-modal tab-show-modal" data-order="3">
                     {{-- 게시글 창 --}}
                     <div class="mypage-boards-part">
-                        왜 이게 아무것도 안나오지?
                         @forelse ($data as $index => $item)
                             @php
                             if( $index >= 1 ) {
@@ -254,29 +252,29 @@
                             @endphp
                             @if ( $index >= 1)
                                 @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
-                                <div class="mypage-date-today">
-                                    <span class="mypage-board-date">{{$item->created_at}}</span>
+                                <div class="mypage-date-today-modal">
+                                    <span class="mypage-board-date-modal">{{$item->created_at}}</span>
                                 </div>
                                 <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                                    <div class="mypage-boardbox">
+                                    <div class="mypage-boardbox-modal">
                                         <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
                                         <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
                                     </div>
                                 </a>
                                 @else
                                 <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                                    <div class="mypage-boardbox">
+                                    <div class="mypage-boardbox-modal">
                                         <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
                                         <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
                                     </div>
                                 </a>
                                 @endif
                             @else
-                            <div class="mypage-date-today">
+                            <div class="mypage-date-today-modal">
                                 <span class="mypage-board-date">{{$item->created_at}}</span>
                             </div>
                             <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                                <div class="mypage-boardbox">
+                                <div class="mypage-boardbox-modal">
                                     <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
                                     <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
                                 </div>
@@ -292,7 +290,7 @@
                     <div class="mypage-boards-part">
                         @forelse ($comments as $index => $item)
                             <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                                <div class="mypage-boardbox">
+                                <div class="mypage-boardbox-modal">
                                     <span class="mypage-boardbox-date">{{$item->created_at}}</span>
                                     <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
                                     <div class="mypage-bord-detailbox">{{Str::limit($item->comment_content, 75, '...')}}</div>
@@ -311,7 +309,7 @@
                 <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">
             </a> --}}
         </div>
-    </div>
 </div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/mypage.js"></script>
 @endsection

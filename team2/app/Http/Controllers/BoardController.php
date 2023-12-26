@@ -370,7 +370,28 @@ $board_detail_get = Board::with(['hashtags'])
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
         ->get();
 
-        return view('favoriteboard')->with('data', $favoriteboard);
+        $cnt = 0;
+
+        foreach ($favoriteboard as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $favoriteboard[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            ->select('hashtags.hashtag_name')
+            ->where('board_tags.board_id', $item->board_id)
+            ->orderby('board_tags.board_id', 'desc')
+            ->get();
+            // Log::debug($item->board_id);
+            $cnt++;
+        }
+
+        $favoritetag = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
+        ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
+        ->select('hashtags.hashtag_name')
+        ->where('users.id', $u_id)
+        ->where('favorite_tags.deleted_at', null)
+        ->orderby('hashtags.hashtag_id')
+        ->get();
+
+        return view('favoriteboard')->with('data', $favoriteboard)->with('tag', $favoritetag);
     }
 }
 

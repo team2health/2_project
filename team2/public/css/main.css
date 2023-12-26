@@ -18,7 +18,13 @@ a {
 	padding: 15px;
 	display: inline-block;
 }
-
+body {
+	position: relative;
+}
+footer {
+	position: absolute;
+	bottom: 0;
+}
 .footer {
 	background-color: #dedede;
 	height: 50px;

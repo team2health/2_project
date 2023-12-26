@@ -4,13 +4,6 @@
 	box-sizing: border-box;
 }
 
-body {
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* 최소 화면 높이 */
-}
-
 .wrapper {
     flex: 1; /* wrapper가 남은 공간을 모두 차지하도록 설정 */
 }
@@ -75,8 +68,6 @@ body {
     padding: 10px;
 }
 .last_headline{
-    display: flex;
-    justify-content: space-between;
     height: 50px;
     line-height: 50px;
 }
@@ -354,7 +345,7 @@ li{
     box-shadow: 0px 3px 5px 3px rgba(196, 196, 196, 0.6);
     margin-bottom: 20px;
     display: grid;
-    grid-template-rows: 200px 1fr 20px;
+    grid-template-rows: 200px 30px;
     align-content: space-between;
 }
 .hot-title {
@@ -497,7 +488,7 @@ li{
     padding: 30px;
 }
 .community-favorite-show {
-    margin: 10px 0;
+    margin: 20px;
 }
 
 .community_tag {
@@ -518,10 +509,18 @@ li{
     -webkit-box-orient: vertical;
     white-space: normal;  
     background-color: #fff;
-    height: 130px;
+    height: 150px;
     border: 2px solid #E8E8E8;
 }
-
+.community_tag > a > div > span {
+    background-color: #fff0e6;
+    /* padding: 5px 10px; */
+    margin: 5px 0;
+    border-radius: 20%;
+}
+.community_fav-board-tag {
+    margin-left: 10px;
+}
 .bordergo-hover a:hover {
     background-color:  rgba(255, 153, 80, 0.6);
 }
@@ -800,6 +799,9 @@ a .a-bordergo-hover:hover {
     .community_tag_container{
         width: 100vw;
         margin: 0 auto;
+    }
+    .last-board-title {
+        font-size: 1.4rem;
     }
 }
   .pagination {

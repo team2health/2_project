@@ -38,6 +38,7 @@
     </div>    
         
     <div class="favorite_slider-container"> 
+        <h2> 유행 중인 질병 </h2>
         <div class="favorite_slider">
             @forelse ($data[1] as $item)
             <div class="favorite_slide">
@@ -73,11 +74,13 @@
                         <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
                         <div class="community-home-content">{{Str::limit($item->board_content, 100, '...')}}</div>
                     </div>
+                    <div class="community_fav-board-tag">
                     @forelse ($item->board_tag as $value)
                             <span>{{$value->hashtag_name}}</span>
-                        @empty
+                            @empty
                             
-                        @endforelse
+                            @endforelse
+                    </div>
                 </a>
                 @if($loop->last)
                 <input type="hidden" name="favorite_num" value="{{ $item->board_id }}" id="favorite_num">
