@@ -4,13 +4,6 @@
 	box-sizing: border-box;
 }
 
-body {
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* 최소 화면 높이 */
-}
-
 .wrapper {
     flex: 1; /* wrapper가 남은 공간을 모두 차지하도록 설정 */
 }
@@ -69,8 +62,6 @@ body {
     padding: 10px;
 }
 .last_headline{
-    display: flex;
-    justify-content: space-between;
     height: 50px;
     line-height: 50px;
 }

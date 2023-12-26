@@ -190,11 +190,6 @@ td {
     #timelineMain {
         overflow: hidden;
     }
-    .recordsection {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 20px 1fr;
-    }
     .mypage-second {
         width: 400px;
     }
@@ -231,13 +226,13 @@ td {
     min-width: 600px;
 }
 .recordsection {
-    width: 100%;
+    width: 90%;
     display: grid;
     grid-template-columns: 50px 1fr;
     align-items: center;
     justify-items: center;
-    margin-top: 30px;
     grid-gap: 20px 0;
+    margin: 30px auto 0 auto;
 }
 .user-record:hover {
     background: #bfbfbf;
