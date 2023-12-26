@@ -8,21 +8,9 @@
         <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>"{{$data[2][0]->category_name}}"</h2>
-        <div class="dropdown">
-            <div class="dropdown-content" id="myDropdown">
-                <form method="get" id="category_id_form">
-                    @csrf
-                    @forelse ($data[1] as $item)
-                        <div class="board-mouse-cursor" onclick="showBoard({{$item->category_id}}); return false;">{{$item->category_name}}</div>
-                    @empty
-                        
-                    @endforelse
-                </form>
-            </div>
-        </div>
     </div>
 
-    
+
     @foreach ($data[0] as $item)
     <div class="last_container">
         <div class="last_user">  
