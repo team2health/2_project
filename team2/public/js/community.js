@@ -113,6 +113,7 @@ function favoriteBoard() {
             let FAVORITEBOARDDIV = [];
             let FAVORITEBOARDDIV2 = [];
             let FAVORITEBOARDDIV3 = [];
+            let FAVORITEBOARDDIV4 = [];
             let FAVORITEBOARDTAG = [];
             
             for(let i = 0; i < data.length; i++) {
@@ -121,11 +122,14 @@ function favoriteBoard() {
                 FAVORITEBOARDDIV[i] = document.createElement('div');
                 FAVORITEBOARDDIV2[i] = document.createElement('div');
                 FAVORITEBOARDDIV3[i] = document.createElement('div');
+                FAVORITEBOARDDIV4[i] = document.createElement('div');
+                FAVORITEBOARDDIV4.classList.add('community_fav-board-tag');
     
                 FAVORITEBOARDBOX.appendChild(FAVORITEBOARDURL[i]);
                 FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDDIV[i]);
                 FAVORITEBOARDDIV[i].appendChild(FAVORITEBOARDDIV2[i]);
                 FAVORITEBOARDDIV[i].appendChild(FAVORITEBOARDDIV3[i]);
+                FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDDIV4[i]);
     
                 FAVORITEBOARDURL[i].href = 'http://127.0.0.1:8000/board/'+data[i].board_id;
                 FAVORITEBOARDDIV2[i].classList.add('community-home-title');
@@ -135,7 +139,8 @@ function favoriteBoard() {
 
                 for(let j = 0; j < data[i].board_tag.length; j++) {
                     FAVORITEBOARDTAG[i] = document.createElement('span');
-                    FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDTAG[i]);
+                    FAVORITEBOARDDIV4[i].appendChild(FAVORITEBOARDTAG[i]);
+                    // FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDURL[i])
                     FAVORITEBOARDTAG[i].innerHTML = data[i].board_tag[j].hashtag_name;
                 }
             }

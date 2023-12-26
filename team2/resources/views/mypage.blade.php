@@ -185,7 +185,6 @@
 
 {{--  display 모달창 --}}
 <div class="UserboardModal" id="UserboardModal">
-    <div>
         <div class="mypage-content-modal" id="mypageContentModal">
             <div onclick="mypagemodalclosebtn(); return false;" class="mypage-modal-close-btn">x</div>
             {{-- <div class="modal-board-show-btn">
@@ -310,7 +309,6 @@
                 <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">
             </a> --}}
         </div>
-    </div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/mypage.js"></script>
