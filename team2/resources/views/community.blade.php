@@ -9,7 +9,7 @@
         <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
         <div class="community_headline">
             <h2>🔥HOT 게시글</h2>
-            <a href="{{route('lastboard.get')}}" class="cate_btn_go">커뮤니티</a>            
+            <a href="{{route('lastboard.get')}}" class="cate_btn_go">전체보기</a>            
         </div>
 	
 		
@@ -73,13 +73,11 @@
                         <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
                         <div class="community-home-content">{{Str::limit($item->board_content, 100, '...')}}</div>
                     </div>
-                    <div style="float: right;">
-                        @forelse ($item->board_tag as $value)
-                            {{$value->hashtag_name}}
+                    @forelse ($item->board_tag as $value)
+                            <span>{{$value->hashtag_name}}</span>
                         @empty
                             
                         @endforelse
-                    </div>
                 </a>
                 @if($loop->last)
                 <input type="hidden" name="favorite_num" value="{{ $item->board_id }}" id="favorite_num">

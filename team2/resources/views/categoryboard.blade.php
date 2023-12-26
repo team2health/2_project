@@ -12,6 +12,7 @@
 
 
     @foreach ($data[0] as $item)
+    <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
     <div class="last_container">
         <div class="last_user">  
                         
@@ -29,14 +30,11 @@
         <div style="margin: 10px;" class="community-category-title">
             {{ $item->board_title }}
         </div> 
-        <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
             <div class="last_content">
-            
                 {{ $item->board_content }}
-                                
             </div>  
-        </a>
-    </div>
+        </div>
+    </a>
     @endforeach
     
 </div>
