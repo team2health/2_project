@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function showSlide() {
         for (let i = 0; i < totalSlides; i++) {
             if (i >= startSlide && i <= endSlide) {
-                slides[i].style.display = 'block';
+                slides[i].style.display = 'grid';
             } else {
                 slides[i].style.display = 'none';
             }
@@ -73,9 +73,10 @@ function lastBoard() {
                 LASTBOARDDIV[i].appendChild(LASTBOARDDIV3[i]);
     
                 LASTBOARDURL[i].href = 'http://127.0.0.1:8000/board/'+data[i].board_id;
-                LASTBOARDDIV2[i].style = 'margin-bottom: 30px';
+                LASTBOARDDIV2[i].classList.add('community-home-title');
                 LASTBOARDDIV2[i].innerHTML = data[i].board_title;
                 LASTBOARDDIV3[i].innerHTML = data[i].board_content;
+                LASTBOARDDIV3[i].classList.add('community-home-content');
             }
     
             let lastNumber = data[data.length - 1]; // 마지막 게시글 번호 가져오기
@@ -125,9 +126,10 @@ function favoriteBoard() {
                 FAVORITEBOARDDIV[i].appendChild(FAVORITEBOARDDIV3[i]);
     
                 FAVORITEBOARDURL[i].href = 'http://127.0.0.1:8000/board/'+data[i].board_id;
-                FAVORITEBOARDDIV2[i].style = 'margin-bottom: 30px';
+                FAVORITEBOARDDIV2[i].classList.add('community-home-title');
                 FAVORITEBOARDDIV2[i].innerHTML = data[i].board_title;
                 FAVORITEBOARDDIV3[i].innerHTML = data[i].board_content;
+                FAVORITEBOARDDIV3[i].classList.add('community-home-content');
             }
     
             let favoriteNumber = data[data.length - 1]; // 마지막 게시글 번호 가져오기

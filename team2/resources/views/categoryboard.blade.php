@@ -8,37 +8,25 @@
         <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>"{{$data[2][0]->category_name}}"</h2>
-        <div class="dropdown">
-            <div class="dropdown-content" id="myDropdown">
-                <form method="get" id="category_id_form">
-                    @csrf
-                    @forelse ($data[1] as $item)
-                        <div class="board-mouse-cursor" onclick="showBoard({{$item->category_id}}); return false;">{{$item->category_name}}</div>
-                    @empty
-                        
-                    @endforelse
-                </form>
-            </div>
-        </div>
     </div>
 
-    
+
     @foreach ($data[0] as $item)
     <div class="last_container">
         <div class="last_user">  
                         
-             <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">            
+            <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">            
             
             <div class="board_nic_text">
                 <div>
                 {{ optional($item->user)->user_name }}
                 </div>
-                <div>
+                <div >
                 {{ $item->created_at }}
                 </div>
             </div>
         </div> 
-        <div style="width: 280px; margin-left: 10px;">
+        <div style="margin: 10px;" class="community-category-title">
             {{ $item->board_title }}
         </div> 
         <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">

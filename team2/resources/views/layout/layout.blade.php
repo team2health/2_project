@@ -16,7 +16,6 @@
 	<br><br><br>
 	@include('layout.footer')
 	
-	
 	<script src="/js/common.js"></script>
 </body>
 </html>

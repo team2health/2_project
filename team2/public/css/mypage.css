@@ -353,7 +353,7 @@ td {
 .mypage-content, .mypage-content2 {
     border-radius: 8px;
     width: 100%;
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
 }
 .mypage-content2 {
     display: none;
@@ -430,6 +430,7 @@ td {
     cursor: pointer;
 }
 .mypage-btn-plus {
+    margin: 30px auto;
     border: 1px solid black;
     border-radius: 20px;
     background-color: #ff9950;
@@ -493,6 +494,8 @@ td {
     text-align: center;
     cursor: pointer;
     background-color: #ffffff;
+    border: 1px solid black;
+    border-radius: 10px ;
 }
 .mypage-comment-show-btn:hover, .mypage-board-show-btn:hover {
     background-color: #f5f5f5;
