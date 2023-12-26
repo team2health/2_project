@@ -28,11 +28,12 @@
 			@endif
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="display-flex-center">
-					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="../user_img/{{ session('user_img') }}" alt="" class="btn-img b-radius"></div>
+					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="/user_img/{{ session('user_img') }}" alt="" class="btn-img b-radius"></div>
 					<div class="div-display-lnlineBlock">
 						<a href="/mypage"><span class="font-weight font-color">{{ session('user_name') }}</span>님 안녕하세요</a>
 						@if (request()->url() !== 'http://127.0.0.1:8000/mypage')
 							<a href="/mypage" class="display-flex font-small">
+								{{-- {{dd(session('user_img'))}} --}}
 								<span>welcome</span>
 								<span class="font-color">마이페이지 이동</span>
 							</a>
@@ -59,7 +60,7 @@
 			@endif
 			@if (request()->url() !== 'http://127.0.0.1:8000/login' && request()->url() !== 'http://127.0.0.1:8000/regist')
 				<div class="display-flex-center">
-					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="../img/default_f.png" alt="" class="btn-img b-radius"></div>
+					<div style="margin-right: 10px" class="div-display-lnlineBlock"><img src="/img/default_f.png" alt="" class="btn-img b-radius"></div>
 					<div class="div-display-lnlineBlock">
 						<a href="{{ route('login.get') }}"><span class="font-weight font-color">로그인</span>을 해주세요.</a>
 						@if (request()->url() !== 'http://127.0.0.1:8000/mypage')
