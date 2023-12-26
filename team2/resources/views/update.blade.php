@@ -43,10 +43,14 @@
 			</div>		
 			<div class="insert_hashtag_container">
 				<label for="hashtag" class="label_hashtag">#해시태그</label>
-				<input type="text" class="insert_hashtag" id="hashtag" name="hashtag" value="디테일에서 가져온값">			  
+				<div class="detail-hashtag" value="123">
+					@foreach($data->hashtags as $hashtag)
+						<span>{{ $hashtag->hashtag_name }}</span>
+					@endforeach
+				</div>		  
 			</div>
-		</div>
-	</div>	
+			
+	</div>
 		<div class="insert_bottom_button">
 		<a href="{{url()->previous()}}"><button class="insert_btn">취소</button></a>		
 			<button type="submit" class="insert_btn">수정완료</button>	

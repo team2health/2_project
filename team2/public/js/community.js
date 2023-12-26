@@ -113,8 +113,10 @@ function favoriteBoard() {
             let FAVORITEBOARDDIV = [];
             let FAVORITEBOARDDIV2 = [];
             let FAVORITEBOARDDIV3 = [];
+            let FAVORITEBOARDTAG = [];
             
             for(let i = 0; i < data.length; i++) {
+                // console.log(data[i].board_tag);
                 FAVORITEBOARDURL[i] = document.createElement('a');
                 FAVORITEBOARDDIV[i] = document.createElement('div');
                 FAVORITEBOARDDIV2[i] = document.createElement('div');
@@ -130,6 +132,12 @@ function favoriteBoard() {
                 FAVORITEBOARDDIV2[i].innerHTML = data[i].board_title;
                 FAVORITEBOARDDIV3[i].innerHTML = data[i].board_content;
                 FAVORITEBOARDDIV3[i].classList.add('community-home-content');
+
+                for(let j = 0; j < data[i].board_tag.length; j++) {
+                    FAVORITEBOARDTAG[i] = document.createElement('span');
+                    FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDTAG[i]);
+                    FAVORITEBOARDTAG[i].innerHTML = data[i].board_tag[j].hashtag_name;
+                }
             }
     
             let favoriteNumber = data[data.length - 1]; // 마지막 게시글 번호 가져오기

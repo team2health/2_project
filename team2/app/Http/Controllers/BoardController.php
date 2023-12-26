@@ -13,6 +13,7 @@ use App\Models\Pandemic;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Hashtag;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class BoardController extends Controller
@@ -29,7 +30,13 @@ class BoardController extends Controller
         if(!Auth::check()){
         return redirect()->route('login.get');
         }
-        $hotboard = Board::orderBy('board_hits', 'desc')->get();
+
+        $weekAgo = Carbon::now()->subWeek();
+        
+        $hotboard = Board::orderBy('board_hits', 'desc')
+        ->where('created_at', '>=', $weekAgo)
+        ->limit(10)
+        ->get();
 
         $pandemicboard = Pandemic::get();
 
@@ -54,6 +61,23 @@ class BoardController extends Controller
         ->where('favorite_tags.deleted_at', null)
         ->orderby('hashtags.hashtag_id')
         ->get();
+
+        $cnt = 0;
+
+        foreach ($favoriteboard as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $favoriteboard[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            ->select('hashtags.hashtag_name')
+            ->where('board_tags.board_id', $item->board_id)
+            ->orderby('board_tags.board_id', 'desc')
+            ->get();
+            // Log::debug($item->board_id);
+            $cnt++;
+        }
+
+        // dd($favoriteboard);
+        // Log::debug($boardfavorite);
+        // Log::debug($favoriteboard);
 
         $result = [$hotboard, $pandemicboard, $favoriteboard, $lastboard, $favoritetag];
 
@@ -110,27 +134,10 @@ class BoardController extends Controller
         }  
 
         $board_id = $board->board_id;
-
         
-        // $hashtag_ids = explode(',', $request->input('hashtag'));
-        // $hashtag_ids = array_map('trim', $hashtag_ids); 
-        // 유저가 선택한 해시태그 목록을 입력
-        // foreach ($hashtag_ids as $hashtag_id) {
-        //     DB::table('board_tags')->insert([
-        //         'board_id' => $board_id,
-        //         'hashtag_id' => $hashtag_id,
-        //     ]);
-        // }
-        // foreach ($hashtag_ids as $hashtag_id) {
-        //     // 여기서 $hashtag_id가 문자열이 아니라 정수로 들어가도록 수정
-        //     DB::table('board_tags')->insert([
-        //         'board_id' => $board_id,
-        //         'hashtag_id' => (int) $hashtag_id,
-        //     ]);
-        // }
+        
         $hashtag_ids = explode(',', $request->input('hashtag'));
         $hashtag_ids = array_map('trim', $hashtag_ids);
-        
         foreach ($hashtag_ids as $hashtag_name) {
             // Check if the hashtag already exists
             $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
@@ -146,6 +153,8 @@ class BoardController extends Controller
                 'hashtag_id' => $hashtag->hashtag_id,
             ]);
         }
+        
+       
     $board_detail_get = DB::table('boards as b')
     ->select(
         'hashtags.hashtag_id',
@@ -179,7 +188,7 @@ class BoardController extends Controller
 
         //  dd($result->images);
         $result->board_hits++;
-        $result->timestamps = false;        
+        $result->timestamps = false;
         $result->save();
         
         return view('detail')->with('data', $result);
@@ -279,22 +288,35 @@ class BoardController extends Controller
         ->where('users.id', $u_id)
         ->where('boards.board_id', '<', $request->favorite_num)
         ->orderby('boards.board_id', 'desc')
+        ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->limit(4)
         ->get();
+
+        $cnt = 0;
+
+        foreach ($result as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $result[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            ->select('hashtags.hashtag_name')
+            ->where('board_tags.board_id', $item->board_id)
+            ->orderby('board_tags.board_id', 'desc')
+            ->get();
+            // Log::debug($item->board_id);
+            $cnt++;
+        }
 
         Log::debug($result);
         return response()->json($result);
     }
 
     public function lastboardget() {
-        $lastboard = Board::orderBy('board_id', 'desc')
-        ->get();
+        $lastboard = Board::orderBy('board_id', 'desc')->paginate(5);
 
         return view('lastboard')->with('data', $lastboard);
     }
 
     public function hotboardget() {
-        $hotboard = Board::orderBy('board_hits', 'desc')->get();
+        $hotboard = Board::orderBy('board_hits', 'desc')->paginate(5);
 
         return view('hotboard')->with('data', $hotboard);
     }

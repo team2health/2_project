@@ -6,7 +6,7 @@
 
 <main class="last_main">
     <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
-    <a href="" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
+    <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>최근 게시글</h2>
     </div>
@@ -14,7 +14,7 @@
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
     <div class="last_container">
         <div class="last_user">
-            <img class="community_icon"  src="{{ route('board.show',['board'=>$item->board_id]) }}" alt="" class="board_nic_img">                               
+        <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">                               
             <div class="board_nic_text">
                 <div>
                     {{ optional($item->user)->user_name }}
@@ -27,14 +27,35 @@
         <div class="last_title">
             {{$item->board_title}}
         </div> 
-        <div class="last_content">
-            {{$item->board_content}}
-        </div>  
+        <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
+            <div class="last_content">
+                {{$item->board_content}}
+            </div> 
+        </a> 
     </div>
     </a>
     @empty
         게시글이 없습니다.
     @endforelse
 </main>
+<div class="pagination">    
+    @if ($data->currentPage() > 1)
+        <a href="{{ $data[0]->url(1) }}">&lt;&lt;</a>
+        <a href="{{ $data[0]->previousPageUrl() }}"> 이전</a>
+    @endif
+
+    @for ($i = max(1, $data->currentPage() - 2); $i <= min($data->lastPage(), $data->currentPage() + 3); $i++)
+        @if ($i == $data->currentPage())
+            <span class="pagination-current">{{ $i }}</span>
+        @else
+            <a href="{{ $data->url($i) }}" class="pagination-link">{{ $i }}</a>
+        @endif
+    @endfor
+
+    @if ($data->currentPage() < $data->lastPage())
+        <a href="{{ $data->nextPageUrl() }}">다음 </a>
+        <a href="{{ $data->url($data->lastPage()) }}">&gt;&gt;</a>
+    @endif
+</div>
 
 @endsection
