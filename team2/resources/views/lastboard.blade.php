@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div> 
-        <div>
+        <div class="last_title">
             {{$item->board_title}}
         </div> 
         <div class="last_content">

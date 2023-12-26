@@ -10,41 +10,40 @@
 	<div class="detail_container">		
         <div class="detail_hidden_container">
             <div class="last_user">                
-                <img class="community_icon" src="{{ asset('user_img/' . optional($data->user)->user_img) }}" alt="">                                  
-                <div class="board_nic_text">
-                    <div>
-                    {{ optional($data->user)->user_name }}
-                    </div>
-                    <div>
-                        {{$data->created_at}}
-                    </div>
+                <div class="last-board-title">           
+                    <p>{{ $data->board_title }}</p>
                 </div>
-            </div> 
-            <div>           
-                <p>{{ $data->board_title }}</p>
-            </div>         
-            <div class="detail_content">
-                @foreach($data->images as $image)
-                <div class="detail_board_content">
-                    <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
-                </div>    
-                @endforeach          
-                <br>
-                <div>
-                {{$data->board_content}}                
-                </div>                
+                {{-- <div class="last-board-detail"> --}}
+                    <img class="community_icon" src="{{ asset('user_img/' . optional($data->user)->user_img) }}" alt="">                                  
+                    <div class="board_nic_text">
+                        <div>
+                        {{ optional($data->user)->user_name }}
+                        </div>
+                        <div>
+                            {{$data->created_at}}
+                        </div>
+                    </div>
+                {{-- </div> --}}
+                <div class="detail_content">
+                    @foreach($data->images as $image)
+                    <div class="detail_board_content">
+                        <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
+                    </div>    
+                    @endforeach          
+                    <br>
+                    <div>
+                    {{$data->board_content}}                
+                    </div>                
+                </div>
             </div>
-            <div>                
-            <div>
-            
-            <div>
-    
-        @foreach($data->hashtags as $hashtag)
-            <span>{{ $hashtag->hashtag_name }}</span>
-        @endforeach
-    
-</div>
-</div>
+        <div>                
+    <div>
+        <div class="detail-hashtag">
+            @foreach($data->hashtags as $hashtag)
+                <span>{{ $hashtag->hashtag_name }}</span>
+            @endforeach
+        </div>
+    </div>
             </div>
         </div>
     </div>
@@ -71,27 +70,29 @@
             <li>
                 <div class="last_user">
                     
-                <img class="community_icon" src="{{ asset('user_img/' . optional($comment->user)->user_img) }}" class="board_nic_img" alt="">
+                <img class="community_icon_comment " src="{{ asset('user_img/' . optional($comment->user)->user_img) }}" class="board_nic_img" alt="">
                         
                     <div class="board_nic_text">
-                        <div>
+                        <div class="board_nic_text_a">
                             {{ optional($comment->user)->user_name }}
                         </div>
                         <div>
                             {{ $comment->created_at }}
+                            <form style="display: inline-block"
+                            method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+                                @csrf
+                                @method('DELETE')
+                                @if(Auth::id() === $comment->u_id)
+                                <button type="submit" class="delete-comment-btn">X</button>
+                                @endif
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="detail-comment-area">
                     <p>{{ $comment->comment_content }}</p>
                 </div>
-                <form method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
-                    @csrf
-                    @method('DELETE')
-                    @if(Auth::id() === $comment->u_id)
-                    <button type="submit" class="delete-comment-btn">댓글 삭제</button>
-                    @endif
-                </form>
+
             </li>
         @endforeach
         </ul>           

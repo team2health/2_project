@@ -36,9 +36,31 @@ body {
 
 .last_user{
     display: grid;
-    flex-wrap: nowrap;
-    grid-template-columns:100px 1fr;    
+    grid-template-columns:60px 1fr;    
     margin: 10px;
+    align-items: center;
+}
+.last-board-title {
+    font-size: 2rem;
+    font-weight: 800;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: inline-block;
+    margin: 10px 0;
+}
+.last-board-title p {
+    display: inline-block;
+}
+.last-board-detail {
+    grid-column-start: 1;
+    grid-column-start: 3;
+    grid-row-start: 2;
+    grid-row-start: 3;
+}
+.last_title {
+    margin-left: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 .last_content{
     border: 1px solid rgba(128, 128, 128, 0.228);
@@ -63,7 +85,7 @@ textarea{
 }
 #comment,#comment_content{
     width: 89%;  
-    height: 50px;  
+    height: 80px;  
 }
 
 .board_nic_img{
@@ -74,12 +96,38 @@ textarea{
 .board_nic_text{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.board_nic_text_a {
+    font-weight: 800;
+    font-size: 1rem;
+    color: #c3590d;
+    margin-left: -7px;
+}
+.detail-comment-area {
+    width: 90%;
+    margin: 15px 0 15px 30px;
+}
+.community_icon_comment {
+    border-radius: 20%;
+    background-color: #ff9950;
+    width: 40px;
+    height: 40px;
+}
+.delete-comment-btn {
+    font-size: 1.3rem;
+    padding: 3px 5px;
+    background-color: white;
+    border-radius: 20%;
+}
+.delete-comment-btn:hover {
+    background-color: rgb(212, 212, 212);
 }
 
 /* -------- detail board -------- */
 
 .detail_container{
-    
+    border-radius: 10px;
     border: 3px solid rgba(128, 128, 128, 0.369);
     border-radius: 5px;
     margin: 25px 0px ;
@@ -119,24 +167,35 @@ textarea{
     font-size: 1.2rem;
 }
 .detail_board_content{
-    
     width: 50%;
     height:50%;
-    
 }
+.detail-hashtag {
+    margin-left: 10px;
+}
+.detail-hashtag > span{
+    border-radius: 5px;
+    padding: 3px 7px;
+    background-color: #e0e0e0;
+}
+
 
 
 
 
 .detail_content{
     border: 2px solid rgba(128, 128, 128, 0.230);
+    min-height: 300px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin: 20px 0;
+    padding-left: 15px;
 }
 .detail_content img{
     width: 100%;
     height: auto;    
 }
 .detail_comment ul li{
-    margin: 20px 0;
     border-bottom: 1px solid black;
 }
 .comment_bottom{
@@ -147,7 +206,7 @@ textarea{
 }
 .detail_comment_insert_complete{
     font-size: 1.2rem;
-    height: 50px;
+    height: 80px;
     width: 9%;
     border: 1px solid black;
     background-color: #e0e0e0;
@@ -155,6 +214,9 @@ textarea{
 }
 li{
     list-style-type: none;
+}
+.detail_comment ul {
+    background-color: #F9F9F9;
 }
 
 /* -------- insert board -------- */
@@ -285,6 +347,21 @@ li{
     height: 270px;
     box-shadow: 0px 3px 5px 3px rgba(196, 196, 196, 0.6);
     margin-bottom: 20px;
+    display: grid;
+    grid-template-rows: 200px 1fr 20px;
+    align-content: space-between;
+}
+.hot-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+.hot-content {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+.hot-info {
+    color: #9a9a9a;
 }
 
 .slider::-webkit-scrollbar {
@@ -318,7 +395,14 @@ li{
     background: rgba(191, 189, 188, 0.1);  /*스크롤바 뒷 배경 색상*/
     border-radius: 10px;
 }
-
+.community-home-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 10px 10px 5px 10px;
+}
+.community-home-content {
+    margin: 0 10px 10px 10px;
+}
 
 .favorite_slider-container {
     margin: 30px auto;
@@ -371,17 +455,21 @@ li{
     font-size: 1.2rem;
     font-weight: bolder;
 }
-.community_content{    
+.community-category-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+.community_pandemic_content{    
     margin: 10px auto;
     /* padding: 10px; */
-    width:80%;   
     text-overflow: ellipsis;
     overflow: hidden;  
     display: -webkit-box;   
     -webkit-line-clamp: 6;  
     -webkit-box-orient: vertical;
     max-height: 6em;      
-    white-space: normal; 
+    white-space: normal;
+    margin: auto 20px;
 }
 .community_bottom{
     display: flex;
@@ -401,6 +489,9 @@ li{
     width: 60vw;
     margin: 0 auto;
     padding: 30px;
+}
+.community-favorite-show {
+    margin: 10px 0;
 }
 
 .community_tag {
@@ -422,6 +513,7 @@ li{
     white-space: normal;  
     background-color: #fff;
     height: 130px;
+    border: 2px solid #E8E8E8;
 }
 
 .bordergo-hover a:hover {
