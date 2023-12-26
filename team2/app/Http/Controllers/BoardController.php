@@ -13,6 +13,7 @@ use App\Models\Pandemic;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Hashtag;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class BoardController extends Controller
@@ -29,7 +30,13 @@ class BoardController extends Controller
         if(!Auth::check()){
         return redirect()->route('login.get');
         }
-        $hotboard = Board::orderBy('board_hits', 'desc')->get();
+
+        $weekAgo = Carbon::now()->subWeek();
+        
+        $hotboard = Board::orderBy('board_hits', 'desc')
+        ->where('created_at', '>=', $weekAgo)
+        ->limit(10)
+        ->get();
 
         $pandemicboard = Pandemic::get();
 
@@ -54,6 +61,24 @@ class BoardController extends Controller
         ->where('favorite_tags.deleted_at', null)
         ->orderby('hashtags.hashtag_id')
         ->get();
+
+        $cnt = 0;
+        
+        foreach ($favoriteboard as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $favoriteboard[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            ->select('hashtags.hashtag_name')
+            ->where('board_tags.board_id', $item->board_id)
+            ->orderby('board_tags.board_id', 'desc')
+            ->limit(4)
+            ->get();
+            // Log::debug($item->board_id);
+            $cnt++;
+        }
+
+        // dd($favoriteboard);
+        // Log::debug($boardfavorite);
+        // Log::debug($favoriteboard);
 
         $result = [$hotboard, $pandemicboard, $favoriteboard, $lastboard, $favoritetag];
 

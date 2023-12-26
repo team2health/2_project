@@ -73,6 +73,13 @@
                         <div style="margin-bottom: 30px;">{{$item->board_title}}</div>
                         <div>{{$item->board_content}}</div>
                     </div>
+                    <div style="float: right;">
+                        @forelse ($item->board_tag as $value)
+                            {{$value->hashtag_name}}
+                        @empty
+                            
+                        @endforelse
+                    </div>
                 </a>
                 @if($loop->last)
                 <input type="hidden" name="favorite_num" value="{{ $item->board_id }}" id="favorite_num">

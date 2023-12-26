@@ -1,8 +1,3 @@
-
-
-
-
-
 // 페이지를 업데이트하는 함수
 function updatePageWithData(data) {
     var postContainer = document.getElementById('post-container');

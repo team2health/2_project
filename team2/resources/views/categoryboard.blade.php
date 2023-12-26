@@ -5,7 +5,7 @@
 @section('main')
 <div class="last_main" id='category-board'>
     <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
-        <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
+    <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>"{{$data[2][0]->category_name}}"</h2>
     </div>
@@ -15,7 +15,7 @@
     <div class="last_container">
         <div class="last_user">  
                         
-             <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">            
+            <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">            
             
             <div class="board_nic_text">
                 <div>
