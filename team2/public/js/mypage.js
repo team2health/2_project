@@ -412,3 +412,22 @@ tab.addEventListener("click", (e) => {
         } else event.classList.remove("tab-show");
         });
 });
+
+const tabModal = document.querySelector(".tab-modal");
+const tabListItemModal = document.querySelectorAll(".mypage-board-modal-btn");
+const tabContentModal = document.querySelectorAll(".tab-contents-modal");
+const activeModal = document.querySelector(".tab-active");
+const showingModal = document.querySelector(".tab-show-modal");
+
+tabModal.addEventListener("click", (e) => {
+    const ListOrderModal = e.target.dataset.list;
+    tabListItemModal.forEach(function (e) {
+    e.classList.remove("tab-active");
+    });
+    e.target.classList.add("tab-active");
+    tabContentModal.forEach(function (event) {
+        if (event.dataset.order == ListOrderModal) {
+        event.classList.add("tab-show-modal");
+        } else event.classList.remove("tab-show-modal");
+        });
+});

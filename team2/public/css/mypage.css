@@ -342,12 +342,18 @@ td {
 /* 마이페이지 */
 
 /* 마이페이지 그리드 */
-
+.tab_list {
+    display: flex;
+    gap: 10px;
+    width: 90%;
+    justify-content: center;
+    margin: 0 auto;
+}
 .mypage-grid {
     display: grid;
     justify-content: center;
     grid-template-columns: 49vw 21vw;
-    justify-items: end;
+    justify-items: center;
     margin: 70px auto;
 }
 .mypage-content, .mypage-content2 {
@@ -488,7 +494,7 @@ td {
 }
 .mypage-board-show-btn  {
     display: inline-block;
-    width: 24.3vw;
+    width: 45%;
     height: 70px;
     line-height: 70px;
     text-align: center;
@@ -516,15 +522,32 @@ td {
     font-weight: 900;
     border-radius: 10px;
 }
+.tab-active {
+    background-color: #f5f5f5;
+    color: #FF9900;
+    font-weight: 900;
+    border-radius: 10px;
+}
+
 [data-order="1"] {
     display: none;
 }
 [data-order="2"] {
     display: none;
 }
+[data-order="3"] {
+    display: none;
+}
+[data-order="4"] {
+    display: none;
+}
 .tab-show {
     display: block;
 }
+.tab-show-modal {
+    display: block;
+}
+
 .mypage-insert-btn {
     width: 70px;
     height: 70px;
@@ -628,6 +651,9 @@ td {
     display: flex;
     align-items: center;
 }
+.tap_list {
+    width: 100%;
+}
 .mypage-content-modal {
     position: absolute;
     top: 15vw;
@@ -673,7 +699,7 @@ display:none;
 }
 .mypage-board-modal-btn, .mypage-comment-modal-btn {
     display: inline-block;
-    width: 40vw;
+    width: 47vw;
     height: 70px;
     line-height: 70px;
     text-align: center;
@@ -784,9 +810,12 @@ display:none;
         margin-bottom: 100px;
         width: 70%;
     }
+    .mypage-board-show-btn {
+        width: 30%;
+    }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
     .mypage-grid {
         display: block;
     }
@@ -796,7 +825,7 @@ display:none;
     }
 }
 @media screen and (max-width: 1500px) {
-    .mypage-content, .mypage-content2 {
-        border: none;
+    .mypage-board-show-btn {
+        /* width: 45%; */
     }
 }
