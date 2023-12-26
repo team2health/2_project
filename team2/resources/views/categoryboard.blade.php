@@ -21,12 +21,12 @@
                 <div>
                 {{ optional($item->user)->user_name }}
                 </div>
-                <div>
+                <div >
                 {{ $item->created_at }}
                 </div>
             </div>
         </div> 
-        <div style="width: 280px; margin-left: 10px;">
+        <div style="margin: 10px;" class="community-category-title">
             {{ $item->board_title }}
         </div> 
         <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">

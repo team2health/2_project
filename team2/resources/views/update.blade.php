@@ -43,7 +43,7 @@
 			</div>		
 			<div class="insert_hashtag_container">
 				<label for="hashtag" class="label_hashtag">#해시태그</label>
-				<input type="text" class="insert_hashtag" id="hashtag" name="hashtag" value="디테일에서 가져온값">			  
+				<input type="text" class="insert_hashtag" id="hashtag" name="hashtag" value="{{$data->hashtags->hashtag_name}}">			  
 			</div>
 		</div>
 	</div>	

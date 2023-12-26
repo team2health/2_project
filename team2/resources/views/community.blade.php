@@ -10,7 +10,7 @@
         <div class="community_headline">
             <h2>🔥HOT 게시글</h2>
             <a href="{{route('lastboard.get')}}" class="cate_btn_go">커뮤니티</a>            
-        </div>		
+        </div>
 	
 		
         <div class="slider" id="slider">
@@ -18,14 +18,14 @@
             <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
                 <div class="slide a-bordergo-hover">
                     <div>
-                        <div>{{ $item->board_title }}</div>
-                        <div>{{ $item->board_content }}</div>
+                        <div class="hot-title">{{ $item->board_title }}</div>
+                        <div class="hot-content">{{Str::limit($item->board_content, 130, '...')}}</div>
                     </div>
                     <div class="community_bottom">
-                        <div>
+                        <div class="hot-info">
                             조회수 {{ $item->board_hits }}
                         </div>
-                        <div>
+                        <div class="hot-info">
                             댓글 {{ $item->comments->count() }}
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                 <div class="favorite_slide-name">
                     {{ $item->pandemic_name }}
                 </div> 
-                <div class="community_content">
+                <div class="community_pandemic_content">
                     {{ $item->pandemic_symptoms }}
                 </div>            
             </div>
@@ -56,10 +56,10 @@
     <div class="community_tag_hidden">
         <div class="board-bc-gray">
         <div class="community_tag_container"> 
-            <div class="">
+            <div class="community-favorite-show">
                 <h2>⭐관심 태그</h2>                    
             </div>
-            <div style="margin-left: 30px;">
+            <div style="margin: 5px 0 5px 20px;">
                 @forelse ($data[4] as $item)
                 <span>{{$item->hashtag_name}}</span>
             @empty
@@ -70,8 +70,8 @@
                 @forelse ($data[2] as $item)
                 <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
                     <div>
-                        <div style="margin-bottom: 30px;">{{$item->board_title}}</div>
-                        <div>{{$item->board_content}}</div>
+                        <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                        <div class="community-home-content">{{Str::limit($item->board_content, 100, '...')}}</div>
                     </div>
                     <div style="float: right;">
                         @forelse ($item->board_tag as $value)
@@ -105,8 +105,8 @@
             @forelse ($data[3] as $item)
             <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
                 <div>
-                    <div style="margin-bottom: 30px">{{ $item->board_title }}</div>
-                    <div>{{ $item->board_content }}</div>
+                    <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
+                    <div class="community-home-content">{{Str::limit($item->board_content, 100, '...')}}</div>
                 </div>
             </a>
             @if($loop->last)
