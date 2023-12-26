@@ -63,14 +63,13 @@ class BoardController extends Controller
         ->get();
 
         $cnt = 0;
-        
+
         foreach ($favoriteboard as $item) {
             // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
             $favoriteboard[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
             ->select('hashtags.hashtag_name')
             ->where('board_tags.board_id', $item->board_id)
             ->orderby('board_tags.board_id', 'desc')
-            ->limit(4)
             ->get();
             // Log::debug($item->board_id);
             $cnt++;
@@ -189,7 +188,7 @@ class BoardController extends Controller
 
         //  dd($result->images);
         $result->board_hits++;
-        $result->timestamps = false;        
+        $result->timestamps = false;
         $result->save();
         
         return view('detail')->with('data', $result);
@@ -289,8 +288,22 @@ class BoardController extends Controller
         ->where('users.id', $u_id)
         ->where('boards.board_id', '<', $request->favorite_num)
         ->orderby('boards.board_id', 'desc')
+        ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->limit(4)
         ->get();
+
+        $cnt = 0;
+
+        foreach ($result as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $result[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            ->select('hashtags.hashtag_name')
+            ->where('board_tags.board_id', $item->board_id)
+            ->orderby('board_tags.board_id', 'desc')
+            ->get();
+            // Log::debug($item->board_id);
+            $cnt++;
+        }
 
         Log::debug($result);
         return response()->json($result);
