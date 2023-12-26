@@ -287,7 +287,8 @@ class BoardController extends Controller
     }
 
     public function lastboardget() {
-        $lastboard = Board::orderBy('board_id', 'desc')->get();
+        $lastboard = Board::orderBy('board_id', 'desc')
+        ->get();
 
         return view('lastboard')->with('data', $lastboard);
     }
@@ -298,7 +299,21 @@ class BoardController extends Controller
         return view('hotboard')->with('data', $hotboard);
     }
 
-    // public function favoriteboardget() {
-    // }
+    public function favoriteboardget() {
+        $u_id = session('id');
+
+        $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
+        ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
+        ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
+        ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
+        ->select('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
+        ->where('users.id', $u_id)
+        ->where('favorite_tags.deleted_at', null)
+        ->orderby('boards.board_id', 'desc')
+        ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
+        ->get();
+
+        return view('favoriteboard')->with('data', $favoriteboard);
+    }
 }
 
