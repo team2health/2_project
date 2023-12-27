@@ -74,7 +74,7 @@
                         <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
                         <div class="community-home-content">{{Str::limit($item->board_content, 100, '...')}}</div>
                     </div>
-                    <div class="community_fav-board-tag">
+                    <div class="community-fav-board-tag">
                     @forelse ($item->board_tag as $value)
                             <span>{{$value->hashtag_name}}</span>
                             @empty

@@ -234,7 +234,6 @@ li{
 }
 .insert_hidden_container{
     margin: 10px;
-   padding: 10px;
 }
 .insert_container{
     width: 60vw;    
@@ -243,13 +242,13 @@ li{
     background-color: white;
     border: 0.5px solid #c5c5c5;
 }
-.insert_img {    
-    margin: 0px auto;
-    width: 70%;
+.insert_img {
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
     height: auto;  
     display: grid;    
     grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
-	gap: 1rem;    
 }
 .insert_img img{    
     width: 100%;
@@ -261,7 +260,7 @@ li{
 .insert_select_container{
     margin: 10px auto;
     padding: 10px;
-    width:70%;
+    width:90%;
     border-radius: 15px;
     background-color: rgba(128, 128, 128, 0.230) ;
 }
@@ -272,7 +271,7 @@ li{
  .insert_input_container,.insert_textarea_container{
     margin: 10px auto;
     padding: 10px;
-    width:70%;    
+    width:90%;    
 }
 .insert_input{
     width:100%;   
@@ -291,7 +290,7 @@ li{
 .insert_hashtag_container{
     margin: 10px auto;
     padding: 10px;
-    width:70%;    
+    width:90%;    
 }
 .insert_hashtag{
     width:100%;  
@@ -528,7 +527,7 @@ li{
     margin: 5px 0;
     border-radius: 20%;
 }
-.community_fav-board-tag {
+.community-fav-board-tag {
     margin-left: 10px;
 }
 .bordergo-hover a:hover {
@@ -661,8 +660,8 @@ a .a-bordergo-hover:hover {
 }
 
 #preview1,#preview0,#preview2 {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
 }
 .modal {
@@ -675,6 +674,12 @@ a .a-bordergo-hover:hover {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4); /* 배경을 어둡게 만들어줌 */
+}
+
+.detail_form-flex {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
 }
 
 .modal-content {
@@ -747,10 +752,6 @@ a .a-bordergo-hover:hover {
     border: none;
 }
 
-.detail_form {
-    display: flex;
-    justify-content: flex-end;
-}
 
 @media only screen and (max-width: 1450px) {
     .community_tag {
@@ -760,7 +761,7 @@ a .a-bordergo-hover:hover {
     }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1000px) {
     .slider-container {
         width: 80vw;        
     }
@@ -772,13 +773,10 @@ a .a-bordergo-hover:hover {
         margin: 0 auto;
     }
     .insert_container {
-        width: 70vw;        
-    }
-    .insert_hidden_container{
-        width: 80vw;
+        width: 80vw;        
     }
     .insert_main{
-        width: 80vw;
+        width: 90vw;
     }
     .detail_form{
         margin-bottom: 15px;
