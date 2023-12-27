@@ -571,6 +571,7 @@ td {
     height: 100px;
     cursor: pointer;
     display: inline-block;
+    border-radius: 50px;
 }
 .user-info-btn {
     padding: 10px 20px;

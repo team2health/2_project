@@ -120,7 +120,7 @@
 				@else
 					<a href="{{route('favoriteboard.get')}}" class="div-display-lnlineBlock main-line-height category_font_hover">관심태그</a>
 				@endif
-				@if (Str::contains(request()->url(), 'boardcategory'))
+				@if (Str::contains(request()->url(), 'boardcategory') || Str::contains(request()->url(), 'categoryboard'))
 					<a class="div-display-lnlineBlock main-line-height cate_btn page-select-font-color" onclick="toggleDropdown()">카테고리</a>
 				@else
 					<a class="div-display-lnlineBlock main-line-height cate_btn" onclick="toggleDropdown()">카테고리</a>
