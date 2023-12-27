@@ -49,6 +49,7 @@ class MypageController extends Controller
                 ,'boards.board_title'
             )->join('boards', 'boards.board_id', 'comments.board_id')
             ->where('comments.u_id',$result)
+            ->where('comments.deleted_at', null)
             ->orderby('comments.comment_id', 'DESC')
             ->get();
         
