@@ -40,8 +40,8 @@
 </main>
 <div class="pagination">    
     @if ($data->currentPage() > 1)
-        <a href="{{ $data[0]->url(1) }}">&lt;&lt;</a>
-        <a href="{{ $data[0]->previousPageUrl() }}"> 이전</a>
+        <a href="{{ $data->url(1) }}">&lt;&lt;</a>
+        <a href="{{ $data->previousPageUrl() }}"> 이전</a>
     @endif
 
     @for ($i = max(1, $data->currentPage() - 2); $i <= min($data->lastPage(), $data->currentPage() + 3); $i++)
