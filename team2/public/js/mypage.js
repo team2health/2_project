@@ -364,6 +364,8 @@ fileInput.addEventListener('change', function() {
     if (file) {
         reader.readAsDataURL(file);
     }
+
+    document.getElementById('user-info-img-remove').style.visibility = 'visible';
 });
 
 function userimgremove() {
@@ -371,6 +373,7 @@ function userimgremove() {
     userImgUrl.innerHTML = '';
     userImgUrl.innerHTML = '사진이 삭제되었습니다.';
     
+    document.getElementById('user-info-img-remove').style.visibility = 'hidden';
     PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
 }
 

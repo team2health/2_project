@@ -86,7 +86,6 @@ textarea{
 }
 
 .board_nic_img{
-
     width: 48px;
     height: 48px;
 }
@@ -100,6 +99,15 @@ textarea{
     font-size: 1rem;
     color: #c3590d;
     margin-left: -7px;
+}
+.detail-comments-flex {
+    display: flex;
+    align-items: center;
+    color: #848484;
+    font-size: 0.8rem;
+}
+.detail-comments-flex span {
+    margin-right: 5px;
 }
 .detail-comment-area {
     width: 90%;
@@ -173,8 +181,7 @@ textarea{
     font-size: 1.2rem;
 }
 .detail_board_content{
-    width: 50%;
-    height:50%;
+    width: 15%;
 }
 .detail-hashtag {
     margin-left: 10px;
@@ -820,8 +827,12 @@ a .a-bordergo-hover:hover {
     .last-board-title {
         font-size: 1.4rem;
     }
+    .detail_board_content{
+        width: 50%;
+    }
 }
-  .pagination {
+
+.pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;

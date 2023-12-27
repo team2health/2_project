@@ -118,9 +118,13 @@
                 게시글이 없습니다.
             @endforelse
         </div>
+        @if (count($data[3]) === 0)
+            
+        @else
         <div class="community_more_container" id="lastboardbtn">
             <button class="community_more" onclick="lastBoard(); return false;">더보기</button>
         </div>
+        @endif
     </div>
 </main>
 <script src="/js/community.js"></script>

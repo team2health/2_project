@@ -183,6 +183,7 @@ function mapDisplay(disease_id, user_id) {
 	// console.log(user_id);
 	MAPDISPLAY.removeAttribute('display');
 	MAPDISPLAY.style.display = 'block';
+	document.getElementById('hospital').style.display = 'none';
 
 	mapopen(disease_id, user_id);
 }

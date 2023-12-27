@@ -78,8 +78,8 @@
                         <div class="board_nic_text_a">
                             {{ optional($comment->user)->user_name }}
                         </div>
-                        <div>
-                            {{ $comment->created_at }}
+                        <div class="detail-comments-flex">
+                            <span>{{ $comment->created_at }}</span>
                             <form style="display: inline-block"
                             method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
                                 @csrf

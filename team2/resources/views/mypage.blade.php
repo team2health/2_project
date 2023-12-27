@@ -113,7 +113,7 @@
                 {{-- <a href="#">비밀번호 변경</a> --}}
                 <br>
                 <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
-                <div class="user-info-btn" onclick="userimgremove(); return false;"> 삭제 </div>
+                <div class="user-info-btn" id="user-info-img-remove" onclick="userimgremove(); return false;"> 삭제 </div>
                 <input type="hidden" name="imgFlg" id="imgflg">
                 <br>
                 <label for="usermodifyname">닉네임 수정</label>
