@@ -277,6 +277,7 @@ li{
 .insert_input{
     width:100%;   
     min-height: 30px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid rgba(128, 128, 128, 0.369);
     
