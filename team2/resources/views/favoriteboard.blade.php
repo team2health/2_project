@@ -10,13 +10,14 @@
     <div class="last_headline">
         <h2>"관심 태그"</h2>
     </div>
+    {{-- {{dd($data)}} --}}
     <span style="font-weight: 700; font-size: 1.2rme; margin-left: 10px;"> <나의 관심태그>  
     @forelse ($tag as $item)
         </span><span class="favorite-tag-board-in">{{ $item->hashtag_name }}</span>
     @empty
         
     @endforelse
-    {{-- {{dd($data)}} --}}
+    {{-- {{dd($data[0]->userinfo[0])}} --}}
     @forelse ($data as $item)
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
     <div class="last_container">

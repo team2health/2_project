@@ -428,8 +428,6 @@ class BoardController extends Controller
             ->orderby('boards.board_id', 'desc')
             ->get();
 
-            Log::debug($favoriteboard[$count]['userinfo']);
-
             $count++;
         }
 
@@ -453,6 +451,8 @@ class BoardController extends Controller
         ->where('favorite_tags.deleted_at', null)
         ->orderby('hashtags.hashtag_id')
         ->get();
+        
+        Log::debug($favoriteboard);
 
         return view('favoriteboard')->with('data', $favoriteboard)->with('tag', $favoritetag);
     }
