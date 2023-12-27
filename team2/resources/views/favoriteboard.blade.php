@@ -49,7 +49,7 @@
     </div>
     </a>
     @empty
-        게시글이 없습니다.
+        <br><br>게시글이 없습니다.
     @endforelse
 </main>
 <div class="pagination">    
