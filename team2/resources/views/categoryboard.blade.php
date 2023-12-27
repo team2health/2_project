@@ -10,8 +10,10 @@
         <h2>"{{$data[2][0]->category_name}}"</h2>
     </div>
 
+    
 
-    @foreach ($data[0] as $item)
+
+    @forelse ($data[0] as $item)
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
     <div class="last_container">
         <div class="last_user">  
@@ -33,7 +35,9 @@
             </div>  
         </div>
     </a>
-    @endforeach
+    @empty
+    게시글이 없습니다.
+    @endforelse
     
 </div>
 
