@@ -368,7 +368,7 @@ $board_detail_get = Board::with(['hashtags'])
         ->where('favorite_tags.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
-        ->get();
+        ->paginate(5);
 
         $cnt = 0;
 

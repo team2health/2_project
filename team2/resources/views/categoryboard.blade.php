@@ -78,9 +78,9 @@
         @endif
     @endfor
 
-    @if ($data[0]->currentPage() < $data[0]->lastPage())
+    @if ($data->currentPage() < $data->lastPage())
         <a href="{{ $data->nextPageUrl() }}">다음 </a>
-        <a href="{{ $data->url($data[0]->lastPage()) }}">&gt;&gt;</a>
+        <a href="{{ $data->url($data->lastPage()) }}">&gt;&gt;</a>
     @endif
 </div>
 
