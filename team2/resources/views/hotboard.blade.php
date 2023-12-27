@@ -8,7 +8,7 @@
     <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
     <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
-        <h2>핫게시글</h2>
+        <h2>"핫게시글"</h2>
     </div>
     @forelse ($data as $item)
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
