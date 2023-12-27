@@ -238,14 +238,18 @@ foreach ($hashtag_names as $hashtag_name) {
     // Check if the hashtag already exists
     $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
 
-    // If not, create a new hashtag
-    if (!$hashtag) {
-        $hashtag = Hashtag::create(['hashtag_name' => $hashtag_name]);
-    }
+// If not, create a new hashtag
+if (!$hashtag) {
+    // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
+    $hashtag = null;
+}
 
-    // Collect hashtag IDs
+// Collect hashtag IDs
+if ($hashtag) {
     $hashtagIds[] = $hashtag->hashtag_id;
 }
+    }
+    
 
 // Sync hashtags for the board
 $board->hashtags()->sync($hashtagIds);
