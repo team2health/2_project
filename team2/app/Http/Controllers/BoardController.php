@@ -238,14 +238,18 @@ foreach ($hashtag_names as $hashtag_name) {
     // Check if the hashtag already exists
     $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
 
-    // If not, create a new hashtag
-    if (!$hashtag) {
-        $hashtag = Hashtag::create(['hashtag_name' => $hashtag_name]);
-    }
+// If not, create a new hashtag
+if (!$hashtag) {
+    // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
+    $hashtag = null;
+}
 
-    // Collect hashtag IDs
+// Collect hashtag IDs
+if ($hashtag) {
     $hashtagIds[] = $hashtag->hashtag_id;
 }
+    }
+    
 
 // Sync hashtags for the board
 $board->hashtags()->sync($hashtagIds);
@@ -368,7 +372,25 @@ $board_detail_get = Board::with(['hashtags'])
         ->where('favorite_tags.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
-        ->get();
+        ->paginate(5);
+
+
+        // Log::debug($favoriteboard);
+
+        $count = 0;
+
+        foreach ($favoriteboard as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $favoriteboard[$count]['userinfo'] = Board::join('users', 'boards.u_id', '=', 'users.id')
+            ->select('users.user_img', 'users.user_name')
+            ->where('boards.board_id', $item->board_id)
+            ->orderby('boards.board_id', 'desc')
+            ->get();
+
+            Log::debug($favoriteboard[$count]['userinfo']);
+
+            $count++;
+        }
 
         $cnt = 0;
 
