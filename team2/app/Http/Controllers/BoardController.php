@@ -25,12 +25,12 @@ class BoardController extends Controller
      */
     public function index()
     {  
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-        }
-        
         $u_id = session('id');
-        
+
+        if(!Auth::check()){
+        return redirect()->route('login.get');
+        }
+
         $weekAgo = Carbon::now()->subWeek();
         
         $hotboard = Board::orderBy('board_hits', 'desc')
@@ -85,10 +85,6 @@ class BoardController extends Controller
     }
 
     public function categoryboard(){
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         $category_board=Board::where('category_id', '1',)->orderBy('board_id', 'desc')->paginate(5);
         $category_id = Category::orderby('category_id', 'asc')->get();
         $category_name = Category::where('category_id', '1')->get();
@@ -106,10 +102,6 @@ class BoardController extends Controller
      */
     public function create()
     {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         $result= Hashtag::all();
         return view('insert')->with('data', $result);
     }    
@@ -121,10 +113,7 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
+    {      
 
         $u_id = auth()->id();        
         $boardData = $request->only('board_title', 'board_content', 'category_id');
@@ -155,14 +144,17 @@ class BoardController extends Controller
         
             // If not, create a new hashtag
             if (!$hashtag) {
-                $hashtag = Hashtag::create(['hashtag_name' => $hashtag_name]);
+                // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
+                $hashtag = null;
             }
         
             // Insert the relationship into board_tags table
-            DB::table('board_tags')->insert([
-                'board_id' => $board_id,
-                'hashtag_id' => $hashtag->hashtag_id,
-            ]);
+            if ($hashtag) {
+                DB::table('board_tags')->insert([
+                    'board_id' => $board_id,
+                    'hashtag_id' => $hashtag->hashtag_id,
+                ]);
+            }
         }
         
        
@@ -195,10 +187,6 @@ class BoardController extends Controller
      */
     public function show($board_id)
     {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         $result = Board::with(['user', 'images'])->find($board_id);
 
         //  dd($result->images);
@@ -217,13 +205,11 @@ class BoardController extends Controller
      */
     public function edit($board_id)
     {
-        if(!Auth::check()){
-        return redirect()->route('login.get');
-        }
+        
 
-        $result = Board::find($board_id);
-        $allHashtags = Hashtag::all();
-        return view('update', compact('result', 'allHashtags'));
+    $result = Board::find($board_id);
+    $allHashtags = Hashtag::all();
+    return view('update', compact('result', 'allHashtags'));
 
     }
 
@@ -236,10 +222,6 @@ class BoardController extends Controller
      */
     public function update(Request $request, $board_id)
     {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         $result = Board::find($board_id);
         $result->update([
             'board_title' => $request->input('u_title'),
@@ -305,20 +287,11 @@ class BoardController extends Controller
      */
     public function destroy($board_id)
     {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         Board::destroy($board_id);
         return redirect()-> route('categoryboard');
     }
 
     public function boardcategoryget($categoryId) {
-
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-            
         // Log::debug($categoryId);
         $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->paginate(5);
 
@@ -378,30 +351,18 @@ class BoardController extends Controller
     }
 
     public function lastboardget() {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         $lastboard = Board::orderBy('board_id', 'desc')->paginate(5);
 
         return view('lastboard')->with('data', $lastboard);
     }
 
     public function hotboardget() {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         $hotboard = Board::orderBy('board_hits', 'desc')->paginate(5);
 
         return view('hotboard')->with('data', $hotboard);
     }
 
     public function favoriteboardget() {
-        if(!Auth::check()){
-            return redirect()->route('login.get');
-            }
-
         $u_id = session('id');
 
         $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
