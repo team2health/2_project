@@ -11,6 +11,10 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
         $request->validate([
             'comment_content' => 'required',            
             'board_id'=>'required',
@@ -37,6 +41,10 @@ class CommentController extends Controller
 
     public function destroy($comment_id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+            
         Comment::destroy($comment_id);
         return redirect()-> back();
         

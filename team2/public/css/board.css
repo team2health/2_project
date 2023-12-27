@@ -173,8 +173,7 @@ textarea{
     font-size: 1.2rem;
 }
 .detail_board_content{
-    width: 50%;
-    height:50%;
+    width: 15%;
 }
 .detail-hashtag {
     margin-left: 10px;
@@ -819,8 +818,12 @@ a .a-bordergo-hover:hover {
     .last-board-title {
         font-size: 1.4rem;
     }
+    .detail_board_content{
+        width: 50%;
+    }
 }
-  .pagination {
+
+.pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
