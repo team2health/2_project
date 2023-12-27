@@ -97,6 +97,7 @@ class MypageController extends Controller
             ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
             ->where('favorite_tags.u_id', $result)
             ->where('favorite_tags.deleted_at', null)
+            ->where('hashtags.hashtag_id', '<>', '0')
             ->orderBy('hashtags.hashtag_id')
             ->get();
             foreach ($user_hashtag as $key => $value) {
