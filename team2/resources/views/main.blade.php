@@ -47,7 +47,11 @@
 			<div id="map-display"><div id="map" style="width:100%; height:350px;"></div></div>
 			<div class="display-flex-hospital">
 				<a href="{{route('main.get')}}" class="check-button">다시 검사</a>
+				@if (session('id'))
 				<span id="hospital" class="check-button">병원 찾기</span>
+				@else
+					
+				@endif
 				{{-- onclick="mapDisplay({{ json_encode(session('id')) }}); return false;" --}}
 			</div>
 		</div>
