@@ -202,8 +202,12 @@ class BoardController extends Controller
      */
     public function edit($board_id)
     {
-        $result=Board::find($board_id);
-        return view('update')->with('data',$result);
+        
+
+    $result = Board::find($board_id);
+    $allHashtags = Hashtag::all();
+    return view('update', compact('result', 'allHashtags'));
+
     }
 
     /**
@@ -219,7 +223,38 @@ class BoardController extends Controller
         $result->update([
             'board_title' => $request->input('u_title'),
             'board_content' => $request->input('u_content'),
-        ]);
+        ]);    
+    
+    $board = Board::find($board_id);
+
+// 새로운 해시태그 추가 또는 기존 해시태그 갱신
+$hashtagInput = $request->input('hashtag');
+$hashtag_names = explode(',', $hashtagInput);
+$hashtag_names = array_map('trim', $hashtag_names);
+
+$hashtagIds = [];
+
+foreach ($hashtag_names as $hashtag_name) {
+    // Check if the hashtag already exists
+    $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
+
+    // If not, create a new hashtag
+    if (!$hashtag) {
+        $hashtag = Hashtag::create(['hashtag_name' => $hashtag_name]);
+    }
+
+    // Collect hashtag IDs
+    $hashtagIds[] = $hashtag->hashtag_id;
+}
+
+// Sync hashtags for the board
+$board->hashtags()->sync($hashtagIds);
+
+// 다시 불러오기
+$board_detail_get = Board::with(['hashtags'])
+    ->where('board_id', $board_id)
+    ->first();
+        
         if ($request->hasFile('board_img')) {
         // 기존 이미지 삭제
         $result->images()->delete();

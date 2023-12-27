@@ -169,7 +169,7 @@ function selectDate(data, data2) {
     .then(response => response.json())
     .then(data => {
         console.log('검색기록결과' + data);
-        if( data.length > 1) {
+        if( data.length > 0) {
             noticeNoData.classList.add('notice-no-data');
             recordTurn.value = '';
             recordTurn.value = data.length;

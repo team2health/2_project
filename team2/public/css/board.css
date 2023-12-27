@@ -40,6 +40,12 @@
     grid-column-end: 3;
     display: inline-block;
     margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.detail_board_hits{
+    font-size: 1rem;
+    font-weight: normal;
 }
 .last-board-title p {
     display: inline-block;

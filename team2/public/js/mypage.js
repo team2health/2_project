@@ -173,6 +173,13 @@ addallfavoritetagevent.addEventListener('click', function(){
     }
 });
 
+// 해시태그 테스트
+let targetArray = [];
+function setArrayHash(data){
+    let TargetValueHash = document.getElementById('favoritehashtext'+data).value;
+    targetArray = TargetValueHash;
+    console.log(targetArray);
+}
 // 관심 해시태그 추가 창 닫기
 function closeoption(){
     let createtagmaindiv = document.getElementById('creaTagMainDiv');
