@@ -28,7 +28,7 @@
     box-shadow:0px 40px 30px -20px rgba(0,0,0,0.3);
     position: absolute;
     z-index: 1;
-    left: 25%;
+    left: -75%;
     top: 50%;
 }
 
@@ -100,6 +100,7 @@ td {
     cursor: pointer;
     text-align: center;
     display: inline-block;
+    /* position: relative; */
 }
 .mypage-second {
     display: inline-block;
@@ -794,7 +795,7 @@ td {
 }
 @media screen and (max-width: 800px) {
     .maincalendar {
-        left: 0%;
+        left: -70%;
         width: 380px;
     }
     .mypage-third {
