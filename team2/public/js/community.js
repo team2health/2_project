@@ -123,7 +123,7 @@ function favoriteBoard() {
                 FAVORITEBOARDDIV2[i] = document.createElement('div');
                 FAVORITEBOARDDIV3[i] = document.createElement('div');
                 FAVORITEBOARDDIV4[i] = document.createElement('div');
-                FAVORITEBOARDDIV4.classList.add('community_fav-board-tag');
+                FAVORITEBOARDDIV4[i].classList.add('community-fav-board-tag');
     
                 FAVORITEBOARDBOX.appendChild(FAVORITEBOARDURL[i]);
                 FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDDIV[i]);

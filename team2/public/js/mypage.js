@@ -240,6 +240,7 @@ function addallfavoritetag() {
     .catch(error => console.error(error));
     
     hashplusclosebtn.addEventListener('click', closeoption);
+    hashplusokbtn.addEventListener('click', closeoption);
 
 }
 
