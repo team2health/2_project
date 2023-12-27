@@ -17,7 +17,7 @@
     @empty
         
     @endforelse
-    {{-- {{dd($data[0]->userinfo[0])}} --}}
+    {{-- {{dd($data)}} --}}
     @forelse ($data as $item)
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
     <div class="last_container">

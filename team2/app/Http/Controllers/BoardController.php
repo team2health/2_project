@@ -35,10 +35,11 @@ class BoardController extends Controller
         
         $hotboard = Board::orderBy('board_hits', 'desc')
         ->where('created_at', '>=', $weekAgo)
+        ->where('deleted_at', null)
         ->limit(10)
         ->get();
 
-        $pandemicboard = Pandemic::get();
+        $pandemicboard = Pandemic::where('deleted_at', null)->get();
 
         $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
             ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
@@ -47,12 +48,14 @@ class BoardController extends Controller
             ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->where('users.id', $u_id)
             ->where('favorite_tags.deleted_at', null)
+            ->where('boards.deleted_at', null)
             ->orderby('boards.board_id', 'desc')
             ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->limit(4)
             ->get();
 
-        $lastboard = Board::orderBy('board_id', 'desc')->limit(4)->get();
+        $lastboard = Board::orderBy('board_id', 'desc')
+        ->where('deleted_at', null)->limit(4)->get();
 
         $favoritetag = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
@@ -165,7 +168,6 @@ class BoardController extends Controller
             ]);
         }
         
-       
     $board_detail_get = DB::table('boards as b')
     ->select(
         'hashtags.hashtag_id',
@@ -320,7 +322,8 @@ class BoardController extends Controller
             }
             
         // Log::debug($categoryId);
-        $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->paginate(5);
+        $category_board = Board::where('category_id', $categoryId)
+        ->where('boards.deleted_at', null)->orderby('board_id', 'desc')->paginate(5);
 
         $category_id = Category::orderby('category_id', 'asc')->get();
 
@@ -336,6 +339,7 @@ class BoardController extends Controller
         // Log::debug($request);
 
         $result = Board::where('board_id', '<', $request->last_num)
+            ->where('deleted_at', null)
             ->orderby('board_id', 'desc')
             ->limit(4)
             ->get();
@@ -355,6 +359,7 @@ class BoardController extends Controller
         ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->where('users.id', $u_id)
         ->where('boards.board_id', '<', $request->favorite_num)
+        ->where('boards.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->limit(4)
@@ -382,7 +387,7 @@ class BoardController extends Controller
             return redirect()->route('login.get');
             }
 
-        $lastboard = Board::orderBy('board_id', 'desc')->paginate(5);
+        $lastboard = Board::where('boards.deleted_at', null)->orderBy('board_id', 'desc')->paginate(5);
 
         return view('lastboard')->with('data', $lastboard);
     }
@@ -392,7 +397,7 @@ class BoardController extends Controller
             return redirect()->route('login.get');
             }
 
-        $hotboard = Board::orderBy('board_hits', 'desc')->paginate(5);
+        $hotboard = Board::where('boards.deleted_at', null)->orderBy('board_hits', 'desc')->paginate(5);
 
         return view('hotboard')->with('data', $hotboard);
     }
@@ -411,6 +416,7 @@ class BoardController extends Controller
         ->select('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
         ->where('users.id', $u_id)
         ->where('favorite_tags.deleted_at', null)
+        ->where('boards.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
         ->paginate(5);
@@ -428,6 +434,7 @@ class BoardController extends Controller
             ->orderby('boards.board_id', 'desc')
             ->get();
 
+            Log::debug($favoriteboard[$count]['userinfo']);
             $count++;
         }
 
@@ -452,7 +459,7 @@ class BoardController extends Controller
         ->orderby('hashtags.hashtag_id')
         ->get();
         
-        Log::debug($favoriteboard);
+        // Log::debug($favoriteboard);
 
         return view('favoriteboard')->with('data', $favoriteboard)->with('tag', $favoritetag);
     }
