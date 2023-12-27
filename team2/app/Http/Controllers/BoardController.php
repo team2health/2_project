@@ -225,39 +225,38 @@ class BoardController extends Controller
             'board_content' => $request->input('u_content'),
         ]);    
     
-    $board = Board::find($board_id);
-
-// 새로운 해시태그 추가 또는 기존 해시태그 갱신
-$hashtagInput = $request->input('hashtag');
-$hashtag_names = explode(',', $hashtagInput);
-$hashtag_names = array_map('trim', $hashtag_names);
-
-$hashtagIds = [];
-
-foreach ($hashtag_names as $hashtag_name) {
-    // Check if the hashtag already exists
-    $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
-
-// If not, create a new hashtag
-if (!$hashtag) {
-    // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
-    $hashtag = null;
-}
-
-// Collect hashtag IDs
-if ($hashtag) {
-    $hashtagIds[] = $hashtag->hashtag_id;
-}
-    }
+        $board = Board::find($board_id);
     
-
-// Sync hashtags for the board
-$board->hashtags()->sync($hashtagIds);
-
-// 다시 불러오기
-$board_detail_get = Board::with(['hashtags'])
-    ->where('board_id', $board_id)
-    ->first();
+        // 새로운 해시태그 추가 또는 기존 해시태그 갱신
+        $hashtagInput = $request->input('hashtag');
+        $hashtag_names = explode(',', $hashtagInput);
+        $hashtag_names = array_map('trim', $hashtag_names);
+    
+        $hashtagIds = [];
+    
+        foreach ($hashtag_names as $hashtag_name) {
+            // Check if the hashtag already exists
+            $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
+    
+            // If not, create a new hashtag
+            if (!$hashtag) {
+                // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
+                $hashtag = null;
+            }
+    
+            // Collect hashtag IDs, but only if $hashtag is not null
+            if ($hashtag) {
+                $hashtagIds[] = $hashtag->hashtag_id;
+            }
+        }
+    
+        // Sync hashtags for the board
+        $board->hashtags()->sync($hashtagIds);
+    
+        // 다시 불러오기
+        $board_detail_get = Board::with(['hashtags'])
+            ->where('board_id', $board_id)
+            ->first();
         
         if ($request->hasFile('board_img')) {
         // 기존 이미지 삭제
