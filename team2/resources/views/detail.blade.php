@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="detail_bottom_button">
-        <form class="detail_form" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+        <form class="detail_form-flex" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
             @csrf
             @method('DELETE')
             @if(Auth::id() === $data->user->id)
