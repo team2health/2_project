@@ -263,17 +263,38 @@ class BoardController extends Controller
             // 기존 이미지를 배열에 저장
 
             if ($request->hasFile('board_img')) {
-                $images = $request->file('board_img');  
-                $result->images()->delete(); 
-                foreach ($images as $image) {
-                    $imageName = Str::uuid() . '.' . $image->extension();
-                    $image->move(public_path('board_img'), $imageName);
-        
-                    // Save the image path to the Board_img model
-                    $boardImage = new Board_img(['img_address' => $imageName]);
-                    $result->images()->save($boardImage);
-                }
+    // 1. 새로 업로드된 이미지를 저장
+    $newImages = $request->file('board_img');
+    $existingImages = $result->images()->pluck('img_address')->toArray();
+
+    foreach ($newImages as $newImage) {
+        $imageName = Str::uuid() . '.' . $newImage->extension();
+        $newImage->move(public_path('board_img'), $imageName);
+
+        // Save the image path to the Board_img model
+        $boardImage = new Board_img(['img_address' => $imageName]);
+        $result->images()->save($boardImage);
+
+        // 기존 이미지 중에 업로드된 이미지와 동일한 것이 있다면 제거
+        $existingImages = array_diff($existingImages, [$imageName]);
+    }
+
+    // 2. 기존에 저장된 이미지 중에서 삭제할 이미지는 삭제
+    foreach ($existingImages as $imageToDelete) {
+        $image = $result->images()->where('img_address', $imageToDelete)->first();
+
+        if ($image) {
+            // 이미지 파일 삭제
+            $imagePath = public_path('board_img') . '/' . $image->img_address;
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
             }
+
+            // 이미지 레코드 삭제
+            $image->delete();
+        }
+    }
+}
 
 
         
