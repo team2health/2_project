@@ -36,7 +36,7 @@
             {{$item->board_title}}
         </div> 
         <div class="last_content">
-            {{$item->board_content}}
+            {!! $item->board_content !!}
             <div style="margin-top: 20px; text-align: right;">
             @forelse ($item->board_tag as $value)
                 {{$value->hashtag_name}}
