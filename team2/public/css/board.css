@@ -254,9 +254,9 @@ li{
     margin-top: 10px;
     text-align: center;
     width: 100%;
-    height: auto;  
-    display: grid;    
-    grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+    height: auto;   
+    display: flex;
+    justify-content: space-around;
 }
 .insert_img img{    
     width: 100%;
