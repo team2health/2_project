@@ -39,7 +39,7 @@
 							</a>
 						@else
 							<a href="{{ route('logout.get') }}" class="display-flex font-small">
-								<span class="font-color">로그아웃</span>
+								<span class="font-color logout-btn">로그아웃</span>
 							</a>
 						@endif
 					</div>
@@ -69,7 +69,7 @@
 							</a>
 						@else
 							<a href="{{ route('logout.get') }}" class="display-flex font-small">
-								<span class="font-color">로그아웃</span>
+								<span class="font-color logout-btn">로그아웃</span>
 							</a>
 						@endif
 					</div>
