@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('board_id');
             $table->string('img_address')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

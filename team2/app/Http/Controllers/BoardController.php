@@ -120,6 +120,9 @@ class BoardController extends Controller
 
         $u_id = auth()->id();
         $boardData = $request->only('board_title', 'board_content', 'category_id');
+        Log::debug($boardData);
+        $boardData['board_content'] = nl2br($boardData['board_content']);
+        Log::debug($boardData);
         $boardData['u_id'] = $u_id;
         $board = Board::create($boardData);
         
