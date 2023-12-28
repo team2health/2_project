@@ -36,14 +36,14 @@
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
                                 <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                                <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
                             </div>
                         </a>
                         @else
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
                                 <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                                <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
                             </div>
                         </a>
                         @endif
@@ -54,7 +54,7 @@
                     <a href="{{route('board.show', ['board' => $item->board_id])}}">
                         <div class="mypage-boardbox">
                             <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                            <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                            <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
                         </div>
                     </a>
                     @endif

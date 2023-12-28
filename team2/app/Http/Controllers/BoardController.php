@@ -192,7 +192,7 @@ class BoardController extends Controller
             ->where('b.board_id', $board_id)
             ->get();
         } else {
-            $board_detail_get = Board::get();
+            $board_detail_get = Board::get()->where('board_id', $board_id);
         }
         
 
