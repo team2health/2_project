@@ -162,10 +162,7 @@ class BoardController extends Controller
                 $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
 
                 // If not, create a new hashtag
-                if (!$hashtag) {
-                    // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
-                    $hashtag = null;
-                }
+                
 
                 // Insert the relationship into board_tags table
                 if ($hashtag) {
@@ -259,8 +256,8 @@ class BoardController extends Controller
             'board_title' => $request->input('u_title'),
             'board_content' => $request->input('u_content'),
         ]);
+        if($request->hashtag) {
         
-        $board = Board::find($board_id);
 
         // 새로운 해시태그 추가 또는 기존 해시태그 갱신
         $hashtagInput = $request->input('hashtag');
@@ -274,16 +271,17 @@ class BoardController extends Controller
             $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
             
             // If not, create a new hashtag
-            if (!$hashtag) {
-                $hashtag = Hashtag::create(['hashtag_name' => $hashtag_name]);
-            }
+            
             
             // Collect hashtag IDs
             $hashtagIds[] = $hashtag->hashtag_id;
         }
-        
+    } else {
+        // 해시태그 입력이 없는 경우, 빈 배열로 초기화
+        $hashtagIds = [];
+    }
         // Sync hashtags for the board
-        $board->hashtags()->sync($hashtagIds);
+        $result->hashtags()->sync($hashtagIds);
         
         // 다시 불러오기
         $board_detail_get = Board::with(['hashtags'])
@@ -438,7 +436,7 @@ class BoardController extends Controller
         ->where('boards.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
-        ->get();
+        ->paginate(5);
 
         $count = 0;
         foreach ($favoriteboard as $item) {
