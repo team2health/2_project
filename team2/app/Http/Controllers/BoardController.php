@@ -35,10 +35,11 @@ class BoardController extends Controller
         
         $hotboard = Board::orderBy('board_hits', 'desc')
         ->where('created_at', '>=', $weekAgo)
+        ->where('deleted_at', null)
         ->limit(10)
         ->get();
 
-        $pandemicboard = Pandemic::get();
+        $pandemicboard = Pandemic::where('deleted_at', null)->get();
 
         $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
             ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
@@ -47,12 +48,14 @@ class BoardController extends Controller
             ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->where('users.id', $u_id)
             ->where('favorite_tags.deleted_at', null)
+            ->where('boards.deleted_at', null)
             ->orderby('boards.board_id', 'desc')
             ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->limit(4)
             ->get();
 
-        $lastboard = Board::orderBy('board_id', 'desc')->limit(4)->get();
+        $lastboard = Board::orderBy('board_id', 'desc')
+        ->where('deleted_at', null)->limit(4)->get();
 
         $favoritetag = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
@@ -85,7 +88,12 @@ class BoardController extends Controller
     }
 
     public function categoryboard(){
-        $category_board=Board::where('category_id', '1',)->orderBy('board_id', 'desc')->paginate(5);
+        
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
+        $category_board=Board::where('category_id', '1',)->where('deleted_at', null)->orderBy('board_id', 'desc')->paginate(5);
         $category_id = Category::orderby('category_id', 'asc')->get();
         $category_name = Category::where('category_id', '1')->get();
         $result = [$category_board, $category_id, $category_name];
@@ -102,6 +110,10 @@ class BoardController extends Controller
      */
     public function create()
     {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
         $result= Hashtag::all();
         return view('insert')->with('data', $result);
     }    
@@ -114,6 +126,9 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {      
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
 
         $u_id = auth()->id();        
         $boardData = $request->only('board_title', 'board_content', 'category_id');
@@ -137,42 +152,49 @@ class BoardController extends Controller
         }  
 
         $board_id = $board->board_id;
-        
-        
-        $hashtag_ids = explode(',', $request->input('hashtag'));
-        $hashtag_ids = array_map('trim', $hashtag_ids);
-        foreach ($hashtag_ids as $hashtag_name) {
-            // Check if the hashtag already exists
-            $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
-        
-            // If not, create a new hashtag
-            if (!$hashtag) {
-                $hashtag = Hashtag::create(['hashtag_name' => $hashtag_name]);
+
+        if($request->hashtag) {
+
+            $hashtag_ids = explode(',', $request->input('hashtag'));
+            $hashtag_ids = array_map('trim', $hashtag_ids);
+            foreach ($hashtag_ids as $hashtag_name) {
+                // Check if the hashtag already exists
+                $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
+
+                // If not, create a new hashtag
+                if (!$hashtag) {
+                    // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
+                    $hashtag = null;
+                }
+
+                // Insert the relationship into board_tags table
+                if ($hashtag) {
+                    DB::table('board_tags')->insert([
+                        'board_id' => $board_id,
+                        'hashtag_id' => $hashtag->hashtag_id,
+                    ]);
+                }
             }
-        
-            // Insert the relationship into board_tags table
-            DB::table('board_tags')->insert([
-                'board_id' => $board_id,
-                'hashtag_id' => $hashtag->hashtag_id,
-            ]);
+
+            $board_detail_get = DB::table('boards as b')
+            ->select(
+                'hashtags.hashtag_id',
+                'hashtags.hashtag_name as hashtag_name', // 변경된 부분
+                'b.category_id',
+                'b.board_id',
+                'b.board_title',
+                'b.board_content',
+                'b.board_hits',
+                'b.created_at'
+            )
+            ->join('board_tags as bt', 'bt.board_id', '=', 'b.board_id')
+            ->join('hashtags', 'hashtags.hashtag_id', '=', 'bt.hashtag_id')
+            ->where('b.board_id', $board_id)
+            ->get();
+        } else {
+            $board_detail_get = Board::get();
         }
         
-       
-    $board_detail_get = DB::table('boards as b')
-    ->select(
-        'hashtags.hashtag_id',
-        'hashtags.hashtag_name as hashtag_name', // 변경된 부분
-        'b.category_id',
-        'b.board_id',
-        'b.board_title',
-        'b.board_content',
-        'b.board_hits',
-        'b.created_at'
-    )
-    ->join('board_tags as bt', 'bt.board_id', '=', 'b.board_id')
-    ->join('hashtags', 'hashtags.hashtag_id', '=', 'bt.hashtag_id')
-    ->where('b.board_id', $board_id)
-    ->get();
 
     // return redirect()->route('detail', ['board' => $board_id])->with('data', $hashtag_id);
     return redirect()->route('detail', ['board' => $board_id])->with('data', $board_detail_get);
@@ -187,6 +209,10 @@ class BoardController extends Controller
      */
     public function show($board_id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
         $result = Board::with(['user', 'images'])->find($board_id);
 
         //  dd($result->images);
@@ -205,11 +231,13 @@ class BoardController extends Controller
      */
     public function edit($board_id)
     {
-        
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+        }
 
-    $result = Board::find($board_id);
-    $allHashtags = Hashtag::all();
-    return view('update', compact('result', 'allHashtags'));
+        $result = Board::find($board_id);
+        $allHashtags = Hashtag::all();
+        return view('update', compact('result', 'allHashtags'));
 
     }
 
@@ -222,6 +250,9 @@ class BoardController extends Controller
      */
     public function update(Request $request, $board_id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
 
         $result = Board::find($board_id);
         $result->update([
@@ -294,13 +325,22 @@ class BoardController extends Controller
      */
     public function destroy($board_id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
         Board::destroy($board_id);
         return redirect()-> route('categoryboard');
     }
 
     public function boardcategoryget($categoryId) {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+            
         // Log::debug($categoryId);
-        $category_board = Board::where('category_id', $categoryId)->orderby('board_id', 'desc')->paginate(5);
+        $category_board = Board::where('category_id', $categoryId)
+        ->where('deleted_at', null)->orderby('board_id', 'desc')->paginate(5);
 
         $category_id = Category::orderby('category_id', 'asc')->get();
 
@@ -316,6 +356,7 @@ class BoardController extends Controller
         // Log::debug($request);
 
         $result = Board::where('board_id', '<', $request->last_num)
+            ->where('deleted_at', null)
             ->orderby('board_id', 'desc')
             ->limit(4)
             ->get();
@@ -334,6 +375,7 @@ class BoardController extends Controller
         ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
         ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->where('users.id', $u_id)
+        ->where('boards.deleted_at', null)
         ->where('boards.board_id', '<', $request->favorite_num)
         ->orderby('boards.board_id', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
@@ -358,30 +400,58 @@ class BoardController extends Controller
     }
 
     public function lastboardget() {
-        $lastboard = Board::orderBy('board_id', 'desc')->paginate(5);
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
+        $lastboard = Board::orderBy('board_id', 'desc')
+        ->where('deleted_at', null)->paginate(5);
 
         return view('lastboard')->with('data', $lastboard);
     }
 
     public function hotboardget() {
-        $hotboard = Board::orderBy('board_hits', 'desc')->paginate(5);
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
+        $hotboard = Board::orderBy('board_hits', 'desc')
+        ->where('deleted_at', null)->paginate(5);
 
         return view('hotboard')->with('data', $hotboard);
     }
 
     public function favoriteboardget() {
+        if(!Auth::check()){
+            return redirect()->route('login.get');
+            }
+
         $u_id = session('id');
 
         $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
         ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
         ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
-        ->select('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
+        ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->where('users.id', $u_id)
         ->where('favorite_tags.deleted_at', null)
+        ->where('boards.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
-        ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
+        ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->get();
+
+        $count = 0;
+        foreach ($favoriteboard as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $favoriteboard[$count]['userinfo'] = Board::join('users', 'boards.u_id', '=', 'users.id')
+            ->select('users.user_img', 'users.user_name')
+            ->where('boards.deleted_at', null)
+            ->where('boards.board_id', $item->board_id)
+            ->orderby('boards.board_id', 'desc')
+            ->get();
+
+            $count++;
+        }
 
         $cnt = 0;
 

@@ -4,6 +4,7 @@
 
 @section('main')
 
+
 <main class="last_main">
     <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
     <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
