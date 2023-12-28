@@ -243,6 +243,9 @@ li{
 .insert_hidden_container{
     margin: 10px;
 }
+.detail_form {
+    margin-bottom: 20px;
+}
 .insert_container{
     width: 60vw;    
     margin: 20px auto;  
@@ -307,19 +310,19 @@ li{
     border: 1px solid rgba(128, 128, 128, 0.369);    
 }
 .insert_bottom_button{
-   display: grid;     
-   justify-content: end;      
-   grid-template-columns: repeat(2,70px);
-   grid-gap: 50px;  
-   margin: 0px auto;
-   width: 70%; 
-   
+    display: grid;
+    justify-content: end;
+    grid-template-columns: repeat(2,90px);
+    grid-gap: 8px;
+    margin: 0px auto;
+    width: 70%;
+    height: 40px;
 }
 .insert_btn{
-    border: 1px solid rgba(128, 128, 128, 0.369);   
-    width: 60px;
+    border: 1px solid rgba(128, 128, 128, 0.369);
+    width: 100%;
     margin: 0 10px;
-    height: 40px;
+    /* height: 40px; */
     border-radius: 5px;
     background-color: white;
 }
