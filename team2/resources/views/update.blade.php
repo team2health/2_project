@@ -28,7 +28,7 @@
         </label>
         <input type="file" name="board_img[new]" id="file_new" style="display:none;" onchange="previewImage('file_new', 'preview_new')" accept="image/*">
     </div> -->
-	<div class="insert_img">
+	<!-- <div class="insert_img">
     @for ($i = 0; $i < 3; $i++)
         @php
             $imgId = 'preview' . $i;
@@ -43,22 +43,24 @@
         </label>
         <input type="file" name="board_img[]" id="{{ $fileId }}" style="display:none;" onchange="previewImage('{{ $fileId }}', '{{ $imgId }}')" accept="image/*">
     @endfor
+</div> -->
+ 	
+<div class="insert_img">
+    <label for="file0">
+        <img id="preview0" src="{{ isset($result->images[0]) ? asset('board_img/' . $result->images[0]->img_address) : asset('img/plus.png') }}" alt="{{ isset($result->images[0]) ? 'Image 1' : 'Placeholder Image' }}">
+    </label>
+    <input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*" >
+
+    <label for="file1">
+        <img id="preview1" src="{{ isset($result->images[1]) ? asset('board_img/' . $result->images[1]->img_address) : asset('img/plus.png') }}" alt="{{ isset($result->images[1]) ? 'Image 2' : 'Placeholder Image' }}">
+    </label>
+    <input type="file" name="board_img[]" id="file1" style="display:none;" onchange="previewImage('file1', 'preview1')" accept="image/*" >
+
+    <label for="file2">
+        <img id="preview2" src="{{ isset($result->images[2]) ? asset('board_img/' . $result->images[2]->img_address) : asset('img/plus.png') }}" alt="{{ isset($result->images[2]) ? 'Image 3' : 'Placeholder Image' }}">
+    </label>
+    <input type="file" name="board_img[]" id="file2" style="display:none;" onchange="previewImage('file2', 'preview2')" accept="image/*" >
 </div>
-	
-				<!-- <div class="insert_img">
-					<label for="file0">
-						<img id="preview0" src="{{ asset('img/plus.png') }}" alt="">
-					</label>
-					<input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*" >
-					<label for="file1">
-						<img id="preview1" src="{{ asset('img/plus.png') }}" alt="">
-					</label>
-					<input type="file" name="board_img[]" id="file1" style="display:none;" onchange="previewImage('file1', 'preview1')" accept="image/*" >
-					<label for="file2">
-						<img id="preview2" src="{{ asset('img/plus.png') }}" alt="">
-					</label>
-					<input type="file" name="board_img[]" id="file2" style="display:none;" onchange="previewImage('file2', 'preview2')" accept="image/*" >
-				</div> -->
 				<div class="insert_select_container">
 					<select name="board" id="board" class="insert_select">
 					

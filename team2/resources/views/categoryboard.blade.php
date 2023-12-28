@@ -31,7 +31,7 @@
             {{ $item->board_title }}
         </div> 
             <div class="last_content">
-                {{ $item->board_content }}
+                {!! $item->board_content !!}
             </div>  
         </div>
     </a>
