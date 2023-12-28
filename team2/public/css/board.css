@@ -322,7 +322,7 @@ li{
     border: 1px solid rgba(128, 128, 128, 0.369);
     width: 100%;
     margin: 0 10px;
-    /* height: 40px; */
+    height: 40px;
     border-radius: 5px;
     background-color: white;
 }
@@ -763,6 +763,13 @@ a .a-bordergo-hover:hover {
     border: none;
 }
 
+@media only screen and (min-width: 1050px) {
+    .community_icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+}
 
 @media only screen and (max-width: 1450px) {
     .community_tag {
