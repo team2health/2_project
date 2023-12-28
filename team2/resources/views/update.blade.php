@@ -11,20 +11,20 @@
 			@method('PUT')            
 			<div class="insert_container">           
 				<!-- <div class="insert_img">
-					@foreach($result->images as $key => $image)
+					{{-- @foreach($result->images as $key => $image) --}}
 						<div class="detail_board_content">
-							<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}">
-							<label for="file{{ $key }}">
-								<button type="button" onclick="openFile('file{{ $key }}')">파일변경</button>
+							{{-- <img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}"> --}}
+							{{-- <label for="file{{ $key }}"> --}}
+								{{-- <button type="button" onclick="openFile('file{{ $key }}')">파일변경</button> --}}
 							</label>
-							<input type="file" name="board_img[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
+							{{-- <input type="file" name="board_img[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*"> --}}
 						</div>
-					@endforeach
+					{{-- @endforeach --}}
 				</div>	
 				<div class="detail_board_content">
         
         <label for="file_new">
-			<img id="preview_new" src="{{ asset('img/plus.png') }}" alt="">
+			{{-- <img id="preview_new" src="{{ asset('img/plus.png') }}" alt=""> --}}
         </label>
         <input type="file" name="board_img[new]" id="file_new" style="display:none;" onchange="previewImage('file_new', 'preview_new')" accept="image/*">
     </div> -->
@@ -39,6 +39,7 @@
 
         <label for="{{ $fileId }}">
             <img id="{{ $imgId }}" src="{{ $previewImage }}" alt="">
+			<input type="hidden" name="origin_board_img[]" value="{{ $result->images[$i] }}">
         </label>
         <input type="file" name="board_img[]" id="{{ $fileId }}" style="display:none;" onchange="previewImage('{{ $fileId }}', '{{ $imgId }}')" accept="image/*">
     @endfor
