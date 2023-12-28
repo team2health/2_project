@@ -118,7 +118,7 @@ class BoardController extends Controller
     public function store(Request $request)
     {      
 
-        $u_id = auth()->id();        
+        $u_id = auth()->id();
         $boardData = $request->only('board_title', 'board_content', 'category_id');
         $boardData['u_id'] = $u_id;
         $board = Board::create($boardData);
@@ -133,48 +133,52 @@ class BoardController extends Controller
                 $boardImage = new Board_img(['img_address' => $imageName]);
                 $board->images()->save($boardImage);
             }
-        
-        }  
-
-        $board_id = $board->board_id;
-        
-        
-        $hashtag_ids = explode(',', $request->input('hashtag'));
-        $hashtag_ids = array_map('trim', $hashtag_ids);
-        foreach ($hashtag_ids as $hashtag_name) {
-            // Check if the hashtag already exists
-            $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
-        
-            // If not, create a new hashtag
-            if (!$hashtag) {
-                // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
-                $hashtag = null;
-            }
-        
-            // Insert the relationship into board_tags table
-            if ($hashtag) {
-                DB::table('board_tags')->insert([
-                    'board_id' => $board_id,
-                    'hashtag_id' => $hashtag->hashtag_id,
-                ]);
-            }
         }
-        
-    $board_detail_get = DB::table('boards as b')
-    ->select(
-        'hashtags.hashtag_id',
-        'hashtags.hashtag_name as hashtag_name', // 변경된 부분
-        'b.category_id',
-        'b.board_id',
-        'b.board_title',
-        'b.board_content',
-        'b.board_hits',
-        'b.created_at'
-    )
-    ->join('board_tags as bt', 'bt.board_id', '=', 'b.board_id')
-    ->join('hashtags', 'hashtags.hashtag_id', '=', 'bt.hashtag_id')
-    ->where('b.board_id', $board_id)
-    ->get();
+
+        if($request->hashtag) {
+            $board_id = $board->board_id;
+            
+            $hashtag_ids = explode(',', $request->input('hashtag'));
+            $hashtag_ids = array_map('trim', $hashtag_ids);
+            foreach ($hashtag_ids as $hashtag_name) {
+                // Check if the hashtag already exists
+                $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
+            
+                // If not, create a new hashtag
+                if (!$hashtag) {
+                    // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
+                    $hashtag = null;
+                }
+            
+                // Insert the relationship into board_tags table
+                if ($hashtag) {
+                    DB::table('board_tags')->insert([
+                        'board_id' => $board_id,
+                        'hashtag_id' => $hashtag->hashtag_id,
+                    ]);
+                }
+            }
+            
+            $board_detail_get = DB::table('boards as b')
+            ->select(
+                'hashtags.hashtag_id',
+                'hashtags.hashtag_name as hashtag_name', // 변경된 부분
+                'b.category_id',
+                'b.board_id',
+                'b.board_title',
+                'b.board_content',
+                'b.board_hits',
+                'b.created_at'
+            )
+            ->join('board_tags as bt', 'bt.board_id', '=', 'b.board_id')
+            ->join('hashtags', 'hashtags.hashtag_id', '=', 'bt.hashtag_id')
+            ->where('b.board_id', $board_id)
+            ->get();
+        } else {
+            $board_id = $board->board_id;
+            
+            $board_detail_get = Board::get();
+        }
 
     // return redirect()->route('detail', ['board' => $board_id])->with('data', $hashtag_id);
     return redirect()->route('detail', ['board' => $board_id])->with('data', $board_detail_get);
