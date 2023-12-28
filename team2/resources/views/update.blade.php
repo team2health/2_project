@@ -30,14 +30,12 @@
  	
 
 				<div class="insert_select_container">
-					<select name="board" id="board" class="insert_select">
-					
-						<option value="{{ $result->category_id }}">{{ $result->category->category_name }}</option>
-					
-						<option value="1">자유게시판</option>
-						<option value="2">정보 게시판</option>
-						<option value="3">친목 게시판</option>
-						<option value="4">질문 게시판</option>
+					<select name="board" id="board" class="insert_select" >
+						{{-- <option value="{{ $result->category_id }}">{{ $result->category->category_name }}</option> --}}
+						<option value="1" {{$result->category_id === 1 ? 'selected' : ''}}>자유게시판</option>
+						<option value="2" {{$result->category_id === 2 ? 'selected' : ''}}>정보 게시판</option>
+						<option value="3" {{$result->category_id === 3 ? 'selected' : ''}}>친목 게시판</option>
+						<option value="4" {{$result->category_id === 4 ? 'selected' : ''}}>질문 게시판</option>
 					</select>
 				</div>		
 				<div class="insert_input_container">
