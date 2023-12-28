@@ -22,7 +22,7 @@
 
         <label for="{{ $fileId }}">
             <img id="{{ $imgId }}" src="{{ $previewImage }}" alt="">
-			<input type="hidden" name="origin_board_img[]" value="{{ $result->images[$i] }}">
+			<input type="hidden" name="origin_board_img[]" value="{{ isset($result->images[$i]) ? $result->images[$i] : '' }}">
         </label>
         <input type="file" name="board_img[]" id="{{ $fileId }}" style="display:none;" onchange="previewImage('{{ $fileId }}', '{{ $imgId }}')" accept="image/*">
     @endfor
