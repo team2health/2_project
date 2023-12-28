@@ -4,8 +4,6 @@
 
 @section('main')
 
-
-
 <main class="insert_main">
 	<div class="insert_hidden_container">
 		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data" >
@@ -45,7 +43,7 @@
 				<div class="insert_textarea_container">
 					<label for="board_content" >내용</label><br>			  
 					<textarea name="board_content" id="board_content" class="insert_textarea" required ></textarea>
-				</div>				
+				</div>
 				<!-- <div class="insert_hashtag_container">
 					<label for="hashtag" class="label_hashtag">#해시태그</label>
 					<input class="insert_hashtag" id="hashtag" name="hashtag"></input>

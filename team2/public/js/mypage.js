@@ -343,10 +343,31 @@ function nameChange() {
 }
 
 let fileInput = document.getElementById('profilephoto');
+// console.log(fileInput.files[0]);
 let userImgUrl = document.getElementById('user-img-url');
 let PROFILEPHOTOVIEW = document.getElementById('profilephotoview');
 
 fileInput.addEventListener('change', function() {
+    console.log(fileInput.files[0].size / 1048576);
+    if (!fileInput.files[0].type.startsWith('image')) {
+        imgFlg = 2;
+        PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
+
+        userImgUrl.innerHTML = '이미지만 선택 가능합니다.';
+        document.getElementById('user-info-img-remove').style.visibility = 'visible';
+        return false;
+    }
+    
+    if (fileInput.files[0].size / 1048576 > 2) {
+        alert('파일의 용량이 너무 큽니다.');
+        imgFlg = 2;
+        
+        PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
+        document.getElementById('user-info-img-remove').style.visibility = 'visible';
+
+        return false;
+    }
+
     userImgUrl.innerHTML = '';
     userImgUrl.innerHTML = fileInput.files[0].name;
     // console.log(fileInput.files[0].name);
