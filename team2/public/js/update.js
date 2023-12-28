@@ -2,17 +2,33 @@ function openFile(fileInputId) {
     document.getElementById(fileInputId).click();
 }
 
+// function previewImage(inputId, previewId) {
+//     var input = document.getElementById(inputId);
+//     var preview = document.getElementById(previewId);
+
+//     var reader = new FileReader();
+//     reader.onload = function (e) {
+//         preview.src = e.target.result;
+//     };
+
+//     if (input.files && input.files[0]) {
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// }
 function previewImage(inputId, previewId) {
     var input = document.getElementById(inputId);
     var preview = document.getElementById(previewId);
-
+    var file = input.files[0];
     var reader = new FileReader();
-    reader.onload = function (e) {
-        preview.src = e.target.result;
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
     };
 
-    if (input.files && input.files[0]) {
-        reader.readAsDataURL(input.files[0]);
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "{{ asset('img/plus.png') }}";
     }
 }
     
