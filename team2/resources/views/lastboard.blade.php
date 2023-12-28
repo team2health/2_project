@@ -28,11 +28,9 @@
         <div class="last_title">
             {{$item->board_title}}
         </div> 
-        <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
             <div class="last_content">
                 {{$item->board_content}}
-            </div> 
-        </a> 
+            </div>
     </div>
     </a>
     @empty

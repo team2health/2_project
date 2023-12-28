@@ -45,25 +45,25 @@ class BoardController extends Controller
             ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
             ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
             ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
-            ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
+            ->select('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
             ->where('users.id', $u_id)
             ->where('favorite_tags.deleted_at', null)
             ->where('boards.deleted_at', null)
             ->orderby('boards.board_id', 'desc')
-            ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
+            ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
             ->limit(4)
             ->get();
 
         $lastboard = Board::orderBy('board_id', 'desc')
-        ->where('deleted_at', null)->limit(4)->get();
+            ->where('deleted_at', null)->limit(4)->get();
 
         $favoritetag = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
-        ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
-        ->select('hashtags.hashtag_name')
-        ->where('users.id', $u_id)
-        ->where('favorite_tags.deleted_at', null)
-        ->orderby('hashtags.hashtag_id')
-        ->get();
+            ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
+            ->select('hashtags.hashtag_name')
+            ->where('users.id', $u_id)
+            ->where('favorite_tags.deleted_at', null)
+            ->orderby('hashtags.hashtag_id')
+            ->get();
 
         $cnt = 0;
 
@@ -243,12 +243,6 @@ class BoardController extends Controller
             // Check if the hashtag already exists
             $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
     
-            // If not, create a new hashtag
-            if (!$hashtag) {
-                // 여기서는 새로운 레코드를 생성하지 않고 null로 설정
-                $hashtag = null;
-            }
-    
             // Collect hashtag IDs, but only if $hashtag is not null
             if ($hashtag) {
                 $hashtagIds[] = $hashtag->hashtag_id;
@@ -331,6 +325,7 @@ class BoardController extends Controller
         ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
         ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->where('users.id', $u_id)
+        ->where('favorite_tags.deleted_at', null)
         ->where('boards.board_id', '<', $request->favorite_num)
         ->where('boards.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
