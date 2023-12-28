@@ -34,7 +34,7 @@
                     @endforeach          
                     <br>
                     <div>
-                    {{$data->board_content}}                
+                        {!! $data->board_content !!}          
                     </div>                
                 </div>
             </div>
