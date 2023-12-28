@@ -84,7 +84,7 @@
 					</div>		 -->
 			</div>
 			<div class="insert_bottom_button">
-				<button type="button"class="insert_btn"><a href="{{url()->previous()}}">취소</a></button>			
+			<a href="{{url()->previous()}}"><button type="button" class="insert_btn">취소</button></a>			
 				<button type="submit" class="insert_btn">작성완료</button>	
 			</div>				
 		</form>		
