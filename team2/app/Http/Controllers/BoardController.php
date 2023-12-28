@@ -438,7 +438,7 @@ class BoardController extends Controller
         ->where('boards.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
-        ->get();
+        ->paginate(5);
 
         $count = 0;
         foreach ($favoriteboard as $item) {
