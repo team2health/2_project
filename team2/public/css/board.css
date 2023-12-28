@@ -93,6 +93,7 @@ textarea{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 10px;
 }
 .board_nic_text_a {
     font-weight: 800;

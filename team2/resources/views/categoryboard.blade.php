@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div> 
-        <div style="margin: 10px;" class="community-category-title">
+        <div style="margin-left: 20px;" class="community-category-title">
             {{ $item->board_title }}
         </div> 
             <div class="last_content">
