@@ -1,5 +1,5 @@
-function openFile() {
-    document.getElementById('file0').click();
+function openFile(fileInputId) {
+    document.getElementById(fileInputId).click();
 }
 
 function previewImage(inputId, previewId) {

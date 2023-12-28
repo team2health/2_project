@@ -16,6 +16,101 @@ function previewImage(inputId, previewId) {
     }
 }
 
+// 이미지를 미리보기하고 파일 인풋의 내용을 변경하는 함수
+// function previewAndAddImage(inputId, containerId) {
+//     var input = document.getElementById(inputId);
+//     var container = document.getElementById(containerId);
+
+//     var reader;
+//     for (var i = 0; i < input.files.length; i++) {
+//         reader = new FileReader();
+//         var file = input.files[i];
+
+//         reader.onload = function (e) {
+//             // 미리보기 이미지 엘리먼트 생성
+//             var previewImage = document.createElement("img");
+//             previewImage.src = e.target.result;
+
+//             // 삭제 버튼 엘리먼트 생성
+//             var deleteButton = document.createElement("button");
+//             deleteButton.type = "button";
+//             deleteButton.innerText = "x";
+//             deleteButton.onclick = function () {
+//                 container.removeChild(previewImage);
+//                 input.value = ''; // 파일 인풋 초기화
+//             };
+
+//             // 미리보기 이미지와 삭제 버튼을 컨테이너에 추가
+//             container.appendChild(previewImage);
+//             container.appendChild(deleteButton);
+//         };
+
+//         reader.readAsDataURL(file);
+//     }
+// }
+
+// // 파일 인풋이 변경되었을 때 호출되는 함수
+// function handleFileInputChange(event) {
+//     var input = event.target;
+//     var container = document.getElementById("imageContainer");
+
+//     previewAndAddImage(input.id, "imageContainer");
+
+//     // 새로운 파일 인풋 엘리먼트 생성
+//     var newInput = document.createElement("input");
+//     newInput.type = "file";
+//     newInput.name = "board_img[]";
+//     newInput.style = "display:none;";
+//     newInput.accept = "image/*";
+//     newInput.id = "fileInput" + container.children.length; // ID를 동적으로 생성
+//     newInput.addEventListener("change", handleFileInputChange);
+
+//     // 파일 인풋을 컨테이너에 추가
+//     container.appendChild(newInput);
+
+//     // 새로운 파일 인풋에 포커스 설정 (다음 이미지를 추가할 때 새로운 파일 인풋이 선택되도록)
+//     newInput.focus();
+// }
+
+// // 초기 파일 인풋에 이벤트 리스너 등록
+// document.getElementById("fileInput").addEventListener("change", handleFileInputChange);
+// function openFileInput() {
+//     document.getElementById('fileInput').click();
+// }
+
+// document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+
+// function handleFileSelect(event) {
+//     const files = event.target.files;
+//     const container = document.getElementById('imageContainer');
+
+//     for (const file of files) {
+//         const imageContainer = document.createElement('div');
+//         imageContainer.className = 'detail_board_content';
+
+//         const img = document.createElement('img');
+//         img.src = URL.createObjectURL(file);
+
+//         const deleteButton = document.createElement('button');
+//         deleteButton.type = 'button';
+//         deleteButton.textContent = '삭제';
+//         deleteButton.addEventListener('click', function() {
+//             // 이미지 및 해당 버튼 제거
+//             imageContainer.remove();
+//         });
+
+//         imageContainer.appendChild(img);
+//         imageContainer.appendChild(deleteButton);
+
+//         container.appendChild(imageContainer);
+//     }
+// }
+
+
+
+
+
+
 var selectedHashtags = [];
 
 function toggleHashtags() {

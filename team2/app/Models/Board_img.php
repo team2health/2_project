@@ -11,6 +11,7 @@ class Board_img extends Model
     protected $fillable = [
         'board_id', 'img_address',
     ];
+    protected $primaryKey = 'board_img_id';
     
 
     public function board()

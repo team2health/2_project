@@ -102,7 +102,7 @@
         <form action="{{ route('comments', ['boardId' => $data->board_id]) }}" method="post" id="commentForm">
             @csrf
             <input type="hidden" name="board_id" value="{{ $data->board_id }}">
-            <textarea name="comment_content" id="comment_content"></textarea>
+            <textarea name="comment_content" id="comment_content" class="comment_content"></textarea>
             <button type="submit" class="detail_comment_insert_complete">입력</button>
         </form>
 
