@@ -227,8 +227,9 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $board_id)
-    {   $result = Board::findOrFail($board_id);
-        // $result = Board::find($board_id);        
+     {   
+        // $result = Board::findOrFail($board_id);
+         $result = Board::find($board_id);        
         $result->update([
             'board_title' => $request->input('u_title'),
             'board_content' => $request->input('u_content'),
@@ -258,28 +259,45 @@ class BoardController extends Controller
         $board_detail_get = Board::with(['hashtags'])
             ->where('board_id', $board_id)
             ->first();
-        
+
+            // 기존 이미지를 배열에 저장
+
             if ($request->hasFile('board_img')) {
-                // 새로운 이미지가 업로드된 경우
-        
-                foreach ($result->images as $image) {
-                    $result->images()->delete();
-                }
-                // 새로운 이미지 업로드
-                $boardImages = [];
-                $images = $request->file('board_img');
-        
+                $images = $request->file('board_img');  
+                $result->images()->delete(); 
                 foreach ($images as $image) {
                     $imageName = Str::uuid() . '.' . $image->extension();
                     $image->move(public_path('board_img'), $imageName);
         
-                    // 새로운 이미지의 경로를 저장
-                    $boardImages[] = ['img_address' => $imageName];
+                    // Save the image path to the Board_img model
+                    $boardImage = new Board_img(['img_address' => $imageName]);
+                    $result->images()->save($boardImage);
                 }
-        
-                // 새로운 이미지 저장
-                $result->images()->createMany($boardImages);
             }
+
+
+        
+            // if ($request->hasFile('board_img')) {
+            //     // 새로운 이미지가 업로드된 경우
+        
+            //     foreach ($result->images as $image) {
+            //         $result->images()->delete();
+            //     }
+            //     // 새로운 이미지 업로드
+            //     $boardImages = [];
+            //     $images = $request->file('board_img');
+        
+            //     foreach ($images as $image) {
+            //         $imageName = Str::uuid() . '.' . $image->extension();
+            //         $image->move(public_path('board_img'), $imageName);
+        
+            //         // 새로운 이미지의 경로를 저장
+            //         $boardImages[] = ['img_address' => $imageName];
+            //     }
+        
+            //     // 새로운 이미지 저장
+            //     $result->images()->createMany($boardImages);
+            // }
         return redirect()-> route('board.show',['board'=> $result->board_id]);
     }
 
