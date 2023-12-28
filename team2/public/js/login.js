@@ -37,3 +37,11 @@ function logingo() {
 
 	document.getElementById('login_form').submit();
 }
+
+
+let loginForm = document.getElementById("login_form");
+loginForm.addEventListener("keyup", function(event) {
+    if (event.key === "Enter" || event.keyCode == 13) {
+        loginForm.submit();
+    }
+});
