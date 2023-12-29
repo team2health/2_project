@@ -235,7 +235,7 @@ function addallfavoritetag() {
         mypageTagTitle.appendChild(createtagmaindiv);
         createtagmaindiv.appendChild(createplustag);
         // addtagbtndiv.appendChild(hashplusokbtn);
-        addtagbtndiv.appendChild(hashplusclosebtn);
+        // addtagbtndiv.appendChild(hashplusclosebtn);
         createtagmaindiv.appendChild(addtagbtndiv);
         
         // let noticeThatFavoriteNone = document.createElement('noticeThatFavoriteNone');
