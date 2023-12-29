@@ -200,6 +200,8 @@ textarea{
     border-radius: 5px;
     padding: 3px 7px;
     background-color: #e0e0e0;
+    margin-bottom: 5px;
+    display: inline-block;
 }
 
 
@@ -313,11 +315,34 @@ li{
     padding: 10px;
     width:90%;    
 }
+.tag {
+    cursor: pointer;
+}
+.tag{
+    border-radius: 5px;
+    padding: 3px 7px;
+    background-color: #e4e4e4;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+.selected-tag {
+    background-color: #ffffff;
+    border: 1px solid #a8a8a8;
+    border-radius: 5px;
+    padding: 3px 7px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+.tag:hover {
+    background-color: #ffa869;
+}
 .insert_hashtag{
     width:100%;  
     min-height: 30px;  
     border-radius: 10px;
-    border: 1px solid rgba(128, 128, 128, 0.369);    
+    border: 1px solid rgba(128, 128, 128, 0.369);
+    padding: 10px;
+    margin-bottom: 12px;
 }
 .insert_bottom_button{
     display: grid;
@@ -428,7 +453,7 @@ li{
     margin: 10px 10px 5px 10px;
 }
 .community-home-content {
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 6px 10px;
     overflow: hidden;
     max-height: 60px;
 }
@@ -551,6 +576,10 @@ li{
     background-color: #fff;
     height: 150px;
     border: 2px solid #E8E8E8;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-rows: 100px 30px;
+    
 }
 .community_tag > a > div > span {
     background-color: #fff0e6;
@@ -561,6 +590,8 @@ li{
 }
 .community-fav-board-tag {
     margin-left: 10px;
+    height: 20px;
+    overflow: hidden;
 }
 .bordergo-hover a:hover {
     background-color:  rgba(255, 153, 80, 0.6);
