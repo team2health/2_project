@@ -828,6 +828,8 @@ td {
 @media screen and (max-width: 1200px) {
     .mypage-grid {
         display: block;
+        overflow: hidden;
+        width: 100%;
     }
     .mypage-content, .mypage-boardbox, .mypage-date-today, .mypage-btn-plus, .mypage-insert-btn
     , .mypage-content, .mypage-board-show-btn, .mypage-comment-show-btn {
