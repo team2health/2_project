@@ -25,7 +25,7 @@
         <div class="last_user">
         <img class="community_icon" src="/user_img/{{$item->userinfo[0]->user_img}}" class="board_nic_img" alt="User Image">                               
             <div class="board_nic_text">
-                <div>
+                <div class="user-nickname">
                     {{$item->userinfo[0]->user_name}}
                 </div>
                 <div>
