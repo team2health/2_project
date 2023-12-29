@@ -294,6 +294,7 @@ function addhashtag(data) {
 // value값 변경해야함
 
 let nameChk = document.getElementById('usermodifyname');
+let nameChkc = nameChk.value;
 let NAMEINFOBTN = document.getElementById('name-info-btn');
 let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
 let imgFlg = 0;
@@ -304,9 +305,15 @@ let namechkflg = 0;
 NAMEINFOBTN.style.visibility = 'hidden';
 
 nameChk.addEventListener('input', function() {
-    nameinput = 1;
-    NAMEINFOBTN.style.visibility = 'visible';
-    // console.log('텍스트 값이 변경됨. nameflg 값:', namechkflg);
+    if(nameinput === 0) {
+        nameinput = 1;
+        NAMEINFOBTN.style.visibility = 'visible';
+    }
+
+    if(document.getElementById('usermodifyname').value === nameChkc) {
+        nameinput = 0;
+        NAMEINFOBTN.style.visibility = 'hidden';
+    }
 });
 
 function nameChange() {
