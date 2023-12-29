@@ -116,7 +116,7 @@ td {
     justify-content: center;
     align-items: center;
     color: #eeeeee;
-    font-size: 2.4rem;
+    font-size: 2rem;
 }
 
 /* 날짜별 */
@@ -192,7 +192,7 @@ td {
         overflow: hidden;
     }
     .mypage-second {
-        width: 400px;
+        width: 100%;
     }
     .mypage-first {
         display: flex;

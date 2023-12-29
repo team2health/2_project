@@ -38,13 +38,12 @@
         </div> 
         <div class="last_content">
             {!! $item->board_content !!}
-            <div style="margin-top: 20px; text-align: right;">
+            <br>
             @forelse ($item->board_tag as $value)
-                {{$value->hashtag_name}}
+            <span class="favoriteboard-favorite-tag">{{$value->hashtag_name}}</span>
             @empty
                 
             @endforelse
-            </div>
         </div> 
     </div>
     </a>
