@@ -17,11 +17,11 @@
         <img class="community_icon" src="{{ asset('user_img/'.optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">                               
             <div class="board_nic_text">
                 {{-- {{dd(asset('user_img/' . optional($item->user)->user_img))}} --}}
-                <div>
+                <div style="font-size: 1rem">
                     {{ optional($item->user)->user_name }}
                 </div>
                 <div>
-                    {{$item->created_at}}
+                    {{ substr($item->created_at, 0, 10)}}
                 </div>
             </div>
         </div> 
