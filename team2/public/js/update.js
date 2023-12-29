@@ -15,6 +15,28 @@ function openFile(fileInputId) {
 //         reader.readAsDataURL(input.files[0]);
 //     }
 // }
+// function previewImage(inputId, previewId) {
+//     var input = document.getElementById(inputId);
+//     var preview = document.getElementById(previewId);
+//     var file = input.files[0];
+//     var reader = new FileReader();
+
+//     reader.onloadend = function () {
+//         preview.src = reader.result;
+//     };
+
+//     if (file) {
+//         reader.readAsDataURL(file);
+//     } else {
+//         preview.src = "{{ asset('img/plus.png') }}";
+//     }
+// }
+var selectedImages = [];
+
+function openFile(fileInputId) {
+    document.getElementById(fileInputId).click();
+}
+
 function previewImage(inputId, previewId) {
     var input = document.getElementById(inputId);
     var preview = document.getElementById(previewId);
@@ -30,6 +52,25 @@ function previewImage(inputId, previewId) {
     } else {
         preview.src = "{{ asset('img/plus.png') }}";
     }
+}
+
+function removeImage(imageKey) {
+    // 이미지를 삭제하는 로직 추가
+
+    // 선택된 이미지 배열에서 삭제
+    selectedImages = selectedImages.filter(function (key) {
+        return key !== imageKey;
+    });
+
+    // 이미지 미리보기, 업로드한 이미지 input, 이미지 삭제 버튼 삭제
+    var imageContainer = document.getElementById('imageContainer' + imageKey);
+    if (imageContainer) {
+        imageContainer.parentNode.removeChild(imageContainer);
+    }
+
+    // 배열에 있는 모든 이미지를 숨겨진 인풋 필드에 설정
+    var selectedImagesInput = document.getElementById('selectedImages');
+    selectedImagesInput.value = selectedImages.join(',');
 }
     
 var selectedHashtags = [];
@@ -88,6 +129,7 @@ function updateSelectedTags() {
     // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
     selectedHashtagsInput.value = selectedHashtags.join(',');
 }
+
 
 function removeSelectedTag(tag) {
     // 선택된 해시태그 배열에서 삭제

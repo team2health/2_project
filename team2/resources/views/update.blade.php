@@ -9,9 +9,8 @@
 		<form class="detail_form" method="POST"  action="{{route('board.update',['board'=>$result->board_id])}}" enctype="multipart/form-data">
 			@csrf
 			@method('PUT')            
-			<div class="insert_container">           
-				
-			<div class="insert_img">
+			<div class="insert_container">				
+				<div class="insert_img">
 					@foreach($result->images as $key => $image)
 						<div class="detail_board_content">
 							<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}">
@@ -60,11 +59,7 @@
 				</div>
 				<!-- Input for selected hashtags -->
 				<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
-			</div>
-			
-	
-				
-			
+			</div>		
 			
 	</div>
 		<div class="insert_bottom_button">
