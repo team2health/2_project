@@ -11,24 +11,17 @@
 			@method('PUT')            
 			<div class="insert_container">           
 				
-	<div class="insert_img">
-    @for ($i = 0; $i < 3; $i++)
-        @php
-            $imgId = 'preview' . $i;
-            $fileId = 'file' . $i;
-            $defaultImage = asset('img/plus.png');
-            $previewImage = isset($result->images[$i]) ? asset('board_img/' . $result->images[$i]->img_address) : $defaultImage;
-        @endphp
-
-        <label for="{{ $fileId }}">
-            <img id="{{ $imgId }}" src="{{ $previewImage }}" alt="">
-			<input type="hidden" name="origin_board_img[]" value="{{ isset($result->images[$i]) ? $result->images[$i] : '' }}">
-        </label>
-        <input type="file" name="board_img[]" id="{{ $fileId }}" style="display:none;" onchange="previewImage('{{ $fileId }}', '{{ $imgId }}')" accept="image/*">
-    @endfor
-</div>
- 	
-
+			<div class="insert_img">
+					@foreach($result->images as $key => $image)
+						<div class="detail_board_content">
+							<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}">
+							<label for="file{{ $key }}">
+								<button type="button" onclick="openFile('file{{ $key }}')">파일변경</button>
+							</label>
+							<input type="file" name="board_img[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
+						</div>
+					@endforeach
+				</div>	
 				<div class="insert_select_container">
 					<select name="board" id="board" class="insert_select" >
 						{{-- <option value="{{ $result->category_id }}">{{ $result->category->category_name }}</option> --}}
