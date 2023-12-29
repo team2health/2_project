@@ -14,6 +14,9 @@
     width: 70vW;
     margin: 10px auto;
 }
+.last_main a .last_container:hover, .last_main a .last_container:focus {
+    background-color: rgba(255, 209, 177, 0.6);
+}
 .last_container {
     
     margin: 10px;
@@ -94,6 +97,12 @@ textarea{
     justify-content: space-between;
     align-items: center;
     margin-left: 10px;
+}
+.board_nic_text .user-nickname {
+    font-size: 1.0rem;
+    font-weight: 800;
+    color: #c3590d;
+    align-self: flex-start;
 }
 .board_nic_text_a {
     font-weight: 800;
@@ -864,8 +873,21 @@ a .a-bordergo-hover:hover {
     .detail_board_content{
         width: 50%;
     }
+    .board_nic_text {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
     .board_nic_text div {
         font-size: 0.85rem;
+        align-self: flex-end;
+    }
+    .last_user {
+        margin-top: 5px;
+        align-items: start;
+    }
+    .last_user .community_icon {
+        margin-top: 5px;
     }
 }
 

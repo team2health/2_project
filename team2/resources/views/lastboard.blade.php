@@ -17,7 +17,7 @@
         <img class="community_icon" src="{{ asset('user_img/'.optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">                               
             <div class="board_nic_text">
                 {{-- {{dd(asset('user_img/' . optional($item->user)->user_img))}} --}}
-                <div>
+                <div class="user-nickname">
                     {{ optional($item->user)->user_name }}
                 </div>
                 <div>
