@@ -466,6 +466,12 @@ td {
 }
 .mypage-btn-line {
     display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    margin-bottom: 8px;
+}
+.mypage-btn-line2 {
+    display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
 }
@@ -481,7 +487,7 @@ td {
 
 .favorite-tag-plus {
     background-color: #FF9900;
-    margin: 30px 0;
+    margin: 30px auto;
 }
 .mypage-comment-show-btn {
     display: inline-block;

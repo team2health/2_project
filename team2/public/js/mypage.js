@@ -158,18 +158,21 @@ function favoritehashdelete(data) {
 
 let addallfavoritetagevent = document.getElementById('addallfavoritetag');
 let favoriteFlg = 0;
+let addallfavoritetagtext = document.getElementById('addallfavoritetag');
+addallfavoritetagtext.innerHTML = '';
+addallfavoritetagtext.innerHTML = '관심태그 추가하기';
 
 // 관심 해시태그 추가 창 열기
 addallfavoritetagevent.addEventListener('click', function(){
     if( favoriteFlg == 0) {
-        console.log(favoriteFlg);
         addallfavoritetag();
         addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
-        let createtagmaindiv = document.getElementById('creaTagMainDiv');
         favoriteFlg = '1';
-    } else if ( favoriteFlg == 1 ) {
-        console.log(favoriteFlg);
+    }
+    if ( favoriteFlg == 1 ) {
         addallfavoritetagevent.addEventListener('click', closeoption);
+        addallfavoritetagtext.innerHTML = '';
+        addallfavoritetagtext.innerHTML = '닫기 ';
     }
 });
 
@@ -178,13 +181,18 @@ let targetArray = [];
 function setArrayHash(data){
     let TargetValueHash = document.getElementById('favoritehashtext'+data).value;
     targetArray = TargetValueHash;
-    console.log(targetArray);
 }
 // 관심 해시태그 추가 창 닫기
 function closeoption(){
-    let createtagmaindiv = document.getElementById('creaTagMainDiv');
-    createtagmaindiv.remove();
-    favoriteFlg = '0';
+    if(
+        document.getElementById('creaTagMainDiv')
+    ) {
+        let createtagmaindiv = document.getElementById('creaTagMainDiv');
+        addallfavoritetagtext.innerHTML = '';
+        addallfavoritetagtext.innerHTML = '관심태그 추가하기 ';
+        createtagmaindiv.remove();
+        favoriteFlg = '0';
+    }
 }
 
 
@@ -195,14 +203,14 @@ function addallfavoritetag() {
     createplustag.classList.add('mypage-hashtag');
     createplustag.id = 'mypageHashtagOpen'
     let addtagbtndiv = document.createElement('mypage-btn-line');
-    let hashplusokbtn = document.createElement('span');
-    let hashplusclosebtn = document.createElement('span');
+    // let hashplusokbtn = document.createElement('span');
+    // let hashplusclosebtn = document.createElement('span');
     addtagbtndiv.classList.add('mypage-btn-line');
     createtagmaindiv.id = 'creaTagMainDiv';
-    hashplusokbtn.innerHTML = '저장';
-    hashplusclosebtn.innerHTML = '취소';
-    hashplusokbtn.classList.add('mypage-btn');
-    hashplusclosebtn.classList.add('mypage-btn');
+    // hashplusokbtn.innerHTML = '저장';
+    // hashplusclosebtn.innerHTML = '닫기';
+    // hashplusokbtn.classList.add('mypage-btn');
+    // hashplusclosebtn.classList.add('mypage-btn');
 
     fetch('/allhashtag')
     .then(response => response.json())
@@ -226,7 +234,7 @@ function addallfavoritetag() {
         }
         mypageTagTitle.appendChild(createtagmaindiv);
         createtagmaindiv.appendChild(createplustag);
-        addtagbtndiv.appendChild(hashplusokbtn);
+        // addtagbtndiv.appendChild(hashplusokbtn);
         addtagbtndiv.appendChild(hashplusclosebtn);
         createtagmaindiv.appendChild(addtagbtndiv);
         
@@ -239,11 +247,12 @@ function addallfavoritetag() {
     })
     .catch(error => console.error(error));
     
-    hashplusclosebtn.addEventListener('click', closeoption);
-    hashplusokbtn.addEventListener('click', closeoption);
+    // hashplusclosebtn.addEventListener('click', closeoption);
+    // hashplusokbtn.addEventListener('click', closeoption);
 
 }
 
+let hashtagIdGet = '';
 
 // 관심 해시태그 추가
 function addhashtag(data) {
@@ -290,7 +299,7 @@ function addhashtag(data) {
     
 }
 
-// 저장 버튼이 구현가능하도록 추가와 db저장을 따로 분리함
+
 // value값 변경해야함
 
 let nameChk = document.getElementById('usermodifyname');
