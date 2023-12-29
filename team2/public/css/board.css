@@ -881,6 +881,7 @@ a .a-bordergo-hover:hover {
     .board_nic_text div {
         font-size: 0.85rem;
         align-self: flex-end;
+        margin-top: 3px;
     }
     .last_user {
         margin-top: 5px;
