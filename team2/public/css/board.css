@@ -14,6 +14,9 @@
     width: 70vW;
     margin: 10px auto;
 }
+.last_main a .last_container:hover, .last_main a .last_container:focus {
+    background-color: rgba(255, 209, 177, 0.6);
+}
 .last_container {
     
     margin: 10px;
@@ -94,6 +97,12 @@ textarea{
     justify-content: space-between;
     align-items: center;
     margin-left: 10px;
+}
+.board_nic_text .user-nickname {
+    font-size: 1.0rem;
+    font-weight: 800;
+    color: #c3590d;
+    align-self: flex-start;
 }
 .board_nic_text_a {
     font-weight: 800;
@@ -420,6 +429,8 @@ li{
 }
 .community-home-content {
     margin: 0 10px 10px 10px;
+    overflow: hidden;
+    max-height: 60px;
 }
 
 .favorite_slider-container {
@@ -442,6 +453,14 @@ li{
     margin: 13px;    
     background-color: rgba(255, 153, 0, 0.2);
     padding: 10px;
+}
+
+.favoriteboard-favorite-tag {
+    display: inline-block;
+    background-color: #FFF0E6;
+    margin: 20px 0 5px 0;
+    border-radius: 20%;
+    font-size: 0.9rem;
 }
 /* .slider-container::-webkit-scrollbar {
     width: 12px; 
@@ -538,6 +557,7 @@ li{
     /* padding: 5px 10px; */
     margin: 5px 0;
     border-radius: 20%;
+    font-size: 0.9rem;
 }
 .community-fav-board-tag {
     margin-left: 10px;
@@ -853,8 +873,22 @@ a .a-bordergo-hover:hover {
     .detail_board_content{
         width: 50%;
     }
+    .board_nic_text {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
     .board_nic_text div {
         font-size: 0.85rem;
+        align-self: flex-end;
+        margin-top: 3px;
+    }
+    .last_user {
+        margin-top: 5px;
+        align-items: start;
+    }
+    .last_user .community_icon {
+        margin-top: 5px;
     }
 }
 

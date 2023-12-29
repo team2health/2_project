@@ -68,7 +68,7 @@
 			
 	</div>
 		<div class="insert_bottom_button">
-		<a href="{{url()->previous()}}"><button class="insert_btn">취소</button></a>		
+		<a href="{{url()->previous()}}"><button type="button" class="insert_btn">취소</button></a>		
 			<button type="submit" class="insert_btn">수정완료</button>	
 		</div>				
 	</form>			

@@ -23,14 +23,11 @@ class UserController extends Controller
     }
 
     public function registpost(Request $request) {
-        Log::debug("*********** registpost start ***********");
         $data = $request->only('user_id', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
-        Log::debug("request data", $data);
         $data['user_password'] = Hash::make($data['user_password']);
 
         $result = User::create($data);
 
-        // Log::debug("*********** registpost end ***********");
         return redirect()->route('login.get');
     }
 
@@ -69,12 +66,7 @@ class UserController extends Controller
     }
 
     public function namechkpost(Request $request) {
-        Log::debug("*********** namechkpost start ***********");
-        // Log::debug("POST data".$_POST);
-        // Log::debug("이거", $request->all());
-        // Log::debug("이거".$request->user_name);
         $username = $request->user_name;
-        // Log::debug("user_name:".$username);
 
         $existingUser = User::where('user_name', $username)->first();
 
@@ -86,12 +78,7 @@ class UserController extends Controller
     }
 
     public function idchkpost(Request $request) {
-        Log::debug("*********** idchkpost start ***********");
-        // Log::debug("POST data".$_POST);
-        // Log::debug("이거", $request->all());
-        // Log::debug("이거".$request->user_name);
         $userid = $request->user_id;
-        // Log::debug("user_name:".$username);
 
         $existingUser = User::where('user_id', $userid)->first();
 

@@ -146,7 +146,7 @@
 
     <div class="mypage-mainbar">
         <div class="mypage-btn-layout">
-            <div class="mypage-btn-line">
+            <div class="mypage-btn-line2">
                 <div class="mypage-btn" onclick="userinforupdate(); return false;">정보수정</div>
                 <a href="{{route('todaytimeline.get')}}"><div class="mypage-btn">타임라인</div></a>
             </div>
@@ -171,7 +171,7 @@
                 @endforelse
                 </div>
                 <div class="favorite-tag-plus" id="addallfavoritetag">
-                    관심태그 추가하기
+                    {{-- 관심태그 추가하기 --}}
                 </div>
             </div>
         </div>

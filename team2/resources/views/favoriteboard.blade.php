@@ -25,11 +25,11 @@
         <div class="last_user">
         <img class="community_icon" src="/user_img/{{$item->userinfo[0]->user_img}}" class="board_nic_img" alt="User Image">                               
             <div class="board_nic_text">
-                <div>
+                <div class="user-nickname">
                     {{$item->userinfo[0]->user_name}}
                 </div>
                 <div>
-                    {{$item->created_at}}
+                    {{ substr($item->created_at, 0, 10)}}
                 </div>
             </div>
         </div> 
@@ -38,13 +38,12 @@
         </div> 
         <div class="last_content">
             {!! $item->board_content !!}
-            <div style="margin-top: 20px; text-align: right;">
+            <br>
             @forelse ($item->board_tag as $value)
-                {{$value->hashtag_name}}
+            <span class="favoriteboard-favorite-tag">{{$value->hashtag_name}}</span>
             @empty
                 
             @endforelse
-            </div>
         </div> 
     </div>
     </a>
