@@ -174,8 +174,6 @@ function checkName() {
 
 	const formData = new FormData();
 	formData.append('user_name', nameChk);
-	// console.log(nameChk);
-	// console.log(formData.get('username'));
 	fetch('/namechk', {
 		method: 'POST',
 		body: formData,
@@ -194,7 +192,6 @@ function checkName() {
 		console.error('오류 발생:', error);
 	})
 	namechkflg = 1;
-	// console.log(namechkflg);
 }
 
 function checkId() {
@@ -210,8 +207,6 @@ function checkId() {
 
 	const formData = new FormData();
 	formData.append('user_id', idChk);
-	// console.log(idChk);
-	// console.log(formData.get('user_id'));
 	fetch('/idchk', {
 		method: 'POST',
 		body: formData,

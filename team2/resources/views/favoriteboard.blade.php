@@ -29,7 +29,7 @@
                     {{$item->userinfo[0]->user_name}}
                 </div>
                 <div>
-                    {{$item->created_at}}
+                    {{ substr($item->created_at, 0, 10)}}
                 </div>
             </div>
         </div> 

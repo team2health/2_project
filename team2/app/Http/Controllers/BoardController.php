@@ -430,12 +430,12 @@ class BoardController extends Controller
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
         ->join('board_tags', 'hashtags.hashtag_id', '=', 'board_tags.hashtag_id')
         ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
-        ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
+        ->select('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
         ->where('users.id', $u_id)
         ->where('favorite_tags.deleted_at', null)
         ->where('boards.deleted_at', null)
         ->orderby('boards.board_id', 'desc')
-        ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
+        ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
         ->paginate(5);
 
         $count = 0;
