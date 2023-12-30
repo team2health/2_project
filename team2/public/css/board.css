@@ -402,6 +402,7 @@ li{
     display: grid;
     grid-template-rows: 200px 30px;
     align-content: space-between;
+    max-width: 240px;
 }
 .hot-title {
     font-size: 1.3rem;
