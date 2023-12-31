@@ -97,16 +97,33 @@ function handleTagClick(tag) {
     } else {
         selectedHashtags.push(clickedTagName);
     }
+    var outputDiv = document.getElementById('hashtagContainer');
 
+    outputDiv.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.tagName === 'BUTTON') {
+            var tagToRemove = target.parentElement.getAttribute('data-selected-tag');
+            removeSelectedTag(tagToRemove);
+        }
+    });
+    // updateSelectedTags 함수 호출을 여기로 이동
     updateSelectedTags();
 }
-
 function updateSelectedTags() {
     var outputDiv = document.getElementById('hashtagContainer');
-    outputDiv.innerHTML = '';
 
-    var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
-    selectedHashtagsInput.value = '';
+    // 기존 해시태그 유지
+    var existingTags = outputDiv.querySelectorAll('.selected-tag');
+    existingTags.forEach(function (existingTag) {
+        var existingTagName = existingTag.getAttribute('data-selected-tag');
+        selectedHashtags.push(existingTagName);
+    });
+
+    // 중복된 해시태그 제거
+    selectedHashtags = [...new Set(selectedHashtags)];
+
+    // 새로운 태그만 추가하기 위해 기존 태그를 비움
+    outputDiv.innerHTML = '';
 
     // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
     selectedHashtags.forEach(function (tag) {
@@ -126,16 +143,35 @@ function updateSelectedTags() {
         outputDiv.appendChild(tagSpan);
     });
 
-    // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
+    // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 추가
+    var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
+    selectedHashtagsInput.value = selectedHashtags.join(',');
+}
+function removeSelectedTag(tag) {
+    var outputDiv = document.getElementById('hashtagContainer');
+    var tags = outputDiv.querySelectorAll('.selected-tag');
+
+    tags.forEach(function (tagElement) {
+        var tagValue = tagElement.getAttribute('data-selected-tag');
+        if (tagValue === tag) {
+            tagElement.remove();
+            // 선택된 해시태그 배열에서 삭제
+            selectedHashtags = selectedHashtags.filter(function (t) {
+                return t !== tag;
+            });
+        }
+    });
+
+    // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 추가
+    var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
     selectedHashtagsInput.value = selectedHashtags.join(',');
 }
 
+// function removeSelectedTag(tag) {
+//     // 선택된 해시태그 배열에서 삭제
+//     selectedHashtags = selectedHashtags.filter(function (t) {
+//         return t !== tag;
+//     });
 
-function removeSelectedTag(tag) {
-    // 선택된 해시태그 배열에서 삭제
-    selectedHashtags = selectedHashtags.filter(function (t) {
-        return t !== tag;
-    });
-
-    updateSelectedTags();
-}
+//     updateSelectedTags();
+// }

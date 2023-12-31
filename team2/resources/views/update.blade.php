@@ -39,8 +39,8 @@
 					<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $result->board_content }}</textarea>
 				</div>	
 			<div class="insert_hashtag_container">
-				<label for="hashtag" class="label_hashtag">#해시태그</label>
-				<div id="hashtagContainer" class="insert_hashtag" onclick="toggleHashtags()">
+				<div class="label_hashtag">#해시태그</div>
+				<div id="hashtagContainer" class="insert_hashtag" >
 					@foreach ($result->hashtags as $hashtag)
 						
 						<span class='selected-tag' data-selected-tag="{{ $hashtag->hashtag_name }}">
@@ -69,4 +69,5 @@
 	</form>			
 </main>
 <script src="/js/update.js"></script>
+
 @endsection

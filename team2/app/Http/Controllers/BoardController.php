@@ -74,13 +74,8 @@ class BoardController extends Controller
             ->where('board_tags.board_id', $item->board_id)
             ->orderby('board_tags.board_id', 'desc')
             ->get();
-            // Log::debug($item->board_id);
             $cnt++;
         }
-
-        // dd($favoriteboard);
-        // Log::debug($boardfavorite);
-        // Log::debug($favoriteboard);
 
         $result = [$hotboard, $pandemicboard, $favoriteboard, $lastboard, $favoritetag];
 
@@ -99,7 +94,7 @@ class BoardController extends Controller
         $result = [$category_board, $category_id, $category_name];
         
 
-        // Log::debug($category_id);
+        
 
         return view('categoryboard')->with('data', $result);
     }
@@ -130,41 +125,43 @@ class BoardController extends Controller
             return redirect()->route('login.get');
             }
 
-        $u_id = auth()->id();        
-        $boardData = $request->only('board_title', 'board_content', 'category_id');
-        Log::debug($boardData);
-        $boardData['board_content'] = nl2br($boardData['board_content']);
-        Log::debug($boardData);
+        $u_id = auth()->id();   
+        // 요청에서 게시글 데이터를 가져옵니다.     
+        $boardData = $request->only('board_title', 'board_content', 'category_id');        
+        // 게시글 내용에서 줄 바꿈을 HTML <br> 태그로 변환
+        $boardData['board_content'] = nl2br($boardData['board_content']);        
+        // 게시글 데이터에 사용자 ID를 추가합니다.
         $boardData['u_id'] = $u_id;
         $board = Board::create($boardData);
         
+        // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasFile('board_img')) {
+            // 업로드된 이미지들을 가져옵니다.
             $images = $request->file('board_img');   
             foreach ($images as $image) {
+                // UUID와 원본 파일 확장자를 사용하여 고유한 이미지 이름을 생성합니다.                
                 $imageName = Str::uuid() . '.' . $image->extension();
                 $image->move(public_path('board_img'), $imageName);
     
-                // Save the image path to the Board_img model
+                
                 $boardImage = new Board_img(['img_address' => $imageName]);
+                 // 현재 게시글과 이미지를 연결하고 저장합니다. 모델끼리 연결해 주어야 함
                 $board->images()->save($boardImage);
             }
         
         }  
-
+        // 새로 생성된 게시글의 ID를 가져옵니다.
         $board_id = $board->board_id;
-
+        // 요청에 해시태그가 있는지 확인합니다.
         if($request->hashtag) {
-
+            // 입력에서 해시태그 ID를 추출하고 공백을 제거합니다.
             $hashtag_ids = explode(',', $request->input('hashtag'));
+            //array_map 함수는 배열의 각 요소에 콜백 함수를 적용하는데 사용
             $hashtag_ids = array_map('trim', $hashtag_ids);
             foreach ($hashtag_ids as $hashtag_name) {
-                // Check if the hashtag already exists
+                // 데이터베이스에서 이름으로 해시태그를 찾습니다.
                 $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
-
-                // If not, create a new hashtag
-                
-
-                // Insert the relationship into board_tags table
+                // 해시태그가 존재하면 'board_tags' 테이블에 레코드를 삽입합니다.                
                 if ($hashtag) {
                     DB::table('board_tags')->insert([
                         'board_id' => $board_id,
@@ -176,7 +173,7 @@ class BoardController extends Controller
             $board_detail_get = DB::table('boards as b')
             ->select(
                 'hashtags.hashtag_id',
-                'hashtags.hashtag_name as hashtag_name', // 변경된 부분
+                'hashtags.hashtag_name',
                 'b.category_id',
                 'b.board_id',
                 'b.board_title',
@@ -191,9 +188,7 @@ class BoardController extends Controller
         } else {
             $board_detail_get = Board::get()->where('board_id', $board_id);
         }
-        
-
-    // return redirect()->route('detail', ['board' => $board_id])->with('data', $hashtag_id);
+           
     return redirect()->route('detail', ['board' => $board_id])->with('data', $board_detail_get);
 }
     
@@ -264,24 +259,14 @@ class BoardController extends Controller
         $hashtag_names = explode(',', $hashtagInput);
         $hashtag_names = array_map('trim', $hashtag_names);
         
-        $hashtagIds = [];
-        
-        foreach ($hashtag_names as $hashtag_name) {
-            // Check if the hashtag already exists
-            $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
-            
-            // If not, create a new hashtag
-            
-            
-            // Collect hashtag IDs
+       foreach ($hashtag_names as $hashtag_name) {
+            $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
             $hashtagIds[] = $hashtag->hashtag_id;
         }
-    } else {
-        // 해시태그 입력이 없는 경우, 빈 배열로 초기화
-        $hashtagIds = [];
-    }
-        // Sync hashtags for the board
+
+        // 변경된 해시태그만 업데이트
         $result->hashtags()->sync($hashtagIds);
+    }
         
         // 다시 불러오기
         $board_detail_get = Board::with(['hashtags'])
@@ -316,7 +301,7 @@ class BoardController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage. 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -351,7 +336,7 @@ class BoardController extends Controller
     }
     
     public function nextboardpost(Request $request) {
-        // Log::debug($request);
+        
 
         $result = Board::where('board_id', '<', $request->last_num)
             ->where('deleted_at', null)
@@ -359,12 +344,12 @@ class BoardController extends Controller
             ->limit(4)
             ->get();
 
-        // Log::debug($result);
+        
         return response()->json($result);
     }
 
     public function favoritenextboardpost(Request $request) {
-        // Log::debug($request);
+        
         $u_id = session('id');
 
         $result = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
@@ -389,7 +374,7 @@ class BoardController extends Controller
             ->where('board_tags.board_id', $item->board_id)
             ->orderby('board_tags.board_id', 'desc')
             ->get();
-            // Log::debug($item->board_id);
+            
             $cnt++;
         }
 
@@ -460,7 +445,7 @@ class BoardController extends Controller
             ->where('board_tags.board_id', $item->board_id)
             ->orderby('board_tags.board_id', 'desc')
             ->get();
-            // Log::debug($item->board_id);
+            
             $cnt++;
         }
 
