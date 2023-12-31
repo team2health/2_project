@@ -22,12 +22,15 @@
                         {{-- 게시글 창 --}}
             <div class="mypage-boards-part">
                 @forelse ($data as $index => $item)
+                <input type="hidden" id="mypageBoardPlusBtn" value="{{$index}}">
                     @php
-                    if( $index >= 1 ) {
-                        $previous_item = $index - 1;
-                        $present_item = $index - 0;
-                    }
+                        if( $index >= 1 ) {
+                            $previous_item = $index - 1;
+                            $present_item = $index - 0;
+                            $last_item = $index;
+                        }
                     @endphp
+
                     @if ( $index >= 1)
                         @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
                         <div class="mypage-date-today">
@@ -61,21 +64,11 @@
                 @empty
                     <div> 작성한 게시글이 없습니다. </div>
                 @endforelse
+                <div class="mypage-btn-plus" id="mypageComment">더보기</div>
             </div>
             </div>
             <div class="tab-contents" data-order="2">
                 
-                {{-- <div class="mypage-date-today">
-                    <span class="mypage-board-date"></span>
-                </div>
-                <div class="mypage-boards-part">
-                    <div class="mypage-boardbox">
-                        <span class="mypage-boardbox-date">2023-12-12</span>
-                        <div class="mypage-bord-title"> 댓글 view 제목입니다.</div>
-                        <div class="mypage-bord-detailbox">상세내용입니다.</div>
-                    </div>
-                </div> --}}
-
                 <div class="mypage-boards-part">
                     @forelse ($comments as $index => $item)
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
@@ -85,18 +78,16 @@
                                 <div class="mypage-bord-detailbox">{{Str::limit($item->comment_content, 75, '...')}}</div>
                             </div>
                         </a>
+                        <input type="hidden" id="mypageCommentPlustBtn" value="{{$index}}">
                     @empty
                         <div> 작성한 댓글이 없습니다. </div>
                     @endforelse
+                        <div class="mypage-btn-plus" id="mypageBoard">더보기</div>
+
                 </div>
             </div>
         </div>
 
-        <div class="mypage-btn-plus">더보기</div>
-        {{-- 게시글 insert로 넘어감 --}}
-        {{-- <a href="{{route('insert')}}">
-            <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">
-        </a> --}}
     </div>
 
     {{-- 정보수정창 --}}
@@ -187,50 +178,6 @@
 <div class="UserboardModal" id="UserboardModal">
         <div class="mypage-content-modal" id="mypageContentModal">
             <div onclick="mypagemodalclosebtn(); return false;" class="mypage-modal-close-btn">x</div>
-            {{-- <div class="modal-board-show-btn">
-                <div class="mypage-board-modal-btn">내가 쓴 게시글</div>
-                <div class="mypage-comment-modal-btn">내가 쓴 댓글</div>
-            </div> --}}
-            {{-- <div class="mypage-boards-part">
-                @forelse ($data as $index => $item)
-                    @php
-                    $previous_item = $index - 1;
-                    $present_item = $index - 0;
-                    @endphp
-                    @if ( $index >= 1)
-                        @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
-                        <div class="mypage-date-today">
-                            <span class="mypage-board-date">{{$item->created_at}}</span>
-                        </div>
-                        <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                            <div class="mypage-boardbox-modal">
-                                <div class="mypage-bord-title">{{$item->board_title}}</div>
-                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
-                            </div>
-                        </a>
-                        @else
-                        <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                            <div class="mypage-boardbox-modal">
-                                <div class="mypage-bord-title">{{$item->board_title}}</div>
-                                <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
-                            </div>
-                        </a>
-                        @endif
-                    @else
-                    <div class="mypage-date-today">
-                        <span class="mypage-board-date">{{$item->created_at}}</span>
-                    </div>
-                    <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                        <div class="mypage-boardbox-modal">
-                            <div class="mypage-bord-title">{{$item->board_title}}</div>
-                            <div class="mypage-bord-detailbox">{{$item->board_content}}</div>
-                        </div>
-                    </a>
-                    @endif
-                @empty
-                    <div> 작성한 게시글이 없습니다. </div>
-                @endforelse
-            </div> --}}
             <div class="tab-modal">
                 <ul class="tab_list">
                     <li class="mypage-board-modal-btn tab-active" data-list="3">
@@ -244,6 +191,7 @@
                     {{-- 게시글 창 --}}
                     <div class="mypage-boards-part">
                         @forelse ($data as $index => $item)
+                        <input type="hidden" id="mypageModalBoardBtn" value="{{$index}}">
                             @php
                             if( $index >= 1 ) {
                                 $previous_item = $index - 1;
@@ -283,12 +231,14 @@
                         @empty
                             <div> 작성한 게시글이 없습니다. </div>
                         @endforelse
+                        <div class="mypage-btn-plus" id="modalBoard">더보기</div>
                     </div>
                 </div>
 
                 <div class="tab-contents-modal" data-order="4">
                     <div class="mypage-boards-part">
                         @forelse ($comments as $index => $item)
+                        <input type="hidden" id="mypageModalCommentBtn" value="{{$index}}">
                             <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                 <div class="mypage-boardbox-modal">
                                     <span class="mypage-boardbox-date">{{$item->created_at}}</span>
@@ -299,11 +249,12 @@
                         @empty
                             <div> 작성한 댓글이 없습니다. </div>
                         @endforelse
+                        <div class="mypage-btn-plus" id="modalComment">더보기</div>
                     </div>
                 </div>
             </div>
         
-            <div class="mypage-btn-plus">더보기</div>
+
             {{-- 게시글 insert로 넘어감 --}}
             {{-- <a href="{{route('insert')}}">
                 <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">

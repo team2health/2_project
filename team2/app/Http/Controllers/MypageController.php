@@ -269,8 +269,9 @@ class MypageController extends Controller
             ->where('u_id',$result)
             ->where('deleted_at', null)
             ->orderBy('board_id', 'DESC')
+            ->limit(8)
             ->get();
-            
+
             $user_hashtag = DB::table('favorite_tags')
             ->select(
             'favorite_tags.favorite_tag_id'
@@ -305,6 +306,7 @@ class MypageController extends Controller
             )->join('boards', 'boards.board_id', 'comments.board_id')
             ->where('comments.u_id',$result)
             ->orderby('comments.comment_id', 'DESC')
+            ->limit(8)
             ->get();
 
             // Log::debug("이름", ['name' => $user_info]);
@@ -312,7 +314,7 @@ class MypageController extends Controller
             'user_img' => $user_info[0]->user_img]);
             // Log::debug("유저", ['name' => $user_info]);
 
-            
+
             return view('mypage')
             ->with('data', $board_result)
             ->with('user_hashtag', $user_hashtag)
