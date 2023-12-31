@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Comment extends Model
 {
     use HasFactory;
-
-    
+    use SoftDeletes;
 
     public $timestamps = ["created_at"]; //only want to used created_at column
 	// const UPDATED_AT = null; //and updated by default null set
@@ -27,7 +26,4 @@ class Comment extends Model
     }
 
     protected $primaryKey = 'comment_id';
-    use SoftDeletes;
-    
-
 }

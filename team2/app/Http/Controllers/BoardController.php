@@ -12,6 +12,7 @@ use App\Models\Board_img;
 use App\Models\Pandemic;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Comment;
 use App\Models\Hashtag;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -313,6 +314,7 @@ class BoardController extends Controller
             }
 
         Board::destroy($board_id);
+        Comment::where('board_id', $board_id)->delete();
         return redirect()-> route('categoryboard');
     }
 

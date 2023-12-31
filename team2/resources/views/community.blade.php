@@ -70,10 +70,10 @@
             <div class="community_tag bordergo-hover" id="favoriteboard">
                 @forelse ($data[2] as $item)
                 <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
-                    <div>
-                        <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                        <div class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</div>
-                    </div>
+                    <span class="spantag-span-display-block">
+                        <span class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                        <span class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</span>
+                    </span>
                     <div class="community-fav-board-tag">
                     @forelse ($item->board_tag as $value)
                             <span>{{$value->hashtag_name}}</span>
@@ -105,10 +105,10 @@
         <div class="community_tag border-line-color-gray bordergo-hover" id="lastboardbox">
             @forelse ($data[3] as $item)
             <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
-                <div>
-                    <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                    <div class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</div>
-                </div>
+                <span class="spantag-span-display-block">
+                    <span class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                    <span class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</span>
+                </span>
             </a>
             @if($loop->last)
             <input type="hidden" name="last_num" value="{{ $item->board_id }}" id="last_num">
