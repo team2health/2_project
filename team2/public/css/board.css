@@ -456,7 +456,15 @@ li{
 .community-home-content {
     margin: 0 10px 6px 10px;
     overflow: hidden;
-    max-height: 60px;
+    max-height: 90px;
+}
+
+.spantag-span-display-block {
+    display: block;
+}
+
+.spantag-span-display-block span {
+    display: block;
 }
 
 .favorite_slider-container {
