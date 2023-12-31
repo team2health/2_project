@@ -8,7 +8,7 @@
     <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
     <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
-        <h2>핫게시글</h2>
+        <h2>"핫게시글"</h2>
     </div>
     @forelse ($data as $item)
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
@@ -16,22 +16,20 @@
         <div class="last_user">
         <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">                               
             <div class="board_nic_text">
-                <div>
+                <div class="user-nickname">
                     {{ optional($item->user)->user_name }}
                 </div>
                 <div>
-                    {{$item->created_at}}
+                    {{ substr($item->created_at, 0, 10)}}
                 </div>
             </div>
         </div> 
         <div class="last_title">
             {{$item->board_title}}
         </div> 
-        <a href="{{ route('board.show',['board'=>$item->board_id]) }}" class="community_content">
-            <div class="last_content">
-                {{$item->board_content}}
-            </div> 
-        </a> 
+        <div class="last_content">
+            {!! $item->board_content !!}
+        </div> 
     </div>
     </a>
     @empty
@@ -40,8 +38,8 @@
 </main>
 <div class="pagination">    
     @if ($data->currentPage() > 1)
-        <a href="{{ $data[0]->url(1) }}">&lt;&lt;</a>
-        <a href="{{ $data[0]->previousPageUrl() }}"> 이전</a>
+        <a href="{{ $data->url(1) }}">&lt;&lt;</a>
+        <a href="{{ $data->previousPageUrl() }}"> 이전</a>
     @endif
 
     @for ($i = max(1, $data->currentPage() - 2); $i <= min($data->lastPage(), $data->currentPage() + 3); $i++)

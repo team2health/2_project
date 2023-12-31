@@ -10,30 +10,34 @@
         <h2>"{{$data[2][0]->category_name}}"</h2>
     </div>
 
+    
 
-    @foreach ($data[0] as $item)
+
+    @forelse ($data[0] as $item)
     <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
     <div class="last_container">
         <div class="last_user">  
             <img class="community_icon" src="{{ asset('user_img/' . optional($item->user)->user_img) }}" class="board_nic_img" alt="User Image">   
             <div class="board_nic_text">
-                <div>
+                <div class="user-nickname">
                 {{ optional($item->user)->user_name }}
                 </div>
                 <div >
-                {{ $item->created_at }}
+                    {{ substr($item->created_at, 0, 10)}}
                 </div>
             </div>
         </div> 
-        <div style="margin: 10px;" class="community-category-title">
+        <div style="margin-left: 20px;" class="community-category-title">
             {{ $item->board_title }}
         </div> 
             <div class="last_content">
-                {{ $item->board_content }}
+                {!! $item->board_content !!}
             </div>  
         </div>
     </a>
-    @endforeach
+    @empty
+    게시글이 없습니다.
+    @endforelse
     
 </div>
 

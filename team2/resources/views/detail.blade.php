@@ -34,7 +34,7 @@
                     @endforeach          
                     <br>
                     <div>
-                    {{$data->board_content}}                
+                        {!! $data->board_content !!}          
                     </div>                
                 </div>
             </div>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="detail_bottom_button">
-        <form class="detail_form" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+        <form class="detail_form-flex" action="{{ route('board.destroy', ['board' => $data->board_id]) }}" method="POST" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
             @csrf
             @method('DELETE')
             @if(Auth::id() === $data->user->id)
@@ -78,8 +78,8 @@
                         <div class="board_nic_text_a">
                             {{ optional($comment->user)->user_name }}
                         </div>
-                        <div>
-                            {{ $comment->created_at }}
+                        <div class="detail-comments-flex">
+                            <span>{{ $comment->created_at }}</span>
                             <form style="display: inline-block"
                             method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
                                 @csrf
@@ -102,7 +102,7 @@
         <form action="{{ route('comments', ['boardId' => $data->board_id]) }}" method="post" id="commentForm">
             @csrf
             <input type="hidden" name="board_id" value="{{ $data->board_id }}">
-            <textarea name="comment_content" id="comment_content"></textarea>
+            <textarea name="comment_content" id="comment_content" class="comment_content"></textarea>
             <button type="submit" class="detail_comment_insert_complete">입력</button>
         </form>
 

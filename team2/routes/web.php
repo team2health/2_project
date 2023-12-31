@@ -59,9 +59,9 @@ Route::post('/idchk', [UserController::class, 'idchkpost']);
 // mypage
 Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get');
 Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->name('myhash.post');
-Route::get('/allhashtag', [MypageController::class, 'allhashget'])->name('allhash.post');
-Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost'])->name('allhash.post');
-Route::post('/newcalendarblock', [MypageController::class, 'newcalendarblock'])->name('allhash.post');
+Route::get('/allhashtag', [MypageController::class, 'allhashget']);
+Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost']);
+Route::post('/newcalendarblock', [MypageController::class, 'newcalendarblock']);
 
 Route::post('/namechange', [MypageController::class, 'namechangepost']);
 Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);

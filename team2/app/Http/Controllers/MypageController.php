@@ -15,75 +15,75 @@ use Illuminate\Support\Str;
 
 class MypageController extends Controller
 {
-        // 마이페이지 이동 시 로그인 유무확인 및 게시글 불러오기
-        public function mypageget() {
+    // 마이페이지 이동 시 로그인 유무확인 및 게시글 불러오기
+    public function mypageget() {
+        
+        // 사용자 ID 가져오기
+        $result = session('id');
 
-            // 사용자 ID 가져오기
-            $result = session('id');
-    
-            if(Auth::check()) {
-    
-                $board_result = DB::table('boards')
-                    ->select(
-                    'board_id'
-                    ,'u_id'
-                    ,'category_id'
-                    ,'board_title'
-                    ,'board_content'
-                    ,'board_hits'
-                    ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
-                    ,'updated_at')
-                    ->where('u_id',$result)
-                    ->where('deleted_at', null)
-                    ->orderBy('board_id', 'DESC')
-                    ->get();
-
-                $comment_result = DB::table('comments')
-                    ->select(
-                        'comments.comment_id'
-                        ,'comments.board_id'
-                        ,'comments.comment_content'
-                        ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
-                        ,'boards.board_title'
-                    )->join('boards', 'boards.board_id', 'comments.board_id')
-                    ->where('comments.u_id',$result)
-                    ->orderby('comments.comment_id', 'DESC')
-                    ->get();
-                
-                $user_hashtag = DB::table('favorite_tags')
-                    ->select(
-                    'favorite_tags.favorite_tag_id'
-                    ,'favorite_tags.hashtag_id'
-                    ,'hashtags.hashtag_name'
-                    )
-                    ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
-                    ->where('favorite_tags.u_id', $result)
-                    ->where('favorite_tags.deleted_at', null)
-                    ->orderBy('favorite_tags.created_at')
-                    ->get();
-                
-                $user_info  = DB::table('users')
-                    ->select(
-                        'id'
-                        ,'user_id'
-                        ,'user_name'
-                        ,'user_address'
-                        ,'user_address_detail'
-                        ,'user_img'
-                    )
-                    ->where('id', $result)
-                    ->get();
-
-                    // Log::debug("유저", ['name' => $user_info]);
-    
-                return view('mypage')->with('data', $board_result)
-                ->with('user_hashtag', $user_hashtag)
-                ->with('user_info', $user_info)
-                ->with('comments', $comment_result);
-            } else {
-                return view('login');
-            }
+        if(!Auth::check()){
+            return redirect()->route('login.get');
         }
+
+        $board_result = DB::table('boards')
+            ->select(
+            'board_id'
+            ,'u_id'
+            ,'category_id'
+            ,'board_title'
+            ,'board_content'
+            ,'board_hits'
+            ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
+            ,'updated_at')
+            ->where('u_id',$result)
+            ->where('deleted_at', null)
+            ->orderBy('board_id', 'DESC')
+            ->get();
+
+        $comment_result = DB::table('comments')
+            ->select(
+                'comments.comment_id'
+                ,'comments.board_id'
+                ,'comments.comment_content'
+                ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
+                ,'boards.board_title'
+            )->join('boards', 'boards.board_id', 'comments.board_id')
+            ->where('comments.u_id',$result)
+            ->where('comments.deleted_at', null)
+            ->orderby('comments.comment_id', 'DESC')
+            ->get();
+        
+        $user_hashtag = DB::table('favorite_tags')
+            ->select(
+            'favorite_tags.favorite_tag_id'
+            ,'favorite_tags.hashtag_id'
+            ,'hashtags.hashtag_name'
+            )
+            ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+            ->where('favorite_tags.u_id', $result)
+            ->where('favorite_tags.deleted_at', null)
+            ->orderBy('favorite_tags.created_at')
+            ->get();
+        
+        $user_info  = DB::table('users')
+            ->select(
+                'id'
+                ,'user_id'
+                ,'user_name'
+                ,'user_address'
+                ,'user_address_detail'
+                ,'user_img'
+            )
+            ->where('id', $result)
+            ->get();
+
+            // Log::debug("유저", ['name' => $user_info]);
+
+        return view('mypage')->with('data', $board_result)
+        ->with('user_hashtag', $user_hashtag)
+        ->with('user_info', $user_info)
+        ->with('comments', $comment_result);
+    }
     
     
         public function allhashget(Request $request){

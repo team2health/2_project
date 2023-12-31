@@ -21,10 +21,7 @@ class MainController extends Controller
     }
 
     public function partselectpost(Request $request) {
-        // Log::debug('올', $request->all());
-        // Log::debug("이거", ['part_id' => $request->part_id]);
         $part_id = $request->part_id;
-        // Log::debug("담았슴", ['part_id' => $part_id]);
         
         $result = Part_symptom::join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
             ->select('symptoms.symptom_name', 'part_symptoms.part_symptom_id')
@@ -36,23 +33,15 @@ class MainController extends Controller
     }
 
     public function symptomselectpost(Request $request) {
-        Log::debug('올', $request->all());
-        // Log::debug("이거", ['part_symptom_id' => $request->part_symptom_id]);
         $part_symptom_id = $request->part_symptom_id;
         $symptomData = Part_symptom::find($part_symptom_id);
-        // Log::debug("증상데이터", ['symptom' => $symptomData]);
-        // Log::debug("aaa", ['symptomData' => $symptomData->symptom_id]);
         if(session('id')) {
             $recordData = [
                 'u_id' => session('id'),
                 'symptom_id' => $symptomData->symptom_id,
             ];
-    
-            // Log::debug("뿌잉", $recordData);
-            // Log::debug("담았슴", ['part_symptom_id' => $part_symptom_id]);
                     
             $record = Record::create($recordData);
-            // Log::debug("검색기록 결과", $record);
         }
 
         $result[] = Dps_link::join('diseases', 'diseases.disease_id', '=', 'dps_links.disease_id')
@@ -62,13 +51,10 @@ class MainController extends Controller
 
         $result[] = session('id');
 
-            // Log::debug("dddddd", ['result' => $result]);
-
             return response()->json($result);
     }
     
     public function useraddresspost(Request $request) {
-        // Log::debug("이이이이이잉", $request->all());
 
         $user_id = $request->user_id;
         $disease_id = $request->disease_id;

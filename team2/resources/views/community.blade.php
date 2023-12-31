@@ -19,7 +19,7 @@
                 <div class="slide a-bordergo-hover">
                     <div>
                         <div class="hot-title">{{ $item->board_title }}</div>
-                        <div class="hot-content">{{Str::limit($item->board_content, 130, '...')}}</div>
+                        <div class="hot-content">{!! Str::limit($item->board_content, 130, '...') !!}</div>
                     </div>
                     <div class="community_bottom">
                         <div class="hot-info">
@@ -72,9 +72,9 @@
                 <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
                     <div>
                         <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                        <div class="community-home-content">{{Str::limit($item->board_content, 100, '...')}}</div>
+                        <div class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</div>
                     </div>
-                    <div class="community_fav-board-tag">
+                    <div class="community-fav-board-tag">
                     @forelse ($item->board_tag as $value)
                             <span>{{$value->hashtag_name}}</span>
                             @empty
@@ -107,7 +107,7 @@
             <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
                 <div>
                     <div class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                    <div class="community-home-content">{{Str::limit($item->board_content, 100, '...')}}</div>
+                    <div class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</div>
                 </div>
             </a>
             @if($loop->last)
@@ -118,9 +118,13 @@
                 게시글이 없습니다.
             @endforelse
         </div>
+        @if (count($data[3]) === 0)
+            
+        @else
         <div class="community_more_container" id="lastboardbtn">
             <button class="community_more" onclick="lastBoard(); return false;">더보기</button>
         </div>
+        @endif
     </div>
 </main>
 <script src="/js/community.js"></script>

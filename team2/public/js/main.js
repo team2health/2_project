@@ -4,15 +4,12 @@ let DISEASE = document.getElementById('disease-display');
 let MAPDISPLAY = document.getElementById('map-display');
 
 function mapopen(disease_id, user_id) {
-	// console.log(disease_id);
-	// console.log(user_id);
 
 	let user_address;
 
 	let formData = new FormData();
 	formData.append('user_id', user_id);
 	formData.append('disease_id', disease_id);
-	// console.log(formData.get('disease_id'));
 
 	fetch('/useraddress', {
 		method: 'POST',
@@ -20,7 +17,6 @@ function mapopen(disease_id, user_id) {
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 		user_address = data[0][0].user_address;
 
 		let mapx;
@@ -30,13 +26,8 @@ function mapopen(disease_id, user_id) {
 
 		var callback = function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
-				// console.log(result);
 				mapx = result[0].y;
 				mapy = result[0].x;
-				// console.log(result[0].x);
-				// console.log(result[0].y);
-				// console.log(mapx);
-				// console.log(mapy);
 
 				mapgo();
 			}
@@ -74,10 +65,8 @@ function mapopen(disease_id, user_id) {
 						// LatLngBounds 객체에 좌표를 추가합니다
 						var bounds = new kakao.maps.LatLngBounds();
 		
-						// console.log(data);
 						for (var i=0; i<data.length; i++) {
 							displayMarker(data[i]);
-							// console.log(data);
 							bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 						}       
 		
@@ -111,19 +100,16 @@ function mapopen(disease_id, user_id) {
 }
 
 function partCheck(index) {
-	// console.log(index);
 
 	let formData = new FormData();
 	formData.append('part_id', index);
 
-	// console.log(formData.get('part_id'));
 	fetch('/partselect', {
 		method: 'POST',
 		body: formData,
 	})
 	.then(response => response.json())
 	.then(data => {
-		// console.log(data);
 
 		let SYMPTOMDIV = [];
 		
@@ -146,7 +132,6 @@ function partCheck(index) {
 }
 
 function symptomCheck(index) {
-	// console.log(index);
 
 	let formData = new FormData();
 	formData.append('part_symptom_id', index);
@@ -157,7 +142,6 @@ function symptomCheck(index) {
 	})
 	.then(response => response.json())
 	.then(data => {
-		// console.log(data);
 	
 		let DIESASENAME = document.getElementById('diesase-name');
 		let DIESASEINFO = document.getElementById('diesase-info');
@@ -179,10 +163,9 @@ function symptomCheck(index) {
 }
 
 function mapDisplay(disease_id, user_id) {
-	// console.log(disease_id);
-	// console.log(user_id);
 	MAPDISPLAY.removeAttribute('display');
 	MAPDISPLAY.style.display = 'block';
+	document.getElementById('hospital').style.display = 'none';
 
 	mapopen(disease_id, user_id);
 }

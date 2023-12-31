@@ -39,14 +39,14 @@
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
                                 <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                                <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
                             </div>
                         </a>
                         @else
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
                                 <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                                <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
                             </div>
                         </a>
                         @endif
@@ -57,7 +57,7 @@
                     <a href="{{route('board.show', ['board' => $item->board_id])}}">
                         <div class="mypage-boardbox">
                             <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                            <div class="mypage-bord-detailbox">{{Str::limit($item->board_content, 75, '...')}}</div>
+                            <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
                         </div>
                     </a>
                     @endif
@@ -104,7 +104,7 @@
                 {{-- <a href="#">비밀번호 변경</a> --}}
                 <br>
                 <label for="profilephoto" class="user-info-btn"> 사진 변경 </label>
-                <div class="user-info-btn" onclick="userimgremove(); return false;"> 삭제 </div>
+                <div class="user-info-btn" id="user-info-img-remove" onclick="userimgremove(); return false;"> 삭제 </div>
                 <input type="hidden" name="imgFlg" id="imgflg">
                 <br>
                 <label for="usermodifyname">닉네임 수정</label>
@@ -137,7 +137,7 @@
 
     <div class="mypage-mainbar">
         <div class="mypage-btn-layout">
-            <div class="mypage-btn-line">
+            <div class="mypage-btn-line2">
                 <div class="mypage-btn" onclick="userinforupdate(); return false;">정보수정</div>
                 <a href="{{route('todaytimeline.get')}}"><div class="mypage-btn">타임라인</div></a>
             </div>
@@ -162,7 +162,7 @@
                 @endforelse
                 </div>
                 <div class="favorite-tag-plus" id="addallfavoritetag">
-                    관심태그 추가하기
+                    {{-- 관심태그 추가하기 --}}
                 </div>
             </div>
         </div>

@@ -4,8 +4,6 @@
 
 @section('main')
 
-
-
 <main class="insert_main">
 	<div class="insert_hidden_container">
 		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data" >
@@ -46,18 +44,6 @@
 					<label for="board_content" >내용</label><br>			  
 					<textarea name="board_content" id="board_content" class="insert_textarea" required ></textarea>
 				</div>				
-				<!-- <div class="insert_hashtag_container">
-					<label for="hashtag" class="label_hashtag">#해시태그</label>
-					<input class="insert_hashtag" id="hashtag" name="hashtag"></input>
-					<button type="button" id="toggleHashtagsBtn" onclick="toggleHashtags()">해시태그 펼치기/접기</button>
-					
-					Hidden container for hashtag data
-					<div id="hiddenHashtags" style="display: none;">
-						@foreach ($data as $item)
-							<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
-						@endforeach
-					</div>
-				</div>	 -->
 				<div class="insert_hashtag_container">
 					<label for="hashtag" class="label_hashtag">#해시태그</label>
 					<div class="insert_hashtag" id="hashtagContainer"></div>
@@ -72,21 +58,10 @@
 
 					<!-- Input for selected hashtags -->
 					<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
-				</div>
-				<!-- <div class="insert_hashtag_container">
-					<label for="hashtag" class="label_hashtag">#해시태그</label>
-					<div class="insert_hashtag" id="hashtagContainer"></div>
-					<button type="button" id="toggleHashtagsBtn" onclick="toggleHashtags()">해시태그 펼치기/접기</button>
-
-					Hidden container for hashtag data
-					<div id="hiddenHashtags" style="display: none;">
-						@foreach ($data as $item)
-							<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
-						@endforeach
-					</div>		 -->
+				</div>				
 			</div>
 			<div class="insert_bottom_button">
-				<button type="button"class="insert_btn"><a href="{{url()->previous()}}">취소</a></button>			
+			<a href="{{url()->previous()}}"><button type="button" class="insert_btn">취소</button></a>			
 				<button type="submit" class="insert_btn">작성완료</button>	
 			</div>				
 		</form>		

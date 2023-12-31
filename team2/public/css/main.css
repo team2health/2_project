@@ -102,12 +102,14 @@ button {
 .font-color {
 	color: #FF9900;
 }
-
+.logout-btn:hover {
+	border-bottom: 1px solid #FF9900;
+	font-weight: 900;
+}
 .display-flex-center {
 	display: flex;
 	align-items: center;
 }
-
 .display-flex-around {
 	display: flex;
 	justify-content: space-around;
@@ -144,7 +146,7 @@ button {
 .login-input-short {
 	width: 60%;
 	height: 6vh;
-	margin: 3px 5px 10px 0;
+	margin: 3px 5px 0 0;
 }
 
 .input-check {
