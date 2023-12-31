@@ -479,3 +479,7 @@ tabModal.addEventListener("click", (e) => {
         } else event.classList.remove("tab-show-modal");
         });
 });
+
+function plusMypageBoard() {
+    
+}

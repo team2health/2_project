@@ -64,8 +64,8 @@
                 @empty
                     <div> 작성한 게시글이 없습니다. </div>
                 @endforelse
-                <div class="mypage-btn-plus" id="mypageComment">더보기</div>
             </div>
+            <div class="mypage-btn-plus" id="mypageComment">더보기</div>
             </div>
             <div class="tab-contents" data-order="2">
                 
@@ -82,9 +82,9 @@
                     @empty
                         <div> 작성한 댓글이 없습니다. </div>
                     @endforelse
-                        <div class="mypage-btn-plus" id="mypageBoard">더보기</div>
-
+                    
                 </div>
+                <div class="mypage-btn-plus" id="mypageBoard" onclick="plusMypageBoard(); return false;">더보기</div>
             </div>
         </div>
 

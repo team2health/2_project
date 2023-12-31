@@ -20,7 +20,7 @@
                         <div>
                         {{ optional($data->user)->user_name }}
                         </div>
-                        <div>
+                        <div class="detail-board-created">
                             {{$data->created_at}}
                         </div>
                         

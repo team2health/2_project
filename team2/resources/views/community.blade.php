@@ -100,7 +100,7 @@
     </div>
     <div class="community_tag_container">        
         <div class="community_headline">
-            <h2>최근 게시글</h2>                     
+            <h2>최근 게시글</h2>
         </div>
         <div class="community_tag border-line-color-gray bordergo-hover" id="lastboardbox">
             @forelse ($data[3] as $item)
