@@ -481,5 +481,6 @@ tabModal.addEventListener("click", (e) => {
 });
 
 function plusMypageBoard() {
-    
+    let boardId = document.getElementById('mypageCommentPlustBtn');
+    console.log(boardId);
 }

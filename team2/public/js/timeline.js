@@ -37,6 +37,17 @@ function yearShowDiv() {
     weekendindiv.innerHTML = showyear + '년 ' + showmonth + '월';
 
 }
+// 오늘 날짜 id값 비교용
+let formattedDate = '';
+function todayCorrect() {
+    let todayId = new Date();
+    let year = todayId.getFullYear();
+    let month = String(todayId.getMonth() + 1).padStart(2, '0');
+    let day = String(todayId.getDate()).padStart(2, '0');
+
+    let result = `${year}${month}${day}`;
+    return result;
+}
 
 //캘린더 보여주는 버튼
 function calendarshow() {
@@ -301,6 +312,7 @@ function buildCalendar() {
         
         if (nowDay > today) {
             newDIV.className = "pastDay";
+
         }
         else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
             newDIV.className = "today";
@@ -310,13 +322,16 @@ function buildCalendar() {
             newDIV.className = "futureDay";
             // newDIV.onclick = function () { choiceDate(this); }
         }
-        
+
         let ptagCal = document.getElementById(testsearchDateZero);
         ptagCal.onclick = function (e) {
-            console.log("Event listener executed with ptagCal1:", ptagCal);
-            console.log(e.target.id);
-            newCalendarReloard(e.target.id);
-            // choiceDate(this);
+            // console.log("Event listener executed with ptagCal1:", ptagCal);
+            // console.log(e.target.id);
+            formattedDate = todayCorrect();
+            if(e.target.id <= formattedDate) {
+                newCalendarReloard(e.target.id);
+            } 
+            // choiceDate(e.target.id);
         }; //각 날짜마다 onclick 처리
         searchDate++;
     }
@@ -393,26 +408,26 @@ function newCalendarReloard(data) {
 
     }
     // let data2 = thismonthtoday;
-
+    
     calendarshow(); //캘린더 닫기
     let weekendindiv = document.getElementById('calendarBtn');
     weekendindiv.innerHTML = thisyear + '년 ' + thismonthday + '월';
     selectDate(iddate2 , thismonthtoday);
 }
 
-// 날짜 선택
-function choiceDate(ptagCal) {
-    console.log("choiceDate", ptagCal);
-    if (document.getElementsByClassName("choiceDay")[0]) {                              // 기존에 선택한 날짜가 있으면
-        document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");  // 해당 날짜의 "choiceDay" class 제거
-    }
-    ptagCal.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
-}
 
 // 이전달 버튼 클릭
 function prevCalendar() {
     nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() - 1, nowMonth.getDate());   // 현재 달을 1 감소
     buildCalendar();    // 달력 다시 생성
+}
+// 날짜 선택
+function choiceDate(data) {
+    console.log("choiceDate", data);
+    if (document.getElementsByClassName('choiceDay')) {                              // 기존에 선택한 날짜가 있으면
+        document.getElementsByClassName('choiceDay').classList.remove('choiceDay');  // 해당 날짜의 "choiceDay" class 제거
+    }
+    document.getElementById(data).classList.add('choiceDay');           // 선택된 날짜에 "choiceDay" class 추가
 }
 // 다음달 버튼 클릭
 function nextCalendar() {
