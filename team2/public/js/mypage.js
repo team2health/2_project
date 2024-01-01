@@ -364,7 +364,7 @@ let userImgUrl = document.getElementById('user-img-url');
 let PROFILEPHOTOVIEW = document.getElementById('profilephotoview');
 
 fileInput.addEventListener('change', function() {
-    console.log(fileInput.files[0].size / 1048576);
+    // console.log(fileInput.files[0].size / 1048576);
     if (!fileInput.files[0].type.startsWith('image')) {
         imgFlg = 2;
         PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
@@ -374,7 +374,7 @@ fileInput.addEventListener('change', function() {
         return false;
     }
     
-    if (fileInput.files[0].size / 1048576 > 2) {
+    if (fileInput.files[0].size / 1048576 > 5) {
         alert('파일의 용량이 너무 큽니다.');
         imgFlg = 2;
         
