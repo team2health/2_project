@@ -342,7 +342,7 @@ td {
 .tab_list {
     display: flex;
     gap: 10px;
-    width: 90%;
+    width: 100%;
     justify-content: center;
     margin: 0 auto;
 }
@@ -439,17 +439,6 @@ td {
     margin-top: 40px;
     cursor: pointer;
 }
-.mypage-btn-plus {
-    margin: 30px auto;
-    border: 1px solid black;
-    border-radius: 20px;
-    background-color: #ff9950;
-    width: 100px;
-    height: 40px;
-    border-radius: 20px;
-    line-height: 40px;
-    text-align: center;
-}
 .mypage-btn2, .favorite-tag-plus {
     width: 310px;
     height: 50px;
@@ -520,15 +509,22 @@ td {
     font-weight: 900;
     color: #FF9900;
 }
-.mypage-comment-show-btn:active, .mypage-board-show-btn:active,
+.mypage-date-today {
+    font-weight: 900;
+    color: #FF9900;
+}
+.mypage-board-show-btn:focus {
+    color: #f15500;
+}
+/* .mypage-comment-show-btn:active, .mypage-board-show-btn:active,
 .mypage-comment-show-btn:focus, .mypage-board-show-btn:focus {
     background-color: #f5f5f5;
     color: #9d46fa;
     font-weight: 900;
     border-radius: 10px;
-}
+} */
 .active {
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
     color: #FF9900;
     font-weight: 900;
     border-radius: 10px;
@@ -554,9 +550,45 @@ td {
 }
 .tab-show {
     display: block;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f5f5f5;
 }
 .tab-show-modal {
     display: block;
+}
+.mypage-btn-plus {
+    margin: 30px auto;
+    border: 1px solid black;
+    font-weight: 100;
+    color: black;
+    border-radius: 20px;
+    background-color: #ff9950;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.mypage-btn-modal-plus {
+    margin: 30px auto;
+    border: 1px solid black;
+    font-weight: 100;
+    color: black;
+    border-radius: 20px;
+    background-color: #ff9950;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 120px;
+}
+.mypage-btn-plus:hover, .mypage-btn-modal-plus:hover {
+    background-color: rgb(210, 102, 1);
+    color: white;
 }
 
 .mypage-insert-btn {
@@ -684,10 +716,10 @@ td {
     display:none;
 }
 
-.tab-contents-modal .mypage-boards-part,
+/* .tab-contents-modal .mypage-boards-part,
 .tab-contents-modal .mypage-boards-part2 {
     margin-bottom: 100px;
-}
+} */
 .mypage-content-modal::-webkit-scrollbar-thumb {
     background: rgb(245, 196, 171); /* 스크롤바 색상 */
     border-radius: 10px; /* 스크롤바 둥근 테두리 */
@@ -795,13 +827,17 @@ td {
 }
 .mypage-hashtag > div {
     padding: 12px 20px;
-    background-color: #EDEDED;
+    /* background-color: #EDEDED; */
+    background-color: #fff1e1;
     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
     margin: 5px 15px 8px 0;
     width: 130px;
     border-radius: 18px;
+}
+#creaTagMainDiv > .mypage-hashtag > div {
+    background-color: #EDEDED;
 }
 .mypage-hashtag > div:hover {
     background-color: rgb(248, 199, 124, 0.3);
@@ -817,6 +853,9 @@ td {
         display: none;
     }
     .mypage-content-modal {
+        display: none;
+    }
+    .mypage-btn-modal-plus {
         display: none;
     }
 }

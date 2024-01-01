@@ -20,9 +20,8 @@
             </ul>
             <div class="tab-contents tab-show" data-order="1">
                         {{-- 게시글 창 --}}
-            <div class="mypage-boards-part">
+            <div class="mypage-boards-part" id="mypageBoard">
                 @forelse ($data as $index => $item)
-                <input type="hidden" id="mypageBoardPlusBtn" value="{{$index}}">
                     @php
                         if( $index >= 1 ) {
                             $previous_item = $index - 1;
@@ -61,15 +60,18 @@
                         </div>
                     </a>
                     @endif
+                    @if($loop->last)
+                        <input type="hidden" id="mypageBoardPlusBtn" value="{{$item->board_id}}">
+                    @endif
                 @empty
                     <div> 작성한 게시글이 없습니다. </div>
                 @endforelse
             </div>
-            <div class="mypage-btn-plus" id="mypageComment">더보기</div>
+            <div class="mypage-btn-plus" id="mypageComment" onclick="plusMypageBoard(); return false;">더보기</div>
             </div>
             <div class="tab-contents" data-order="2">
                 
-                <div class="mypage-boards-part">
+                <div class="mypage-boards-part" id="mypageCommentPlus">
                     @forelse ($comments as $index => $item)
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
@@ -78,13 +80,15 @@
                                 <div class="mypage-bord-detailbox">{{Str::limit($item->comment_content, 75, '...')}}</div>
                             </div>
                         </a>
-                        <input type="hidden" id="mypageCommentPlustBtn" value="{{$index}}">
+                        @if($loop->last)
+                            <input type="hidden" id="mypageCommentPlustBtn" value="{{$item->comment_id}}">
+                        @endif
                     @empty
                         <div> 작성한 댓글이 없습니다. </div>
                     @endforelse
                     
                 </div>
-                <div class="mypage-btn-plus" id="mypageBoard" onclick="plusMypageBoard(); return false;">더보기</div>
+                <div class="mypage-btn-plus" id="mypageBoard" onclick="plusMypageComment('mypageCommentPlus'); return false;">더보기</div>
             </div>
         </div>
 
@@ -189,9 +193,8 @@
                 </ul>
                 <div class="tab-contents-modal tab-show-modal" data-order="3">
                     {{-- 게시글 창 --}}
-                    <div class="mypage-boards-part">
+                    <div class="mypage-boards-part" id="mypageModalBoard">
                         @forelse ($data as $index => $item)
-                        <input type="hidden" id="mypageModalBoardBtn" value="{{$index}}">
                             @php
                             if( $index >= 1 ) {
                                 $previous_item = $index - 1;
@@ -228,17 +231,20 @@
                                 </div>
                             </a>
                             @endif
+                            @if($loop->last)
+                                <input type="hidden" id="mypageModalBoardBtn"  value="{{$item->board_id}}">
+                            @endif
                         @empty
                             <div> 작성한 게시글이 없습니다. </div>
                         @endforelse
-                        <div class="mypage-btn-plus" id="modalBoard">더보기</div>
                     </div>
+                    <div class="mypage-btn-modal-plus" id="modalBoard" onclick="plusMypageBoardModal(); return false;">더보기</div>
                 </div>
 
                 <div class="tab-contents-modal" data-order="4">
-                    <div class="mypage-boards-part">
+                    <div class="mypage-boards-part" id="mypageCommentModalPlus">
                         @forelse ($comments as $index => $item)
-                        <input type="hidden" id="mypageModalCommentBtn" value="{{$index}}">
+
                             <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                 <div class="mypage-boardbox-modal">
                                     <span class="mypage-boardbox-date">{{$item->created_at}}</span>
@@ -246,11 +252,14 @@
                                     <div class="mypage-bord-detailbox">{{Str::limit($item->comment_content, 75, '...')}}</div>
                                 </div>
                             </a>
+                            @if($loop->last)
+                                <input type="hidden" id="mypageModalCommentBtn" value="{{$item->comment_id}}">
+                            @endif
                         @empty
                             <div> 작성한 댓글이 없습니다. </div>
                         @endforelse
-                        <div class="mypage-btn-plus" id="modalComment">더보기</div>
                     </div>
+                    <div class="mypage-btn-modal-plus" id="modalComment" onclick="plusMypageCommentModal(); return false;">더보기</div>
                 </div>
             </div>
         

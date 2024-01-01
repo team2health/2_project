@@ -328,9 +328,12 @@ function buildCalendar() {
             // console.log("Event listener executed with ptagCal1:", ptagCal);
             // console.log(e.target.id);
             formattedDate = todayCorrect();
-            if(e.target.id <= formattedDate) {
+            if(e.target.id < formattedDate) {
                 newCalendarReloard(e.target.id);
             } 
+            if (e.target.id = formattedDate) {
+                newCalendarReloard(formattedDate);
+            }
             // choiceDate(e.target.id);
         }; //각 날짜마다 onclick 처리
         searchDate++;

@@ -29,5 +29,7 @@ class VerifyCsrfToken extends Middleware
         '/recorddelete',
         '/nextboard',
         '/favoritenextboard',
+        '/mypagecommentplus',
+        '/mypageboardplus',
     ];
 }

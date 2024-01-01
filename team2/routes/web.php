@@ -62,6 +62,8 @@ Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->nam
 Route::get('/allhashtag', [MypageController::class, 'allhashget']);
 Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost']);
 Route::post('/newcalendarblock', [MypageController::class, 'newcalendarblock']);
+Route::post('/mypagecommentplus', [MypageController::class, 'mypagecommentplus']);
+Route::post('/mypageboardplus', [MypageController::class, 'mypageboardplus']);
 
 Route::post('/namechange', [MypageController::class, 'namechangepost']);
 Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);

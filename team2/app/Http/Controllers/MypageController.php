@@ -38,6 +38,7 @@ class MypageController extends Controller
             ->where('u_id',$result)
             ->where('deleted_at', null)
             ->orderBy('board_id', 'DESC')
+            ->limit(8)
             ->get();
 
         $comment_result = DB::table('comments')
@@ -52,6 +53,7 @@ class MypageController extends Controller
             ->where('comments.deleted_at', null)
             ->where('boards.deleted_at', null)
             ->orderby('comments.comment_id', 'DESC')
+            ->limit(6)
             ->get();
         
         $user_hashtag = DB::table('favorite_tags')
@@ -86,92 +88,129 @@ class MypageController extends Controller
         ->with('comments', $comment_result);
     }
     
-    
-        public function allhashget(Request $request){
+    // 게시글 더보기
+    public function mypageboardplus(Request $request) {
 
-            Log::debug("allhashget", $request->all());
-            $result = session('id');
-            $user_hashtag = DB::table('favorite_tags')
+        $result = session('id');
+        $last_id  = $request->lastboardid;
+
+        $board_result = DB::table('boards')
+        ->select(
+        'board_id'
+        ,'u_id'
+        ,'category_id'
+        ,'board_title'
+        ,'board_content'
+        ,'board_hits'
+        ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
+        ,'updated_at')
+        ->where('board_id', '<', $last_id)
+        ->where('u_id',$result)
+        ->where('deleted_at', null)
+        ->orderBy('board_id', 'DESC')
+        ->limit(4)
+        ->get();
+
+        return response()->json($board_result);
+    }
+
+    // 댓글 더보기
+    public function mypagecommentplus(Request $request) {
+
+        $result = session('id');
+        $last_id  = $request->lastboardid;
+
+        $comment_result = DB::table('comments')
             ->select(
-            'favorite_tags.hashtag_id'
+                'comments.comment_id'
+                ,'comments.board_id'
+                ,'comments.comment_content'
+                ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
+                ,'boards.board_title'
+            )->join('boards', 'boards.board_id', 'comments.board_id')
+            ->where('comments.comment_id', '<', $last_id)
+            ->where('comments.u_id', $result)
+            ->where('comments.deleted_at', null)
+            ->where('boards.deleted_at', null)
+            ->orderby('comments.comment_id', 'DESC')
+            ->limit(4)
+            ->get();
+
+            return response()->json($comment_result);
+    }
+
+    public function allhashget(Request $request){
+
+        Log::debug("allhashget", $request->all());
+        $result = session('id');
+        $user_hashtag = DB::table('favorite_tags')
+        ->select(
+        'favorite_tags.hashtag_id'
+        )
+        ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+        ->where('favorite_tags.u_id', $result)
+        ->where('favorite_tags.deleted_at', null)
+        ->orderBy('hashtags.hashtag_id')
+        ->get();
+        foreach ($user_hashtag as $key => $value) {
+            $result2[] = $value->hashtag_id;
+        }
+
+        $hashtag  = DB::table('hashtags')
+        ->select(
+            'hashtags.hashtag_id'
+            ,'hashtags.hashtag_name'
+        );
+        
+        if( isset($result2)) {
+            $hashtag->whereNotIn('hashtags.hashtag_id', $result2);
+        }
+        $hashtag->orderBy('hashtags.hashtag_id');
+        $allhashtag = $hashtag->get();
+        Log::debug($allhashtag);
+        return response()->json($allhashtag);
+}
+
+    public function myhashdeletepost(Request $request) {
+        Log::debug('**********************해시태그 삭제 start***********************');
+        Log::debug($request);
+        
+        $id = $request->myhashdelete;
+
+        Log::debug($id);
+
+        Favorite_tag::destroy($id);
+    }
+
+    public function addfavoritehashtagpost(Request $request) {
+
+        $currentDateTime = Carbon::now();
+        Log::debug("asdfasdfa", $request->all());
+        $tag_id = $request->tag_id;
+        $result = session('id');
+        Log::debug("session", ['id' => $result]);
+        $hashtag = DB::table('favorite_tags')->insert([
+            'hashtag_id' => $tag_id,
+            'u_id' => $result,
+            'created_at' => $currentDateTime,
+            'updated_at' => $currentDateTime
+        ]);
+
+        $hashtaginfo =
+        DB::table('favorite_tags')
+        ->select(
+            'favorite_tags.favorite_tag_id'
+            ,'hashtags.hashtag_id'
+            ,'hashtags.hashtag_name'
             )
-            ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
-            ->where('favorite_tags.u_id', $result)
-            ->where('favorite_tags.deleted_at', null)
-            ->orderBy('hashtags.hashtag_id')
-            ->get();
-            foreach ($user_hashtag as $key => $value) {
-                $result2[] = $value->hashtag_id;
-            }
-    
-            $hashtag  = DB::table('hashtags')
-            ->select(
-                'hashtags.hashtag_id'
-                ,'hashtags.hashtag_name'
-            );
-            
-            if( isset($result2)) {
-                $hashtag->whereNotIn('hashtags.hashtag_id', $result2);
-            }
-            $hashtag->orderBy('hashtags.hashtag_id');
-            $allhashtag = $hashtag->get();
-            Log::debug($allhashtag);
-            return response()->json($allhashtag);
-        }
-    
-        public function myhashdeletepost(Request $request) {
-            Log::debug('**********************해시태그 삭제 start***********************');
-            Log::debug($request);
-            
-            $id = $request->myhashdelete;
-            // $user_id = session('id');
-            // Log::debug($id);
-            // Log::debug('유저아이디');
-            // Log::debug($user_id);
-
-            // $favoritetag_id =
-            // DB::table('favorite_tags')
-            // ->select('favorite_tags.favorite_tag_id')
-            // ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
-            // ->where('favorite_tags.u_id', $user_id)
-            // ->where('favorite_tags.hashtag_id', $id)
-            // ->where('favorite_tags.deleted_at', null)
-            // ->get();
-
-            Log::debug($id);
-
-            Favorite_tag::destroy($id);
-        }
-    
-        public function addfavoritehashtagpost(Request $request) {
-    
-            $currentDateTime = Carbon::now();
-            Log::debug("asdfasdfa", $request->all());
-            $tag_id = $request->tag_id;
-            $result = session('id');
-            Log::debug("session", ['id' => $result]);
-            $hashtag = DB::table('favorite_tags')->insert([
-                'hashtag_id' => $tag_id,
-                'u_id' => $result,
-                'created_at' => $currentDateTime,
-                'updated_at' => $currentDateTime
-            ]);
-
-            $hashtaginfo =
-            DB::table('favorite_tags')
-            ->select(
-                'favorite_tags.favorite_tag_id'
-                ,'hashtags.hashtag_id'
-                ,'hashtags.hashtag_name'
-                )
-            ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
-            ->orderby('favorite_tag_id', 'desc')
-            ->limit(1)
-            ->get();
-            Log::debug($hashtaginfo);
-            Log::debug(response()->json($hashtaginfo));
-            return response()->json($hashtaginfo);
-        }
+        ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+        ->orderby('favorite_tag_id', 'desc')
+        ->limit(1)
+        ->get();
+        Log::debug($hashtaginfo);
+        Log::debug(response()->json($hashtaginfo));
+        return response()->json($hashtaginfo);
+    }
 
     public function todaytimelineget(){
 
@@ -307,7 +346,7 @@ class MypageController extends Controller
             )->join('boards', 'boards.board_id', 'comments.board_id')
             ->where('comments.u_id',$result)
             ->orderby('comments.comment_id', 'DESC')
-            ->limit(8)
+            ->limit(6)
             ->get();
 
             // Log::debug("이름", ['name' => $user_info]);
@@ -322,6 +361,7 @@ class MypageController extends Controller
             ->with('user_info', $user_info)
             ->with('comments', $comment_result);
         }
+
 
     public function daytimelinepost(Request $request) {
 

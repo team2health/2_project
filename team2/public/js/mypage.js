@@ -280,9 +280,7 @@ function addhashtag(data) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data[0]);
-        // console.log(data.hash_id);
-        // console.log(data.hash_name);
+
         // 즉시 추가
         deletedfavoritehashtag.id = 'favoriteHashtagId' + data[0].hashtag_id;
         makefavoritespan.id = 'favoritehashtext'+data[0].hashtag_id;
@@ -442,6 +440,7 @@ function userinfoupdate() {
 
 // userImgName.innerHTML = userImgSelect;
 
+// 게시글 탭
 const tab = document.querySelector(".tab");
 const tabListItem = document.querySelectorAll(".mypage-board-show-btn");
 const tabContent = document.querySelectorAll(".tab-contents");
@@ -461,6 +460,7 @@ tab.addEventListener("click", (e) => {
         });
 });
 
+// 모달 탭
 const tabModal = document.querySelector(".tab-modal");
 const tabListItemModal = document.querySelectorAll(".mypage-board-modal-btn");
 const tabContentModal = document.querySelectorAll(".tab-contents-modal");
@@ -480,7 +480,285 @@ tabModal.addEventListener("click", (e) => {
         });
 });
 
+// active 클래스 제한
+
+
+// 게시글 더보기
 function plusMypageBoard() {
-    let boardId = document.getElementById('mypageCommentPlustBtn');
-    console.log(boardId);
+    
+    let mypageContent = document.getElementById('mypageBoard');
+    let lastSpanSelect = document.querySelectorAll('#mypageBoard .mypage-board-date');
+    let lastSpanDate = lastSpanSelect[lastSpanSelect.length - 1].innerHTML;
+    let boardId = document.getElementById('mypageBoardPlusBtn').value;
+
+    let formData = new FormData();
+    formData.append('lastboardid', boardId);
+
+    fetch('/mypageboardplus', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                let boardTitlePlus = data[i].board_title;
+                let boardContentPlus = data[i].board_content;
+                
+                // 글자 자르기
+                if (data[i].board_title.length > 30) {
+                    boardTitlePlus.substring(0, 30) + '...';
+                }
+                if (data[i].board_content.length > 75) {
+                    boardContentPlus.substring(0, 75) + '...';
+                }
+
+                if(data[0].created_at !== lastSpanDate && i == 0) {
+                    let createdAt = data[0].created_at;
+                    let mypageDateToday = document.createElement('div');
+                    mypageDateToday.classList.add('mypage-date-today');
+                    let mypageBoardDate = document.createElement('span');
+                    mypageBoardDate.classList.add('mypage-board-date');
+                    mypageBoardDate.innerHTML = createdAt;
+
+                    mypageDateToday.appendChild(mypageBoardDate);
+                    mypageContent.appendChild(mypageDateToday);
+                } 
+                if(i > 0) {
+                    if(data[i-1].created_at !== data[i].created_at) {
+                        let mypageDateToday = document.createElement('div');
+                        mypageDateToday.classList.add('mypage-date-today');
+                        let mypageBoardDate = document.createElement('span');
+                        mypageBoardDate.classList.add('mypage-board-date');
+                        mypageBoardDate.innerHTML = data[i].created_at;
+
+                        mypageDateToday.appendChild(mypageBoardDate);
+                        mypageContent.appendChild(mypageDateToday);
+                    } 
+                }
+
+                // 게시글
+                let outATag = document.createElement('a');
+                let outDiv = document.createElement('div');
+                let inFirstDiv = document.createElement('div');
+                let inSecondDiv = document.createElement('div');
+
+                outATag.setAttribute('href', '/board/'+data[i].board_id);
+                outDiv.classList.add('mypage-boardbox');
+                inFirstDiv.classList.add('mypage-bord-title');
+                inFirstDiv.innerHTML = boardTitlePlus;
+                inSecondDiv.classList.add('mypage-bord-detailbox');
+                inSecondDiv.innerHTML = boardContentPlus;
+
+                outDiv.appendChild(inFirstDiv);
+                outDiv.appendChild(inSecondDiv);
+                outATag.appendChild(outDiv);
+                mypageContent.appendChild(outATag);
+
+            }
+            let boardValueSet = document.getElementById('mypageBoardPlusBtn');
+            boardValueSet.value = '';
+            boardValueSet.value = data[data.length-1].board_id;
+    })
+    .catch(error => console.log(error));
+}
+
+// 댓글 더보기
+function plusMypageComment() {
+
+    let mypageCommentPlus = document.getElementById('mypageCommentPlus');
+    let commentId = document.getElementById('mypageCommentPlustBtn').value;
+
+    let formData = new FormData();
+    formData.append('lastboardid', commentId);
+
+    fetch('/mypagecommentplus', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+
+        let mypageCommentPlustBtn = document.getElementById('mypageCommentPlustBtn');
+        
+        for(let i = 0; i < data.length; i++) {
+
+            let boardTitlePlus = data[i].board_title;
+            let comment = data[i].comment_content;
+            
+            // 글자 자르기
+            if (data[i].board_title.length > 30) {
+                return boardTitlePlus.substring(0, 30) + '...';
+            }
+            if (data[i].comment_content.length > 75) {
+                return comment.substring(0, 75) + '...';
+            }
+            
+            let aTag = document.createElement('a');
+            let outDiv = document.createElement('div');
+            let createDate = document.createElement('span');
+            let boardTitle = document.createElement('div');
+            let commentIn = document.createElement('div');
+            
+            aTag.setAttribute('href', '/board/'+data[i].board_id);
+            outDiv.classList.add('mypage-boardbox');
+            createDate.classList.add('mypage-boardbox-date');
+            createDate.innerHTML = data[i].created_at;
+            boardTitle.innerHTML = boardTitlePlus;
+            boardTitle.classList.add('mypage-bord-title');
+            commentIn.innerHTML = comment;
+            commentIn.classList.add('mypage-bord-detailbox');
+
+            outDiv.appendChild(createDate);
+            outDiv.appendChild(boardTitle);
+            outDiv.appendChild(commentIn);
+            aTag.appendChild(outDiv);
+            mypageCommentPlus.appendChild(aTag);
+
+            mypageCommentPlustBtn.value = '';
+            mypageCommentPlustBtn.value = data[i].board_id;
+        }
+    })
+    .catch(error => console.log(error));
+}
+
+
+// 게시글 모달 더보기
+
+function plusMypageBoardModal() {
+    let mypageContent = document.getElementById('mypageModalBoard');
+    let lastSpanSelect = document.querySelectorAll('#mypageModalBoard .mypage-date-today-modal');
+    let lastSpanDate = lastSpanSelect[lastSpanSelect.length - 1].innerHTML;
+    let boardId = document.getElementById('mypageModalBoardBtn').value;
+
+    let formData = new FormData();
+    formData.append('lastboardid', boardId);
+
+    fetch('/mypageboardplus', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                let boardTitlePlus = data[i].board_title;
+                let boardContentPlus = data[i].board_content;
+                
+                // 글자 자르기
+                if (data[i].board_title.length > 30) {
+                    boardTitlePlus.substring(0, 30) + '...';
+                }
+                if (data[i].board_content.length > 75) {
+                    boardContentPlus.substring(0, 75) + '...';
+                }
+
+                if(data[0].created_at !== lastSpanDate && i == 0) {
+                    let createdAt = data[0].created_at;
+                    let mypageDateToday = document.createElement('div');
+                    mypageDateToday.classList.add('mypage-date-today-modal');
+                    let mypageBoardDate = document.createElement('span');
+                    mypageBoardDate.classList.add('mypage-board-date-modal');
+                    mypageBoardDate.innerHTML = createdAt;
+
+                    mypageDateToday.appendChild(mypageBoardDate);
+                    mypageContent.appendChild(mypageDateToday);
+                } 
+                if(i > 0) {
+                    if(data[i-1].created_at !== data[i].created_at) {
+                        let mypageDateToday = document.createElement('div');
+                        mypageDateToday.classList.add('mypage-date-today-modal');
+                        let mypageBoardDate = document.createElement('span');
+                        mypageBoardDate.classList.add('mypage-board-date-modal');
+                        mypageBoardDate.innerHTML = data[i].created_at;
+
+                        mypageDateToday.appendChild(mypageBoardDate);
+                        mypageContent.appendChild(mypageDateToday);
+                    } 
+                }
+
+                // 게시글
+                let outATag = document.createElement('a');
+                let outDiv = document.createElement('div');
+                let inFirstDiv = document.createElement('div');
+                let inSecondDiv = document.createElement('div');
+
+                outATag.setAttribute('href', '/board/'+data[i].board_id);
+                outDiv.classList.add('mypage-boardbox-modal');
+                inFirstDiv.classList.add('mypage-bord-title');
+                inFirstDiv.innerHTML = boardTitlePlus;
+                inSecondDiv.classList.add('mypage-bord-detailbox');
+                inSecondDiv.innerHTML = boardContentPlus;
+
+                outDiv.appendChild(inFirstDiv);
+                outDiv.appendChild(inSecondDiv);
+                outATag.appendChild(outDiv);
+                mypageContent.appendChild(outATag);
+
+            }
+            let boardValueSet = document.getElementById('mypageModalBoardBtn');
+            boardValueSet.value = '';
+            boardValueSet.value = data[data.length-1].board_id;
+    })
+    .catch(error => console.log(error));
+}
+
+// 댓글 모달 더보기
+function plusMypageCommentModal() {
+    let mypageCommentPlus = document.getElementById('mypageCommentModalPlus');
+    let commentId = document.getElementById('mypageModalCommentBtn').value;
+
+    let formData = new FormData();
+    formData.append('lastboardid', commentId);
+
+    fetch('/mypagecommentplus', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+
+        let mypageCommentPlustBtn = document.getElementById('mypageModalCommentBtn');
+        
+        for(let i = 0; i < data.length; i++) {
+
+            let boardTitlePlus = data[i].board_title;
+            let comment = data[i].comment_content;
+            
+            // 글자 자르기
+            if (data[i].board_title.length > 30) {
+                return boardTitlePlus.substring(0, 30) + '...';
+            }
+            if (data[i].comment_content.length > 75) {
+                return comment.substring(0, 75) + '...';
+            }
+            
+            let aTag = document.createElement('a');
+            let outDiv = document.createElement('div');
+            let createDate = document.createElement('span');
+            let boardTitle = document.createElement('div');
+            let commentIn = document.createElement('div');
+            
+            aTag.setAttribute('href', '/board/'+data[i].board_id);
+            outDiv.classList.add('mypage-boardbox-modal');
+            createDate.classList.add('mypage-boardbox-date');
+            createDate.innerHTML = data[i].created_at;
+            boardTitle.innerHTML = boardTitlePlus;
+            boardTitle.classList.add('mypage-bord-title');
+            commentIn.innerHTML = comment;
+            commentIn.classList.add('mypage-bord-detailbox');
+
+            outDiv.appendChild(createDate);
+            outDiv.appendChild(boardTitle);
+            outDiv.appendChild(commentIn);
+            aTag.appendChild(outDiv);
+            mypageCommentPlus.appendChild(aTag);
+
+            mypageCommentPlustBtn.value = '';
+            mypageCommentPlustBtn.value = data[i].board_id;
+        }
+    })
+    .catch(error => console.log(error));
 }
