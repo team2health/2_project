@@ -176,8 +176,8 @@ td {
     margin: 5px 0;
 }
 .datebardayselect {
-    background-color: rgba(247, 240, 193, 0.3);
-    color: rgb(0, 149, 223);
+    background-color: rgba(247, 233, 193, 0.3);
+    color: rgb(89, 0, 223);
     font-weight: 900;
 }
 .datebartoday {
@@ -385,7 +385,7 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.tab-contents {
+.tab-contents, .tab-contents2 {
     margin: 0 auto;
 }
 
@@ -395,6 +395,9 @@ td {
     justify-content: center;
     gap: 20px;
     padding-top: 35px;
+}
+.mypage-boards-part div span {
+    display: block;
 }
 .mypage-content-modal::-webkit-scrollbar {
     margin-top: 50px;
@@ -509,10 +512,10 @@ td {
     font-weight: 900;
     color: #FF9900;
 }
-.mypage-date-today {
+/* .mypage-date-today {
     font-weight: 900;
     color: #FF9900;
-}
+} */
 .mypage-board-show-btn:focus {
     color: #f15500;
 }
@@ -885,6 +888,8 @@ td {
 }
 
 @media screen and (max-width: 1200px) {
+
+    
     .mypage-grid {
         display: block;
         overflow: hidden;
@@ -894,9 +899,13 @@ td {
     , .mypage-content, .mypage-board-show-btn, .mypage-comment-show-btn {
         display: none;
     }
+    .tab {
+        display: none;
+    }
 }
 @media screen and (max-width: 1500px) {
     .mypage-board-show-btn {
         /* width: 45%; */
     }
+    
 }

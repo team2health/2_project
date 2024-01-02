@@ -357,6 +357,7 @@ class BoardController extends Controller
         ->join('boards', 'board_tags.board_id', '=', 'boards.board_id')
         ->select('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->where('users.id', $u_id)
+        ->where('favorite_tags.deleted_at', null)
         ->where('boards.deleted_at', null)
         ->where('boards.board_id', '<', $request->favorite_num)
         ->orderby('boards.board_id', 'desc')
