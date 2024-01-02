@@ -41,8 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
 function lastBoard() {
     let LASTNUM = document.getElementById('last_num').value;
 
-    // console.log(LASTNUM);
-
     let formData = new FormData();
 	formData.append('last_num', LASTNUM);
 
@@ -53,7 +51,6 @@ function lastBoard() {
 	.then(response => response.json())
 	.then(data => {
         if(data && data.length > 0) {
-            console.log(data);
             
             let LASTBOARDBOX = document.getElementById('lastboardbox');
             let LASTBOARDURL = [];
@@ -80,7 +77,6 @@ function lastBoard() {
             }
     
             let lastNumber = data[data.length - 1]; // 마지막 게시글 번호 가져오기
-            console.log(lastNumber.board_id);
             document.getElementById('last_num').setAttribute('value', lastNumber.board_id);
         } else {
             document.getElementById('lastboardbtn').style.display = 'none';
@@ -94,8 +90,6 @@ function lastBoard() {
 function favoriteBoard() {
     let FAVORITENUM = document.getElementById('favorite_num').value;
 
-    // console.log(LASTNUM);
-
     let formData = new FormData();
 	formData.append('favorite_num', FAVORITENUM);
 
@@ -106,7 +100,6 @@ function favoriteBoard() {
 	.then(response => response.json())
 	.then(data => {
         if(data && data.length > 0) {
-            console.log(data);
             
             let FAVORITEBOARDBOX = document.getElementById('favoriteboard');
             let FAVORITEBOARDURL = [];
@@ -117,7 +110,6 @@ function favoriteBoard() {
             let FAVORITEBOARDTAG = [];
             
             for(let i = 0; i < data.length; i++) {
-                // console.log(data[i].board_tag);
                 FAVORITEBOARDURL[i] = document.createElement('a');
                 FAVORITEBOARDDIV[i] = document.createElement('div');
                 FAVORITEBOARDDIV2[i] = document.createElement('div');
@@ -146,7 +138,6 @@ function favoriteBoard() {
             }
     
             let favoriteNumber = data[data.length - 1]; // 마지막 게시글 번호 가져오기
-            console.log(favoriteNumber.board_id);
             document.getElementById('favorite_num').setAttribute('value', favoriteNumber.board_id);
         } else {
             document.getElementById('favoritebtn').style.display = 'none';

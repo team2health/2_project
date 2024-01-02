@@ -140,7 +140,9 @@ function favoritehashdelete(data) {
         .then(response => response.json())
         .then(data => {
             console.log(data)})
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.error('오류 발생:', error);
+        });
 
     } else {
         //
@@ -289,7 +291,9 @@ function addhashtag(data) {
         makefavoritespan.innerHTML = data[0].hashtag_name;
         makefavoritespan2.innerHTML = 'x';
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.error('오류 발생:', error);
+    });
 
     deletedfavoritehashtag.appendChild(makefavoritespan);
     deletedfavoritehashtag.appendChild(makefavoritespan2);
@@ -334,8 +338,6 @@ function nameChange() {
 
 	const formData = new FormData();
 	formData.append('user_name', nameChk.value);
-	// console.log(nameChk);
-	// console.log(formData.get('username'));
 	fetch('/namechange', {
 		method: 'POST',
 		body: formData,
@@ -357,12 +359,10 @@ function nameChange() {
 }
 
 let fileInput = document.getElementById('profilephoto');
-// console.log(fileInput.files[0]);
 let userImgUrl = document.getElementById('user-img-url');
 let PROFILEPHOTOVIEW = document.getElementById('profilephotoview');
 
 fileInput.addEventListener('change', function() {
-    // console.log(fileInput.files[0].size / 1048576);
     if (!fileInput.files[0].type.startsWith('image')) {
         imgFlg = 2;
         PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
@@ -384,7 +384,6 @@ fileInput.addEventListener('change', function() {
 
     userImgUrl.innerHTML = '';
     userImgUrl.innerHTML = fileInput.files[0].name;
-    // console.log(fileInput.files[0].name);
     if (fileInput.files.length > 0) {
         imgFlg = 1;
     }
@@ -433,12 +432,6 @@ function userinfoupdate() {
 
 	document.getElementById('userinfo_form').submit();
 }
-
-// let userImgSelect = document.getElementById('profilephoto').files[0];
-// let userImgName = document.getElementById('user_img_name');
-// console.log(userImgSelect);
-
-// userImgName.innerHTML = userImgSelect;
 
 // 게시글 탭
 const tab = document.querySelector(".tab");
@@ -500,7 +493,6 @@ function plusMypageBoard() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
             for (let i = 0; i < data.length; i++) {
                 let boardTitlePlus = data[i].board_title;
                 let boardContentPlus = data[i].board_content;
@@ -560,7 +552,9 @@ function plusMypageBoard() {
             boardValueSet.value = '';
             boardValueSet.value = data[data.length-1].board_id;
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.error('오류 발생:', error);
+    });
 }
 
 // 댓글 더보기
@@ -578,7 +572,6 @@ function plusMypageComment() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
 
         let mypageCommentPlustBtn = document.getElementById('mypageCommentPlustBtn');
         
@@ -620,7 +613,9 @@ function plusMypageComment() {
             mypageCommentPlustBtn.value = data[i].board_id;
         }
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.error('오류 발생:', error);
+    });
 }
 
 
@@ -641,7 +636,6 @@ function plusMypageBoardModal() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
             for (let i = 0; i < data.length; i++) {
                 let boardTitlePlus = data[i].board_title;
                 let boardContentPlus = data[i].board_content;
@@ -701,7 +695,9 @@ function plusMypageBoardModal() {
             boardValueSet.value = '';
             boardValueSet.value = data[data.length-1].board_id;
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.error('오류 발생:', error);
+    });
 }
 
 // 댓글 모달 더보기
@@ -718,7 +714,6 @@ function plusMypageCommentModal() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
 
         let mypageCommentPlustBtn = document.getElementById('mypageModalCommentBtn');
         
@@ -760,5 +755,7 @@ function plusMypageCommentModal() {
             mypageCommentPlustBtn.value = data[i].board_id;
         }
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.error('오류 발생:', error);
+    });
 }

@@ -1,16 +1,3 @@
-// window.addEventListener('load', function() {
-//     buildCalendar();  //달력 불러오는 함수를 페이지를 로딩하자마자 실행
-// });.
-// const mediaQuery = window.matchMedia('(min-width: 800px)');
-
-// if (mediaQuery.matches) {
-//     dateScrollbar();
-//     console.log('노노노')
-// } else {
-//     console.log('애애앵')
-// }
-
-
 window.addEventListener('load', function() {
     weekendShow(); //일주일을 불러오는 함수
 });
@@ -134,8 +121,6 @@ function showRecordToday () {
 }
 //날짜에 따른 검색기록 조회
 function selectDate(data, data2) {
-    console.log('data:   ' + data);
-    console.log('data2:   ' + data2);
 
     // 선택한 날을 제외한 다른 hover 삭제
     let parentElement = document.getElementById('mypageSecond');
@@ -179,7 +164,6 @@ function selectDate(data, data2) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('검색기록결과' + data);
         if( data.length > 0) {
             noticeNoData.classList.add('notice-no-data');
             recordTurn.value = '';
@@ -210,10 +194,6 @@ function selectDate(data, data2) {
                 recordDeleteDiv.onclick = function (e) {recorddeletemodalopen(e.target.id);}
                 textspan.classList.add('recordtext');
                 textspan.innerHTML = data[i].symptom_name;
-                console.log('record_id');
-                console.log(data[i].record_id);
-                console.log('onclick아이디');
-                console.log(inputHiddenRecordValue);
 
                 recordDiv.appendChild(timespan);
                 recordDiv.appendChild(recordDeleteDiv);
@@ -230,7 +210,9 @@ function selectDate(data, data2) {
             noticeNoData.classList.remove('notice-no-data');
         }
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.error('오류 발생:', error);
+    });
 }
 
 // 스크롤 이동
@@ -293,16 +275,12 @@ function buildCalendar() {
             searchDateZero = "0" + searchDate;
             newDIV.id = inputDateId + searchDateZero;
             testsearchDateZero = inputDateId + searchDateZero;
-            // console.log(testsearchDateZero);
         } else {
             searchDateZero = searchDate;
             newDIV.id = inputDateId + searchDateZero;
             testsearchDateZero = inputDateId + searchDateZero;
         }
         newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
-        // let newDivId = newDIV.id;
-        // ptagCal.onclick = function () { console.log('test') }; //각 날짜마다 onclick 처리        
-        // console.log(testsearchDateZero);
         
         nowColumn.appendChild(newDIV);
 
@@ -325,8 +303,6 @@ function buildCalendar() {
 
         let ptagCal = document.getElementById(testsearchDateZero);
         ptagCal.onclick = function (e) {
-            // console.log("Event listener executed with ptagCal1:", ptagCal);
-            // console.log(e.target.id);
             formattedDate = todayCorrect();
             if(e.target.id < formattedDate) {
                 newCalendarReloard(e.target.id);
@@ -334,7 +310,6 @@ function buildCalendar() {
             if (e.target.id = formattedDate) {
                 newCalendarReloard(formattedDate);
             }
-            // choiceDate(e.target.id);
         }; //각 날짜마다 onclick 처리
         searchDate++;
     }
@@ -359,7 +334,6 @@ function newCalendarReloard(data) {
     let thisyear = setNewCalendar.getFullYear(); // 불러온 년도
     let thismonthday = setNewCalendar.getMonth()+1; // 불러온 달
     let thismonthtoday = setNewCalendar.getDate(); // 불러온 날짜
-    console.log('불러온 날짜' + thismonthtoday);
     let iddate = thisyear + '-' + thismonthday + '-'; // 날짜마다id 세팅
     let monthlast = new Date(thisyear, thismonthday, 0); //월의 마지막 날짜 가져오기
     let monthfirstday = new Date(thisyear, thismonthday-1, 1); //월의 첫번째 날짜 가져오기
@@ -426,7 +400,6 @@ function prevCalendar() {
 }
 // 날짜 선택
 function choiceDate(data) {
-    console.log("choiceDate", data);
     if (document.getElementsByClassName('choiceDay')) {                              // 기존에 선택한 날짜가 있으면
         document.getElementsByClassName('choiceDay').classList.remove('choiceDay');  // 해당 날짜의 "choiceDay" class 제거
     }
@@ -434,17 +407,14 @@ function choiceDate(data) {
 }
 // 다음달 버튼 클릭
 function nextCalendar() {
-    console.log('달력 다음달 버튼 클릭시:'+ nowMonth.getMonth())
     if(nowMonth.getMonth() + 1 > 11) {
         let Year =  nowMonth.getFullYear() + 1;
         let Month = 0;
         let newDate = nowMonth.getDate();
         
         nowMonth = new Date(Year, Month, newDate);
-        console.log('달력 리뉴얼'+nowMonth);
     } else {
         nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, nowMonth.getDate());   // 현재 달을 1 증가
-        console.log('달력 유지'+nowMonth);
     }
     buildCalendar();    // 달력 다시 생성
 }
@@ -478,7 +448,9 @@ function recorddeletemodalopen(data) {
         .then(response => response.json())
         .then(data => {
             console.log(data)})
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.error('오류 발생:', error);
+        });
 
 	}else{
         // 처리 없음
