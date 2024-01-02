@@ -53,7 +53,7 @@ class MypageController extends Controller
             ->where('comments.deleted_at', null)
             ->where('boards.deleted_at', null)
             ->orderby('comments.comment_id', 'DESC')
-            ->limit(6)
+            ->limit(8)
             ->get();
         
         $user_hashtag = DB::table('favorite_tags')
