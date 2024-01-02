@@ -373,9 +373,9 @@ fileInput.addEventListener('change', function() {
     }
     
     if (fileInput.files[0].size / 1048576 > 5) {
-        alert('파일의 용량이 너무 큽니다.');
         imgFlg = 2;
         
+        userImgUrl.innerHTML = '이미지의 용량이 너무 큽니다.';
         PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
         document.getElementById('user-info-img-remove').style.visibility = 'visible';
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('u_id');
             $table->integer('category_id');
             $table->string('board_title');
-            $table->string('board_content');
+            $table->string('board_content', 1000);
             $table->integer('board_hits')->default(0);
             $table->timestamps();
             $table->softDeletes();
