@@ -65,7 +65,7 @@
    
     <div class="detail_comment">
         <div class="comment_bottom">
-        <p>댓글{{ count($data->comments ?? []) }}개</p>
+        <p>댓글 <span style="color:#e86507; font-weight:900;">{{ count($data->comments ?? []) }}</span>개</p>
         </div>
         <ul>
         @foreach($data->comments ?? [] as $comment)
