@@ -252,42 +252,43 @@ class BoardController extends Controller
             'board_title' => $request->input('u_title'),
             'board_content' => $request->input('u_content'),
         ]);
-        if($request->hashtag) {
-        
+        //$request에서 hashtag 파라미터의 존재 여부를 확인합니다.
+        //<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
+        if($request->hashtag) {       
 
         // 새로운 해시태그 추가 또는 기존 해시태그 갱신
+        //hashtag 파라미터의 값을 가져와서 $hashtagInput 변수에 저장합니다.
         $hashtagInput = $request->input('hashtag');
+        //$hashtagInput 값을 쉼표로 구분하여 배열로 변환합니다. 
+        //이렇게 함으로써 여러 개의 해시태그를 나누어 처리할 수 있습니다.
         $hashtag_names = explode(',', $hashtagInput);
+        //각 해시태그의 양쪽 공백을 제거합니다.
         $hashtag_names = array_map('trim', $hashtag_names);
         
        foreach ($hashtag_names as $hashtag_name) {
+        // $hashtag_name에 해당하는 해시태그를 데이터베이스에서 찾거나 새로 생성합니다. 
+        // firstOrCreate 메서드는 주어진 조건으로 검색하여 해당하는 모델을 찾거나 생성합니다.
             $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
+            //현재 반복 중인 해시태그의 ID를 $hashtagIds 배열에 추가합니다.
             $hashtagIds[] = $hashtag->hashtag_id;
         }
 
-        // 변경된 해시태그만 업데이트
+        //$result 모델의 hashtags 관계를 동기화합니다.
+        //$hashtagIds 배열에 있는 해시태그 ID들과 현재 모델의 해시태그 간의 관계를 업데이트합니다. 
+        //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다
         $result->hashtags()->sync($hashtagIds);
     }
         
-        // 다시 불러오기
-        $board_detail_get = Board::with(['hashtags'])
-    ->where('board_id', $board_id)
-    ->first();
+        
 
     if ($request->hasFile('board_img')) {
         // 기존 이미지 삭제
-        // $result->images()->delete();
+        // $result->images()->delete();     
         
-        // $original_images = $result->images();
-        $origin_board_img = $request->origin_board_img;
         
-        $img_result = $request->file('board_img');
+        $images = $request->file('board_img');
         
-        $images = array();
-        $images[] = '';
-
-        $images = $origin_board_img;
-        $images = $img_result;
+        
         
         foreach ($images as $image) {
             $imageName = Str::uuid() . '.' . $image->extension();
