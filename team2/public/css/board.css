@@ -15,7 +15,8 @@
     margin: 10px auto;
 }
 .last_main a .last_container:hover, .last_main a .last_container:focus {
-    background-color: rgba(255, 209, 177, 0.6);
+    background-color: #fdf9f3;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 .last_container {
     
@@ -49,6 +50,9 @@
 .detail_board_hits{
     font-size: 1rem;
     font-weight: normal;
+    display: inline-block;
+    float: right;
+    margin-right: 10px
 }
 .last-board-title p {
     display: inline-block;
@@ -85,7 +89,12 @@ textarea{
 }
 .comment_content{
     width: 89%;  
-    height: 80px;  
+    height: 80px;
+}
+.comment_content:focus {
+    outline: none;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: #FFF8DC;
 }
 
 .board_nic_img{
@@ -130,7 +139,7 @@ textarea{
     border-radius: 20%;
 }
 .delete-comment-btn:hover {
-    background-color: rgb(212, 212, 212);
+    background-color: rgb(255, 226, 163);
 }
 
 /* -------- detail board -------- */
@@ -144,7 +153,7 @@ textarea{
 
 
 .detail_hidden_container{
-    margin: 20px;
+    margin: 10px;
 }
 
 .d_btn{
@@ -170,6 +179,9 @@ textarea{
     background-color: white;
     font-size: 1.2rem;
     float: right;
+}
+.a_cancel:hover {
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
 .a_update {
@@ -198,16 +210,17 @@ textarea{
     display: inline-block;
 }
 
-
-
-
+.board_created_at {
+    text-align: right;
+    color: #888;
+}
 
 .detail_content{
     border: 2px solid rgba(128, 128, 128, 0.230);
     min-height: 300px;
     grid-column-start: 1;
     grid-column-end: 3;
-    margin: 20px 0;
+    margin: 10px 0;
     padding-left: 15px;
 }
 .detail_content img{
@@ -231,6 +244,10 @@ textarea{
     background-color: #e0e0e0;
     border-radius: 5px;
     min-width: 60px;
+}
+.detail_comment_insert_complete:hover {
+    background-color: rgb(255, 226, 163);
+    transition: 0.2s;
 }
 li{
     list-style-type: none;
@@ -319,12 +336,12 @@ li{
     margin-bottom: 5px;
     display: inline-block;
 }
+
 .selected-tag {
     background-color: #ffffff;
     border: 1px solid #a8a8a8;
     border-radius: 5px;
     padding: 3px 7px;
-    margin-bottom: 5px;
     display: inline-block;
     margin-right: 3px;
 }
@@ -612,7 +629,8 @@ li{
 }
 
 a .a-bordergo-hover:hover {
-    background-color:  rgba(255, 153, 80, 0.6);
+    background-color: rgba(243, 243, 243, 0.6);
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
 
 .border-line-color-gray > a {
@@ -675,6 +693,9 @@ a .a-bordergo-hover:hover {
     align-items: center;
     justify-content: center;
     cursor: pointer;            
+}
+.community_a:hover, .community_aplus:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 .cate_btn_go {
     border: 1px solid rgba(128, 128, 128, 0.369);   
@@ -829,6 +850,51 @@ a .a-bordergo-hover:hover {
     border: none;
 }
 
+.detail-board-created {
+    font-size: 1rem;
+    margin-left: 10px;
+    color: #888;
+    display: inline-block;
+}
+
+.detail-board-name {
+    margin-top: 10px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+} 
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+.pagination a:hover,
+.pagination span:hover {
+     /* 호버 시 배경색 변경 */
+    color: #FF9900; /* 호버 시 글자색 변경 (예시로 검은색으로 지정) */
+}
+.pagination-current{
+    color:rgb(255, 255, 255);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #FF9900;
+    font-weight: 900;
+    margin-right: 5px;
+    text-align: center;
+}
+.pagination-link {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #e4e4e4;
+    margin-right: 5px;
+    text-align: center;
+}
+
 @media only screen and (min-width: 1050px) {
     .community_icon {
         width: 60px;
@@ -921,15 +987,12 @@ a .a-bordergo-hover:hover {
         display: block;
         display: flex;
         flex-direction: column-reverse;
+        margin: 3px 0 0 10px;
 
     }
     .board_nic_text .detail-board-created {
         display: flex;
         justify-content: flex-end;
-    }
-    .board_nic_text > div {
-        font-size: 0.85rem;
-        margin-top: 3px;
     }
     .last_user img {
         margin-top: 7px;
@@ -945,13 +1008,28 @@ a .a-bordergo-hover:hover {
     .last_user .community_icon {
         margin-top: 5px;
     }
+    
+    .detail_board_hits{
+        font-size: 0.8rem;
+        font-weight: normal;
+        display: inline-block;
+        float: right;
+        margin-right: 10px;
+    }
+    .detail-board-created {
+        font-size: 0.8rem;
+        margin-left: 10px;
+        color: #888;
+        display: inline-block;
+    }
+    .pagination a, .pagination span {
+        display: inline-block;
+        padding: 8px 10px;
+        text-decoration: none;
+    }
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-} 
+
 @media only screen and (min-width: 851px) {
     .board_nic_text{
         display: flex;
@@ -959,25 +1037,5 @@ a .a-bordergo-hover:hover {
         align-items: center;
         margin-left: 10px;
     }
-}
-
-
-
-.pagination a,
-.pagination span {
-    display: inline-block;
-    padding: 8px 12px;
-    
-    text-decoration: none;
-   
-}
-.pagination a:hover,
-.pagination span:hover {
-     /* 호버 시 배경색 변경 */
-    color: #f44336; /* 호버 시 글자색 변경 (예시로 검은색으로 지정) */
-}
-.pagination-current{
-    color:red;
-    
 }
 

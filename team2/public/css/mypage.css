@@ -28,7 +28,7 @@
     box-shadow:0px 40px 30px -20px rgba(0,0,0,0.3);
     position: absolute;
     z-index: 1;
-    left: -75%;
+    left: -90%;
     top: 50%;
 }
 
@@ -338,6 +338,10 @@ td {
 
 /* 마이페이지 */
 
+.tab {
+    margin-top: 42px;
+}
+
 /* 마이페이지 그리드 */
 .tab_list {
     display: flex;
@@ -351,7 +355,7 @@ td {
     justify-content: center;
     grid-template-columns: 49vw 21vw;
     justify-items: center;
-    margin: 70px auto;
+    margin: 30px auto;
 }
 .mypage-content, .mypage-content2 {
     border-radius: 8px;
@@ -425,6 +429,7 @@ td {
     height: 100px;
     font-size: 1.1rem;
     padding: 15px;
+    overflow: hidden;
 }
 .mpb-modify {
     margin-bottom: 30px;
@@ -453,6 +458,9 @@ td {
     line-height: 50px;
     cursor: pointer;
 }
+/* .favorite-tag-plus:hover {
+
+} */
 .mypage-mainbar {
     display: grid;
     grid-template-rows: 200px 1fr;
@@ -478,8 +486,8 @@ td {
     margin-bottom: 20px;
 }
 .mypage-btn:hover, .mypage-btn2:hover {
-    background-color: #dedede;
     border: 1px solid #dedede;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .favorite-tag-plus {
@@ -842,8 +850,8 @@ td {
 #creaTagMainDiv > .mypage-hashtag > div {
     background-color: #EDEDED;
 }
-.mypage-hashtag > div:hover {
-    background-color: rgb(248, 199, 124, 0.3);
+.mypage-hashtag > div:hover, #creaTagMainDiv > .mypage-hashtag > div:hover {
+    background-color: rgb(255, 214, 161)
 }
 .mypage-hashtag > div > span {
     cursor: pointer;
@@ -863,10 +871,6 @@ td {
     }
 }
 @media screen and (max-width: 800px) {
-    .maincalendar {
-        left: -70%;
-        width: 380px;
-    }
     .mypage-third {
         margin-bottom: 100px;
         width: 100%;
