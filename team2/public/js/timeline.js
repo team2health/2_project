@@ -136,7 +136,6 @@ function showRecordToday () {
 //날짜에 따른 검색기록 조회
 function selectDate(data, data2) {
     let dataZero = '';
-    console.log('data' + data);
     if(data2 < 10) {
         dataZero = String(0) + data2;
     } else {
@@ -144,7 +143,6 @@ function selectDate(data, data2) {
     }
 
     let formDataSet = data + dataZero; 
-    console.log('formDataSet' + formDataSet);
     // 선택한 날을 제외한 다른 hover 삭제
     let parentElement = document.getElementById('mypageSecond');
     let childElements = parentElement.getElementsByClassName('datebardayselect');
@@ -178,7 +176,6 @@ function selectDate(data, data2) {
         }
     // }
 
-    // console.log('//날짜에 따른 검색기록 조회: ' + data);
 
     let formData = new FormData();
     formData.append('date', formDataSet);
@@ -342,7 +339,6 @@ function buildCalendar() {
 
 // 달력 날짜 선택하면 실행되는 함수
 function newCalendarReloard(data) {
-    // console.log('newCalendarReloard' + data);
     // 기존 달의 데이터바 삭제
     let mypageSecond = document.getElementById('mypageSecond');
     let mypageSecondMargin = document.getElementById('mypageSecondMargin');
