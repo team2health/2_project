@@ -447,7 +447,6 @@ let tabflg = 1;
 
 firstTab.addEventListener('click', function () {
     if(tabflg === 2) {
-        console.log('플래그1');
             data1.forEach(element => {
                 element.style.display = 'block';
             });
@@ -462,7 +461,6 @@ firstTab.addEventListener('click', function () {
 
 secondTab.addEventListener('click', function () {
     if (tabflg === 1) {
-        console.log('플래그2');
             data2.forEach(element => {
                 element.style.display = 'block';
             });
