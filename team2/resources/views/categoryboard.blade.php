@@ -22,7 +22,7 @@
                 <div class="user-nickname">
                 {{ optional($item->user)->user_name }}
                 </div>
-                <div >
+                <div class="board_created_at">
                     {{ substr($item->created_at, 0, 10)}}
                 </div>
             </div>

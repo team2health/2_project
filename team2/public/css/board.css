@@ -49,6 +49,9 @@
 .detail_board_hits{
     font-size: 1rem;
     font-weight: normal;
+    display: inline-block;
+    float: right;
+    margin-right: 10px
 }
 .last-board-title p {
     display: inline-block;
@@ -144,7 +147,7 @@ textarea{
 
 
 .detail_hidden_container{
-    margin: 20px;
+    margin: 10px;
 }
 
 .d_btn{
@@ -198,16 +201,17 @@ textarea{
     display: inline-block;
 }
 
-
-
-
+.board_created_at {
+    text-align: right;
+    color: #888;
+}
 
 .detail_content{
     border: 2px solid rgba(128, 128, 128, 0.230);
     min-height: 300px;
     grid-column-start: 1;
     grid-column-end: 3;
-    margin: 20px 0;
+    margin: 10px 0;
     padding-left: 15px;
 }
 .detail_content img{
@@ -319,12 +323,12 @@ li{
     margin-bottom: 5px;
     display: inline-block;
 }
+
 .selected-tag {
     background-color: #ffffff;
     border: 1px solid #a8a8a8;
     border-radius: 5px;
     padding: 3px 7px;
-    margin-bottom: 5px;
     display: inline-block;
     margin-right: 3px;
 }
@@ -829,6 +833,37 @@ a .a-bordergo-hover:hover {
     border: none;
 }
 
+.detail-board-created {
+    font-size: 1rem;
+    margin-left: 10px;
+    color: #888;
+    display: inline-block;
+}
+
+.detail-board-name {
+    margin-top: 10px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+} 
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+.pagination a:hover,
+.pagination span:hover {
+     /* 호버 시 배경색 변경 */
+    color: #f44336; /* 호버 시 글자색 변경 (예시로 검은색으로 지정) */
+}
+.pagination-current{
+    color:red;
+    
+}
+
 @media only screen and (min-width: 1050px) {
     .community_icon {
         width: 60px;
@@ -921,15 +956,12 @@ a .a-bordergo-hover:hover {
         display: block;
         display: flex;
         flex-direction: column-reverse;
+        margin: 3px 0 0 10px;
 
     }
     .board_nic_text .detail-board-created {
         display: flex;
         justify-content: flex-end;
-    }
-    .board_nic_text > div {
-        font-size: 0.85rem;
-        margin-top: 3px;
     }
     .last_user img {
         margin-top: 7px;
@@ -945,13 +977,28 @@ a .a-bordergo-hover:hover {
     .last_user .community_icon {
         margin-top: 5px;
     }
+    
+    .detail_board_hits{
+        font-size: 0.8rem;
+        font-weight: normal;
+        display: inline-block;
+        float: right;
+        margin-right: 10px;
+    }
+    .detail-board-created {
+        font-size: 0.8rem;
+        margin-left: 10px;
+        color: #888;
+        display: inline-block;
+    }
+    .pagination a, .pagination span {
+        display: inline-block;
+        padding: 8px 10px;
+        text-decoration: none;
+    }
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-} 
+
 @media only screen and (min-width: 851px) {
     .board_nic_text{
         display: flex;
@@ -959,25 +1006,5 @@ a .a-bordergo-hover:hover {
         align-items: center;
         margin-left: 10px;
     }
-}
-
-
-
-.pagination a,
-.pagination span {
-    display: inline-block;
-    padding: 8px 12px;
-    
-    text-decoration: none;
-   
-}
-.pagination a:hover,
-.pagination span:hover {
-     /* 호버 시 배경색 변경 */
-    color: #f44336; /* 호버 시 글자색 변경 (예시로 검은색으로 지정) */
-}
-.pagination-current{
-    color:red;
-    
 }
 

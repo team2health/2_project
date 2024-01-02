@@ -1,6 +1,7 @@
 <header>
 	@if (!Str::contains(request()->url(), 'login') && !Str::contains(request()->url(), 'regist'))
 	<div class="container">
+	<a name="top">
 		<div class="inmypageheader">
 			<div style="color: rgb(182, 182, 182)" class="div-margin font-small">
 				<div id="time-year"></div>

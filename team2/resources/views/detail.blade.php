@@ -9,19 +9,19 @@
 	
 	<div class="detail_container">		
         <div class="detail_hidden_container">
-            <div class="last_user">                
-                <div class="last-board-title">           
+            <div class="detail-board-created">
+                {{$data->created_at}}
+            </div>
+            <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>
+            <div class="last_user">
+                <div class="last-board-title">    
                     <p>{{ $data->board_title }}</p>
-                    <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>
                 </div>
                 {{-- <div class="last-board-detail"> --}}
                     <img class="community_icon" src="{{ asset('user_img/' . optional($data->user)->user_img) }}" alt="">                                  
                     <div class="board_nic_text">
-                        <div>
+                        <div class="detail-board-name">
                         {{ optional($data->user)->user_name }}
-                        </div>
-                        <div class="detail-board-created">
-                            {{$data->created_at}}
                         </div>
                         
                     </div>
