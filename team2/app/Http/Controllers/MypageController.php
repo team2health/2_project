@@ -80,8 +80,6 @@ class MypageController extends Controller
             ->where('id', $result)
             ->get();
 
-            // Log::debug("유저", ['name' => $user_info]);
-
         return view('mypage')->with('data', $board_result)
         ->with('user_hashtag', $user_hashtag)
         ->with('user_info', $user_info)
@@ -141,7 +139,6 @@ class MypageController extends Controller
 
     public function allhashget(Request $request){
 
-        Log::debug("allhashget", $request->all());
         $result = session('id');
         $user_hashtag = DB::table('favorite_tags')
         ->select(
@@ -167,17 +164,12 @@ class MypageController extends Controller
         }
         $hashtag->orderBy('hashtags.hashtag_id');
         $allhashtag = $hashtag->get();
-        Log::debug($allhashtag);
         return response()->json($allhashtag);
 }
 
     public function myhashdeletepost(Request $request) {
-        Log::debug('**********************해시태그 삭제 start***********************');
-        Log::debug($request);
         
         $id = $request->myhashdelete;
-
-        Log::debug($id);
 
         Favorite_tag::destroy($id);
     }
@@ -185,10 +177,8 @@ class MypageController extends Controller
     public function addfavoritehashtagpost(Request $request) {
 
         $currentDateTime = Carbon::now();
-        Log::debug("asdfasdfa", $request->all());
         $tag_id = $request->tag_id;
         $result = session('id');
-        Log::debug("session", ['id' => $result]);
         $hashtag = DB::table('favorite_tags')->insert([
             'hashtag_id' => $tag_id,
             'u_id' => $result,
@@ -207,18 +197,13 @@ class MypageController extends Controller
         ->orderby('favorite_tag_id', 'desc')
         ->limit(1)
         ->get();
-        Log::debug($hashtaginfo);
-        Log::debug(response()->json($hashtaginfo));
         return response()->json($hashtaginfo);
     }
 
     public function todaytimelineget(){
 
-        Log::debug('********************start*************');
         $created_start = Carbon::now()->format('Y-m-d');
         $user_id = session('id');
-        Log::debug($created_start);
-        Log::debug($user_id);
 
         $today_timeline = DB::table('symptoms')
         ->select(
@@ -234,9 +219,7 @@ class MypageController extends Controller
         ->where('records.deleted_at', null)
         ->get();
 
-        Log::debug($today_timeline);
         $result_count = $today_timeline->count();
-        Log::debug($result_count);
 
         return view('timeline')
         ->with('data', $today_timeline)
@@ -246,12 +229,7 @@ class MypageController extends Controller
 
 
     public function namechangepost(Request $request) {
-        // Log::debug("*********** namechkpost start ***********");
-        // Log::debug("POST data".$_POST);
-        // Log::debug("이거", $request->all());
-        // Log::debug("이거".$request->user_name);
         $username = $request->user_name;
-        // Log::debug("user_name:".$username);
         
         $existingUser = User::where('user_name', $username)->first();
         
@@ -263,13 +241,11 @@ class MypageController extends Controller
     }
 
     public function userinfoupdatepost(Request $request) {
-        // Log::debug("111111", $request->all());
         
         // 사용자 ID 가져오기
         $result = session('id');
         
         $imgFlg = $request->imgFlg;
-        // Log::debug("efeeee", ['img' => $imgFlg]);
         
         $userinfo = User::find($result);
         
@@ -349,10 +325,8 @@ class MypageController extends Controller
             ->limit(6)
             ->get();
 
-            // Log::debug("이름", ['name' => $user_info]);
             session(['user_name' => $user_info[0]->user_name,
             'user_img' => $user_info[0]->user_img]);
-            // Log::debug("유저", ['name' => $user_info]);
 
 
             return view('mypage')
@@ -365,9 +339,7 @@ class MypageController extends Controller
 
     public function daytimelinepost(Request $request) {
 
-        log::debug("daytimelinepost", $request->all());
         $created_at = $request->date;
-        Log::debug($created_at);
         $user_id = session('id');
 
         $timeline = DB::table('symptoms')
@@ -382,8 +354,6 @@ class MypageController extends Controller
         ->where('records.created_at', 'like', $created_at.'%')
         ->where('records.deleted_at', null)
         ->get();
-        
-        Log::debug($timeline);
 
         return response()->json($timeline);
 
@@ -393,8 +363,6 @@ class MypageController extends Controller
 
     $id = $request->record_id;
     $created_at = $request->created_at;
-    Log::debug($id);
-    Log::debug($created_at);
 
     Record::destroy($id);
     DB::commit();

@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('서버 응답:', data);
             updateCommentCount(); // 댓글 개수 업데이트
             // 댓글 추가 후 폼 초기화
             commentForm.reset();
@@ -61,8 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: formData,
             })
             .then(response => response.json())
-            .then(data => {
-                console.log('서버 응답:', data);                
+            .then(data => {              
                 updateCommentCount(); // 댓글 개수 업데이트
                 // 댓글 추가 후 폼 초기화
                 window.location.reload();

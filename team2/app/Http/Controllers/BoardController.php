@@ -322,15 +322,11 @@ class BoardController extends Controller
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
-            
-        // Log::debug($categoryId);
         $category_board = Board::where('category_id', $categoryId)
         ->where('deleted_at', null)->orderby('board_id', 'desc')->paginate(5);
 
         $category_id = Category::orderby('category_id', 'asc')->get();
 
-        // Log::debug($result);
-        // Log::debug($category_id);
         $category_name = Category::where('category_id', $categoryId)->get();
         $result = [$category_board, $category_id, $category_name];
 
@@ -380,7 +376,6 @@ class BoardController extends Controller
             $cnt++;
         }
 
-        Log::debug($result);
         return response()->json($result);
     }
 
