@@ -436,44 +436,86 @@ function userinfoupdate() {
 // 게시글 탭
 const tab = document.querySelector(".tab");
 const tabListItem = document.querySelectorAll(".mypage-board-show-btn");
-const tabContent = document.querySelectorAll(".tab-contents");
-const active = document.querySelector(".tab-active");
-const showing = document.querySelector(".tab-show");
+const firstTab = tabListItem[0];
+const secondTab = tabListItem[1];
+const tabContent1 = document.querySelectorAll(".tab-contents");
+const tabContent2 = document.querySelectorAll(".tab-contents2");
+const data1 = document.querySelectorAll('[data-order="1"]');
+const data2 = document.querySelectorAll('[data-order="2"]');
 
-tab.addEventListener("click", (e) => {
-    const ListOrder = e.target.dataset.list;
-    tabListItem.forEach(function (e) {
-    e.classList.remove("active");
-    });
-    e.target.classList.add("active");
-    tabContent.forEach(function (event) {
-        if (event.dataset.order == ListOrder) {
-        event.classList.add("tab-show");
-        } else event.classList.remove("tab-show");
-        });
-});
+let tabflg = 1;
+
+firstTab.addEventListener('click', function () {
+    if(tabflg === 2) {
+        console.log('플래그1');
+            data1.forEach(element => {
+                element.style.display = 'block';
+            });
+            data2.forEach(element => {
+                element.style.display = 'none';
+            });
+        firstTab.classList.add('active');
+        secondTab.classList.remove('active');
+        tabflg = 1;
+    } 
+})
+
+secondTab.addEventListener('click', function () {
+    if (tabflg === 1) {
+        console.log('플래그2');
+            data2.forEach(element => {
+                element.style.display = 'block';
+            });
+            data1.forEach(element => {
+                element.style.display = 'none';
+            });
+        firstTab.classList.remove('active');
+        secondTab.classList.add('active');
+        tabflg = 2;
+    }
+})
+
 
 // 모달 탭
+
 const tabModal = document.querySelector(".tab-modal");
 const tabListItemModal = document.querySelectorAll(".mypage-board-modal-btn");
-const tabContentModal = document.querySelectorAll(".tab-contents-modal");
-const activeModal = document.querySelector(".tab-active");
-const showingModal = document.querySelector(".tab-show-modal");
+const modalfirstTab = tabListItemModal[0];
+const modalsecondTab = tabListItemModal[1];
+const modaltabContent1 = document.querySelectorAll(".tab-contents-modal");
+const modaltabContent2 = document.querySelectorAll(".tab-contents-modal2");
+const modaldata1 = document.querySelectorAll('[data-order="3"]');
+const modaldata2 = document.querySelectorAll('[data-order="4"]');
 
-tabModal.addEventListener("click", (e) => {
-    const ListOrderModal = e.target.dataset.list;
-    tabListItemModal.forEach(function (e) {
-    e.classList.remove("tab-active");
-    });
-    e.target.classList.add("tab-active");
-    tabContentModal.forEach(function (event) {
-        if (event.dataset.order == ListOrderModal) {
-        event.classList.add("tab-show-modal");
-        } else event.classList.remove("tab-show-modal");
-        });
-});
+let modaltabflg = 3;
 
-// active 클래스 제한
+modalfirstTab.addEventListener('click', function () {
+    if(modaltabflg === 4) {
+            modaldata1.forEach(element => {
+                element.style.display = 'block';
+            });
+            modaldata2.forEach(element => {
+                element.style.display = 'none';
+            });
+        firstTab.classList.add('active');
+        secondTab.classList.remove('active');
+        modaltabflg = 3;
+    } 
+})
+
+modalsecondTab.addEventListener('click', function () {
+    if (modaltabflg === 3) {
+            modaldata2.forEach(element => {
+                element.style.display = 'block';
+            });
+            modaldata1.forEach(element => {
+                element.style.display = 'none';
+            });
+        firstTab.classList.remove('active');
+        secondTab.classList.add('active');
+        modaltabflg = 4;
+    }
+})
 
 
 // 게시글 더보기
