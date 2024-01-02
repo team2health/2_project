@@ -20,6 +20,15 @@
 							<input type="file" name="board_img[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
 						</div>
 					@endforeach
+					@for ($i = count($result->images); $i < 3; $i++)
+						<div class="detail_board_content">
+							<img id="preview{{ $i }}" src="{{ asset('img/plus.png') }}" alt="">
+							<label for="file{{ $i }}">
+								<button type="button" onclick="openFile('file{{ $i }}')">파일변경</button>
+							</label>
+							<input type="file" name="board_img[]" id="file{{ $i }}" style="display:none;" onchange="previewImage('file{{ $i }}', 'preview{{ $i }}')" accept="image/*">
+						</div>
+					@endfor
 				</div>	
 				<div class="insert_select_container">
 					<select name="board" id="board" class="insert_select" >

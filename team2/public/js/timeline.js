@@ -50,12 +50,19 @@ function weekendShow() {
     let thismonth = today.getFullYear(); // 올해 날짜 가져옴
     let thismonthday = today.getMonth()+1; // 이번달
     let thismonthtoday = today.getDate();
-    let iddate = thismonth + '-' + thismonthday + '-';
-
+    let thismonthdayi = '';
+    
     let monthlast = new Date(thismonth, thismonthday+1, 0); //월의 마지막 날짜 가져오기
     let monthfirstday = new Date(thismonth, thismonthday, 1); //월의 마지막 날짜 가져오기
     let totalmonthdate = monthlast.getDate(); //변수에 담기
     let monthday = monthfirstday.getDay();
+    let iddate = thismonth + '-' + thismonthday + '-'; // 날짜마다id 세팅
+
+    if(thismonthday < 10) {
+        thismonthdayi = "0" + thismonthday;
+    }
+    
+    let iddate2 = thismonth + '-' + thismonthdayi + '-'; // 날짜마다id 세팅
 
 
     for (let date = 1; date <= totalmonthdate; date++) {
@@ -78,11 +85,18 @@ function weekendShow() {
             monthdaytext = '토';
         };
 
+        let aZeroSet = '';
+        if (date < 10) {
+            aZeroSet = "0" + date;
+        } else {
+            aZeroSet = date;
+        }
+
         let weekendindiv = document.createElement('div');
         weekendindiv.classList.add('datebar');
         weekendindiv.id = 'weekend'+date;
         weekendindiv.onclick = function () {
-            selectDate(iddate + date, date);
+            selectDate(iddate2 + aZeroSet, date);
         }
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')
@@ -121,6 +135,8 @@ function showRecordToday () {
 }
 //날짜에 따른 검색기록 조회
 function selectDate(data, data2) {
+    // console.log(data);
+    // console.log(data2);
 
     // 선택한 날을 제외한 다른 hover 삭제
     let parentElement = document.getElementById('mypageSecond');
@@ -154,6 +170,8 @@ function selectDate(data, data2) {
             });
         }
     // }
+
+    // console.log('//날짜에 따른 검색기록 조회: ' + data);
 
     let formData = new FormData();
     formData.append('date', data);
@@ -307,7 +325,7 @@ function buildCalendar() {
             if(e.target.id < formattedDate) {
                 newCalendarReloard(e.target.id);
             } 
-            if (e.target.id = formattedDate) {
+            else if (e.target.id = formattedDate) {
                 newCalendarReloard(formattedDate);
             }
         }; //각 날짜마다 onclick 처리
@@ -317,7 +335,7 @@ function buildCalendar() {
 
 // 달력 날짜 선택하면 실행되는 함수
 function newCalendarReloard(data) {
-
+    // console.log('newCalendarReloard' + data);
     // 기존 달의 데이터바 삭제
     let mypageSecond = document.getElementById('mypageSecond');
     let mypageSecondMargin = document.getElementById('mypageSecondMargin');
@@ -334,12 +352,20 @@ function newCalendarReloard(data) {
     let thisyear = setNewCalendar.getFullYear(); // 불러온 년도
     let thismonthday = setNewCalendar.getMonth()+1; // 불러온 달
     let thismonthtoday = setNewCalendar.getDate(); // 불러온 날짜
-    let iddate = thisyear + '-' + thismonthday + '-'; // 날짜마다id 세팅
+
+    let thismonthdayi = '';
+    let thismonthtodayi = '';
+    // 앞에 0 붙이기
+    thismonthdayi = thismonthday.toString().padStart(2, '0');
+    thismonthtodayi = thismonthtoday.toString().padStart(2, '0');
+
+    let iddate = thisyear + '-' + thismonthdayi + '-'; // 날짜마다id 세팅
     let monthlast = new Date(thisyear, thismonthday, 0); //월의 마지막 날짜 가져오기
     let monthfirstday = new Date(thisyear, thismonthday-1, 1); //월의 첫번째 날짜 가져오기
     let totalmonthdate = monthlast.getDate(); //변수에 담기
     let monthday = monthfirstday.getDay();
-    let iddate2 = thisyear + '-' + thismonthday + '-' + thismonthtoday; // ���� ��다
+    let iddate2 = thisyear + '-' + thismonthdayi + '-' + thismonthtodayi;
+
 
     for (let a = 1; a <= totalmonthdate; a++) {
         // 마지막 날짜만큼 for문 돌려서 1일부터 출력
@@ -361,11 +387,13 @@ function newCalendarReloard(data) {
             monthdaytext = '토';
         };
 
+
+
         let weekendindiv = document.createElement('div');
         weekendindiv.classList.add('datebar');
         weekendindiv.id = 'weekend'+a;
         weekendindiv.onclick = function () {
-            selectDate(iddate + a, a);
+            selectDate(iddate2, a);
         }
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')

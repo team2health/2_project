@@ -36,17 +36,17 @@
                             <span class="mypage-board-date">{{$item->created_at}}</span>
                         </div>
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                            <div class="mypage-boardbox">
-                                <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
-                            </div>
+                            <span class="mypage-boardbox">
+                                <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                                <span class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</span>
+                            </span>
                         </a>
                         @else
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                            <div class="mypage-boardbox">
-                                <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
-                            </div>
+                            <span class="mypage-boardbox">
+                                <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                                <span class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</span>
+                            </span>
                         </a>
                         @endif
                     @else
@@ -54,10 +54,10 @@
                         <span class="mypage-board-date">{{$item->created_at}}</span>
                     </div>
                     <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                        <div class="mypage-boardbox">
-                            <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                            <div class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</div>
-                        </div>
+                        <span class="mypage-boardbox">
+                            <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                            <span class="mypage-bord-detailbox">{!! Str::limit($item->board_content, 75, '...') !!}</span>
+                        </span>
                     </a>
                     @endif
                     @if($loop->last)
@@ -69,15 +69,15 @@
             </div>
             <div class="mypage-btn-plus" id="mypageComment" onclick="plusMypageBoard(); return false;">더보기</div>
             </div>
-            <div class="tab-contents" data-order="2">
+            <div class="tab-contents2" data-order="2">
                 
                 <div class="mypage-boards-part" id="mypageCommentPlus">
                     @forelse ($comments as $index => $item)
                         <a href="{{route('board.show', ['board' => $item->board_id])}}">
                             <div class="mypage-boardbox">
                                 <span class="mypage-boardbox-date">{{$item->created_at}}</span>
-                                <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                <div class="mypage-bord-detailbox">{{Str::limit($item->comment_content, 75, '...')}}</div>
+                                <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                                <span class="mypage-bord-detailbox">{{Str::limit($item->comment_content, 75, '...')}}</span>
                             </div>
                         </a>
                         @if($loop->last)
@@ -91,8 +91,8 @@
                 <div class="mypage-btn-plus" id="mypageBoard" onclick="plusMypageComment('mypageCommentPlus'); return false;">더보기</div>
             </div>
         </div>
-
     </div>
+{{-- </div> --}}
 
     {{-- 정보수정창 --}}
     <div class="mypage-content2" id="mypageContent2">
@@ -171,7 +171,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 
@@ -204,7 +204,7 @@
                             @if ( $index >= 1)
                                 @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
                                 <div class="mypage-date-today-modal">
-                                    <span class="mypage-board-date-modal">{{$item->created_at}}</span>
+                                    <span class="mypage-board-date-modal" style="width: 100vw; text-align:center;">{{$item->created_at}}</span>
                                 </div>
                                 <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                     <div class="mypage-boardbox-modal">
@@ -241,7 +241,7 @@
                     <div class="mypage-btn-modal-plus" id="modalBoard" onclick="plusMypageBoardModal(); return false;">더보기</div>
                 </div>
 
-                <div class="tab-contents-modal" data-order="4">
+                <div class="tab-contents-modal2" data-order="4">
                     <div class="mypage-boards-part" id="mypageCommentModalPlus">
                         @forelse ($comments as $index => $item)
 
@@ -269,6 +269,7 @@
                 <img src="/img/plusbtn.png" alt="" class="mypage-insert-btn">
             </a> --}}
         </div>
+        
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/mypage.js"></script>
