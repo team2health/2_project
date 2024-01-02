@@ -396,6 +396,9 @@ td {
     gap: 20px;
     padding-top: 35px;
 }
+.mypage-boards-part div span {
+    display: block;
+}
 .mypage-content-modal::-webkit-scrollbar {
     margin-top: 50px;
     width: 10px;
@@ -885,6 +888,8 @@ td {
 }
 
 @media screen and (max-width: 1200px) {
+
+    
     .mypage-grid {
         display: block;
         overflow: hidden;
@@ -894,9 +899,13 @@ td {
     , .mypage-content, .mypage-board-show-btn, .mypage-comment-show-btn {
         display: none;
     }
+    .tab {
+        display: none;
+    }
 }
 @media screen and (max-width: 1500px) {
     .mypage-board-show-btn {
         /* width: 45%; */
     }
+    
 }

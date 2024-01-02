@@ -69,7 +69,7 @@
             </div>
             <div class="mypage-btn-plus" id="mypageComment" onclick="plusMypageBoard(); return false;">더보기</div>
             </div>
-            <div class="tab-contents2 tab-show" data-order="2">
+            <div class="tab-contents2" data-order="2">
                 
                 <div class="mypage-boards-part" id="mypageCommentPlus">
                     @forelse ($comments as $index => $item)
@@ -204,7 +204,7 @@
                             @if ( $index >= 1)
                                 @if ($data[$present_item]->created_at != $data[$previous_item]->created_at)
                                 <div class="mypage-date-today-modal">
-                                    <span class="mypage-board-date-modal">{{$item->created_at}}</span>
+                                    <span class="mypage-board-date-modal" style="width: 100vw; text-align:center;">{{$item->created_at}}</span>
                                 </div>
                                 <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                     <div class="mypage-boardbox-modal">
