@@ -272,7 +272,7 @@ class BoardController extends Controller
             //현재 반복 중인 해시태그의 ID를 $hashtagIds 배열에 추가합니다.
             $hashtagIds[] = $hashtag->hashtag_id;
         }
-
+       
         //$result 모델의 hashtags 관계를 동기화합니다.
         //$hashtagIds 배열에 있는 해시태그 ID들과 현재 모델의 해시태그 간의 관계를 업데이트합니다. 
         //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다

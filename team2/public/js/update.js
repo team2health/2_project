@@ -199,9 +199,9 @@ function removeSelectedTag(tag) {
         }
     });
 
-    // // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 추가
-    // var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
-    // selectedHashtagsInput.value = selectedHashtags.join(',');
+    // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 추가
+    var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
+    selectedHashtagsInput.value = selectedHashtags.join(',');
 }
 
 // function removeSelectedTag(tag) {
