@@ -338,6 +338,10 @@ td {
 
 /* 마이페이지 */
 
+.tab {
+    margin-top: 42px;
+}
+
 /* 마이페이지 그리드 */
 .tab_list {
     display: flex;
@@ -351,7 +355,7 @@ td {
     justify-content: center;
     grid-template-columns: 49vw 21vw;
     justify-items: center;
-    margin: 70px auto;
+    margin: 30px auto;
 }
 .mypage-content, .mypage-content2 {
     border-radius: 8px;
