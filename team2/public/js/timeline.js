@@ -51,21 +51,27 @@ function weekendShow() {
     let thismonthday = today.getMonth()+1; // 이번달
     let thismonthtoday = today.getDate();
     let thismonthdayi = '';
+    let thismonthtodayi = '';
     
+
     let monthlast = new Date(thismonth, thismonthday+1, 0); //월의 마지막 날짜 가져오기
-    let monthfirstday = new Date(thismonth, thismonthday, 1); //월의 마지막 날짜 가져오기
+    let monthfirstday = new Date(thismonth, thismonthday-1, 1); //월의 마지막 날짜 가져오기
     let totalmonthdate = monthlast.getDate(); //변수에 담기
+    // if (thismonthday == 12) {
+    //     thismonthtodayi = new Date(thismonth, thismonthday, 0);
+    //     totalmonthdate = monthlast.getDate();
+    // }
     let monthday = monthfirstday.getDay();
     let iddate = thismonth + '-' + thismonthday + '-'; // 날짜마다id 세팅
 
-    if(thismonthday < 10) {
-        thismonthdayi = "0" + thismonthday;
-    }
+    // 앞에 0 붙이기
+    thismonthdayi = thismonthday.toString().padStart(2, '0');
     
+
     let iddate2 = thismonth + '-' + thismonthdayi + '-'; // 날짜마다id 세팅
 
-
-    for (let date = 1; date <= totalmonthdate; date++) {
+    let formattedDate = '';
+    for (let i = 1; i <= totalmonthdate; i++) {
         // 마지막 날짜만큼 for문 돌려서 1일부터 출력
         let monthdaytext;
 
@@ -85,18 +91,11 @@ function weekendShow() {
             monthdaytext = '토';
         };
 
-        let aZeroSet = '';
-        if (date < 10) {
-            aZeroSet = "0" + date;
-        } else {
-            aZeroSet = date;
-        }
-
         let weekendindiv = document.createElement('div');
         weekendindiv.classList.add('datebar');
-        weekendindiv.id = 'weekend'+date;
+        weekendindiv.id = 'weekend'+i;
         weekendindiv.onclick = function () {
-            selectDate(iddate2 + aZeroSet, date);
+            selectDate(iddate2, i);
         }
         let weekendinspan = document.createElement('span');
         let weekendinspan2 = document.createElement('span')
@@ -105,7 +104,7 @@ function weekendShow() {
         let mypagediv = document.getElementById('mypageSecondMargin');
         mypagediv.appendChild(weekendindiv);
 
-        weekendinspan.innerHTML = date+'일';
+        weekendinspan.innerHTML = i+'일';
         weekendinspan2.innerHTML =  monthdaytext;
         // weekendinsdot.innerHTML = '.';
 
@@ -118,9 +117,10 @@ function weekendShow() {
             monthday = 0;
         }
 
-        if( date == thismonthtoday) {
+        if( i == thismonthtoday) {
             weekendindiv.classList.add('datebartoday');
         }
+        formattedDate = '';
     }
 }
 // 날짜에 따른 검색기록 초기 화면 
@@ -135,9 +135,16 @@ function showRecordToday () {
 }
 //날짜에 따른 검색기록 조회
 function selectDate(data, data2) {
-    // console.log(data);
-    // console.log(data2);
+    let dataZero = '';
+    console.log('data' + data);
+    if(data2 < 10) {
+        dataZero = String(0) + data2;
+    } else {
+        dataZero = String(data2);
+    }
 
+    let formDataSet = data + dataZero; 
+    console.log('formDataSet' + formDataSet);
     // 선택한 날을 제외한 다른 hover 삭제
     let parentElement = document.getElementById('mypageSecond');
     let childElements = parentElement.getElementsByClassName('datebardayselect');
@@ -174,7 +181,7 @@ function selectDate(data, data2) {
     // console.log('//날짜에 따른 검색기록 조회: ' + data);
 
     let formData = new FormData();
-    formData.append('date', data);
+    formData.append('date', formDataSet);
 
     fetch('/daytimeline', {
         method: 'POST',
@@ -354,23 +361,24 @@ function newCalendarReloard(data) {
     let thismonthtoday = setNewCalendar.getDate(); // 불러온 날짜
 
     let thismonthdayi = '';
-    let thismonthtodayi = '';
+    // let thismonthtodayi = '';
     // 앞에 0 붙이기
     thismonthdayi = thismonthday.toString().padStart(2, '0');
-    thismonthtodayi = thismonthtoday.toString().padStart(2, '0');
+    // thismonthtodayi = thismonthtoday.toString().padStart(2, '0');
+
 
     let iddate = thisyear + '-' + thismonthdayi + '-'; // 날짜마다id 세팅
     let monthlast = new Date(thisyear, thismonthday, 0); //월의 마지막 날짜 가져오기
     let monthfirstday = new Date(thisyear, thismonthday-1, 1); //월의 첫번째 날짜 가져오기
     let totalmonthdate = monthlast.getDate(); //변수에 담기
     let monthday = monthfirstday.getDay();
-    let iddate2 = thisyear + '-' + thismonthdayi + '-' + thismonthtodayi;
-
+    let iddate2 = thisyear + '-' + thismonthdayi + '-';
+    let aZero = '';
 
     for (let a = 1; a <= totalmonthdate; a++) {
         // 마지막 날짜만큼 for문 돌려서 1일부터 출력
         let monthdaytext;
-
+        aZero = '';
         if(monthday == 0) {
             monthdaytext = '일';
         } else if (monthday == 1) {
@@ -387,7 +395,11 @@ function newCalendarReloard(data) {
             monthdaytext = '토';
         };
 
-
+        if(a < 10){
+            aZero = String(a).padStart(2, '0');
+        } else {
+            aZero = String(a);
+        }
 
         let weekendindiv = document.createElement('div');
         weekendindiv.classList.add('datebar');
