@@ -495,8 +495,8 @@ modalfirstTab.addEventListener('click', function () {
             modaldata2.forEach(element => {
                 element.style.display = 'none';
             });
-        firstTab.classList.add('active');
-        secondTab.classList.remove('active');
+            modalfirstTab.classList.add('tab-active');
+            modalsecondTab.classList.remove('tab-active');
         modaltabflg = 3;
     } 
 })
@@ -509,8 +509,8 @@ modalsecondTab.addEventListener('click', function () {
             modaldata1.forEach(element => {
                 element.style.display = 'none';
             });
-        firstTab.classList.remove('active');
-        secondTab.classList.add('active');
+            modalfirstTab.classList.remove('tab-active');
+            modalsecondTab.classList.add('tab-active');
         modaltabflg = 4;
     }
 })

@@ -208,15 +208,15 @@
                                 </div>
                                 <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                     <div class="mypage-boardbox-modal">
-                                        <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                        <div class="mypage-bord-detailbox">{!!Str::limit($item->board_content, 75, '...')!!}</div>
+                                        <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                                        <span class="mypage-bord-detailbox">{!!Str::limit($item->board_content, 75, '...')!!}</span>
                                     </div>
                                 </a>
                                 @else
                                 <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                     <div class="mypage-boardbox-modal">
-                                        <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                        <div class="mypage-bord-detailbox">{!!Str::limit($item->board_content, 75, '...')!!}</div>
+                                        <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                                        <span class="mypage-bord-detailbox">{!!Str::limit($item->board_content, 75, '...')!!}</span>
                                     </div>
                                 </a>
                                 @endif
@@ -226,8 +226,8 @@
                             </div>
                             <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                 <div class="mypage-boardbox-modal">
-                                    <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                    <div class="mypage-bord-detailbox">{!!Str::limit($item->board_content, 75, '...')!!}</div>
+                                    <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                                    <span class="mypage-bord-detailbox">{!!Str::limit($item->board_content, 75, '...')!!}</span>
                                 </div>
                             </a>
                             @endif
@@ -248,8 +248,8 @@
                             <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                 <div class="mypage-boardbox-modal">
                                     <span class="mypage-boardbox-date">{{$item->created_at}}</span>
-                                    <div class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</div>
-                                    <div class="mypage-bord-detailbox">{!!Str::limit($item->comment_content, 75, '...')!!}</div>
+                                    <span class="mypage-bord-title">{{Str::limit($item->board_title, 30, '...')}}</span>
+                                    <span class="mypage-bord-detailbox">{!!Str::limit($item->comment_content, 75, '...')!!}</span>
                                 </div>
                             </a>
                             @if($loop->last)
