@@ -111,7 +111,8 @@ class BoardController extends Controller
             }
 
         $result= Hashtag::all();
-        return view('insert')->with('data', $result);
+        $categories = Category::all();
+        return view('insert')->with(['categories' => $categories, 'hashtags' => $result]);
     }    
 
     /**
@@ -125,7 +126,6 @@ class BoardController extends Controller
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
-
         $u_id = auth()->id();   
         // 요청에서 게시글 데이터를 가져옵니다.     
         $boardData = $request->only('board_title', 'board_content', 'category_id');        
@@ -133,7 +133,10 @@ class BoardController extends Controller
         $boardData['board_content'] = nl2br($boardData['board_content']);        
         // 게시글 데이터에 사용자 ID를 추가합니다.
         $boardData['u_id'] = $u_id;
+        $category_id = $request->input('category_id');
+        $boardData['category_id'] = $category_id;
         $board = Board::create($boardData);
+        
         
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasFile('board_img')) {
@@ -180,17 +183,20 @@ class BoardController extends Controller
                 'b.board_title',
                 'b.board_content',
                 'b.board_hits',
-                'b.created_at'
+                'b.created_at',
+                'categories.category_name'
             )
             ->join('board_tags as bt', 'bt.board_id', '=', 'b.board_id')
             ->join('hashtags', 'hashtags.hashtag_id', '=', 'bt.hashtag_id')
+            ->join('categories', 'categories.category_id', '=', 'b.category_id')
             ->where('b.board_id', $board_id)
             ->get();
         } else {
             $board_detail_get = Board::get()->where('board_id', $board_id);
         }
            
-    return redirect()->route('detail', ['board' => $board_id])->with('data', $board_detail_get);
+    return redirect()->route('detail', ['board' => $board_id])->with(['hashtags' => $hashtags, 'category' => $category]);
+    // $boardDetail = session('data');
 }
     
 

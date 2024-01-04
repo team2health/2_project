@@ -4,12 +4,29 @@
 
 @section('main')
 
-<main class="last_main">	
-	<div class="detail_container">       
+<main class="last_main">
+	<div class="detail_container">               
         <div class="detail-board-created">
             {{$data->created_at}}
         </div>
         <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>
+        @if(Auth::id() !== $data->user->id)
+<button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px; alt=""></button>
+    <div id="myModal" class="modal">
+        <div class="comment_modal_content">            
+            <p><input type="radio" name="options" value="option1">                                        
+            욕설</p> 
+            <p><input type="radio" name="options" value="option2">                                        
+            사기</p> 
+            <p><input type="radio" name="options" value="option3">                                        
+            허위사실 유포</p>                                             
+            <!-- <input type="radio" name="options" value="option4">
+            <label></label> -->   
+            <button type="button">신고</button> 
+            <span class="close" onclick="closeModal()">취소</span>                                    
+        </div>
+    </div>
+    @endif
         <div class="last_user">
             <div class="last-board-title">    
                 <p>{{ $data->board_title }}</p>
@@ -76,6 +93,23 @@
                                 @method('DELETE')
                                 @if(Auth::id() === $comment->u_id)
                                 <button type="submit" class="delete-comment-btn">X</button>
+                                @else
+                                <button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px; alt=""></button>
+                                <div id="myModal" class="modal">
+                                    <div class="comment_modal_content">
+                                        <span class="close" onclick="closeModal()">&times;</span>
+                                       <p><input type="radio" name="options" value="option1">                                        
+                                        욕설</p> 
+                                        <p><input type="radio" name="options" value="option2">                                        
+                                        사기</p> 
+                                        <p><input type="radio" name="options" value="option3">                                        
+                                        허위사실 유포</p>                                             
+                                        <!-- <input type="radio" name="options" value="option4">
+                                        <label></label> -->   
+                                        <button type="button">신고</button> 
+                                        <span class="close" onclick="closeModal()">취소</span>                                    
+                                    </div>
+                                </div>
                                 @endif
                             </form>
                         </div>
