@@ -815,9 +815,10 @@ function deleteMypageBtnAll() {
     mypageLogout.classList.add('mypage-display-none');
 }
 
+// 나의 해시태그 목록 불러오기
 function canDeleteHashLoad() {
     deleteMypageBtnAll();
     let mypageHashtagAll = document.getElementById('mypageHashtagAll');
     mypageHashtagAll.classList.remove('mypage-display-none');
-    
 }
+// 해시태그 검색

@@ -51,16 +51,32 @@
                 <img src="/img/favoritetag.png" alt="">
                 <div class="mypage-main-btn-name" onclick="canDeleteHashLoad(); return false;">관심태그 목록</div>
             </div>
+
             <div class="mypage-hashtag-display mypage-display-none" id="mypageHashtagAll">
-                <div class="mypage-hashtag" id="mypageHashtag">
-                    @forelse ($user_hashtag as $item)
-                        <div class="mypage-hashtag-click" id="favoriteHashtagId{{$item->favorite_tag_id}}" onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">
-                            <span id="favoritehashtext{{$item->favorite_tag_id}}" value="{{$item->favorite_tag_id}}">{{$item->hashtag_name}}</span>
-                        </div>
-                    @empty
-                        <span id="noticeThatFavoriteNone" class="notice-that-favorite-none"> 관심태그로 등록한 해시태그가 없습니다.</span>
-                    @endforelse
+
+                <div class="mypage-myHashtag">
+                    <div>나의 관심태그 목록</div>
+                    <div><img src="/img/close.png" alt=""></div>
                 </div>
+                    <div class="mypage-hashtag mypage-display-none" id="mypageHashtag" style="display: none;">
+                        @forelse ($user_hashtag as $item)
+                            <div class="mypage-hashtag-click" id="favoriteHashtagId{{$item->favorite_tag_id}}" onclick="favoritehashdelete({{$item->favorite_tag_id}}); return false;">
+                                <span id="favoritehashtext{{$item->favorite_tag_id}}" value="{{$item->favorite_tag_id}}">{{$item->hashtag_name}}</span>
+                            </div>
+                        @empty
+                            <span id="noticeThatFavoriteNone" class="notice-that-favorite-none"> 관심태그로 등록한 해시태그가 없습니다.</span>
+                        @endforelse
+                    </div>
+
+                    <form action="" method="post" class="mypage-hashtag-search-form">
+                        @csrf
+                        <div class="mypage-hashtag-search-div">
+                            <input type="text" placeholder="해시태그 검색">
+                            <button type="submit" class="mypage-hashtag-search">
+                                <img src="/img/search.png"
+                            ></button>
+                            </div>
+                    </form>
                 {{-- <div class="favorite-tag-plus" id="addallfavoritetag"> --}}
                     {{-- 관심태그 추가하기 --}}
                 </div>

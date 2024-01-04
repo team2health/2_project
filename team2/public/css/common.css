@@ -17,3 +17,23 @@
 * {
     font-family: 'NanumSquareRound';
 }
+
+.header-mobile {
+    background-color: #F9F9F9;
+    height: 40px;
+    position: relative;
+}
+.header-mobile-backBtn {
+    line-height: 40px;
+    position: absolute;
+    left: 10px;
+}
+.header-pageName {
+    line-height: 40px;
+    text-align: center;
+}
+@media screen and(max-width: 800px) {
+    .mobile-header {
+        display: none;
+    }
+}
