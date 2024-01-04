@@ -152,9 +152,7 @@ textarea{
 }
 
 
-.detail_hidden_container{
-    margin: 10px;
-}
+
 
 .d_btn{
     border: 1px solid rgba(128, 128, 128, 0.369);
@@ -261,7 +259,7 @@ li{
 .insert_main{
     width: 70vW;
     margin: 10px auto;      
-    background-color: rgba(128, 128, 128, 0.369) ;
+    ;
 }
 .insert_hidden_container{
     margin: 10px;
@@ -361,7 +359,7 @@ li{
     justify-content: end;
     grid-template-columns: repeat(2,90px);
     grid-gap: 8px;
-    margin: 0px auto;
+    margin: 10px auto;
     width: 70%;
     height: 40px;
 }
@@ -939,10 +937,10 @@ a .a-bordergo-hover:hover {
         margin: 0 auto;
     }
     .insert_container {
-        width: 80vw;        
+        width: 90vw;        
     }
     .insert_main{
-        width: 90vw;
+        width: 100vw;
     }
     .detail_form{
         margin-bottom: 15px;
@@ -954,13 +952,51 @@ a .a-bordergo-hover:hover {
         width: 85vw;
     }
     .last_main{
-        width: 85vw;
+        width: 95vw;
     }
     .favorite_slider {
         display: flex;   
         overflow-x: auto;
         scroll-snap-type: x mandatory; 
         flex-direction: column;
+    }
+    
+    .detail_form {
+        margin-bottom:20px;
+    }
+    .insert_container{
+          
+        margin: 0px auto;  
+        
+    }
+    
+    
+    .insert_select{
+        border: none;
+        
+        background-color: rgba(128, 128, 128, 0) ;
+    }
+     .insert_input_container,.insert_textarea_container{
+        margin: 0 auto;    
+        width:100%;    
+    }
+    .insert_input{
+        width:100%;   
+        min-height: 30px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid rgba(128, 128, 128, 0.369);
+        
+    }
+    .insert_textarea{
+        width:100%;
+        min-height: 300px;
+        border-radius: 5px;
+        border: 1px solid rgba(128, 128, 128, 0.369);
+    }
+    .insert_hashtag_container{
+        margin: 0 auto;
+        width:100%;    
     }
 }
 

@@ -4,8 +4,7 @@
 
 @section('main')
 
-<main class="insert_main">
-	<div class="insert_hidden_container">
+<main class="insert_main">	
 		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data" >
 			@csrf
 			{{-- @include('layout.errorlayout') --}}
@@ -65,7 +64,7 @@
 				<button type="submit" class="insert_btn">작성완료</button>	
 			</div>				
 		</form>		
-	</div>		
+			
 </main>
        
 <script src="/js/insert.js"></script>
