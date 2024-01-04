@@ -508,14 +508,14 @@ li{
     font-size: 1.1rem;
     font-weight: 800;
     margin: 10px 10px 5px 10px;
-    width: 200px;
+    /* width: 200px; */
 }
 .community-home-content {
     margin: 0 10px 6px 10px;
     overflow: hidden;
     max-height: 62px;
     color: #A7A7A7;
-    width: 200px;
+    /* width: 200px; */
     font-size: 0.9rem;
 }
 
@@ -648,13 +648,13 @@ li{
     background-color: #EAEAEA;
     padding: 3px;
     margin: 5px 0;
-    border-radius: 20%;
+    border-radius: 5px;
     font-size: 0.9rem;
     color: #7A7A7A;
 }
 .community-fav-board-tag {
     margin-left: 10px;
-    height: 20px;
+    /* height: 25px; */
     overflow: hidden;
 }
 .bordergo-hover a:hover {

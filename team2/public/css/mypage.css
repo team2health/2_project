@@ -137,3 +137,31 @@
     height: 30px;
     margin-left: 15px;
 }
+
+
+/* 나의 게시글 / 댓글 */
+.mypage-board-tag .mypage-board-first-line span {
+    background-color: #EAEAEA;
+    padding: 3px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #7A7A7A;
+}
+.mypage-board-tag {
+    display: grid;
+    grid-template-columns: 1fr 82px;
+    align-items: center;
+    overflow-x: hidden;
+}
+.mypage-myboard-date {
+    color: #ababab;
+    font-size: 0.9rem;
+}
+.mypage-board-img {
+    width: 80px;
+}
+.mypage-board-first-line {
+    grid-column: span 1;
+    min-width: 0;
+}

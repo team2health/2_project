@@ -12,6 +12,7 @@ use App\Models\Record;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Models\Board_tag;
 
 class MypageController extends Controller
 {
@@ -27,19 +28,30 @@ class MypageController extends Controller
 
         $board_result = DB::table('boards')
             ->select(
-            'board_id'
-            ,'u_id'
-            ,'category_id'
-            ,'board_title'
-            ,'board_content'
-            ,'board_hits'
-            ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
-            ,'updated_at')
-            ->where('u_id',$result)
-            ->where('deleted_at', null)
-            ->orderBy('board_id', 'DESC')
-            ->limit(8)
+            'boards.board_id'
+            ,'boards.u_id'
+            ,'boards.category_id'
+            ,'boards.board_title'
+            ,'boards.board_content'
+            ,'boards.board_hits'
+            ,DB::raw('DATE_FORMAT(boards.created_at, "%Y-%m-%d") as created_at')
+            ,'boards.updated_at')
+            ->where('boards.u_id',$result)
+            ->where('boards.deleted_at', null)
+            ->orderBy('boards.board_id', 'DESC')
             ->get();
+
+            $board_result = json_decode($board_result, true);
+            $cnt = 0;
+            foreach ($board_result as $item) {
+                // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+                $board_result[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+                ->select('hashtags.hashtag_name')
+                ->where('board_tags.board_id', $item['board_id'])
+                ->orderby('board_tags.board_id', 'desc')
+                ->get();
+                $cnt++;
+            }
 
         $comment_result = DB::table('comments')
             ->select(
@@ -235,7 +247,6 @@ class MypageController extends Controller
         
         if ($existingUser) {
             return response()->json(['namechange' => '1']);
-            exit;
         }
         return response()->json(['namechange' => '0']);
     }
@@ -373,7 +384,6 @@ class MypageController extends Controller
     public function hashtagsearch(Request $request) {
         $id = session('id');
         Log::debug($id);
-        exit;
 
         $result = trim($request->hashsearch);
         $hashget = DB::table('hashtags')

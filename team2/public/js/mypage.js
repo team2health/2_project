@@ -808,7 +808,7 @@ function canDeleteHashLoad() {
 
 
 function hashtagNoneDisplay() {
-    // 해시태그 검색창 출력
+    // 나의 해시태그 출력
 let showMyHashtagAll = document.getElementById('showMyHashtagAll');
 let showMyHashtagAllFlg = showMyHashtagAll.value;
     let mypageHashtag = document.getElementById('mypageHashtag'); 
@@ -821,9 +821,8 @@ let showMyHashtagAllFlg = showMyHashtagAll.value;
     }
 }
 
-// function searchHashtag(data) {
-//     let mypageHastagSearchForm = document.getElementById('mypageHastagSearchForm');
-//     mypageHastagSearchForm.setAttribute('action', '/hashtagsearch');
-//     mypageHastagSearchForm.submit();
-
-// }
+function goToMyBoard() {
+    deleteMypageBtnAll();
+    let mypageMyInfoThird = document.getElementById('mypageMyInfoThird');
+    mypageMyInfoThird.classList.remove('mypage-display-none');
+}
