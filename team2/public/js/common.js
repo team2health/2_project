@@ -1,5 +1,6 @@
 function toggleDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
+	document.getElementById("headerCategory").style.color = '#FF9900'
 }
 window.addEventListener('load', function() {
     setPageName(); //일주일을 불러오는 함수

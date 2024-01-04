@@ -334,23 +334,7 @@ button {
 /* ------------- footer ------------- */
 
 .footer-container {
-    width: 100vw;
-	display: flex;
-	justify-content: space-around;
-	position: fixed;
-    bottom: 0;
-	padding: 15px;
-	background-color: #fff;
-	border-top: 1px solid #c9c9c9;
-}
-
-.footer-icon-div {
-	width: 45px;
-	height: 45px;
-}
-
-.footer-icon {
-	height: 40px;
+	display: none;
 }
 
 /* --------- header --------- */
@@ -364,6 +348,33 @@ button {
 
 .header-community-nav {
 	padding: 10px;
+}
+
+.main-body-button {
+	text-align: center;
+}
+
+.area {
+	background-color: #B7B7B7;
+}
+
+.main-body-front-back {
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	border: 1px solid #2C2B71;
+	border-radius: 50px;
+}
+
+.main-body-front-back-btn {
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 50px;
+	background-color: #2C2B71;
+	color: #fff;
 }
 
 @media only screen and (max-width:1300px) {
@@ -411,6 +422,26 @@ button {
 		border: 1px solid #c9c9c9;
 		padding: 10px;
 		border-radius: 50px;
+	}
+	.footer-container {
+		display: block;
+		width: 100vw;
+		display: flex;
+		justify-content: space-around;
+		position: fixed;
+		bottom: 0;
+		padding: 15px;
+		background-color: #fff;
+		border-top: 1px solid #c9c9c9;
+	}
+	
+	.footer-icon-div {
+		width: 45px;
+		height: 45px;
+	}
+	
+	.footer-icon {
+		height: 40px;
 	}
 }
 
