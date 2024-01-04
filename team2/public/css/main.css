@@ -40,10 +40,6 @@ button {
 	cursor: pointer;
 }
 
-.main-line-height {
-	line-height: 20px;
-}
-
 .container {
 	width: 70vw;
 	margin: 0 auto;
@@ -355,6 +351,20 @@ button {
 
 .footer-icon {
 	height: 40px;
+}
+
+/* --------- header --------- */
+
+.header-community-container {
+	display: flex;
+    justify-content: space-evenly;
+	padding: 15px;
+}
+
+.header-community-nav {
+	border: 1px solid #B7B7B7;
+	padding: 10px;
+	border-radius: 50px;
 }
 
 @media only screen and (max-width:1300px) {

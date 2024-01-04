@@ -1,14 +1,5 @@
-let COMMUNITYNAV = document.getElementById("myDropdown");
-let communityNav = 0;
-
 function toggleDropdown() {
-	if(communityNav === 0) {
-		COMMUNITYNAV.style.display = 'block'
-		communityNav = 1;
-	} else if(communityNav === 1) {
-		COMMUNITYNAV.style.display = 'none'
-		communityNav = 0;
-	}
+    document.getElementById("myDropdown").classList.toggle("show");
 }
 
 // function toggleDropdown2() {
@@ -16,17 +7,17 @@ function toggleDropdown() {
 // }
 
 // 창 외부 클릭 시 드랍다운 닫기
-// window.onclick = function (event) {
-//     if (!event.target.matches('.cate_btn')) {
-//         var dropdowns = document.getElementsByClassName("dropdown-content");
-//         for (var i = 0; i < dropdowns.length; i++) {
-//             var openDropdown = dropdowns[i];
-//             if (openDropdown.classList.contains('show')) {
-//                 openDropdown.classList.remove('show');
-//             }
-//         }
-//     }
-// }
+window.onclick = function (event) {
+    if (!event.target.matches('.cate_btn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
 
 // let categoryFlg = 0;
 
