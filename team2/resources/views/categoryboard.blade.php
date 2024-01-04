@@ -4,7 +4,6 @@
 
 @section('main')
 <div class="last_main" id='category-board'>
-    <a href="" class="community_a"><img class="community_icon" src="../img/top.png" alt=""></a>
     <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>"{{$data[2][0]->category_name}}"</h2>

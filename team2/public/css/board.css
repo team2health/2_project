@@ -479,10 +479,12 @@ li{
     margin: 0 10px 6px 10px;
     overflow: hidden;
     max-height: 62px;
+    color: #A7A7A7;
+    width: 200px;
 }
 
 .spantag-span-display-block {
-    display: block;
+    display: inline-block;
 }
 
 .spantag-span-display-block span {
@@ -498,7 +500,6 @@ li{
 }
 .favorite_slider {
     display: flex;
-    margin-top: 30px;
     margin-bottom: 20px;
 }
 
@@ -581,7 +582,6 @@ li{
 .community_tag_container{
     width: 60vw;
     margin: 0 auto;
-    padding: 30px;
 }
 .community-favorite-show {
     margin: 20px;
@@ -593,7 +593,7 @@ li{
     grid-gap: 20px;
     margin-bottom: 15px;
 }
-.community_tag > a {
+.community_tag_a {
     border-radius: 10px;
     margin: 10px auto;
     padding: 10px;
@@ -607,12 +607,8 @@ li{
     background-color: #fff;
     height: 150px;
     border: 2px solid #E8E8E8;
-    display: grid;
-    grid-gap: 5px;
-    grid-template-rows: 100px 30px;
-    
 }
-.community_tag > a > div > span {
+.community_tag_a > div > span {
     background-color: #fff0e6;
     /* padding: 5px 10px; */
     margin: 5px 0;
@@ -680,7 +676,7 @@ a .a-bordergo-hover:hover {
 
 .community_aplus{
     position: fixed;
-    bottom: 60px;
+    bottom: 90px;
     right: 20px;
     background-color: #ff9950;
     color: white;
@@ -895,6 +891,20 @@ a .a-bordergo-hover:hover {
     text-align: center;
 }
 
+/* ---------------------------- */
+.community-home-board-img-span {
+    float: right;
+    margin-top: 7px;
+}
+
+.community-home-board-img {
+    width: 100px;
+}
+
+.community-trend-disease {
+    margin-left: 20px;
+}
+
 @media only screen and (min-width: 1050px) {
     .community_icon {
         width: 60px;
@@ -919,7 +929,7 @@ a .a-bordergo-hover:hover {
         width: 80vw;
     }   
     .community_tag_container{
-        width: 80vw;
+        width: 100vw;
         margin: 0 auto;
     }
     .insert_container {
@@ -971,7 +981,7 @@ a .a-bordergo-hover:hover {
         width: 100vw;
     }
     .favorite_slider-container{
-        width: 90vw;
+        width: 100vw;
     }   
     .community_tag_container{
         width: 100vw;
@@ -1026,6 +1036,20 @@ a .a-bordergo-hover:hover {
         display: inline-block;
         padding: 8px 10px;
         text-decoration: none;
+    }
+    .community_tag_a {
+        margin: 10px auto;
+        padding: 10px;
+        width:100%;   
+        text-overflow: ellipsis;
+        overflow: hidden;  
+        display: -webkit-box;   
+        -webkit-line-clamp: 6;  
+        -webkit-box-orient: vertical;
+        white-space: normal;  
+        background-color: #fff;
+        height: 150px;
+        border: 2px solid #E8E8E8;
     }
 }
 

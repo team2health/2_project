@@ -341,7 +341,7 @@ button {
     bottom: 0;
 	padding: 15px;
 	background-color: #fff;
-	border-top: 1px solid #B7B7B7;
+	border-top: 1px solid #c9c9c9;
 }
 
 .footer-icon-div {
@@ -359,12 +359,11 @@ button {
 	display: flex;
     justify-content: space-evenly;
 	padding: 15px;
+	border-bottom: 1px solid #c9c9c9;
 }
 
 .header-community-nav {
-	border: 1px solid #B7B7B7;
 	padding: 10px;
-	border-radius: 50px;
 }
 
 @media only screen and (max-width:1300px) {
@@ -397,6 +396,21 @@ button {
 		width: 15vw;
 		height: 15vw;
 		overflow: hidden;
+	}
+}
+
+@media only screen and (max-width:800px) {
+	.header-community-container {
+		display: flex;
+		justify-content: space-evenly;
+		padding: 15px;
+		border-bottom: 1px solid #c9c9c9;
+	}
+	
+	.header-community-nav {
+		border: 1px solid #c9c9c9;
+		padding: 10px;
+		border-radius: 50px;
 	}
 }
 
