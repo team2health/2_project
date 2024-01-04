@@ -63,6 +63,7 @@
 /* 해시태그 영역 */
 .mypage-hashtag-search-form {
     width: 100%;
+    margin-top: 50px;
 }
 .mypage-hashtag-search-div {
     margin: 0 20px;
@@ -95,10 +96,44 @@
     width: 30px;
 }
 .mypage-myHashtag {
-    width: 100%;
-    margin: 0 20px;
-    border: 1px solid #E9E9E9;
+    margin: 50px 20px 0 20px;
+    margin-bottom: 20px;
 }
 .mypage-myHashtag img {
     width: 20px;
+    margin-right: 20px;
+}
+.mypage-myHashtag-div {
+    height: 57px;
+    background: #e4e4e4;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.mypage-myHashtag-div div {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+.mypage-can-get-all-tag {
+    margin-top: 40px;
+}
+.mypage-can-get-all-tag-msg {
+    font-size: 1.2rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    color: #767676;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #b9b9b9;
+}
+.mypage-can-get-all-tag-msg img{
+    height: 30px;
+    margin-left: 15px;
 }
