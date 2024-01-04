@@ -10,7 +10,7 @@
 			<div id="myModal" class="modal">
 				<div class="comment_modal_content">  
 				@foreach ($categories as $category)
-					<p class="category-item" data-category-id="{{ $category->category_name }}" onclick="toggleCategorySelection(this)">
+					<p class="category-item" data-category-id="{{ $category->category_id }}" onclick="toggleCategorySelection(this)">
 						{{ $category->category_name }}
 					</p>
 				@endforeach		
@@ -22,7 +22,7 @@
 			
 			{{-- @include('layout.errorlayout') --}}
 			<div class="insert_container">
-				<div class="insert_img">
+				<!-- <div class="insert_img">
 					<label for="file0">
 						<img id="preview0" src="{{ asset('img/plus.png') }}" alt="">
 					</label>
@@ -35,26 +35,26 @@
 						<img id="preview2" src="{{ asset('img/plus.png') }}" alt="">
 					</label>
 					<input type="file" name="board_img[]" id="file2" style="display:none;" onchange="previewImage('file2', 'preview2')" accept="image/*" >
-				</div>
+				</div> -->
 				
 				
 				<div class="insert_select_container">
 					<div class="insert_select" id="selectedCategoriesContainer" onclick="openModal()">게시판을 선택해주세요</div>
 				</div>
-					
+				<input type="hidden" name="category_id" id="selectedCategoriesInput" />
 				
 			
 			
 				<div class="insert_input_container">
 					<label for="board_title">
-						<input type="text" class="insert_input" id="board_title" name="board_title" required placeholder="제목">
+						<input type="text" class="insert_input" id="board_title" name="board_title" required placeholder="제목을 입력해 주세요">
 					</label>
 					<br>								  
 				</div>
 				
 				<div class="insert_textarea_container">
 					<label for="board_content" >
-						<textarea name="board_content" id="board_content" class="insert_textarea" required required placeholder="내용"></textarea>
+						<textarea name="board_content" id="board_content" class="insert_textarea" required  placeholder="내용을 입력해 주세요"></textarea>
 					</label>
 					<br>				
 				</div>				

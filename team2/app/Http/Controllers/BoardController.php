@@ -133,9 +133,10 @@ class BoardController extends Controller
         $boardData['board_content'] = nl2br($boardData['board_content']);        
         // 게시글 데이터에 사용자 ID를 추가합니다.
         $boardData['u_id'] = $u_id;
-        $category_id = $request->input('category_id');
-        $boardData['category_id'] = $category_id;
+        // $category_id = $request->input('category_id');
+        // $boardData['category_id'] = $category_id;
         $board = Board::create($boardData);
+        // dd($request->input('category_id'));
         
         
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.

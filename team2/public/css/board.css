@@ -1007,18 +1007,17 @@ a .a-bordergo-hover:hover {
         width:100%;    
     }
     .insert_input{
-        width:100%;   
+        width:100vw;   
         min-height: 30px;
         padding: 10px;
-        border-radius: 5px;
-        border: 1px solid rgba(128, 128, 128, 0.369);
         
+        border: none;
     }
     .insert_textarea{
-        width:100%;
+        width:100vw;
         min-height: 300px;
-        border-radius: 5px;
-        border: 1px solid rgba(128, 128, 128, 0.369);
+       
+        border: none;
     }
     .insert_hashtag_container{
         margin: 0 auto;
