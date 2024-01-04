@@ -354,8 +354,98 @@ button {
 	text-align: center;
 }
 
-.area {
-	background-color: #B7B7B7;
+.part-box {
+	position: relative;
+	width: 317px;
+	height: 787px;
+	margin: 0 auto;
+}
+
+.partchk-body {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	left: 0;
+}
+
+.partchk-head {
+	position: absolute;
+	left: 105px;
+    top: -3px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-left-arm {
+	position: absolute;
+	left: 5px;
+    top: 128px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-right-arm {
+	position: absolute;
+	left: 183px;
+    top: 126px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-front {
+	position: absolute;
+	left: 86px;
+    top: 101px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-stomach {
+	position: absolute;
+	left: 90px;
+	top: 218px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-pan {
+	position: absolute;
+	left: 78px;
+    top: 329px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-left-leg {
+	position: absolute;
+	left: 70px;
+    top: 401px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-right-leg {
+	position: absolute;
+	left: 159px;
+    top: 400px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-left-leg2 {
+	position: absolute;
+	left: 32px;
+    top: 497px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-right-leg2 {
+	position: absolute;
+	left: 173px;
+    top: 496px;
+	z-index: 1;
+	opacity: 0.5;
 }
 
 .main-body-front-back {
@@ -433,6 +523,7 @@ button {
 		padding: 15px;
 		background-color: #fff;
 		border-top: 1px solid #c9c9c9;
+		z-index: 10;
 	}
 	
 	.footer-icon-div {

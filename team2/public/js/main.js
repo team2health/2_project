@@ -3,6 +3,60 @@ let SYMPTOM = document.getElementById('symptom-display');
 let DISEASE = document.getElementById('disease-display');
 let MAPDISPLAY = document.getElementById('map-display');
 
+function on_mouse(index) {
+	if(index === 1) {
+		document.getElementById('partchk-head').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-left-arm').style.opacity = '1';
+		document.getElementById('partchk-right-arm').style.opacity = '1';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-front').style.opacity = '1';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-stomach').style.opacity = '1';
+	}
+	if(index === 5) {
+		document.getElementById('partchk-pan').style.opacity = '1';
+	}
+	if(index === 6) {
+		document.getElementById('partchk-left-leg').style.opacity = '1';
+		document.getElementById('partchk-right-leg').style.opacity = '1';
+	}
+	if(index === 7) {
+		document.getElementById('partchk-left-leg2').style.opacity = '1';
+		document.getElementById('partchk-right-leg2').style.opacity = '1';
+	}
+}
+
+function off_mouse(index) {
+	if(index === 1) {
+		document.getElementById('partchk-head').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-left-arm').style.opacity = '0.5';
+		document.getElementById('partchk-right-arm').style.opacity = '0.5';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-front').style.opacity = '0.5';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-stomach').style.opacity = '0.5';
+	}
+	if(index === 5) {
+		document.getElementById('partchk-pan').style.opacity = '0.5';
+	}
+	if(index === 6) {
+		document.getElementById('partchk-left-leg').style.opacity = '0.5';
+		document.getElementById('partchk-right-leg').style.opacity = '0.5';
+	}
+	if(index === 7) {
+		document.getElementById('partchk-left-leg2').style.opacity = '0.5';
+		document.getElementById('partchk-right-leg2').style.opacity = '0.5';
+	}
+}
+
 function mapopen(disease_id, user_id) {
 
 	let user_address;
@@ -169,4 +223,3 @@ function mapDisplay(disease_id, user_id) {
 
 	mapopen(disease_id, user_id);
 }
-
