@@ -152,7 +152,6 @@
             <div class="mypage-tag-title2" id="mypageTagTitle2">
                 <div class="mypage-hashtag-title">
                     <input type="hidden" value="0" id="favoriteFlg">
-                    <img src="/img/star.png" alt="">
                     내가 찜한 관심 태그
                 </div>
                 <div class="mypage-hashtag" id="mypageHashtag">
@@ -272,5 +271,5 @@
         
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/js/mypage.js"></script>
+{{-- <script src="/js/mypage.js"></script> --}}
 @endsection

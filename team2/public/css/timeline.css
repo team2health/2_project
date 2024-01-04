@@ -841,10 +841,10 @@ td {
     /* background-color: #EDEDED; */
     background-color: #fff1e1;
     margin-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
     margin: 5px 15px 8px 0;
-    width: 130px;
+    width: 110px;
     border-radius: 18px;
 }
 #creaTagMainDiv > .mypage-hashtag > div {

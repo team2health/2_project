@@ -31,7 +31,9 @@
     align-items: center;
 }
 .mypage-main-btn:hover {
-    background-color: #e2e2e2;
+    background-color: #dedede;
+    transition: 0.2s;
+    cursor: pointer;
 }
 .mypage-gap {
     border-bottom: 1px solid rgb(207, 207, 207);
@@ -46,4 +48,12 @@
     text-align: center;
     margin-top: 100px;
     color: #FF9900;
+}
+
+.mypage-hashtag-click {
+    cursor: pointer;
+}
+
+.mypage-display-none {
+    display: none;
 }
