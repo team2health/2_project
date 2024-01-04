@@ -1,7 +1,7 @@
 <header>
 	@if (request()->path() === 'board')
 		<div class="header-community-container">
-			<a class="cate_btn header-community-nav" onclick="toggleDropdown()">카테고리</a>
+			<a class="cate_btn header-community-nav" onclick="toggleDropdown()" id="headerCategory">카테고리</a>
 			<div class="dropdown-content" id="myDropdown">
 				<form method="get" id="category_id_form">
 					@csrf
@@ -15,5 +15,16 @@
 			<a href="{{route('hotboard.get')}}" class="header-community-nav">인기글</a>
 			<a href="{{route('favoriteboard.get')}}" class="header-community-nav">관심태그</a>
 		</div>
+	@endif
+
+	@if (Str::contains(request()->url(), 'login') || Str::contains(request()->url(), 'regist')
+	|| Str::contains(request()->url(), 'mypage') || Str::contains(request()->url(), 'categoryboard')
+	|| Str::contains(request()->url(), 'boardcategory') || Str::contains(request()->url(), 'lastboard')
+	|| Str::contains(request()->url(), 'hotboard')
+	|| Str::contains(request()->url(), 'favoriteboard') || Str::contains(request()->url(), 'board/'))
+	<div class="header-mobile">
+		<div class="header-mobile-backBtn"> < </div>
+		<div class="header-pageName" id="headerPageName"></div>
+	</div>
 	@endif
 </header>

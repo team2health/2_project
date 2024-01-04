@@ -5,33 +5,30 @@
 @section('main')
 <main class="wrapper">
 	<div class="container" id="part-display">
-		<br>
 		<div style="color: #2C2B71" class="text-center bc-purple">
-			<br><br>
+			<br>
 			<div><span class="text-part">#부위</span>를 선택해 주세요</div>
-			<br><br>
+			<br>
 			<div class="part-box">
-				@forelse ($part as $item)
-				<div onclick="partCheck({{$item->part_id}}); return false;">{{$item->part_name}}</div>
-				@empty
-					<div>추가 될 예정입니다. 기다려주세용</div>
-				@endforelse
+				<img src="/img/body.png" usemap="#partchk" alt="사람이미지">
+				<map name="partchk">
+					<area class="area" shape="circle" alt="머리" title="" coords="156,44,32" href="#" target=""/>
+				</map>
 			</div>
-			<br><br>
+			<div class="main-body-button">
+				<div class="main-body-front-back-btn">정면</div>
+				<div class="main-body-front-back">후면</div>
+			</div>
+			<br>
 		</div>
 	</div>
-	<div class="container" id="symptom-display">
+	{{-- <div class="container" id="symptom-display">
 		<br>
 		<div style="color: #2C2B71" class="text-center bc-purple">
 			<br><br>
 			<div><span class="text-part">#증상</span>을 선택해 주세요</div>
 			<br><br>
 			<div class="part-box" id="symptom-box">
-				{{-- @forelse ($symptom as $item)
-				<div onclick="symptomCheck({{$item->symptom_id}}); return false;">{{$item->symptom_id}}</div>
-				@empty
-					
-				@endforelse --}}
 			</div>
 			<br><br>
 		</div>
@@ -52,10 +49,9 @@
 				@else
 					
 				@endif
-				{{-- onclick="mapDisplay({{ json_encode(session('id')) }}); return false;" --}}
 			</div>
 		</div>
-	</div>
+	</div> --}}
 </main>
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script>

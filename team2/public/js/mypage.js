@@ -48,6 +48,9 @@ function sample4_execDaumPostcode() {
 window.addEventListener('load', function() {
     mypagemodalclosebtn(); //모달창 닫기
 });
+window.addEventListener('load', function() {
+    addallfavoritetag(); //마이페이지 해시태그 불러오기
+})
 
 // 삭제 모달
 function recorddeletemodalopen() {
@@ -82,7 +85,6 @@ let userinfomodify = document.getElementById('mypageContent2');
 let mypagecontent = document.getElementById('mypageContent');
 let userboardmodal = document.getElementById('UserboardModal');
 let mypageContentModal = document.getElementById('mypageContentModal');
-let mypageTagTitle = document.getElementById('mypageTagTitle2');
 
 function userboardshow() {
         userinfomodify.style.display = 'none';
@@ -114,16 +116,13 @@ function favoritehashdelete(data) {
 
         let deletedfavoritehashtag = document.createElement('div')
         let deletefavoritespan = document.createElement('span');
-        let deletefavoritespan2 = document.createElement('span');
         
         deletedfavoritehashtag.id = 'allHashtagtext' + data;
         deletefavoritespan.id = 'favoritehashtext'+data;
         deletefavoritespan.setAttribute('value', data );
-        deletefavoritespan2.setAttribute('onclick', `addhashtag(${data})`);
+        deletefavoritespan.setAttribute('onclick', `addhashtag(${data})`);
         deletefavoritespan.innerHTML = favoritehashtextget;
-        deletefavoritespan2.innerHTML = 'x';
         deletedfavoritehashtag.appendChild(deletefavoritespan);
-        deletedfavoritehashtag.appendChild(deletefavoritespan2);
         
         let mypageHashtagOpen = document.getElementById('mypageHashtagOpen');
         if (mypageHashtagOpen) {
@@ -158,25 +157,25 @@ function favoritehashdelete(data) {
     }
 }
 
-let addallfavoritetagevent = document.getElementById('addallfavoritetag');
-let favoriteFlg = 0;
-let addallfavoritetagtext = document.getElementById('addallfavoritetag');
-addallfavoritetagtext.innerHTML = '';
-addallfavoritetagtext.innerHTML = '관심태그 추가하기';
+// let addallfavoritetagevent = document.getElementById('addallfavoritetag');
+// let favoriteFlg = 0;
+// let addallfavoritetagtext = document.getElementById('addallfavoritetag');
+// addallfavoritetagtext.innerHTML = '';
+// addallfavoritetagtext.innerHTML = '관심태그 추가하기';
 
-// 관심 해시태그 추가 창 열기
-addallfavoritetagevent.addEventListener('click', function(){
-    if( favoriteFlg == 0) {
-        addallfavoritetag();
-        addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
-        favoriteFlg = '1';
-    }
-    if ( favoriteFlg == 1 ) {
-        addallfavoritetagevent.addEventListener('click', closeoption);
-        addallfavoritetagtext.innerHTML = '';
-        addallfavoritetagtext.innerHTML = '닫기 ';
-    }
-});
+// // 관심 해시태그 추가 창 열기
+// addallfavoritetagevent.addEventListener('click', function(){
+//     if( favoriteFlg == 0) {
+//         addallfavoritetag();
+//         addallfavoritetagevent.removeEventListener('click', addallfavoritetag);
+//         favoriteFlg = '1';
+//     }
+//     if ( favoriteFlg == 1 ) {
+//         addallfavoritetagevent.addEventListener('click', closeoption);
+//         addallfavoritetagtext.innerHTML = '';
+//         addallfavoritetagtext.innerHTML = '닫기 ';
+//     }
+// });
 
 // 해시태그 테스트
 let targetArray = [];
@@ -184,18 +183,7 @@ function setArrayHash(data){
     let TargetValueHash = document.getElementById('favoritehashtext'+data).value;
     targetArray = TargetValueHash;
 }
-// 관심 해시태그 추가 창 닫기
-function closeoption(){
-    if(
-        document.getElementById('creaTagMainDiv')
-    ) {
-        let createtagmaindiv = document.getElementById('creaTagMainDiv');
-        addallfavoritetagtext.innerHTML = '';
-        addallfavoritetagtext.innerHTML = '관심태그 추가하기 ';
-        createtagmaindiv.remove();
-        favoriteFlg = '0';
-    }
-}
+
 // 관심 해시태그 목록 불러오기 및 추가
 function addallfavoritetag() {
     let createtagmaindiv = document.createElement('div');
@@ -207,6 +195,7 @@ function addallfavoritetag() {
     // let hashplusclosebtn = document.createElement('span');
     addtagbtndiv.classList.add('mypage-btn-line');
     createtagmaindiv.id = 'creaTagMainDiv';
+    createtagmaindiv.classList.add('create-tag-main-div');
     // hashplusokbtn.innerHTML = '저장';
     // hashplusclosebtn.innerHTML = '닫기';
     // hashplusokbtn.classList.add('mypage-btn');
@@ -219,19 +208,17 @@ function addallfavoritetag() {
         for(let i = 0; i < data.length; i++) {
             let hashtagdiv = document.createElement('div');
             let hashspan = document.createElement('span');
-            let hashplusbtn = document.createElement('span');
             hashtagdiv.id = 'allHashtagId'+data[i].hashtag_id;
             // hashplusbtn.setAttribute("value", data[i].hashtag_id);
-            hashplusbtn.innerHTML = '+';
-            hashplusbtn.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
+            hashspan.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
             hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
             hashspan.setAttribute('value', data[i].hashtag_id);
             hashspan.innerHTML = data[i].hashtag_name;
             hashtagdiv.appendChild(hashspan);
-            hashtagdiv.appendChild(hashplusbtn);
             createplustag.appendChild(hashtagdiv);
 
         }
+        let mypageTagTitle = document.getElementById('mypageCanGetAllTag');
         mypageTagTitle.appendChild(createtagmaindiv);
         createtagmaindiv.appendChild(createplustag);
         // addtagbtndiv.appendChild(hashplusokbtn);
@@ -272,7 +259,6 @@ function addhashtag(data) {
     let mypageHashtag = document.getElementById('mypageHashtag');
     let deletedfavoritehashtag = document.createElement('div')
     let makefavoritespan = document.createElement('span');
-    let makefavoritespan2 = document.createElement('span');
 
     fetch('/addfavoritehashtag', {
         method: 'POST',
@@ -285,16 +271,14 @@ function addhashtag(data) {
         deletedfavoritehashtag.id = 'favoriteHashtagId' + data[0].hashtag_id;
         makefavoritespan.id = 'favoritehashtext'+data[0].hashtag_id;
         makefavoritespan.setAttribute('value', data[0].hashtag_id );
-        makefavoritespan2.setAttribute('onclick', `favoritehashdelete(${data[0].hashtag_id})`);
+        makefavoritespan.setAttribute('onclick', `favoritehashdelete(${data[0].hashtag_id})`);
         makefavoritespan.innerHTML = data[0].hashtag_name;
-        makefavoritespan2.innerHTML = 'x';
     })
     .catch(error => {
         console.error('오류 발생:', error);
     });
 
     deletedfavoritehashtag.appendChild(makefavoritespan);
-    deletedfavoritehashtag.appendChild(makefavoritespan2);
     mypageHashtag.appendChild(deletedfavoritehashtag);
     
 }
@@ -815,9 +799,24 @@ function deleteMypageBtnAll() {
     mypageLogout.classList.add('mypage-display-none');
 }
 
+// 나의 해시태그 목록 불러오기
 function canDeleteHashLoad() {
     deleteMypageBtnAll();
     let mypageHashtagAll = document.getElementById('mypageHashtagAll');
     mypageHashtagAll.classList.remove('mypage-display-none');
-    
+}
+
+
+function hashtagNoneDisplay() {
+    // 해시태그 검색창 출력
+let showMyHashtagAll = document.getElementById('showMyHashtagAll');
+let showMyHashtagAllFlg = showMyHashtagAll.value;
+    let mypageHashtag = document.getElementById('mypageHashtag'); 
+    if(showMyHashtagAllFlg == 0) { 
+        mypageHashtag.style = '';
+        showMyHashtagAll.value = 1;
+    } else if (showMyHashtagAllFlg == 1) {
+        mypageHashtag.style.display = 'none';
+        showMyHashtagAll.value = 0;
+    }
 }
