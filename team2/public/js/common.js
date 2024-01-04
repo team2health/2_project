@@ -1,5 +1,6 @@
 function toggleDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
+	document.getElementById("headerCategory").style.color = '#FF9900'
 }
 
 // function toggleDropdown2() {

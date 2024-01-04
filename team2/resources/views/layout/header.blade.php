@@ -1,7 +1,7 @@
 <header>
 	@if (request()->path() === 'board')
 		<div class="header-community-container">
-			<a class="cate_btn header-community-nav" onclick="toggleDropdown()">카테고리</a>
+			<a class="cate_btn header-community-nav" onclick="toggleDropdown()" id="headerCategory">카테고리</a>
 			<div class="dropdown-content" id="myDropdown">
 				<form method="get" id="category_id_form">
 					@csrf

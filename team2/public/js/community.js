@@ -57,23 +57,33 @@ function lastBoard() {
             let LASTBOARDDIV = [];
             let LASTBOARDDIV2 = [];
             let LASTBOARDDIV3 = [];
+            let LASTBOARDSPAN = [];
+            let LASTBOARDIMG = [];
             
             for(let i = 0; i < data.length; i++) {
                 LASTBOARDURL[i] = document.createElement('a');
                 LASTBOARDDIV[i] = document.createElement('div');
                 LASTBOARDDIV2[i] = document.createElement('div');
-                LASTBOARDDIV3[i] = document.createElement('div');
+                LASTBOARDDIV3[i] = document.createElement('div');                
+                LASTBOARDSPAN[i] = document.createElement('span');
+                LASTBOARDIMG[i] = document.createElement('img');
     
                 LASTBOARDBOX.appendChild(LASTBOARDURL[i]);
                 LASTBOARDURL[i].appendChild(LASTBOARDDIV[i]);
                 LASTBOARDDIV[i].appendChild(LASTBOARDDIV2[i]);
                 LASTBOARDDIV[i].appendChild(LASTBOARDDIV3[i]);
+                LASTBOARDURL[i].appendChild(LASTBOARDSPAN[i]);
+                LASTBOARDSPAN[i].appendChild(LASTBOARDIMG[i]);
     
+                LASTBOARDDIV[i].classList.add('spantag-span-display-block');
                 LASTBOARDURL[i].href = '/board/'+data[i].board_id;
                 LASTBOARDDIV2[i].classList.add('community-home-title');
                 LASTBOARDDIV2[i].innerHTML = data[i].board_title;
                 LASTBOARDDIV3[i].innerHTML = data[i].board_content;
                 LASTBOARDDIV3[i].classList.add('community-home-content');
+                LASTBOARDSPAN[i].classList.add('community-home-board-img-span');
+                LASTBOARDIMG[i].classList.add('community-home-board-img');
+                LASTBOARDIMG[i].src = '/img/default_f.png';
             }
     
             let lastNumber = data[data.length - 1]; // 마지막 게시글 번호 가져오기
@@ -108,6 +118,8 @@ function favoriteBoard() {
             let FAVORITEBOARDDIV3 = [];
             let FAVORITEBOARDDIV4 = [];
             let FAVORITEBOARDTAG = [];
+            let FAVORITEBOARDSPAN = [];
+            let FAVORITEBOARDIMG = [];
             
             for(let i = 0; i < data.length; i++) {
                 FAVORITEBOARDURL[i] = document.createElement('a');
@@ -115,19 +127,27 @@ function favoriteBoard() {
                 FAVORITEBOARDDIV2[i] = document.createElement('div');
                 FAVORITEBOARDDIV3[i] = document.createElement('div');
                 FAVORITEBOARDDIV4[i] = document.createElement('div');
+                FAVORITEBOARDSPAN[i] = document.createElement('span');
+                FAVORITEBOARDIMG[i] = document.createElement('img');
+                FAVORITEBOARDDIV[i].classList.add('spantag-span-display-block');
                 FAVORITEBOARDDIV4[i].classList.add('community-fav-board-tag');
     
                 FAVORITEBOARDBOX.appendChild(FAVORITEBOARDURL[i]);
+                FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDDIV4[i]);
                 FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDDIV[i]);
                 FAVORITEBOARDDIV[i].appendChild(FAVORITEBOARDDIV2[i]);
                 FAVORITEBOARDDIV[i].appendChild(FAVORITEBOARDDIV3[i]);
-                FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDDIV4[i]);
+                FAVORITEBOARDURL[i].appendChild(FAVORITEBOARDSPAN[i]);
+                FAVORITEBOARDSPAN[i].appendChild(FAVORITEBOARDIMG[i]);
     
                 FAVORITEBOARDURL[i].href = '/board/'+data[i].board_id;
                 FAVORITEBOARDDIV2[i].classList.add('community-home-title');
                 FAVORITEBOARDDIV2[i].innerHTML = data[i].board_title;
                 FAVORITEBOARDDIV3[i].innerHTML = data[i].board_content;
                 FAVORITEBOARDDIV3[i].classList.add('community-home-content');
+                FAVORITEBOARDSPAN[i].classList.add('community-home-board-img-span');
+                FAVORITEBOARDIMG[i].classList.add('community-home-board-img');
+                FAVORITEBOARDIMG[i].src = '/img/default_f.png';
 
                 for(let j = 0; j < data[i].board_tag.length; j++) {
                     FAVORITEBOARDTAG[i] = document.createElement('span');
