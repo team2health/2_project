@@ -5,7 +5,7 @@
 @section('main')
 <main class="">
     <div class="slider-container">
-        <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
+        <a href="{{route('board.create')}}" class="community_aplus" onclick="openModal(); return false;"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
         
     <div class="favorite_slider-container"> 
         <h2 class="community-trend-disease"> 유행 중인 질병 </h2>
@@ -129,4 +129,5 @@
     </div>
 </main>
 <script src="/js/community.js"></script>
+<script src="/js/insert_modal.js"></script>
 @endsection

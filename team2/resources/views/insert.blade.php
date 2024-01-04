@@ -5,8 +5,21 @@
 @section('main')
 
 <main class="insert_main">	
-		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data" >
+		<form class="detail_form" method="POST"  action="{{route('board.store')}}" enctype="multipart/form-data" onsubmit="return validateForm()">
 			@csrf
+			<div id="myModal" class="modal">
+				<div class="comment_modal_content">  
+				@foreach ($categories as $category)
+					<p class="category-item" data-category-id="{{ $category->category_name }}" onclick="toggleCategorySelection(this)">
+						{{ $category->category_name }}
+					</p>
+				@endforeach		
+					<!-- <a href="{{url()->previous()}}"> -->
+						<span class="close" onclick="closeModal()">취소</span>
+					</a>             
+				</div>
+    		</div>  
+			
 			{{-- @include('layout.errorlayout') --}}
 			<div class="insert_container">
 				<div class="insert_img">
@@ -24,24 +37,26 @@
 					<input type="file" name="board_img[]" id="file2" style="display:none;" onchange="previewImage('file2', 'preview2')" accept="image/*" >
 				</div>
 				
+				
 				<div class="insert_select_container">
-					<select name="category_id" id="category_id" class="insert_select">						
-						<option value="1">자유게시판</option>
-						<option value="2">정보 게시판</option>
-						<option value="3">친목 게시판</option>
-						<option value="4">질문 게시판</option>
-					</select>
-				</div>	
+					<div class="insert_select" id="selectedCategoriesContainer" onclick="openModal()">게시판을 선택해주세요</div>
+				</div>
+					
+				
 			
 			
 				<div class="insert_input_container">
-					<label for="board_title" class="">제목</label><br>
-					<input type="text" class="insert_input" id="board_title" name="board_title" required>			  
+					<label for="board_title">
+						<input type="text" class="insert_input" id="board_title" name="board_title" required placeholder="제목">
+					</label>
+					<br>								  
 				</div>
 				
 				<div class="insert_textarea_container">
-					<label for="board_content" >내용</label><br>			  
-					<textarea name="board_content" id="board_content" class="insert_textarea" required ></textarea>
+					<label for="board_content" >
+						<textarea name="board_content" id="board_content" class="insert_textarea" required required placeholder="내용"></textarea>
+					</label>
+					<br>				
 				</div>				
 				<div class="insert_hashtag_container">
 					<label for="hashtag" class="label_hashtag">#해시태그</label>
@@ -50,7 +65,7 @@
 
 					<!-- Hidden container for hashtag data -->
 					<div id="hiddenHashtags" style="display: none;">
-						@foreach ($data as $item)
+						@foreach ($hashtags as $item)
 							<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
 						@endforeach
 					</div>
