@@ -196,8 +196,6 @@ function closeoption(){
         favoriteFlg = '0';
     }
 }
-
-
 // 관심 해시태그 목록 불러오기 및 추가
 function addallfavoritetag() {
     let createtagmaindiv = document.createElement('div');
@@ -798,4 +796,28 @@ function plusMypageCommentModal() {
     .catch(error => {
         console.error('오류 발생:', error);
     });
+}
+
+// 마이페이지 모든 버튼 삭제하는 함수
+function deleteMypageBtnAll() {
+    let mypageProfile = document.getElementById('mypageProfile');
+    let mypageMyInfo = document.querySelectorAll('.mypage-main-btn');
+    let mypageGap = document.getElementById('mypageGap');
+    let mypageLogout = document.getElementById('mypageLogout');
+    let mypageMainBtn = document.getElementById('mypageMainBtn');
+    mypageMyInfo.forEach(function (element) {
+        element.classList.add('mypage-display-none');
+    });
+
+    mypageProfile.classList.add('mypage-display-none');
+    mypageMainBtn.classList.add('mypage-display-none');
+    mypageGap.classList.add('mypage-display-none');
+    mypageLogout.classList.add('mypage-display-none');
+}
+
+function canDeleteHashLoad() {
+    deleteMypageBtnAll();
+    let mypageHashtagAll = document.getElementById('mypageHashtagAll');
+    mypageHashtagAll.classList.remove('mypage-display-none');
+    
 }
