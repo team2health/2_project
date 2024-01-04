@@ -820,3 +820,10 @@ let showMyHashtagAllFlg = showMyHashtagAll.value;
         showMyHashtagAll.value = 0;
     }
 }
+
+// function searchHashtag(data) {
+//     let mypageHastagSearchForm = document.getElementById('mypageHastagSearchForm');
+//     mypageHastagSearchForm.setAttribute('action', '/hashtagsearch');
+//     mypageHastagSearchForm.submit();
+
+// }

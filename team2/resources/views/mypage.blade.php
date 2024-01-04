@@ -70,21 +70,24 @@
                         @endforelse
                     </div>
 
-                    <form action="" method="post" class="mypage-hashtag-search-form">
+                    <form action="/hashtagsearch" method="post" class="mypage-hashtag-search-form" id="mypageHastagSearchForm">
                         @csrf
                         <div class="mypage-hashtag-search-div">
-                            <input type="text" placeholder="해시태그 검색">
+                            <input type="text" placeholder="해시태그 검색" name="hashsearch">
                             <button type="submit" class="mypage-hashtag-search">
                                 <img src="/img/search.png">
                             </button>
-                            </div>
+                        </div>
+                        <div id="searchHashtag" class="mypage-seach-hashtag">
+
+                        </div>
                     </form>
-                <div id="mypageCanGetAllTag" class="mypage-can-get-all-tag">
-                    <div class="mypage-can-get-all-tag-msg">
-                        <img src="/img/favoritetag.png" alt="">
-                        <span>관심태그 추가하기</span>
+                    <div id="mypageCanGetAllTag" class="mypage-can-get-all-tag">
+                        <div class="mypage-can-get-all-tag-msg">
+                            <img src="/img/favoritetag.png" alt="">
+                            <span>관심태그 추가하기</span>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>

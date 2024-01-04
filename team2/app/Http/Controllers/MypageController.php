@@ -319,6 +319,8 @@ class MypageController extends Controller
                 ,'comments.comment_content'
                 ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
                 ,'boards.board_title'
+
+                
             )->join('boards', 'boards.board_id', 'comments.board_id')
             ->where('comments.u_id',$result)
             ->orderby('comments.comment_id', 'DESC')
@@ -367,5 +369,64 @@ class MypageController extends Controller
     Record::destroy($id);
     DB::commit();
     
+    }
+    public function hashtagsearch(Request $request) {
+        $id = session('id');
+        Log::debug($id);
+        exit;
+
+        $result = trim($request->hashsearch);
+        $hashget = DB::table('hashtags')
+        ->select('hashtag_id')
+        ->where('hashtag_name','like', '%'.$result.'%')
+        ->get();
+
+        $hashget_count = $hashget->count();
+        $hashget = json_decode($hashget, true);
+
+
+        Log::debug("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        Log::debug($hashget);
+
+        if(!empty($hashget)) {
+            foreach ($hashget as $item) {
+                $count = DB::table('favorite_tags')
+                    ->select('hashtag_id')
+                    ->where('hashtag_id', $item['hashtag_id'])
+                    ->whereNotNull('deleted_at')
+                    ->where('u_id', $id)
+                    ->get();
+                }
+                $count = json_decode($count, true);
+                Log::debug('countcountcountcount');
+                Log::debug($count);
+        }
+        
+        if(empty($count)){
+            $result_set = $hashget;
+        } else {
+            $result_set = array_diff($hashget, $count);
+        }
+        Log::debug('differencedifferencedifferencedifference');
+        Log::debug($result_set);
+
+
+        if($result_set != null) {
+            // 검색결과 있음
+            foreach($result_set as $item){
+                $hashtag_search = DB::table('hashtags')
+                ->select('hashtag_id', 'hashtag_name')
+                ->where('hashtag_id',$item['hashtag_id'])
+                ->orderBy('hashtag_id', 'desc')
+                ->get();
+            }
+            return response()->json($hashtag_search);
+
+        } else {
+            // 검색결과 없을 때 처리
+            return response()->json('false');
+        }
+        
+
     }
 }
