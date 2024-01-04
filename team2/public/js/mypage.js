@@ -808,7 +808,7 @@ function canDeleteHashLoad() {
 
 
 function hashtagNoneDisplay() {
-    // 해시태그 검색창 출력
+    // 나의 해시태그 출력
 let showMyHashtagAll = document.getElementById('showMyHashtagAll');
 let showMyHashtagAllFlg = showMyHashtagAll.value;
     let mypageHashtag = document.getElementById('mypageHashtag'); 
@@ -819,4 +819,10 @@ let showMyHashtagAllFlg = showMyHashtagAll.value;
         mypageHashtag.style.display = 'none';
         showMyHashtagAll.value = 0;
     }
+}
+
+function goToMyBoard() {
+    deleteMypageBtnAll();
+    let mypageMyInfoThird = document.getElementById('mypageMyInfoThird');
+    mypageMyInfoThird.classList.remove('mypage-display-none');
 }

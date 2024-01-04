@@ -253,6 +253,34 @@ li{
 .detail_comment ul {
     background-color: #F9F9F9;
 }
+.comment_modal_content {
+    display: inline-block;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    line-height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    padding: 20px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 /* -------- insert board -------- */
 
@@ -293,8 +321,9 @@ li{
     margin: 10px auto;
     padding: 10px;
     width:90%;
-    border-radius: 15px;
-    background-color: rgba(128, 128, 128, 0.230) ;
+    border: 1px solid black;
+    
+    
 }
 .insert_select{
     border: none;
@@ -376,6 +405,13 @@ li{
 }
 .label_hashtag{
     color: rgba(128, 128, 128, 0.369) ;
+}
+.category-item {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: lightblue;
 }
 /* ---------커뮤니티------------------ */
 .slider-container {    
@@ -472,14 +508,14 @@ li{
     font-size: 1.1rem;
     font-weight: 800;
     margin: 10px 10px 5px 10px;
-    width: 200px;
+    /* width: 200px; */
 }
 .community-home-content {
     margin: 0 10px 6px 10px;
     overflow: hidden;
     max-height: 62px;
     color: #A7A7A7;
-    width: 200px;
+    /* width: 200px; */
     font-size: 0.9rem;
 }
 
@@ -612,13 +648,13 @@ li{
     background-color: #EAEAEA;
     padding: 3px;
     margin: 5px 0;
-    border-radius: 20%;
+    border-radius: 5px;
     font-size: 0.9rem;
     color: #7A7A7A;
 }
 .community-fav-board-tag {
     margin-left: 10px;
-    height: 20px;
+    /* height: 25px; */
     overflow: hidden;
 }
 .bordergo-hover a:hover {
@@ -921,7 +957,8 @@ a .a-bordergo-hover:hover {
         margin: 0 auto;
     }
     .insert_container {
-        width: 90vw;        
+        width: 100vw; 
+        border:none;       
     }
     .insert_main{
         width: 100vw;
@@ -944,39 +981,43 @@ a .a-bordergo-hover:hover {
         scroll-snap-type: x mandatory; 
         flex-direction: column;
     }
+    .insert_input_container{
+        width: 100vw;
+    }
     
     .detail_form {
         margin-bottom:20px;
     }
-    .insert_container{
-          
-        margin: 0px auto;  
-        
+    .insert_container{          
+        margin: 0px auto;
     }
-    
+    .insert_select_container{
+        width: 100vw;
+        border:solid black 1px ;
+        border-left: none;
+        border-right: none;
+
+    }
     
     .insert_select{
         border: none;
-        
-        background-color: rgba(128, 128, 128, 0) ;
     }
      .insert_input_container,.insert_textarea_container{
         margin: 0 auto;    
         width:100%;    
     }
     .insert_input{
-        width:100%;   
+        width:100vw;   
         min-height: 30px;
         padding: 10px;
-        border-radius: 5px;
-        border: 1px solid rgba(128, 128, 128, 0.369);
         
+        border: none;
     }
     .insert_textarea{
-        width:100%;
+        width:100vw;
         min-height: 300px;
-        border-radius: 5px;
-        border: 1px solid rgba(128, 128, 128, 0.369);
+       
+        border: none;
     }
     .insert_hashtag_container{
         margin: 0 auto;

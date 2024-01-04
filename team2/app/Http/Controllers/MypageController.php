@@ -12,6 +12,7 @@ use App\Models\Record;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Models\Board_tag;
 
 class MypageController extends Controller
 {
@@ -27,19 +28,30 @@ class MypageController extends Controller
 
         $board_result = DB::table('boards')
             ->select(
-            'board_id'
-            ,'u_id'
-            ,'category_id'
-            ,'board_title'
-            ,'board_content'
-            ,'board_hits'
-            ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
-            ,'updated_at')
-            ->where('u_id',$result)
-            ->where('deleted_at', null)
-            ->orderBy('board_id', 'DESC')
-            ->limit(8)
+            'boards.board_id'
+            ,'boards.u_id'
+            ,'boards.category_id'
+            ,'boards.board_title'
+            ,'boards.board_content'
+            ,'boards.board_hits'
+            ,DB::raw('DATE_FORMAT(boards.created_at, "%Y-%m-%d") as created_at')
+            ,'boards.updated_at')
+            ->where('boards.u_id',$result)
+            ->where('boards.deleted_at', null)
+            ->orderBy('boards.board_id', 'DESC')
             ->get();
+
+            $board_result = json_decode($board_result, true);
+            $cnt = 0;
+            foreach ($board_result as $item) {
+                // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+                $board_result[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+                ->select('hashtags.hashtag_name')
+                ->where('board_tags.board_id', $item['board_id'])
+                ->orderby('board_tags.board_id', 'desc')
+                ->get();
+                $cnt++;
+            }
 
         $comment_result = DB::table('comments')
             ->select(
@@ -235,7 +247,6 @@ class MypageController extends Controller
         
         if ($existingUser) {
             return response()->json(['namechange' => '1']);
-            exit;
         }
         return response()->json(['namechange' => '0']);
     }
@@ -319,6 +330,8 @@ class MypageController extends Controller
                 ,'comments.comment_content'
                 ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
                 ,'boards.board_title'
+
+                
             )->join('boards', 'boards.board_id', 'comments.board_id')
             ->where('comments.u_id',$result)
             ->orderby('comments.comment_id', 'DESC')
@@ -367,5 +380,63 @@ class MypageController extends Controller
     Record::destroy($id);
     DB::commit();
     
+    }
+    public function hashtagsearch(Request $request) {
+        $id = session('id');
+        Log::debug($id);
+
+        $result = trim($request->hashsearch);
+        $hashget = DB::table('hashtags')
+        ->select('hashtag_id')
+        ->where('hashtag_name','like', '%'.$result.'%')
+        ->get();
+
+        $hashget_count = $hashget->count();
+        $hashget = json_decode($hashget, true);
+
+
+        Log::debug("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        Log::debug($hashget);
+
+        if(!empty($hashget)) {
+            foreach ($hashget as $item) {
+                $count = DB::table('favorite_tags')
+                    ->select('hashtag_id')
+                    ->where('hashtag_id', $item['hashtag_id'])
+                    ->whereNotNull('deleted_at')
+                    ->where('u_id', $id)
+                    ->get();
+                }
+                $count = json_decode($count, true);
+                Log::debug('countcountcountcount');
+                Log::debug($count);
+        }
+        
+        if(empty($count)){
+            $result_set = $hashget;
+        } else {
+            $result_set = array_diff($hashget, $count);
+        }
+        Log::debug('differencedifferencedifferencedifference');
+        Log::debug($result_set);
+
+
+        if($result_set != null) {
+            // 검색결과 있음
+            foreach($result_set as $item){
+                $hashtag_search = DB::table('hashtags')
+                ->select('hashtag_id', 'hashtag_name')
+                ->where('hashtag_id',$item['hashtag_id'])
+                ->orderBy('hashtag_id', 'desc')
+                ->get();
+            }
+            return response()->json($hashtag_search);
+
+        } else {
+            // 검색결과 없을 때 처리
+            return response()->json('false');
+        }
+        
+
     }
 }

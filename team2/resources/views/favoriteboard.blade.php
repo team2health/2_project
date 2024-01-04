@@ -6,7 +6,7 @@
 
 
 <main class="last_main">
-    <a href="{{route('board.create')}}" class="community_aplus"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
+    <a href="{{route('board.create')}}" class="community_aplus" onclick="openModal(); return false;"><img class="community_icon" src="../img/plusicon.png" alt=""></a>
     <div class="last_headline">
         <h2>"관심 태그"</h2>
     </div>
@@ -69,4 +69,5 @@
         <a href="{{ $data->url($data->lastPage()) }}">&gt;&gt;</a>
     @endif
 </div>
+<script src="/js/insert_modal.js"></script>
 @endsection

@@ -135,6 +135,10 @@ function toggleHashtags() {
         
     });
 }
+document.addEventListener('DOMContentLoaded', function() {
+    openModal();  // 페이지 로드 시 모달 창을 열도록 호출     
+});
+
 
 function handleTagClick(tag) {
     var clickedTagName = tag.getAttribute('data-tag');
@@ -182,3 +186,75 @@ function removeSelectedTag(button) {
     var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
     selectedHashtagsInput.value = selectedHashtags.join(',');
 }
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+    selectedCategories = [];
+}
+
+// 모달 닫기
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+// 모달 외부 클릭 시 닫기
+window.onclick = function(event) {
+    console.log(event.target);
+    var modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+function validateForm() {
+    var selectedCategory = document.querySelector('.category-item.selected');
+    
+    if (!selectedCategory) {
+        alert('게시판을 선택해주세요.');
+        return false;
+    }
+
+    return true;
+}
+
+var selectedCategories = [];
+
+        function toggleCategorySelection(categoryElement) {
+            var categoryId = categoryElement.getAttribute('data-category-id');
+
+            var index = selectedCategories.indexOf(categoryId);
+            if (index === -1) {
+                selectedCategories.push(categoryId);
+                categoryElement.classList.add('selected');
+            } else {
+                selectedCategories.splice(index, 1);
+                categoryElement.classList.remove('selected');
+            }
+
+            updateSelectedCategories();
+        }
+
+        function updateSelectedCategories() {
+            var selectedCategoriesContainer = document.getElementById('selectedCategoriesContainer');
+            selectedCategoriesContainer.innerHTML = ""; // 기존에 선택한 카테고리를 모두 지웁니다.
+
+            selectedCategories.forEach(function (categoryId) {
+                var categoryElement = document.createElement('p');
+                categoryElement.innerText = getCategoryNameById(categoryId);
+                selectedCategoriesContainer.appendChild(categoryElement);
+            });
+
+            // 모달을 닫습니다.
+            closeModal();
+        }
+
+        function getCategoryNameById(categoryId) {
+            // categoryId에 해당하는 카테고리 이름을 반환하는 함수를 구현해야 합니다.
+            // 해당 함수는 서버 측에서 미리 로드한 카테고리 정보를 활용하여 categoryId에 해당하는 카테고리 이름을 반환해야 합니다.
+            // 이 예제에서는 더미 함수로 대체하였습니다.
+            return  categoryId;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+        }
+        
