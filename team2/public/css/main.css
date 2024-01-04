@@ -350,6 +350,33 @@ button {
 	padding: 10px;
 }
 
+.main-body-button {
+	text-align: center;
+}
+
+.area {
+	background-color: #B7B7B7;
+}
+
+.main-body-front-back {
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	border: 1px solid #2C2B71;
+	border-radius: 50px;
+}
+
+.main-body-front-back-btn {
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 50px;
+	background-color: #2C2B71;
+	color: #fff;
+}
+
 @media only screen and (max-width:1300px) {
 	.mini-container {
 		width: 50vw;
