@@ -1,45 +1,14 @@
-let now = new Date();
-now.getFullYear();
-let year = now.getFullYear();
-now.getMonth() + 1;
-let month = now.getMonth() + 1;
-now.getDate();
-let date = now.getDate();
-now.getDay();
-let day = now.getDay();
-w_day = '';
-
-switch(day) {
-	case 1:
-		w_day = ' 월요일';
-		break;
-	case 2:
-		w_day = ' 화요일';
-		break;
-	case 3:
-		w_day = ' 수요일';
-		break;
-	case 4:
-		w_day = ' 목요일';
-		break;
-	case 5:
-		w_day = ' 금요일';
-		break;
-	case 6:
-		w_day = ' 토요일';
-		break;
-	default:
-		w_day = ' 일요일';
-		break;
-}
-let timeYear = document.getElementById('time-year');
-let timeDay = document.getElementById('time-day');
-timeYear.innerHTML = year+'.'+month+'.'+date;
-timeDay.innerHTML = w_day;
-
+let COMMUNITYNAV = document.getElementById("myDropdown");
+let communityNav = 0;
 
 function toggleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
+	if(communityNav === 0) {
+		COMMUNITYNAV.style.display = 'block'
+		communityNav = 1;
+	} else if(communityNav === 1) {
+		COMMUNITYNAV.style.display = 'none'
+		communityNav = 0;
+	}
 }
 
 // function toggleDropdown2() {
@@ -47,17 +16,17 @@ function toggleDropdown() {
 // }
 
 // 창 외부 클릭 시 드랍다운 닫기
-window.onclick = function (event) {
-    if (!event.target.matches('.cate_btn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
+// window.onclick = function (event) {
+//     if (!event.target.matches('.cate_btn')) {
+//         var dropdowns = document.getElementsByClassName("dropdown-content");
+//         for (var i = 0; i < dropdowns.length; i++) {
+//             var openDropdown = dropdowns[i];
+//             if (openDropdown.classList.contains('show')) {
+//                 openDropdown.classList.remove('show');
+//             }
+//         }
+//     }
+// }
 
 // let categoryFlg = 0;
 
