@@ -169,6 +169,36 @@ function off_mouse_pan(index) {
 	}
 }
 
+function on_mouse_leg(index) {
+	if(index === 1) {
+		document.getElementById('partchk-leg-knee').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-leg-calf').style.opacity = '1';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-leg-ankle').style.opacity = '1';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-leg-foot').style.opacity = '1';
+	}
+}
+
+function off_mouse_leg(index) {
+	if(index === 1) {
+		document.getElementById('partchk-leg-knee').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-leg-calf').style.opacity = '0.5';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-leg-ankle').style.opacity = '0.5';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-leg-foot').style.opacity = '0.5';
+	}
+}
+
 function partclick(index) {
 	if(index === 1) {
 		document.getElementById('body-part-chk').style.display = 'none';

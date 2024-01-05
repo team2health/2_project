@@ -454,8 +454,8 @@ button {
 .head-part-box {
 	position: relative;
     top: 106px;
-    width: 317px;
-    height: 535px;
+    width: 400px;
+    height: 585px;
     margin: 0 auto;
 }
 
@@ -463,53 +463,53 @@ button {
 	position: absolute;
 	z-index: 2;
 	opacity: 0.5;
-	left: 34px;
+	left: 21px;
 }
 
 .partchk-head-brain {
 	position: absolute;
-	left: 90px;
-    top: 31px;
+	left: 96px;
+    top: 41px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-head-eye {
 	position: absolute;
-	left: 90px;
-    top: 109px;
+	left: 93px;
+    top: 154px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-head-eye2 {
 	position: absolute;
-	left: 171px;
-    top: 108px;
+	left: 213px;
+    top: 154px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-head-nose {
 	position: absolute;
-	left: 136px;
-    top: 108px;
+	left: 163px;
+    top: 152px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-head-mouse {
 	position: absolute;
-	left: 116px;
-    top: 176px;
+	left: 126px;
+    top: 249px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-head-neck {
 	position: absolute;
-	left: 116px;
-	top: 213px;
+	left: 133px;
+    top: 302px;
 	z-index: 1;
 	opacity: 0.5;
 }
@@ -519,8 +519,8 @@ button {
 .arm-part-box {
 	position: relative;
     top: 106px;
-    width: 317px;
-    height: 535px;
+    width: 400px;
+    height: 585px;
     margin: 0 auto;
 }
 
@@ -529,36 +529,37 @@ button {
 	z-index: 2;
 	opacity: 0.5;
 	left: 78px;
+	bottom: 107px;
 }
 
 .partchk-arm-shoulder {
 	position: absolute;
-	left: 132px;
-    top: 13px;
+	left: 156px;
+    bottom: 477px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-arm-arm {
 	position: absolute;
-	left: 124px;
-    top: 95px;
+	left: 142px;
+    top: 54px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-arm-wrist {
 	position: absolute;
-	left: 109px;
-    top: 227px;
+	left: 119px;
+    top: 250px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-arm-hand {
 	position: absolute;
-	left: 106px;
-    top: 281px;
+	left: 115px;
+    top: 327px;
 	z-index: 1;
 	opacity: 0.5;
 }
@@ -568,8 +569,8 @@ button {
 .front-part-box {
 	position: relative;
     top: 106px;
-    width: 317px;
-    height: 535px;
+    width: 400px;
+    height: 585px;
     margin: 0 auto;
 }
 
@@ -582,16 +583,16 @@ button {
 
 .partchk-front-heart {
 	position: absolute;
-	left: 156px;
-    top: 68px;
+	left: 206px;
+    top: 62px;
 	z-index: 1;
 	opacity: 0.5;
 }
 
 .partchk-front-lung {
 	position: absolute;
-	left: 79px;
-    top: 43px;
+	left: 94px;
+    top: 62px;
 	z-index: 1;
 	opacity: 0.5;
 }
@@ -601,8 +602,8 @@ button {
 .pan-part-box {
 	position: relative;
     top: 106px;
-    width: 317px;
-    height: 535px;
+    width: 400px;
+    height: 585px;
     margin: 0 auto;
 }
 
@@ -643,8 +644,8 @@ button {
 .leg-part-box {
 	position: relative;
     top: 106px;
-    width: 317px;
-    height: 535px;
+    width: 400px;
+    height: 585px;
     margin: 0 auto;
 }
 
@@ -652,10 +653,41 @@ button {
 	position: absolute;
 	z-index: 2;
 	opacity: 0.5;
-	right: 0px;
-    top: 18px;
+	right: 94px;
+    top: -57px;
 }
 
+.partchk-leg-knee {
+	position: absolute;
+	left: 164px;
+    top: -40px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-leg-calf {
+	position: absolute;
+	left: 136px;
+    top: 71px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-leg-ankle {
+	position: absolute;
+	left: 152px;
+    top: 276px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-leg-foot {
+	position: absolute;
+	left: 77px;
+    top: 320px;
+	z-index: 1;
+	opacity: 0.5;
+}
 
 /* ------------------------------- */
 

@@ -96,8 +96,16 @@
 			<div class="leg-part-box" id="leg-part-chk">
 				<img class="leg-detail" src="/img/leg-detail.png" usemap="#legpartchk" alt="">
 				<map name="legpartchk">
-					
+					<area onmouseover="on_mouse_leg(1); return false;" onmouseout="off_mouse_leg(1); return false;" shape="poly" coords="133,18,126,20,120,25,120,34,117,47,116,61,116,75,118,83,118,88,112,99,118,106,138,109,152,111,171,114,181,112,187,108,185,98,185,95,187,89,192,80,193,65,193,48,193,37,194,35,188,25,172,20,138,18,132,18" href=""/>
+					<area onmouseover="on_mouse_leg(2); return false;" onmouseout="off_mouse_leg(2); return false;" shape="poly" coords="111,127,110,145,108,158,105,171,102,192,102,204,102,219,101,233,100,255,101,269,103,290,104,306,107,315,113,323,124,325,140,325,152,325,155,320,157,309,159,298,160,291,160,283,162,267,165,257,169,245,174,234,179,222,185,208,186,200,189,181,189,171,189,159,188,152,187,143,181,134,168,130,145,128,117,127,111,126,111,129" href=""/>
+					<area onmouseover="on_mouse_leg(3); return false;" onmouseout="off_mouse_leg(3); return false;" shape="poly" coords="108,333,107,349,105,363,102,375,102,383,115,386,131,387,149,388,154,384,154,376,154,366,153,357,150,345,146,335,132,335,118,333,109,333" href=""/>
+					<area onmouseover="on_mouse_leg(4); return false;" onmouseout="off_mouse_leg(4); return false;" shape="poly" coords="80,414,67,431,51,449,41,459,33,464,26,477,35,486,48,488,55,493,64,496,73,480,83,478,95,473,103,467,110,456,121,444,130,440,143,431,150,420,155,409,158,403,157,394,154,397,135,389,114,387,99,387,92,397,82,407,81,411" href=""/>
 				</map>
+
+				<img id="partchk-leg-knee" class="partchk-leg-knee" src="/img/knee.png" alt="">
+				<img id="partchk-leg-calf" class="partchk-leg-calf" src="/img/calf.png" alt="">
+				<img id="partchk-leg-ankle" class="partchk-leg-ankle" src="/img/ankle.png" alt="">
+				<img id="partchk-leg-foot" class="partchk-leg-foot" src="/img/foot.png" alt="">
 			</div>
 
 			<div class="main-body-button">
