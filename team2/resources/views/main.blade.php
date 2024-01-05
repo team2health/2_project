@@ -10,7 +10,7 @@
 			<div><span class="text-part">#부위</span>를 선택해 주세요</div>
 			<br>
 			<div class="part-box" id="body-part-chk">
-				<img class="partchk-body" src="/img/body.png" usemap="#partchk" alt="사람이미지">
+				<img class="partchk-body" src="/img/body.png" usemap="#partchk" alt="">
 				<map name="partchk">
 					<area onmouseover="on_mouse(1); return false;" onmouseout="off_mouse(1); return false;" onclick="partclick(1); return false;" shape="poly" coords="153,16,131,26,121,44,127,61,129,79,138,91,142,105,144,113,165,116,172,106,175,89,182,76,187,57,187,40,179,26,165,15,152,17" href=""/>
 					<area onmouseover="on_mouse(2); return false;" onmouseout="off_mouse(2); return false;" onclick="partclick(2); return false;" shape="poly" coords="90,144,67,152,56,180,59,201,60,210,51,248,51,271,45,288,44,310,39,337,39,362,35,379,22,396,20,410,49,419,51,411,48,384,51,367,66,330,72,299,73,264,82,245,93,215,96,144,91,143" href=""/>
@@ -38,12 +38,12 @@
 			<div class="head-part-box" id="head-part-chk">
 				<img class="head-detail" src="/img/head-detail.png" usemap="#headpartchk" alt="">
 				<map name="headpartchk">
-					<area onmouseover="on_mouse_head(1); return false;" onmouseout="off_mouse_head(1); return false;" shape="poly" coords="124,35,110,35,99,35,87,43,74,51,69,56,63,62,61,69,60,73,58,79,55,84,55,88,55,93,56,98,60,101,76,107,79,108,84,108,91,110,101,115,113,116,119,117,126,118,137,117,144,116,152,113,163,109,170,108,174,105,179,104,184,100,188,98,191,95,193,92,193,83,190,73,183,62,178,51,170,47,152,37,128,33,114,34" href=""/>
-					<area onmouseover="on_mouse_head(2); return false;" onmouseout="off_mouse_head(2); return false;" shape="poly" coords="66,127,66,135,68,142,71,144,75,145,84,145,97,146,106,146,112,143,113,138,111,131,105,123,99,118,90,116,80,114,68,114,65,116,65,123,65,125,66,128" href=""/>
-					<area onmouseover="on_mouse_head(2); return false;" onmouseout="off_mouse_head(2); return false;" shape="poly" coords="149,145,155,145,165,145,179,145,183,143,184,141,187,137,187,135,187,132,184,123,182,116,175,113,169,114,155,117,148,119,142,124,141,129,141,134,145,142,146,142,149,143,149,143" href=""/>
-					<area onmouseover="on_mouse_head(3); return false;" onmouseout="off_mouse_head(3); return false;" shape="poly" coords="126,132,120,136,116,139,115,144,112,153,112,160,112,165,112,168,116,172,119,174,126,176,131,176,134,175,139,173,141,168,141,164,143,157,143,154,142,150,141,148,141,142,138,139,136,134,133,133,129,132" href=""/>
-					<area onmouseover="on_mouse_head(4); return false;" onmouseout="off_mouse_head(4); return false;" shape="poly" coords="126,182,118,181,113,181,105,181,100,182,92,186,85,191,83,197,84,202,87,209,92,212,99,215,105,216,115,216,122,216,134,217,141,218,147,218,154,216,157,215,161,212,163,209,164,206,164,202,164,200,163,196,160,193,155,189,153,188,143,185,130,182,119,182,120,181" href=""/>
-					<area onmouseover="on_mouse_head(5); return false;" onmouseout="off_mouse_head(5); return false;" shape="poly" coords="87,227,86,240,86,246,88,252,94,255,98,257,110,259,117,259,126,259,138,256,154,257,160,256,164,254,166,250,168,245,168,239,168,235,166,231,164,229,156,229,151,227,148,228,140,229,135,229,120,230,102,228,95,224,89,226,85,226" href=""/>
+					<area onmouseover="on_mouse_head(1); return false;" onmouseout="off_mouse_head(1); return false;" shape="poly" coords="170,44,151,44,129,49,107,63,92,76,82,87,75,97,70,106,70,120,80,128,95,142,112,151,132,161,152,163,178,167,201,162,228,154,247,145,268,135,276,122,274,108,265,90,253,73,237,58,212,46,184,43,169,44,169,44" href=""/>
+					<area onmouseover="on_mouse_head(2); return false;" onmouseout="off_mouse_head(2); return false;" shape="poly" coords="143,181,132,172,123,163,109,160,89,160,76,168,76,181,78,192,83,199,90,205,103,207,114,206,129,205,142,204,145,196,145,186,145,182" href=""/>
+					<area onmouseover="on_mouse_head(2); return false;" onmouseout="off_mouse_head(2); return false;" shape="poly" coords="243,164,234,161,221,159,215,162,207,164,197,174,198,186,205,197,222,203,233,204,250,201,263,197,268,189,268,175,264,166,254,161,242,161,239,162" href=""/>
+					<area onmouseover="on_mouse_head(3); return false;" onmouseout="off_mouse_head(3); return false;" shape="poly" coords="171,172,162,173,153,184,150,199,150,218,150,238,157,248,177,250,186,247,197,238,198,222,194,203,193,188,186,178,175,173,174,173" href=""/>
+					<area onmouseover="on_mouse_head(4); return false;" onmouseout="off_mouse_head(4); return false;" shape="poly" coords="111,257,112,283,116,300,133,304,161,311,186,312,207,309,226,298,236,288,239,267,237,254,215,252,196,257,182,260,162,260,145,253,122,250,114,252,112,258" href=""/>
+					<area onmouseover="on_mouse_head(5); return false;" onmouseout="off_mouse_head(5); return false;" shape="poly" coords="171,315,153,314,135,318,115,323,109,334,107,348,114,361,126,368,139,369,156,369,176,369,222,368,231,360,242,348,242,333,230,321,205,315,174,314,171,314" href=""/>
 				</map>
 
 				<img id="partchk-head-brain" class="partchk-head-brain" src="/img/brain.png" alt="">
@@ -57,10 +57,10 @@
 			<div class="arm-part-box" id="arm-part-chk">
 				<img class="arm-detail" src="/img/arm-detail.png" usemap="#armpartchk" alt="">
 				<map name="armpartchk">
-					<area onmouseover="on_mouse_arm(1); return false;" onmouseout="off_mouse_arm(1); return false;" shape="poly" coords="99,22,91,27,82,34,76,45,70,62,67,72,67,86,68,95,72,104,80,111,92,122,96,127,99,130,99,22" href=""/>
-					<area onmouseover="on_mouse_arm(2); return false;" onmouseout="off_mouse_arm(2); return false;" shape="poly" coords="64,106,60,129,56,142,54,161,56,171,53,182,49,197,47,217,47,231,45,242,56,246,65,247,72,246,74,236,78,221,82,208,82,187,82,175,84,166,92,148,94,138,93,130,70,111,64,105" href=""/>
-					<area onmouseover="on_mouse_arm(3); return false;" onmouseout="off_mouse_arm(3); return false;" shape="poly" coords="41,271,41,280,46,286,52,286,58,283,60,280,63,273,65,267,68,259,68,254,63,251,55,249,46,248,43,249,42,261,42,266" href=""/>
-					<area onmouseover="on_mouse_arm(4); return false;" onmouseout="off_mouse_arm(4); return false;" shape="poly" coords="32,299,29,304,25,313,23,323,29,325,32,327,32,337,34,341,39,335,43,335,41,343,42,346,45,345,49,341,51,343,52,348,58,348,61,344,60,335,60,328,60,316,61,306,60,298,52,293,43,292,33,293,30,301" href=""/>
+					<area onmouseover="on_mouse_arm(1); return false;" onmouseout="off_mouse_arm(1); return false;" shape="poly" coords="142,28,127,39,110,55,97,74,93,96,93,108,95,121,114,136,137,154,144,159,143,30" href=""/>
+					<area onmouseover="on_mouse_arm(2); return false;" onmouseout="off_mouse_arm(2); return false;" shape="poly" coords="141,179,139,169,130,161,115,151,99,141,91,141,85,161,79,188,75,213,75,232,77,243,71,259,65,283,63,309,62,329,105,342,113,315,123,285,120,247,132,222,141,180" href=""/>
+					<area onmouseover="on_mouse_arm(3); return false;" onmouseout="off_mouse_arm(3); return false;" shape="poly" coords="60,389,59,401,62,409,75,413,86,405,89,391,99,371,99,360,89,354,75,350,61,350,59,363,60,387" href=""/>
+					<area onmouseover="on_mouse_arm(4); return false;" onmouseout="off_mouse_arm(4); return false;" shape="poly" coords="48,414,37,426,29,458,42,467,78,488,88,472,88,428,70,416,49,413" href=""/>
 				</map>
 
 				<img id="partchk-arm-shoulder" class="partchk-arm-shoulder" src="/img/shoulder.png" alt="">
@@ -72,8 +72,8 @@
 			<div class="front-part-box" id="front-part-chk">
 				<img class="front-detail" src="/img/front-detail.png" usemap="#frontpartchk" alt="">
 				<map name="frontpartchk">
-					<area onmouseover="on_mouse_front(1); return false;" onmouseout="off_mouse_front(1); return false;" shape="poly" coords="147,111,145,91,174,85,200,88,210,109,205,132,199,159,192,163,169,157,155,133,148,114" href=""/>
-					<area onmouseover="on_mouse_front(2); return false;" onmouseout="off_mouse_front(2); return false;" shape="poly" coords="120,47,101,54,86,65,73,83,67,119,71,159,79,175,90,174,121,164,139,143,136,120,133,118,133,85,133,61,121,47" href=""/>
+					<area onmouseover="on_mouse_front(1); return false;" onmouseout="off_mouse_front(1); return false;" shape="poly" coords="241,94,232,97,214,104,207,112,205,128,205,142,209,157,219,170,238,186,256,194,279,197,292,187,292,157,288,126,271,103,244,94,243,94" href=""/>
+					<area onmouseover="on_mouse_front(2); return false;" onmouseout="off_mouse_front(2); return false;" shape="poly" coords="161,61,148,64,134,73,124,84,114,96,108,105,103,122,98,137,94,152,92,170,90,183,90,196,90,207,91,213,93,225,95,235,97,242,100,250,106,259,116,263,131,263,142,258,157,249,171,240,180,232,190,223,196,213,197,201,195,192,191,181,187,173,188,160,187,137,184,121,182,100,182,87,182,69,177,60,164,59" href=""/>
 				</map>
 
 				<img id="partchk-front-heart" class="partchk-front-heart" src="/img/heart.png" alt="">
@@ -83,9 +83,9 @@
 			<div class="pan-part-box" id="pan-part-chk">
 				<img class="pan-detail" src="/img/pan-detail.png" usemap="#panpartchk" alt="">
 				<map name="panpartchk">
-					<area onmouseover="on_mouse_pan(1); return false;" onmouseout="off_mouse_pan(1); return false;" shape="poly" coords="73,37,72,50,69,64,66,81,71,95,89,100,112,107,133,109,143,107,145,101,143,92,138,83,133,78,125,73,121,66,114,55,106,46,90,38,76,34,72,39" href=""/>
-					<area onmouseover="on_mouse_pan(1); return false;" onmouseout="off_mouse_pan(1); return false;" shape="poly" coords="230,26,235,40,239,55,243,70,247,88,243,98,231,98,210,100,190,103,175,102,176,93,182,85,192,81,197,77,202,72,207,63,212,54,217,43,219,36,223,31,227,27" href=""/>
-					<area onmouseover="on_mouse_pan(2); return false;" onmouseout="off_mouse_pan(2); return false;" shape="poly" coords="156,27,130,28,119,33,124,44,131,62,141,78,148,88,155,95,162,91,173,82,180,75,187,65,191,53,198,40,199,30,182,28,158,26,152,28" href=""/>
+					<area onmouseover="on_mouse_pan(1); return false;" onmouseout="off_mouse_pan(1); return false;" shape="poly" coords="85,27,79,59,80,84,95,98,136,111,167,114,171,96,149,80,129,48,109,29,84,20,84,26" href=""/>
+					<area onmouseover="on_mouse_pan(1); return false;" onmouseout="off_mouse_pan(1); return false;" shape="poly" coords="185,109,190,115,199,114,216,109,226,108,240,103,258,96,268,89,273,82,276,73,274,59,271,44,268,31,268,13,265,8,259,6,248,13,240,23,234,33,231,43,224,59,220,70,202,83,184,100,185,109" href=""/>
+					<area onmouseover="on_mouse_pan(2); return false;" onmouseout="off_mouse_pan(2); return false;" shape="poly" coords="127,14,166,10,221,11,229,12,229,21,224,37,217,50,207,67,193,83,185,88,173,89,158,74,150,60,138,36,132,19,128,13" href=""/>
 				</map>
 
 				<img id="partchk-pan-pelvis" class="partchk-pan-pelvis" src="/img/pelvis.png" alt="">
@@ -108,14 +108,31 @@
 				<img id="partchk-leg-foot" class="partchk-leg-foot" src="/img/foot.png" alt="">
 			</div>
 
+			<div class="part-box" id="body-part-chk-back">
+				<img class="partchk-body-back" src="/img/body-back.png" usemap="#partchk-back" alt="">
+				<map name="partchk-back">
+					<area onmouseover="on_mouse_back(1); return false;" onmouseout="off_mouse_back(1); return false;"  shape="poly" coords="160,144,136,147,116,151,106,160,96,175,94,185,94,197,97,215,106,228,113,237,125,243,140,245,175,246,197,246,219,238,228,224,231,207,224,176,207,148,183,142,161,143" href="">
+					<area onmouseover="on_mouse_back(2); return false;" onmouseout="off_mouse_back(2); return false;"  shape="poly" coords="52,246,50,258,51,266,52,270,52,274,49,279,47,284,46,289,45,292,47,296,57,298,66,299,74,299,77,296,78,282,77,275,79,267,84,255,82,249,56,242,52,246,52,246" href="">
+					<area onmouseover="on_mouse_back(2); return false;" onmouseout="off_mouse_back(2); return false;"  shape="poly" coords="262,244,250,245,238,250,234,256,237,264,241,270,243,282,243,294,250,295,260,298,271,296,276,292,269,270,270,247,263,244" href="">
+					<area onmouseover="on_mouse_back(3); return false;" onmouseout="off_mouse_back(3); return false;"  shape="poly" coords="103,319,100,333,103,345,100,356,98,365,226,365,220,336,223,331,218,308,221,285,220,270,102,269,102,295,103,319" href="">
+					<area onmouseover="on_mouse_back(4); return false;" onmouseout="off_mouse_back(4); return false;"  shape="poly" coords="100,372,223,372,230,390,235,414,237,431,210,438,164,430,122,439,89,428,93,399,98,375" href="">
+				</map>
+
+				<img id="partchk-back-back" class="partchk-back-back" src="/img/back.png" alt="">
+				<img id="partchk-back-elbow" class="partchk-back-elbow" src="/img/elbow.png" alt="">
+				<img id="partchk-back-elbow2" class="partchk-back-elbow2" src="/img/elbow2.png" alt="">
+				<img id="partchk-back-waist" class="partchk-back-waist" src="/img/waist.png" alt="">
+				<img id="partchk-back-hip" class="partchk-back-hip" src="/img/hip.png" alt="">
+			</div>
+
 			<div class="main-body-button">
-				<div class="main-body-front-back-btn">정면</div>
-				<div class="main-body-front-back">후면</div>
+				<div class="main-body-front-back" id="body-front" onclick="bodyChkFront(); return false;">앞면</div>
+				<div class="main-body-front-back" id="body-back" onclick="bodyChkBack(); return false;">후면</div>
 			</div>
 			<br>
 		</div>
 	</div>
-	
+<br><br><br>
 </main>
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script>

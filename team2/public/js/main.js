@@ -3,6 +3,22 @@ let SYMPTOM = document.getElementById('symptom-display');
 let DISEASE = document.getElementById('disease-display');
 let MAPDISPLAY = document.getElementById('map-display');
 
+function bodyChkFront() {
+	document.getElementById('body-part-chk').style.display = 'block';
+	document.getElementById('body-part-chk-back').style.display = 'none';
+	document.getElementById('body-front').style.display = 'none';
+	document.getElementById('body-back').style.display = 'inline-block';
+}
+
+function bodyChkBack() {
+	document.getElementById('body-part-chk').style.display = 'none';
+	document.getElementById('body-part-chk-back').style.display = 'block';
+	document.getElementById('body-front').style.display = 'inline-block';
+	document.getElementById('body-back').style.display = 'none';
+}
+
+document.getElementById('body-front').style.display = 'none';
+document.getElementById('body-part-chk-back').style.display = 'none';
 document.getElementById('head-part-chk').style.display = 'none';
 document.getElementById('arm-part-chk').style.display = 'none';
 document.getElementById('front-part-chk').style.display = 'none';
@@ -199,7 +215,43 @@ function off_mouse_leg(index) {
 	}
 }
 
+function on_mouse_back(index) {
+	if(index === 1) {
+		document.getElementById('partchk-back-back').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-back-elbow').style.opacity = '1';
+		document.getElementById('partchk-back-elbow2').style.opacity = '1';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-back-waist').style.opacity = '1';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-back-hip').style.opacity = '1';
+	}
+}
+
+function off_mouse_back(index) {
+	if(index === 1) {
+		document.getElementById('partchk-back-back').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-back-elbow').style.opacity = '0.5';
+		document.getElementById('partchk-back-elbow2').style.opacity = '0.5';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-back-waist').style.opacity = '0.5';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-back-hip').style.opacity = '0.5';
+	}
+}
+
 function partclick(index) {
+	
+	document.getElementById('body-front').style.display = 'none';
+	document.getElementById('body-back').style.display = 'none';
+
 	if(index === 1) {
 		document.getElementById('body-part-chk').style.display = 'none';
 		document.getElementById('head-part-chk').style.display = 'block';
