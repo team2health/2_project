@@ -16,7 +16,7 @@
 
             <div id="mypageProfileChange" class="mypage-display-none">
                 <div id="mypageContent2">
-                    <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                    <form action="/" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
                         @csrf
                         <div id="UserInfoModify" class="User-info-modify">
                             <div class="mypage-profile-div">
@@ -99,12 +99,13 @@
                 </div>
                 <div class="mypage-byebye mypage-display-none" id="passwordFirstChk">
                     <form action="/deleteacountchk" method="post">
+                        @method('POST')
                         @csrf
                         <div class="password-pass-main-div">
                             <div class="mypage-account-delete">
                                 한 번 탈퇴하시면 계정을 복구할 수 없습니다.</div>
                             <label class="mypage-info-label" for="password-first-chk">비밀번호 확인</label>
-                            <input class="password-pass" type="password" placeholder="비밀번호를 입력해주세요." id="password-first-chk" onchange="passwordChk(); return false;">
+                            <input class="password-pass" name="user_password" type="password" placeholder="비밀번호를 입력해주세요." id="password-first-chk">
                         </div>
                     </form>
                 </div>
@@ -217,7 +218,6 @@
                             </button>
                         </div>
                         <div id="searchHashtag" class="mypage-seach-hashtag">
-
                         </div>
                     </form>
                     <div id="mypageCanGetAllTag" class="mypage-can-get-all-tag">

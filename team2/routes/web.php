@@ -52,7 +52,7 @@ Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
 Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
-Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk'])->name('logout.get');
+Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);
 
 Route::post('/namechk', [UserController::class, 'namechkpost']);
 Route::post('/idchk', [UserController::class, 'idchkpost']);
