@@ -4,14 +4,26 @@
     margin: 50px 0;
     display: flex;
 }
-.mypage-myProfile img{
+.mypage-myProfile-img {
     width: 120px;
+    height: 120px;
+    background-size: cover;
     border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
 }
 .mypage-myProfile-btn {
     margin: 0 auto;
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+}
+.mypage-myProfile-btn:hover {
+    border-radius: 40px;
+    background-color: #f4f4f4;
+    cursor: pointer;
 }
 .mypage-myProfile-btn-name {
     font-size: 1.6rem;
@@ -31,7 +43,7 @@
     align-items: center;
 }
 .mypage-main-btn:hover {
-    background-color: #dedede;
+    background-color: #DEDEDE;
     transition: 0.2s;
     cursor: pointer;
 }
@@ -46,14 +58,15 @@
 }
 .mypage-logout {
     text-align: center;
-    margin-top: 100px;
-    color: #FF9900;
+    margin: 150px 0;
+    color: #ea9008;
 }
-
+.mypage-logout a {
+    color: #ea9008;
+}
 .mypage-hashtag-click {
     cursor: pointer;
 }
-
 .mypage-display-none {
     display: none;
 }
@@ -67,7 +80,7 @@
 }
 .mypage-hashtag-search-div {
     margin: 0 20px;
-    border: 1px solid #d6d6d6;
+    border: 1px solid #D6D6D6;
     border-radius: 35px;
     display: flex;
     position: relative;
@@ -105,7 +118,7 @@
 }
 .mypage-myHashtag-div {
     height: 57px;
-    background: #e4e4e4;
+    background: #E4E4E4;
     border-radius: 30px;
     display: flex;
     justify-content: space-between;
@@ -131,15 +144,12 @@
     margin-bottom: 20px;
     color: #767676;
     padding-bottom: 13px;
-    border-bottom: 1px solid #b9b9b9;
+    border-bottom: 1px solid #B9B9B9;
 }
 .mypage-can-get-all-tag-msg img{
     height: 30px;
     margin-left: 15px;
 }
-
-
-/* 나의 게시글 / 댓글 */
 .mypage-board-tag .mypage-board-first-line span {
     background-color: #EAEAEA;
     padding: 3px;
@@ -153,15 +163,77 @@
     grid-template-columns: 1fr 82px;
     align-items: center;
     overflow-x: hidden;
+    width: 125%;
 }
 .mypage-myboard-date {
-    color: #ababab;
+    color: #ABABAB;
     font-size: 0.9rem;
 }
+.community-home-board-img-span {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+}
 .mypage-board-img {
-    width: 80px;
+    width: 100px;
 }
 .mypage-board-first-line {
     grid-column: span 1;
     min-width: 0;
+    margin-right: 25px;
+}
+.mypage-comment-area {
+    display: grid;
+    grid-template-columns: 1fr 82px;
+    width: 135%;
+}
+.mypage-comment-boardTitle {
+    color: #ABABAB;
+    font-size: 0.95rem;
+}
+.mypage-myComment {
+    font-size: 1.1rem;
+    font-weight: 700;
+    grid-column-start: 1;
+}
+.mypage-myComment-date {
+    color: #ABABAB;
+    font-size: 0.9rem;
+    grid-column-start: 1;
+}
+.tab-contents2 .community_tag a {
+    display: grid;
+    grid-template-rows: 20px 1fr 20px;
+    gap: 10px;
+    padding: 10px 20px;
+}
+.mypage-comment-categoryName {
+    grid-column-start: 2;
+}
+.mypage-profile-div {
+    display: grid;
+    grid-template-columns: 160px 160px;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+.profile-photo-btn {
+    margin-bottom: 20px;
+}
+.user-info-modify-1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.margin-bottom-200 {
+    margin-bottom: 200px;
+}
+
+@media only screen and (min-width: 850px) {
+    .mypage-comment-area {
+        width: 100%;
+    }
+    .mypage-board-img {
+        margin-left: 50px;
+    }
 }

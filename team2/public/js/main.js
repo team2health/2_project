@@ -3,6 +3,12 @@ let SYMPTOM = document.getElementById('symptom-display');
 let DISEASE = document.getElementById('disease-display');
 let MAPDISPLAY = document.getElementById('map-display');
 
+document.getElementById('head-part-chk').style.display = 'none';
+document.getElementById('arm-part-chk').style.display = 'none';
+document.getElementById('front-part-chk').style.display = 'none';
+document.getElementById('pan-part-chk').style.display = 'none';
+document.getElementById('leg-part-chk').style.display = 'none';
+
 function on_mouse(index) {
 	if(index === 1) {
 		document.getElementById('partchk-head').style.opacity = '1';
@@ -54,6 +60,165 @@ function off_mouse(index) {
 	if(index === 7) {
 		document.getElementById('partchk-left-leg2').style.opacity = '0.5';
 		document.getElementById('partchk-right-leg2').style.opacity = '0.5';
+	}
+}
+
+function on_mouse_head(index) {
+	if(index === 1) {
+		document.getElementById('partchk-head-brain').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-head-eye').style.opacity = '1';
+		document.getElementById('partchk-head-eye2').style.opacity = '1';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-head-nose').style.opacity = '1';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-head-mouse').style.opacity = '1';
+	}
+	if(index === 5) {
+		document.getElementById('partchk-head-neck').style.opacity = '1';
+	}
+}
+
+function off_mouse_head(index) {
+	if(index === 1) {
+		document.getElementById('partchk-head-brain').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-head-eye').style.opacity = '0.5';
+		document.getElementById('partchk-head-eye2').style.opacity = '0.5';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-head-nose').style.opacity = '0.5';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-head-mouse').style.opacity = '0.5';
+	}
+	if(index === 5) {
+		document.getElementById('partchk-head-neck').style.opacity = '0.5';
+	}
+}
+
+function on_mouse_arm(index) {
+	if(index === 1) {
+		document.getElementById('partchk-arm-shoulder').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-arm-arm').style.opacity = '1';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-arm-wrist').style.opacity = '1';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-arm-hand').style.opacity = '1';
+	}
+}
+
+function off_mouse_arm(index) {
+	if(index === 1) {
+		document.getElementById('partchk-arm-shoulder').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-arm-arm').style.opacity = '0.5';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-arm-wrist').style.opacity = '0.5';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-arm-hand').style.opacity = '0.5';
+	}
+}
+
+function on_mouse_front(index) {
+	if(index === 1) {
+		document.getElementById('partchk-front-heart').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-front-lung').style.opacity = '1';
+	}
+}
+
+function off_mouse_front(index) {
+	if(index === 1) {
+		document.getElementById('partchk-front-heart').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-front-lung').style.opacity = '0.5';
+	}
+}
+
+function on_mouse_pan(index) {
+	if(index === 1) {
+		document.getElementById('partchk-pan-pelvis').style.opacity = '1';
+		document.getElementById('partchk-pan-pelvis2').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-pan-genital').style.opacity = '1';
+	}
+}
+
+function off_mouse_pan(index) {
+	if(index === 1) {
+		document.getElementById('partchk-pan-pelvis').style.opacity = '0.5';
+		document.getElementById('partchk-pan-pelvis2').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-pan-genital').style.opacity = '0.5';
+	}
+}
+
+function on_mouse_leg(index) {
+	if(index === 1) {
+		document.getElementById('partchk-leg-knee').style.opacity = '1';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-leg-calf').style.opacity = '1';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-leg-ankle').style.opacity = '1';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-leg-foot').style.opacity = '1';
+	}
+}
+
+function off_mouse_leg(index) {
+	if(index === 1) {
+		document.getElementById('partchk-leg-knee').style.opacity = '0.5';
+	}
+	if(index === 2) {
+		document.getElementById('partchk-leg-calf').style.opacity = '0.5';
+	}
+	if(index === 3) {
+		document.getElementById('partchk-leg-ankle').style.opacity = '0.5';
+	}
+	if(index === 4) {
+		document.getElementById('partchk-leg-foot').style.opacity = '0.5';
+	}
+}
+
+function partclick(index) {
+	if(index === 1) {
+		document.getElementById('body-part-chk').style.display = 'none';
+		document.getElementById('head-part-chk').style.display = 'block';
+	}
+	if(index === 2) {
+		document.getElementById('body-part-chk').style.display = 'none';
+		document.getElementById('arm-part-chk').style.display = 'block';
+	}
+	if(index === 3) {
+		document.getElementById('body-part-chk').style.display = 'none';
+		document.getElementById('front-part-chk').style.display = 'block';
+	}
+	if(index === 4) {
+		document.getElementById('body-part-chk').style.display = 'none';
+		document.getElementById('pan-part-chk').style.display = 'block';
+	}
+	if(index === 5) {
+		document.getElementById('body-part-chk').style.display = 'none';
+		document.getElementById('leg-part-chk').style.display = 'block';
 	}
 }
 

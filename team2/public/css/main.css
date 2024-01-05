@@ -354,6 +354,7 @@ button {
 	text-align: center;
 }
 
+/* --------------------------------- */
 .part-box {
 	position: relative;
 	width: 317px;
@@ -448,6 +449,248 @@ button {
 	opacity: 0.5;
 }
 
+/* ------------------------------ */
+
+.head-part-box {
+	position: relative;
+    top: 106px;
+    width: 400px;
+    height: 585px;
+    margin: 0 auto;
+}
+
+.head-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	left: 21px;
+}
+
+.partchk-head-brain {
+	position: absolute;
+	left: 96px;
+    top: 41px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-eye {
+	position: absolute;
+	left: 93px;
+    top: 154px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-eye2 {
+	position: absolute;
+	left: 213px;
+    top: 154px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-nose {
+	position: absolute;
+	left: 163px;
+    top: 152px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-mouse {
+	position: absolute;
+	left: 126px;
+    top: 249px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-neck {
+	position: absolute;
+	left: 133px;
+    top: 302px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.arm-part-box {
+	position: relative;
+    top: 106px;
+    width: 400px;
+    height: 585px;
+    margin: 0 auto;
+}
+
+.arm-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	left: 78px;
+	bottom: 107px;
+}
+
+.partchk-arm-shoulder {
+	position: absolute;
+	left: 156px;
+    bottom: 477px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-arm-arm {
+	position: absolute;
+	left: 142px;
+    top: 54px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-arm-wrist {
+	position: absolute;
+	left: 119px;
+    top: 250px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-arm-hand {
+	position: absolute;
+	left: 115px;
+    top: 327px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.front-part-box {
+	position: relative;
+    top: 106px;
+    width: 400px;
+    height: 585px;
+    margin: 0 auto;
+}
+
+.front-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	left: 19px;
+}
+
+.partchk-front-heart {
+	position: absolute;
+	left: 206px;
+    top: 62px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-front-lung {
+	position: absolute;
+	left: 94px;
+    top: 62px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.pan-part-box {
+	position: relative;
+    top: 106px;
+    width: 400px;
+    height: 585px;
+    margin: 0 auto;
+}
+
+.pan-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	right: 5px;
+    top: 76px;
+}
+
+.partchk-pan-pelvis {
+	position: absolute;
+	left: 69px;
+    top: 100px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-pan-pelvis2 {
+	position: absolute;
+	left: 175px;
+    top: 102px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-pan-genital {
+	position: absolute;
+	left: 122px;
+    top: 106px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.leg-part-box {
+	position: relative;
+    top: 106px;
+    width: 400px;
+    height: 585px;
+    margin: 0 auto;
+}
+
+.leg-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	right: 94px;
+    top: -57px;
+}
+
+.partchk-leg-knee {
+	position: absolute;
+	left: 164px;
+    top: -40px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-leg-calf {
+	position: absolute;
+	left: 136px;
+    top: 71px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-leg-ankle {
+	position: absolute;
+	left: 152px;
+    top: 276px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-leg-foot {
+	position: absolute;
+	left: 77px;
+    top: 320px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
 .main-body-front-back {
 	display: inline-block;
 	width: 100px;
@@ -520,19 +763,25 @@ button {
 		justify-content: space-around;
 		position: fixed;
 		bottom: 0;
-		padding: 15px;
 		background-color: #fff;
-		border-top: 1px solid #c9c9c9;
+		border-top: 1px solid #e2e2e2;
 		z-index: 10;
 	}
 	
 	.footer-icon-div {
-		width: 45px;
-		height: 45px;
+		width: 70px;
+		height: 70px;
+		display: grid;
+		align-items: center;
+		justify-items: center;
 	}
-	
 	.footer-icon {
 		height: 40px;
+	}
+	.footer-icon-div:hover {
+		border-radius: 50%;
+		background-color: #d7e3ff;
+		transition: 0.2s;
 	}
 }
 

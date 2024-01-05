@@ -520,12 +520,15 @@ li{
 }
 
 .spantag-span-display-block {
-    display: inline-block;
+    /* display: inline-block; */
+    grid-column-start: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.spantag-span-display-block span {
+/* .spantag-span-display-block span {
     display: block;
-}
+} */
 
 .favorite_slider-container {
     margin: 30px auto;
@@ -629,11 +632,12 @@ li{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
+    margin-top: 10px;
 }
 .community_tag > a {
     border-radius: 10px;
     padding: 10px;
-    width:100%;   
+    width:98%;   
     text-overflow: ellipsis;
     overflow: hidden;  
     display: -webkit-box;   
@@ -643,6 +647,11 @@ li{
     background-color: #fff;
     height: 150px;
     border: 2px solid #E8E8E8;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 77% 1fr;
+    grid-template-rows: 25px 125px;
+    box-sizing: content-box;
 }
 .community_tag > a > div > span {
     background-color: #EAEAEA;
@@ -651,14 +660,16 @@ li{
     border-radius: 5px;
     font-size: 0.9rem;
     color: #7A7A7A;
+    text-align: center;
 }
 .community-fav-board-tag {
     margin-left: 10px;
     /* height: 25px; */
     overflow: hidden;
+    grid-column-start: 1;
 }
 .bordergo-hover a:hover {
-    background-color:  rgba(255, 153, 80, 0.6);
+    background-color:  rgba(245, 241, 238, 0.6);
 }
 
 a .a-bordergo-hover:hover {
@@ -926,11 +937,12 @@ a .a-bordergo-hover:hover {
 /* ---------------------------- */
 .community-home-board-img-span {
     float: right;
-    margin-top: 7px;
+    grid-column-start: 2;
+    grid-row-start: 2;
 }
 
 .community-home-board-img {
-    width: 100px;
+    width: 90px;
 }
 
 .community-trend-disease {
@@ -1111,17 +1123,19 @@ a .a-bordergo-hover:hover {
         text-decoration: none;
     }
     .community_tag > a {
-        padding: 10px;
-        width:100%;   
         text-overflow: ellipsis;
-        overflow: hidden;  
-        display: -webkit-box;   
-        -webkit-line-clamp: 6;  
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
-        white-space: normal;  
+        white-space: normal;
         background-color: #fff;
         height: 150px;
         border: 2px solid #E8E8E8;
+        display: grid;
+        grid-template-columns: 75% 15%;
+        grid-template-rows: 25px 90px;
+        box-sizing: border-box;
     }
     .community_tag {
         margin-bottom: 15px;
@@ -1130,12 +1144,16 @@ a .a-bordergo-hover:hover {
 }
 
 
+
 @media only screen and (min-width: 851px) {
     .board_nic_text{
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-left: 10px;
+    }
+    .community_tag {
+        margin: 10px 5px 15px 5px;
     }
 }
 

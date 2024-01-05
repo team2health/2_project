@@ -46,9 +46,6 @@ function sample4_execDaumPostcode() {
 }
 
 window.addEventListener('load', function() {
-    mypagemodalclosebtn(); //모달창 닫기
-});
-window.addEventListener('load', function() {
     addallfavoritetag(); //마이페이지 해시태그 불러오기
 })
 
@@ -97,11 +94,11 @@ function userboardshow() {
 }
 
 // 모달창 닫는 버튼
-function mypagemodalclosebtn() {
-    let userboardmodal = document.getElementById('UserboardModal');
-    userboardmodal.classList.toggle('UserboardModal');
-    mypageContentModal.classList.toggle('mypage-content-modal-block');
-}
+// function mypagemodalclosebtn() {
+//     let userboardmodal = document.getElementById('UserboardModal');
+//     userboardmodal.classList.toggle('UserboardModal');
+//     mypageContentModal.classList.toggle('mypage-content-modal-block');
+// }
 
 // 관심 해시태그 삭제 버튼
 function favoritehashdelete(data) {
@@ -417,23 +414,25 @@ function userinfoupdate() {
 
 // 게시글 탭
 const tab = document.querySelector(".tab");
-const tabListItem = document.querySelectorAll(".mypage-board-show-btn");
-const firstTab = tabListItem[0];
-const secondTab = tabListItem[1];
+// const tabListItem = document.querySelectorAll(".mypage-board-show-btn");
+const firstTab = document.getElementById('tabBtnFirst');
+const secondTab = document.getElementById('tabBtnSecond');
 const tabContent1 = document.querySelectorAll(".tab-contents");
 const tabContent2 = document.querySelectorAll(".tab-contents2");
 const data1 = document.querySelectorAll('[data-order="1"]');
 const data2 = document.querySelectorAll('[data-order="2"]');
 
 let tabflg = 1;
-
 firstTab.addEventListener('click', function () {
     if(tabflg === 2) {
             data1.forEach(element => {
-                element.style.display = 'block';
+                // element.style.display = 'block';
+                element.classList.add('tab-show');
             });
             data2.forEach(element => {
-                element.style.display = 'none';
+                // element.style.display = 'none';
+                element.classList.remove('tab-show');
+
             });
         firstTab.classList.add('active');
         secondTab.classList.remove('active');
@@ -444,10 +443,12 @@ firstTab.addEventListener('click', function () {
 secondTab.addEventListener('click', function () {
     if (tabflg === 1) {
             data2.forEach(element => {
-                element.style.display = 'block';
+                // element.style.display = 'block';
+                element.classList.add('tab-show');
             });
             data1.forEach(element => {
-                element.style.display = 'none';
+                // element.style.display = 'none';
+                element.classList.remove('tab-show');
             });
         firstTab.classList.remove('active');
         secondTab.classList.add('active');
@@ -458,44 +459,44 @@ secondTab.addEventListener('click', function () {
 
 // 모달 탭
 
-const tabModal = document.querySelector(".tab-modal");
-const tabListItemModal = document.querySelectorAll(".mypage-board-modal-btn");
-const modalfirstTab = tabListItemModal[0];
-const modalsecondTab = tabListItemModal[1];
-const modaltabContent1 = document.querySelectorAll(".tab-contents-modal");
-const modaltabContent2 = document.querySelectorAll(".tab-contents-modal2");
-const modaldata1 = document.querySelectorAll('[data-order="3"]');
-const modaldata2 = document.querySelectorAll('[data-order="4"]');
+// const tabModal = document.querySelector(".tab-modal");
+// const tabListItemModal = document.querySelectorAll(".mypage-board-modal-btn");
+// const modalfirstTab = tabListItemModal[0];
+// const modalsecondTab = tabListItemModal[1];
+// const modaltabContent1 = document.querySelectorAll(".tab-contents-modal");
+// const modaltabContent2 = document.querySelectorAll(".tab-contents-modal2");
+// const modaldata1 = document.querySelectorAll('[data-order="3"]');
+// const modaldata2 = document.querySelectorAll('[data-order="4"]');
 
-let modaltabflg = 3;
+// let modaltabflg = 3;
 
-modalfirstTab.addEventListener('click', function () {
-    if(modaltabflg === 4) {
-            modaldata1.forEach(element => {
-                element.style.display = 'block';
-            });
-            modaldata2.forEach(element => {
-                element.style.display = 'none';
-            });
-            modalfirstTab.classList.add('tab-active');
-            modalsecondTab.classList.remove('tab-active');
-        modaltabflg = 3;
-    } 
-})
+// modalfirstTab.addEventListener('click', function () {
+//     if(modaltabflg === 4) {
+//             modaldata1.forEach(element => {
+//                 element.style.display = 'block';
+//             });
+//             modaldata2.forEach(element => {
+//                 element.style.display = 'none';
+//             });
+//             modalfirstTab.classList.add('tab-active');
+//             modalsecondTab.classList.remove('tab-active');
+//         modaltabflg = 3;
+//     } 
+// })
 
-modalsecondTab.addEventListener('click', function () {
-    if (modaltabflg === 3) {
-            modaldata2.forEach(element => {
-                element.style.display = 'block';
-            });
-            modaldata1.forEach(element => {
-                element.style.display = 'none';
-            });
-            modalfirstTab.classList.remove('tab-active');
-            modalsecondTab.classList.add('tab-active');
-        modaltabflg = 4;
-    }
-})
+// modalsecondTab.addEventListener('click', function () {
+//     if (modaltabflg === 3) {
+//             modaldata2.forEach(element => {
+//                 element.style.display = 'block';
+//             });
+//             modaldata1.forEach(element => {
+//                 element.style.display = 'none';
+//             });
+//             modalfirstTab.classList.remove('tab-active');
+//             modalsecondTab.classList.add('tab-active');
+//         modaltabflg = 4;
+//     }
+// })
 
 
 // 게시글 더보기
@@ -782,12 +783,12 @@ function plusMypageCommentModal() {
     });
 }
 
-// 마이페이지 모든 버튼 삭제하는 함수
+// 마이페이지 모든 항목 display none 함수
 function deleteMypageBtnAll() {
     let mypageProfile = document.getElementById('mypageProfile');
     let mypageMyInfo = document.querySelectorAll('.mypage-main-btn');
     let mypageGap = document.getElementById('mypageGap');
-    let mypageLogout = document.getElementById('mypageLogout');
+    let mypageLogout = document.getElementById('mypageLogoutBtn');
     let mypageMainBtn = document.getElementById('mypageMainBtn');
     mypageMyInfo.forEach(function (element) {
         element.classList.add('mypage-display-none');
@@ -821,8 +822,36 @@ let showMyHashtagAllFlg = showMyHashtagAll.value;
     }
 }
 
+// 나의 게시물 불러오기
 function goToMyBoard() {
     deleteMypageBtnAll();
     let mypageMyInfoThird = document.getElementById('mypageMyInfoThird');
     mypageMyInfoThird.classList.remove('mypage-display-none');
 }
+
+// 스크롤바   
+window.addEventListener("scroll", function() {
+        let topBar = document.getElementById("topBar");
+        let scrollPosition = window.scrollY;
+
+        // 특정 스크롤 좌표 이후에 fixed 스타일 적용
+        if (scrollPosition > 200) {
+            topBar.classList.add("tab-list-fixed");
+        } else {
+            topBar.classList.remove("tab-list-fixed");
+        }
+    });
+
+function setNewInfo() {
+    deleteMypageBtnAll();
+    let mypagemyInfoMain = document.getElementById('mypagemyInfoMain');
+    let UserAccountDelete = document.getElementById('UserAccountDelete');
+    let mypageGap2 = document.getElementById('mypageGap2');
+    mypagemyInfoMain.classList.remove('mypage-display-none');
+    UserAccountDelete.classList.remove('mypage-display-none');
+    mypageGap2.classList.remove('mypage-display-none');
+}
+
+// function deleteAccount() {
+
+// }
