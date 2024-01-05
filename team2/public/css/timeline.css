@@ -619,9 +619,13 @@ td {
 
 /* 유저 정보 수정창 */
 
-.User-info-modify {
+.user-info-modify {
     margin: auto;
     width: 98%;
+    margin: 15px auto;
+    display: grid;
+    justify-content: center;
+    margin-top: 50px;
 }
 .profile-photo-btn {
     background-size: cover;
@@ -638,11 +642,6 @@ td {
     border: 1px solid #C5C5C5;
     display: inline-block;
     cursor: pointer;
-}
-.user-info-modify {
-    margin: 15px auto;
-    display: grid;
-    justify-content: center;
 }
 .mypage-info-label{
     font-weight: 700;
@@ -664,11 +663,11 @@ td {
     height: 60px;
     width: 100%;
     font-size: 1rem;
-    background-color: #fffdf9;
+    border: 0.5px solid #222222;
 }
 #UserInfoModify > input:focus {
     background-color: #FFF8DC;
-    border: 0.5px solid #282828;
+    border: 0.5px solid #222222;
 }
 .mypage-btn-line-modify > .mypage-btn {
     width: 145px;

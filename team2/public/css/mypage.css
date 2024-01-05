@@ -2,7 +2,6 @@
 
 .mypage-myProfile {
     margin: 50px 0;
-    display: flex;
 }
 .mypage-myProfile-img {
     width: 120px;
@@ -60,15 +59,13 @@
     text-align: center;
     margin: 150px 0;
     color: #ea9008;
+    cursor: pointer;
 }
 .mypage-logout a {
     color: #ea9008;
 }
 .mypage-hashtag-click {
     cursor: pointer;
-}
-.mypage-display-none {
-    display: none;
 }
 
 
@@ -228,7 +225,59 @@
 .margin-bottom-200 {
     margin-bottom: 200px;
 }
+.password-pass-main-div {
+    margin: 0 auto;
+    width: 400px;
+    max-width: 90%;
+    /* margin-top: 250px; */
+    background-color: #f8f8f8;
+    padding: 30px;
+}
+.password-pass {
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 65px;
+    background-color: #fffdf9;
+    border: 0.5px solid #767676;
+    padding-left: 20px;
+}
+.password-pass:focus {
+    background-color: #fffdf9;
+    color: #f09309;
+}
+.password-pass-main-div input::placeholder {
+    color: #727272; /* 원하는 색상으로 변경하세요 */
+}
+.mypage-account-delete {
+    color: #ff5100;
+}
+.mypage-byebye {
+    background-image: url(/img/byebye.jpg);
+    background-position: center center;
+    width: 100vw;
+    height: 500px;
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: grid;
+    align-items: center;
+}
 
+
+
+
+
+
+
+
+
+
+
+
+/* display none */
+.mypage-display-none {
+    display: none;
+}
 @media only screen and (min-width: 850px) {
     .mypage-comment-area {
         width: 100%;

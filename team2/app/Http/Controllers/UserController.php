@@ -89,4 +89,23 @@ class UserController extends Controller
         return response()->json(['idChk' => '0']);
     }
 
+    public function deleteaccountchk(Request $request) {
+
+        Log::debug($request);
+        $id = session('id');
+
+        $data = $request->password;
+        $hash_data = Hash::make($data);
+
+        $user_password = DB::table('users')
+            ->select('user_password')
+            ->where('user_id', $id)
+            ->get();
+
+            if($hash_data === $user_password) {
+                return response()->json('true');
+            } else {
+                return response()->json('false');
+            }
+    }
 }

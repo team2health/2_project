@@ -31,5 +31,6 @@ class VerifyCsrfToken extends Middleware
         '/favoritenextboard',
         '/mypagecommentplus',
         '/mypageboardplus',
+        '/deleteacountchk',
     ];
 }

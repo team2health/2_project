@@ -8,10 +8,40 @@
 <div class="mypage-main">
     <div class="mypage-main-grid" id="mypageMainGrid">
         {{-- 나의 프로필과 아이디 띄우는 곳 --}}
-        <div class="mypage-myProfile" id="mypageProfile">
-            <div class="mypage-myProfile-btn">
+        <div class="mypage-myProfile">
+            <div class="mypage-myProfile-btn" id="mypageProfile" onclick="myprofileChange(); return false;">
                 <div class="mypage-myProfile-img" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
                 <div class="mypage-myProfile-btn-name">{{$user_info[0]->user_name}}</div>
+            </div>
+
+            <div id="mypageProfileChange" class="mypage-display-none">
+                <div id="mypageContent2">
+                    <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                        @csrf
+                        <div id="UserInfoModify" class="User-info-modify">
+                            <div class="mypage-profile-div">
+                                <label for="profilephoto" class="user-info-modify-1">
+                                    <div id="profilephotoview" class="profile-photo-btn" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
+                                    <span id="user_img_name"></span>
+                                </label>
+                                <input type="file" accept="image/*" style="display: none;" id="profilephoto" name="user_img">
+                                <label for="profilephoto" class="mypage-btn user-info-modify-2"> 사진 변경 </label>
+                                <div class="mypage-btn user-info-modify-3" id="user-info-img-remove" onclick="userimgremove(); return false;"> 삭제 </div>
+                                <input type="hidden" name="imgFlg" id="imgflg">
+                            </div>
+                            <span id="user-img-url"></span>
+                            {{-- <a href="#">비밀번호 변경</a> --}}
+                            <br>
+                            <div class="mypage-gap mypage-display-none" id="mypageGap3"></div>
+                            <label for="usermodifyname" class="mypage-info-label">닉네임</label>
+                            <span class="user-info-btn-chk" onclick="nameChange(); return false;" id="name-info-btn"> 닉네임 중복 확인 </span>
+                            <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
+                            <div class="mypage-btn-line-modify">
+                                <button type="button" class="mypage-btn mpb-modify" onclick="userinfoupdate(); return false;">수정완료</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         {{-- 정보수정 --}}
@@ -24,40 +54,17 @@
                 </div>
 
             </div>
+            
             {{-- 나의 정보 --}}
             <div class="mypage-myInfo-second">
                 <div class="mypage-main-btn" onclick="setNewInfo(); return false;">
                     <img src="/img/userinfo.png" alt="">
                     <div class="mypage-main-btn-name">나의 정보</div>
                 </div>
-
                 <div class="mypage-display-none" id="mypagemyInfoMain">
                     <div id="mypageContent2">
                         <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
                             @csrf
-                            <div id="UserInfoModify" class="User-info-modify">
-                                <div class="mypage-profile-div">
-                                    <label for="profilephoto" class="user-info-modify-1">
-                                        <div id="profilephotoview" class="profile-photo-btn" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
-                                        <span id="user_img_name"></span>
-                                    </label>
-                                    <input type="file" accept="image/*" style="display: none;" id="profilephoto" name="user_img">
-                                    <label for="profilephoto" class="mypage-btn user-info-modify-2"> 사진 변경 </label>
-                                    <div class="mypage-btn user-info-modify-3" id="user-info-img-remove" onclick="userimgremove(); return false;"> 삭제 </div>
-                                    <input type="hidden" name="imgFlg" id="imgflg">
-                                </div>
-                                <span id="user-img-url"></span>
-                                {{-- <a href="#">비밀번호 변경</a> --}}
-                                <br>
-                                <label for="usermodifyname" class="mypage-info-label">닉네임</label>
-                                <span class="user-info-btn-chk" onclick="nameChange(); return false;" id="name-info-btn"> 닉네임 중복 확인 </span>
-                                <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
-                                {{-- <br>
-                                <label for="usermodifypassword">비밀번호 수정</label>
-                                <input type="password" id="usermodifypassword">
-                                <br>
-                                <label for="usermodifypasswordchk">비밀번호 확인</label>
-                                <input type="password" id="usermodifypasswordchk"> --}}
                                 <label class="mypage-info-label">아이디</label>
                                 <div class="user-now-address">{{$user_info[0]->user_id}}</div>
                                 <label class="mypage-info-label">우편번호</label>
@@ -87,10 +94,18 @@
                     </div>
                 </div>
                 <div class="mypage-gap mypage-display-none" id="mypageGap2"></div>
-                <div id="UserAccountDelete" class="mypage-display-none" onclick="deleteAccount(); return false;">
-                    <form action="/deleteacount" method="post">
+                <div id="UserAccountDelete" class="mypage-display-none" onclick="goToDeleteIdZone(); return false;">
+                    <div class="mypage-logout" id="goToDeleteIdZone">탈퇴하기</div>
+                </div>
+                <div class="mypage-byebye mypage-display-none" id="passwordFirstChk">
+                    <form action="/deleteacountchk" method="post">
                         @csrf
-                        <div class="mypage-logout">탈퇴하기</div>
+                        <div class="password-pass-main-div">
+                            <div class="mypage-account-delete">
+                                한 번 탈퇴하시면 계정을 복구할 수 없습니다.</div>
+                            <label class="mypage-info-label" for="password-first-chk">비밀번호 확인</label>
+                            <input class="password-pass" type="password" placeholder="비밀번호를 입력해주세요." id="password-first-chk" onchange="passwordChk(); return false;">
+                        </div>
                     </form>
                 </div>
             {{-- 나의 게시글 목록 --}}

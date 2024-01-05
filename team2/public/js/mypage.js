@@ -842,6 +842,7 @@ window.addEventListener("scroll", function() {
         }
     });
 
+// 정보수정창으로 이동
 function setNewInfo() {
     deleteMypageBtnAll();
     let mypagemyInfoMain = document.getElementById('mypagemyInfoMain');
@@ -852,6 +853,30 @@ function setNewInfo() {
     mypageGap2.classList.remove('mypage-display-none');
 }
 
-// function deleteAccount() {
+// 프로필 변경창
+function myprofileChange() {
+    deleteMypageBtnAll();
+    let mypageProfileChange = document.getElementById('mypageProfileChange');
+    let mypageGap3 = document.getElementById('mypageGap3');
+    mypageProfileChange.classList.remove('mypage-display-none');
+    mypageGap3.classList.remove('mypage-display-none');
+}
 
-// }
+// 비밀번호 변경창
+function setNewPassword() {
+    deleteMypageBtnAll();
+}
+
+// 회원탈퇴 창으로 이동
+function goToDeleteIdZone() {
+    let goToDeleteIdZoneDiv = document.getElementById('goToDeleteIdZone');
+    let mypagemyInfoMain = document.getElementById('mypagemyInfoMain');
+    let UserAccountDelete = document.getElementById('UserAccountDelete');
+    let mypageGap2 = document.getElementById('mypageGap2');
+    let passwordFirstChk = document.getElementById('passwordFirstChk');
+    mypagemyInfoMain.classList.add('mypage-display-none');
+    UserAccountDelete.classList.add('mypage-display-none');
+    mypageGap2.classList.add('mypage-display-none');
+    goToDeleteIdZoneDiv.classList.add('mypage-display-none');
+    passwordFirstChk.classList.remove('mypage-display-none');
+}
