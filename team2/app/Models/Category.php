@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'category_name','category_id'
+        'category_name'
     ];
     public function boards()
     {

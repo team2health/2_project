@@ -12,7 +12,7 @@ function previewImage(inputId, previewId) {
     if (file) {
         reader.readAsDataURL(file);
     } else {
-        preview.src = "{{ asset('img/plus.png') }}";
+        preview.src = "{{ asset('img/camera2.png') }}";
     }
 }
 
@@ -228,6 +228,7 @@ var selectedCategories = [];
                 selectedCategories.splice(index, 1);
                 categoryElement.classList.remove('selected');
             }
+            
 
             updateSelectedCategories();
         }
@@ -244,6 +245,9 @@ var selectedCategories = [];
 
             // 모달을 닫습니다.
             closeModal();
+            var selectedCategoriesInput = document.getElementById('selectedCategoriesInput');
+            selectedCategoriesInput.value = selectedCategories.join(',');
+
         }
 
         function getCategoryNameById(categoryId) {
@@ -256,5 +260,9 @@ var selectedCategories = [];
         function closeModal() {
             var modal = document.getElementById('myModal');
             modal.style.display = 'none';
+            
         }
+        // function getSelectedCategoryIds() {
+        //     return selectedCategories;
+        // }
         

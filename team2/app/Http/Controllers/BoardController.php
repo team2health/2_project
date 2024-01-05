@@ -123,21 +123,41 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {      
+        // dd($request->all());
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
         $u_id = auth()->id();   
         // 요청에서 게시글 데이터를 가져옵니다.     
-        $boardData = $request->only('board_title', 'board_content', 'category_id');        
+        $boardData = $request->only('board_title', 'board_content');
+        $boardData['category_id'] = (int)$request->input('category_id');
+      
         // 게시글 내용에서 줄 바꿈을 HTML <br> 태그로 변환
         $boardData['board_content'] = nl2br($boardData['board_content']);        
         // 게시글 데이터에 사용자 ID를 추가합니다.
-        $boardData['u_id'] = $u_id;
-        // $category_id = $request->input('category_id');
-        // $boardData['category_id'] = $category_id;
-        $board = Board::create($boardData);
-        // dd($request->input('category_id'));
+        $boardData['u_id'] = $u_id;       
+    
+    if ($request->category_id) {
+        // "category_id"를 사용하여 게시글을 저장하거나 필요한 작업을 수행합니다.
+        $category_id = explode($request->input('category_id'));
         
+        foreach($category_id as $categories){
+            
+            $categoryname = Category::where('category_name', $categories)->first();
+
+            if($categoryname){                
+                $category_ids=$categoryname->category_id;                
+                DB::table('boards')->insert([
+                    'u_id' => $u_id,
+                    'board_title' => $boardData['board_title'],
+                    'board_content' => $boardData['board_content'],
+                    'category_id'=>$category_ids
+                ]);
+            }
+        }
+    }     
+        // 이후에 게시글을 생성할 때 사용할 수 있습니다.
+        $board = Board::create($boardData);       
         
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasFile('board_img')) {
@@ -195,8 +215,9 @@ class BoardController extends Controller
         } else {
             $board_detail_get = Board::get()->where('board_id', $board_id);
         }
+        
            
-    return redirect()->route('detail', ['board' => $board_id])->with(['hashtags' => $hashtags, 'category' => $category]);
+    return redirect()->route('detail', ['board' => $board_id])->with(['board_detail_get'=>$board_detail_get]);
     // $boardDetail = session('data');
 }
     
