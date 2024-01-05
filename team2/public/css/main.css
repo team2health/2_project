@@ -354,6 +354,7 @@ button {
 	text-align: center;
 }
 
+/* --------------------------------- */
 .part-box {
 	position: relative;
 	width: 317px;
@@ -447,6 +448,216 @@ button {
 	z-index: 1;
 	opacity: 0.5;
 }
+
+/* ------------------------------ */
+
+.head-part-box {
+	position: relative;
+    top: 106px;
+    width: 317px;
+    height: 535px;
+    margin: 0 auto;
+}
+
+.head-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	left: 34px;
+}
+
+.partchk-head-brain {
+	position: absolute;
+	left: 90px;
+    top: 31px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-eye {
+	position: absolute;
+	left: 90px;
+    top: 109px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-eye2 {
+	position: absolute;
+	left: 171px;
+    top: 108px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-nose {
+	position: absolute;
+	left: 136px;
+    top: 108px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-mouse {
+	position: absolute;
+	left: 116px;
+    top: 176px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-head-neck {
+	position: absolute;
+	left: 116px;
+	top: 213px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.arm-part-box {
+	position: relative;
+    top: 106px;
+    width: 317px;
+    height: 535px;
+    margin: 0 auto;
+}
+
+.arm-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	left: 78px;
+}
+
+.partchk-arm-shoulder {
+	position: absolute;
+	left: 132px;
+    top: 13px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-arm-arm {
+	position: absolute;
+	left: 124px;
+    top: 95px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-arm-wrist {
+	position: absolute;
+	left: 109px;
+    top: 227px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-arm-hand {
+	position: absolute;
+	left: 106px;
+    top: 281px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.front-part-box {
+	position: relative;
+    top: 106px;
+    width: 317px;
+    height: 535px;
+    margin: 0 auto;
+}
+
+.front-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	left: 19px;
+}
+
+.partchk-front-heart {
+	position: absolute;
+	left: 156px;
+    top: 68px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-front-lung {
+	position: absolute;
+	left: 79px;
+    top: 43px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.pan-part-box {
+	position: relative;
+    top: 106px;
+    width: 317px;
+    height: 535px;
+    margin: 0 auto;
+}
+
+.pan-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	right: 5px;
+    top: 76px;
+}
+
+.partchk-pan-pelvis {
+	position: absolute;
+	left: 69px;
+    top: 100px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-pan-pelvis2 {
+	position: absolute;
+	left: 175px;
+    top: 102px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.partchk-pan-genital {
+	position: absolute;
+	left: 122px;
+    top: 106px;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+/* ------------------------------- */
+
+.leg-part-box {
+	position: relative;
+    top: 106px;
+    width: 317px;
+    height: 535px;
+    margin: 0 auto;
+}
+
+.leg-detail {
+	position: absolute;
+	z-index: 2;
+	opacity: 0.5;
+	right: 0px;
+    top: 18px;
+}
+
+
+/* ------------------------------- */
 
 .main-body-front-back {
 	display: inline-block;
