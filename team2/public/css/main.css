@@ -748,7 +748,7 @@ button {
 	}
 	.footer-icon-div:hover {
 		border-radius: 50%;
-		background-color: #d7e3ff;
+		background-color: #ebedf3;
 		transition: 0.2s;
 	}
 }

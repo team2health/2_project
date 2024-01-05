@@ -449,7 +449,6 @@ class MypageController extends Controller
             // 검색결과 없을 때 처리
             return response()->json('false');
         }
-        
-
     }
+
 }
