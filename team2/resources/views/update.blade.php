@@ -34,14 +34,21 @@
 					</div>
 				@endfor
 			</div>	 -->
-			<div class="insert_select_container">
-				<select name="board" id="board" class="insert_select" >
-					{{-- <option value="{{ $result->category_id }}">{{ $result->category->category_name }}</option> --}}
-					<option value="1" {{$result->category_id === 1 ? 'selected' : ''}}>자유게시판</option>
-					<option value="2" {{$result->category_id === 2 ? 'selected' : ''}}>정보 게시판</option>
-					<option value="3" {{$result->category_id === 3 ? 'selected' : ''}}>친목 게시판</option>
-					<option value="4" {{$result->category_id === 4 ? 'selected' : ''}}>질문 게시판</option>
-				</select>
+			<div id="myModal" class="modal">
+				<div class="comment_modal_content">  
+				@foreach ($categories as $category)
+					<p class="category-item" data-category-id="{{ $category->category_name }}" onclick="toggleCategorySelection(this)">
+						{{ $category->category_name }}
+					</p>
+				@endforeach		
+					<!-- <a href="{{url()->previous()}}"> -->
+						<span class="close" onclick="closeModal()">취소</span>
+					</a>             
+				</div>
+    		</div> 
+			<div class="insert_select_container" onclick="openModal()">			
+			<div class="insert_select" id="selectedCategoriesContainer">{{ $result->category->category_name }}</div>
+				
 			</div>		
 			<div class="insert_input_container">
 				<label for="u_title" class="">

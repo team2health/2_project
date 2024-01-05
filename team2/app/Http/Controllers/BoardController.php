@@ -137,27 +137,41 @@ class BoardController extends Controller
         // 게시글 데이터에 사용자 ID를 추가합니다.
         $boardData['u_id'] = $u_id;       
     
-    if ($request->category_id) {
-        // "category_id"를 사용하여 게시글을 저장하거나 필요한 작업을 수행합니다.
-        $category_id = explode($request->input('category_id'));
+    // if ($request->category_id) {
+    //     // "category_id"를 사용하여 게시글을 저장하거나 필요한 작업을 수행합니다.
+    //     $category_id = explode(',',$request->input('category_id'));
         
-        foreach($category_id as $categories){
+    //     foreach($category_id as $categories){
             
-            $categoryname = Category::where('category_name', $categories)->first();
+    //         $categoryname = Category::where('category_name', $categories)->first();
 
-            if($categoryname){                
-                $category_ids=$categoryname->category_id;                
-                DB::table('boards')->insert([
-                    'u_id' => $u_id,
-                    'board_title' => $boardData['board_title'],
-                    'board_content' => $boardData['board_content'],
-                    'category_id'=>$category_ids
-                ]);
-            }
-        }
-    }     
+    //         if($categoryname){                
+    //             $category_ids=$categoryname->category_id;                
+    //             DB::table('boards')->insert([
+    //                 'u_id' => $u_id,
+    //                 'board_title' => $boardData['board_title'],
+    //                 'board_content' => $boardData['board_content'],
+    //                 'category_id'=>$category_ids
+    //             ]);
+    //         }
+    //     }
+    // }     
         // 이후에 게시글을 생성할 때 사용할 수 있습니다.
-        $board = Board::create($boardData);       
+        $board = Board::create($boardData);  
+        if ($request->category_id) {
+            $category_names = explode(',', $request->input('category_id'));
+    
+            foreach ($category_names as $category_name) {
+                // 카테고리를 찾아서 연결합니다.
+                $category = Category::where('category_name', $category_name)->first();
+    
+                if ($category) {
+                    $board->category()->associate($category);
+                }
+            }
+            // 모델의 save 메소드를 호출하여 저장합니다.
+            $board->save();
+        }     
         
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasFile('board_img')) {
@@ -258,7 +272,8 @@ class BoardController extends Controller
 
         $result = Board::find($board_id);
         $allHashtags = Hashtag::all();
-        return view('update', compact('result', 'allHashtags'));
+        $categories = Category::all();
+        return view('update', compact('result', 'allHashtags','categories'));
 
     }
 
@@ -306,6 +321,14 @@ class BoardController extends Controller
         //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다
         $result->hashtags()->sync($hashtagIds);
     }
+    if ($request->has('category_id')) {
+        // 이 부분을 수정하여 카테고리 업데이트 로직을 추가합니다.
+        $category = Category::where('category_name', $request->input('category_id'))->first();
+        if ($category) {
+            $result->update(['category_id' => $category->category_id]);
+        }
+    }
+
         
         
 

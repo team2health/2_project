@@ -19,64 +19,7 @@ function previewImage(inputId, previewId) {
         preview.src = "{{ asset('img/plus.png') }}";
     }
 }
-// 이미지를 저장하는 배열
-// var selectedImages = [];
 
-
-// function openFile(fileInputId) {
-//     //파일 선택 다이얼로그 열기
-//     document.getElementById(fileInputId).click();
-// }
-
-// function previewImage(inputId, previewId) {
-//     //전달받은 inputId를 사용하여 HTML 문서에서 해당 ID를 가진 
-//     //파일 입력(input) 엘리먼트를 찾아 변수 input에 할당
-//     var input = document.getElementById(inputId);
-    
-//     // 전달받은 previewId를 사용하여 HTML 문서에서 해당 ID를 가진 
-//     // 이미지 미리보기 엘리먼트를 찾아 변수 preview에 할당합니다.
-//     var preview = document.getElementById(previewId);
-    
-//     //파일 입력(input) 엘리먼트에서 선택된 파일의 
-//     //첫 번째 파일을 가져와 변수 file에 할당합니다.
-//     var file = input.files[0];
-    
-//     //FileReader 객체를 생성하여 변수 reader에 할당합니다. 
-//     //이 객체는 파일을 비동기적으로 읽을 수 있게 해줍니다.
-//     var reader = new FileReader();
-    
-//     //reader 객체의 onloadend 이벤트 핸들러를 설정합니다. 파일 읽기가 완료되면 
-//     //해당 함수가 실행되어 미리보기 이미지의 소스(src)를 읽은 파일의 결과로 설정합니다.
-//     reader.onloadend = function () {
-//         preview.src = reader.result;
-//     };
-//     //만약 선택된 파일이 있다면, FileReader를 사용하여 파일을 데이터 URL로 읽어와
-//     //미리보기 이미지의 소스로 설정합니다. 선택된 파일이 없으면 
-//     //기본적으로 설정된 이미지 파일('img/plus.png')을 미리보기 이미지의 소스로 설정합니다.
-//     if (file) {
-//         reader.readAsDataURL(file);
-//     } else {
-//         preview.src = "{{ asset('img/plus.png') }}";
-//     }
-// }
-
-// function removeImage(imageKey) {    
-
-//     // 선택된 이미지 배열에서 삭제
-//     selectedImages = selectedImages.filter(function (key) {
-//         return key !== imageKey;
-//     });
-
-//     // 이미지 미리보기, 업로드한 이미지 input, 이미지 삭제 버튼 삭제
-//     var imageContainer = document.getElementById('imageContainer' + imageKey);
-//     if (imageContainer) {
-//         imageContainer.parentNode.removeChild(imageContainer);
-//     }
-
-//     // 배열에 있는 모든 이미지를 숨겨진 인풋 필드에 설정
-//     var selectedImagesInput = document.getElementById('selectedImages');
-//     selectedImagesInput.value = selectedImages.join(',');
-// }
     
 var selectedHashtags = [];
 
@@ -211,4 +154,94 @@ function removeSelectedTag(tag) {
 //     });
 
 //     updateSelectedTags();
+// }
+
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+    selectedCategories = [];
+}
+
+// 모달 닫기
+// function closeModal() {
+//     document.getElementById('myModal').style.display = 'none';
+// }
+
+// 모달 외부 클릭 시 닫기
+window.onclick = function(event) {
+    console.log(event.target);
+    var modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+function validateForm() {
+    var selectedCategory = document.querySelector('.category-item.selected');
+    
+    if (!selectedCategory) {
+        alert('게시판을 선택해주세요.');
+        return false;
+    }
+
+    return true;
+}
+
+var selectedCategories = [];
+
+        function toggleCategorySelection(categoryElement) {
+            var categoryId = categoryElement.getAttribute('data-category-id');
+
+            var index = selectedCategories.indexOf(categoryId);
+            if (index === -1) {
+                selectedCategories.push(categoryId);
+                categoryElement.classList.add('selected');
+            } else {
+                selectedCategories.splice(index, 1);
+                categoryElement.classList.remove('selected');
+            }
+            
+
+            updateSelectedCategories();
+        }
+
+        function updateSelectedCategories() {
+            var selectedCategoriesContainer = document.getElementById('selectedCategoriesContainer');
+            selectedCategoriesContainer.innerHTML = ""; // 기존에 선택한 카테고리를 모두 지웁니다.
+
+            selectedCategories.forEach(function (categoryId) {
+                var categoryElement = document.createElement('p');
+                categoryElement.innerText = getCategoryNameById(categoryId);
+                selectedCategoriesContainer.appendChild(categoryElement);
+            });
+
+            // 모달을 닫습니다.
+            closeModal();
+            var selectedCategoriesInput = document.getElementById('selectedCategoriesInput');
+            selectedCategoriesInput.value = selectedCategories.join(',');
+
+        }
+
+        function getCategoryNameById(categoryId) {
+            // categoryId에 해당하는 카테고리 이름을 반환하는 함수를 구현해야 합니다.
+            // 해당 함수는 서버 측에서 미리 로드한 카테고리 정보를 활용하여 categoryId에 해당하는 카테고리 이름을 반환해야 합니다.
+            // 이 예제에서는 더미 함수로 대체하였습니다.
+            return  categoryId;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+            
+        }
+// function selectCategory(categoryName) {
+//     document.getElementById('selectedCategoriesContainer').innerText = categoryName;
+//     document.getElementById('selectedCategoriesInput').value = categoryName;
+//     closeModal();
+// }
+
+// function closeModal() {
+//     document.getElementById('myModal').style.display = 'none';
+// }
+
+// function openModal() {
+//     document.getElementById('myModal').style.display = 'block';
 // }
