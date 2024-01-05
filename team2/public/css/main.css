@@ -763,19 +763,25 @@ button {
 		justify-content: space-around;
 		position: fixed;
 		bottom: 0;
-		padding: 15px;
 		background-color: #fff;
-		border-top: 1px solid #c9c9c9;
+		border-top: 1px solid #e2e2e2;
 		z-index: 10;
 	}
 	
 	.footer-icon-div {
-		width: 45px;
-		height: 45px;
+		width: 70px;
+		height: 70px;
+		display: grid;
+		align-items: center;
+		justify-items: center;
 	}
-	
 	.footer-icon {
 		height: 40px;
+	}
+	.footer-icon-div:hover {
+		border-radius: 50%;
+		background-color: #d7e3ff;
+		transition: 0.2s;
 	}
 }
 

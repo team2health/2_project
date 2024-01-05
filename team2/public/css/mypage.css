@@ -58,7 +58,7 @@
 }
 .mypage-logout {
     text-align: center;
-    margin-bottom: 100px;
+    margin: 150px 0;
     color: #ea9008;
 }
 .mypage-logout a {
@@ -163,7 +163,7 @@
     grid-template-columns: 1fr 82px;
     align-items: center;
     overflow-x: hidden;
-    width: 135%;
+    width: 125%;
 }
 .mypage-myboard-date {
     color: #ABABAB;
@@ -180,6 +180,7 @@
 .mypage-board-first-line {
     grid-column: span 1;
     min-width: 0;
+    margin-right: 25px;
 }
 .mypage-comment-area {
     display: grid;
@@ -224,6 +225,9 @@
     grid-column-end: 3;
 }
 
+.margin-bottom-200 {
+    margin-bottom: 200px;
+}
 
 @media only screen and (min-width: 850px) {
     .mypage-comment-area {

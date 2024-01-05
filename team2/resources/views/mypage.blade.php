@@ -114,7 +114,7 @@
                                 </li>
                             </ul>
                         <div class="tab-contents tab-show" data-order="1">
-                            <div class="community_tag bordergo-hover">
+                            <div class="community_tag margin-bottom-200 bordergo-hover">
                                 @forelse ($data as $value => $item)
                                 <a href="{{ route('board.show',['board'=>$item["board_id"]]) }}">
                                     <div class="community-fav-board-tag mypage-board-tag">
