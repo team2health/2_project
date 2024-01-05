@@ -18,7 +18,7 @@
         <div class="mypage-myInfo" id="mypageMyInfo">
             {{-- 비밀번호 변경--}}
             <div class="mypage-myInfo-first">
-                <div class="mypage-main-btn">
+                <div class="mypage-main-btn" onclick="setNewPassword(); return false;">
                     <img src="/img/password.png" alt="">
                     <div class="mypage-main-btn-name">비밀번호 변경</div>
                 </div>
@@ -26,12 +26,73 @@
             </div>
             {{-- 나의 정보 --}}
             <div class="mypage-myInfo-second">
-                <div class="mypage-main-btn">
+                <div class="mypage-main-btn" onclick="setNewInfo(); return false;">
                     <img src="/img/userinfo.png" alt="">
                     <div class="mypage-main-btn-name">나의 정보</div>
                 </div>
 
-            </div>
+                <div class="mypage-display-none" id="mypagemyInfoMain">
+                    <div id="mypageContent2">
+                        <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                            @csrf
+                            <div id="UserInfoModify" class="User-info-modify">
+                                <div class="mypage-profile-div">
+                                    <label for="profilephoto" class="user-info-modify-1">
+                                        <div id="profilephotoview" class="profile-photo-btn" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
+                                        <span id="user_img_name"></span>
+                                    </label>
+                                    <input type="file" accept="image/*" style="display: none;" id="profilephoto" name="user_img">
+                                    <label for="profilephoto" class="mypage-btn user-info-modify-2"> 사진 변경 </label>
+                                    <div class="mypage-btn user-info-modify-3" id="user-info-img-remove" onclick="userimgremove(); return false;"> 삭제 </div>
+                                    <input type="hidden" name="imgFlg" id="imgflg">
+                                </div>
+                                <span id="user-img-url"></span>
+                                {{-- <a href="#">비밀번호 변경</a> --}}
+                                <br>
+                                <label for="usermodifyname" class="mypage-info-label">닉네임</label>
+                                <span class="user-info-btn-chk" onclick="nameChange(); return false;" id="name-info-btn"> 닉네임 중복 확인 </span>
+                                <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
+                                {{-- <br>
+                                <label for="usermodifypassword">비밀번호 수정</label>
+                                <input type="password" id="usermodifypassword">
+                                <br>
+                                <label for="usermodifypasswordchk">비밀번호 확인</label>
+                                <input type="password" id="usermodifypasswordchk"> --}}
+                                <label class="mypage-info-label">아이디</label>
+                                <div class="user-now-address">{{$user_info[0]->user_id}}</div>
+                                <label class="mypage-info-label">우편번호</label>
+                                <div class="user-now-address">{{$user_info[0]->user_address_num}}</div>
+                                <label class="mypage-info-label">현재 주소지</label>
+                                <div class="user-now-address">{{$user_info[0]->user_address}} {{$user_info[0]->user_address_detail}}</div>
+                                <br>
+                                <br>
+                                {{-- 선 --}}
+                                <div class="mypage-gap mypage-display-none" id="mypageGap2"></div>
+
+                                <label class="mypage-info-label">주소 변경</label>
+                                <div class="adress-box">
+                                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" name="user_address_num" readonly>
+                                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="mypage-btn"><br>
+                                    <span id="guide" style="color:#999;display:none"></span>
+                                    <input class="adress-box-b" type="text" id="sample4_roadAddress" name="user_address" placeholder="도로명주소" readonly>
+                                    <br>
+                                    <input class="adress-box-b" type="text" id="sample4_detailAddress" name="user_address_detail" placeholder="상세주소">
+                                </div>
+                                <div class="mypage-btn-line-modify">
+                                    <button type="button" class="mypage-btn mpb-modify" onclick="userinfoupdate(); return false;">수정완료</button>
+                                    {{-- <a href="{{route('mypage.get')}}"><div class="mypage-btn">취소</div></a> --}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="mypage-gap mypage-display-none" id="mypageGap2"></div>
+                <div id="UserAccountDelete" class="mypage-display-none" onclick="deleteAccount(); return false;">
+                    <form action="/deleteacount" method="post">
+                        @csrf
+                        <div class="mypage-logout">탈퇴하기</div>
+                    </form>
+                </div>
             {{-- 나의 게시글 목록 --}}
             <div class="mypage-myInfo-third">
                 <div class="mypage-main-btn" onclick="goToMyBoard(); return false;">
@@ -44,7 +105,7 @@
                                 <div class="mypage-myProfile-img" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
                                 <div class="mypage-myProfile-btn-name">{{$user_info[0]->user_name}}</div>
                             </div>
-                            <ul class="tab_list">
+                            <ul class="tab_list" id="topBar">
                                 <li class="mypage-board-show-btn active" data-list="1" id="tabBtnFirst">
                                     내가 쓴 게시글
                                 </li>
@@ -88,7 +149,7 @@
                                     <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                         <div class="mypage-comment-area">
                                             <div class="mypage-comment-boardTitle">{!! Str::limit($item->board_title, 40, '...') !!}</div>
-                                            <span>카테고리</span>
+                                            <span class="mypage-comment-categoryName">카테고리</span>
                                         </div>
                                         <div class="mypage-myComment">{{Str::limit($item->comment_content, 75, '...')}}</div>
                                         <div class="mypage-myComment-date">{{$item->created_at}}</div>
@@ -155,7 +216,7 @@
         </div>
     </div>
 
-    <div class="mypage-logout" id="mypageLogout">
+    <div class="mypage-logout" id="mypageLogoutBtn">
         <a href="{{ route('logout.get') }}">로그아웃</a>
     </div>
 

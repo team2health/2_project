@@ -520,12 +520,15 @@ li{
 }
 
 .spantag-span-display-block {
-    display: inline-block;
+    /* display: inline-block; */
+    grid-column-start: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.spantag-span-display-block span {
+/* .spantag-span-display-block span {
     display: block;
-}
+} */
 
 .favorite_slider-container {
     margin: 30px auto;
@@ -629,11 +632,12 @@ li{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
+    margin-top: 10px;
 }
 .community_tag > a {
     border-radius: 10px;
     padding: 10px;
-    width:100%;   
+    width:98%;   
     text-overflow: ellipsis;
     overflow: hidden;  
     display: -webkit-box;   
@@ -643,6 +647,11 @@ li{
     background-color: #fff;
     height: 150px;
     border: 2px solid #E8E8E8;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 67% 1fr;
+    grid-template-rows: 25px 125px;
+    box-sizing: content-box;
 }
 .community_tag > a > div > span {
     background-color: #EAEAEA;
@@ -657,6 +666,7 @@ li{
     margin-left: 10px;
     /* height: 25px; */
     overflow: hidden;
+    grid-column-start: 1;
 }
 .bordergo-hover a:hover {
     background-color:  rgba(255, 153, 80, 0.6);
@@ -928,6 +938,8 @@ a .a-bordergo-hover:hover {
 .community-home-board-img-span {
     float: right;
     margin-top: 7px;
+    grid-column-start: 2;
+    grid-row-start: 2;
 }
 
 .community-home-board-img {
@@ -1101,8 +1113,8 @@ a .a-bordergo-hover:hover {
         text-decoration: none;
     }
     .community_tag > a {
-        padding: 10px;
-        width:100%;   
+        /* padding: 10px; */
+        width:100%;
         text-overflow: ellipsis;
         overflow: hidden;  
         display: -webkit-box;   
@@ -1112,6 +1124,11 @@ a .a-bordergo-hover:hover {
         background-color: #fff;
         height: 150px;
         border: 2px solid #E8E8E8;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 67% 1fr;
+        grid-template-rows: 25px 125px;
+        box-sizing: content-box;
     }
     .community_tag {
         margin-bottom: 15px;
@@ -1126,6 +1143,9 @@ a .a-bordergo-hover:hover {
         justify-content: space-between;
         align-items: center;
         margin-left: 10px;
+    }
+    .community_tag {
+        margin: 10px 5px 15px 5px;
     }
 }
 

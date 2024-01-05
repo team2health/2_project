@@ -17,7 +17,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+}
+.mypage-myProfile-btn:hover {
+    border-radius: 40px;
+    background-color: #f4f4f4;
+    cursor: pointer;
 }
 .mypage-myProfile-btn-name {
     font-size: 1.6rem;
@@ -52,8 +58,11 @@
 }
 .mypage-logout {
     text-align: center;
-    margin-top: 100px;
-    color: #FF9900;
+    margin-bottom: 100px;
+    color: #ea9008;
+}
+.mypage-logout a {
+    color: #ea9008;
 }
 .mypage-hashtag-click {
     cursor: pointer;
@@ -154,13 +163,19 @@
     grid-template-columns: 1fr 82px;
     align-items: center;
     overflow-x: hidden;
+    width: 135%;
 }
 .mypage-myboard-date {
     color: #ABABAB;
     font-size: 0.9rem;
 }
+.community-home-board-img-span {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+}
 .mypage-board-img {
-    width: 80px;
+    width: 100px;
 }
 .mypage-board-first-line {
     grid-column: span 1;
@@ -169,16 +184,52 @@
 .mypage-comment-area {
     display: grid;
     grid-template-columns: 1fr 82px;
+    width: 135%;
 }
 .mypage-comment-boardTitle {
     color: #ABABAB;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 .mypage-myComment {
     font-size: 1.1rem;
     font-weight: 700;
+    grid-column-start: 1;
 }
 .mypage-myComment-date {
     color: #ABABAB;
     font-size: 0.9rem;
+    grid-column-start: 1;
+}
+.tab-contents2 .community_tag a {
+    display: grid;
+    grid-template-rows: 20px 1fr 20px;
+    gap: 10px;
+    padding: 10px 20px;
+}
+.mypage-comment-categoryName {
+    grid-column-start: 2;
+}
+.mypage-profile-div {
+    display: grid;
+    grid-template-columns: 160px 160px;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+.profile-photo-btn {
+    margin-bottom: 20px;
+}
+.user-info-modify-1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+
+@media only screen and (min-width: 850px) {
+    .mypage-comment-area {
+        width: 100%;
+    }
+    .mypage-board-img {
+        margin-left: 50px;
+    }
 }

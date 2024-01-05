@@ -86,6 +86,7 @@ class MypageController extends Controller
                 ,'user_id'
                 ,'user_name'
                 ,'user_address'
+                ,'user_address_num'
                 ,'user_address_detail'
                 ,'user_img'
             )
@@ -284,20 +285,31 @@ class MypageController extends Controller
         $userinfo->save();
 
         $board_result = DB::table('boards')
-        ->select(
-            'board_id'
-            ,'u_id'
-            ,'category_id'
-            ,'board_title'
-            ,'board_content'
-            ,'board_hits'
-            ,DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as created_at')
-            ,'updated_at')
-            ->where('u_id',$result)
-            ->where('deleted_at', null)
-            ->orderBy('board_id', 'DESC')
-            ->limit(8)
+            ->select(
+            'boards.board_id'
+            ,'boards.u_id'
+            ,'boards.category_id'
+            ,'boards.board_title'
+            ,'boards.board_content'
+            ,'boards.board_hits'
+            ,DB::raw('DATE_FORMAT(boards.created_at, "%Y-%m-%d") as created_at')
+            ,'boards.updated_at')
+            ->where('boards.u_id',$result)
+            ->where('boards.deleted_at', null)
+            ->orderBy('boards.board_id', 'DESC')
             ->get();
+
+            $board_result = json_decode($board_result, true);
+            $cnt = 0;
+            foreach ($board_result as $item) {
+                // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+                $board_result[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+                ->select('hashtags.hashtag_name')
+                ->where('board_tags.board_id', $item['board_id'])
+                ->orderby('board_tags.board_id', 'desc')
+                ->get();
+                $cnt++;
+            }
 
             $user_hashtag = DB::table('favorite_tags')
             ->select(
@@ -330,12 +342,12 @@ class MypageController extends Controller
                 ,'comments.comment_content'
                 ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
                 ,'boards.board_title'
-
-                
             )->join('boards', 'boards.board_id', 'comments.board_id')
             ->where('comments.u_id',$result)
+            ->where('comments.deleted_at', null)
+            ->where('boards.deleted_at', null)
             ->orderby('comments.comment_id', 'DESC')
-            ->limit(6)
+            ->limit(8)
             ->get();
 
             session(['user_name' => $user_info[0]->user_name,
