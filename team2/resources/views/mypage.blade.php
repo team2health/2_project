@@ -10,8 +10,8 @@
         {{-- 나의 프로필과 아이디 띄우는 곳 --}}
         <div class="mypage-myProfile" id="mypageProfile">
             <div class="mypage-myProfile-btn">
-                <img src="/img/default_f.png" alt="">
-                <div class="mypage-myProfile-btn-name">닉네임</div>
+                <div class="mypage-myProfile-img" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
+                <div class="mypage-myProfile-btn-name">{{$user_info[0]->user_name}}</div>
             </div>
         </div>
         {{-- 정보수정 --}}
@@ -38,13 +38,17 @@
                     <img src="/img/myboard.png" alt="">
                     <div class="mypage-main-btn-name">게시글 목록</div>
                 </div>
-                    <div class="mypage-myInfo-third" id="mypageMyInfoThird">
+                    <div class="mypage-myInfo-third mypage-display-none" id="mypageMyInfoThird">
                         <div class="tab">
+                            <div class="mypage-myProfile-btn">
+                                <div class="mypage-myProfile-img" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
+                                <div class="mypage-myProfile-btn-name">{{$user_info[0]->user_name}}</div>
+                            </div>
                             <ul class="tab_list">
-                                <li class="mypage-board-show-btn active" data-list="1">
+                                <li class="mypage-board-show-btn active" data-list="1" id="tabBtnFirst">
                                     내가 쓴 게시글
                                 </li>
-                                <li class="mypage-board-show-btn" data-list="2">
+                                <li class="mypage-board-show-btn" data-list="2" id="tabBtnSecond">
                                     내가 쓴 댓글
                                 </li>
                             </ul>
@@ -82,12 +86,12 @@
                             <div class="community_tag bordergo-hover">
                                 @forelse ($comments as $index => $item)
                                     <a href="{{route('board.show', ['board' => $item->board_id])}}">
-                                        <div>
-                                            <span>{{$item->board_title}}</span>
+                                        <div class="mypage-comment-area">
+                                            <div class="mypage-comment-boardTitle">{!! Str::limit($item->board_title, 40, '...') !!}</div>
                                             <span>카테고리</span>
                                         </div>
-                                        <div>{!! Str::limit($item->board_title, 40, '...') !!}</div>
-                                        <div>{{Str::limit($item->comment_content, 75, '...')}}</div>
+                                        <div class="mypage-myComment">{{Str::limit($item->comment_content, 75, '...')}}</div>
+                                        <div class="mypage-myComment-date">{{$item->created_at}}</div>
                                     </a>
                                 @empty
                                     <div> 작성한 댓글이 없습니다. </div>
@@ -151,7 +155,9 @@
         </div>
     </div>
 
-    <div class="mypage-logout" id="mypageLogout">로그아웃</div>
+    <div class="mypage-logout" id="mypageLogout">
+        <a href="{{ route('logout.get') }}">로그아웃</a>
+    </div>
 
 
 
