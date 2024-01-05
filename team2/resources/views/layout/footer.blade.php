@@ -14,7 +14,7 @@
 				<a href="{{route('board.index')}}"><img class="footer-icon" src="/img/community.png" alt=""></a>
 			</div>
 			<div class="footer-icon-div">
-				<a href="{{route('todaytimeline.get')}}"><img class="footer-icon" src="/img/home.png" alt=""></a>
+				<a href="{{route('todaytimeline.get')}}"><img class="footer-icon" src="/img/timeline.png" alt=""></a>
 			</div>
 			<div class="footer-icon-div">
 				<a href="{{route('mypage.get')}}"><img class="footer-icon" src="/img/mypage.png" alt=""></a>
