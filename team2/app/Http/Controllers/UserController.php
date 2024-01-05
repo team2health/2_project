@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use Illuminate\support\Facades\DB;
 
 
 
@@ -91,21 +92,18 @@ class UserController extends Controller
 
     public function deleteaccountchk(Request $request) {
 
-        Log::debug($request);
         $id = session('id');
+        var_dump($id);
+        $user_into = $request->user_password;
+        $result = User::where('user_id', $id)->get();
+        dd($result);
 
-        $data = $request->password;
-        $hash_data = Hash::make($data);
+        if (Hash::check($user_into, $result->user_password)) {
+            User::destroy($id);
+        } else {
+            // 에러처리
+            return response()->json('false');
+        }
 
-        $user_password = DB::table('users')
-            ->select('user_password')
-            ->where('user_id', $id)
-            ->get();
-
-            if($hash_data === $user_password) {
-                return response()->json('true');
-            } else {
-                return response()->json('false');
-            }
     }
 }
