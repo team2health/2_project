@@ -8,7 +8,7 @@
 	&& !Str::contains(request()->url(), '/detail/'))
 		<div class="footer-container">
 			<div class="footer-icon-div">
-				<a href="{{route('main.get')}}"><img class="footer-icon" src="/img/search.png" alt=""></a>
+				<a href="{{route('main.get')}}"><img class="footer-icon" src="/img/main.png" alt=""></a>
 			</div>
 			<div class="footer-icon-div">
 				<a href="{{route('board.index')}}"><img class="footer-icon" src="/img/community.png" alt=""></a>

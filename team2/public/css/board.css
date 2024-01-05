@@ -649,7 +649,7 @@ li{
     border: 2px solid #E8E8E8;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 67% 1fr;
+    grid-template-columns: 77% 1fr;
     grid-template-rows: 25px 125px;
     box-sizing: content-box;
 }
@@ -669,7 +669,7 @@ li{
     grid-column-start: 1;
 }
 .bordergo-hover a:hover {
-    background-color:  rgba(255, 153, 80, 0.6);
+    background-color:  rgba(245, 241, 238, 0.6);
 }
 
 a .a-bordergo-hover:hover {
@@ -937,13 +937,12 @@ a .a-bordergo-hover:hover {
 /* ---------------------------- */
 .community-home-board-img-span {
     float: right;
-    margin-top: 7px;
     grid-column-start: 2;
     grid-row-start: 2;
 }
 
 .community-home-board-img {
-    width: 100px;
+    width: 90px;
 }
 
 .community-trend-disease {
@@ -1113,28 +1112,26 @@ a .a-bordergo-hover:hover {
         text-decoration: none;
     }
     .community_tag > a {
-        /* padding: 10px; */
-        width:100%;
         text-overflow: ellipsis;
-        overflow: hidden;  
-        display: -webkit-box;   
-        -webkit-line-clamp: 6;  
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
-        white-space: normal;  
+        white-space: normal;
         background-color: #fff;
         height: 150px;
         border: 2px solid #E8E8E8;
         display: grid;
-        grid-gap: 10px;
-        grid-template-columns: 67% 1fr;
-        grid-template-rows: 25px 125px;
-        box-sizing: content-box;
+        grid-template-columns: 75% 15%;
+        grid-template-rows: 25px 90px;
+        box-sizing: border-box;
     }
     .community_tag {
         margin-bottom: 15px;
         display: block;
     }
 }
+
 
 
 @media only screen and (min-width: 851px) {

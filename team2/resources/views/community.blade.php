@@ -104,7 +104,7 @@
         <div class="community_tag border-line-color-gray bordergo-hover" id="lastboardbox">
             @forelse ($data[3] as $item)
             <a href="{{ route('board.show',['board'=>$item->board_id]) }}">
-                <span class="spantag-span-display-block">
+                <span>
                     <span class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</span>
                     <span class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</span>
                 </span>

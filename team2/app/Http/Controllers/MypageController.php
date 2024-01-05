@@ -329,6 +329,7 @@ class MypageController extends Controller
                 ,'user_id'
                 ,'user_name'
                 ,'user_address'
+                ,'user_address_num'
                 ,'user_address_detail'
                 ,'user_img'
             )
