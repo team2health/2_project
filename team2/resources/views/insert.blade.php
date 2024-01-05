@@ -10,7 +10,7 @@
 			<div id="myModal" class="modal">
 				<div class="comment_modal_content">  
 				@foreach ($categories as $category)
-					<p class="category-item" data-category-id="{{ $category->category_id }}" onclick="toggleCategorySelection(this)">
+					<p class="category-item" data-category-id="{{ $category->category_name }}" onclick="toggleCategorySelection(this)">
 						{{ $category->category_name }}
 					</p>
 				@endforeach		
@@ -19,6 +19,11 @@
 					</a>             
 				</div>
     		</div>  
+			<div class="insert_bottom_button">
+				<a href="{{url()->previous()}}"><button type="button" class="insert_btn"><</button></a>
+				<p>글쓰기</p>
+				<button type="submit" class="insert_btn">작성완료</button>	
+			</div>
 			
 			{{-- @include('layout.errorlayout') --}}
 			<div class="insert_container">
@@ -57,27 +62,32 @@
 						<textarea name="board_content" id="board_content" class="insert_textarea" required  placeholder="내용을 입력해 주세요"></textarea>
 					</label>
 					<br>				
-				</div>				
+				</div>		
+				<div class="insert_hashtag" id="hashtagContainer"></div>		
 				<div class="insert_hashtag_container">
-					<label for="hashtag" class="label_hashtag">#해시태그</label>
-					<div class="insert_hashtag" id="hashtagContainer"></div>
+					<!-- <label for="hashtag" class="label_hashtag">#해시태그</label> -->
+					
 					<button type="button" id="toggleHashtagsBtn" onclick="toggleHashtags()">해시태그 펼치기/접기</button>
-
+					<label class="insert_img" for="file0">
+						<img id="preview0" src="{{ asset('img/camera2.png') }}" alt="">사진
+					</label>
+					<input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*">
 					<!-- Hidden container for hashtag data -->
-					<div id="hiddenHashtags" style="display: none;">
+					
+				</div>
+				<div id="hiddenHashtags" style="display: none;">
 						@foreach ($hashtags as $item)
 							<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
 						@endforeach
 					</div>
 
 					<!-- Input for selected hashtags -->
-					<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
-				</div>				
+					<input type="hidden" id="selectedHashtagsInput" name="hashtag" />				
 			</div>
-			<div class="insert_bottom_button">
+			<!-- <div class="insert_bottom_button">
 			<a href="{{url()->previous()}}"><button type="button" class="insert_btn">취소</button></a>			
 				<button type="submit" class="insert_btn">작성완료</button>	
-			</div>				
+			</div>				 -->
 		</form>		
 			
 </main>

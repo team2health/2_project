@@ -292,9 +292,9 @@ li{
 .insert_hidden_container{
     margin: 10px;
 }
-.detail_form {
+/* .detail_form {
     margin-bottom: 20px;
-}
+} */
 .insert_container{
     width: 60vw;    
     margin: 20px auto;  
@@ -304,13 +304,12 @@ li{
 }
 .insert_img {
     margin-top: 10px;
-    text-align: center;
-    width: 100%;
-    height: auto;   
-    display: flex;
-    justify-content: space-around;
+    text-align: center;   
+    width: 50px;
+    height:auto;
+    display: inline-block;
 }
-.insert_img img{    
+.insert_img>img{    
     width: 100%;
     height: auto; 
     cursor: pointer;
@@ -318,40 +317,43 @@ li{
 }
 
 .insert_select_container{
-    margin: 10px auto;
+    margin: 0px auto;
     padding: 10px;
-    width:90%;
-    border: 1px solid black;
-    
-    
+    width:100%;    
+    border-bottom:solid black 1px;    
 }
 .insert_select{
     border: none;
     background-color: rgba(128, 128, 128, 0) ;
 }
  .insert_input_container,.insert_textarea_container{
-    margin: 10px auto;
-    padding: 10px;
-    width:90%;    
+    
+    padding: 20px;
+    width:100%;    
 }
 .insert_input{
     width:100%;   
     min-height: 30px;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid rgba(128, 128, 128, 0.369);
+    border: none;
     
 }
 .insert_textarea{
     width:100%;
-    min-height: 300px;
-    border-radius: 5px;
-    border: 1px solid rgba(128, 128, 128, 0.369);
+    min-height: 300px;  
+    padding: 10px;  
+    border: none;
 }
-.insert_hashtag_container{
-    margin: 10px auto;
+.insert_hashtag_container{    
     padding: 10px;
-    width:90%;    
+    width:60vw; 
+    min-height: 50px; 
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;   
+}
+#hiddenHashtags{
+    padding: 10px;
 }
 .tag {
     cursor: pointer;
@@ -377,25 +379,23 @@ li{
 }
 .insert_hashtag{
     width:100%;  
-    min-height: 30px;  
-    border-radius: 10px;
-    border: 1px solid rgba(128, 128, 128, 0.369);
+    min-height: 30px;    
     padding: 10px;
-    margin-bottom: 12px;
 }
 .insert_bottom_button{
     display: grid;
-    justify-content: end;
-    grid-template-columns: repeat(2,90px);
-    grid-gap: 8px;
-    margin: 10px auto;
-    width: 70%;
-    height: 40px;
+    justify-content: space-between;
+    grid-template-columns: repeat(3,90px);   
+    margin: 0px auto;  
+    width: 60vw;   
+}
+.insert_bottom_button>p{
+    text-align: center;
 }
 .insert_btn{
     border: 1px solid rgba(128, 128, 128, 0.369);
     width: 100%;
-    margin: 0 10px;
+    /* margin: 0 10px; */
     height: 40px;
     border-radius: 5px;
     background-color: white;
@@ -786,8 +786,8 @@ a .a-bordergo-hover:hover {
 }
 
 #preview1,#preview0,#preview2 {
-    width: 80px;
-    height: 80px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
 }
 .modal {
@@ -958,14 +958,15 @@ a .a-bordergo-hover:hover {
     }
     .insert_container {
         width: 100vw; 
-        border:none;       
+        border:none; 
+        margin: 10px 0 0 0;      
     }
     .insert_main{
         width: 100vw;
     }
-    .detail_form{
+    /* .detail_form{
         margin-bottom: 15px;
-    }
+    } */
     .last_container {
         width: 80vw;
     }
@@ -985,12 +986,10 @@ a .a-bordergo-hover:hover {
         width: 100vw;
     }
     
-    .detail_form {
+    /* .detail_form {
         margin-bottom:20px;
-    }
-    .insert_container{          
-        margin: 0px auto;
-    }
+    } */
+    
     .insert_select_container{
         width: 100vw;
         border:solid black 1px ;
@@ -1004,7 +1003,8 @@ a .a-bordergo-hover:hover {
     }
      .insert_input_container,.insert_textarea_container{
         margin: 0 auto;    
-        width:100%;    
+        width:100vw;  
+        padding: 0px;  
     }
     .insert_input{
         width:100vw;   
@@ -1015,13 +1015,24 @@ a .a-bordergo-hover:hover {
     }
     .insert_textarea{
         width:100vw;
-        min-height: 300px;
-       
+        min-height: 300px;       
         border: none;
+        padding: 10px;
+    }  
+    .insert_hashtag_container{          
+        width:100vw;          
+    }  
+    .insert_bottom_button {
+        width: 100vw;
     }
-    .insert_hashtag_container{
-        margin: 0 auto;
-        width:100%;    
+    .insert_hashtag{
+        width:100vw;  
+        min-height: 30px;       
+        border: none;
+        padding: 10px;        
+    }
+    #toggleHashtagsBtn{
+        min-height: 50px; 
     }
 }
 
