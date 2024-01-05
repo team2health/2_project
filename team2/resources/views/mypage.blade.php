@@ -97,13 +97,17 @@
                 <div id="UserAccountDelete" class="mypage-display-none" onclick="goToDeleteIdZone(); return false;">
                     <div class="mypage-logout" id="goToDeleteIdZone">탈퇴하기</div>
                 </div>
-                <form action="" method="post">
-                    @csrf
-                    <div class="mypage-display-none password-pass-main-div" id="passwordFirstChk">
-                        <label class="mypage-info-label" for="password-first-chk">비밀번호 확인</label>
-                        <input class="password-pass" type="password" placeholder="비밀번호를 입력해주세요." id="password-first-chk" onchange="passwordChk(); return false;">
-                    </div>
-                </form>
+                <div class="mypage-byebye mypage-display-none" id="passwordFirstChk">
+                    <form action="/deleteacountchk" method="post">
+                        @csrf
+                        <div class="password-pass-main-div">
+                            <div class="mypage-account-delete">
+                                한 번 탈퇴하시면 계정을 복구할 수 없습니다.</div>
+                            <label class="mypage-info-label" for="password-first-chk">비밀번호 확인</label>
+                            <input class="password-pass" type="password" placeholder="비밀번호를 입력해주세요." id="password-first-chk" onchange="passwordChk(); return false;">
+                        </div>
+                    </form>
+                </div>
             {{-- 나의 게시글 목록 --}}
             <div class="mypage-myInfo-third">
                 <div class="mypage-main-btn" onclick="goToMyBoard(); return false;">

@@ -444,9 +444,7 @@ class MypageController extends Controller
                 ->get();
             }
             return response()->json($hashtag_search);
-
         } else {
-            // 검색결과 없을 때 처리
             return response()->json('false');
         }
     }
