@@ -651,6 +651,7 @@ li{
     border-radius: 5px;
     font-size: 0.9rem;
     color: #7A7A7A;
+    text-align: center;
 }
 .community-fav-board-tag {
     margin-left: 10px;
