@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -37,7 +38,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-
+    
     /**
      * The attributes that should be hidden for serialization.
      *
