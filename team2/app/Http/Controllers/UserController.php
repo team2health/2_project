@@ -39,11 +39,12 @@ class UserController extends Controller
     }
 
     public function loginpost(Request $request) {
-        $result = User::where('user_id', $request->user_id)->first();
+        $result = User::where('user_id', $request->user_id)->first()
+        ;
         // 탈퇴한 사용자 로그인 알림
-        $deleted_user = User::withTrashed()
-        ->where('id', $request->user_id)
-        ->get();
+        // $deleted_user = User::withTrashed()
+        // ->where('id', $request->user_id)
+        // ->get();
 
         if(isset($deleted_user)) {
             return view('login')->with('passwordError', '2');
