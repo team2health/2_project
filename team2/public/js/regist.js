@@ -217,7 +217,7 @@ function checkId() {
 			alert('사용가능한 아이디 입니다.');
 			idFlg = 0;
 		} else if(data['idChk'] === '1') {
-			alert('이미 존재하는 아이디 입니다.');
+			alert('사용할 수 없는 아이디 입니다.');
 			idFlg = 1;
 		}
 	})

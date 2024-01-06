@@ -18,6 +18,11 @@
 			<div class="input-div-box">
 				<input type="text" class="login-input-short" name="user_id" id="user_id">
 				<div class="input-check" onclick="checkId(); return false;">아이디 확인</div>
+			{{-- @if (isset($idError))
+			<input type="hidden" id="idError" value="{{$idError}}">
+			@else
+			<input type="hidden" id="idError" value="0">
+			@endif --}}
 			</div>
 			<br>
 
@@ -51,6 +56,8 @@
 		</form>
 	</div>
 </div>
+
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/regist.js"></script>
 @endsection

@@ -75,3 +75,4 @@ Route::get('/timeline', [MypageController::class, 'todaytimelineget'])->name('to
 Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name('daytimeline.post');
 Route::post('/recorddelete', [MypageController::class, 'recorddelete'])->name('recorddelete.post');
 
+Route::get('/seeyouagain', [MypageController::class, 'seeyouagainget'])->name('seeyouagain');

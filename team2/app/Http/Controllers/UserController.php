@@ -23,8 +23,9 @@ class UserController extends Controller
         return view('regist');
     }
 
+
     public function registpost(Request $request) {
-        
+
         $data = $request->only('user_id', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
         $data['user_password'] = Hash::make($data['user_password']);
         $result = User::create($data);
@@ -78,7 +79,7 @@ class UserController extends Controller
     public function namechkpost(Request $request) {
         $username = $request->user_name;
 
-        $existingUser = User::where('user_name', $username)->first();
+        $existingUser = User::withTrashed()->where('user_name', $username)->first();
 
         if ($existingUser) {
             return response()->json(['nameChk' => '1']);
@@ -88,13 +89,13 @@ class UserController extends Controller
     }
 
     public function idchkpost(Request $request) {
+
         $userid = $request->user_id;
 
-        $existingUser = User::where('user_id', $userid)->first();
+        $existingUser = User::withTrashed()->where('user_id', $userid)->first();
 
         if ($existingUser) {
             return response()->json(['idChk' => '1']);
-            exit;
         }
         return response()->json(['idChk' => '0']);
     }
@@ -107,7 +108,7 @@ class UserController extends Controller
 
         if (Hash::check($user_into, $result->user_password)) {
             User::destroy($id);
-            Log::debug("성공");
+            return redirect()->route('seeyouagain');
         } else {
             Log::debug("실패");
         }
