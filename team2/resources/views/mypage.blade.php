@@ -16,7 +16,7 @@
 
             <div id="mypageProfileChange" class="mypage-display-none">
                 <div id="mypageContent2">
-                    <form action="/" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                    <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
                         @csrf
                         <div id="UserInfoModify" class="User-info-modify">
                             <div class="mypage-profile-div">
@@ -63,7 +63,7 @@
                 </div>
                 <div class="mypage-display-none" id="mypagemyInfoMain">
                     <div id="mypageContent2">
-                        <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                        <form action="/userinfoupdate" class="user-info-modify" method="POST" enctype="multipart/form-data">
                             @csrf
                                 <label class="mypage-info-label">아이디</label>
                                 <div class="user-now-address">{{$user_info[0]->user_id}}</div>
@@ -86,7 +86,7 @@
                                     <input class="adress-box-b" type="text" id="sample4_detailAddress" name="user_address_detail" placeholder="상세주소">
                                 </div>
                                 <div class="mypage-btn-line-modify">
-                                    <button type="button" class="mypage-btn mpb-modify" onclick="userinfoupdate(); return false;">수정완료</button>
+                                    <button type="submit" class="mypage-btn mpb-modify">수정완료</button>
                                     {{-- <a href="{{route('mypage.get')}}"><div class="mypage-btn">취소</div></a> --}}
                                 </div>
                             </div>
