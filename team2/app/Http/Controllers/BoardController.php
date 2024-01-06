@@ -286,11 +286,13 @@ class BoardController extends Controller
      */
     public function update(Request $request, $board_id)
     {
+        // dd($request->all());
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
 
         $result = Board::find($board_id);
+        // dd($result);
         $result->update([
             'board_title' => $request->input('u_title'),
             'board_content' => $request->input('u_content'),
@@ -321,14 +323,28 @@ class BoardController extends Controller
         //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다
         $result->hashtags()->sync($hashtagIds);
     }
-    if ($request->has('category_id')) {
-        // 이 부분을 수정하여 카테고리 업데이트 로직을 추가합니다.
-        $category = Category::where('category_name', $request->input('category_id'))->first();
-        if ($category) {
-            $result->update(['category_id' => $category->category_id]);
-        }
+   
+    if ($request->category_id) {
+        //  dd($request);
+        $newCategoryName = $request->input('category_id');
+        
+            $category = Category::where('category_name', $newCategoryName)->first();
+            if ($category) {
+                $result->update(['category_id' => $category->category_id]);
+            }
+        
     }
-
+    // if ($result->category_id) {
+    //     $newCategoryName = $result->category->category_name;       
+    //     // dd($newCategoryName);
+    //     $category = Category::where('category_name', $newCategoryName)->first();
+        
+    //     if ($category) {
+    //         dd($category);
+    //         $result->update(['category_id' => $category->category_id]);
+    //     }
+        
+    // }
         
         
 
