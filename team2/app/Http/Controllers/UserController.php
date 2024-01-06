@@ -24,11 +24,10 @@ class UserController extends Controller
     }
 
     public function registpost(Request $request) {
+        
         $data = $request->only('user_id', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
         $data['user_password'] = Hash::make($data['user_password']);
-
         $result = User::create($data);
-
         return redirect()->route('login.get');
     }
 
@@ -36,12 +35,20 @@ class UserController extends Controller
         if(Auth::check()) {
             return redirect()->route('main.get');
         }
-
         return view('login')->with('passwordError','0');
     }
 
     public function loginpost(Request $request) {
         $result = User::where('user_id', $request->user_id)->first();
+        // 탈퇴한 사용자 로그인 알림
+        $deleted_user = User::withTrashed()
+        ->where('id', $request->user_id)
+        ->get();
+
+        if(isset($deleted_user)) {
+            return view('login')->with('passwordError', '2');
+        }
+
         if(!$result) {
             return view('login')->with('passwordError', '0');
         }
@@ -49,7 +56,7 @@ class UserController extends Controller
         if(!(Hash::check($request->user_password, $result->user_password))) {
             return view('login')->with('passwordError', '1');
         }
-
+        
         Auth::login($result);
         if(Auth::check()) {
             session($result->only('id', 'user_name', 'user_img'));
@@ -93,16 +100,14 @@ class UserController extends Controller
     public function deleteaccountchk(Request $request) {
 
         $id = session('id');
-        var_dump($id);
         $user_into = $request->user_password;
-        $result = User::where('user_id', $id)->get();
-        dd($result);
+        $result = User::where('id', $id)->first();
 
         if (Hash::check($user_into, $result->user_password)) {
             User::destroy($id);
+            Log::debug("성공");
         } else {
-            // 에러처리
-            return response()->json('false');
+            Log::debug("실패");
         }
 
     }
