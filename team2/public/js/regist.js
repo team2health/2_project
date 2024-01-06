@@ -65,6 +65,13 @@ let regex2 = /^[가-힣a-zA-Z0-9]{4,}$/;
 USERNAME.addEventListener('input', function() {
     const value = USERNAME.value;
 
+	inputCheckBtn[0].disabled = false;
+	inputCheckBtn[0].classList.replace('input-check-end', 'input-check');
+
+	if(inputCheckName == value) {
+		inputCheckBtn[0].disabled = true;
+		inputCheckBtn[0].classList.replace('input-check', 'input-check-end');
+	}
     if (!regex.test(value)) {
 		ERRORNAME.removeAttribute('class');
     } else {
@@ -75,6 +82,14 @@ USERNAME.addEventListener('input', function() {
 USERID.addEventListener('input', function() {
     const value = USERID.value;
 
+	inputCheckBtn[1].disabled = false;
+	inputCheckBtn[1].classList.replace('input-check-end', 'input-check');
+
+	if(inputCheckId == value) {
+		inputCheckBtn[1].disabled = true;
+		inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
+	}
+	
     if (!regex2.test(value)) {
         ERRORID.removeAttribute('class');
     } else {
@@ -161,6 +176,9 @@ function registgo() {
 	document.getElementById('regist_form').submit();
 }
 
+let inputCheckBtn = document.querySelectorAll('.input-check');
+let inputCheckName;
+
 function checkName() {
 	let nameChk = document.getElementById('user_name').value;
 
@@ -182,6 +200,9 @@ function checkName() {
 	.then(data => {
 		if(data['nameChk'] === '0') {
 			alert('사용가능한 닉네임 입니다.');
+			inputCheckBtn[0].disabled = true;
+			inputCheckBtn[0].classList.replace('input-check', 'input-check-end');
+			inputCheckName = nameChk;
 			nameFlg = 0;
 		} else if(data['nameChk'] === '1') {
 			alert('이미 존재하는 닉네임 입니다.');
@@ -194,6 +215,7 @@ function checkName() {
 	namechkflg = 1;
 }
 
+let inputCheckId;
 function checkId() {
 	let idChk = document.getElementById('user_id').value;
 
@@ -215,9 +237,12 @@ function checkId() {
 	.then(data => {
 		if(data['idChk'] === '0') {
 			alert('사용가능한 아이디 입니다.');
+			inputCheckBtn[1].disabled = true;
+			inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
+			inputCheckId = idChk;
 			idFlg = 0;
 		} else if(data['idChk'] === '1') {
-			alert('이미 존재하는 아이디 입니다.');
+			alert('사용할 수 없는 아이디 입니다.');
 			idFlg = 1;
 		}
 	})

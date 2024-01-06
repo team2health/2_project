@@ -10,14 +10,19 @@
 			<p style="width: 60px;" class="ptag">닉네임</p><span id="error_name" class="not-error-name">한글, 영문, 숫자로 2글자 이상 입력해주세요</span>
 			<div class="input-div-box">
 				<input type="text" class="login-input-short" name="user_name" id="user_name">
-				<div class="input-check" onclick="checkName(); return false;">닉네임 확인</div>
+				<button type="button" class="input-check" onclick="checkName(); return false;">닉네임 확인</button>
 			</div>
 			<br>
 
 			<p style="width: 60px;" class="ptag">아이디</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
 			<div class="input-div-box">
 				<input type="text" class="login-input-short" name="user_id" id="user_id">
-				<div class="input-check" onclick="checkId(); return false;">아이디 확인</div>
+				<button type="button" class="input-check" onclick="checkId(); return false;">아이디 확인</button>
+			{{-- @if (isset($idError))
+			<input type="hidden" id="idError" value="{{$idError}}">
+			@else
+			<input type="hidden" id="idError" value="0">
+			@endif --}}
 			</div>
 			<br>
 
@@ -45,12 +50,14 @@
 				<div class="gender-div" onclick="genderFcheck(); return false;" id="gender-female">여</div>
 				<input type="hidden" name="user_gender" id="gender-input">
 				<br>
-				<a href="/login" class="regist-button">돌아가기</a>
+				{{-- <a href="/login" class="regist-button">돌아가기</a> --}}
 				<button type="button" class="regist-button" onclick="registgo(); return false;">가입하기</button>
 			</div>
 		</form>
 	</div>
 </div>
+
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/regist.js"></script>
 @endsection

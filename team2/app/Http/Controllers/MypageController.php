@@ -448,5 +448,8 @@ class MypageController extends Controller
             return response()->json('false');
         }
     }
+    public function seeyouagainget() {
+        return view('byebye');
+    }
 
 }

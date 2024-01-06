@@ -265,6 +265,17 @@
 
 
 
+/* 회원탈퇴 화면 */
+.see-you-then {
+    color: #0088ff;
+    display: flex;
+    align-items: center;
+    height: 100vw;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 
 
 

@@ -156,6 +156,22 @@ button {
 	border-radius: 10px;
 	line-height: 6vh;
 	cursor: pointer;
+	font-size: 1rem;
+}
+.input-check:hover {
+	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(188, 118, 90, 0.05) 0px 0.25em 1em;
+}
+.input-check-end {
+	display: inline-block;
+	width: 30%;
+	height: 6vh;
+	background-color: #FAFAFA;
+	border-radius: 10px;
+	line-height: 6vh;
+	font-size: 1rem;
+	color: #c4c4c4;
+	border: 1px solid #CFCFCF;
+	cursor: not-allowed;
 }
 
 .lr-box {
@@ -240,17 +256,23 @@ button {
 	height: 6vh;
 	margin-top: 10px;
 }
-
+.regist-container {
+	margin-top: 70px;
+	margin-bottom: 200px;
+}
 .regist-button {
 	display: inline-block;
-	width: 44%;
+	width: 90%;
 	height: 6vh;
-	margin-top: 10px;
+	margin-top: 30px;
 	background-color: #FFDDAA;
-	border-radius: 10px;
+	border-radius: 30px;
 	font-size: 1.6rem;
 	font-weight: 600;
 	line-height: 6vh;
+}
+.regist-button:hover {
+	background-color: #ffc165;
 }
 
 #symptom-display {
@@ -315,15 +337,19 @@ button {
 }
 
 .gender-div {
-	display: inline-block;
-	width: 44%;
-	height: 6vh;
-	background-color: #F5F5F5;
-	border-radius: 10px;
-	font-size: 1.6rem;
-	font-weight: 600;
-	line-height: 6vh;
-	cursor: pointer;
+	margin-top: 10px;
+    display: inline-block;
+    width: 44%;
+    height: 6vh;
+    background-color: #F5F5F5;
+    border-radius: 80px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 6vh;
+    cursor: pointer;
+}
+.gender-div:hover {
+	box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .not-error-name, .not-error-id, .not-error-passwordchk, .not-login-id {

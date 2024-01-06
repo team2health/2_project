@@ -18,6 +18,7 @@
 					<a href="/regist">회원가입</a>
 				</div>
 			</form>
+
 			@if(isset($passwordError))
 				<input type="hidden" id="passwordError" value="{{$passwordError}}">
 			@else

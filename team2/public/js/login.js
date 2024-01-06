@@ -11,7 +11,6 @@ window.addEventListener('load', function() {
 
 function loginonload() {
 
-	console.log('떠라')
 	if(PASSWORDERROR.value == '1') {
 		alert('비밀번호가 일치하지 않습니다.');
 	}
@@ -19,7 +18,7 @@ function loginonload() {
 	// 	alert('아이디를 다시 확인해주세요.');
 	// }
 	if(PASSWORDERROR.value == '2') {
-		alert('사용하실 수 없는 아이디입니다.');
+		alert('탈퇴한 회원입니다.');
 	}
 }
 
@@ -47,7 +46,6 @@ function logingo() {
 		alert('비밀번호를 입력해주세요.');
 		return false;
 	} 
-
 	document.getElementById('login_form').submit();
 }
 
