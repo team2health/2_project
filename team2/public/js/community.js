@@ -83,7 +83,9 @@ function lastBoard() {
                 LASTBOARDDIV3[i].classList.add('community-home-content');
                 LASTBOARDSPAN[i].classList.add('community-home-board-img-span');
                 LASTBOARDIMG[i].classList.add('community-home-board-img');
-                LASTBOARDIMG[i].src = '/img/default_f.png';
+                if(data[i].board_img.length  > 0) {
+                    LASTBOARDIMG[i].src = '/board_img/'+data[i].board_img[0].img_address;
+                }
             }
     
             let lastNumber = data[data.length - 1]; // 마지막 게시글 번호 가져오기
@@ -147,7 +149,9 @@ function favoriteBoard() {
                 FAVORITEBOARDDIV3[i].classList.add('community-home-content');
                 FAVORITEBOARDSPAN[i].classList.add('community-home-board-img-span');
                 FAVORITEBOARDIMG[i].classList.add('community-home-board-img');
-                FAVORITEBOARDIMG[i].src = '/img/default_f.png';
+                if(data[i].board_img.length  > 0) {
+                    FAVORITEBOARDIMG[i].src = '/board_img/'+data[i].board_img[0].img_address;
+                }
 
                 for(let j = 0; j < data[i].board_tag.length; j++) {
                     FAVORITEBOARDTAG[i] = document.createElement('span');
