@@ -13,27 +13,7 @@
 			<p>글 수정</p>	
 			<button type="submit" class="insert_btn">수정완료</button>	
 		</div>	     
-		<div class="insert_container">				
-			<!-- <div class="insert_img">
-				@foreach($result->images as $key => $image)
-					<div class="detail_board_content">
-						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}">
-						<label for="file{{ $key }}">
-							<button type="button" onclick="openFile('file{{ $key }}')">파일변경</button>
-						</label>
-						<input type="file" name="board_img[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
-					</div>
-				@endforeach
-				@for ($i = count($result->images); $i < 3; $i++)
-					<div class="detail_board_content">
-						<img id="preview{{ $i }}" src="{{ asset('img/plus.png') }}" alt="">
-						<label for="file{{ $i }}">
-							<button type="button" onclick="openFile('file{{ $i }}')">파일변경</button>
-						</label>
-						<input type="file" name="board_img[]" id="file{{ $i }}" style="display:none;" onchange="previewImage('file{{ $i }}', 'preview{{ $i }}')" accept="image/*">
-					</div>
-				@endfor
-			</div>	 -->
+		<div class="insert_container">			
 			<div id="myModal" class="modal">
 				<div class="comment_modal_content">  
 				@foreach ($categories as $category)
@@ -63,7 +43,7 @@
 						
 						<span class='selected-tag' data-selected-tag="{{ $hashtag->hashtag_name }}">
 							{{ $hashtag->hashtag_name }} 
-							<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">x</button>
+							<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">X</button>
 						</span>
 					@endforeach
 					@foreach($result->images as $key => $image)
@@ -91,12 +71,12 @@
 					<input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*">
 			</div>
 			<div id="hiddenHashtags" style="display: none;">
-					@foreach ($allHashtags as $hashtag)
-						<span class='tag' data-tag="{{ $hashtag->hashtag_name }}" onclick="handleTagClick(this)">
-							{{ $hashtag->hashtag_name }}
-						</span>
-					@endforeach
-				</div>			
+				@foreach ($allHashtags as $hashtag)
+					<span class='tag' data-tag="{{ $hashtag->hashtag_name }}" onclick="handleTagClick(this)">
+						{{ $hashtag->hashtag_name }}
+					</span>
+				@endforeach
+			</div>			
 		</div>
 		<!-- <div class="insert_bottom_button">
 			<a href="{{url()->previous()}}"><button type="button" class="insert_btn">취소</button></a>		

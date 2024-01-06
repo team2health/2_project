@@ -298,12 +298,13 @@ class BoardController extends Controller
             'board_content' => $request->input('u_content'),
         ]);
         //$request에서 hashtag 파라미터의 존재 여부를 확인합니다.
-        //<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
-        if($request->hashtag) {       
-
+        //<input type="hidden" id="selectedHashtagsInput" name="hashtag" />        
+        if($request->hashtag) {
+        // dd($request->hashtag);
         // 새로운 해시태그 추가 또는 기존 해시태그 갱신
         //hashtag 파라미터의 값을 가져와서 $hashtagInput 변수에 저장합니다.
         $hashtagInput = $request->input('hashtag');
+        // dd($hashtagInput);
         //$hashtagInput 값을 쉼표로 구분하여 배열로 변환합니다. 
         //이렇게 함으로써 여러 개의 해시태그를 나누어 처리할 수 있습니다.
         $hashtag_names = explode(',', $hashtagInput);
@@ -311,18 +312,49 @@ class BoardController extends Controller
         $hashtag_names = array_map('trim', $hashtag_names);
         
        foreach ($hashtag_names as $hashtag_name) {
+        // dd($hashtag_names);
         // $hashtag_name에 해당하는 해시태그를 데이터베이스에서 찾거나 새로 생성합니다. 
         // firstOrCreate 메서드는 주어진 조건으로 검색하여 해당하는 모델을 찾거나 생성합니다.
-            $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
+            // $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
+            $hashtag = Hashtag::where('hashtag_name', $hashtag_name)->first();
             //현재 반복 중인 해시태그의 ID를 $hashtagIds 배열에 추가합니다.
             $hashtagIds[] = $hashtag->hashtag_id;
         }
-       
         //$result 모델의 hashtags 관계를 동기화합니다.
         //$hashtagIds 배열에 있는 해시태그 ID들과 현재 모델의 해시태그 간의 관계를 업데이트합니다. 
         //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다
         $result->hashtags()->sync($hashtagIds);
-    }
+        
+}
+
+    // 이전 상태에서의 해시태그 ID 목록
+// $previousHashtags = $result->hashtags()->pluck('hashtags.hashtag_id')->toArray();
+// //  dd($previousHashtags);
+
+// // 현재 상태에서의 해시태그 입력 값
+// $hashtagInput = $request->input('hashtag');
+// $hashtag_names = explode(',', $hashtagInput);
+// $hashtag_names = array_map('trim', $hashtag_names);
+
+// // 현재 상태의 해시태그 ID 목록
+// $currentHashtags = Hashtag::whereIn('hashtag_name', $hashtag_names)->pluck('hashtag_id')->toArray();
+// // dd($currentHashtags);
+// // 삭제된 해시태그 찾기
+// $deletedHashtags = array_diff($previousHashtags, $currentHashtags);
+// // dd($deletedHashtags);
+// // 삭제된 해시태그 처리
+// if (!empty($deletedHashtags)) {
+//     // 여기에서 $deletedHashtags에 해당하는 해시태그 삭제 또는 처리를 수행
+// }
+
+// // 나머지는 입력된 해시태그 처리
+// $hashtagIds = array_diff($currentHashtags, $deletedHashtags);
+
+// // 나머지 로직은 입력된 해시태그에 대한 처리
+// $result->hashtags()->sync($hashtagIds);
+
+       
+    
    
     if ($request->category_id) {
         //  dd($request);
@@ -333,20 +365,7 @@ class BoardController extends Controller
                 $result->update(['category_id' => $category->category_id]);
             }
         
-    }
-    // if ($result->category_id) {
-    //     $newCategoryName = $result->category->category_name;       
-    //     // dd($newCategoryName);
-    //     $category = Category::where('category_name', $newCategoryName)->first();
-        
-    //     if ($category) {
-    //         dd($category);
-    //         $result->update(['category_id' => $category->category_id]);
-    //     }
-        
-    // }
-        
-        
+    }        
 
     if ($request->hasFile('board_img')) {
         // 기존 이미지 삭제

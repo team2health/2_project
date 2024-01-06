@@ -87,6 +87,5 @@
     @endif
 </div>
 
-<script src="/js/categoryboard.js"></script> 
-<script src="/js/insert_modal.js"></script>
+<script src="/js/categoryboard.js"></script>
 @endsection

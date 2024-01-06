@@ -54,5 +54,4 @@
         <a href="{{ $data->url($data->lastPage()) }}">&gt;&gt;</a>
     @endif
 </div>
-<script src="/js/insert_modal.js"></script>
 @endsection
