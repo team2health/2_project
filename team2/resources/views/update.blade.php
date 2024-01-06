@@ -47,8 +47,8 @@
 				</div>
     		</div> 
 			<div class="insert_select_container" onclick="openModal()">			
-			<div class="insert_select" id="selectedCategoriesContainer">{{ $result->category->category_name }}</div>
-				
+				<div class="insert_select" id="selectedCategoriesContainer">{{ $result->category->category_name }}</div>
+				<input type="hidden" name="category_id" id="selectedCategoriesInput" />	
 			</div>		
 			<div class="insert_input_container">
 				<label for="u_title" class="">

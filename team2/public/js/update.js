@@ -209,7 +209,7 @@ var selectedCategories = [];
 
             selectedCategories.forEach(function (categoryId) {
                 var categoryElement = document.createElement('p');
-                categoryElement.innerText = getCategoryNameById(categoryId);
+                categoryElement.innerText =categoryId;
                 selectedCategoriesContainer.appendChild(categoryElement);
             });
 
@@ -220,12 +220,12 @@ var selectedCategories = [];
 
         }
 
-        function getCategoryNameById(categoryId) {
-            // categoryId에 해당하는 카테고리 이름을 반환하는 함수를 구현해야 합니다.
-            // 해당 함수는 서버 측에서 미리 로드한 카테고리 정보를 활용하여 categoryId에 해당하는 카테고리 이름을 반환해야 합니다.
-            // 이 예제에서는 더미 함수로 대체하였습니다.
-            return  categoryId;
-        }
+        // function getCategoryNameById(categoryId) {
+        //     // categoryId에 해당하는 카테고리 이름을 반환하는 함수를 구현해야 합니다.
+        //     // 해당 함수는 서버 측에서 미리 로드한 카테고리 정보를 활용하여 categoryId에 해당하는 카테고리 이름을 반환해야 합니다.
+        //     // 이 예제에서는 더미 함수로 대체하였습니다.
+        //     return  categoryId;
+        // }
 
         function closeModal() {
             var modal = document.getElementById('myModal');
