@@ -79,7 +79,7 @@
                         <span class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</span>
                         <span class="community-home-content">{!! Str::limit($item->board_content, 40, '...') !!}</span>
                     </span>
-                    <span class="community-home-board-img-span"><img class="community-home-board-img" src="/img/default_f.png" alt=""></span>
+                    <span class="community-home-board-img-span"><img class="community-home-board-img" src="{{isset($item->board_img[0]->img_address) ? "/board_img/".$item->board_img[0]->img_address : ""}}" alt=""></span>
                 </a>
                 @if($loop->last)
                 <input type="hidden" name="favorite_num" value="{{ $item->board_id }}" id="favorite_num">
@@ -108,7 +108,7 @@
                     <span class="community-home-title">{{Str::limit($item->board_title, 30, '...')}}</span>
                     <span class="community-home-content">{!! Str::limit($item->board_content, 100, '...') !!}</span>
                 </span>
-                <span class="community-home-board-img-span"><img class="community-home-board-img" src="/img/default_f.png" alt=""></span>
+                <span class="community-home-board-img-span"><img class="community-home-board-img" src="{{isset($item->board_img[0]->img_address) ? "/board_img/".$item->board_img[0]->img_address : ""}}" alt=""></span>
             </a>
             @if($loop->last)
             <input type="hidden" name="last_num" value="{{ $item->board_id }}" id="last_num">

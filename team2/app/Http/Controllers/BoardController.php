@@ -55,9 +55,6 @@ class BoardController extends Controller
             ->limit(4)
             ->get();
 
-        $lastboard = Board::orderBy('board_id', 'desc')
-        ->where('deleted_at', null)->limit(4)->get();
-
         $favoritetag = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
         ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
         ->select('hashtags.hashtag_name')
@@ -69,13 +66,37 @@ class BoardController extends Controller
         $cnt = 0;
 
         foreach ($favoriteboard as $item) {
-            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
             $favoriteboard[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
             ->select('hashtags.hashtag_name')
             ->where('board_tags.board_id', $item->board_id)
             ->orderby('board_tags.board_id', 'desc')
             ->get();
             $cnt++;
+        }
+            
+        $count = 0;
+
+        foreach ($favoriteboard as $item) {
+            $favoriteboard[$count]['board_img'] = Board::join('board_imgs', 'board_imgs.board_id' ,'=', 'boards.board_id')
+            ->select('board_imgs.img_address')
+            ->where('boards.board_id', $item->board_id)
+            ->limit(1)
+            ->get();
+            $count++;
+        }
+        
+        $lastboard = Board::orderBy('board_id', 'desc')
+        ->where('deleted_at', null)->limit(4)->get();
+
+        $lastboard_cnt = 0;
+
+        foreach ($lastboard as $item) {
+            $lastboard[$lastboard_cnt]['board_img'] = Board::join('board_imgs', 'board_imgs.board_id' ,'=', 'boards.board_id')
+            ->select('board_imgs.img_address')
+            ->where('boards.board_id', $item->board_id)
+            ->limit(1)
+            ->get();
+            $lastboard_cnt++;
         }
 
         $result = [$hotboard, $pandemicboard, $favoriteboard, $lastboard, $favoritetag];
@@ -428,7 +449,17 @@ class BoardController extends Controller
             ->orderby('board_id', 'desc')
             ->limit(4)
             ->get();
+        
+        $lastboard_cnt = 0;
 
+        foreach ($result as $item) {
+            $result[$lastboard_cnt]['board_img'] = Board::join('board_imgs', 'board_imgs.board_id' ,'=', 'boards.board_id')
+            ->select('board_imgs.img_address')
+            ->where('boards.board_id', $item->board_id)
+            ->limit(1)
+            ->get();
+            $lastboard_cnt++;
+        }
         
         return response()->json($result);
     }
@@ -462,6 +493,17 @@ class BoardController extends Controller
             ->get();
             
             $cnt++;
+        }
+                    
+        $count = 0;
+
+        foreach ($result as $item) {
+            $result[$count]['board_img'] = Board::join('board_imgs', 'board_imgs.board_id' ,'=', 'boards.board_id')
+            ->select('board_imgs.img_address')
+            ->where('boards.board_id', $item->board_id)
+            ->limit(1)
+            ->get();
+            $count++;
         }
 
         return response()->json($result);
