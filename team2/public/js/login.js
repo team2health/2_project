@@ -4,12 +4,25 @@ let regex = /^[가-힣a-zA-Z0-9]{4,}$/;
 
 let PASSWORDERROR = document.getElementById('passwordError');
 // let IDERROR = document.getElementById('idError');
-if(PASSWORDERROR.value === '1') {
-	alert('비밀번호가 일치하지 않습니다.');
+
+window.addEventListener('load', function() {
+    loginonload();
+})
+
+function loginonload() {
+
+	console.log('떠라')
+	if(PASSWORDERROR.value == '1') {
+		alert('비밀번호가 일치하지 않습니다.');
+	}
+	// if(IDERROR.value === '1') {
+	// 	alert('아이디를 다시 확인해주세요.');
+	// }
+	if(PASSWORDERROR.value == '2') {
+		alert('사용하실 수 없는 아이디입니다.');
+	}
 }
-// if(IDERROR.value === '1') {
-// 	alert('아이디를 다시 확인해주세요.');
-// }
+
 
 LOGINUSERID.addEventListener('input', function() {
     const value = LOGINUSERID.value;
