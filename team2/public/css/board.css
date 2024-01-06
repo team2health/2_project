@@ -225,6 +225,9 @@ textarea{
     width: 100%;
     height: auto;    
 }
+.detail_comment {
+    margin-bottom: 100px;
+}
 .detail_comment ul li{
     border-bottom: 1px solid black;
 }
@@ -335,6 +338,7 @@ li{
     width:100%;   
     min-height: 30px;
     padding: 10px;
+    font-size: 1.2rem;
     border: none;
     
 }
@@ -627,12 +631,11 @@ li{
 .community-favorite-show {
     margin: 20px;
 }
-
 .community_tag {
     margin-bottom: 15px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 3px;
     margin-top: 10px;
 }
 .community_tag > a {
@@ -646,13 +649,22 @@ li{
     -webkit-box-orient: vertical;
     white-space: normal;  
     background-color: #fff;
-    height: 150px;
+    height: 160px;
     border: 2px solid #E8E8E8;
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 77% 1fr;
     grid-template-rows: 25px 125px;
     box-sizing: content-box;
+}
+.community_tag > a > span:nth-child(1) {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
 }
 .community_tag > a > div > span {
     background-color: #EAEAEA;
@@ -1005,7 +1017,6 @@ a .a-bordergo-hover:hover {
         border:solid black 1px ;
         border-left: none;
         border-right: none;
-
     }
     
     .insert_select{
@@ -1046,6 +1057,11 @@ a .a-bordergo-hover:hover {
     }
     .pagination{
         margin-bottom: 75px;
+    }
+    .community_tag {
+        margin-bottom: 15px;
+        grid-template-columns: 1fr;
+        /* display: block; */
     }
 }
 
@@ -1105,11 +1121,11 @@ a .a-bordergo-hover:hover {
         margin-top: 5px;
     }
     .community_aplus{
-       
         bottom: 100px;
     }
     
     .detail_board_hits{
+        margin-top: 4px;
         font-size: 0.8rem;
         font-weight: normal;
         display: inline-block;
@@ -1135,16 +1151,12 @@ a .a-bordergo-hover:hover {
         -webkit-box-orient: vertical;
         white-space: normal;
         background-color: #fff;
-        height: 150px;
+        height: 160px;
         border: 2px solid #E8E8E8;
         display: grid;
         grid-template-columns: 75% 15%;
         grid-template-rows: 25px 90px;
         box-sizing: border-box;
-    }
-    .community_tag {
-        margin-bottom: 15px;
-        display: block;
     }
 }
 

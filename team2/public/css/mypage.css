@@ -143,6 +143,12 @@
     padding-bottom: 13px;
     border-bottom: 1px solid #B9B9B9;
 }
+
+/* 나의 게시글 댓글 */
+.tab-contents .community_tag
+,.tab-contents2 .community_tag {
+    margin-bottom: 100px;
+}
 .mypage-can-get-all-tag-msg img{
     height: 30px;
     margin-left: 15px;

@@ -35,7 +35,15 @@ class MypageController extends Controller
             ,'boards.board_content'
             ,'boards.board_hits'
             ,DB::raw('DATE_FORMAT(boards.created_at, "%Y-%m-%d") as created_at')
-            ,'boards.updated_at')
+            ,'boards.updated_at'
+            ,'board_imgs.img_address')
+            ->leftJoin('board_imgs', function ($join) {
+                $join->on('boards.board_id', '=', 'board_imgs.board_id')
+                    ->whereRaw('board_imgs.board_img_id =
+                    (SELECT MIN(board_img_id)
+                    FROM board_imgs
+                    WHERE board_id = boards.board_id)');
+            })
             ->where('boards.u_id',$result)
             ->where('boards.deleted_at', null)
             ->orderBy('boards.board_id', 'DESC')
