@@ -795,14 +795,15 @@ a .a-bordergo-hover:hover {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    border-radius: 20px;
 } 
 
 .cate_btn_go:hover {
     background-color: #FF9900;
 }
 
-.dropdown-content div:hover {
-    background-color: #FF9900;
+.dropdown-content form div:nth-child(1) {
+    background-color: #ff3939;
 }
 
 .show {
