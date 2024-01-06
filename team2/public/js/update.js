@@ -102,7 +102,7 @@ function updateSelectedTags() {
         //새로운 button 엘리먼트를 생성하고, 해당 버튼의 텍스트 내용을 'x'로 설정합니다.
         // 버튼의 type 속성은 'button'으로 설정됩니다.
         var removeButton = document.createElement('button');
-        removeButton.textContent = 'x';
+        removeButton.textContent = 'X';
         removeButton.type = 'button';
         //removeButton에 클릭 이벤트 리스너를 추가합니다. 버튼이 클릭되면 
         //removeSelectedTag 함수가 호출되어 해당 해시태그를 제거하게 됩니다.

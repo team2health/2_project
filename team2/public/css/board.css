@@ -354,6 +354,7 @@ li{
 }
 #hiddenHashtags{
     padding: 10px;
+    margin-bottom: 70px;
 }
 .tag {
     cursor: pointer;
@@ -909,6 +910,10 @@ a .a-bordergo-hover:hover {
     display: inline-block;
     padding: 8px 12px;
     text-decoration: none;
+    
+}
+.page_pre{
+    width: 59px;
 }
 .pagination a:hover,
 .pagination span:hover {
@@ -976,9 +981,6 @@ a .a-bordergo-hover:hover {
     .insert_main{
         width: 100vw;
     }
-    /* .detail_form{
-        margin-bottom: 15px;
-    } */
     /* .last_container {
         width: 80vw;
     } */
@@ -997,10 +999,6 @@ a .a-bordergo-hover:hover {
     .insert_input_container{
         width: 100vw;
     }
-    
-    /* .detail_form {
-        margin-bottom:20px;
-    } */
     
     .insert_select_container{
         width: 100vw;
@@ -1046,6 +1044,9 @@ a .a-bordergo-hover:hover {
     #toggleHashtagsBtn{
         min-height: 50px; 
     }
+    .pagination{
+        margin-bottom: 75px;
+    }
 }
 
 @media only screen and (max-width: 950px) {
@@ -1070,7 +1071,7 @@ a .a-bordergo-hover:hover {
     }   
     .community_tag_container{
         width: 100vw;
-        margin: 0 auto;
+        margin: 0 auto 50px;
     }
     .last-board-title {
         font-size: 1.4rem;
@@ -1100,8 +1101,12 @@ a .a-bordergo-hover:hover {
         margin-top: 5px;
         align-items: start;
     }
-    .last_user .community_icon {
+    .last_user .community_icon{
         margin-top: 5px;
+    }
+    .community_aplus{
+       
+        bottom: 150px;
     }
     
     .detail_board_hits{

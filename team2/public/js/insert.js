@@ -155,7 +155,7 @@ function handleTagClick(tag) {
         var tagSpan = document.createElement('span');
         tagSpan.className = 'selected-tag';
         tagSpan.setAttribute('data-selected-tag', clickedTagName);
-        tagSpan.innerHTML = clickedTagName + ' <button type="button" onclick="removeSelectedTag(this)">x</button>';
+        tagSpan.innerHTML = clickedTagName + ' <button type="button" onclick="removeSelectedTag(this)">X</button>';
 
         // span 태그를 출력 div에 추가
         outputDiv.appendChild(tagSpan);
