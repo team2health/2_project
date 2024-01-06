@@ -839,6 +839,9 @@ button {
 		align-items: center;
 		justify-items: center;
 	}
+	.footer-icon-div-opacity {
+		opacity: 0.4;
+	}
 	.footer-icon {
 		height: 40px;
 	}

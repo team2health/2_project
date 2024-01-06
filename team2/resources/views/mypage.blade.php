@@ -147,9 +147,11 @@
                                         <span class="community-home-title">{{Str::limit($item["board_title"], 30, '...')}}</span>
                                         <span class="community-home-content">{!! Str::limit($item["board_content"], 40, '...') !!}</span>
                                     </span>
+                                    @if(isset($item["img_address"]))
                                     <span class="community-home-board-img-span">
-                                        <img class="mypage-board-img" src="/img/default_f.png" alt="">
+                                        <img class="mypage-board-img" src="/img/{{$item["img_address"]}}" alt="">
                                     </span>
+                                    @endif
                                 </a>
                                 @if($loop->last)
                                 <input type="hidden" name="favorite_num" value="{{ $item["board_id"] }}" id="favorite_num">
