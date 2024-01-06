@@ -125,9 +125,14 @@ function removeSelectedTag(tag) {
     var outputDiv = document.getElementById('hashtagContainer');
     var tags = outputDiv.querySelectorAll('.selected-tag');
 
+    let i = 0;
     tags.forEach(function (tagElement) {
         //data-selected-tag' 속성 값을 가져와서 tagValue 변수에 저장
         var tagValue = tagElement.getAttribute('data-selected-tag');
+        if(tagValue) {
+            selectedHashtags[i] = tagValue;
+            i++;
+        }
         // 현재 해시태그의 값이 함수에 전달된 tag 값과 일치하는지 확인합니다.
         if (tagValue === tag) {
             //일치하는 경우, 해당 엘리먼트를 DOM에서 제거합니다.
