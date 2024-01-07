@@ -283,134 +283,134 @@ function addhashtag(data) {
 
 // value값 변경해야함
 
-// let nameChk = document.getElementById('usermodifyname');
-// let nameChkc = nameChk.value;
-// let NAMEINFOBTN = document.getElementById('name-info-btn');
-// let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
-// let imgFlg = 0;
-// let nameflg = 0;
-// let nameinput = 0;
-// let namechkflg = 0;
+let nameChk = document.getElementById('usermodifyname');
+let nameChkc = nameChk.value;
+let NAMEINFOBTN = document.getElementById('name-info-btn');
+let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
+let imgFlg = 0;
+let nameflg = 0;
+let nameinput = 0;
+let namechkflg = 0;
 
-// NAMEINFOBTN.style.visibility = 'hidden';
+NAMEINFOBTN.style.visibility = 'hidden';
 
-// nameChk.addEventListener('input', function() {
-//     if(nameinput === 0) {
-//         nameinput = 1;
-//         NAMEINFOBTN.style.visibility = 'visible';
-//     }
+nameChk.addEventListener('input', function() {
+    if(nameinput === 0) {
+        nameinput = 1;
+        NAMEINFOBTN.style.visibility = 'visible';
+    }
 
-//     if(document.getElementById('usermodifyname').value === nameChkc) {
-//         nameinput = 0;
-//         NAMEINFOBTN.style.visibility = 'hidden';
-//     }
-// });
+    if(document.getElementById('usermodifyname').value === nameChkc) {
+        nameinput = 0;
+        NAMEINFOBTN.style.visibility = 'hidden';
+    }
+});
 
-// function nameChange() {
-// 	if(nameChk.value === '') {
-// 		alert('닉네임을 입력해주세요');
-// 		return false;
-// 	} else if(!regex.test(nameChk.value)) {
-//         alert('닉네임을 다시 확인해주세요.');
-//         return false;
-//     }
+function nameChange() {
+	if(nameChk.value === '') {
+		alert('닉네임을 입력해주세요');
+		return false;
+	} else if(!regex.test(nameChk.value)) {
+        alert('닉네임을 다시 확인해주세요.');
+        return false;
+    }
 
-// 	const formData = new FormData();
-// 	formData.append('user_name', nameChk.value);
-// 	fetch('/namechange', {
-// 		method: 'POST',
-// 		body: formData,
-// 	})
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		if(data['namechange'] === '0') {
-// 			alert('사용가능한 닉네임 입니다.');
-//             nameflg = 0;
-// 		} else if(data['namechange'] === '1') {
-// 			alert('이미 존재하는 닉네임 입니다.');
-//             nameflg = 1;
-// 		}
-// 	})
-// 	.catch(error => {
-// 		console.error('오류 발생:', error);
-// 	})
-//     namechkflg = 1;
-// }
+	const formData = new FormData();
+	formData.append('user_name', nameChk.value);
+	fetch('/namechange', {
+		method: 'POST',
+		body: formData,
+	})
+	.then(response => response.json())
+	.then(data => {
+		if(data['namechange'] === '0') {
+			alert('사용가능한 닉네임 입니다.');
+            nameflg = 0;
+		} else if(data['namechange'] === '1') {
+			alert('이미 존재하는 닉네임 입니다.');
+            nameflg = 1;
+		}
+	})
+	.catch(error => {
+		console.error('오류 발생:', error);
+	})
+    namechkflg = 1;
+}
 
-// let fileInput = document.getElementById('profilephoto');
-// let userImgUrl = document.getElementById('user-img-url');
-// let PROFILEPHOTOVIEW = document.getElementById('profilephotoview');
+let fileInput = document.getElementById('profilephoto');
+let userImgUrl = document.getElementById('user-img-url');
+let PROFILEPHOTOVIEW = document.getElementById('profilephotoview');
 
-// fileInput.addEventListener('change', function() {
-//     if (!fileInput.files[0].type.startsWith('image')) {
-//         imgFlg = 2;
-//         PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
+fileInput.addEventListener('change', function() {
+    if (!fileInput.files[0].type.startsWith('image')) {
+        imgFlg = 2;
+        PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
 
-//         userImgUrl.innerHTML = '이미지만 선택 가능합니다.';
-//         document.getElementById('user-info-img-remove').style.visibility = 'visible';
-//         return false;
-//     }
+        userImgUrl.innerHTML = '이미지만 선택 가능합니다.';
+        document.getElementById('user-info-img-remove').style.visibility = 'visible';
+        return false;
+    }
     
-//     if (fileInput.files[0].size / 1048576 > 5) {
-//         imgFlg = 2;
+    if (fileInput.files[0].size / 1048576 > 5) {
+        imgFlg = 2;
         
-//         userImgUrl.innerHTML = '이미지의 용량이 너무 큽니다.';
-//         PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
-//         document.getElementById('user-info-img-remove').style.visibility = 'visible';
+        userImgUrl.innerHTML = '이미지의 용량이 너무 큽니다.';
+        PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
+        document.getElementById('user-info-img-remove').style.visibility = 'visible';
 
-//         return false;
-//     }
+        return false;
+    }
 
-//     userImgUrl.innerHTML = '';
-//     userImgUrl.innerHTML = fileInput.files[0].name;
-//     if (fileInput.files.length > 0) {
-//         imgFlg = 1;
-//     }
+    userImgUrl.innerHTML = '';
+    userImgUrl.innerHTML = fileInput.files[0].name;
+    if (fileInput.files.length > 0) {
+        imgFlg = 1;
+    }
 
-//     var file = fileInput.files[0];
-//     var reader = new FileReader();
+    var file = fileInput.files[0];
+    var reader = new FileReader();
 
-//     reader.onloadend = function () {
-//         PROFILEPHOTOVIEW.style.backgroundImage = `url(${reader.result})`;
-//     };
+    reader.onloadend = function () {
+        PROFILEPHOTOVIEW.style.backgroundImage = `url(${reader.result})`;
+    };
 
-//     if (file) {
-//         reader.readAsDataURL(file);
-//     }
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 
-//     document.getElementById('user-info-img-remove').style.visibility = 'visible';
-// });
+    document.getElementById('user-info-img-remove').style.visibility = 'visible';
+});
 
-// function userimgremove() {
-//     imgFlg = 2;
-//     userImgUrl.innerHTML = '';
-//     userImgUrl.innerHTML = '사진이 삭제되었습니다.';
+function userimgremove() {
+    imgFlg = 2;
+    userImgUrl.innerHTML = '';
+    userImgUrl.innerHTML = '사진이 삭제되었습니다.';
     
-//     document.getElementById('user-info-img-remove').style.visibility = 'hidden';
-//     PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
-// }
+    document.getElementById('user-info-img-remove').style.visibility = 'hidden';
+    PROFILEPHOTOVIEW.style.backgroundImage = "url(/img/default_f.png)";
+}
 
-// function userinfoupdate() {
-//     if(nameinput === 1) {
-//         if(nameChk.value === '') {
-//             alert('닉네임을 입력해주세요');
-//             return false;
-//         } 
-//         if(namechkflg === 0) {
-//             alert('닉네임 중복체크를 해주세요.');
-//             return false;
-//         }
-//         if(nameflg === 1) {
-//             alert('사용 중인 아이디입니다.\n아이디를 다시 입력해주세요.');
-//             return false;
-//         }
-//     }
+function userinfoupdate() {
+    if(nameinput === 1) {
+        if(nameChk.value === '') {
+            alert('닉네임을 입력해주세요');
+            return false;
+        } 
+        if(namechkflg === 0) {
+            alert('닉네임 중복체크를 해주세요.');
+            return false;
+        }
+        if(nameflg === 1) {
+            alert('사용 중인 아이디입니다.\n아이디를 다시 입력해주세요.');
+            return false;
+        }
+    }
 
-//     let IMGFLG = document.getElementById('imgflg');
-//     IMGFLG.setAttribute('value', imgFlg);
+    let IMGFLG = document.getElementById('imgflg');
+    IMGFLG.setAttribute('value', imgFlg);
 
-// 	document.getElementById('userinfo_form').submit();
-// }
+	document.getElementById('userinfo_form').submit();
+}
 
 // 게시글 탭
 const tab = document.querySelector(".tab");
