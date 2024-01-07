@@ -332,6 +332,14 @@ class BoardController extends Controller
         //각 해시태그의 양쪽 공백을 제거합니다.
         $hashtag_names = array_map('trim', $hashtag_names);
         
+        // 빈 배열 제거
+        $hashtag_names = array_values(array_filter($hashtag_names));
+
+        // 재정렬
+        usort($hashtag_names, function($a, $b) {
+            return strcmp($a[0], $b[0]);
+        });
+
        foreach ($hashtag_names as $hashtag_name) {
         // dd($hashtag_names);
         // $hashtag_name에 해당하는 해시태그를 데이터베이스에서 찾거나 새로 생성합니다. 
