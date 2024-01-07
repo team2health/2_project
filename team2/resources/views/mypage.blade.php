@@ -16,7 +16,7 @@
 
             <div id="mypageProfileChange" class="mypage-display-none">
                 <div id="mypageContent2">
-                    {{-- <form action="/" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                    <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
                         @csrf
                         <div id="UserInfoModify" class="User-info-modify">
                             <div class="mypage-profile-div">
@@ -36,10 +36,10 @@
                             <span class="user-info-btn-chk" onclick="nameChange(); return false;" id="name-info-btn"> 닉네임 중복 확인 </span>
                             <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
                             <div class="mypage-btn-line-modify">
-                                <button type="button" class="mypage-btn mpb-modify" onclick="userinfoupdate(); return false;">수정완료</button>
+                                <button type="submit" class="mypage-btn mpb-modify">수정완료</button>
                             </div>
                         </div>
-                    </form> --}}
+                    </form>
                 </div>
             </div>
         </div>
