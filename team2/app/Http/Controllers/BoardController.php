@@ -156,27 +156,8 @@ class BoardController extends Controller
         // 게시글 내용에서 줄 바꿈을 HTML <br> 태그로 변환
         $boardData['board_content'] = nl2br($boardData['board_content']);        
         // 게시글 데이터에 사용자 ID를 추가합니다.
-        $boardData['u_id'] = $u_id;       
-    
-    // if ($request->category_id) {
-    //     // "category_id"를 사용하여 게시글을 저장하거나 필요한 작업을 수행합니다.
-    //     $category_id = explode(',',$request->input('category_id'));
+        $boardData['u_id'] = $u_id;           
         
-    //     foreach($category_id as $categories){
-            
-    //         $categoryname = Category::where('category_name', $categories)->first();
-
-    //         if($categoryname){                
-    //             $category_ids=$categoryname->category_id;                
-    //             DB::table('boards')->insert([
-    //                 'u_id' => $u_id,
-    //                 'board_title' => $boardData['board_title'],
-    //                 'board_content' => $boardData['board_content'],
-    //                 'category_id'=>$category_ids
-    //             ]);
-    //         }
-    //     }
-    // }     
         // 이후에 게시글을 생성할 때 사용할 수 있습니다.
         $board = Board::create($boardData);  
         if ($request->category_id) {
@@ -196,18 +177,24 @@ class BoardController extends Controller
         
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasFile('board_img')) {
+            // dd($request);
             // 업로드된 이미지들을 가져옵니다.
-            $images = $request->file('board_img');   
+            $images = $request->file('board_img'); 
+            // dd($images); 
+            
             foreach ($images as $image) {
+                //dd($image);
                 // UUID와 원본 파일 확장자를 사용하여 고유한 이미지 이름을 생성합니다.                
                 $imageName = Str::uuid() . '.' . $image->extension();
                 $image->move(public_path('board_img'), $imageName);
-    
+                // dd($imageName);
                 
-                $boardImage = new Board_img(['img_address' => $imageName]);
+                $boardImage[]= (['img_address' => $imageName]);
+                // dd($boardImage);
                  // 현재 게시글과 이미지를 연결하고 저장합니다. 모델끼리 연결해 주어야 함
-                $board->images()->save($boardImage);
+                
             }
+            $board->images()->createMany($boardImage);
         
         }  
         // 새로 생성된 게시글의 ID를 가져옵니다.
