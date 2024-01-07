@@ -16,7 +16,7 @@
 
             <div id="mypageProfileChange" class="mypage-display-none">
                 <div id="mypageContent2">
-                    <form action="/userinfoupdate" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                    {{-- <form action="/" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
                         @csrf
                         <div id="UserInfoModify" class="User-info-modify">
                             <div class="mypage-profile-div">
