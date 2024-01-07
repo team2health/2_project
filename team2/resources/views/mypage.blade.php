@@ -30,14 +30,13 @@
                                 <input type="hidden" name="imgFlg" id="imgflg">
                             </div>
                             <span id="user-img-url"></span>
-                            {{-- <a href="#">비밀번호 변경</a> --}}
                             <br>
                             <div class="mypage-gap mypage-display-none" id="mypageGap3"></div>
                             <label for="usermodifyname" class="mypage-info-label">닉네임</label>
                             <span class="user-info-btn-chk" onclick="nameChange(); return false;" id="name-info-btn"> 닉네임 중복 확인 </span>
                             <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
                             <div class="mypage-btn-line-modify">
-                                <button type="button" class="mypage-btn mpb-modify" onclick="userinfoupdate(); return false;">수정완료</button>
+                                <button type="submit" class="mypage-btn mpb-modify">수정완료</button>
                             </div>
                         </div>
                     </form>
@@ -48,11 +47,10 @@
         <div class="mypage-myInfo" id="mypageMyInfo">
             {{-- 비밀번호 변경--}}
             <div class="mypage-myInfo-first">
-                <div class="mypage-main-btn" onclick="setNewPassword(); return false;">
+                <a class="mypage-main-btn" href="{{ route('firstchkpassword') }}">
                     <img src="/img/password.png" alt="">
                     <div class="mypage-main-btn-name">비밀번호 변경</div>
-                </div>
-
+                </a>
             </div>
             
             {{-- 나의 정보 --}}
@@ -149,7 +147,7 @@
                                     </span>
                                     @if(isset($item["img_address"]))
                                     <span class="community-home-board-img-span">
-                                        <img class="mypage-board-img" src="/img/{{$item["img_address"]}}" alt="">
+                                        <img class="mypage-board-img" src="/user_img/{{$item["img_address"]}}" alt="">
                                     </span>
                                     @endif
                                 </a>

@@ -47,7 +47,7 @@ function sample4_execDaumPostcode() {
 
 window.addEventListener('load', function() {
     addallfavoritetag(); //마이페이지 해시태그 불러오기
-})
+});
 
 // 삭제 모달
 function recorddeletemodalopen() {
@@ -457,48 +457,6 @@ secondTab.addEventListener('click', function () {
 })
 
 
-// 모달 탭
-
-// const tabModal = document.querySelector(".tab-modal");
-// const tabListItemModal = document.querySelectorAll(".mypage-board-modal-btn");
-// const modalfirstTab = tabListItemModal[0];
-// const modalsecondTab = tabListItemModal[1];
-// const modaltabContent1 = document.querySelectorAll(".tab-contents-modal");
-// const modaltabContent2 = document.querySelectorAll(".tab-contents-modal2");
-// const modaldata1 = document.querySelectorAll('[data-order="3"]');
-// const modaldata2 = document.querySelectorAll('[data-order="4"]');
-
-// let modaltabflg = 3;
-
-// modalfirstTab.addEventListener('click', function () {
-//     if(modaltabflg === 4) {
-//             modaldata1.forEach(element => {
-//                 element.style.display = 'block';
-//             });
-//             modaldata2.forEach(element => {
-//                 element.style.display = 'none';
-//             });
-//             modalfirstTab.classList.add('tab-active');
-//             modalsecondTab.classList.remove('tab-active');
-//         modaltabflg = 3;
-//     } 
-// })
-
-// modalsecondTab.addEventListener('click', function () {
-//     if (modaltabflg === 3) {
-//             modaldata2.forEach(element => {
-//                 element.style.display = 'block';
-//             });
-//             modaldata1.forEach(element => {
-//                 element.style.display = 'none';
-//             });
-//             modalfirstTab.classList.remove('tab-active');
-//             modalsecondTab.classList.add('tab-active');
-//         modaltabflg = 4;
-//     }
-// })
-
-
 // 게시글 더보기
 function plusMypageBoard() {
     
@@ -862,10 +820,16 @@ function myprofileChange() {
     mypageGap3.classList.remove('mypage-display-none');
 }
 
-// 비밀번호 변경창
-function setNewPassword() {
-    deleteMypageBtnAll();
-}
+// 비밀번호 변경창 열기
+// function setNewPassword() {
+//     deleteMypageBtnAll();
+//     let passwordChangeFirstChk = document.getElementById('passwordChangeFirstChk');
+//     passwordChangeFirstChk.classList.remove('mypage-display-none');
+// }
+
+// function passwordChangeChk() {
+
+// }
 
 // 회원탈퇴 창으로 이동
 function goToDeleteIdZone() {

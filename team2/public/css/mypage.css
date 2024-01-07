@@ -233,12 +233,30 @@
 }
 .password-pass-main-div {
     margin: 0 auto;
-    width: 400px;
-    max-width: 90%;
+    max-width: 700px;
     /* margin-top: 250px; */
     background-color: #f8f8f8;
     padding: 30px;
 }
+.password-pass-main-div .mypage-btn {
+    margin-top: 30px;
+    float: right;
+}
+.password-pass-main-div .mypage-info-label {
+    margin-top: 0;
+}
+.mypage-change-password-errorMsg {
+    margin-left: 13px;
+    color: #ea9008;
+}
+.mypage-password-second-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
 .password-pass {
     outline: none;
     border: none;
@@ -280,9 +298,17 @@
     flex-direction: column;
     justify-content: center;
 }
-
-
-
+/* 비밀번호 변경 */
+.mypage-change-password {
+    width: 100vw;
+    height: 500px;
+    display: grid;
+    align-items: center;
+}
+.mypage-change-password-msg {
+    margin-left: 13px;
+    color: #5c5c5c;
+}
 
 
 
