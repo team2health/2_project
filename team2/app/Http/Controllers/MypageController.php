@@ -73,7 +73,6 @@ class MypageController extends Controller
             ->where('comments.deleted_at', null)
             ->where('boards.deleted_at', null)
             ->orderby('comments.comment_id', 'DESC')
-            ->limit(8)
             ->get();
         
         $user_hashtag = DB::table('favorite_tags')
@@ -416,7 +415,7 @@ class MypageController extends Controller
         $hashget = json_decode($hashget, true);
 
 
-        Log::debug("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        Log::debug("hashgethashgethashgethashgethashget");
         Log::debug($hashget);
 
         if(!empty($hashget)) {
@@ -424,25 +423,33 @@ class MypageController extends Controller
                 $count = DB::table('favorite_tags')
                     ->select('hashtag_id')
                     ->where('hashtag_id', $item['hashtag_id'])
-                    ->whereNotNull('deleted_at')
+                    ->whereNull('deleted_at')
                     ->where('u_id', $id)
                     ->get();
+
+                    Log::debug("유저가 이미 좋아한다고 등록해놨는지 확인");
+                    Log::debug($count);
                 }
                 $count = json_decode($count, true);
                 Log::debug('countcountcountcount');
                 Log::debug($count);
         }
-        
-        if(empty($count)){
-            $result_set = $hashget;
-        } else {
-            $result_set = array_diff($hashget, $count);
+        $result_set = [];
+        if(!empty($count)) {
+            foreach ($hashget as $hashitem) {
+                foreach ($count as $countitem) {
+                    if ($hashitem['hashtag_id'] === $countitem['hashtag_id']) {
+                        $result_set = $hashitem['hashtag_id'];
+                    }
+                }
+            }
+
         }
+        // $result_set = array_diff(array_values($hashget), array_values($count));
         Log::debug('differencedifferencedifferencedifference');
         Log::debug($result_set);
 
-
-        if($result_set != null) {
+        if(isset($result_set)) {
             // 검색결과 있음
             foreach($result_set as $item){
                 $hashtag_search = DB::table('hashtags')
@@ -451,9 +458,11 @@ class MypageController extends Controller
                 ->orderBy('hashtag_id', 'desc')
                 ->get();
             }
+            Log::debug('hashtag_searchhashtag_searchhashtag_search');
+            Log::debug($hashtag_search);
             return response()->json($hashtag_search);
         } else {
-            return response()->json('false');
+            return response()->json('hashtag_search', 'nodata');
         }
     }
     public function seeyouagainget() {

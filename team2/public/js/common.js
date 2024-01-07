@@ -96,6 +96,10 @@ function setPageName () {
         footericondiv[0].classList.remove('footer-icon-div-opacity');
     } else if(currentPath == '/board') {
         footericondiv[1].classList.remove('footer-icon-div-opacity');
+    } else if(currentPath == '/firstchkpassword') {
+        footericondiv[3].classList.remove('footer-icon-div-opacity');
+        headerPageName.innerHTML='';
+        headerPageName.innerHTML='비밀번호 변경';
     }
 }
 // 창 외부 클릭 시 드랍다운 닫기

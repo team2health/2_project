@@ -208,18 +208,20 @@
                             <span id="noticeThatFavoriteNone" class="notice-that-favorite-none"> 관심태그로 등록한 해시태그가 없습니다.</span>
                         @endforelse
                     </div>
-
-                    <form action="/hashtagsearch" method="post" class="mypage-hashtag-search-form" id="mypageHastagSearchForm">
+                    <form class="mypage-hashtag-search-form" id="mypageHastagSearchForm">
                         @csrf
                         <div class="mypage-hashtag-search-div">
                             <input type="text" placeholder="해시태그 검색" name="hashsearch">
-                            <button type="submit" class="mypage-hashtag-search">
+                            <button type="button" class="mypage-hashtag-search" onclick="submitSearchHash(); return false;">
                                 <img src="/img/search.png">
                             </button>
                         </div>
                         <div id="searchHashtag" class="mypage-seach-hashtag">
                         </div>
                     </form>
+                    @if(isset($hashtag_search))
+                        <input type="hidden" value="{{$hashtag_search}}" id="hashtagSearch">
+                    @endif
                     <div id="mypageCanGetAllTag" class="mypage-can-get-all-tag">
                         <div class="mypage-can-get-all-tag-msg">
                             <img src="/img/favoritetag.png" alt="">

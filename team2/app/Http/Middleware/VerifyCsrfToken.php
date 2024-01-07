@@ -33,5 +33,6 @@ class VerifyCsrfToken extends Middleware
         '/mypageboardplus',
         '/deleteacountchk',
         '/changpasswordchk',
+        '/hashtagsearch',
     ];
 }

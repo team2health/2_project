@@ -844,3 +844,22 @@ function goToDeleteIdZone() {
     goToDeleteIdZoneDiv.classList.add('mypage-display-none');
     passwordFirstChk.classList.remove('mypage-display-none');
 }
+
+// 해시태그 검색 폼 submit
+
+function submitSearchHash() {
+    let formData = new FormData(document.getElementById('mypageHastagSearchForm'));
+
+    fetch('/hashtagsearch', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        alert('Server response: ' + data.message);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
