@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\support\Facades\DB;
+use App\Models\Board_tag;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -112,6 +114,45 @@ class UserController extends Controller
         } else {
             Log::debug("실패");
         }
+    }
+    public function firstchkpassword() {
+        return view('firstchkpassword');
+    }
+    public function changpasswordchk(Request $request) {
 
+        $id = session('id');
+        $user_password = $request->user_password;
+        $user_new_password = $request->user_new_password;
+        $user_new_passwordchk = $request->user_new_passwordchk;
+
+        $rules = [
+            'password_rule' => 'required|string|min:6|max:20|regex:/^[a-z0-9]+$/',
+        ];
+
+        $passwordchk = ['password_rule' => $user_new_password];
+
+        $result = User::where('id', $id)->first();
+    
+        if ($user_password === $user_new_password) {
+            return view('firstchkpassword')->with('passwordchk','3');
+        }
+        // 유효성 검사
+        $validator = Validator::make($passwordchk, $rules);
+        // 유효성 검사 실패 시
+        if ($validator->fails()) {
+            return view('firstchkpassword')->with('passwordchk','4');
+        }
+
+        if (Hash::check($user_password, $result->user_password)) {
+            if( $user_new_password === $user_new_passwordchk ) {
+                $user_new_password = Hash::make($user_new_password);
+                DB::table('users')->where('id', $id)->update(['user_password' => $user_new_password]);
+                return redirect()->route('mypage.get');
+            } else {
+                return view('firstchkpassword')->with('passwordchk','2');
+            }
+        }else {
+            return view('firstchkpassword')->with('passwordchk','1');
+        }
     }
 }

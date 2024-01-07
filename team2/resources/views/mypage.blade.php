@@ -16,7 +16,7 @@
 
             <div id="mypageProfileChange" class="mypage-display-none">
                 <div id="mypageContent2">
-                    <form action="/" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
+                    {{-- <form action="/" class="user-info-modify" method="POST" id="userinfo_form" enctype="multipart/form-data">
                         @csrf
                         <div id="UserInfoModify" class="User-info-modify">
                             <div class="mypage-profile-div">
@@ -30,7 +30,6 @@
                                 <input type="hidden" name="imgFlg" id="imgflg">
                             </div>
                             <span id="user-img-url"></span>
-                            {{-- <a href="#">비밀번호 변경</a> --}}
                             <br>
                             <div class="mypage-gap mypage-display-none" id="mypageGap3"></div>
                             <label for="usermodifyname" class="mypage-info-label">닉네임</label>
@@ -40,7 +39,7 @@
                                 <button type="button" class="mypage-btn mpb-modify" onclick="userinfoupdate(); return false;">수정완료</button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         </div>
@@ -48,11 +47,10 @@
         <div class="mypage-myInfo" id="mypageMyInfo">
             {{-- 비밀번호 변경--}}
             <div class="mypage-myInfo-first">
-                <div class="mypage-main-btn" onclick="setNewPassword(); return false;">
+                <a class="mypage-main-btn" href="{{ route('firstchkpassword') }}">
                     <img src="/img/password.png" alt="">
                     <div class="mypage-main-btn-name">비밀번호 변경</div>
-                </div>
-
+                </a>
             </div>
             
             {{-- 나의 정보 --}}
@@ -149,7 +147,7 @@
                                     </span>
                                     @if(isset($item["img_address"]))
                                     <span class="community-home-board-img-span">
-                                        <img class="mypage-board-img" src="/img/{{$item["img_address"]}}" alt="">
+                                        <img class="mypage-board-img" src="/user_img/{{$item["img_address"]}}" alt="">
                                     </span>
                                     @endif
                                 </a>
