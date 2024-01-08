@@ -31,10 +31,11 @@
 //         preview.src = "{{ asset('img/camera2.png') }}";
 //     }
 // }
+let selectedImages = [];
 
 document.addEventListener('DOMContentLoaded', function() {
     // 기존 이미지 미리보기 및 삭제 기능 추가
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
         var fileInput = document.getElementById('file' + i);
         if (fileInput) {
             fileInput.addEventListener('change', function(event) {
@@ -45,7 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function handleFileSelect(event) {
+    
     const files = event.target.files;
+    
     const container = document.getElementById('imageContainer');
 
     for (const file of files) {
@@ -66,9 +69,11 @@ function handleFileSelect(event) {
         imageContainer.appendChild(img);
         imageContainer.appendChild(deleteButton);
 
-        container.appendChild(imageContainer);
+        container.appendChild(imageContainer);     
     }
+    
  }
+ 
 // document.addEventListener('DOMContentLoaded', function() {
 //     // 기존 이미지 미리보기 및 삭제 기능 추가
 //     for (var i = 0; i < 10; i++) {

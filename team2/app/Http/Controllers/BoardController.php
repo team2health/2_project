@@ -144,6 +144,7 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {      
+        
         // dd($request->all());
         if(!Auth::check()){
             return redirect()->route('login.get');
@@ -175,11 +176,13 @@ class BoardController extends Controller
             $board->save();
         }     
         
+        Log::info('이미지가 전송되었습니다.');
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasFile('board_img')) {
-            // dd($request);
+            // dd($request->file('board_img'));
             // 업로드된 이미지들을 가져옵니다.
             $images = $request->file('board_img'); 
+            // $boardImage = [];
             // dd($images); 
             
             foreach ($images as $image) {
@@ -192,9 +195,12 @@ class BoardController extends Controller
                 $boardImage[]= (['img_address' => $imageName]);
                 // dd($boardImage);
                  // 현재 게시글과 이미지를 연결하고 저장합니다. 모델끼리 연결해 주어야 함
-                
+                 
             }
+            // return response()->json(['success' => '이미지가 성공적으로 저장되었습니다.']);
+                
             $board->images()->createMany($boardImage);
+            
         
         }  
         // 새로 생성된 게시글의 ID를 가져옵니다.
@@ -341,37 +347,7 @@ class BoardController extends Controller
         //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다
         $result->hashtags()->sync($hashtagIds);
         
-}
-
-    // 이전 상태에서의 해시태그 ID 목록
-// $previousHashtags = $result->hashtags()->pluck('hashtags.hashtag_id')->toArray();
-// //  dd($previousHashtags);
-
-// // 현재 상태에서의 해시태그 입력 값
-// $hashtagInput = $request->input('hashtag');
-// $hashtag_names = explode(',', $hashtagInput);
-// $hashtag_names = array_map('trim', $hashtag_names);
-
-// // 현재 상태의 해시태그 ID 목록
-// $currentHashtags = Hashtag::whereIn('hashtag_name', $hashtag_names)->pluck('hashtag_id')->toArray();
-// // dd($currentHashtags);
-// // 삭제된 해시태그 찾기
-// $deletedHashtags = array_diff($previousHashtags, $currentHashtags);
-// // dd($deletedHashtags);
-// // 삭제된 해시태그 처리
-// if (!empty($deletedHashtags)) {
-//     // 여기에서 $deletedHashtags에 해당하는 해시태그 삭제 또는 처리를 수행
-// }
-
-// // 나머지는 입력된 해시태그 처리
-// $hashtagIds = array_diff($currentHashtags, $deletedHashtags);
-
-// // 나머지 로직은 입력된 해시태그에 대한 처리
-// $result->hashtags()->sync($hashtagIds);
-
-       
-    
-   
+}  
     if ($request->category_id) {
         //  dd($request);
         $newCategoryName = $request->input('category_id');
