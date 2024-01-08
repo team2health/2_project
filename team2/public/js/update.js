@@ -19,6 +19,45 @@ function previewImage(inputId, previewId) {
         preview.src = "{{ asset('img/plus.png') }}";
     }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    // 기존 이미지 미리보기 및 삭제 기능 추가
+    for (let i = 0; i < 10; i++) {
+        var fileInput = document.getElementById('file' + i);
+        if (fileInput) {
+            fileInput.addEventListener('change', function(event) {
+                handleFileSelect(event);
+            });
+        }
+    }
+});
+
+function handleFileSelect(event) {
+    
+    const files = event.target.files;
+    
+    const container = document.getElementById('imageContainer');
+
+    for (const file of files) {
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'insert_img';
+
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.textContent = '삭제';
+        deleteButton.addEventListener('click', function() {
+            // 이미지 및 해당 버튼 제거
+            imageContainer.remove();
+        });
+
+        imageContainer.appendChild(img);
+        imageContainer.appendChild(deleteButton);
+
+        container.appendChild(imageContainer);     
+    }
+ }
 
     
 var selectedHashtags = [];
