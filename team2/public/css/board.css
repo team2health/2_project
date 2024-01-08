@@ -771,9 +771,6 @@ a .a-bordergo-hover:hover {
     display: inline-block;
     position: relative;
 } 
-.dropdown-content {
-    border-radius: 20px;
-}
 .category_font_hover:hover {
     font-weight: 900;
     color: #FF9900;
@@ -782,6 +779,7 @@ a .a-bordergo-hover:hover {
     background-color: #4CAF50;
 } */
 .dropdown-content {
+    border-radius: 20px;
     display: none;
     position: absolute;
     background-color: #f9f9f9;
