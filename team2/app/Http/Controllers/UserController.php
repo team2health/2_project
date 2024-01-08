@@ -28,7 +28,19 @@ class UserController extends Controller
 
     public function registpost(Request $request) {
 
-        $data = $request->only('user_id', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
+        // $data = $request->only('user_email', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
+        $data = array (
+            'user_email' => 'team2',
+            'user_name' => 'team2',
+            'user_password' => 'team2',
+            'birthday' => '20000101',
+            'user_address_num' => '06517',
+            'user_address' => '서울 서초구 나루터로 15',
+            'user_address_detail' => NULL,
+            'user_gender' => '1',
+            'agreement_flg' => '1',
+        );
+
         $data['user_password'] = Hash::make($data['user_password']);
         $result = User::create($data);
         return redirect()->route('login.get');
@@ -42,11 +54,11 @@ class UserController extends Controller
     }
 
     public function loginpost(Request $request) {
-        $result = User::where('user_id', $request->user_id)->first();
+        $result = User::where('user_email', $request->user_email)->first();
         // 탈퇴한 사용자 로그인 알림
 
         $deleted_user = User::withTrashed()
-        ->where('user_id', $request->user_id)
+        ->where('user_email', $request->user_email)
         ->whereNull('deleted_at')
         ->get();
         $deleted_user = $deleted_user->count();
@@ -92,9 +104,9 @@ class UserController extends Controller
 
     public function idchkpost(Request $request) {
 
-        $userid = $request->user_id;
+        $userid = $request->user_email;
 
-        $existingUser = User::withTrashed()->where('user_id', $userid)->first();
+        $existingUser = User::withTrashed()->where('user_email', $userid)->first();
 
         if ($existingUser) {
             return response()->json(['idChk' => '1']);

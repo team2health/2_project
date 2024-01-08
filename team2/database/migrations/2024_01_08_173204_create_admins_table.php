@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dps_links', function (Blueprint $table) {
-            $table->integer('dps_id');
-            $table->integer('disease_id');
-            $table->integer('part_symptom_id');
-
-            $table->primary('dps_id');
+        Schema::create('admins', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('admin_id')->unique();
+            $table->string('admin_name');
+            $table->string('admin_password');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dps_links');
+        Schema::dropIfExists('admins');
     }
 };

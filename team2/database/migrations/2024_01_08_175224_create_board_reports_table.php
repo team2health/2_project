@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('diagnoses', function (Blueprint $table) {
-            $table->integer('diagnosis_id');
-            $table->string('diagnosis_name')->unique();
-
-            $table->primary('diagnosis_id');
+        Schema::create('board_reports', function (Blueprint $table) {
+            $table->increments('board_report_id');
+            $table->integer('board_id');
+            $table->integer('u_id');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diagnoses');
+        Schema::dropIfExists('board_reports');
     }
 };

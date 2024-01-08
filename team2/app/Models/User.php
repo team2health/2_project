@@ -21,14 +21,16 @@ class User extends Authenticatable
      */
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id',
+        'user_email',
         'user_name',
         'user_password',
+        'birthday',
         'user_address_num',
         'user_address',
         'user_address_detail',
         'user_gender',
         'user_img',
+        'agreement_flg',
         
     ];
     public function boardid(){

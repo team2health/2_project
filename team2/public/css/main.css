@@ -820,6 +820,14 @@ button {
 		padding: 10px;
 		border-radius: 50px;
 	}
+	.header-community-nav:hover {
+		background-color: #2C2B71;
+		color: white;
+		transition: 0.2s;
+	}
+	.header-community-nav:focus {
+		background-color: #2C2B71;
+	}
 	.footer-container {
 		display: block;
 		width: 100vw;

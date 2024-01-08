@@ -42,9 +42,10 @@ Route::resource('/board', BoardController::class);
 
 // main
 Route::get('/', [MainController::class, 'mainget'])->name('main.get');
-Route::post('/partselect', [MainController::class, 'partselectpost']);
-Route::post('/symptomselect', [MainController::class, 'symptomselectpost']);
-Route::post('/useraddress', [MainController::class, 'useraddresspost']);
+Route::get('/partselect/{id}', [MainController::class, 'partselectget'])->name('partselect.get');
+
+// Route::post('/symptomselect', [MainController::class, 'symptomselectpost']);
+// Route::post('/useraddress', [MainController::class, 'useraddresspost']);
 
 // user
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
@@ -60,9 +61,9 @@ Route::post('/namechk', [UserController::class, 'namechkpost']);
 Route::post('/idchk', [UserController::class, 'idchkpost']);
 
 // mypage
-Route::get('/mypage', [MypageController::class, 'mypageget'])->name('mypage.get');
+Route::get('/mypage', [MypageController::class, 'mypageget'])->middleware('auth')->name('mypage.get');
 Route::post('/myhashdelete', [MypageController::class, 'myhashdeletepost'])->name('myhash.post');
-Route::get('/allhashtag', [MypageController::class, 'allhashget']);
+Route::get('/allhashtag', [MypageController::class, 'allhashget'])->middleware('auth');
 Route::post('/addfavoritehashtag', [MypageController::class, 'addfavoritehashtagpost']);
 Route::post('/newcalendarblock', [MypageController::class, 'newcalendarblock']);
 Route::post('/mypagecommentplus', [MypageController::class, 'mypagecommentplus']);
