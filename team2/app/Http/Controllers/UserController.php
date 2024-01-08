@@ -28,7 +28,19 @@ class UserController extends Controller
 
     public function registpost(Request $request) {
 
-        $data = $request->only('user_email', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
+        // $data = $request->only('user_email', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
+        $data = array (
+            'user_email' => 'team2',
+            'user_name' => 'team2',
+            'user_password' => 'team2',
+            'birthday' => '20000101',
+            'user_address_num' => '06517',
+            'user_address' => '서울 서초구 나루터로 15',
+            'user_address_detail' => NULL,
+            'user_gender' => '1',
+            'agreement_flg' => '1',
+        );
+
         $data['user_password'] = Hash::make($data['user_password']);
         $result = User::create($data);
         return redirect()->route('login.get');

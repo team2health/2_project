@@ -1,4 +1,4 @@
-let LOGINUSERID = document.getElementById('login_user_id');
+let LOGINUSERID = document.getElementById('login_user_email');
 let ERRORLOGINID = document.getElementById('error_login_id');
 let regex = /^[가-힣a-zA-Z0-9]{4,}$/;
 
@@ -34,7 +34,7 @@ LOGINUSERID.addEventListener('input', function() {
 });
 
 function logingo() {
-	let LOGINUSERIDVALUE = document.getElementById('login_user_id').value;
+	let LOGINUSERIDVALUE = document.getElementById('login_user_email').value;
 	let LOGINUSERPWVALUE = document.getElementById('login_user_password').value;
 
 	if(LOGINUSERIDVALUE === '') {
