@@ -24,7 +24,7 @@
 	|| Str::contains(request()->url(), 'favoriteboard') || Str::contains(request()->url(), 'board/')
 	|| Str::contains(request()->url(), 'hotboard') || Str::contains(request()->url(), 'firstchkpassword'))
 	<div class="header-mobile">
-		<div class="header-mobile-backBtn"> < </div>
+		<div class="header-mobile-backBtn" onclick="goBack(); return false;"> < </div>
 		<div class="header-pageName" id="headerPageName"></div>
 	</div>
 	@endif
