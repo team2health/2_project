@@ -47,7 +47,7 @@
 			</div>
 			<div class="insert_img_div">
 				<div id="imageContainer">
-	<!-- 이미지를 추가할 부분 -->
+					<!-- 이미지를 추가할 부분 -->
 				</div>					
 			</div>	
 			<div class="insert_hashtag_container">
