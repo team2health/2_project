@@ -3,6 +3,7 @@
 @section('title', 'login')
 
 @section('main')
+
 	<div class="mini-container">
 		<div class="lr-box">
 			<form action="{{ route('login.post') }}" method="POST" id="login_form">

@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\support\Facades\DB;
 use App\Models\Board_tag;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Auth\MustVerifyEmail; 
+use Illuminate\Auth\Events\Registered;
 
 
 
