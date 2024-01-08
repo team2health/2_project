@@ -846,9 +846,29 @@ function goToDeleteIdZone() {
 }
 
 // 해시태그 검색 폼 submit
+// 엔터키로 작동
+let submitSearchHashBtn = document.getElementById("submitSearchHashBtn");
+submitSearchHashBtn.addEventListener("keyup", function(event) {
+    if (event.key === "Enter" || event.keyCode == 13) {
+        submitSearchHash();
+    }
+});
+
+function inputsubmit(event) {
+    // Enter 키의 keyCode는 13
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      submitSearchHash(); // 여기에 원하는 동작을 추가
+}
+}
 
 function submitSearchHash() {
+    let searchHashResult = document.getElementById('searchHashResult');
+    while (searchHashResult.firstChild) {
+        searchHashResult.removeChild(searchHashResult.firstChild);
+    }
     let formData = new FormData(document.getElementById('mypageHastagSearchForm'));
+    let hashsearch = document.getElementById('hashsearch').value;
+    formData.append('hashsearch', hashsearch);
 
     fetch('/hashtagsearch', {
         method: 'POST',
@@ -857,7 +877,31 @@ function submitSearchHash() {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        alert('Server response: ' + data.message);
+        if(data == 'nodata') {
+            let creatediv = document.createElement('div');
+            creatediv.innerHTML = '검색결과가 없습니다.'
+            creatediv.style.gridColumnStart = '1';
+            creatediv.style.gridColumnEnd = '4';
+            creatediv.style.backgroundColor = '#e0eaff';
+            creatediv.style.width = '100%';
+            creatediv.style.justifyContent = 'center';
+            creatediv.style.alignItems = 'center';
+
+            searchHashResult.appendChild(creatediv);
+        } else {
+            for (let i = 0; i < data.length; i++) {
+                let hashtagdiv = document.createElement('div');
+                let hashspan = document.createElement('span');
+                hashtagdiv.id = 'allHashtagId'+data[i].hashtag_id;
+                // hashplusbtn.setAttribute("value", data[i].hashtag_id);
+                hashspan.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
+                hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
+                hashspan.setAttribute('value', data[i].hashtag_id);
+                hashspan.innerHTML = data[i].hashtag_name;
+                hashtagdiv.appendChild(hashspan);
+                searchHashResult.appendChild(hashtagdiv);
+            }
+        }
     })
     .catch(error => {
         console.error('Error:', error);

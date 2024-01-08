@@ -102,6 +102,10 @@ function setPageName () {
         headerPageName.innerHTML='비밀번호 변경';
     }
 }
+// 뒤로가기
+function goBack() {
+    window.history.back();
+}
 // 창 외부 클릭 시 드랍다운 닫기
 window.onclick = function (event) {
     if (!event.target.matches('.cate_btn')) {

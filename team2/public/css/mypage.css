@@ -71,6 +71,9 @@
 
 
 /* 해시태그 영역 */
+.mypage-hashtag-display {
+    margin-bottom: 150px;
+}
 .mypage-hashtag-search-form {
     width: 100%;
     margin-top: 50px;
@@ -143,6 +146,14 @@
     padding-bottom: 13px;
     border-bottom: 1px solid #B9B9B9;
 }
+#searchHashResult div {
+    margin-top: 20px;
+    background-color: rgb(255 198 173);
+    cursor: pointer;
+}
+#searchHashResult div:hover {
+    background-color: rgb(255, 185, 94);
+}
 
 /* 나의 게시글 댓글 */
 .tab-contents .community_tag
@@ -179,6 +190,8 @@
 }
 .mypage-board-img {
     width: 100px;
+    height: 100px;
+
 }
 .mypage-board-first-line {
     grid-column: span 1;
@@ -239,7 +252,7 @@
     padding: 30px;
 }
 .password-pass-main-div .mypage-btn {
-    margin-top: 30px;
+    margin-top: 47px;
     float: right;
 }
 .password-pass-main-div .mypage-info-label {
@@ -300,6 +313,7 @@
 }
 /* 비밀번호 변경 */
 .mypage-change-password {
+    margin-top: 100px;
     width: 100vw;
     height: 500px;
     display: grid;
@@ -308,6 +322,13 @@
 .mypage-change-password-msg {
     margin-left: 13px;
     color: #5c5c5c;
+}
+.mypage-nodata {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100px;
+    justify-content: center;
 }
 
 

@@ -147,7 +147,7 @@
                                     </span>
                                     @if(isset($item["img_address"]))
                                     <span class="community-home-board-img-span">
-                                        <img class="mypage-board-img" src="/user_img/{{$item["img_address"]}}" alt="">
+                                        <img class="mypage-board-img" src="/board_img/{{$item["img_address"]}}" alt="">
                                     </span>
                                     @endif
                                 </a>
@@ -155,7 +155,7 @@
                                 <input type="hidden" name="favorite_num" value="{{ $item["board_id"] }}" id="favorite_num">
                                 @endif
                                 @empty
-                                <div> 작성한 게시글이 없습니다.</div>
+                                <div class="mypage-nodata"> 작성한 게시글이 없습니다.</div>
                             @endforelse
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                                         <div class="mypage-myComment-date">{{$item->created_at}}</div>
                                     </a>
                                 @empty
-                                    <div> 작성한 댓글이 없습니다. </div>
+                                    <div class="mypage-nodata"> 작성한 댓글이 없습니다. </div>
                                 @endforelse
                             </div>
                         </div>
@@ -208,11 +208,12 @@
                             <span id="noticeThatFavoriteNone" class="notice-that-favorite-none"> 관심태그로 등록한 해시태그가 없습니다.</span>
                         @endforelse
                     </div>
-                    <form class="mypage-hashtag-search-form" id="mypageHastagSearchForm">
+                    <form class="mypage-hashtag-search-form" id="mypageHastagSearchForm" onsubmit="return false">
                         @csrf
                         <div class="mypage-hashtag-search-div">
-                            <input type="text" placeholder="해시태그 검색" name="hashsearch">
-                            <button type="button" class="mypage-hashtag-search" onclick="submitSearchHash(); return false;">
+                            <input hidden='hidden'/>
+                            <input type="text" placeholder="해시태그 검색" name="hashsearch" id="hashsearch" onclick="inputsubmit(); return false;">
+                            <button type="button" class="mypage-hashtag-search" onclick="submitSearchHash(); return false;" id="submitSearchHashBtn">
                                 <img src="/img/search.png">
                             </button>
                         </div>
@@ -222,6 +223,7 @@
                     @if(isset($hashtag_search))
                         <input type="hidden" value="{{$hashtag_search}}" id="hashtagSearch">
                     @endif
+                    <div id="searchHashResult" class="mypage-hashtag"></div>
                     <div id="mypageCanGetAllTag" class="mypage-can-get-all-tag">
                         <div class="mypage-can-get-all-tag-msg">
                             <img src="/img/favoritetag.png" alt="">

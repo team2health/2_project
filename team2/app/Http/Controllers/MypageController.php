@@ -402,67 +402,23 @@ class MypageController extends Controller
     
     }
     public function hashtagsearch(Request $request) {
-        $id = session('id');
-        Log::debug($id);
 
+        $id = session('id');
         $result = trim($request->hashsearch);
         $hashget = DB::table('hashtags')
-        ->select('hashtag_id')
-        ->where('hashtag_name','like', '%'.$result.'%')
+        ->select('hashtags.hashtag_id','hashtags.hashtag_name')
+        ->join('favorite_tags', 'favorite_tags.hashtag_id', 'hashtags.hashtag_id')
+        ->where('hashtags.hashtag_name','like', '%'.$result.'%')
+        ->whereRaw('hashtags.hashtag_id NOT IN 
+        (SELECT favorite_tags.hashtag_id FROM favorite_tags WHERE favorite_tags.deleted_at is null AND favorite_tags.u_id = ?)', [$id])
+        ->orderby('hashtags.hashtag_id','asc')
+        ->distinct()
         ->get();
 
-        $hashget_count = $hashget->count();
-        $hashget = json_decode($hashget, true);
-
-
-        Log::debug("hashgethashgethashgethashgethashget");
-        Log::debug($hashget);
-
-        if(!empty($hashget)) {
-            foreach ($hashget as $item) {
-                $count = DB::table('favorite_tags')
-                    ->select('hashtag_id')
-                    ->where('hashtag_id', $item['hashtag_id'])
-                    ->whereNull('deleted_at')
-                    ->where('u_id', $id)
-                    ->get();
-
-                    Log::debug("유저가 이미 좋아한다고 등록해놨는지 확인");
-                    Log::debug($count);
-                }
-                $count = json_decode($count, true);
-                Log::debug('countcountcountcount');
-                Log::debug($count);
-        }
-        $result_set = [];
-        if(!empty($count)) {
-            foreach ($hashget as $hashitem) {
-                foreach ($count as $countitem) {
-                    if ($hashitem['hashtag_id'] === $countitem['hashtag_id']) {
-                        $result_set = $hashitem['hashtag_id'];
-                    }
-                }
-            }
-
-        }
-        // $result_set = array_diff(array_values($hashget), array_values($count));
-        Log::debug('differencedifferencedifferencedifference');
-        Log::debug($result_set);
-
-        if(isset($result_set)) {
-            // 검색결과 있음
-            foreach($result_set as $item){
-                $hashtag_search = DB::table('hashtags')
-                ->select('hashtag_id', 'hashtag_name')
-                ->where('hashtag_id',$item['hashtag_id'])
-                ->orderBy('hashtag_id', 'desc')
-                ->get();
-            }
-            Log::debug('hashtag_searchhashtag_searchhashtag_search');
-            Log::debug($hashtag_search);
-            return response()->json($hashtag_search);
+        if(count($hashget) > 0){
+            return response()->json($hashget);
         } else {
-            return response()->json('hashtag_search', 'nodata');
+            return response()->json('nodata');
         }
     }
     public function seeyouagainget() {

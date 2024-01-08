@@ -854,9 +854,10 @@ td {
     width: 30px;
 }
 .notice-that-favorite-none {
-    flex: 1;
     margin: 0;
     padding: 0;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 .mypage-hashtag-title {
     font-weight: 600;
