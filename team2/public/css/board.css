@@ -645,7 +645,7 @@ li{
 .community_tag > a {
     border-radius: 10px;
     padding: 10px;
-    width:98%;   
+    /* width:98%;    */
     text-overflow: ellipsis;
     overflow: hidden;  
     display: -webkit-box;   
@@ -880,6 +880,9 @@ a .a-bordergo-hover:hover {
 .board-mouse-cursor {
     cursor: pointer;
 }
+.board-mouse-cursor:hover {
+    background-color: #c5c5c5;
+}
 
 .confirmCommentDeleteModal {
     display: none;
@@ -976,6 +979,12 @@ a .a-bordergo-hover:hover {
     margin-left: 20px;
 }
 
+/* 캐러셸 */
+
+
+
+
+/* 미디어쿼리 */
 @media only screen and (min-width: 1050px) {
     .community_icon {
         width: 60px;

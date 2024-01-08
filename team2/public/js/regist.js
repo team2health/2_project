@@ -46,7 +46,7 @@ function sample4_execDaumPostcode() {
 }
 
 let USERNAME = document.getElementById('user_name');
-let USERID = document.getElementById('user_id');
+let USERID = document.getElementById('user_email');
 let USERPASSWORD = document.getElementById('user_password');
 let USERPASSWORDCHECK = document.getElementById('user_password_check');
 // let USERADRESSF = document.getElementById('sample4_roadAddress');
@@ -126,7 +126,7 @@ function genderFcheck() {
 
 function registgo() {
 	let USERNAMEVALUE = document.getElementById('user_name').value;
-	let USERIDVALUE = document.getElementById('user_id').value;
+	let USERIDVALUE = document.getElementById('user_email').value;
 	let USERPASSWORDVALUE = document.getElementById('user_password').value;
 	let USERPASSWORDCHECKVALUE = document.getElementById('user_password_check').value;
 	let USERADRESSFVALUE = document.getElementById('sample4_roadAddress').value;
@@ -217,7 +217,7 @@ function checkName() {
 
 let inputCheckId;
 function checkId() {
-	let idChk = document.getElementById('user_id').value;
+	let idChk = document.getElementById('user_email').value;
 
 	if(idChk === '') {
 		alert('아이디를 입력해주세요');
@@ -228,7 +228,7 @@ function checkId() {
 	}
 
 	const formData = new FormData();
-	formData.append('user_id', idChk);
+	formData.append('user_email', idChk);
 	fetch('/idchk', {
 		method: 'POST',
 		body: formData,

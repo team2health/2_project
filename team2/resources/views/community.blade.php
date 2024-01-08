@@ -3,6 +3,7 @@
 @section('title','Community')
 
 @section('main')
+
 <main class="">
     <div class="slider-container">
         <a href="{{route('board.create')}}" class="community_aplus" onclick="openModal(); return false;"><img class="community_icon" src="../img/plusicon.png" alt=""></a>

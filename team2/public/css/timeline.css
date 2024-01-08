@@ -661,13 +661,16 @@ td {
     outline: none;
     border: none;
     height: 60px;
-    width: 100%;
+    border-radius: 30px;
+    padding-left: 30px;
+    width: 90%;
+    font-weight: 800;
+    background-color: #fcf5da;
     font-size: 1rem;
-    border: 0.5px solid #222222;
 }
 #UserInfoModify > input:focus {
+    color: #e96d04;
     background-color: #FFF8DC;
-    border: 0.5px solid #222222;
 }
 .mypage-btn-line-modify > .mypage-btn {
     width: 145px;
