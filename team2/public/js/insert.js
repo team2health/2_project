@@ -44,35 +44,54 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+let test = null; // 파일 저장용 전역변수
 
 function handleFileSelect(event) {
-    
-    const files = event.target.files;
-    
-    const container = document.getElementById('imageContainer');
-
-    for (const file of files) {
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'insert_img';
-
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.type = 'button';
-        deleteButton.textContent = '삭제';
-        deleteButton.addEventListener('click', function() {
-            // 이미지 및 해당 버튼 제거
-            imageContainer.remove();
-        });
-
-        imageContainer.appendChild(img);
-        imageContainer.appendChild(deleteButton);
-
-        container.appendChild(imageContainer);     
+    if(!test) {
+        // 1번째 파일일 경우 초기 데이터 셋팅
+        test = event.target.files;
+    } else {
+        // 2번째 이후 파일일 경우 추가처리
+        const dataTranster = new DataTransfer();
+        // 기존 데이터 추가
+        for (let i = 0; i < test.length; i++) {
+            dataTranster.items.add(test[i]);
+        }
+        // 새로운 파일 추가
+        dataTranster.items.add(event.target.files[0]);
+        // 전역변수에 저장
+        test = dataTranster.files;
+    //     const fileInput = document.getElementById('fileInput1');
+    // fileInput.files = test;
     }
+}
+    // const files = event.target.files;
     
- }
+    // const container = document.getElementById('imageContainer');
+
+    // for (const file of files) {
+
+    //     const imageContainer = document.createElement('div');
+    //     imageContainer.className = 'insert_img';
+
+    //     const img = document.createElement('img');
+    //     img.src = URL.createObjectURL(file);
+
+    //     const deleteButton = document.createElement('button');
+    //     deleteButton.type = 'button';
+    //     deleteButton.textContent = '삭제';
+    //     deleteButton.addEventListener('click', function() {
+    //         // 이미지 및 해당 버튼 제거
+    //         imageContainer.remove();
+    //     });
+
+    //     imageContainer.appendChild(img);
+    //     imageContainer.appendChild(deleteButton);
+
+    //     container.appendChild(imageContainer);     
+    // }
+    
+//  }
  
 // document.addEventListener('DOMContentLoaded', function() {
 //     // 기존 이미지 미리보기 및 삭제 기능 추가

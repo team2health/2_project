@@ -144,7 +144,7 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {      
-        
+        // dd($request);
         // dd($request->all());
         if(!Auth::check()){
             return redirect()->route('login.get');
@@ -179,7 +179,7 @@ class BoardController extends Controller
         Log::info('이미지가 전송되었습니다.');
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasFile('board_img')) {
-            // dd($request->file('board_img'));
+            dd($request->file('board_img'));
             // 업로드된 이미지들을 가져옵니다.
             $images = $request->file('board_img'); 
             // $boardImage = [];
