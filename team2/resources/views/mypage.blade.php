@@ -36,7 +36,7 @@
                             <span class="user-info-btn-chk" onclick="nameChange(); return false;" id="name-info-btn"> 닉네임 중복 확인 </span>
                             <input type="text" id="usermodifyname" name="user_name" value="{{$user_info[0]->user_name}}">
                             <div class="mypage-btn-line-modify">
-                                <button type="submit" class="mypage-btn mpb-modify">수정완료</button>
+                                <button type="button" class="mypage-btn mpb-modify" onclick="userinfoupdate(); return false;">수정완료</button>
                             </div>
                         </div>
                     </form>
