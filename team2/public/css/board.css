@@ -772,12 +772,16 @@ a .a-bordergo-hover:hover {
     display: inline-block;
     position: relative;
 } 
-
+.dropdown-content {
+    border-radius: 20px;
+}
 .category_font_hover:hover {
     font-weight: 900;
     color: #FF9900;
 }
-
+/* .dropdown-content div:a {
+    background-color: #4CAF50;
+} */
 .dropdown-content {
     display: none;
     position: absolute;
