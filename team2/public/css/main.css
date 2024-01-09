@@ -877,6 +877,33 @@ button {
 
 /* ------------------------------- */
 
+.test {
+	display: none;
+}
+
+.test1 {
+	display: inline-block;
+    width: 100px;
+    height: 50px;
+    background-color: #e2e2e2;
+    border-radius: 15px;
+    line-height: 50px;
+	cursor: pointer;
+}
+
+.test1:hover {
+	background-color: #3331ba;
+	color: #fff;
+}
+
+input:checked + label{
+    background-color: #3331ba;
+	color: #fff;
+}
+
+
+/* ------------------------------- */
+
 .main-body-front-back {
 	display: inline-block;
 	border: 3px solid #2C2B71;

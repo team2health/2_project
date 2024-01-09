@@ -5,7 +5,7 @@
 @section('main')
 <main class="wrapper">
 	<div class="container" id="part-display">
-		<div style="color: #2C2B71" class="text-center bc-purple">
+		<div style="color: #2C2B71" class="text-center bc-purple" id="partChkContainer">
 			<br>
 			<div><span class="text-part" id="partSelect">#부위</span>을/를 선택해 주세요</div>
 			<br>
@@ -130,6 +130,17 @@
 				<div class="main-body-front-back" id="body-back" onclick="bodyChkBack(); return false;">후면</div>
 			</div>
 			<br>
+		</div>
+		<div style="color: #2C2B71" class="text-center bc-purple" id="symptomChkContainer">
+			<br>
+			<div><span class="text-part">#증상</span>을/를 선택해 주세요</div>
+			<br>
+			<form action="" id="symptomChkbox">
+				<input type="checkbox" name="test" id="test" class="test">
+				<label for="test" class="test1">두통</label>
+				<input type="checkbox" name="test" id="test1" class="test">
+				<label for="test1" class="test1">치통</label>
+			</form>
 		</div>
 	</div>
 <br><br><br>
