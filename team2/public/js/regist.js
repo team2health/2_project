@@ -46,7 +46,7 @@ function sample4_execDaumPostcode() {
 }
 
 let USERNAME = document.getElementById('user_name');
-let USERID = document.getElementById('user_email');
+// let USERID = document.getElementById('user_email');
 let USERPASSWORD = document.getElementById('user_password');
 let USERPASSWORDCHECK = document.getElementById('user_password_check');
 // let USERADRESSF = document.getElementById('sample4_roadAddress');
@@ -79,23 +79,23 @@ USERNAME.addEventListener('input', function() {
 	}
 });
 
-USERID.addEventListener('input', function() {
-    const value = USERID.value;
+// USERID.addEventListener('input', function() {
+//     const value = USERID.value;
 
-	inputCheckBtn[1].disabled = false;
-	inputCheckBtn[1].classList.replace('input-check-end', 'input-check');
+// 	inputCheckBtn[1].disabled = false;
+// 	inputCheckBtn[1].classList.replace('input-check-end', 'input-check');
 
-	if(inputCheckId == value) {
-		inputCheckBtn[1].disabled = true;
-		inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
-	}
+// 	if(inputCheckId == value) {
+// 		inputCheckBtn[1].disabled = true;
+// 		inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
+// 	}
 	
-    if (!regex2.test(value)) {
-        ERRORID.removeAttribute('class');
-    } else {
-		ERRORID.setAttribute('class', 'not-error-id');
-	}
-});
+//     if (!regex2.test(value)) {
+//         ERRORID.removeAttribute('class');
+//     } else {
+// 		ERRORID.setAttribute('class', 'not-error-id');
+// 	}
+// });
 
 USERPASSWORDCHECK.addEventListener('input', function() {
     const value = USERPASSWORD.value;

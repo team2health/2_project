@@ -64,7 +64,7 @@
                         <form action="/userinfoupdate" class="user-info-modify" method="POST" enctype="multipart/form-data">
                             @csrf
                                 <label class="mypage-info-label">아이디</label>
-                                <div class="user-now-address">{{$user_info[0]->user_id}}</div>
+                                <div class="user-now-address">{{$user_info[0]->user_email}}</div>
                                 <label class="mypage-info-label">우편번호</label>
                                 <div class="user-now-address">{{$user_info[0]->user_address_num}}</div>
                                 <label class="mypage-info-label">현재 주소지</label>

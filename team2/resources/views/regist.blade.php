@@ -167,7 +167,7 @@
 
 			<p style="width: 60px;" class="ptag">아이디</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
 			<div class="input-div-box">
-				<input type="text" class="login-input-short" name="user_email" id="user_email">
+				<input type="email" class="login-input-short" name="user_email" id="user_email">
 				<button type="button" class="input-check" onclick="checkId(); return false;">아이디 확인</button>
 			{{-- @if (isset($idError))
 			<input type="hidden" id="idError" value="{{$idError}}">
