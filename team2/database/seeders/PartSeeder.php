@@ -35,6 +35,10 @@ class PartSeeder extends Seeder
             , ['part_id' => 17, 'part_name' => '종아리']
             , ['part_id' => 18, 'part_name' => '발목']
             , ['part_id' => 19, 'part_name' => '발']
+            , ['part_id' => 20, 'part_name' => '등']
+            , ['part_id' => 21, 'part_name' => '팔꿈치']
+            , ['part_id' => 22, 'part_name' => '허리']
+            , ['part_id' => 23, 'part_name' => '엉덩이']
         ]);
     }
 }
