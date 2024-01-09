@@ -27,97 +27,120 @@ function setPageName () {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='마이페이지';
         footericondiv[3].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
     } else if(currentPath == '/login') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='로그인';
         footericondiv[3].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
     } else if(currentPath == '/regist') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='회원가입';
         footericondiv[3].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
     }else if(boardcategory1.test(currentPath)) {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='자유게시판';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(boardcategory2.test(currentPath)) {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='친목게시판';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(boardcategory3.test(currentPath)) {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='정보게시판';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(boardcategory4.test(currentPath)) {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='질문게시판';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath === '/boardcategory/1') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='자유게시판';
-        headerMainDiv.style.display = 'none';
+        footericondiv[1].classList.remove('footer-icon-div-opacity');
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath === '/boardcategory/2') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='친목게시판';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath === '/boardcategory/3') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='정보게시판';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath === '/boardcategory/1') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='질문게시판';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     }else if(currentPath == '/favoriteboard') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='관심태그 게시글';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(boardNum.test(currentPath)) {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='상세내용';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath == '/lastboard') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='게시글 내용';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath == '/categoryboard') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='카테고리';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath == '/timeline') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='타임라인';
         footericondiv[2].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath == '/hotboard') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='핫게시글';
         footericondiv[1].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
+        window.onresize = function () {
+            headerCategoryShow();
+        };
     } else if(currentPath == '/') {
         footericondiv[0].classList.remove('footer-icon-div-opacity');
-        headerMainDiv.style.display = 'none';
     } else if(currentPath == '/board') {
         footericondiv[1].classList.remove('footer-icon-div-opacity');
     } else if(currentPath == '/firstchkpassword') {
         footericondiv[3].classList.remove('footer-icon-div-opacity');
         headerPageName.innerHTML='';
         headerPageName.innerHTML='비밀번호 변경';
-        headerMainDiv.style.display = 'none';
     }
 }
 
