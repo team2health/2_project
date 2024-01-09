@@ -395,34 +395,75 @@ function partSelect(index) {
 	PARTCHKCONTAINER.style.display = 'none';
 	SYMPTOMCHKCONTAINER.style.display = 'block';
 
-	// let formData = new FormData();
-	// formData.append('part_id', index);
+	let formData = new FormData();
+	formData.append('part_id', index);
 
-	// fetch('/partselect', {
-	// 	method: 'POST',
-	// 	body: formData,
-	// })
-	// .then(response => response.json())
-	// .then(data => {
-	// 	let SYMPTOMINPUT = [];
-	// 	let SYMPTOMLABEL = [];
-		
-	// 	for(let i = 0; i < data.length; i++) {
-	// 		let SYMPTOMBOX = document.getElementById('symptomChkContainer');
-	// 		SYMPTOMINPUT[i] = document.createElement('input');
-	// 		SYMPTOMLABEL[i] = document.createElement('label');
-	// 		SYMPTOMINPUT[i].type = 'checkbox';
-	// 		SYMPTOMINPUT[i].name = 'symptomchk';
-	// 		SYMPTOMLABEL[i].value = data[i].part_symptom_id;
+	fetch('/partselect', {
+		method: 'POST',
+		body: formData,
+	})
+	.then(response => response.json())
+	.then(data => {
+		let SYMPTOMBOX = document.getElementById('symptomChkbox');
+		let SYMPTOMINPUT = [];
+		let SYMPTOMLABEL = [];
+	
+		for(let i = 0; i < data[0].length; i++) {
+			SYMPTOMINPUT[i] = document.createElement('input');
+			SYMPTOMLABEL[i] = document.createElement('label');
+			SYMPTOMINPUT[i].type = 'checkbox';
+			SYMPTOMINPUT[i].name = 'symptom_id';
+			SYMPTOMINPUT[i].id = 'symptomchk'+[i];
+			SYMPTOMINPUT[i].classList = 'symptomchk-input';
+			SYMPTOMINPUT[i].value = data[0][i].part_symptom_id;
+			SYMPTOMLABEL[i].innerHTML = data[0][i].symptom_name;
+			SYMPTOMLABEL[i].setAttribute('for', 'symptomchk'+[i]);
+			SYMPTOMLABEL[i].classList = 'symptomchk-label';
 
-	// 		SYMPTOMBOX.appendChild(SYMPTOMINPUT[i]);
-	// 		SYMPTOMBOX.appendChild(SYMPTOMLABEL[i]);
-	// 		SYMPTOMINPUT[i].innerHTML = data[i].symptom_name;
-	// 	}
-	// })
-	// .catch(error => {
-	// 	console.error('오류 발생:', error);
-	// })
+			SYMPTOMBOX.appendChild(SYMPTOMINPUT[i]);
+			SYMPTOMBOX.appendChild(SYMPTOMLABEL[i]);
+		}
+
+		let INPUTHIDDEN = document.createElement('input');
+		let SYMPTOMBTNBOX = document.createElement('div');
+		let SYMPTOMBTN = document.createElement('button');
+		SYMPTOMBOX.appendChild(INPUTHIDDEN);
+		INPUTHIDDEN.type = 'hidden';
+		INPUTHIDDEN.value = data[1];
+		INPUTHIDDEN.id = 'hiddenPartId';
+		SYMPTOMBTNBOX.classList = 'symptom-button-box';
+		SYMPTOMBOX.appendChild(SYMPTOMBTNBOX);
+		SYMPTOMBTNBOX.appendChild(SYMPTOMBTN);
+		SYMPTOMBTN.innerHTML = '검사하기';
+		SYMPTOMBTN.classList = 'symptom-button';
+		SYMPTOMBTN.type = 'button';
+		SYMPTOMBTN.setAttribute('onclick', 'symptomChk()');
+
+	})
+	.catch(error => {
+		console.error('오류 발생:', error);
+	})
+}
+
+function symptomChk() {
+	let checkboxes = document.querySelectorAll('input[name="symptom_id"]:checked');
+	let values = Array.from(checkboxes).map(checkbox => checkbox.value);
+	let HIDDENPARTID = document.getElementById('hiddenPartId').value;
+
+	fetch('/symptomselect', {
+		method: 'POST',
+		body: JSON.stringify({ symptom_id: values, part_id:  HIDDENPARTID}),
+		headers: {
+		'Content-Type': 'application/json'
+    }
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	})
+	.catch(error => {
+		console.error(error.stack);
+	})
 }
 
 // function mapopen(disease_id, user_id) {
