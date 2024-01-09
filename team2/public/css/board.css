@@ -628,7 +628,7 @@ li{
 }
 
 .community_tag_container{
-    width: 60vw;
+    /* width: 60vw; */
     margin: 0 auto;
 }
 .community-favorite-show {

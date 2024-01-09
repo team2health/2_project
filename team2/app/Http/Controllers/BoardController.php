@@ -176,15 +176,17 @@ class BoardController extends Controller
             $board->save();
         }     
         
-        Log::info('이미지가 전송되었습니다.');
+        Log::debug($request);
+        // dd($request->board_img);
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
-        if ($request->hasFile('board_img')) {
-            dd($request->file('board_img'));
+        if ($request->hasfile('images')) {
+            // Log::debug($request->hasfile('images'));
             // 업로드된 이미지들을 가져옵니다.
-            $images = $request->file('board_img'); 
-            // $boardImage = [];
+            $images = $request->file('images'); 
+            // Log::debug($images);
+            $boardImage = [];
             // dd($images); 
-            
+            // Log::debug($boardImage);
             foreach ($images as $image) {
                 //dd($image);
                 // UUID와 원본 파일 확장자를 사용하여 고유한 이미지 이름을 생성합니다.                
@@ -195,9 +197,9 @@ class BoardController extends Controller
                 $boardImage[]= (['img_address' => $imageName]);
                 // dd($boardImage);
                  // 현재 게시글과 이미지를 연결하고 저장합니다. 모델끼리 연결해 주어야 함
-                 
+                //  Log::debug($boardImage);
             }
-            // return response()->json(['success' => '이미지가 성공적으로 저장되었습니다.']);
+            //  return response()->json([$boardImage]);
                 
             $board->images()->createMany($boardImage);
             
