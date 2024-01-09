@@ -72,8 +72,8 @@
 			<div class="front-part-box" id="front-part-chk">
 				<img class="front-detail" src="/img/front-detail.png" usemap="#frontpartchk" alt="">
 				<map name="frontpartchk">
-					<area onclick="partSelect(10); return false;" onmouseover="on_mouse_front(1); return false;" onmouseout="off_mouse_front(1); return false;" shape="poly" coords="241,94,232,97,214,104,207,112,205,128,205,142,209,157,219,170,238,186,256,194,279,197,292,187,292,157,288,126,271,103,244,94,243,94" href=""/>
-					<area onclick="partSelect(11); return false;" onmouseover="on_mouse_front(2); return false;" onmouseout="off_mouse_front(2); return false;" shape="poly" coords="161,61,148,64,134,73,124,84,114,96,108,105,103,122,98,137,94,152,92,170,90,183,90,196,90,207,91,213,93,225,95,235,97,242,100,250,106,259,116,263,131,263,142,258,157,249,171,240,180,232,190,223,196,213,197,201,195,192,191,181,187,173,188,160,187,137,184,121,182,100,182,87,182,69,177,60,164,59" href=""/>
+					<area onclick="partSelect(11); return false;" onmouseover="on_mouse_front(1); return false;" onmouseout="off_mouse_front(1); return false;" shape="poly" coords="241,94,232,97,214,104,207,112,205,128,205,142,209,157,219,170,238,186,256,194,279,197,292,187,292,157,288,126,271,103,244,94,243,94" href=""/>
+					<area onclick="partSelect(10); return false;" onmouseover="on_mouse_front(2); return false;" onmouseout="off_mouse_front(2); return false;" shape="poly" coords="161,61,148,64,134,73,124,84,114,96,108,105,103,122,98,137,94,152,92,170,90,183,90,196,90,207,91,213,93,225,95,235,97,242,100,250,106,259,116,263,131,263,142,258,157,249,171,240,180,232,190,223,196,213,197,201,195,192,191,181,187,173,188,160,187,137,184,121,182,100,182,87,182,69,177,60,164,59" href=""/>
 				</map>
 
 				<img id="partchk-front-heart" class="partchk-front-heart" src="/img/heart.png" alt="">
