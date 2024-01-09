@@ -26,11 +26,11 @@ function loginonload() {
 LOGINUSERID.addEventListener('input', function() {
     const value = LOGINUSERID.value;
 
-    if (!regex.test(value)) {
-        ERRORLOGINID.removeAttribute('class');
-    } else {
+    // if (!regex.test(value)) {
+    //     ERRORLOGINID.removeAttribute('class');
+    // } else {
 		ERRORLOGINID.setAttribute('class', 'not-error-id');
-	}
+	// }
 });
 
 function logingo() {

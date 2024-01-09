@@ -30,21 +30,35 @@ class UserController extends Controller
 
     public function registpost(Request $request) {
 
-        // $data = $request->only('user_email', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
-        $data = array (
-            'user_email' => 'team2',
-            'user_name' => 'team2',
-            'user_password' => 'team2',
-            'birthday' => '20000101',
-            'user_address_num' => '06517',
-            'user_address' => '서울 서초구 나루터로 15',
-            'user_address_detail' => NULL,
-            'user_gender' => '1',
-            'agreement_flg' => '1',
-        );
+        Log::debug($request);
 
-        $data['user_password'] = Hash::make($data['user_password']);
-        $result = User::create($data);
+        
+        $data = $request->only('user_email', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
+
+        $user_email = $request->user_email;
+        $user_name = $request->user_name;
+        $user_password = Hash::make($request->user_password);
+        $user_address_num = $request->user_address_num;
+        $user_address = $request->user_address;
+        $user_address_detail = $request->user_address_detail;
+        $user_gender = $request->user_gender;
+        $agreement_flg = $request->agreement_flg;
+        $user_gender = $request->user_gender;
+        $birthday = $request->birth_year.$request->birth_month.$request->birth_date;
+
+        $result = User::create([
+            'user_email' => $user_email,
+            'user_name' => $user_name,
+            'user_password' => $user_password,
+            'user_address_num' => $user_address_num,
+            'user_address' => $user_address,
+            'user_address_detail' => $user_address_detail,
+            'user_gender' => $user_gender,
+            'agreement_flg' => '1',
+            'email_verified_at' => '1',
+            'birthday' => $birthday,
+        ]);
+
         return redirect()->route('login.get');
     }
 
