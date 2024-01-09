@@ -4,12 +4,24 @@ function toggleDropdown() {
 window.addEventListener('load', function() {
     setPageName(); //일주일을 불러오는 함수
 });
+
+allHeaderDisplayNone();
+
 // 푸터 아이콘 opacity
 let footericondiv = document.querySelectorAll('.footer-icon-div');
 
 // function toggleDropdown2() {
 //     document.getElementById("myDropdown2").classList.toggle("show");
 // }
+
+let searchHealth = document.getElementById('searchHealth');
+let headerComunityHome = document.getElementById('headerComunityHome');
+let headerCategory = document.getElementById('headerCategory'); 
+let myDropdown = document.getElementById('myDropdown');
+let headerLastBoard = document.getElementById('headerLastBoard'); 
+let headerHotBoard = document.getElementById('headerHotBoard');
+let headerFavoriteBoard = document.getElementById('headerFavoriteBoard');
+
 
 // 페이지 이름 세팅
 function setPageName () {
@@ -27,6 +39,11 @@ function setPageName () {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='마이페이지';
         footericondiv[3].classList.remove('footer-icon-div-opacity');
+            
+        window.onresize = function () {
+            allHeaderDisplayNone();
+        };
+
     } else if(currentPath == '/login') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='로그인';
@@ -124,8 +141,9 @@ function setPageName () {
         headerPageName.innerHTML='타임라인';
         footericondiv[2].classList.remove('footer-icon-div-opacity');
         window.onresize = function () {
-            headerCategoryShow();
+            allHeaderDisplayNone();
         };
+        
     } else if(currentPath == '/hotboard') {
         headerPageName.innerHTML='';
         headerPageName.innerHTML='핫게시글';
@@ -134,9 +152,18 @@ function setPageName () {
             headerCategoryShow();
         };
     } else if(currentPath == '/') {
+        allHeaderDisplayBlock();
         footericondiv[0].classList.remove('footer-icon-div-opacity');
+        searchHealth.style.display = 'none';
+        myDropdown.style.display = 'none';
+        headerCategory.style.display = 'none';
+        headerLastBoard.style.display = 'none';
+        headerHotBoard.style.display = 'none';
+        headerFavoriteBoard.style.display = 'none';
     } else if(currentPath == '/board') {
         footericondiv[1].classList.remove('footer-icon-div-opacity');
+        allHeaderDisplayBlock();
+        headerComunityHome.style.display = 'none';
     } else if(currentPath == '/firstchkpassword') {
         footericondiv[3].classList.remove('footer-icon-div-opacity');
         headerPageName.innerHTML='';
@@ -155,6 +182,18 @@ function headerCategoryShow() {
         searchHealth.style.display = 'none';
         headerComunityHome.style.display = 'none';
     }
+}
+
+function allHeaderDisplayNone() {
+    let headerMainDiv = document.getElementById('headerMainDiv');
+    if (window.innerWidth < 800 ) {
+        headerMainDiv.style.display = 'none';
+    } else {
+        headerMainDiv.style.display = ''; // 윈도우 크기가 800 이상일 때 다시 표시
+    }
+}
+function allHeaderDisplayBlock() {
+    headerMainDiv.style.display = 'block';
 }
 
 // 뒤로가기

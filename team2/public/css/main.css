@@ -24,17 +24,7 @@ a {
 .gohome:hover {
 	background-color: #fdf5e3;
 }
-footer {
-	position: absolute;
-	bottom: 0;
-}
-/* .footer {
-	background-color: #dedede;
-	height: 50px;
-	width: 100vw;
-	text-align: center;
-	line-height: 50px;
-} */
+
 
 button {
 	border: none;
@@ -449,7 +439,7 @@ button {
 	cursor: pointer;
 }
 .header-btn1:hover {
-	background-color: #d6d5ff;
+	background-color: #ebebed;
 	border-radius: 10px;
 }
 .header-community-nav, .pc-header-button-main {
@@ -479,7 +469,7 @@ button {
 
 .header-community-container-mini {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     position: relative;
     width: 100%;
 }
@@ -954,7 +944,7 @@ button {
         display: none;
     }
 	
-	.header-community-nav {
+	.header-community-nav, .header-community-container-mini a{
 		border: 1px solid #c9c9c9;
 		padding: 10px;
 		border-radius: 50px;

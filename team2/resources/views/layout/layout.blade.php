@@ -18,9 +18,10 @@
 
 		@include('layout.header')
 		@yield('main')
-		@include('layout.footer')
-		</div>
 	</div>
+</div>
+@include('layout.section')
+@include('layout.footer')
 	
 	<script src="/js/common.js"></script>
 </body>
