@@ -1,9 +1,13 @@
 <header>
-		<div class="header-community-container">
-			<div class="header-community-container-mini">
-				<a href="{{route('main.get')}}" class="pc-header-button-main">증상검색</a>
-				@if (request()->path() === 'board')
-				<a class="cate_btn header-community-nav" onclick="toggleDropdown()" id="headerCategory">카테고리</a>
+		<div class="header-community-container" id="headerMainDiv">
+			<div class="header-community-container-mini" id="headerThirdDiv">
+				<a class="header-btn1" href="{{route('main.get')}}" id="searchHealth" class="pc-header-button-main">증상검색</a>
+				{{-- @if (request()->path() === 'board' || request()->path() === 'lastboard'
+					|| request()->path() === 'hotboard' || request()->path() === 'favoriteboard') --}}
+					{{-- @if (request()->path() !== 'board') --}}
+				<a class="header-btn1" id="headerComunityHome" href="{{route('board.index')}}" class="header-community-nav">커뮤니티</a>
+					{{-- @endif --}}
+				<a class="header-btn1 cate_btn header-community-nav" onclick="toggleDropdown(); return false;" id="headerCategory">카테고리</a>
 				<div class="dropdown-content" id="myDropdown">
 					<form method="get" id="category_id_form">
 						@csrf
@@ -13,18 +17,15 @@
 							<div class="board-mouse-cursor" onclick="showBoard(4); return false;">질문게시판</div>
 					</form>
 				</div>
-				<a href="{{route('lastboard.get')}}" class="header-community-nav">최신글</a>
-				<a href="{{route('hotboard.get')}}" class="header-community-nav">인기글</a>
-				<a href="{{route('favoriteboard.get')}}" class="header-community-nav">관심태그</a>
-				@endif
-				@if (request()->path() !== 'board')
-				<a href="{{route('board.index')}}" class="header-community-nav">커뮤니티</a>
-				@endif
+				<a class="header-btn1" href="{{route('lastboard.get')}}" class="header-community-nav" id="headerLastBoard">최신글</a>
+				<a class="header-btn1" href="{{route('hotboard.get')}}" class="header-community-nav" id="headerHotBoard">인기글</a>
+				<a class="header-btn1" href="{{route('favoriteboard.get')}}" class="header-community-nav" id="headerFavoriteBoard">관심태그</a>
+				{{-- @endif --}}
+				{{-- <div class="header-mypage-timeline-box" id="headerSecondDiv"> --}}
+					<a class="header-mypage-timeline-box" href="{{route('todaytimeline.get')}}" class="pc-header-button-mypage">타임라인</a>
+					<a  class="header-mypage-timeline-box" href="{{route('mypage.get')}}" class="pc-header-button-mypage">마이페이지</a>
 			</div>
-			<div class="header-mypage-timeline-box">
-				<a href="{{route('todaytimeline.get')}}" class="pc-header-button-mypage">타임라인</a>
-				<a href="{{route('mypage.get')}}" class="pc-header-button-mypage">마이페이지</a>
-			</div>
+
 		</div>
 
 	@if (Str::contains(request()->url(), 'login') || Str::contains(request()->url(), 'regist')
@@ -37,5 +38,6 @@
 		<div class="header-mobile-backBtn" onclick="goBack(); return false;"> < </div>
 		<div class="header-pageName" id="headerPageName"></div>
 	</div>
+</div>
 	@endif
 </header>

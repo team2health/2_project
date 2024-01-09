@@ -189,6 +189,7 @@ td {
 @media screen and (max-width: 800px) {
     /* 임시 - 수정예정 */
     #timelineMain {
+        height: 120vw;
         overflow: hidden;
     }
     .mypage-second {

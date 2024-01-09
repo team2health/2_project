@@ -115,7 +115,7 @@
                 </div>
                     <div class="mypage-myInfo-third mypage-display-none" id="mypageMyInfoThird">
                         <div class="tab">
-                            <div class="mypage-myProfile-btn">
+                            <div class="mypage-myProfile-btn" onclick="myprofileChange(); return false;">
                                 <div class="mypage-myProfile-img" style="background-image: url(/user_img/{{$user_info[0]->user_img}});"></div>
                                 <div class="mypage-myProfile-btn-name">{{$user_info[0]->user_name}}</div>
                             </div>

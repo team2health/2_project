@@ -20,17 +20,16 @@ class MainController extends Controller
         return view('main')->with('part', $result);
     }
 
-    public function partselectget($id) {
-        // dd($id);
-        // $part_id = $request->part_id;
+    public function partselectpost(Request $request) {
+        $part_id = $request->part_id;
         
-        // $result = Part_symptom::join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
-        //     ->select('symptoms.symptom_name', 'part_symptoms.part_symptom_id')
-        //     ->where('part_symptoms.part_id', $part_id)
-        //     ->orderby('symptoms.symptom_id', 'asc')
-        //     ->get();
+        $result = Part_symptom::join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
+            ->select('symptoms.symptom_name', 'part_symptoms.part_symptom_id')
+            ->where('part_symptoms.part_id', $part_id)
+            ->orderby('symptoms.symptom_id', 'asc')
+            ->get();
 
-        //     return response()->json($result);
+        return response()->json($result);
     }
 
     // public function symptomselectpost(Request $request) {
@@ -55,17 +54,17 @@ class MainController extends Controller
     //         return response()->json($result);
     // }
     
-    public function useraddresspost(Request $request) {
+    // public function useraddresspost(Request $request) {
 
-        $user_id = $request->user_id;
-        $disease_id = $request->disease_id;
+    //     $user_id = $request->user_id;
+    //     $disease_id = $request->disease_id;
 
-        $result[] = User::where('id', $user_id)->get();
-        $result[] = Disease_diagnosis::join('diagnoses', 'disease_diagnoses.diagnosis_id', '=', 'diagnoses.diagnosis_id')
-            ->select('diagnoses.diagnosis_name')
-            ->where('disease_diagnoses.disease_id', $disease_id)
-            ->get();
+    //     $result[] = User::where('id', $user_id)->get();
+    //     $result[] = Disease_diagnosis::join('diagnoses', 'disease_diagnoses.diagnosis_id', '=', 'diagnoses.diagnosis_id')
+    //         ->select('diagnoses.diagnosis_name')
+    //         ->where('disease_diagnoses.disease_id', $disease_id)
+    //         ->get();
 
-        return response()->json($result);
-    }
+    //     return response()->json($result);
+    // }
 }

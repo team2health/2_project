@@ -7,7 +7,6 @@ window.addEventListener('load', function() {
 window.addEventListener('load', function() {
     dateScrollbar(); //일주일 스크롤을 설정하는 함수
 });
-
 window.addEventListener('load', function() {
     showRecordToday();
 });
