@@ -90,11 +90,11 @@ USERID.addEventListener('input', function() {
 		inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
 	}
 	
-    if (!regex2.test(value)) {
-        ERRORID.removeAttribute('class');
-    } else {
-		ERRORID.setAttribute('class', 'not-error-id');
-	}
+    // if (!regex2.test(value)) {
+    //     ERRORID.removeAttribute('class');
+    // } else {
+	// 	ERRORID.setAttribute('class', 'not-error-id');
+	// }
 });
 
 USERPASSWORDCHECK.addEventListener('input', function() {
@@ -149,12 +149,18 @@ const birthMonthEl = document.querySelector('#birth-month')
 isMonthOptionExisted = false;
 birthMonthEl.addEventListener('focus', function () {
   // year 목록 생성되지 않았을 때 (최초 클릭 시)
-	if(!isYearOptionExisted) {
+	if(!isMonthOptionExisted) {
 		isMonthOptionExisted = true
+		let day;
 		for(var i = 1; i <= 12; i++) {
 		// option element 생성
 			const MonthOption = document.createElement('option');
-			MonthOption.setAttribute('value', i);
+			if(i<10) {
+				day = "0" + i;
+			} else {
+				day = i;
+			}
+			MonthOption.setAttribute('value', day);
 			MonthOption.innerText = i;
 		// birthMonthEl의 자식 요소로 추가
 			this.appendChild(MonthOption);
@@ -168,12 +174,19 @@ const birthDateEl = document.querySelector('#birth-day')
 isDateOptionExisted = false;
 birthDateEl.addEventListener('focus', function () {
   // year 목록 생성되지 않았을 때 (최초 클릭 시)
-	if(!isYearOptionExisted) {
-		isDateOptionExisted = true
+	if(!isDateOptionExisted) {
+		isDateOptionExisted = true;
+		
+		let date;
 		for(var i = 1; i <= 31; i++) {
 		// option element 생성
+			if(i<10) {
+				date = "0" + i;
+			} else {
+				date = i;
+			}
 			const DayOption = document.createElement('option');
-			DayOption.setAttribute('value', i);
+			DayOption.setAttribute('value', date);
 			DayOption.innerText = i
 		// birthMonthEl의 자식 요소로 추가
 			this.appendChild(DayOption);
@@ -202,16 +215,13 @@ function registgo() {
         alert('사용 중인 닉네임입니다.\n닉네임을 다시 입력해주세요.');
         return false;
     } else if(USERIDVALUE === '') {
-		alert('아이디는 필수사항입니다.');
+		alert('이메일은 필수사항입니다.');
 		return false;
 	} else if(idchkflg === 0) {
-		alert('아이디 중복확인을 해주세요.');
+		alert('이메일 중복확인을 해주세요.');
 		return false;
-	} else if(!regex2.test(USERIDVALUE)) {
-		alert('아이디를 다시 확인해주세요.');
-		return false;
-	}  else if(idFlg === 1) {
-        alert('사용 중인 아이디입니다.\n아이디를 다시 입력해주세요.');
+	} else if(idFlg === 1) {
+        alert('사용 중인 이메일입니다.\n이메일을 다시 입력해주세요.');
         return false;
     } else if(USERPASSWORDVALUE === '') {
 		alert('비밀번호는 필수사항입니다.');
@@ -277,12 +287,13 @@ function checkId() {
 	let idChk = document.getElementById('user_email').value;
 
 	if(idChk === '') {
-		alert('아이디를 입력해주세요');
+		alert('이메일을 입력해주세요');
 		return false;
-	} else if(!regex2.test(idChk)) {
-		alert('사용할 수 없는 아이디입니다.');
-		return false;
-	}
+	} 
+	// else if(!regex2.test(idChk)) {
+	// 	alert('사용할 수 없는 이메일입니다.');
+	// 	return false;
+	// }
 
 	const formData = new FormData();
 	formData.append('user_email', idChk);
@@ -293,13 +304,13 @@ function checkId() {
 	.then(response => response.json())
 	.then(data => {
 		if(data['idChk'] === '0') {
-			alert('사용가능한 아이디 입니다.');
+			alert('사용가능한 이메일 입니다.');
 			inputCheckBtn[1].disabled = true;
 			inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
 			inputCheckId = idChk;
 			idFlg = 0;
 		} else if(data['idChk'] === '1') {
-			alert('사용할 수 없는 아이디 입니다.');
+			alert('사용할 수 없는 이메일 입니다.');
 			idFlg = 1;
 		}
 	})

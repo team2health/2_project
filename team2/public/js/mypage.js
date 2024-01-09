@@ -816,6 +816,10 @@ function myprofileChange() {
     deleteMypageBtnAll();
     let mypageProfileChange = document.getElementById('mypageProfileChange');
     let mypageGap3 = document.getElementById('mypageGap3');
+    let mypageMyInfoThird = document.getElementById('mypageMyInfoThird');
+    if (!mypageMyInfoThird.classList.contains('mypage-display-none')) {
+        mypageMyInfoThird.classList.add('mypage-display-none');
+    }
     mypageProfileChange.classList.remove('mypage-display-none');
     mypageGap3.classList.remove('mypage-display-none');
 }

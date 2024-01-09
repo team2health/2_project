@@ -90,7 +90,7 @@ class MypageController extends Controller
         $user_info  = DB::table('users')
             ->select(
                 'id'
-                ,'user_id'
+                ,'user_email'
                 ,'user_name'
                 ,'user_address'
                 ,'user_address_num'
@@ -223,7 +223,7 @@ class MypageController extends Controller
     public function todaytimelineget(){
 
         $created_start = Carbon::now()->format('Y-m-d');
-        $user_id = session('id');
+        $user_email = session('id');
 
         $today_timeline = DB::table('symptoms')
         ->select(
@@ -234,7 +234,7 @@ class MypageController extends Controller
             ,'records.created_at'
         )
         ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
-        ->where('records.u_id', $user_id)
+        ->where('records.u_id', $user_email)
         ->where('records.created_at', 'like', $created_start.'%')
         ->where('records.deleted_at', null)
         ->get();
@@ -333,7 +333,7 @@ class MypageController extends Controller
             $user_info  = DB::table('users')
             ->select(
                 'id'
-                ,'user_id'
+                ,'user_email'
                 ,'user_name'
                 ,'user_address'
                 ,'user_address_num'
@@ -373,7 +373,7 @@ class MypageController extends Controller
     public function daytimelinepost(Request $request) {
 
         $created_at = $request->date;
-        $user_id = session('id');
+        $user_email = session('id');
 
         $timeline = DB::table('symptoms')
         ->select(
@@ -383,7 +383,7 @@ class MypageController extends Controller
             ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
         )
         ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
-        ->where('records.u_id', $user_id)
+        ->where('records.u_id', $user_email)
         ->where('records.created_at', 'like', $created_at.'%')
         ->where('records.deleted_at', null)
         ->get();

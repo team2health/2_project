@@ -11,7 +11,7 @@
 /* -------- lastboard -------- */
 
 .last_main{
-    width: 70vW;
+    width: 100%;
     margin: 10px auto;
 }
 .last_main a .last_container:hover, .last_main a .last_container:focus {
@@ -628,7 +628,7 @@ li{
 }
 
 .community_tag_container{
-    width: 60vw;
+    /* width: 60vw; */
     margin: 0 auto;
 }
 .community-favorite-show {
@@ -794,8 +794,7 @@ a .a-bordergo-hover:hover {
 .cate_btn {
     cursor: pointer;
 }
-
- .dropdown-content div {
+.dropdown-content div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -813,6 +812,8 @@ a .a-bordergo-hover:hover {
 
 .show {
     display: block;
+    position: absolute;
+    left: 20%;
 }
 
 

@@ -17,11 +17,25 @@
 * {
     font-family: 'NanumSquareRound';
 }
-
+header {
+    border-bottom: 1px solid #c9c9c9;
+}
+.body {
+    display: grid;
+    overflow: hidden;
+    justify-content: center;
+    min-height: 100vh
+}
+.body-sub {
+    max-width: 1000px;
+    overflow: hidden;
+    width: 100vw;
+}
 .header-mobile {
     background-color: #F9F9F9;
     height: 40px;
     position: relative;
+    display: none;
 }
 .header-mobile-backBtn {
     position: absolute;
@@ -41,8 +55,88 @@
     line-height: 40px;
     text-align: center;
 }
-@media screen and(max-width: 800px) {
-    .mobile-header {
-        display: none;
+
+
+/* footer */
+
+.footer-section {
+	/* position: absolute;
+	left: 0;
+	bottom: 0; */
+	margin-top: 50px;
+	margin-bottom: 70px;
+}
+.developer-info {
+	background-color: #2f2f2f;
+	height: 155px;
+	width: 100vw;
+	text-align: center;
+	line-height: 50px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    font-size: 0.8rem;
+    justify-items: center;
+    justify-content: center;
+}
+.developer1, .developer2, .developer3 {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.developer-info div div {
+    color: #c1c1c1;
+    font-weight: 100;
+    height: 20px;
+}
+.developer-info div div:first-child {
+    color: #dedede;
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.footer-gap {
+    border-bottom: 1px solid rgb(103, 103, 103);
+    margin: 35px 0;
+    width: 100%;
+    position: absolute;
+    top: 70px;
+}
+.copyright-info {
+    margin-top: 10px;
+    display: flex;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.copyright-info div:first-child {
+    margin-right: 13px;
+}
+
+@media screen and (max-width: 800px) {
+    .header-mobile {
+        display: block;
+    }
+}
+@media screen and (min-width: 800px) {
+    .footer-section {
+        margin-bottom: 0;
+    }
+}
+@media screen and (max-width: 800px) {
+    .developer-info {
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: 150px 150px 150px;
+        font-size: 0.7rem;
+        justify-items: center;
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .developer-info {
+        max-width: 100%;
     }
 }

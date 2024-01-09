@@ -16,49 +16,154 @@ class Part_symptomSeeder extends Seeder
     public function run()
     {
         DB::table('part_symptoms')->insert([
-            ['part_symptom_id' => '1', 'symptom_id' => '1', 'part_id' => '1'] // 머리 1
-            , ['part_symptom_id' => '2', 'symptom_id' => '2', 'part_id' => '1'] // 머리 1
-            , ['part_symptom_id' => '3', 'symptom_id' => '3', 'part_id' => '1'] // 머리 2
-            , ['part_symptom_id' => '4', 'symptom_id' => '30', 'part_id' => '1'] // 머리 8
-            , ['part_symptom_id' => '5', 'symptom_id' => '33', 'part_id' => '1'] // 머리 2
-            , ['part_symptom_id' => '6', 'symptom_id' => '4', 'part_id' => '2'] // 눈 3
-            , ['part_symptom_id' => '7', 'symptom_id' => '5', 'part_id' => '2'] // 눈 7
-            , ['part_symptom_id' => '8', 'symptom_id' => '6', 'part_id' => '2'] // 눈 6
-            , ['part_symptom_id' => '9', 'symptom_id' => '31', 'part_id' => '2'] // 눈 12
-            , ['part_symptom_id' => '10', 'symptom_id' => '32', 'part_id' => '2'] // 눈 4
-            , ['part_symptom_id' => '11', 'symptom_id' => '33', 'part_id' => '2'] // 눈 6
-            , ['part_symptom_id' => '12', 'symptom_id' => '34', 'part_id' => '2'] // 눈 5
-            , ['part_symptom_id' => '13', 'symptom_id' => '7', 'part_id' => '3'] // 코 8
-            , ['part_symptom_id' => '14', 'symptom_id' => '8', 'part_id' => '3'] // 코 8
-            , ['part_symptom_id' => '15', 'symptom_id' => '9', 'part_id' => '3'] // 코 8
-            , ['part_symptom_id' => '16', 'symptom_id' => '10', 'part_id' => '4'] // 입 9
-            , ['part_symptom_id' => '17', 'symptom_id' => '11', 'part_id' => '4'] // 입 9
-            , ['part_symptom_id' => '18', 'symptom_id' => '12', 'part_id' => '4'] // 입 10
-            , ['part_symptom_id' => '19', 'symptom_id' => '29', 'part_id' => '4'] // 입 25
-            , ['part_symptom_id' => '20', 'symptom_id' => '31', 'part_id' => '4'] // 입 12
-            , ['part_symptom_id' => '21', 'symptom_id' => '32', 'part_id' => '4'] // 입 11
-            , ['part_symptom_id' => '22', 'symptom_id' => '34', 'part_id' => '4'] // 입 25
-            , ['part_symptom_id' => '23', 'symptom_id' => '14', 'part_id' => '5'] // 귀 14
-            , ['part_symptom_id' => '24', 'symptom_id' => '15', 'part_id' => '5'] // 귀 15
-            , ['part_symptom_id' => '25', 'symptom_id' => '16', 'part_id' => '5'] // 귀 14
-            , ['part_symptom_id' => '26', 'symptom_id' => '13', 'part_id' => '6'] // 목 13
-            , ['part_symptom_id' => '27', 'symptom_id' => '30', 'part_id' => '6'] // 목 13
-            , ['part_symptom_id' => '28', 'symptom_id' => '22', 'part_id' => '8'] // 배 20
-            , ['part_symptom_id' => '29', 'symptom_id' => '23', 'part_id' => '8'] // 배 21
-            , ['part_symptom_id' => '30', 'symptom_id' => '24', 'part_id' => '8'] // 배 21
-            , ['part_symptom_id' => '31', 'symptom_id' => '25', 'part_id' => '8'] // 배 21
-            , ['part_symptom_id' => '32', 'symptom_id' => '26', 'part_id' => '8'] // 배 21
-            , ['part_symptom_id' => '33', 'symptom_id' => '27', 'part_id' => '8'] // 배 22
-            , ['part_symptom_id' => '34', 'symptom_id' => '28', 'part_id' => '8'] // 배 22
-            , ['part_symptom_id' => '35', 'symptom_id' => '35', 'part_id' => '8'] // 배 21
-            , ['part_symptom_id' => '36', 'symptom_id' => '17', 'part_id' => '9'] // 팔 16
-            , ['part_symptom_id' => '37', 'symptom_id' => '18', 'part_id' => '9'] // 팔 16
-            , ['part_symptom_id' => '38', 'symptom_id' => '19', 'part_id' => '9'] // 팔 17
-            , ['part_symptom_id' => '39', 'symptom_id' => '29', 'part_id' => '9'] // 팔 23
-            , ['part_symptom_id' => '40', 'symptom_id' => '20', 'part_id' => '10'] // 다리 18
-            , ['part_symptom_id' => '41', 'symptom_id' => '21', 'part_id' => '10'] // 다리 19
-            , ['part_symptom_id' => '42', 'symptom_id' => '29', 'part_id' => '10'] // 다리 23
-            , ['part_symptom_id' => '43', 'symptom_id' => '31', 'part_id' => '10'] // 다리 24
+            ['part_symptom_id' => '1', 'symptom_id' => '1', 'part_id' => '1'] 
+            , ['part_symptom_id' => '2', 'symptom_id' => '2', 'part_id' => '1'] 
+            , ['part_symptom_id' => '3', 'symptom_id' => '3', 'part_id' => '1'] 
+            , ['part_symptom_id' => '4', 'symptom_id' => '4', 'part_id' => '1'] 
+            , ['part_symptom_id' => '5', 'symptom_id' => '4', 'part_id' => '10'] 
+            , ['part_symptom_id' => '6', 'symptom_id' => '4', 'part_id' => '12'] 
+            , ['part_symptom_id' => '7', 'symptom_id' => '5', 'part_id' => '1'] 
+            , ['part_symptom_id' => '8', 'symptom_id' => '6', 'part_id' => '2'] 
+            , ['part_symptom_id' => '9', 'symptom_id' => '7', 'part_id' => '2'] 
+            , ['part_symptom_id' => '10', 'symptom_id' => '7', 'part_id' => '3'] 
+            , ['part_symptom_id' => '11', 'symptom_id' => '7', 'part_id' => '4']
+            , ['part_symptom_id' => '12', 'symptom_id' => '7', 'part_id' => '5'] 
+            , ['part_symptom_id' => '13', 'symptom_id' => '7', 'part_id' => '6'] 
+            , ['part_symptom_id' => '14', 'symptom_id' => '7', 'part_id' => '7'] 
+            , ['part_symptom_id' => '15', 'symptom_id' => '7', 'part_id' => '8'] 
+            , ['part_symptom_id' => '16', 'symptom_id' => '7', 'part_id' => '9']
+            , ['part_symptom_id' => '17', 'symptom_id' => '7', 'part_id' => '10'] 
+            , ['part_symptom_id' => '18', 'symptom_id' => '7', 'part_id' => '11'] 
+            , ['part_symptom_id' => '19', 'symptom_id' => '7', 'part_id' => '12'] 
+            , ['part_symptom_id' => '20', 'symptom_id' => '7', 'part_id' => '13'] 
+            , ['part_symptom_id' => '21', 'symptom_id' => '7', 'part_id' => '14']
+            , ['part_symptom_id' => '22', 'symptom_id' => '7', 'part_id' => '15'] 
+            , ['part_symptom_id' => '23', 'symptom_id' => '7', 'part_id' => '16'] 
+            , ['part_symptom_id' => '24', 'symptom_id' => '7', 'part_id' => '17'] 
+            , ['part_symptom_id' => '25', 'symptom_id' => '7', 'part_id' => '18'] 
+            , ['part_symptom_id' => '26', 'symptom_id' => '7', 'part_id' => '19']
+            , ['part_symptom_id' => '27', 'symptom_id' => '7', 'part_id' => '20'] 
+            , ['part_symptom_id' => '28', 'symptom_id' => '7', 'part_id' => '21'] 
+            , ['part_symptom_id' => '29', 'symptom_id' => '7', 'part_id' => '22'] 
+            , ['part_symptom_id' => '30', 'symptom_id' => '7', 'part_id' => '23'] 
+            , ['part_symptom_id' => '31', 'symptom_id' => '8', 'part_id' => '2']
+            , ['part_symptom_id' => '32', 'symptom_id' => '8', 'part_id' => '3'] 
+            , ['part_symptom_id' => '33', 'symptom_id' => '8', 'part_id' => '4']
+            , ['part_symptom_id' => '34', 'symptom_id' => '8', 'part_id' => '5'] 
+            , ['part_symptom_id' => '35', 'symptom_id' => '9', 'part_id' => '1'] 
+            , ['part_symptom_id' => '36', 'symptom_id' => '9', 'part_id' => '2'] 
+            , ['part_symptom_id' => '37', 'symptom_id' => '9', 'part_id' => '3'] 
+            , ['part_symptom_id' => '38', 'symptom_id' => '9', 'part_id' => '4'] 
+            , ['part_symptom_id' => '39', 'symptom_id' => '9', 'part_id' => '14'] 
+            , ['part_symptom_id' => '40', 'symptom_id' => '9', 'part_id' => '23'] 
+            , ['part_symptom_id' => '41', 'symptom_id' => '10', 'part_id' => '2'] 
+            , ['part_symptom_id' => '42', 'symptom_id' => '10', 'part_id' => '14'] 
+            , ['part_symptom_id' => '43', 'symptom_id' => '11', 'part_id' => '2'] 
+            , ['part_symptom_id' => '44', 'symptom_id' => '11', 'part_id' => '4'] 
+            , ['part_symptom_id' => '45', 'symptom_id' => '11', 'part_id' => '5'] 
+            , ['part_symptom_id' => '46', 'symptom_id' => '11', 'part_id' => '6'] 
+            , ['part_symptom_id' => '47', 'symptom_id' => '11', 'part_id' => '7'] 
+            , ['part_symptom_id' => '48', 'symptom_id' => '11', 'part_id' => '8'] 
+            , ['part_symptom_id' => '49', 'symptom_id' => '11', 'part_id' => '9'] 
+            , ['part_symptom_id' => '50', 'symptom_id' => '11', 'part_id' => '13'] 
+            , ['part_symptom_id' => '51', 'symptom_id' => '11', 'part_id' => '14'] 
+            , ['part_symptom_id' => '52', 'symptom_id' => '11', 'part_id' => '15'] 
+            , ['part_symptom_id' => '53', 'symptom_id' => '11', 'part_id' => '16'] 
+            , ['part_symptom_id' => '54', 'symptom_id' => '11', 'part_id' => '17'] 
+            , ['part_symptom_id' => '55', 'symptom_id' => '11', 'part_id' => '18'] 
+            , ['part_symptom_id' => '56', 'symptom_id' => '11', 'part_id' => '19'] 
+            , ['part_symptom_id' => '57', 'symptom_id' => '11', 'part_id' => '21'] 
+            , ['part_symptom_id' => '58', 'symptom_id' => '12', 'part_id' => '2'] 
+            , ['part_symptom_id' => '59', 'symptom_id' => '13', 'part_id' => '2'] 
+            , ['part_symptom_id' => '60', 'symptom_id' => '13', 'part_id' => '9'] 
+            , ['part_symptom_id' => '61', 'symptom_id' => '13', 'part_id' => '13'] 
+            , ['part_symptom_id' => '62', 'symptom_id' => '13', 'part_id' => '15'] 
+            , ['part_symptom_id' => '63', 'symptom_id' => '13', 'part_id' => '18'] 
+            , ['part_symptom_id' => '64', 'symptom_id' => '13', 'part_id' => '19'] 
+            , ['part_symptom_id' => '65', 'symptom_id' => '13', 'part_id' => '20'] 
+            , ['part_symptom_id' => '66', 'symptom_id' => '13', 'part_id' => '21'] 
+            , ['part_symptom_id' => '67', 'symptom_id' => '13', 'part_id' => '23'] 
+            , ['part_symptom_id' => '68', 'symptom_id' => '14', 'part_id' => '2'] 
+            , ['part_symptom_id' => '69', 'symptom_id' => '15', 'part_id' => '2'] 
+            , ['part_symptom_id' => '70', 'symptom_id' => '16', 'part_id' => '2'] 
+            , ['part_symptom_id' => '71', 'symptom_id' => '17', 'part_id' => '2'] 
+            , ['part_symptom_id' => '72', 'symptom_id' => '17', 'part_id' => '7'] 
+            , ['part_symptom_id' => '73', 'symptom_id' => '17', 'part_id' => '8'] 
+            , ['part_symptom_id' => '74', 'symptom_id' => '17', 'part_id' => '15'] 
+            , ['part_symptom_id' => '75', 'symptom_id' => '17', 'part_id' => '17'] 
+            , ['part_symptom_id' => '76', 'symptom_id' => '17', 'part_id' => '22'] 
+            , ['part_symptom_id' => '77', 'symptom_id' => '17', 'part_id' => '23'] 
+            , ['part_symptom_id' => '78', 'symptom_id' => '18', 'part_id' => '2'] 
+            , ['part_symptom_id' => '79', 'symptom_id' => '19', 'part_id' => '3'] 
+            , ['part_symptom_id' => '80', 'symptom_id' => '20', 'part_id' => '3'] 
+            , ['part_symptom_id' => '81', 'symptom_id' => '21', 'part_id' => '3'] 
+            , ['part_symptom_id' => '82', 'symptom_id' => '22', 'part_id' => '3'] 
+            , ['part_symptom_id' => '83', 'symptom_id' => '23', 'part_id' => '4'] 
+            , ['part_symptom_id' => '84', 'symptom_id' => '24', 'part_id' => '5'] 
+            , ['part_symptom_id' => '85', 'symptom_id' => '24', 'part_id' => '5'] 
+            , ['part_symptom_id' => '86', 'symptom_id' => '24', 'part_id' => '6'] 
+            , ['part_symptom_id' => '87', 'symptom_id' => '24', 'part_id' => '7'] 
+            , ['part_symptom_id' => '88', 'symptom_id' => '24', 'part_id' => '8'] 
+            , ['part_symptom_id' => '89', 'symptom_id' => '24', 'part_id' => '9'] 
+            , ['part_symptom_id' => '90', 'symptom_id' => '24', 'part_id' => '13'] 
+            , ['part_symptom_id' => '91', 'symptom_id' => '24', 'part_id' => '14'] 
+            , ['part_symptom_id' => '92', 'symptom_id' => '24', 'part_id' => '15'] 
+            , ['part_symptom_id' => '93', 'symptom_id' => '24', 'part_id' => '16'] 
+            , ['part_symptom_id' => '94', 'symptom_id' => '24', 'part_id' => '18'] 
+            , ['part_symptom_id' => '95', 'symptom_id' => '24', 'part_id' => '19'] 
+            , ['part_symptom_id' => '96', 'symptom_id' => '24', 'part_id' => '21'] 
+            , ['part_symptom_id' => '97', 'symptom_id' => '25', 'part_id' => '5'] 
+            , ['part_symptom_id' => '98', 'symptom_id' => '26', 'part_id' => '5'] 
+            , ['part_symptom_id' => '99', 'symptom_id' => '26', 'part_id' => '6'] 
+            , ['part_symptom_id' => '100', 'symptom_id' => '26', 'part_id' => '8'] 
+            , ['part_symptom_id' => '101', 'symptom_id' => '26', 'part_id' => '13'] 
+            , ['part_symptom_id' => '102', 'symptom_id' => '27', 'part_id' => '1'] 
+            , ['part_symptom_id' => '103', 'symptom_id' => '28', 'part_id' => '6'] 
+            , ['part_symptom_id' => '104', 'symptom_id' => '28', 'part_id' => '13'] 
+            , ['part_symptom_id' => '105', 'symptom_id' => '28', 'part_id' => '15'] 
+            , ['part_symptom_id' => '106', 'symptom_id' => '28', 'part_id' => '16'] 
+            , ['part_symptom_id' => '107', 'symptom_id' => '28', 'part_id' => '17'] 
+            , ['part_symptom_id' => '108', 'symptom_id' => '28', 'part_id' => '18'] 
+            , ['part_symptom_id' => '109', 'symptom_id' => '28', 'part_id' => '19'] 
+            , ['part_symptom_id' => '110', 'symptom_id' => '28', 'part_id' => '20'] 
+            , ['part_symptom_id' => '111', 'symptom_id' => '28', 'part_id' => '21'] 
+            , ['part_symptom_id' => '112', 'symptom_id' => '28', 'part_id' => '22'] 
+            , ['part_symptom_id' => '113', 'symptom_id' => '29', 'part_id' => '4'] 
+            , ['part_symptom_id' => '114', 'symptom_id' => '29', 'part_id' => '6'] 
+            , ['part_symptom_id' => '115', 'symptom_id' => '29', 'part_id' => '7'] 
+            , ['part_symptom_id' => '116', 'symptom_id' => '29', 'part_id' => '8'] 
+            , ['part_symptom_id' => '117', 'symptom_id' => '29', 'part_id' => '13'] 
+            , ['part_symptom_id' => '118', 'symptom_id' => '29', 'part_id' => '14'] 
+            , ['part_symptom_id' => '119', 'symptom_id' => '30', 'part_id' => '6'] 
+            , ['part_symptom_id' => '120', 'symptom_id' => '30', 'part_id' => '7'] 
+            , ['part_symptom_id' => '121', 'symptom_id' => '30', 'part_id' => '8'] 
+            , ['part_symptom_id' => '122', 'symptom_id' => '30', 'part_id' => '15'] 
+            , ['part_symptom_id' => '123', 'symptom_id' => '30', 'part_id' => '17'] 
+            , ['part_symptom_id' => '124', 'symptom_id' => '30', 'part_id' => '18'] 
+            , ['part_symptom_id' => '125', 'symptom_id' => '30', 'part_id' => '22'] 
+            , ['part_symptom_id' => '126', 'symptom_id' => '31', 'part_id' => '5'] 
+            , ['part_symptom_id' => '127', 'symptom_id' => '32', 'part_id' => '2'] 
+            , ['part_symptom_id' => '128', 'symptom_id' => '32', 'part_id' => '6'] 
+            , ['part_symptom_id' => '129', 'symptom_id' => '32', 'part_id' => '7'] 
+            , ['part_symptom_id' => '130', 'symptom_id' => '32', 'part_id' => '8'] 
+            , ['part_symptom_id' => '131', 'symptom_id' => '32', 'part_id' => '9'] 
+            , ['part_symptom_id' => '132', 'symptom_id' => '32', 'part_id' => '18'] 
+            , ['part_symptom_id' => '133', 'symptom_id' => '32', 'part_id' => '19'] 
+            , ['part_symptom_id' => '134', 'symptom_id' => '32', 'part_id' => '20'] 
+            , ['part_symptom_id' => '135', 'symptom_id' => '33', 'part_id' => '7'] 
+            , ['part_symptom_id' => '136', 'symptom_id' => '33', 'part_id' => '8'] 
+            , ['part_symptom_id' => '137', 'symptom_id' => '33', 'part_id' => '9'] 
+            , ['part_symptom_id' => '138', 'symptom_id' => '33', 'part_id' => '17'] 
+            , ['part_symptom_id' => '139', 'symptom_id' => '33', 'part_id' => '19'] 
+            , ['part_symptom_id' => '140', 'symptom_id' => '34', 'part_id' => '10'] 
+            , ['part_symptom_id' => '141', 'symptom_id' => '34', 'part_id' => '11'] 
+            , ['part_symptom_id' => '142', 'symptom_id' => '35', 'part_id' => '5'] 
+            , ['part_symptom_id' => '143', 'symptom_id' => '36', 'part_id' => '11'] 
+            , ['part_symptom_id' => '144', 'symptom_id' => '37', 'part_id' => '12'] 
+            , ['part_symptom_id' => '145', 'symptom_id' => '38', 'part_id' => '12'] 
+            , ['part_symptom_id' => '146', 'symptom_id' => '39', 'part_id' => '12'] 
+            , ['part_symptom_id' => '147', 'symptom_id' => '40', 'part_id' => '12'] 
+            , ['part_symptom_id' => '148', 'symptom_id' => '41', 'part_id' => '20'] 
         ]);
     }
 }

@@ -16,7 +16,7 @@
 			@endforeach		
 				<!-- <a href="{{url()->previous()}}"> -->
 					<span class="close" onclick="closeModal()">취소</span>
-				</a>             
+				<!-- </a>              -->
 			</div>
 		</div>  
 		<div class="insert_bottom_button">
@@ -59,7 +59,7 @@
 				</label>
 				<input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*"> -->
 				<div class="insert_img" id="imageContainer">
-					<input type="file" name="fileInput1" id="fileInput1" style="display:none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
+					<input type="file" name="images[]" id="fileInput1" style="display:none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
 					<label for="fileInput1">
 						<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
 					</label>						
