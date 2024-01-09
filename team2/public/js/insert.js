@@ -108,7 +108,7 @@ function handleFileSelect(event) {
     const container = document.getElementById('imageContainer');
 
     // CSRF 토큰을 가져옵니다.
-    // const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     for (const file of files) {
         const imageContainer = document.createElement('div');
