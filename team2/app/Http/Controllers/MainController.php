@@ -23,13 +23,13 @@ class MainController extends Controller
     public function partselectpost(Request $request) {
         $part_id = $request->part_id;
         
-        // $result = Part_symptom::join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
-        //     ->select('symptoms.symptom_name', 'part_symptoms.part_symptom_id')
-        //     ->where('part_symptoms.part_id', $part_id)
-        //     ->orderby('symptoms.symptom_id', 'asc')
-        //     ->get();
+        $result = Part_symptom::join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
+            ->select('symptoms.symptom_name', 'part_symptoms.part_symptom_id')
+            ->where('part_symptoms.part_id', $part_id)
+            ->orderby('symptoms.symptom_id', 'asc')
+            ->get();
 
-        return response()->json($part_id);
+        return response()->json($result);
     }
 
     // public function symptomselectpost(Request $request) {

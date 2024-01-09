@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('board_id');
             $table->integer('u_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -3,6 +3,10 @@ let SYMPTOM = document.getElementById('symptom-display');
 let DISEASE = document.getElementById('disease-display');
 let MAPDISPLAY = document.getElementById('map-display');
 let PARTSELCT = document.getElementById('partSelect');
+let PARTCHKCONTAINER = document.getElementById('partChkContainer');
+let SYMPTOMCHKCONTAINER = document.getElementById('symptomChkContainer');
+
+SYMPTOMCHKCONTAINER.style.display = 'none';
 
 function bodyChkFront() {
 	document.getElementById('body-part-chk').style.display = 'block';
@@ -388,20 +392,37 @@ function partclick(index) {
 }
 
 function partSelect(index) {
-	let formData = new FormData();
-	formData.append('part_id', index);
+	PARTCHKCONTAINER.style.display = 'none';
+	SYMPTOMCHKCONTAINER.style.display = 'block';
 
-	fetch('/partselect', {
-		method: 'POST',
-		body: formData,
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-	})
-	.catch(error => {
-		console.error('오류 발생:', error);
-	})
+	// let formData = new FormData();
+	// formData.append('part_id', index);
+
+	// fetch('/partselect', {
+	// 	method: 'POST',
+	// 	body: formData,
+	// })
+	// .then(response => response.json())
+	// .then(data => {
+	// 	let SYMPTOMINPUT = [];
+	// 	let SYMPTOMLABEL = [];
+		
+	// 	for(let i = 0; i < data.length; i++) {
+	// 		let SYMPTOMBOX = document.getElementById('symptomChkContainer');
+	// 		SYMPTOMINPUT[i] = document.createElement('input');
+	// 		SYMPTOMLABEL[i] = document.createElement('label');
+	// 		SYMPTOMINPUT[i].type = 'checkbox';
+	// 		SYMPTOMINPUT[i].name = 'symptomchk';
+	// 		SYMPTOMLABEL[i].value = data[i].part_symptom_id;
+
+	// 		SYMPTOMBOX.appendChild(SYMPTOMINPUT[i]);
+	// 		SYMPTOMBOX.appendChild(SYMPTOMLABEL[i]);
+	// 		SYMPTOMINPUT[i].innerHTML = data[i].symptom_name;
+	// 	}
+	// })
+	// .catch(error => {
+	// 	console.error('오류 발생:', error);
+	// })
 }
 
 // function mapopen(disease_id, user_id) {
