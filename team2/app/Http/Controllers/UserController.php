@@ -13,12 +13,18 @@ use App\Models\Board_tag;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Auth\MustVerifyEmail; 
 use Illuminate\Auth\Events\Registered;
-
+use Illuminate\Auth\Notifications\VerifyEmail;
 
 
 
 class UserController extends Controller
 {
+    public function via($notifiable)
+    {
+        return ['mail'];
+    }
+
+    
     public function registget() {
         if(Auth::check()) {
             return redirect()->route('main.get');
@@ -29,10 +35,12 @@ class UserController extends Controller
 
 
     public function registpost(Request $request) {
-
-        Log::debug($request);
-
         
+        if(isset($request->agreement_flg)) {
+            return redirect()->route('regist.get')->with('agreement_Error', '1');
+        }
+        Log::debug($request);
+        exit;
         $data = $request->only('user_email', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
 
         $user_email = $request->user_email;
@@ -54,7 +62,7 @@ class UserController extends Controller
             'user_address' => $user_address,
             'user_address_detail' => $user_address_detail,
             'user_gender' => $user_gender,
-            'agreement_flg' => '1',
+            'agreement_flg' => $agreement_flg,
             'email_verified_at' => '1',
             'birthday' => $birthday,
         ]);

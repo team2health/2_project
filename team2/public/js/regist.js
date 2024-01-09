@@ -319,3 +319,13 @@ function checkId() {
 	})
 	idchkflg = 1;
 }
+
+function agreementErrorSet () {
+	let agreementError = document.getElementById('agreementError').value;
+	if(agreementError === '1') {
+		let agreementError = document.getElementById('agreementError');
+		agreementError.innerHTML = '이용약관 동의는 필수입니다.';
+	} else {
+		
+	}
+}

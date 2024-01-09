@@ -8,6 +8,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\HashTagController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,7 +51,7 @@ Route::post('/symptomselect', [MainController::class, 'symptomselectpost']);
 // user
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
-Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
+Route::get('/regist', [UserController::class, 'registget'])->middleware('verified')->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);
@@ -78,3 +80,5 @@ Route::post('/daytimeline', [MypageController::class, 'daytimelinepost'])->name(
 Route::post('/recorddelete', [MypageController::class, 'recorddelete'])->name('recorddelete.post');
 
 Route::get('/seeyouagain', [MypageController::class, 'seeyouagainget'])->name('seeyouagain');
+
+//Auth::routes(['verify' => true]);
