@@ -13,9 +13,14 @@
 	<title>@yield('title', 'main')</title>
 </head>
 <body>
-	@include('layout.header')
-    @yield('main')
-	@include('layout.footer')
+	<div class="body">
+		<div class="body-sub">
+
+		@include('layout.header')
+		@yield('main')
+		@include('layout.footer')
+		</div>
+	</div>
 	
 	<script src="/js/common.js"></script>
 </body>

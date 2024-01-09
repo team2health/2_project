@@ -43,7 +43,7 @@ button {
 }
 
 .container {
-	width: 70vw;
+	width: 50vw;
 	margin: 0 auto;
 }
 
@@ -434,13 +434,24 @@ button {
 }
 
 /* --------- header --------- */
+
+
 .header-community-container {
 	display: flex;
-	justify-content: flex-end;
-	padding: 15px;
-	border-bottom: 1px solid #c9c9c9;
+    justify-content: center;
+	align-items: center;
+	/* border-bottom: 1px solid #c9c9c9; */
 }
-
+.header-btn1 {
+    padding: 31px;
+    padding-left: 13%;
+    font-weight: 800;
+	cursor: pointer;
+}
+.header-btn1:hover {
+	background-color: #d6d5ff;
+	border-radius: 10px;
+}
 .header-community-nav, .pc-header-button-main {
 	padding: 10px;
 }
@@ -454,17 +465,32 @@ button {
 }
 
 .header-mypage-timeline-box {
-	line-height: 39px;
-    margin-left: 150px;
-	font-size: 0.8rem;
+    font-size: 0.8rem;
+    display: block;
+    min-width: 60px;
+}
+.header-mypage-timeline-box:hover {
+	color: #FF9900;
+}
+.header-mypage-timeline-box a:hover {
+	background-color: #e7e7ff;
+	border-radius: 10px;
 }
 
 .header-community-container-mini {
-	display: flex;
-    width: 55vw;
-    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
 }
 
+
+.header-community-container-mini a {
+	padding: 20px 20px;
+	min-width: 100px;
+	text-align: center;
+	line-height: 20px;
+}
 /* --------------------------------- */
 .part-box {
 	position: relative;
@@ -895,12 +921,25 @@ button {
 
 @media only screen and (max-width:800px) {
 	.header-community-container {
-		display: flex;
-		justify-content: space-evenly;
-		padding: 15px;
-		border-bottom: 1px solid #c9c9c9;
+		padding: 10px 0;
+		margin-left: 0;
+		display: block;
 	}
-
+	.header-community-container div a {
+		padding: 10px;
+		min-width: 20px;
+	}
+	.header-community-container div a:hover {
+		background-color: #2C2B71;
+		border-radius: 20px;
+		color: #fff;
+	}
+	.header-community-container-main {
+		display: none;
+	}
+	.header-community-container-mini-main {
+		display: none;
+	}
 	.header-community-container-mini {
 		display: flex;
 		justify-content: space-evenly;

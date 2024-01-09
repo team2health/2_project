@@ -17,11 +17,25 @@
 * {
     font-family: 'NanumSquareRound';
 }
+header {
+    border-bottom: 1px solid #c9c9c9;
+}
+.body {
+    display: grid;
+    overflow: hidden;
+    justify-content: center;
 
+}
+.body-sub {
+    max-width: 1000px;
+    overflow: hidden;
+    width: 100vw;
+}
 .header-mobile {
     background-color: #F9F9F9;
     height: 40px;
     position: relative;
+    display: none;
 }
 .header-mobile-backBtn {
     position: absolute;
@@ -41,8 +55,9 @@
     line-height: 40px;
     text-align: center;
 }
-@media screen and(max-width: 800px) {
-    .mobile-header {
-        display: none;
+
+@media screen and (max-width: 800px) {
+    .header-mobile {
+        display: block;
     }
 }
