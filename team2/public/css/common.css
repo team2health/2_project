@@ -46,7 +46,6 @@ header {
     max-width: 1000px;
     overflow: hidden;
     width: 100vw;
-    /* margin-bottom: 200px; */
 }
 .header-mobile {
     background-color: #F9F9F9;

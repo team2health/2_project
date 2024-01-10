@@ -14,12 +14,12 @@
 </head>
 <body>
 	<div class="body">
-		<div class="body-sub">
+	<div class="body-sub">
 
-		@include('layout.header')
-		@yield('main')
-		</div>
-	@include('layout.section')
+	@include('layout.header')
+	@yield('main')
+	</div>
+	{{-- @include('layout.section') --}}
 	@include('layout.footer')
 </div>
 	
