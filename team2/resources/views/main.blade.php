@@ -137,13 +137,38 @@
 			<br>
 			<div class="symptomChkbox-container">
 				<form action="" id="symptomChkbox">
+					@csrf
 				</form>
+			</div>
+		</div>
+		<div style="color: #2C2B71" class="text-center bc-purple" id="resultContainer">
+		<div class="progress-bar-box" id="progress-bar-box">
+			<div class="progress-bar">
+				<div class="progress-bar__bar"></div>
+			</div>
+		</div>
+			<br>
+			<div class="go-doctor">※정확한 진단은 의사와 상담하시길 바랍니다.※</div>
+			<div class="mainResultTextBox">
+				<div class="mainResultText" id="mainResultText"></div>
+			</div>
+			<div class="mainResultBox">
+				<a href="{{route('main.get')}}" class="diagnoseAgain">다시 진단하기</a>
+				<div class="hospitalSearch" onclick="mapopen(); return false;">주위 병원 찾기</div>
+				<input type="hidden" name="hospitalGo" id="hospitalGo">
+			</div>
+		</div>
+		<div style="color: #2C2B71" class="text-center bc-purple" id="hospitalContainer">
+			<br>
+			<div id="map" style="height:500px;"></div>
+			<div class="mainResultBox">
+				<a href="{{route('main.get')}}" class="diagnoseAgain">다시 진단하기</a>
 			</div>
 		</div>
 	</div>
 <br><br><br>
 </main>
 
-	{{-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script> --}}
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script>
 	<script src="../js/main.js"></script>
 @endsection
