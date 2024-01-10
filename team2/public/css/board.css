@@ -11,6 +11,7 @@
 /* -------- lastboard -------- */
 
 .last_main{
+    min-height: 66vh;
     width: 100%;
     margin: 10px auto;
 }
