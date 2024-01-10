@@ -282,13 +282,12 @@ function closeModal() {
 }
 
 // 모달 외부 클릭 시 닫기
-window.onclick = function(event) {
-    console.log(event.target);
+window.addEventListener('click', function(event) {
     var modal = document.getElementById('myModal');
-    if (event.target == modal) {
+    if (event.target === modal) {
         closeModal();
     }
-}
+});
 function validateForm() {
     var selectedCategory = document.querySelector('.category-item.selected');
     

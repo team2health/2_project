@@ -419,9 +419,7 @@ li{
     cursor: pointer;
 }
 
-.selected {
-    background-color: lightblue;
-}
+
 /* ---------커뮤니티------------------ */
 .slider-container {    
     margin: 30px auto;
