@@ -632,6 +632,7 @@ li{
 .community_tag_container{
     /* width: 60vw; */
     margin: 0 auto;
+    margin-top: 50px;
 }
 .community-favorite-show {
     margin: 20px 0 10px 20px;
@@ -1115,7 +1116,7 @@ a .a-bordergo-hover:hover {
     }   
     .community_tag_container{
         width: 100vw;
-        margin: 0 auto 50px;
+        margin: 50px auto 50px;
     }
     .last-board-title {
         font-size: 1.4rem;
