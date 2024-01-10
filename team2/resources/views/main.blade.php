@@ -38,7 +38,7 @@
 			<div class="head-part-box" id="head-part-chk">
 				<img class="head-detail" src="/img/head-detail.png" usemap="#headpartchk" alt="">
 				<map name="headpartchk">
-					<area onclick="partSelect(1); return false;" onmouseover="on_mouse_head(1); return false;" onmouseout="off_mouse_head(1); return false;" shape="poly" coords="170,44,151,44,129,49,107,63,92,76,82,87,75,97,70,106,70,120,80,128,95,142,112,151,132,161,152,163,178,167,201,162,228,154,247,145,268,135,276,122,274,108,265,90,253,73,237,58,212,46,184,43,169,44,169,44"/>
+					<area onclick="partSelect(1); return false;" onmouseover="on_mouse_head(1); return false;" onmouseout="off_mouse_head(1); return false;" shape="poly" coords="170,44,151,44,129,49,107,63,92,76,82,87,75,97,70,106,70,120,80,128,95,142,112,151,132,161,152,163,178,167,201,162,228,154,247,145,268,135,276,122,274,108,265,90,253,73,237,58,212,46,184,43,169,44,169,44" href=""/>
 					<area onclick="partSelect(2); return false;" onmouseover="on_mouse_head(2); return false;" onmouseout="off_mouse_head(2); return false;" shape="poly" coords="143,181,132,172,123,163,109,160,89,160,76,168,76,181,78,192,83,199,90,205,103,207,114,206,129,205,142,204,145,196,145,186,145,182" href=""/>
 					<area onclick="partSelect(2); return false;" onmouseover="on_mouse_head(2); return false;" onmouseout="off_mouse_head(2); return false;" shape="poly" coords="243,164,234,161,221,159,215,162,207,164,197,174,198,186,205,197,222,203,233,204,250,201,263,197,268,189,268,175,264,166,254,161,242,161,239,162" href=""/>
 					<area onclick="partSelect(3); return false;" onmouseover="on_mouse_head(3); return false;" onmouseout="off_mouse_head(3); return false;" shape="poly" coords="171,172,162,173,153,184,150,199,150,218,150,238,157,248,177,250,186,247,197,238,198,222,194,203,193,188,186,178,175,173,174,173" href=""/>
@@ -135,12 +135,10 @@
 			<br>
 			<div><span class="text-part">#증상</span>을/를 선택해 주세요</div>
 			<br>
-			<form action="" id="symptomChkbox">
-				<input type="checkbox" name="test" id="test" class="test">
-				<label for="test" class="test1">두통</label>
-				<input type="checkbox" name="test" id="test1" class="test">
-				<label for="test1" class="test1">치통</label>
-			</form>
+			<div class="symptomChkbox-container">
+				<form action="" id="symptomChkbox">
+				</form>
+			</div>
 		</div>
 	</div>
 <br><br><br>

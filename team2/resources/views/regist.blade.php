@@ -152,11 +152,18 @@
 	</div>
 	<div class="regist-container">
 		<form action="{{ route('regist.post') }}" method="POST" id="regist_form">
+			<div id="agreementError" class="agreement-error"></div>
 			<div class="regist-agreement-div">
 				<label for="agreement_flg">이용약관 동의</label>
 				<input type="checkbox" id="agreement_flg" name="agreement_flg" value="1">
 			</div>
 			<br>
+			@if (isset($agreement_Error))
+				<input type="hidden" value="{{$agreement_Error}}" id="agreementError">
+			@else
+				<input type="hidden" value="0" id="agreementError">
+			@endif
+			
 			@csrf
 			<p style="width: 60px;" class="ptag">닉네임</p><span id="error_name" class="not-error-name">한글, 영문, 숫자로 2글자 이상 입력해주세요</span>
 			<div class="input-div-box">
@@ -165,10 +172,10 @@
 			</div>
 			<br>
 
-			<p style="width: 60px;" class="ptag">아이디</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
+			<p style="width: 60px;" class="ptag">이메일</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
 			<div class="input-div-box">
 				<input type="email" class="login-input-short" name="user_email" id="user_email">
-				<button type="button" class="input-check" onclick="checkId(); return false;">아이디 확인</button>
+				<button type="button" class="input-check" onclick="checkId(); return false;">이메일 인증</button>
 			{{-- @if (isset($idError))
 			<input type="hidden" id="idError" value="{{$idError}}">
 			@else
