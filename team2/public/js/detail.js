@@ -9,12 +9,12 @@ function closeModal() {
 }
 
 // 모달 외부 클릭 시 닫기
-window.onclick = function(event) {
+window.addEventListener('click', function(event) {
     var modal = document.getElementById('myModal');
-    if (event.target == modal) {
+    if (event.target === modal) {
         closeModal();
     }
-}
+});
 
 
 document.addEventListener('DOMContentLoaded', function () {

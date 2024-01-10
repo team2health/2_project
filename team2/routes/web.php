@@ -7,7 +7,8 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\HashTagController;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 
 /*
@@ -81,4 +82,76 @@ Route::post('/recorddelete', [MypageController::class, 'recorddelete'])->name('r
 
 Route::get('/seeyouagain', [MypageController::class, 'seeyouagainget'])->name('seeyouagain');
 
-//Auth::routes(['verify' => true]);
+
+// 이메일 확인 페이지
+Route::get('/emailchk', [UserController::class, 'emailchk']);
+
+// 이메일 확인하면 어디로 돌아가는지
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+// 이메일 확인 핸들러
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+// 확인 이메일 재전송
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+// 경로 보호
+Route::get('/profile', function () {
+})->middleware(['auth', 'verified']);
+
+// 관리자 페이지 임시 라우트
+
+Route::get('/admin/main', function () {
+    return view('/adminpage/index');
+})->name('index');
+
+Route::get('/admin/charts-chartjs', function () {
+    return view('/adminpage/charts-chartjs');
+})->name('charts-chartjs');
+
+Route::get('/admin/icons-feather', function () {
+    return view('/adminpage/icons-feather');
+})->name('icons-feather');
+
+
+Route::get('/admin/blank', function () {
+    return view('/adminpage/blank');
+})->name('blank');
+
+Route::get('/admin/pages-sign-in', function () {
+    return view('/adminpage/pages-sign-in');
+})->name('pages-sign-in');
+
+Route::get('/admin/pages-sign-up', function () {
+    return view('/adminpage/pages-sign-up');
+})->name('pages-sign-up');
+
+Route::get('/admin/ui-buttons', function () {
+    return view('/adminpage/ui-buttons');
+})->name('ui-buttons');
+
+Route::get('/admin/ui-cards', function () {
+    return view('/adminpage/ui-cards');
+})->name('ui-cards');
+
+Route::get('/admin/ui-forms', function () {
+    return view('/adminpage/ui-forms');
+})->name('ui-forms');
+
+Route::get('/admin/ui-typography', function () {
+    return view('/adminpage/ui-typography');
+})->name('ui-typography');
+
+Route::get('/admin/upgrade-to-pro', function () {
+    return view('/adminpage/upgrade-to-pro');
+})->name('upgrade-to-pro');
+
+Route::get('/admin/board', function () {
+    return view('/adminpage/upgrade-to-pro');
+})->name('upgrade-to-pro');

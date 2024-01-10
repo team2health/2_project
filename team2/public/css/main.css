@@ -108,6 +108,7 @@ button {
 	width: 30vw;
 	margin: 0 auto;
 	text-align: center;
+	margin-top: 50px;
 }
 
 .text-center {
@@ -1015,6 +1016,7 @@ input:checked + label{
 		width: 50vw;
 		margin: 0 auto;
 		text-align: center;
+		margin-top: 50px;
 	}
 }
 
@@ -1150,5 +1152,6 @@ input:checked + label{
 		width: 100vw;
 		margin: 0 auto;
 		text-align: center;
+		margin-top: 50px;
 	}
 }
