@@ -65,3 +65,7 @@
 .navbar-expand .navbar-collapse {
     justify-content: flex-end;
 }
+.navbar-select-class {
+    background-color: #b8d8ff;
+    color: rgb(53, 44, 57);
+}

@@ -19,9 +19,9 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 
 class UserController extends Controller
 {
-    public function via($notifiable)
-    {
-        return ['mail'];
+
+    public function emailchk() {
+        return view('emailpage');
     }
 
     
