@@ -35,7 +35,11 @@ header {
     overflow: hidden;
     justify-content: center;
     /* min-height: 100vh; */
-    align-items: start;
+    /* align-items: start;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none */
 }
 .body-sub {
     max-width: 1000px;
