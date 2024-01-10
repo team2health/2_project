@@ -625,6 +625,7 @@ li{
 .board-bc-gray {
     background-color: #efefef;
     padding-top: 1px;
+    padding-bottom: 10px;
 }
 
 .community_tag_container{
@@ -632,7 +633,7 @@ li{
     margin: 0 auto;
 }
 .community-favorite-show {
-    margin: 20px;
+    margin: 20px 0 10px 20px;
 }
 .community_tag {
     margin-bottom: 15px;
@@ -669,12 +670,18 @@ li{
     grid-row-start: 1;
     grid-row-end: 3;
 }
+.community-favoritetag-list span {
+    font-family: 'GangwonEdu_OTFBoldA';
+    font-size: 1.3rem;
+    border-bottom: 1px solid #4CAF50;
+}
 .community_tag > a > div > span {
+    font-family: 'GangwonEdu_OTFBoldA';
     background-color: #EAEAEA;
     padding: 3px;
     margin: 5px 0;
     border-radius: 5px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: #7A7A7A;
     text-align: center;
 }
@@ -683,6 +690,7 @@ li{
     /* height: 25px; */
     overflow: hidden;
     grid-column-start: 1;
+    grid-column-end: 3;
 }
 .bordergo-hover a:hover {
     background-color:  rgba(245, 241, 238, 0.6);
@@ -701,13 +709,14 @@ a .a-bordergo-hover:hover {
     text-align: center;
 }
 .community_more {
-    
-    border: 1px solid black;
-    border-radius: 20px;
-    background-color: #ff9950;
-    width: 100px;
-    height: 40px;
-    margin-bottom: 12px;
+    border: 1px solid #e2e2e2;
+    background-color: #ffffff;
+    height: 65px;
+    margin-bottom: 25px;
+    width: 98%;
+}
+.community_more:hover {
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
 .community_icon{
     border-radius: 50%;
@@ -974,6 +983,7 @@ a .a-bordergo-hover:hover {
 }
 
 .community-trend-disease {
+    margin-top: 10px;
     margin-left: 20px;
 }
 

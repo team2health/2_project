@@ -59,7 +59,7 @@
             <div class="community-favorite-show">
                 <h2>⭐관심 태그</h2>                    
             </div>
-            <div style="margin: 5px 0 5px 20px;">
+            <div style="margin: 1px 0 22px 34px;" class="community-favoritetag-list">
                 @forelse ($data[4] as $item)
                 <span>{{$item->hashtag_name}}</span>
             @empty
