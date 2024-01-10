@@ -38,18 +38,11 @@
 				<label for="u_content" >			  
 				<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $result->board_content }}</textarea></label><br>
 			</div>	
-			<div id="hashtagContainer" class="insert_hashtag" >
-					@foreach ($result->hashtags as $hashtag)
-						
-						<span class='selected-tag' data-selected-tag="{{ $hashtag->hashtag_name }}">
-							{{ $hashtag->hashtag_name }} 
-							<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">X</button>
-						</span>
-					@endforeach
-					@foreach($result->images as $key => $image)
-					<div class="detail_board_content">
-						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}">
+			<div class="insert_hashtag">
+			@foreach($result->images as $key => $image)
+					<div class="detail_board_content">						
 						<label for="file{{ $key }}">
+						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}"onclick="openFile('file{{ $key }}')">
 							<button type="button" onclick="openFile('file{{ $key }}')">파일변경</button>
 						</label>
 						<input type="file" name="board_img[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
@@ -59,9 +52,18 @@
 				<div class="insert_img_div">
 					<div id="imageContainer">
 		<!-- 이미지를 추가할 부분 -->
-					</div>
-					<!-- <input type="hidden" id="selectedImagesInput" name="selected_images" /> -->
+					</div>				
 				</div>
+			</div>
+			<div id="hashtagContainer" class="insert_hashtag" >
+					@foreach ($result->hashtags as $hashtag)
+						
+						<span class='selected-tag' data-selected-tag="{{ $hashtag->hashtag_name }}">
+							{{ $hashtag->hashtag_name }} 
+							<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">X</button>
+						</span>
+					@endforeach
+					
 			</div>
 
 			<div class="insert_hashtag_container">
