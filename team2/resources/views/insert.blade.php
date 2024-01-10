@@ -49,10 +49,8 @@
 				<!-- <div id="imageContainer">
 					 이미지를 추가할 부분
 				</div>					 -->
-				<div id='image_zone'>
-				</div>					
-			</div>	
-			</div>	
+				<div id='image_zone'></div>					
+			</div>		
 			<div class="insert_hashtag_container">
 				<!-- <label for="hashtag" class="label_hashtag">#해시태그</label> -->
 				
@@ -63,12 +61,13 @@
 				<input type="file" name="board_img[]" id="file0" style="display:none;" onchange="previewImage('file0', 'preview0')" accept="image/*"> -->
 				<div class="insert_img" id="imageContainer">
 					<!-- <input type="file" name="images[]" id="fileInput1" style="display:none;" onchange="handleFileSelect(event)" accept="image/*" multiple> -->
-					<input type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>
+					<input type='file' name='selectFile[]' style="display:none;" id='selectFile' multiple='multiple'>
 					<label for="selectFile">
 						<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
 					</label>						
 				</div>					
-			</div>	 
+			</div>	
+		</div>	 
 			<div id="hiddenHashtags" style="display: none;">
 					@foreach ($hashtags as $item)
 						<span class='tag' data-tag="{{ $item->hashtag_name }}">{{ $item->hashtag_name }}</span>
