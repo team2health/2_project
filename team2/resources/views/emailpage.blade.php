@@ -4,7 +4,8 @@
 
 @section('main')
 
-<form action="/emailpost" method="post" class="emailchkpage-form">
+<form action="{{route('email.post')}}" method="post" class="emailchkpage-form">
+    @csrf
     <div>
         <label for="user_email">이메일을 입력해주세요.</label>
         <input type="email" class="login-input" placeholder="user@email.com"
