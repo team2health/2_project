@@ -144,6 +144,7 @@
 		<div style="color: #2C2B71" class="text-center bc-purple" id="resultContainer">
 		<div class="progress-bar-box" id="progress-bar-box">
 			<div class="progress-bar">
+				AI가 진단 중입니다 . . .
 				<div class="progress-bar__bar"></div>
 			</div>
 		</div>

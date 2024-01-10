@@ -934,11 +934,11 @@ input:checked + label{
 
 .mainResultTextBox {
 	width: 80%;
-	border: 1px solid #000000;
+    border: 5px solid #d0d0d0;
     border-radius: 50px;
-    margin: 0 auto;
+    margin: 30px auto;
     padding: 40px;
-	color: #000000;
+    color: #000000;
 }
 
 .mainResultBox {
