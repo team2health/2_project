@@ -46,7 +46,7 @@ Route::resource('/board', BoardController::class);
 Route::get('/', [MainController::class, 'mainget'])->name('main.get');
 Route::post('/partselect', [MainController::class, 'partselectpost']);
 Route::post('/symptomselect', [MainController::class, 'symptomselectpost']);
-// Route::post('/useraddress', [MainController::class, 'useraddresspost']);
+Route::get('/useraddress', [MainController::class, 'useraddressget']);
 
 // user
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');

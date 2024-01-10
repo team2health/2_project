@@ -225,4 +225,3 @@ function showBoard(categoryId) {
     // 드랍다운 닫기
     document.getElementById("myDropdown").classList.remove("show");
 }
-

@@ -5,8 +5,16 @@ let MAPDISPLAY = document.getElementById('map-display');
 let PARTSELCT = document.getElementById('partSelect');
 let PARTCHKCONTAINER = document.getElementById('partChkContainer');
 let SYMPTOMCHKCONTAINER = document.getElementById('symptomChkContainer');
+let RESULTCONTAINER = document.getElementById('resultContainer');
+let HOSPITALCONTAINER = document.getElementById('hospitalContainer');
 
+let PROGRESSBOX = document.getElementById('progress-bar-box');
+let progressBarElem = document.querySelector('.progress-bar__bar');
+
+PROGRESSBOX.style.display = 'none';
 SYMPTOMCHKCONTAINER.style.display = 'none';
+RESULTCONTAINER.style.display = 'none';
+HOSPITALCONTAINER.style.display = 'none';
 
 function bodyChkFront() {
 	document.getElementById('body-part-chk').style.display = 'block';
@@ -424,19 +432,14 @@ function partSelect(index) {
 			SYMPTOMBOX.appendChild(SYMPTOMLABEL[i]);
 		}
 
-		let INPUTHIDDEN = document.createElement('input');
 		let SYMPTOMBTNBOX = document.createElement('div');
 		let SYMPTOMBTN = document.createElement('button');
-		SYMPTOMBOX.appendChild(INPUTHIDDEN);
-		INPUTHIDDEN.type = 'hidden';
-		INPUTHIDDEN.value = data[1];
-		INPUTHIDDEN.id = 'hiddenPartId';
 		SYMPTOMBTNBOX.classList = 'symptom-button-box';
 		SYMPTOMBOX.appendChild(SYMPTOMBTNBOX);
 		SYMPTOMBTNBOX.appendChild(SYMPTOMBTN);
 		SYMPTOMBTN.innerHTML = '검사하기';
-		SYMPTOMBTN.classList = 'symptom-button';
 		SYMPTOMBTN.type = 'button';
+		SYMPTOMBTN.classList = 'symptom-button';
 		SYMPTOMBTN.setAttribute('onclick', 'symptomChk()');
 
 	})
@@ -444,123 +447,145 @@ function partSelect(index) {
 		console.error('오류 발생:', error);
 	})
 }
+// let AA = document.getElementById('aa');
+// AA.addEventListener('click', function () {
+// 	progressBarElem.classList.add('active');
+// })
+
 
 function symptomChk() {
+	PROGRESSBOX.style.display = 'block';
+	progressBarElem.classList.add('active');
+	RESULTCONTAINER.style.display = 'block';
+	SYMPTOMCHKCONTAINER.style.display = 'none';
 	let checkboxes = document.querySelectorAll('input[name="symptom_id"]:checked');
 	let values = Array.from(checkboxes).map(checkbox => checkbox.value);
-	let HIDDENPARTID = document.getElementById('hiddenPartId').value;
+	let HOSPITALGO = document.getElementById('hospitalGo');
 
 	fetch('/symptomselect', {
 		method: 'POST',
-		body: JSON.stringify({ symptom_id: values, part_id:  HIDDENPARTID}),
+		body: JSON.stringify({ part_symptom_id: values}),
 		headers: {
 		'Content-Type': 'application/json'
     }
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
+		PROGRESSBOX.style.display = 'none';
+		progressBarElem.classList.remove('active');
+		let MAINRESULTTEXT = document.getElementById('mainResultText');
+        let result = data.replace(/\.\s/g, '<br>');
+		MAINRESULTTEXT.innerHTML = result;
+		let regex = /`([^`]+)`/g;
+		let matches = [];
+		let match;
+
+		while ((match = regex.exec(data)) !== null) {
+			matches.push(match[1]);
+		}
+		
+		let str = matches.join(', ');
+		HOSPITALGO.value = str;
+
 	})
 	.catch(error => {
 		console.error(error.stack);
 	})
 }
 
-// function mapopen(disease_id, user_id) {
+function mapopen() {
+	RESULTCONTAINER.style.display = 'none';
+	HOSPITALCONTAINER.style.display = 'block';
+	let HOS = document.getElementById('hospitalGo').value;
 
-// 	let user_address;
+	let arr = HOS.split(', ');
 
-// 	let formData = new FormData();
-// 	formData.append('user_id', user_id);
-// 	formData.append('disease_id', disease_id);
+	fetch('/useraddress', {
+		method: 'GET',
+	})
+	.then(response => response.json())
+	.then(data => {
+		user_address = data[0].user_address;
 
-// 	fetch('/useraddress', {
-// 		method: 'POST',
-// 		body: formData,
-// 	})
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		user_address = data[0][0].user_address;
+		let mapx;
+		let mapy;
 
-// 		let mapx;
-// 		let mapy;
+		var geocoder = new kakao.maps.services.Geocoder();
 
-// 		var geocoder = new kakao.maps.services.Geocoder();
+		var callback = function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				mapx = result[0].y;
+				mapy = result[0].x;
 
-// 		var callback = function(result, status) {
-// 			if (status === kakao.maps.services.Status.OK) {
-// 				mapx = result[0].y;
-// 				mapy = result[0].x;
+				mapgo();
+			}
+		};
 
-// 				mapgo();
-// 			}
-// 		};
+		geocoder.addressSearch(user_address, callback);
 
-// 		geocoder.addressSearch(user_address, callback);
-
-// 		function mapgo() {
-// 			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-// 			var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+		function mapgo() {
+			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+			var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 	
-// 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-// 				mapOption = {
-// 					center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
-// 					level: 3 // 지도의 확대 레벨
-// 				};  
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				mapOption = {
+					center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+					level: 3 // 지도의 확대 레벨
+				};  
 	
-// 			// 지도를 생성합니다    
-// 			var map = new kakao.maps.Map(mapContainer, mapOption); 
-// 			var ps = [];
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			var ps = [];
 	
-// 			for(let i = 0; i < data[1].length; i++) {
+			for(let i = 0; i < arr.length; i++) {
 
-// 				// 장소 검색 객체를 생성합니다
-// 				ps[i] = new kakao.maps.services.Places(); 
+				// 장소 검색 객체를 생성합니다
+				ps[i] = new kakao.maps.services.Places(); 
 		
-// 				// 키워드로 장소를 검색합니다
-// 				ps[i].keywordSearch(user_address+data[1][i].diagnosis_name, placesSearchCB);
+				// 키워드로 장소를 검색합니다
+				ps[i].keywordSearch(user_address+arr[i], placesSearchCB);
 		
-// 				// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-// 				function placesSearchCB (data, status, pagination) {
-// 					if (status === kakao.maps.services.Status.OK) {
+				// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+				function placesSearchCB (data, status, pagination) {
+					if (status === kakao.maps.services.Status.OK) {
 		
-// 						// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-// 						// LatLngBounds 객체에 좌표를 추가합니다
-// 						var bounds = new kakao.maps.LatLngBounds();
+						// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+						// LatLngBounds 객체에 좌표를 추가합니다
+						var bounds = new kakao.maps.LatLngBounds();
 		
-// 						for (var i=0; i<data.length; i++) {
-// 							displayMarker(data[i]);
-// 							bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-// 						}       
+						for (var i=0; i<data.length; i++) {
+							displayMarker(data[i]);
+							bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+						}       
 		
-// 						// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-// 						map.setBounds(bounds);
-// 					} 
-// 				}
+						// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+						map.setBounds(bounds);
+					} 
+				}
 		
-// 				// 지도에 마커를 표시하는 함수입니다
-// 				function displayMarker(place) {
+				// 지도에 마커를 표시하는 함수입니다
+				function displayMarker(place) {
 					
-// 					// 마커를 생성하고 지도에 표시합니다
-// 					var marker = new kakao.maps.Marker({
-// 						map: map,
-// 						position: new kakao.maps.LatLng(place.y, place.x) 
-// 					});
+					// 마커를 생성하고 지도에 표시합니다
+					var marker = new kakao.maps.Marker({
+						map: map,
+						position: new kakao.maps.LatLng(place.y, place.x) 
+					});
 		
-// 					// 마커에 클릭이벤트를 등록합니다
-// 					kakao.maps.event.addListener(marker, 'click', function() {
-// 						// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-// 						infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-// 						infowindow.open(map, marker);
-// 					});
-// 				}
-// 			}
-// 		}
-// 	})
-// 	.catch(error => {
-// 		console.error('오류 발생:', error);
-// 	})
-// }
+					// 마커에 클릭이벤트를 등록합니다
+					kakao.maps.event.addListener(marker, 'click', function() {
+						// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+						infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+						infowindow.open(map, marker);
+					});
+				}
+			}
+		}
+	})
+	.catch(error => {
+		console.error('오류 발생:', error);
+	})
+}
 
 // function partCheck(index) {
 

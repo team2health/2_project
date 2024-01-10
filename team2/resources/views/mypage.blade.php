@@ -120,7 +120,7 @@
                                 <div class="mypage-myProfile-btn-name">{{$user_info[0]->user_name}}</div>
                             </div>
                             <ul class="tab_list" id="topBar">
-                                <li class="mypage-board-show-btn active" data-list="1" id="tabBtnFirst">
+                                <li class="mypage-board-show-btn timeline-active" data-list="1" id="tabBtnFirst">
                                     내가 쓴 게시글
                                 </li>
                                 <li class="mypage-board-show-btn" data-list="2" id="tabBtnSecond">

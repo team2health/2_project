@@ -537,7 +537,7 @@ td {
     font-weight: 900;
     border-radius: 10px;
 } */
-.active {
+.timeline-active {
     /* background-color: #f5f5f5; */
     color: #000000;
     font-weight: 900;

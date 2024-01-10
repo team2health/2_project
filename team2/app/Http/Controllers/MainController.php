@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\OpenAI;
+use OpenAI\Laravel\Facades\OpenAI;
 use App\Models\User;
 use App\Models\Part;
 use App\Models\Record;
@@ -32,8 +32,6 @@ class MainController extends Controller
     }
 
     public function symptomselectpost(Request $request) {
-        // Log::debug($request);
-
         $id = session('id');
         $userinfo = User::select('birthday', 'user_gender')->where('id', $id)->get();
 
@@ -44,7 +42,7 @@ class MainController extends Controller
 
         $birthYear = date('Y', strtotime($birthday));
     
-        $age = $currentYear - $birthYear;
+        $age = $currentYear+1 - $birthYear;
 
         // 유저 성별
         $gender = '';
@@ -54,35 +52,55 @@ class MainController extends Controller
             $gender = '여성';
         }
 
+        $part_symptom_id = $request->input('part_symptom_id.0');
 
+        $part = Part_symptom::join('parts', 'parts.part_id', '=', 'part_symptoms.part_id')
+        ->select('parts.part_name')
+        ->where('part_symptoms.part_symptom_id', $part_symptom_id)
+        ->get();
 
-        // $result = OpenAI::chat()->create([
-        //     'model' => 'gpt-3.5-turbo',
-        //     'messages' => [
-        //         ['role' => 'system', 'content' => '
-        //         당신은 세계 최고의 의사입니다.
-        //         나이와 성별, 부위, 증상을 알면 가능성이 가장 높은 예상 질병을 알 수 있습니다. 먼저 예상 질병을 알려주고 해당 예상 질병에 맞는 증상을 알려주세요. 마지막으로는 예상 질병에 맞는 병원을 추천해주는데 병원은 `을 씌워서 알려주세요.
-        //         출력 문장은 예를 들어
-        //         해당 부위와 증상으로 예상할 수 있는 질병은 "예상 질병"입니다.
-        //         "예상 질병"은 "증상"입니다.
-        //         진료 과목: `{병원}`
-        //         이런 식으로 간략하게 알려주세요.'],
-        //         ['role' => 'user', 'content' => $age.'세의 '.$gender.'의 '.'부위에서 증상, 증상, 증상 어쩌구저쩌꾸'],
-        //     ],
-        // ]);
+        $symptom_id = [];
+
+        foreach($request->part_symptom_id as $item) {
+            $symptom_id[] = Part_symptom::join('symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
+            ->select('symptoms.symptom_name')
+            ->where('part_symptoms.part_symptom_id', $item)
+            ->get();
+        }
+
+        foreach($symptom_id as $item) {
+            $symptom_name[] = $item[0]->symptom_name;
+        }
+
+        $symptom = implode(',', $symptom_name);
+
+        $result = OpenAI::chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'system', 'content' => '
+                당신은 세계 최고의 의사입니다.
+                환자의 나이, 성별, 부위, 증상을 알면 질병을 알 수 있습니다.
+                환자에게 질병을 알려주고 해당 질병에 대한 정보를 상세하게  알려주세요. 마지막엔 해당 질병일 때 어느 병원을 가야하는지 `을 씌워서 알려주세요.
+                하나 이상은 무조건 병원을 추천해주세요.
+
+                예시) 질병은 "감기"입니다.
+                감기는 바이러스에 의해 코와 목 부분을 포함한 상부 호흡기계의 감염 증상으로, 사람에게 나타나는 가장 흔한 급성 질환 중 하나입니다. 재채기, 코막힘, 콧물, 인후통, 기침, 미열, 두통 및 근육통과 같은 증상이 나타날 수 있습니다.
+                진료 과목: `내과`, `이비인후과`'],
+                ['role' => 'user', 'content' => $age.'세의 '.$gender.'의 '.$part.'에서 '.$symptom.' 증상이 있습니다.'],
+            ],
+        ]);
+
+        $content = $result->choices[0]->message->content;
+        
+        return response()->json($content);
     }
     
-    // public function useraddresspost(Request $request) {
+    public function useraddressget() {
 
-    //     $user_id = $request->user_id;
-    //     $disease_id = $request->disease_id;
+        $id = session('id');
 
-    //     $result[] = User::where('id', $user_id)->get();
-    //     $result[] = Disease_diagnosis::join('diagnoses', 'disease_diagnoses.diagnosis_id', '=', 'diagnoses.diagnosis_id')
-    //         ->select('diagnoses.diagnosis_name')
-    //         ->where('disease_diagnoses.disease_id', $disease_id)
-    //         ->get();
+        $result = User::select('user_address')->where('id', $id)->get();
 
-    //     return response()->json($result);
-    // }
+        return response()->json($result);
+    }
 }
