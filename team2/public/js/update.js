@@ -15,51 +15,329 @@ function previewImage(inputId, previewId) {
 
     if (file) {
         reader.readAsDataURL(file);
-    } else {
-        preview.src = "{{ asset('img/plus.png') }}";
+    } 
+}
+// function removeImage(key) {
+//     var imageContainer = document.querySelector('.detail_board_content:nth-child(' + (parseInt(key) + 1) + ')');
+//     if (imageContainer) {
+//         imageContainer.remove();
+//         // 이미지 삭제 후 배열에서도 제거
+//         sel_files.splice(parseInt(key), 1);
+//     }
+//     // 이미지를 삭제하면서 파일 선택란도 함께 초기화
+//     document.getElementById('file' + key).value = '';
+//     // 미리보기 영역도 초기화
+//     document.getElementById('preview' + key).src = '';
+// }
+function removeImage(key) {
+    console.log("Button clicked for key: " + key);  
+//     console.log("Key: " + key);
+    var imageContainer = document.querySelector('.detail_board_content:nth-child(' + (parseInt(key) + 1) + ')');
+    if (imageContainer) {
+        console.log(imageContainer);
+        imageContainer.remove();
     }
 }
-document.addEventListener('DOMContentLoaded', function() {
-    // 기존 이미지 미리보기 및 삭제 기능 추가
-    for (let i = 0; i < 10; i++) {
-        var fileInput = document.getElementById('file' + i);
-        if (fileInput) {
-            fileInput.addEventListener('change', function(event) {
-                handleFileSelect(event);
-            });
+
+
+// function removeImage(key) {
+//     console.log("Button clicked for key: " + key);  
+//     console.log("Key: " + key);
+//     var index = parseInt(key, 10);  // 문자열을 정수로 변환
+//     var imageContainer = document.querySelector('.detail_board_content:nth-child(' + (index + 1) + ')');
+//     console.log(imageContainer);
+//     if (imageContainer) {
+//         imageContainer.remove();
+//         console.log(imageContainer);        
+//     }
+// }
+// console.log("Button clicked for key: " + key);
+ imageView = function imageView(vid, fid) {
+    var imageZone = document.getElementById(vid);
+    var selectFile = document.getElementById(fid);
+    var sel_files = [];
+
+    selectFile.onchange = function(e){
+        var files = e.target.files;
+        var fileArr = Array.prototype.slice.call(files) // begin부터 end-1 인덱스 까지 요소를 얕은 복사하여 새로운 배열 객체로 반환
+        for(f of fileArr) {
+            imageLoader(f);
         }
-    }
-});
+    }; 
 
-function handleFileSelect(event) {
+    // 탐색기에서 드래그앤 드롭 사용
     
-    const files = event.target.files;
+    // 드롭 대상 위로 지나갈 때
+    imageZone.addEventListener('dragenter', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }, false);
     
-    const container = document.getElementById('imageContainer');
+    // 드롭 대상위로 지나갈때
+    imageZone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }, false);
+      
+    // 드래그 할때
+    imageZone.addEventListener('drop', function(e) {
+        var files = {};
+        e.preventDefault();
+        e.stopPropagation();
+        var dt = e.dataTransfer;
+        files = dt.files;
+        for(f of files) {
+            imageLoader(f);
+        }
+    }, false);
 
-    for (const file of files) {
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'insert_img';
+    // 첨부된 이미지를 배열에 넣고 미리보기
+    var imageLoader = function(file){
+        sel_files.push(file);
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            let img = document.createElement('img')
+            img.classList.add("image"); // class 추가
+            img.src = e.target.result;
+            imageZone.appendChild(makeDiv(img, file));
+        };
+      
+        var dt = new DataTransfer();
+        for(f in sel_files) {
+            var file = sel_files[f];
+            dt.items.add(file);
+        }
+        selectFile.files = dt.files;
+        
+        reader.readAsDataURL(file);
+    };
 
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.type = 'button';
-        deleteButton.textContent = '삭제';
-        deleteButton.addEventListener('click', function() {
-            // 이미지 및 해당 버튼 제거
-            imageContainer.remove();
-        });
-
-        imageContainer.appendChild(img);
-        imageContainer.appendChild(deleteButton);
-
-        container.appendChild(imageContainer);     
-    }
- }
-
+    // 첨부된 파일이 있는 경우 button과 함께 imageZone에 추가할 div를 만들어 반환
+    var makeDiv = function(img, file) {
+        var div = document.createElement('div');
+        div.classList.add("image-box");
+  
+        var btn = document.createElement('input');
+        btn.setAttribute('type', 'button');
+        btn.setAttribute('value', 'x');
+        btn.setAttribute('delFile', file.name);
+        btn.classList.add("image-btn");
+        btn.onclick = function(ev){
+            var ele = ev.srcElement;
+            var delFile = ele.getAttribute('delFile');
+            for(var i=0 ;i<sel_files.length; i++){
+                if(delFile === sel_files[i].name){
+                    sel_files.splice(i, 1);      
+                }
+            }
     
+            var dt = new DataTransfer();
+            for(f in sel_files) {
+                var file = sel_files[f];
+                dt.items.add(file);
+            }
+            selectFile.files = dt.files;
+            
+            var p = ele.parentNode;
+            imageZone.removeChild(p);
+        };
+        div.appendChild(img);
+        div.appendChild(btn);
+        return div;
+    };
+}
+('image_zone', 'selectFile');
+// function openFile(fileInputId) {
+//     document.getElementById(fileInputId).click();
+// }
+
+// // 
+// function previewImage(inputId, previewId) {
+//     var input = document.getElementById(inputId);
+//     var preview = document.getElementById(previewId);
+//     var file = input.files[0];
+//     var reader = new FileReader();
+
+//     reader.onloadend = function () {
+//         preview.src = reader.result;
+//     };
+
+//     if (file) {
+//         reader.readAsDataURL(file);
+//     } else {
+//         preview.src = "{{ asset('img/plus.png') }}";
+//     }
+// }
+// document.addEventListener('DOMContentLoaded', function() {
+//     // 기존 이미지 미리보기 및 삭제 기능 추가
+//     for (let i = 0; i < 10; i++) {
+//         var fileInput = document.getElementById('file' + i);
+//         if (fileInput) {
+//             fileInput.addEventListener('change', function(event) {
+//                 handleFileSelect(event);
+//             });
+//         }
+//     }
+// });
+
+// function handleFileSelect(event) {
+    
+//     const files = event.target.files;
+    
+//     const container = document.getElementById('imageContainer');
+
+//     for (const file of files) {
+//         const imageContainer = document.createElement('div');
+//         imageContainer.className = 'insert_img';
+
+//         const img = document.createElement('img');
+//         img.src = URL.createObjectURL(file);
+
+//         const deleteButton = document.createElement('button');
+//         deleteButton.type = 'button';
+//         deleteButton.textContent = '삭제';
+//         deleteButton.addEventListener('click', function() {
+//             // 이미지 및 해당 버튼 제거
+//             imageContainer.remove();
+//         });
+
+//         imageContainer.appendChild(img);
+//         imageContainer.appendChild(deleteButton);
+
+//         container.appendChild(imageContainer);     
+//     }
+//  }
+// function openFile(fileInputId) {
+//     document.getElementById(fileInputId).click();
+// }
+// function removeImage(key) {
+//     console.log('removeImage function called for key:', key); // 확인용 출력
+//     var imageContainer = document.querySelector('.detail_board_content:nth-child(' + (key + 1) + ')');
+//     console.log('Image container:', imageContainer); // 확인용 출력
+//     if (imageContainer) {
+//         imageContainer.remove();
+//     }
+// }
+ 
+// function previewImage(inputId, previewId) {
+//     var input = document.getElementById(inputId);
+//     var preview = document.getElementById(previewId);
+//     var file = input.files[0];
+//     var reader = new FileReader();
+
+//     reader.onloadend = function () {
+//         preview.src = reader.result;
+//     };
+
+//     if (file) {
+//         reader.readAsDataURL(file);
+//     } 
+// }
+// function removeImage(key) {
+//     var imageContainer = document.querySelector('preview',key );
+//     console.log(imageContainer)
+//     imageContainer.remove();
+// }  
+
+ 
+//  imageView = function imageView(vid, fid) {
+//     var imageZone = document.getElementById(vid);
+//     var selectFile = document.getElementById(fid);
+//     var sel_files = [];
+
+//     selectFile.onchange = function(e){
+//         var files = e.target.files;
+//         var fileArr = Array.prototype.slice.call(files) // begin부터 end-1 인덱스 까지 요소를 얕은 복사하여 새로운 배열 객체로 반환
+//         for(f of fileArr) {
+//             imageLoader(f);
+//         }
+//     }; 
+
+//     // 탐색기에서 드래그앤 드롭 사용
+    
+//     // 드롭 대상 위로 지나갈 때
+//     imageZone.addEventListener('dragenter', function(e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//     }, false);
+    
+//     // 드롭 대상위로 지나갈때
+//     imageZone.addEventListener('dragover', function(e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//     }, false);
+      
+//     // 드래그 할때
+//     imageZone.addEventListener('drop', function(e) {
+//         var files = {};
+//         e.preventDefault();
+//         e.stopPropagation();
+//         var dt = e.dataTransfer;
+//         files = dt.files;
+//         for(f of files) {
+//             imageLoader(f);
+//         }
+//     }, false);
+
+//     // 첨부된 이미지를 배열에 넣고 미리보기
+//     var imageLoader = function(file){
+//         sel_files.push(file);
+//         var reader = new FileReader();
+//         reader.onload = function(e) {
+//             let img = document.createElement('img')
+//             img.classList.add("image"); // class 추가
+//             img.src = e.target.result;
+//             imageZone.appendChild(makeDiv(img, file));
+//         };
+      
+//         var dt = new DataTransfer();
+//         for(f in sel_files) {
+//             var file = sel_files[f];
+//             dt.items.add(file);
+//         }
+//         selectFile.files = dt.files;
+        
+//         reader.readAsDataURL(file);
+//     };
+    
+
+//     // 첨부된 파일이 있는 경우 button과 함께 imageZone에 추가할 div를 만들어 반환
+//     var makeDiv = function(img, file) {
+//         var div = document.createElement('div');
+//         div.classList.add("image-box");
+  
+//         var btn = document.createElement('input');
+//         btn.setAttribute('type', 'button');
+//         btn.setAttribute('value', 'x');
+//         btn.setAttribute('delFile', file.name);
+//         btn.classList.add("image-btn");
+//         btn.onclick = function(ev){
+//             var ele = ev.srcElement;
+//             var delFile = ele.getAttribute('delFile');
+//             for(var i=0 ;i<sel_files.length; i++){
+//                 if(delFile === sel_files[i].name){
+//                     sel_files.splice(i, 1);      
+//                 }
+//             }
+    
+//             var dt = new DataTransfer();
+//             for(f in sel_files) {
+//                 var file = sel_files[f];
+//                 dt.items.add(file);
+//             }
+//             selectFile.files = dt.files;
+            
+//             var p = ele.parentNode;
+//             imageZone.removeChild(p);
+//         };
+//         div.appendChild(img);
+//         div.appendChild(btn);
+//         return div;
+//     };
+// }
+// ('image_zone', 'selectFile');
+
+ 
 var selectedHashtags = [];
 
 function toggleHashtags() {

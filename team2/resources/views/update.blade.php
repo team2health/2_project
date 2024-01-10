@@ -38,23 +38,24 @@
 				<label for="u_content" >			  
 				<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $result->board_content }}</textarea></label><br>
 			</div>	
-			<div class="insert_hashtag">
+			
 			@foreach($result->images as $key => $image)
-					<div class="detail_board_content">						
+					<div class="detail_board_content">
+						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}">
 						<label for="file{{ $key }}">
-						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}"onclick="openFile('file{{ $key }}')">
 							<button type="button" onclick="openFile('file{{ $key }}')">파일변경</button>
 						</label>
-						<input type="file" name="board_img[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
-						
+						<input type="file" name="selectFile[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
+						<button type="button" onclick="removeImage('{{ $key }}')">이미지 삭제</button>
 					</div>
 				@endforeach
 				<div class="insert_img_div">
-					<div id="imageContainer">
+					<!-- <div id="imageContainer"> -->
 		<!-- 이미지를 추가할 부분 -->
-					</div>				
+					<!-- </div>				 -->
+					<div id='image_zone'>
+				</div>	
 				</div>
-			</div>
 			<div id="hashtagContainer" class="insert_hashtag" >
 					@foreach ($result->hashtags as $hashtag)
 						
@@ -75,8 +76,8 @@
 				<!-- Input for selected hashtags -->
 				<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
 				<div class="insert_img" id="imageContainer">
-						<input type="file" name="board_img[]" id="fileInput1" style="display:none;" onchange="handleFileSelect(event)" accept="image/*" multiple>
-						<label for="fileInput1">
+				<input type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>>
+						<label for="selectFile">
 							<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
 						</label>						
 					</div>	

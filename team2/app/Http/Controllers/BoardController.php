@@ -16,6 +16,7 @@ use App\Models\Comment;
 use App\Models\Hashtag;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BoardController extends Controller
 {
@@ -179,10 +180,10 @@ class BoardController extends Controller
         Log::debug($request);
         // dd($request->board_img);
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
-        if ($request->hasfile('images')) {
+        if ($request->hasfile('selectFile')) {
             // Log::debug($request->hasfile('images'));
             // 업로드된 이미지들을 가져옵니다.
-            $images = $request->file('images'); 
+            $images = $request->file('selectFile'); 
             // Log::debug($images);
             $boardImage = [];
             // dd($images); 
@@ -359,26 +360,75 @@ class BoardController extends Controller
                 $result->update(['category_id' => $category->category_id]);
             }
         
-    }        
+    }    
+    
+    Log::debug($request);
+    // if ($request->hasFile('selectFile') && request('selectFile') != '') {
+    //     $imagePath = public_path('board_img'.request->image);
+    //     if(File::exists($imagePath)){
+    //         unlink($imagePath);
+    //     }
+    //     $image = $request()->file('selectFile')->store('uploads', 'public');
+    //     $data['image'] = $image;
+    //     $post->update($data);
+    // }
+    // $request->update($data);
+// 데이터베이스에서 변경하려는 이미지를 식별하여 삭제
+// foreach ($existingImages as $existingImage) {
+//     if ($existingImage->img_address == $imageNameToDelete) {
+//         // 이미지를 파일 시스템에서 삭제
+//         Storage::delete('board_img/' . $existingImage->img_address);
 
-    if ($request->hasFile('board_img')) {
+//         // 데이터베이스에서 이미지를 삭제
+//         $existingImage->delete();
+//     }
+// }
+
+// 새로운 이미지를 서버에 저장하고 데이터베이스에 연결
+// $newImageName = $newImage->store('board_img');
+// Board::findOrFail($board_id)->images()->create(['img_address' => $newImage]);
+if ($request->hasFile('selectFile')) {
+    foreach ($result->images as $existingImage) {
         // 기존 이미지 삭제
-        // $result->images()->delete();     
-        
-        
-        $images = $request->file('board_img');
-        
-        
-        
-        foreach ($images as $image) {
-            $imageName = Str::uuid() . '.' . $image->extension();
-            $image->move(public_path('board_img'), $imageName);
-
-            // Save the image path to the Board_img model
-            $boardImage = new Board_img(['img_address' => $imageName]);
-            $result->images()->save($boardImage);
-        }
+        Storage::delete('board_img/' . $existingImage->img_address);
+        $existingImage->delete();
     }
+    // $hashtag_names = array_values(array_filter($hashtag_names));
+
+    // 재정렬
+    // usort($hashtag_names, function($a, $b) {
+    //     return strcmp($a[0], $b[0]);
+    // });
+    $images = $request->file('selectFile');
+
+    foreach ($images as $image) {
+        $imageName = Str::uuid() . '.' . $image->extension();
+        $image->move(public_path('board_img'), $imageName);
+
+        // Save the image path to the Board_img model
+        $boardImage = new Board_img(['img_address' => $imageName]);
+        $result->images()->save($boardImage);
+    }
+}
+
+    // if ($request->hasFile('selectFile')) {
+    //     // 기존 이미지 삭제
+    //     // $result->images()->delete();     
+        
+        
+    //     $images = $request->file('selectFile');
+        
+        
+        
+    //     foreach ($images as $image) {
+    //         $imageName = Str::uuid() . '.' . $image->extension();
+    //         $image->move(public_path('board_img'), $imageName);
+
+    //         // Save the image path to the Board_img model
+    //         $boardImage = new Board_img(['img_address' => $imageName]);
+    //         $result->images()->save($boardImage);
+    //     }
+    // }
         return redirect()-> route('board.show',['board'=> $result->board_id]);
     }
 
@@ -388,14 +438,15 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($board_id)
+    public function destroy(Request $request,$board_id)
     {
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
 
         Board::destroy($board_id);
-        Comment::where('board_id', $board_id)->delete();
+        Comment::where('board_id', $board_id)->delete();        
+        // Board_img::destroy('board_img_id');
         return redirect()-> route('categoryboard');
     }
 

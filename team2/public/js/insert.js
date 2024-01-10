@@ -1,201 +1,168 @@
-
-// function previewImage(inputId, previewId) {
-//     var input = document.getElementById(inputId);
-//     var preview = document.getElementById(previewId);
-//     var file = input.files[0];
-//     var reader = new FileReader();
-
-//     reader.onloadend = function () {
-//         preview.src = reader.result;
-//     };
-
-//     if (file) {
-//         reader.readAsDataURL(file);
-//     } else {
-//         preview.src = "{{ asset('img/camera2.png') }}";
-//     }
-// }
-// function previewImage(inputId, previewId) {
-//     var input = document.getElementById(inputId);
-//     var preview = document.getElementById(previewId);
-//     var file = input.files[0];
-//     var reader = new FileReader();
-
-//     reader.onloadend = function () {
-//         preview.src = reader.result;
-//     };
-
-//     if (file) {
-//         reader.readAsDataURL(file);
-//     } else {
-//         preview.src = "{{ asset('img/camera2.png') }}";
-//     }
-// }
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     // 기존 이미지 미리보기 및 삭제 기능 추가
-//     for (let i = 0; i < 10; i++) {
-//         var fileInput = document.getElementById('file' + i);
-//         if (fileInput) {
-//             fileInput.addEventListener('change', function(event) {
-//                 handleFileSelect(event);
-//             });
-//         }
-//     }
-// });
-// let test = null; // 파일 저장용 전역변수
-
-// function handleFileSelect(event) {
-//     if(!test) {
-//         // 1번째 파일일 경우 초기 데이터 셋팅
-//         test = event.target.files;
-//     } else {
-//         // 2번째 이후 파일일 경우 추가처리
-//         const dataTranster = new DataTransfer();
-//         // 기존 데이터 추가
-//         for (let i = 0; i < test.length; i++) {
-//             dataTranster.items.add(test[i]);
-//         }
-//         // 새로운 파일 추가
-//         dataTranster.items.add(event.target.files[0]);
-//         // 전역변수에 저장
-//         test = dataTranster.files;
-//     //     const fileInput = document.getElementById('fileInput1');
-//     // fileInput.files = test;
-//     }
-// }
-    // const files = event.target.files;
+    imageView = function imageView(vid, fid) {
+		var imageZone = document.getElementById(vid);
+		var selectFile = document.getElementById(fid);
+		var sel_files = [];
     
-    // const container = document.getElementById('imageContainer');
-
-    // for (const file of files) {
-
-    //     const imageContainer = document.createElement('div');
-    //     imageContainer.className = 'insert_img';
-
-    //     const img = document.createElement('img');
-    //     img.src = URL.createObjectURL(file);
-
-    //     const deleteButton = document.createElement('button');
-    //     deleteButton.type = 'button';
-    //     deleteButton.textContent = '삭제';
-    //     deleteButton.addEventListener('click', function() {
-    //         // 이미지 및 해당 버튼 제거
-    //         imageContainer.remove();
-    //     });
-
-    //     imageContainer.appendChild(img);
-    //     imageContainer.appendChild(deleteButton);
-
-    //     container.appendChild(imageContainer);     
-    // }
+		selectFile.onchange = function(e){
+			var files = e.target.files;
+			var fileArr = Array.prototype.slice.call(files) // begin부터 end-1 인덱스 까지 요소를 얕은 복사하여 새로운 배열 객체로 반환
+			for(f of fileArr) {
+				imageLoader(f);
+			}
+		}; 
+  
+		// 탐색기에서 드래그앤 드롭 사용
+		
+		// 드롭 대상 위로 지나갈 때
+		imageZone.addEventListener('dragenter', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		}, false);
+    	
+		// 드롭 대상위로 지나갈때
+		imageZone.addEventListener('dragover', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		}, false);
+  		
+		// 드래그 할때
+		imageZone.addEventListener('drop', function(e) {
+			var files = {};
+			e.preventDefault();
+			e.stopPropagation();
+			var dt = e.dataTransfer;
+			files = dt.files;
+			for(f of files) {
+				imageLoader(f);
+			}
+		}, false);
     
-//  }
-let test = []; // 전역 변수로 선언
-
-document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('fileInput');
-    if (fileInput) {
-        fileInput.addEventListener('change', function(event) {
-            handleFileSelect(event);
-        });
-    }
-});
-
-function handleFileSelect(event) {
-    const files = event.target.files;
-    const container = document.getElementById('imageContainer');
-
-    // CSRF 토큰을 가져옵니다.
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
-    for (const file of files) {
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'insert_img';
-
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-        const formData = new FormData();
-
-        // CSRF 토큰을 FormData에 추가
-        formData.append('_token', csrfToken);
-
-        // test 배열에 있는 이미지들을 FormData에 추가
-        for (const file of test) {
-            formData.append('images[]', file);
-        }
+	    // 첨부된 이미지를 배열에 넣고 미리보기
+		var imageLoader = function(file){
+			sel_files.push(file);
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				let img = document.createElement('img')
+				img.classList.add("image"); // class 추가
+				img.src = e.target.result;
+				imageZone.appendChild(makeDiv(img, file));
+			};
+	      
+			var dt = new DataTransfer();
+			for(f in sel_files) {
+				var file = sel_files[f];
+				dt.items.add(file);
+			}
+			selectFile.files = dt.files;
+			
+			reader.readAsDataURL(file);
+		};
+    
+		// 첨부된 파일이 있는 경우 button과 함께 imageZone에 추가할 div를 만들어 반환
+		var makeDiv = function(img, file) {
+			var div = document.createElement('div');
+			div.classList.add("image-box");
+      
+			var btn = document.createElement('input');
+			btn.setAttribute('type', 'button');
+			btn.setAttribute('value', 'x');
+			btn.setAttribute('delFile', file.name);
+			btn.classList.add("image-btn");
+			btn.onclick = function(ev){
+				var ele = ev.srcElement;
+				var delFile = ele.getAttribute('delFile');
+				for(var i=0 ;i<sel_files.length; i++){
+					if(delFile === sel_files[i].name){
+						sel_files.splice(i, 1);      
+					}
+				}
         
-        // 서버로 이미지 전송
-        fetch('/board', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-        const deleteButton = document.createElement('button');
-        deleteButton.type = 'button';
-        deleteButton.textContent = '삭제';
-        deleteButton.addEventListener('click', function() {
-            // 이미지 및 해당 버튼 제거
-            imageContainer.remove();
-            // 저장된 파일 목록에서도 삭제
-            const fileIndex = test.findIndex(item => item.file === file);
-            if (fileIndex !== -1) {
-                test.splice(fileIndex, 1);
-            }
-        });
-
-        imageContainer.appendChild(img);
-        imageContainer.appendChild(deleteButton);
-
-        container.appendChild(imageContainer);
-
-        // 파일 정보와 함께 test 배열에 저장
-        test.push({ file, imageContainer });
-    }
-
-    // test 배열에 저장된 정보를 활용하여 다양한 작업 수행 가능
-    console.log(test);
-}
+				var dt = new DataTransfer();
+				for(f in sel_files) {
+					var file = sel_files[f];
+					dt.items.add(file);
+				}
+				selectFile.files = dt.files;
+				
+				var p = ele.parentNode;
+				imageZone.removeChild(p);
+			};
+			div.appendChild(img);
+			div.appendChild(btn);
+			return div;
+		};
+	}
+('image_zone', 'selectFile');
+    
+// //  }
+// let test = []; // 전역 변수로 선언   최신
 
 // document.addEventListener('DOMContentLoaded', function() {
-//     // 기존 이미지 미리보기 및 삭제 기능 추가
-//     for (var i = 0; i < 10; i++) {
-//         var fileInput = document.getElementById('file' + i);
-//         if (fileInput) {
-//             fileInput.addEventListener('change', function(event) {
-//                 handleFileSelect(event);
-//             });
-//         }
+//     const fileInput = document.getElementById('fileInput');
+//     if (fileInput) {
+//         fileInput.addEventListener('change', function(event) {
+//             handleFileSelect(event);
+//         });
 //     }
 // });
+
 // function handleFileSelect(event) {
 //     const files = event.target.files;
 //     const container = document.getElementById('imageContainer');
-    
+
+//     // CSRF 토큰을 가져옵니다.
+//     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
 //     for (const file of files) {
 //         const imageContainer = document.createElement('div');
 //         imageContainer.className = 'insert_img';
+
 //         const img = document.createElement('img');
 //         img.src = URL.createObjectURL(file);
+//         const formData = new FormData();
 
+//         // CSRF 토큰을 FormData에 추가
+//         formData.append('_token', csrfToken);
+
+//         // test 배열에 있는 이미지들을 FormData에 추가
+//         for (const file of test) {
+//             formData.append('images[]', file);
+//         }
+        
+//         // 서버로 이미지 전송
+//         fetch('/board', {
+//             method: 'POST',
+//             body: formData,
+//         })
+//         .then(response => response.json())
+//         .then(data => console.log(data))
+//         .catch(error => console.error('Error:', error));
 //         const deleteButton = document.createElement('button');
 //         deleteButton.type = 'button';
 //         deleteButton.textContent = '삭제';
 //         deleteButton.addEventListener('click', function() {
 //             // 이미지 및 해당 버튼 제거
 //             imageContainer.remove();
+//             // 저장된 파일 목록에서도 삭제
+//             const fileIndex = test.findIndex(item => item.file === file);
+//             if (fileIndex !== -1) {
+//                 test.splice(fileIndex, 1);
+//             }
 //         });
 
 //         imageContainer.appendChild(img);
 //         imageContainer.appendChild(deleteButton);
 
 //         container.appendChild(imageContainer);
-        
+
+//         // 파일 정보와 함께 test 배열에 저장
+//         test.push({ file, imageContainer });
 //     }
+
+//     // test 배열에 저장된 정보를 활용하여 다양한 작업 수행 가능
+//     console.log(test);
 // }
+
 var selectedHashtags = [];
 
 function toggleHashtags() {
