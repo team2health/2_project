@@ -1,16 +1,17 @@
 
 .timelinemain { 
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     display: flex;
     grid-gap: 30px;
-    margin-top: 30px;
     position: relative;
     flex-direction: column;
     align-items: center;
-    } 
+    height: 80vh;
+    margin-top: 100px;
+}
 .mypage-first {
     display: grid;
     justify-content: center;
