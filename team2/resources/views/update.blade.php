@@ -39,16 +39,19 @@
 				<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $result->board_content }}</textarea></label><br>
 			</div>	
 			
-			@foreach($result->images as $key => $image)
+			@foreach($result->images as $image)
+			
 					<div class="detail_board_content">
-						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{ $key }}">
-						<label for="file{{ $key }}">
-							<button type="button" onclick="openFile('file{{ $key }}')">파일변경</button>
+						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{$image->board_img_id }}">
+						<label for="file{{ $image->board_img_id }}">
+							<button type="button" onclick="openFile('file{{ $image->board_img_id }}')">파일변경</button>
 						</label>
-						<input type="file" name="selectFile[]" id="file{{ $key }}" style="display:none;" onchange="previewImage('file{{ $key }}', 'preview{{ $key }}')" accept="image/*">
-						<button type="button" onclick="removeImage('{{ $key }}')">이미지 삭제</button>
+						<input type="file" name="selectFile[]" id="file{{ $image->board_img_id }}" style="display:none;" onchange="previewImage('file{{ $image->board_img_id }}', 'preview{{ $image->board_img_id }}')" accept="image/*">
+						<button type="button" onclick="removeImage('{{ $image->board_img_id }}')">이미지 삭제</button>
 					</div>
+					
 				@endforeach
+				
 				<div class="insert_img_div">
 					<!-- <div id="imageContainer"> -->
 		<!-- 이미지를 추가할 부분 -->
@@ -97,5 +100,6 @@
 	</form>			
 </main>
 <script src="/js/update.js"></script>
+<script>var images = @json($result->images)</script>
 
 @endsection

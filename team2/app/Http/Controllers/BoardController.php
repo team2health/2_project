@@ -303,7 +303,7 @@ class BoardController extends Controller
      */
     public function update(Request $request, $board_id)
     {
-        // dd($request->all());
+        // dd($request);
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
@@ -387,29 +387,29 @@ class BoardController extends Controller
 // 새로운 이미지를 서버에 저장하고 데이터베이스에 연결
 // $newImageName = $newImage->store('board_img');
 // Board::findOrFail($board_id)->images()->create(['img_address' => $newImage]);
-if ($request->hasFile('selectFile')) {
-    foreach ($result->images as $existingImage) {
-        // 기존 이미지 삭제
-        Storage::delete('board_img/' . $existingImage->img_address);
-        $existingImage->delete();
-    }
+// if ($request->hasFile('selectFile')) {
+    // foreach ($result->images as $existingImage) {
+    //     // 기존 이미지 삭제
+    //     Storage::delete('board_img/' . $existingImage->img_address);
+    //     $existingImage->delete();
+    // }
     // $hashtag_names = array_values(array_filter($hashtag_names));
 
     // 재정렬
     // usort($hashtag_names, function($a, $b) {
     //     return strcmp($a[0], $b[0]);
     // });
-    $images = $request->file('selectFile');
+//     $images = $request->file('selectFile');
 
-    foreach ($images as $image) {
-        $imageName = Str::uuid() . '.' . $image->extension();
-        $image->move(public_path('board_img'), $imageName);
+//     foreach ($images as $image) {
+//         $imageName = Str::uuid() . '.' . $image->extension();
+//         $image->move(public_path('board_img'), $imageName);
 
-        // Save the image path to the Board_img model
-        $boardImage = new Board_img(['img_address' => $imageName]);
-        $result->images()->save($boardImage);
-    }
-}
+//         // Save the image path to the Board_img model
+//         $boardImage = new Board_img(['img_address' => $imageName]);
+//         $result->images()->save($boardImage);
+//     }
+// }
 
     // if ($request->hasFile('selectFile')) {
     //     // 기존 이미지 삭제
@@ -429,7 +429,38 @@ if ($request->hasFile('selectFile')) {
     //         $result->images()->save($boardImage);
     //     }
     // }
-        return redirect()-> route('board.show',['board'=> $result->board_id]);
+    if ($request->hasFile('selectFile')) {
+    $images = $request->file('selectFile');
+   Log::debug($images);  
+    foreach ($images as $image) {
+        $imageName = Str::uuid() . '.' . $image->extension();
+        $image->move(public_path('board_img'), $imageName);
+
+        // Save the image path to the Board_img model
+        $boardImage = new Board_img(['img_address' => $imageName]);
+        $result->images()->save($boardImage);
+    }
+}
+
+// 이미지 삭제 요청이 있는 경우
+if ($request->has('delete_image_id')) {
+    $imageIdToDelete = $request->input('delete_image_id');
+    dd($imageIdToDelete); 
+    // 이미지 모델에서 해당 ID에 해당하는 이미지를 찾아 삭제
+    $imageToDelete = Board_img::findOrFail($imageIdToDelete);
+    $imagePath = public_path('board_img/' . $imageToDelete->img_address);
+
+    if (File::exists($imagePath)) {
+        // 파일 시스템에서 이미지 삭제
+        unlink($imagePath);
+    }
+
+    // 모델에서 이미지 삭제
+    $imageToDelete->delete();
+}
+
+return redirect()->route('board.show', ['board' => $result->board_id]);
+        
     }
 
     /**
@@ -446,7 +477,7 @@ if ($request->hasFile('selectFile')) {
 
         Board::destroy($board_id);
         Comment::where('board_id', $board_id)->delete();        
-        // Board_img::destroy('board_img_id');
+        // Board_img::where('board_id', $board_id)->delete();
         return redirect()-> route('categoryboard');
     }
 
