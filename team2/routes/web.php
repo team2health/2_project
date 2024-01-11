@@ -118,9 +118,7 @@ Route::middleware(['admin'])->group(function () {
     
 });
 
-Route::get('/admin/main', function () {
-    return view('/adminpage/index');
-})->name('index');
+Route::get('/admin/main', [AdminController::class, '/mainget'])->name('index');
 
 Route::get('/admin/charts-chartjs', function () {
     return view('/adminpage/charts-chartjs');

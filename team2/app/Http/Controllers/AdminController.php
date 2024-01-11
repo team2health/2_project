@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Admin;
 use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\Admin;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -27,5 +28,18 @@ class AdminController extends Controller
             return view('adminlogin');
         }
         return view('adminpage.index');
+    }
+
+    public function mainget() {
+        User::select('birthday')->get();
+        
+        // 유저 나이
+        $birthday = $userinfo[0]['birthday'];
+
+        $currentYear = date('Y');
+
+        $birthYear = date('Y', strtotime($birthday));
+    
+        $age = $currentYear+1 - $birthYear;
     }
 }
