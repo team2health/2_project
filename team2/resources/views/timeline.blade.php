@@ -57,7 +57,7 @@
                     <span class="record-time">{{$item->created_date}}</span>
                     <div class="record-delete-btn" onclick="recorddeletemodalopen({{$item->record_id}}); return false;">X</div>
                     <br>
-                    <span class="recordtext">{{$item->symptom_name}} </span>
+                    <span class="recordtext">{{$item->part_name}} - {{$item->symptom_name}} </span>
                 </div>
             @empty
                 {{-- <div class="none-recordtext"> 오늘은 검색기록이 없어요!</div> --}}

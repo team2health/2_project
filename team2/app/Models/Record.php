@@ -17,7 +17,7 @@ class Record extends Model
 
     protected $fillable = [
         'u_id',
-        'symptom_id',
+        'part_symptom_id',
     ];
     
     protected $primaryKey = 'record_id';

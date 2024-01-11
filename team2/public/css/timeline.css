@@ -9,7 +9,6 @@
     position: relative;
     flex-direction: column;
     align-items: center;
-    height: 80vh;
     margin-top: 100px;
 }
 .mypage-first {
@@ -190,7 +189,6 @@ td {
 @media screen and (max-width: 800px) {
     /* 임시 - 수정예정 */
     #timelineMain {
-        height: 120vw;
         overflow: hidden;
     }
     .mypage-second {

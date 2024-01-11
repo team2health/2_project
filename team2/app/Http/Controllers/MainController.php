@@ -43,6 +43,7 @@ class MainController extends Controller
         $birthYear = date('Y', strtotime($birthday));
     
         $age = $currentYear+1 - $birthYear;
+        Log::debug($id);
 
         // 유저 성별
         $gender = '';
@@ -66,6 +67,12 @@ class MainController extends Controller
             ->select('symptoms.symptom_name')
             ->where('part_symptoms.part_symptom_id', $item)
             ->get();
+
+
+            $result = Record::create([
+                'u_id' => $id,
+                'part_symptom_id' => $item
+            ]);
         }
 
         foreach($symptom_id as $item) {

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->increments('record_id');
             $table->integer('u_id');
-            $table->integer('Symptom_id');
+            $table->integer('part_symptom_id');
             $table->timestamps(); // record_date
             $table->softDeletes();
         });

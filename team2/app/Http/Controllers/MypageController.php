@@ -225,19 +225,35 @@ class MypageController extends Controller
         $created_start = Carbon::now()->format('Y-m-d');
         $user_email = session('id');
 
-        $today_timeline = DB::table('symptoms')
+        $today_timeline = DB::table('records')
         ->select(
             'records.record_id'
-            ,'symptoms.symptom_id'
             ,'symptoms.symptom_name'
+            ,'parts.part_name'
             ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_date')
             ,'records.created_at'
         )
-        ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        ->join('part_symptoms', 'records.part_symptom_id', '=', 'part_symptoms.part_symptom_id')
+        ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+        ->join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
         ->where('records.u_id', $user_email)
         ->where('records.created_at', 'like', $created_start.'%')
         ->where('records.deleted_at', null)
         ->get();
+        
+        // DB::table('symptoms')
+        // ->select(
+        //     'records.record_id'
+        //     ,'symptoms.symptom_id'
+        //     ,'symptoms.symptom_name'
+        //     ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_date')
+        //     ,'records.created_at'
+        // )
+        // ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        // ->where('records.u_id', $user_email)
+        // ->where('records.created_at', 'like', $created_start.'%')
+        // ->where('records.deleted_at', null)
+        // ->get();
 
         $result_count = $today_timeline->count();
 
@@ -375,18 +391,35 @@ class MypageController extends Controller
         $created_at = $request->date;
         $user_email = session('id');
 
-        $timeline = DB::table('symptoms')
+        $timeline = DB::table('records')
         ->select(
             'records.record_id'
             ,'symptoms.symptom_id'
             ,'symptoms.symptom_name'
-            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+            ,'parts.part_name'
+            ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_date')
+            ,'records.created_at'
         )
-        ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        ->join('part_symptoms', 'records.part_symptom_id', '=', 'part_symptoms.part_symptom_id')
+        ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+        ->join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
         ->where('records.u_id', $user_email)
         ->where('records.created_at', 'like', $created_at.'%')
         ->where('records.deleted_at', null)
         ->get();
+        
+        // DB::table('symptoms')
+        // ->select(
+        //     'records.record_id'
+        //     ,'symptoms.symptom_id'
+        //     ,'symptoms.symptom_name'
+        //     ,DB::raw('DATE_FORMAT(records.created_at, "%H:%i") as created_at')
+        // )
+        // ->join('records', 'records.symptom_id', '=', 'symptoms.symptom_id')
+        // ->where('records.u_id', $user_email)
+        // ->where('records.created_at', 'like', $created_at.'%')
+        // ->where('records.deleted_at', null)
+        // ->get();
 
         return response()->json($timeline);
 

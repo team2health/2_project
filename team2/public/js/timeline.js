@@ -214,7 +214,7 @@ function selectDate(data, data2) {
                 recordDeleteDiv.id = data[i].record_id;
                 recordDeleteDiv.onclick = function (e) {recorddeletemodalopen(e.target.id);}
                 textspan.classList.add('recordtext');
-                textspan.innerHTML = data[i].symptom_name;
+                textspan.innerHTML = data[i].part_name+' - '+data[i].symptom_name;
 
                 recordDiv.appendChild(timespan);
                 recordDiv.appendChild(recordDeleteDiv);
