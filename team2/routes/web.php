@@ -52,7 +52,7 @@ Route::get('/useraddress', [MainController::class, 'useraddressget']);
 // user
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::post('/login', [UserController::class, 'loginpost'])->name('login.post');
-Route::get('/regist', [UserController::class, 'registget'])->middleware('verified')->name('regist.get');
+Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
 Route::post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);
@@ -87,25 +87,28 @@ Route::get('/seeyouagain', [MypageController::class, 'seeyouagainget'])->name('s
 Route::get('/emailchk', [UserController::class, 'emailchk'])->name('email.get');
 Route::post('/emailchkgo', [UserController::class, 'emailchkpost'])->name('email.post');
 // 이메일 확인하면 어디로 돌아가는지
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
 // 이메일 확인 핸들러
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 // 확인 이메일 재전송
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // 경로 보호
 Route::get('/profile', function () {
 })->middleware(['auth', 'verified']);
 
 // 관리자 페이지 임시 라우트
+Route::get('/admin', function () {
+    return view('/adminpage/adminlogin');
+})->name('adminlogin');
 
 Route::get('/admin/main', function () {
     return view('/adminpage/index');

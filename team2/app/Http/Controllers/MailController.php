@@ -4,17 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SignupEmail;
+use App\Models\SignupEmail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\SendMail;
 
 class MailController extends Controller
 {
-    public static function sendSignupEmail($user_email, $verification_code) {
-        $data = [
-            'name' => $user_email,
-            'verification_code' => $verification_code
-        ];
-        Mail::to($user_email)->send(new SignupEmail($data));
-    }
-
-    
+	function emailchkpost(Request $req) {
+		$email = 'team2.healthproject@gmail.com';
+		Mail::to($email)->send(new SendMail($email));
+		return '메일 확인';
+	}
 }

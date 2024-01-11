@@ -19,7 +19,7 @@
 	@include('layout.header')
 	@yield('main')
 	</div>
-	{{-- @include('layout.section') --}}
+	@include('layout.section')
 	@include('layout.footer')
 </div>
 	
