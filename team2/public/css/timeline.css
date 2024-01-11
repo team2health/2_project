@@ -109,9 +109,9 @@ td {
 .block-mypage {
     position: absolute;
     z-index: 1;
-    bottom: 0;
+    top: 0;
     width: 100%;
-    height: 105%;
+    height: 60%;
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;

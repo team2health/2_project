@@ -7,6 +7,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\HashTagController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -105,10 +106,17 @@ Route::post('/emailchkgo', [UserController::class, 'emailchkpost'])->name('email
 Route::get('/profile', function () {
 })->middleware(['auth', 'verified']);
 
+
 // 관리자 페이지 임시 라우트
 Route::get('/admin', function () {
     return view('/adminpage/adminlogin');
 })->name('adminlogin');
+Route::post('/adminlogin', [AdminController::class, 'adminlogin'])->name('adminlogin');
+
+Route::middleware(['admin'])->group(function () {
+    // 관리자 전용 라우트 등록하는 곳
+    
+});
 
 Route::get('/admin/main', function () {
     return view('/adminpage/index');
@@ -158,3 +166,4 @@ Route::get('/admin/upgrade-to-pro', function () {
 Route::get('/admin/board', function () {
     return view('/adminpage/upgrade-to-pro');
 })->name('upgrade-to-pro');
+
