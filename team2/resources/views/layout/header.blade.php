@@ -6,7 +6,8 @@
 		@if ((request()->path() === '/') || (request()->path() === 'timeline') || (request()->path() === 'mypage'))
 			<div class="header-community-container-mini2" id="headerThirdDiv">
 		@endif
-		@if ((request()->path() === 'lastboard') || (request()->path() === 'favoriteboard') || (request()->path() === 'hotboard') || Str::contains(request()->url(), 'boardcategory') || Str::contains(request()->url(), 'board/'))
+		@if ((request()->path() === 'lastboard') || (request()->path() === 'favoriteboard') || (request()->path() === 'hotboard')
+		|| Str::contains(request()->url(), 'boardcategory') || Str::contains(request()->url(), 'board/') || (request()->path() === 'categoryboard') || Str::contains(request()->url(), 'detail'))
 			<div class="header-community-container-mini3" id="headerThirdDiv">
 		@endif
 		@if ((request()->path() === 'board'))
@@ -64,8 +65,8 @@
 		|| Str::contains(request()->url(), 'mypage') || Str::contains(request()->url(), 'categoryboard')
 		|| Str::contains(request()->url(), 'boardcategory') || Str::contains(request()->url(), 'lastboard')
 		|| Str::contains(request()->url(), 'hotboard')	|| Str::contains(request()->url(), 'timeline')
-		|| Str::contains(request()->url(), 'favoriteboard') || Str::contains(request()->url(), 'board/')
-		|| Str::contains(request()->url(), 'hotboard') || Str::contains(request()->url(), 'firstchkpassword'))
+		|| Str::contains(request()->url(), 'favoriteboard') || (request()->path() === 'board')
+		|| Str::contains(request()->url(), 'hotboard') || Str::contains(request()->url(), 'firstchkpassword') || Str::contains(request()->url(), 'detail'))
 		<div class="header-mobile">
 			<div class="header-mobile-backBtn" onclick="goBack(); return false;"> < </div>
 			<div class="header-pageName" id="headerPageName"></div>

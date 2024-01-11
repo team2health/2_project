@@ -293,7 +293,7 @@ li{
 
 .insert_main{
     width: 70vW;
-    margin: 10px auto;      
+    margin: 50px auto;      
     ;
 }
 .insert_hidden_container{
@@ -302,8 +302,7 @@ li{
 /* .detail_form {
     margin-bottom: 20px;
 } */
-.insert_container{
-    width: 60vw;    
+.insert_container{ 
     margin: 20px auto;  
     border-radius: 5px; 
     background-color: white;
@@ -327,6 +326,22 @@ li{
     
 }
 
+.image-box {
+    margin: 0 auto;
+}
+
+.image-btn {
+    padding: 20px;
+    border: none;
+    background-color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.img-button-cursor {
+    cursor: pointer;
+}
+
 .insert_select_container{
     margin: 0px auto;
     padding: 10px;
@@ -336,6 +351,7 @@ li{
 .insert_select{
     border: none;
     background-color: rgba(128, 128, 128, 0) ;
+    cursor: pointer;
 }
  .insert_input_container,.insert_textarea_container{
     
@@ -358,7 +374,6 @@ li{
 }
 .insert_hashtag_container{    
     padding: 10px;
-    width:60vw; 
     min-height: 50px; 
     border: 1px solid black;
     border-left: none;
@@ -366,7 +381,8 @@ li{
 }
 #hiddenHashtags{
     padding: 10px;
-    margin-bottom: 70px;
+    width: 60vw;
+    margin: auto;
 }
 .tag {
     cursor: pointer;
@@ -400,7 +416,6 @@ li{
     justify-content: space-between;
     grid-template-columns: repeat(3,90px);   
     margin: 0px auto;  
-    width: 60vw;   
 }
 .insert_bottom_button>p{
     text-align: center;
@@ -763,7 +778,8 @@ a .a-bordergo-hover:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;            
+    cursor: pointer;
+    z-index: 10;         
 }
 .community_a:hover, .community_aplus:hover {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -1021,6 +1037,10 @@ a .a-bordergo-hover:hover {
         margin: 10px 0 0 0;      
     }
     .insert_main{
+        margin: 20px auto;
+        width: 100vw;
+    }
+    #hiddenHashtags {
         width: 100vw;
     }
     /* .last_container {

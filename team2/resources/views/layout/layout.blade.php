@@ -13,15 +13,10 @@
 	<title>@yield('title', 'main')</title>
 </head>
 <body>
-	{{-- <div class="body">
-	<div class="body-sub"> --}}
-
 	@include('layout.header')
 	@yield('main')
-	</div>
 	@include('layout.section')
 	@include('layout.footer')
-{{-- </div> --}}
 	
 	<script src="/js/common.js"></script>
 </body>

@@ -31,6 +31,10 @@ function previewImage(inputId, previewId) {
 //         parentContainer.parentNode.removeChild(parentContainer);
 //     }
 // }
+
+let IMGDELETE = [];
+let cnt = 0;
+
 function removeImage(imageId) {
     // 삭제하려는 이미지의 부모 요소를 찾아서 삭제
     var imageContainer = document.getElementById(`preview${imageId}`);
@@ -44,8 +48,11 @@ function removeImage(imageId) {
 
         // 배열에서 해당 이미지 ID를 사용하여 제거하는 로직 추가
         // 예: 이미지 배열(images)에서 imageId에 해당하는 이미지를 찾아 제거
-        images = images.filter(image => image.id !== imageId);
-       console.log(images);
+        // images = images.filter(image => image.id !== imageId);
+        
+        IMGDELETE[cnt] = imageId;
+        cnt++;
+        document.getElementById('inputHiddenImgUrl').value = IMGDELETE;
     }
 }
 
