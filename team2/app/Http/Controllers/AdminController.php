@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Session;
 use App\Models\Admin;
 use App\Models\User;
 

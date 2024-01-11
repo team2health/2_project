@@ -55,6 +55,8 @@ function removeImage(imageId) {
         cnt++;
         console.log(imageId);
         document.getElementById('inputHiddenImgUrl').value = IMGDELETE;
+        console.log('imgdelete 영역');
+        console.log(IMGDELETE);
     }
     // updateImagesOnServer();
 }
