@@ -41,7 +41,7 @@ class AdminController extends Controller
 
     public function mainget() {
 
-        User::select()
+        User::select();
 
         // SELECT CASE WHEN age < 20 THEN '10'
         //     WHEN age BETWEEN 20 AND 29 THEN '20'
