@@ -27,26 +27,6 @@ h2 {
 * {
     font-family: 'NanumSquareRound';
 }
-header {
-    border-bottom: 1px solid #c9c9c9;
-}
-.body {
-    display: grid;
-    overflow: hidden;
-    justify-content: center;
-    position: relative;
-    /* min-height: 100vh; */
-    /* align-items: start;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none */
-}
-.body-sub {
-    max-width: 1000px;
-    overflow: hidden;
-    width: 100vw;
-}
 .header-mobile {
     background-color: #F9F9F9;
     height: 40px;

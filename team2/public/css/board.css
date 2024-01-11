@@ -12,7 +12,7 @@
 
 .last_main{
     min-height: 66vh;
-    width: 100%;
+    width: 70vw;
     margin: 10px auto;
 }
 .last_main a .last_container:hover, .last_main a .last_container:focus {
@@ -427,7 +427,6 @@ li{
 /* ---------커뮤니티------------------ */
 .slider-container {    
     margin: 30px auto;
-    width: 70vW;   
 }
 
 .community_headline{
@@ -990,6 +989,11 @@ a .a-bordergo-hover:hover {
     margin-left: 20px;
 }
 
+.community-main-container {
+    width: 70vw;
+    margin: 0 auto;
+}
+
 /* 캐러셸 */
 
 
@@ -1052,7 +1056,7 @@ a .a-bordergo-hover:hover {
     .insert_select{
         border: none;
     }
-     .insert_input_container,.insert_textarea_container{
+    .insert_input_container,.insert_textarea_container{
         margin: 0 auto;    
         width:100vw;  
         padding: 0px;  
@@ -1092,6 +1096,11 @@ a .a-bordergo-hover:hover {
         margin-bottom: 15px;
         grid-template-columns: 1fr;
         /* display: block; */
+    }
+
+        
+    .community-main-container {
+        width: 100vw;
     }
 }
 
@@ -1187,6 +1196,10 @@ a .a-bordergo-hover:hover {
         grid-template-columns: 75% 15%;
         grid-template-rows: 25px 90px;
         box-sizing: border-box;
+    }
+    
+    .community-main-container {
+        margin: 0;
     }
 }
 

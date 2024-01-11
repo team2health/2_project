@@ -31,6 +31,12 @@
     font-weight: 800;
     margin-left: 20px
 }
+
+.mypage-main {
+    width: 70vw;
+    margin: 0 auto;
+}
+
 .mypage-main-btn img{
     height: 30px;
     margin-left: 15px;
@@ -344,10 +350,12 @@
     justify-content: center;
 }
 
-
-
-
-
+@media only screen and (max-width: 800px) {
+    .mypage-main {
+        width: 100vw;
+        margin: 0 auto;
+    }
+}
 
 /* display none */
 .mypage-display-none {
@@ -360,4 +368,5 @@
     .mypage-board-img {
         margin-left: 50px;
     }
+    
 }

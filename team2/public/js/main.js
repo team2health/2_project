@@ -434,12 +434,17 @@ function partSelect(index) {
 
 		let SYMPTOMBTNBOX = document.createElement('div');
 		let SYMPTOMBTN = document.createElement('button');
+		let SYMPTOMA = document.createElement('a');
 		SYMPTOMBTNBOX.classList = 'symptom-button-box';
 		SYMPTOMBOX.appendChild(SYMPTOMBTNBOX);
+		SYMPTOMBTNBOX.appendChild(SYMPTOMA);
 		SYMPTOMBTNBOX.appendChild(SYMPTOMBTN);
 		SYMPTOMBTN.innerHTML = '검사하기';
+		SYMPTOMA.innerHTML = '돌아가기';
+		SYMPTOMA.href = '/';
 		SYMPTOMBTN.type = 'button';
 		SYMPTOMBTN.classList = 'symptom-button';
+		SYMPTOMA.classList = 'symptom-button1';
 		SYMPTOMBTN.setAttribute('onclick', 'symptomChk()');
 
 	})
