@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
-use Illuminate\Contracts\Auth\Authenticatable;
+// use Illuminate\Contracts\Auth\Adminauth;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -22,10 +23,19 @@ class AdminController extends Controller
 
         Auth::login($result);
         if(Auth::check()) {
-            session($result->only('id', 'admin_id', 'admin_name'));
+            session($result->only('admin_id', 'admin_name'));
         } else {
             return view('adminlogin');
         }
+        return redirect()->route('adminmain');
+    }
+    public function adminlogout() {
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('main.get');
+    }
+
+    public function adminmain() {
         return view('adminpage.index');
     }
 }

@@ -4,10 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Middleware\AdminMiddleware as Middleware;
-
-
-class AdminMiddleware extends Middleware
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Middleware\Adminauth as Middleware;
+// extends Middleware
+class Adminauth
 {
     /**
      * Handle an incoming request.
@@ -16,12 +17,14 @@ class AdminMiddleware extends Middleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle($request, Closure $next, ...$guards)
+    public function handle($request, Closure $next)
     {
-        // if (Auth::check() && Auth::user()->isAdmin()) {
-        //     return $next($request);
-        // } else {
-        //     return view('main');
-        // }
+        $admin_id = session('admin_id');
+
+        if (isset($admin_id)) {
+            return $next($request);
+        }
+        
+        return redirect()->route('adminlogin');
     }
 }

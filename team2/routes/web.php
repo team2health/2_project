@@ -10,7 +10,7 @@ use App\Http\Controllers\HashTagController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-
+use App\Http\Middleware\Adminauth;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,59 +111,60 @@ Route::get('/profile', function () {
 Route::get('/admin', function () {
     return view('/adminpage/adminlogin');
 })->name('adminlogin');
-Route::post('/adminlogin', [AdminController::class, 'adminlogin'])->name('adminlogin');
+Route::post('/adminlogin', [AdminController::class, 'adminlogin'])->name('adminloginpost');
+Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('adminlogout');
 
-Route::middleware(['admin'])->group(function () {
-    // 관리자 전용 라우트 등록하는 곳
+
+
+// 관리자 전용 라우트 등록하는 곳
+Route::middleware(['admin.auth'])->group(function () {
+
+    Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('adminmain');
+    
+    Route::get('/admin/charts-chartjs', function () {
+        return view('/adminpage/charts-chartjs');
+    })->name('charts-chartjs');
+    
+    Route::get('/admin/icons-feather', function () {
+        return view('/adminpage/icons-feather');
+    })->name('icons-feather');
+    
+    
+    Route::get('/admin/blank', function () {
+        return view('/adminpage/blank');
+    })->name('blank');
+    
+    Route::get('/admin/pages-sign-in', function () {
+        return view('/adminpage/pages-sign-in');
+    })->name('pages-sign-in');
+    
+    Route::get('/admin/pages-sign-up', function () {
+        return view('/adminpage/pages-sign-up');
+    })->name('pages-sign-up');
+    
+    Route::get('/admin/ui-buttons', function () {
+        return view('/adminpage/ui-buttons');
+    })->name('ui-buttons');
+    
+    Route::get('/admin/ui-cards', function () {
+        return view('/adminpage/ui-cards');
+    })->name('ui-cards');
+    
+    Route::get('/admin/ui-forms', function () {
+        return view('/adminpage/ui-forms');
+    })->name('ui-forms');
+    
+    Route::get('/admin/ui-typography', function () {
+        return view('/adminpage/ui-typography');
+    })->name('ui-typography');
+    
+    Route::get('/admin/upgrade-to-pro', function () {
+        return view('/adminpage/upgrade-to-pro');
+    })->name('upgrade-to-pro');
+    
+    Route::get('/admin/board', function () {
+        return view('/adminpage/upgrade-to-pro');
+    })->name('upgrade-to-pro');
     
 });
-
-Route::get('/admin/main', function () {
-    return view('/adminpage/index');
-})->name('index');
-
-Route::get('/admin/charts-chartjs', function () {
-    return view('/adminpage/charts-chartjs');
-})->name('charts-chartjs');
-
-Route::get('/admin/icons-feather', function () {
-    return view('/adminpage/icons-feather');
-})->name('icons-feather');
-
-
-Route::get('/admin/blank', function () {
-    return view('/adminpage/blank');
-})->name('blank');
-
-Route::get('/admin/pages-sign-in', function () {
-    return view('/adminpage/pages-sign-in');
-})->name('pages-sign-in');
-
-Route::get('/admin/pages-sign-up', function () {
-    return view('/adminpage/pages-sign-up');
-})->name('pages-sign-up');
-
-Route::get('/admin/ui-buttons', function () {
-    return view('/adminpage/ui-buttons');
-})->name('ui-buttons');
-
-Route::get('/admin/ui-cards', function () {
-    return view('/adminpage/ui-cards');
-})->name('ui-cards');
-
-Route::get('/admin/ui-forms', function () {
-    return view('/adminpage/ui-forms');
-})->name('ui-forms');
-
-Route::get('/admin/ui-typography', function () {
-    return view('/adminpage/ui-typography');
-})->name('ui-typography');
-
-Route::get('/admin/upgrade-to-pro', function () {
-    return view('/adminpage/upgrade-to-pro');
-})->name('upgrade-to-pro');
-
-Route::get('/admin/board', function () {
-    return view('/adminpage/upgrade-to-pro');
-})->name('upgrade-to-pro');
 
