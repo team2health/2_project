@@ -34,5 +34,6 @@ class VerifyCsrfToken extends Middleware
         '/deleteacountchk',
         '/changpasswordchk',
         '/hashtagsearch',
+        '/adminlogout',
     ];
 }
