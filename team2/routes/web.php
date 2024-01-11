@@ -83,9 +83,9 @@ Route::post('/recorddelete', [MypageController::class, 'recorddelete'])->name('r
 Route::get('/seeyouagain', [MypageController::class, 'seeyouagainget'])->name('seeyouagain');
 
 
-// 이메일 확인 페이지
-Route::get('/emailchk', [UserController::class, 'emailchk']);
-
+// 이메일 확인 페이지 접속
+Route::get('/emailchk', [UserController::class, 'emailchk'])->name('email.get');
+Route::post('/emailchkgo', [UserController::class, 'emailchkpost'])->name('email.post');
 // 이메일 확인하면 어디로 돌아가는지
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

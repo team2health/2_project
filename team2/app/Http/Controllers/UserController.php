@@ -11,27 +11,19 @@ use App\Models\User;
 use Illuminate\support\Facades\DB;
 use App\Models\Board_tag;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Contracts\Auth\MustVerifyEmail; 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Notifications\VerifyEmail;
 
 
 
 class UserController extends Controller
 {
-
-    public function emailchk() {
-        return view('emailpage');
-    }
-
-    
     public function registget() {
         if(Auth::check()) {
             return redirect()->route('main.get');
         }
         
-        return view('regist');
+        return view('emailpage');
     }
+
 
 
     public function registpost(Request $request) {
@@ -190,5 +182,20 @@ class UserController extends Controller
         }else {
             return view('firstchkpassword')->with('passwordchk','1');
         }
+    }
+
+    public function emailchk() {
+        return view('emailpage');
+    }
+
+    public function emailchkpost(Request $request) {
+        Log::debug('emailchkpostemailchkpostemailchkpostemailchkpost');
+        Log::debug($request);
+        $verification_code = mt_rand(100000, 999999);
+        Log::debug($verification_code);
+        exit;
+        MailController::sendSignupEmail($request->user_email, $verification_code);
+        //Show a message
+        return redirect()->back()->with(session()->flash('이메일 확인해보세용'));
     }
 }
