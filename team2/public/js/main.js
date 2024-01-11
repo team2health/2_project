@@ -7,6 +7,7 @@ let PARTCHKCONTAINER = document.getElementById('partChkContainer');
 let SYMPTOMCHKCONTAINER = document.getElementById('symptomChkContainer');
 let RESULTCONTAINER = document.getElementById('resultContainer');
 let HOSPITALCONTAINER = document.getElementById('hospitalContainer');
+let USERID = document.getElementById('main-user_id');
 
 let PROGRESSBOX = document.getElementById('progress-bar-box');
 let progressBarElem = document.querySelector('.progress-bar__bar');
@@ -373,6 +374,10 @@ function off_mouse_back(index) {
 }
 
 function partclick(index) {
+	if(!USERID.value) {
+		alert('로그인을 해주세요.')
+		return false;
+	}
 	
 	document.getElementById('body-front').style.display = 'none';
 	document.getElementById('body-back').style.display = 'none';
@@ -400,6 +405,11 @@ function partclick(index) {
 }
 
 function partSelect(index) {
+	if(!USERID.value) {
+		alert('로그인을 해주세요.')
+		return false;
+	}
+	
 	PARTCHKCONTAINER.style.display = 'none';
 	SYMPTOMCHKCONTAINER.style.display = 'block';
 

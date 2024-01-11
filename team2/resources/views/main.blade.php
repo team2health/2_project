@@ -6,6 +6,7 @@
 <main class="wrapper">
 	<div class="container" id="part-display">
 		<div style="color: #2C2B71" class="text-center bc-purple" id="partChkContainer">
+			<input type="hidden" id="main-user_id" value="{{ session('id') }}">
 			<br>
 			<div><span class="text-part" id="partSelect">#부위</span>을/를 선택해 주세요</div>
 			<br>

@@ -1,14 +1,19 @@
 function toggleDropdown() {
     document.getElementById('myDropdown').classList.toggle('show');
 }
-window.addEventListener('load', function() {
-    setPageName(); //일주일을 불러오는 함수
-});
+// window.addEventListener('load', function() {
+//     setPageName(); //일주일을 불러오는 함수
+// });
 
-allHeaderDisplayNone();
+// allHeaderDisplayNone();
 
 // 푸터 아이콘 opacity
+let BACKURL = document.referrer;
 let footericondiv = document.querySelectorAll('.footer-icon-div');
+console.log(BACKURL);
+function goBack() {
+    window.location.href = BACKURL;
+}
 
 // function toggleDropdown2() {
 //     document.getElementById("myDropdown2").classList.toggle("show");

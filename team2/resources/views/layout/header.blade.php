@@ -6,7 +6,7 @@
 		@if ((request()->path() === '/') || (request()->path() === 'timeline') || (request()->path() === 'mypage'))
 			<div class="header-community-container-mini2" id="headerThirdDiv">
 		@endif
-		@if ((request()->path() === 'lastboard') || (request()->path() === 'favoriteboard') || (request()->path() === 'hotboard') || Str::contains(request()->url(), 'boardcategory'))
+		@if ((request()->path() === 'lastboard') || (request()->path() === 'favoriteboard') || (request()->path() === 'hotboard') || Str::contains(request()->url(), 'boardcategory') || Str::contains(request()->url(), 'board/'))
 			<div class="header-community-container-mini3" id="headerThirdDiv">
 		@endif
 		@if ((request()->path() === 'board'))
@@ -44,10 +44,16 @@
 						<a class="header-btn1" href="{{route('favoriteboard.get')}}" class="header-community-nav" id="headerFavoriteBoard">관심태그</a>
 					@endif
 			</div>
-			<div class="header-timeline-mypage-box">
-				<a class="header-mypage-timeline-box" href="{{route('todaytimeline.get')}}" class="pc-header-button-mypage">타임라인</a>
-				<a  class="header-mypage-timeline-box" href="{{route('mypage.get')}}" class="pc-header-button-mypage">마이페이지</a>
-			</div>
+			@if (session('id'))
+				<div class="header-timeline-mypage-box">
+					<a class="header-mypage-timeline-box" href="{{route('todaytimeline.get')}}" class="pc-header-button-mypage">타임라인</a>
+					<a  class="header-mypage-timeline-box" href="{{route('mypage.get')}}" class="pc-header-button-mypage">마이페이지</a>
+				</div>
+			@else
+				<div class="header-timeline-mypage-box">
+					<a  class="header-mypage-timeline-box" href="{{route('login.get')}}" class="pc-header-button-mypage">로그인</a>
+				</div>
+			@endif
 		</div>
 
 	</div>
