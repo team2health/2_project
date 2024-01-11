@@ -39,6 +39,7 @@
 				<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $result->board_content }}</textarea></label><br>
 			</div>	
 			
+			<input type="hidden" name="imgUrl" id="inputHiddenImgUrl">
 			@foreach($result->images as $image)
 			
 					<div class="detail_board_content">
@@ -78,9 +79,9 @@
 				<button type="button" id="toggleHashtagsBtn" onclick="toggleHashtags()">해시태그 펼치기/접기</button>
 				
 				<!-- Input for selected hashtags -->
-				<input type="hidden" id="selectedHashtagsInput" name="hashtag" />
+				<input type="hidden" id="selectedHashtagsInput" name="hashtag"/>
 				<div class="insert_img" id="imageContainer">
-				<input type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>>
+				<input type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>
 						<label for="selectFile">
 							<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
 						</label>						
@@ -98,7 +99,8 @@
 			<a href="{{url()->previous()}}"><button type="button" class="insert_btn">취소</button></a>		
 			<button type="submit" class="insert_btn">수정완료</button>	
 		</div>				 -->
-	</form>			
+	</form>
+	<br><br><br><br>	
 </main>
 <script src="/js/update.js"></script>
 <script>var images = @json($result->images)</script>

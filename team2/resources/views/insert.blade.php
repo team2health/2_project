@@ -62,7 +62,7 @@
 				<div class="insert_img" id="imageContainer">
 					<!-- <input type="file" name="images[]" id="fileInput1" style="display:none;" onchange="handleFileSelect(event)" accept="image/*" multiple> -->
 					<input type='file' name='selectFile[]' style="display:none;" id='selectFile' multiple='multiple'>
-					<label for="selectFile">
+					<label for="selectFile" class="img-button-cursor">
 						<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
 					</label>						
 				</div>					
@@ -77,7 +77,8 @@
 			<!-- Input for selected hashtags -->
 			<input type="hidden" id="selectedHashtagsInput" name="hashtag" />			
 		</div>			
-	</form>				
+	</form>	
+	<br><br><br><br>			
 </main>
        
 <script src="/js/insert.js"></script>

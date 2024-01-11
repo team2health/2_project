@@ -33,7 +33,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'user_gender',
         'user_img',
         'agreement_flg',
-        
     ];
     public function boardid(){
         return $this->hasMany(Board::class);

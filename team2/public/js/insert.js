@@ -65,7 +65,7 @@
       
 			var btn = document.createElement('input');
 			btn.setAttribute('type', 'button');
-			btn.setAttribute('value', 'x');
+			btn.setAttribute('value', 'X');
 			btn.setAttribute('delFile', file.name);
 			btn.classList.add("image-btn");
 			btn.onclick = function(ev){

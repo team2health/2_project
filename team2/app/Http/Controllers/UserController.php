@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\support\Facades\DB;
 use App\Models\Board_tag;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 
 
 
@@ -20,7 +22,6 @@ class UserController extends Controller
         if(Auth::check()) {
             return redirect()->route('main.get');
         }
-        
         return view('emailpage');
     }
 
@@ -184,18 +185,22 @@ class UserController extends Controller
         }
     }
 
-    public function emailchk() {
-        return view('emailpage');
+    public function emailchkpost(Request $request) {
+
+        $verification_code = mt_rand(100000, 999999);
+        $this->sendSignupEmail($request->user_email, $verification_code);
+        return redirect()->route('email.get')->with(session()->flash('email_msg','이메일 확인해보세용'));
     }
 
-    public function emailchkpost(Request $request) {
-        Log::debug('emailchkpostemailchkpostemailchkpostemailchkpost');
-        Log::debug($request);
-        $verification_code = mt_rand(100000, 999999);
-        Log::debug($verification_code);
-        exit;
-        MailController::sendSignupEmail($request->user_email, $verification_code);
-        //Show a message
-        return redirect()->back()->with(session()->flash('이메일 확인해보세용'));
+
+    public function sendSignupEmail($user_email, $verification_code) {
+        Log::debug($user_email);
+        $data = [
+            'name' => $user_email,
+            'verification_code' => $verification_code
+        ];
+        // $mail = new S0ignupEmail($data);
+        Mail::to($user_email)->send(new SendEmail($data));
+        return '메일확인';
     }
 }
