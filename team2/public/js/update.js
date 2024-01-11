@@ -17,41 +17,38 @@ function previewImage(inputId, previewId) {
         reader.readAsDataURL(file);
     } 
 }
+
 // function removeImage(key) {
-//     var imageContainer = document.querySelector('.detail_board_content:nth-child(' + (parseInt(key) + 1) + ')');
+//     // 삭제하려는 이미지의 부모 요소를 찾아서 삭제
+//     var imageContainer = document.getElementById(`preview${board_img_id}`);
+//     console.log(imageContainer);
+    
 //     if (imageContainer) {
-//         imageContainer.remove();
-//         // 이미지 삭제 후 배열에서도 제거
-//         sel_files.splice(parseInt(key), 1);
+//         // 이미지를 감싸는 부모 요소를 찾기
+//         var parentContainer = imageContainer.parentNode;
+        
+//         // 부모 요소에서 이미지 삭제
+//         parentContainer.parentNode.removeChild(parentContainer);
 //     }
-//     // 이미지를 삭제하면서 파일 선택란도 함께 초기화
-//     document.getElementById('file' + key).value = '';
-//     // 미리보기 영역도 초기화
-//     document.getElementById('preview' + key).src = '';
 // }
-function removeImage(key) {
-    console.log("Button clicked for key: " + key);  
-//     console.log("Key: " + key);
-    var imageContainer = document.querySelector('.detail_board_content:nth-child(' + (parseInt(key) + 1) + ')');
+function removeImage(imageId) {
+    // 삭제하려는 이미지의 부모 요소를 찾아서 삭제
+    var imageContainer = document.getElementById(`preview${imageId}`);
+    
     if (imageContainer) {
-        console.log(imageContainer);
-        imageContainer.remove();
+        // 이미지를 감싸는 부모 요소를 찾기
+        var parentContainer = imageContainer.parentNode;
+        
+        // 부모 요소에서 이미지 삭제
+        parentContainer.parentNode.removeChild(parentContainer);
+
+        // 배열에서 해당 이미지 ID를 사용하여 제거하는 로직 추가
+        // 예: 이미지 배열(images)에서 imageId에 해당하는 이미지를 찾아 제거
+        images = images.filter(image => image.id !== imageId);
+       console.log(images);
     }
 }
 
-
-// function removeImage(key) {
-//     console.log("Button clicked for key: " + key);  
-//     console.log("Key: " + key);
-//     var index = parseInt(key, 10);  // 문자열을 정수로 변환
-//     var imageContainer = document.querySelector('.detail_board_content:nth-child(' + (index + 1) + ')');
-//     console.log(imageContainer);
-//     if (imageContainer) {
-//         imageContainer.remove();
-//         console.log(imageContainer);        
-//     }
-// }
-// console.log("Button clicked for key: " + key);
  imageView = function imageView(vid, fid) {
     var imageZone = document.getElementById(vid);
     var selectFile = document.getElementById(fid);
