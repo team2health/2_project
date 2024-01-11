@@ -106,15 +106,10 @@ Route::post('/emailchkgo', [UserController::class, 'emailchkpost'])->name('email
 Route::get('/profile', function () {
 })->middleware(['auth', 'verified']);
 
-
 // 관리자 페이지 임시 라우트
-Route::get('/admin', function () {
-    return view('/adminpage/adminlogin');
-})->name('adminlogin');
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 Route::post('/adminlogin', [AdminController::class, 'adminlogin'])->name('adminloginpost');
 Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('adminlogout');
-
-
 
 // 관리자 전용 라우트 등록하는 곳
 Route::middleware(['admin.auth'])->group(function () {

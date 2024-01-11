@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function admin() {
+        return view('adminlogin');
+    }
     public function adminlogin(Request $request) {
-        Log::debug($request);
 
         $result = Admin::where('admin_id', $request->admin_id)->first();
 
