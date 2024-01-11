@@ -444,8 +444,9 @@ class BoardController extends Controller
 
 // 이미지 삭제 요청이 있는 경우
 if ($request->has('delete_image_id')) {
+    Log::debug($request->has('delete_image_id')); 
     $imageIdToDelete = $request->input('delete_image_id');
-    dd($imageIdToDelete); 
+    // dd($imageIdToDelete); 
     // 이미지 모델에서 해당 ID에 해당하는 이미지를 찾아 삭제
     $imageToDelete = Board_img::findOrFail($imageIdToDelete);
     $imagePath = public_path('board_img/' . $imageToDelete->img_address);
@@ -476,8 +477,7 @@ return redirect()->route('board.show', ['board' => $result->board_id]);
             }
 
         Board::destroy($board_id);
-        Comment::where('board_id', $board_id)->delete();        
-        // Board_img::where('board_id', $board_id)->delete();
+        Comment::where('board_id', $board_id)->delete();
         return redirect()-> route('categoryboard');
     }
 

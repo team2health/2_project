@@ -48,6 +48,7 @@
 						</label>
 						<input type="file" name="selectFile[]" id="file{{ $image->board_img_id }}" style="display:none;" onchange="previewImage('file{{ $image->board_img_id }}', 'preview{{ $image->board_img_id }}')" accept="image/*">
 						<button type="button" onclick="removeImage('{{ $image->board_img_id }}')">이미지 삭제</button>
+						<input type="hidden" name="delete_image_id[]" value="{{ $image->board_img_id}}">
 					</div>
 					
 				@endforeach

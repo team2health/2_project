@@ -31,6 +31,7 @@ function previewImage(inputId, previewId) {
 //         parentContainer.parentNode.removeChild(parentContainer);
 //     }
 // }
+
 function removeImage(imageId) {
     // 삭제하려는 이미지의 부모 요소를 찾아서 삭제
     var imageContainer = document.getElementById(`preview${imageId}`);
@@ -45,9 +46,42 @@ function removeImage(imageId) {
         // 배열에서 해당 이미지 ID를 사용하여 제거하는 로직 추가
         // 예: 이미지 배열(images)에서 imageId에 해당하는 이미지를 찾아 제거
         images = images.filter(image => image.id !== imageId);
-       console.log(images);
+       console.log('Updated images:',images);
     }
+    // updateImagesOnServer();
 }
+// function updateImagesOnServer() {
+//     // images 배열에서 이미지 ID만 추출하여 서버로 전송할 데이터 생성
+//     var imageIdsToDelete = images.map(image => image.id);
+//     var csrfToken = document.querySelector('meta[name="csrf-token"]').content;   
+
+//     // 서버로 전송할 JSON 데이터
+//     var jsonData = {
+//         imagesToDelete: imageIdsToDelete
+//     };
+
+//     // Fetch API를 사용하여 서버로 JSON 데이터 전송
+//     fetch('/board/board_id', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-CSRF-TOKEN': csrfToken,
+//         },
+//         body: JSON.stringify(jsonData),
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         console.log('Server response:', data);
+//     })
+//     .catch(error => {
+//         console.error('Error during fetch:', error);
+//     });
+// }
 
  imageView = function imageView(vid, fid) {
     var imageZone = document.getElementById(vid);
