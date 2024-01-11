@@ -363,76 +363,11 @@ class BoardController extends Controller
         
     }    
     
-    Log::debug($request);
-    // if ($request->hasFile('selectFile') && request('selectFile') != '') {
-    //     $imagePath = public_path('board_img'.request->image);
-    //     if(File::exists($imagePath)){
-    //         unlink($imagePath);
-    //     }
-    //     $image = $request()->file('selectFile')->store('uploads', 'public');
-    //     $data['image'] = $image;
-    //     $post->update($data);
-    // }
-    // $request->update($data);
-// 데이터베이스에서 변경하려는 이미지를 식별하여 삭제
-// foreach ($existingImages as $existingImage) {
-//     if ($existingImage->img_address == $imageNameToDelete) {
-//         // 이미지를 파일 시스템에서 삭제
-//         Storage::delete('board_img/' . $existingImage->img_address);
-
-//         // 데이터베이스에서 이미지를 삭제
-//         $existingImage->delete();
-//     }
-// }
-
-// 새로운 이미지를 서버에 저장하고 데이터베이스에 연결
-// $newImageName = $newImage->store('board_img');
-// Board::findOrFail($board_id)->images()->create(['img_address' => $newImage]);
-// if ($request->hasFile('selectFile')) {
-    // foreach ($result->images as $existingImage) {
-    //     // 기존 이미지 삭제
-    //     Storage::delete('board_img/' . $existingImage->img_address);
-    //     $existingImage->delete();
-    // }
-    // $hashtag_names = array_values(array_filter($hashtag_names));
-
-    // 재정렬
-    // usort($hashtag_names, function($a, $b) {
-    //     return strcmp($a[0], $b[0]);
-    // });
-//     $images = $request->file('selectFile');
-
-//     foreach ($images as $image) {
-//         $imageName = Str::uuid() . '.' . $image->extension();
-//         $image->move(public_path('board_img'), $imageName);
-
-//         // Save the image path to the Board_img model
-//         $boardImage = new Board_img(['img_address' => $imageName]);
-//         $result->images()->save($boardImage);
-//     }
-// }
-
-    // if ($request->hasFile('selectFile')) {
-    //     // 기존 이미지 삭제
-    //     // $result->images()->delete();     
-        
-        
-    //     $images = $request->file('selectFile');
-        
-        
-        
-    //     foreach ($images as $image) {
-    //         $imageName = Str::uuid() . '.' . $image->extension();
-    //         $image->move(public_path('board_img'), $imageName);
-
-    //         // Save the image path to the Board_img model
-    //         $boardImage = new Board_img(['img_address' => $imageName]);
-    //         $result->images()->save($boardImage);
-    //     }
-    // }
+    // Log::debug($request);
+ 
     if ($request->hasFile('selectFile')) {
     $images = $request->file('selectFile');
-   Log::debug($images);  
+//    Log::debug($images);  
     foreach ($images as $image) {
         $imageName = Str::uuid() . '.' . $image->extension();
         $image->move(public_path('board_img'), $imageName);
@@ -441,35 +376,23 @@ class BoardController extends Controller
         $boardImage = new Board_img(['img_address' => $imageName]);
         $result->images()->save($boardImage);
     }
+    }
+    if ($request->has('imgUrl')) {
+        Log::debug($request->has('imgUrl')); 
+        $imageIdToDelete = $request->input('imgUrl');    
+        $imageToDelete = Board_img::findOrFail($imageIdToDelete);    
+        $imagePath = public_path('board_img/' . $imageToDelete->img_address);
+        if (File::exists($imagePath)) {
+            // 파일 시스템에서 이미지 삭제
+            unlink($imagePath);
+        }
+        // 모델에서 이미지 삭제
+        $imageToDelete->delete();
+    }
+
+
+    return redirect()->route('board.show', ['board' => $result->board_id]);
 }
-
-// 이미지 삭제 요청이 있는 경우
-if ($request->has('delete_image_id')) {
-    Log::debug('Image deletion request received'); 
-    Log::debug($request->has('delete_image_id')); 
-    $imageIdsToDelete = $request->input('delete_image_id');
-    Log::debug('Image IDs to delete: ' . implode(', ', $imageIdsToDelete));
-    Log::debug($imageIdsToDelete);
-    foreach ($imageIdsToDelete as $imageIdToDelete) {
-    // 이미지 모델에서 해당 ID에 해당하는 이미지를 찾아 삭제
-    $imageToDelete = Board_img::find($imageIdToDelete);
-    // dd( $imageToDelete);
-    $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-    // dd( $imagePath);
-
-    if (File::exists($imagePath)) {
-        // 파일 시스템에서 이미지 삭제
-        unlink($imagePath);
-    }
-
-    // 모델에서 이미지 삭제
-    $imageToDelete->delete();
-    }
-}
-
-return redirect()->route('board.show', ['board' => $result->board_id]);
-        
-    }
 
     /**
      * Remove the specified resource from storage. 
