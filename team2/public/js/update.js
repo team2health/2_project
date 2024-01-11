@@ -51,7 +51,9 @@ function removeImage(imageId) {
         // images = images.filter(image => image.id !== imageId);
         
         IMGDELETE[cnt] = imageId;
+        console.log(IMGDELETE);
         cnt++;
+        console.log(imageId);
         document.getElementById('inputHiddenImgUrl').value = IMGDELETE;
     }
     // updateImagesOnServer();

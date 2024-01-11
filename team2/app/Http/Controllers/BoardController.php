@@ -17,6 +17,7 @@ use App\Models\Hashtag;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BoardController extends Controller
 {
@@ -444,12 +445,17 @@ class BoardController extends Controller
 
 // 이미지 삭제 요청이 있는 경우
 if ($request->has('delete_image_id')) {
+    Log::debug('Image deletion request received'); 
     Log::debug($request->has('delete_image_id')); 
-    $imageIdToDelete = $request->input('delete_image_id');
-    // dd($imageIdToDelete); 
+    $imageIdsToDelete = $request->input('delete_image_id');
+    Log::debug('Image IDs to delete: ' . implode(', ', $imageIdsToDelete));
+    Log::debug($imageIdsToDelete);
+    foreach ($imageIdsToDelete as $imageIdToDelete) {
     // 이미지 모델에서 해당 ID에 해당하는 이미지를 찾아 삭제
-    $imageToDelete = Board_img::findOrFail($imageIdToDelete);
+    $imageToDelete = Board_img::find($imageIdToDelete);
+    // dd( $imageToDelete);
     $imagePath = public_path('board_img/' . $imageToDelete->img_address);
+    // dd( $imagePath);
 
     if (File::exists($imagePath)) {
         // 파일 시스템에서 이미지 삭제
@@ -458,6 +464,7 @@ if ($request->has('delete_image_id')) {
 
     // 모델에서 이미지 삭제
     $imageToDelete->delete();
+    }
 }
 
 return redirect()->route('board.show', ['board' => $result->board_id]);
