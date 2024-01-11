@@ -104,7 +104,6 @@ button {
 }
 
 .mini-container {
-	background-color: #F5F5F5;
 	width: 30vw;
 	margin: 0 auto;
 	text-align: center;
@@ -205,7 +204,7 @@ button {
 }
 
 .lr-box {
-	margin-top: 70px;
+	margin-top: 200px;
 }
 .display-flex a:hover {
 	color: #FF9900;
@@ -431,18 +430,35 @@ button {
 	display: flex;
     justify-content: center;
 	align-items: center;
-	/* border-bottom: 1px solid #c9c9c9; */
+	width: 80vw;
+	margin: 0 auto;
+    border-bottom: 1px solid #c9c9c9;
 }
-.header-btn1 {
-    padding: 31px;
-    padding-left: 13%;
-    font-weight: 800;
-	cursor: pointer;
+
+.header-community-container1 {
+	display: flex;
+    justify-content: center;
+	align-items: center;
+	width: 80vw;
+	margin: 0 auto;
+    border-bottom: 1px solid #c9c9c9;
 }
+
 .header-btn1:hover {
 	background-color: #ebebed;
 	border-radius: 10px;
 }
+
+.header-btn2:hover {
+	background-color: #ebebed;
+	border-radius: 10px;
+}
+
+.header-main-go:hover {
+	background-color: #ebebed;
+	border-radius: 10px;
+}
+
 .header-community-nav, .pc-header-button-main {
 	padding: 10px;
 }
@@ -476,17 +492,34 @@ button {
     height: 60px;
 }
 
+.header-community-container-mini2 {
+	display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
+.header-community-container-mini3 {
+	display: flex;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
 .header-community-box {
 	line-height: 60px;
 }
 
 
-.header-btn1 {
+.header-btn1, .header-btn2 {
 	padding: 20px 20px;
 	min-width: 100px;
 	text-align: center;
 	line-height: 20px;
-	margin: 0 10px;
+	margin: 0 5px;
+    font-weight: 800;
 }
 /* --------------------------------- */
 .part-box {
@@ -913,9 +946,21 @@ input:checked + label{
 	margin: 30px;
 }
 
+.symptom-button1 {
+	width: 160px;
+    height: 60px;
+    background-color: #f4c4c4;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    margin: 30px;
+    line-height: 60px;
+    font-weight: 400;
+}
+
 .symptom-button-box {
-	text-align: right;
 	margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .diagnoseAgain, .hospitalSearch {
@@ -926,6 +971,7 @@ input:checked + label{
 	border-radius: 20px;
 	margin-bottom: 50px;
 	color: #000000;
+	cursor: pointer;
 }
 
 .mainResultText {
@@ -950,8 +996,8 @@ input:checked + label{
 
 .header-timeline-mypage-box {
 	line-height: 60px;
-    margin-left: 50px;
-    width: 20%;
+    margin-left: 45px;
+    width: 25%;
     text-align: right;
 }
 
@@ -1000,6 +1046,15 @@ input:checked + label{
 	left: 0;
 }
 
+.header-main-go {
+	padding: 20px 20px;
+    min-width: 100px;
+    text-align: center;
+    line-height: 20px;
+    margin: 0 5px;
+    font-weight: 800;
+}
+
 /* ------------------------------- */
 
 .main-body-front-back {
@@ -1017,6 +1072,13 @@ input:checked + label{
 		margin: 0 auto;
 		text-align: center;
 		margin-top: 50px;
+	}
+	
+	.header-timeline-mypage-box {
+		line-height: 60px;
+		margin-left: 16px;
+		width: 25%;
+		text-align: right;
 	}
 }
 
@@ -1043,14 +1105,34 @@ input:checked + label{
 		height: 15vw;
 		overflow: hidden;
 	}
+	
+	.header-community-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100vw;
+		margin: 0 auto;
+		border-bottom: 1px solid #c9c9c9;
+	}
+
+	.header-community-container1 {
+		display: none;
+	}
+
+	.header-timeline-mypage-box {
+		line-height: 60px;
+		width: 25%;
+		text-align: right;
+		margin: 0;
+	}
+	
+	.header-community-box {
+		line-height: 60px;
+		text-align: center;
+	}
 }
 
 @media only screen and (max-width:800px) {
-	.header-community-container {
-		padding: 10px 0;
-		margin-left: 0;
-		display: block;
-	}
 	.header-community-container div a {
 		padding: 10px;
 		min-width: 20px;
@@ -1066,10 +1148,17 @@ input:checked + label{
 	.header-community-container-mini-main {
 		display: none;
 	}
+
+	.header-community-container-mini2 {
+		display: none;
+	}
+
+	.header-community-container-mini3 {
+		display: none;
+	}
+
 	.header-community-container-mini {
-		display: flex;
-		justify-content: space-evenly;
-		width: 100vw;
+		display: block;
 	}
 
 	.pc-header-button-main {
@@ -1145,6 +1234,14 @@ input:checked + label{
 		border: none;
 		width: 100%;
 	}
+
+	.header-btn2 {
+		display: none;
+	}
+		
+	.lr-box {
+		margin-top: 100px;
+	}	
 }
 
 @media only screen and (max-width:650px) {
