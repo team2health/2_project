@@ -116,6 +116,25 @@ Route::middleware(['admin.auth'])->group(function () {
 
     Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('adminmain');
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // 템플릿 라우트
     Route::get('/admin/charts-chartjs', function () {
         return view('/adminpage/charts-chartjs');
     })->name('charts-chartjs');
