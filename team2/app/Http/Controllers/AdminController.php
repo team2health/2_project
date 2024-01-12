@@ -21,7 +21,7 @@ class AdminController extends Controller
         $result = Admin::where('admin_id', $request->admin_id)->first();
 
         if(!(Hash::check($request->admin_password, $result->admin_password))) {
-            return view('adminpage.adminlogin');
+            return redirect()->route('admin');
         }
 
         Auth::login($result);

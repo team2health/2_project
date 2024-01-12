@@ -143,7 +143,7 @@ birthYearEl.addEventListener('focus', function () {
 		}
 	}
 });
-// '출생 연도' 셀렉트 박스 option 목록 동적 생성
+// '출생 달' 셀렉트 박스 option 목록 동적 생성
 const birthMonthEl = document.querySelector('#birth-month')
 // option 목록 생성 여부 확인
 isMonthOptionExisted = false;
@@ -168,7 +168,7 @@ birthMonthEl.addEventListener('focus', function () {
 	}
 });
 
-// '출생 연도' 셀렉트 박스 option 목록 동적 생성
+// '출생 날짜' 셀렉트 박스 option 목록 동적 생성
 const birthDateEl = document.querySelector('#birth-day')
 // option 목록 생성 여부 확인
 isDateOptionExisted = false;
