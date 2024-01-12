@@ -12,20 +12,32 @@
         <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>
         @if(Auth::id() !== $data->user->id)
 <button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px; alt=""></button>
+<form action="{{ route('boardreport', ['board_id' => $data->board_id, 'u_id' => Auth::id()]) }}" method="POST">
+    
+    @csrf
     <div id="myModal" class="modal">
         <div class="comment_modal_content">            
-            <p><input type="radio" name="options" value="option1">                                        
-            욕설</p> 
-            <p><input type="radio" name="options" value="option2">                                        
+            <p><input type="radio" name="options" value="1">                                        
+            언어폭력</p> 
+            <p><input type="radio" name="options" value="2">                                        
             사기</p> 
-            <p><input type="radio" name="options" value="option3">                                        
+            <p><input type="radio" name="options" value="3">                                        
             허위사실 유포</p>                                             
-            <!-- <input type="radio" name="options" value="option4">
-            <label></label> -->   
-            <button type="button">신고</button> 
+            <p><input type="radio" name="options" value="4">
+            스팸</p>  
+            <p><input type="radio" name="options" value="5">
+            불법 또는 규제상품 판매</p> 
+            <p><input type="radio" name="options" value="6">
+            성희롱</p> 
+            <p><input type="radio" name="options" value="7">
+            혐오감을 주는 발언 또는 상징</p> 
+            <p><input type="radio" name="options" value="8">
+            마음에 들지 않습니다.</p> 
+            <button class="detail_report" type="submit">신고</button> 
             <span class="close" onclick="closeModal()">취소</span>                                    
         </div>
     </div>
+    </form>
     @endif
         <div class="last_user">
             <div class="last-board-title">    
@@ -88,30 +100,41 @@
                         <div class="detail-comments-flex">
                             <span>{{ $comment->created_at }}</span>
                             <form style="display: inline-block"
-                            method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+                            method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}">
                                 @csrf
                                 @method('DELETE')
                                 @if(Auth::id() === $comment->u_id)
                                 <button type="submit" class="delete-comment-btn">X</button>
+                            </form>    
                                 @else
-                                <button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px; alt=""></button>
+                            <button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px; alt=""></button>
+                            <!-- <form action="{{ route('commentreport', ['comment_id' => $comment->comment_id, 'u_id' => Auth::id()]) }}" method="POST">  -->
+                                @csrf
+                                
                                 <div id="myModal" class="modal">
-                                    <div class="comment_modal_content">
-                                        <span class="close" onclick="closeModal()">&times;</span>
-                                       <p><input type="radio" name="options" value="option1">                                        
-                                        욕설</p> 
-                                        <p><input type="radio" name="options" value="option2">                                        
+                                    <div class="comment_modal_content">            
+                                        <p><input type="radio" name="values" value="1">                                        
+                                        언어폭력</p> 
+                                        <p><input type="radio" name="values" value="2">                                        
                                         사기</p> 
-                                        <p><input type="radio" name="options" value="option3">                                        
+                                        <p><input type="radio" name="values" value="3">                                        
                                         허위사실 유포</p>                                             
-                                        <!-- <input type="radio" name="options" value="option4">
-                                        <label></label> -->   
-                                        <button type="button">신고</button> 
+                                        <p><input type="radio" name="values" value="4">
+                                        스팸</p>  
+                                        <p><input type="radio" name="values" value="5">
+                                        불법 또는 규제상품 판매</p> 
+                                        <p><input type="radio" name="values" value="6">
+                                        성희롱</p> 
+                                        <p><input type="radio" name="values" value="7">
+                                        혐오감을 주는 발언 또는 상징</p> 
+                                        <p><input type="radio" name="values" value="8">
+                                        마음에 들지 않습니다.</p> 
+                                        <button class="detail_report" type="submit">신고</button> 
                                         <span class="close" onclick="closeModal()">취소</span>                                    
                                     </div>
                                 </div>
-                                @endif
-                            </form>
+                                <!-- </form> -->
+                            @endif                            
                         </div>
                     </div>
                 </div>

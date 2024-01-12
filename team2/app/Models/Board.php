@@ -49,7 +49,11 @@ class Board extends Model
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
     
-
+    public function boardreports()
+    {
+        return $this->belongsToMany(Board_report::class, 'board_reports', 'board_id','u_id');
+    }
+   
     
 }
 

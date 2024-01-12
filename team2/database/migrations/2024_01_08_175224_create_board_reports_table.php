@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('board_report_id');
             $table->integer('board_id');
             $table->integer('u_id');
+            $table->char('board_reason_flg',2);
             $table->timestamps();
             $table->softDeletes();
         });
