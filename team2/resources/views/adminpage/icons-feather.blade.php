@@ -1,6 +1,6 @@
-@extends('adminlayout.layout')
+@extends('adminpage/adminlayout.layout')
 
-@section('title','charts-chartjs')
+@section('title','icons-feather')
 
 @section('main')
 

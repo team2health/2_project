@@ -75,11 +75,11 @@
             @csrf
             @method('DELETE')
             @if(Auth::id() === $data->user->id)
-                <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
+                <a href="{{ route('board.index') }}" class="a_cancel">목록</a>
                 <a href="{{ route('board.edit', ['board' => $data->board_id]) }}" class="a_update">수정</a>
                 <button type="submit" class="d_btn">삭제</button>
             @else
-                <a href="{{ route('categoryboard') }}" class="a_cancel">목록</a>
+                <a href="{{ route('board.index') }}" class="a_cancel">목록</a>
             @endif         
         </form>
     </div>

@@ -75,7 +75,7 @@ h2 {
 	text-align: center;
 	line-height: 50px;
     position: relative;
-    display: none;
+    display: grid;
     grid-template-columns: 200px 200px 200px;
     font-size: 0.8rem;
     justify-items: center;
