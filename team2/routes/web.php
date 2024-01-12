@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\HashTagController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContentsadminController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Adminauth;
@@ -116,7 +117,8 @@ Route::middleware(['admin.auth'])->group(function () {
 
 Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.main');
     
-
+Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
+Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
 
 
 
@@ -142,7 +144,6 @@ Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.ma
     Route::get('/admin/icons-feather', function () {
         return view('/adminpage/icons-feather');
     })->name('icons-feather');
-    
     
     Route::get('/admin/blank', function () {
         return view('/adminpage/blank');
@@ -179,6 +180,6 @@ Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.ma
     Route::get('/admin/board', function () {
         return view('/adminpage/upgrade-to-pro');
     })->name('upgrade-to-pro');
-    
+
 });
 

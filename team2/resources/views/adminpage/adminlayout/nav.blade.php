@@ -1,12 +1,12 @@
 <nav id="sidebar" class="sidebar js-sidebar">
 <div class="sidebar-content js-simplebar">
     <a class="sidebar-brand" href="{{route('admin.main')}}">
-<span class="align-middle">AdminKit</span>
+<span class="align-middle">건강하시조</span>
 </a>
 
     <ul class="sidebar-nav">
         <li class="sidebar-header">
-            Pages
+            메인
         </li>
 
         <li class="sidebar-item">
@@ -33,11 +33,25 @@
             </a>
         </li>
 
+        <li class="sidebar-header">
+            컨텐츠 관리
+        </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('blank')}}">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">빈 화면</span>
+                <i class="align-middle" data-feather="book"></i> <span class="align-middle">작업규칙넣는곳</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('admin.contents')}}">
+                <i class="align-middle me-2" data-feather="edit"></i> <span class="align-middle">게시글/댓글</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('contents.declaration')}}">
+                <i class="align-middle me-2" data-feather="x-circle"></i> <span class="align-middle">신고내역</span>
+            </a>
+        </li>
+
 
         <li class="sidebar-header">
             Tools & Components
