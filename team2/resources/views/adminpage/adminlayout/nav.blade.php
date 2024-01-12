@@ -42,13 +42,13 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="#">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">게시글/댓글</span>
+            <a class="sidebar-link" href="{{route('admin.contents')}}">
+                <i class="align-middle me-2" data-feather="edit"></i> <span class="align-middle">게시글/댓글</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="#">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">신고 내역</span>
+            <a class="sidebar-link" href="{{route('contents.declaration')}}">
+                <i class="align-middle me-2" data-feather="x-circle"></i> <span class="align-middle">신고내역</span>
             </a>
         </li>
 
