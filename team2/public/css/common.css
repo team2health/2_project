@@ -59,13 +59,9 @@ h2 {
 /* footer */
 
 .footer-section {
-	/* position: absolute;
-	left: 0;
-	bottom: 0; */
-	margin-top: 50px;
-	margin-bottom: 70px;
-    bottom: 0;
-    margin-bottom: 70px;
+	position: absolute;
+	/* left: 0; */
+	/* bottom: 0; */
     width: 100vw;
 }
 .developer-info {

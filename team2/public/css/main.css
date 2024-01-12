@@ -913,7 +913,7 @@ button {
 
 .symptomchk-label {
 	display: inline-block;
-    width: 200px;
+    width: 166px;
     height: 60px;
     background-color: #fff;
     border-radius: 15px;
@@ -1008,32 +1008,29 @@ input:checked + label{
 }
 
 .progress-bar {
-	background-color: #3269ff;
-    border-radius: 4px;
-    box-shadow: inset 0 0.5em 0.5em rgba(0,0,0,0.05);
-    height: 20px;
-    overflow: hidden;
-    position: relative;
-    top: 333px;
-    transform: translateZ(0);
-    width: 70%;
-    margin: 0 auto;
+    margin: 300px auto;
 }
 
-.progress-bar__bar {
-    background-color: #ececec;
-    box-shadow: inset 0 0.5em 0.5em rgba(94, 49, 49, 0.05);
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
 
-.progress-bar__bar.active {
-    transition: all 10000ms ease-out;
-    transform: translateX(100%);
-}
+@keyframes spin {
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(359deg);
+	}
+  }
+
+.loader {
+	margin: 5% auto;
+	height: 100px;
+	width: 100px;
+	border: 6px solid #fff;
+	border-right-color: #c30;
+	border-top-color: #c30;
+	border-radius: 100%;
+	animation: spin 800ms infinite linear;
+  }
 
 .progress-bar-box {
 	width: 100vw;

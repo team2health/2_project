@@ -470,7 +470,6 @@ function partSelect(index) {
 
 function symptomChk() {
 	PROGRESSBOX.style.display = 'block';
-	progressBarElem.classList.add('active');
 	RESULTCONTAINER.style.display = 'block';
 	SYMPTOMCHKCONTAINER.style.display = 'none';
 	let checkboxes = document.querySelectorAll('input[name="symptom_id"]:checked');
@@ -487,7 +486,6 @@ function symptomChk() {
 	.then(response => response.json())
 	.then(data => {
 		PROGRESSBOX.style.display = 'none';
-		progressBarElem.classList.remove('active');
 		let MAINRESULTTEXT = document.getElementById('mainResultText');
         let result = data.replace(/\.\s/g, '<br>');
 		MAINRESULTTEXT.innerHTML = result;
