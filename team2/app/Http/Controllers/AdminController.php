@@ -10,6 +10,7 @@ use Illuminate\support\facades\DB;
 use App\Models\Admin;
 use App\Models\Board;
 use App\Models\Comment;
+use App\Models\Record;
 
 use Illuminate\Http\Request;
 
@@ -85,6 +86,16 @@ class AdminController extends Controller
         ->groupBy(DB::raw('DATE_FORMAT(created_at, "%a")'))
         ->orderByRaw("FIELD(DATE_FORMAT(created_at, '%a'), 'Mon', 'Tue', 'Wed', 'Thu', 'Fri')")
         ->get();
+
+        $result[4] = Record::select(
+            DB::raw('part_symptom_id'),
+            DB::raw('COUNT(part_symptom_id) AS cnt')
+        )
+        ->where('created_at', '>', 20240101)
+        ->groupBy('part_symptom_id')
+        ->get();
+
+        Log::debug($result[4]);
 
         return view('adminpage.index')->with('result', $result);
     }

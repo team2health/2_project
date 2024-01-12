@@ -23,6 +23,20 @@
 					</div>
 				</div>
 			</div>
+			<br><br>
+			<span>2024년</span>
+			<div class="card-header">
+				<div>
+					<div class="admin-index-ps">
+						<div class="admin-index-ps-mini">
+							<span>순위</span>
+							<span>부위 - 증상</span>
+						</div>
+						<span>조회수</span>
+					</div>
+					<div></div>
+				</div>
+			</div>
 		</div>
 	</main>
 	<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>

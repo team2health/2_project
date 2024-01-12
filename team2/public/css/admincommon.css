@@ -173,13 +173,18 @@
     justify-content: space-between;
 }
 
-.index-container-mini {
-}
-
-.index-container-mini2 {
-}
-
 /* display none */
 .admin-display-none {
     display: none;
+}
+
+.admin-index-ps {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-index-ps-mini {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
 }
