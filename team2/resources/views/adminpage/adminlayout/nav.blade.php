@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar js-sidebar">
 <div class="sidebar-content js-simplebar">
-    <a class="sidebar-brand" href="{{route('adminmain')}}">
+    <a class="sidebar-brand" href="{{route('admin.main')}}">
 <span class="align-middle">AdminKit</span>
 </a>
 
@@ -10,7 +10,7 @@
         </li>
 
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('adminmain')}}">
+            <a class="sidebar-link" href="{{route('admin.main')}}">
                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
         </li>
@@ -111,7 +111,7 @@
 </a>
 
 <div class="navbar-collapse collapse">
-    <a href="{{ route('adminlogout') }}">Logout</a>
+    <a href="{{ route('admin.logout') }}">Logout</a>
 </div>
     {{-- <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
