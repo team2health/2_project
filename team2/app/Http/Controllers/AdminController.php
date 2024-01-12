@@ -14,21 +14,21 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function admin() {
-        return view('adminlogin');
+        return view('adminpage.adminlogin');
     }
     public function adminlogin(Request $request) {
 
         $result = Admin::where('admin_id', $request->admin_id)->first();
 
         if(!(Hash::check($request->admin_password, $result->admin_password))) {
-            return view('adminlogin');
+            return view('adminpage.adminlogin');
         }
 
         Auth::login($result);
         if(Auth::check()) {
             session($result->only('admin_id', 'admin_name'));
         } else {
-            return view('adminlogin');
+            return view('adminpage.adminlogin');
         }
         return redirect()->route('adminmain');
     }
