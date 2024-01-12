@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Models\Board_report;
 
 class BoardController extends Controller
 {
@@ -157,9 +158,10 @@ class BoardController extends Controller
         $boardData['category_id'] = (int)$request->input('category_id');
       
         // 게시글 내용에서 줄 바꿈을 HTML <br> 태그로 변환
-        $boardData['board_content'] = nl2br($boardData['board_content']);        
+        // $boardData['board_content'] = nl2br($boardData['board_content']);        
         // 게시글 데이터에 사용자 ID를 추가합니다.
-        $boardData['u_id'] = $u_id;           
+        $boardData['u_id'] = $u_id;    
+             
         
         // 이후에 게시글을 생성할 때 사용할 수 있습니다.
         $board = Board::create($boardData);  
@@ -251,6 +253,34 @@ class BoardController extends Controller
            
     return redirect()->route('detail', ['board' => $board_id])->with(['board_detail_get'=>$board_detail_get]);
     // $boardDetail = session('data');
+}
+public function boardreport(Request $request){
+    // dd($request);
+    // dd($request->attributes->all());
+    $boardId = $request->input('board_id');
+$userId = $request->input('u_id');
+$flg=$request->input('options');
+// dd($boardId, $userId,$flg);
+    Board_report::create([
+        'board_id' =>$boardId ,
+        'u_id' => $userId,
+        'board_reason_flg' =>$flg           
+    ]);  
+    return redirect()->back();
+}
+public function commentreport(Request $request){
+    // dd($request);
+    // dd($request->attributes->all());
+    $commentId = $request->input('comment_id');
+$userId = $request->input('u_id');
+$flg=$request->input('values');
+// dd($boardId, $userId,$flg);
+    Comment_report::create([
+        'comment_id' =>$commentId ,
+        'u_id' => $userId,
+        'comment_reason_flg' =>$flg           
+    ]);  
+    return redirect()->back();
 }
     
 

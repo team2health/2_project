@@ -264,7 +264,7 @@ li{
     display: inline-block;
     position: absolute;
     width: 300px;
-    height: 300px;
+    
     line-height: 50px;
     top: 50%;
     left: 50%;
@@ -281,6 +281,9 @@ li{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
+.detail_report{font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;}
 .close {
     color: #aaa;
     float: right;

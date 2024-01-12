@@ -163,6 +163,22 @@
     color: rgb(53, 44, 57);
 }
 
+.genderList {    
+    font-weight: 900;
+    text-align: right;
+}
+
+.index-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.index-container-mini {
+}
+
+.index-container-mini2 {
+}
+
 /* display none */
 .admin-display-none {
     display: none;

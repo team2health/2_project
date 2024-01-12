@@ -28,6 +28,20 @@ class CommentController extends Controller
 
         return redirect()->back();
     }
+    public function commentreport(Request $request){
+        dd($request);
+        // dd($request->attributes->all());
+        $commentId = $request->input('comment_id');
+    $userId = $request->input('u_id');
+    $flg=$request->input('values');
+    // dd($boardId, $userId,$flg);
+        Comment_report::create([
+            'comment_id' =>$commentId ,
+            'u_id' => $userId,
+            'comment_reason_flg' =>$flg           
+        ]);  
+        return redirect()->back();
+    }
 
     public function edit($id)
     {

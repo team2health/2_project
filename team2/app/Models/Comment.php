@@ -26,4 +26,9 @@ class Comment extends Model
     }
 
     protected $primaryKey = 'comment_id';
+    
+    public function commentreports()
+    {
+        return $this->belongsToMany(Comment_report::class, 'comment_reports', 'comment_id','u_id');
+    }
 }

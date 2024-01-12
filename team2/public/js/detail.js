@@ -18,6 +18,24 @@ window.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll('.delete-comment-btn');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+
+            if (confirmDelete) {
+                // 확인이 눌렸을 때의 처리
+                const form = button.closest('form');
+                form.submit(); // 폼 제출
+            } else {
+                // 취소가 눌렸을 때의 처리
+                event.preventDefault(); // 기본 동작(폼 제출) 방지
+            }
+        });
+    });
+    
+    
     // 댓글 개수 업데이트
     function updateCommentCount() {
        // 여기에서 board_id를 올바르게 추출하는 부분을 확인
