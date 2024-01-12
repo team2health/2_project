@@ -108,13 +108,13 @@ Route::get('/profile', function () {
 
 // 관리자 페이지 임시 라우트
 Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
-Route::post('/adminlogin', [AdminController::class, 'adminlogin'])->name('adminloginpost');
-Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('adminlogout');
+Route::post('/adminlogin', [AdminController::class, 'adminlogin'])->name('adminlogin.post');
+Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('adminlog.out');
 
 // 관리자 전용 라우트 등록하는 곳
 Route::middleware(['admin.auth'])->group(function () {
 
-    Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('adminmain');
+Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.main');
     
 
 

@@ -30,7 +30,7 @@ class AdminController extends Controller
         } else {
             return view('adminpage.adminlogin');
         }
-        return redirect()->route('adminmain');
+        return redirect()->route('admin.main');
     }
     public function adminlogout() {
         Session::flush();
