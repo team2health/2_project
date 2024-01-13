@@ -103,6 +103,5 @@
 	<br><br><br><br>	
 </main>
 <script src="/js/update.js"></script>
-<script>var images = @json($result->images)</script>
 
 @endsection
