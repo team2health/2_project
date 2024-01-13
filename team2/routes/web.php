@@ -12,6 +12,7 @@ use App\Http\Controllers\ContentsadminController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Adminauth;
+use App\Http\Middleware\Adminblock;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,7 @@ Route::get('/useraddress', [MainController::class, 'useraddressget']);
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::middleware('user.validation')->post('/login', [UserController::class, 'loginpost'])->name('login.post');
 Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
-Route::middleware('user.validation')->post('/regist', [UserController::class, 'registpost'])->name('regist.post');
+Route::middleware('Adminblock')->post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);
 Route::get('/firstchkpassword', [UserController::class, 'firstchkpassword'])->middleware('auth')->name('firstchkpassword');
@@ -108,8 +109,8 @@ Route::post('/emailchkgo', [UserController::class, 'emailchkpost'])->name('email
 Route::get('/profile', function () {
 })->middleware(['auth', 'verified']);
 
-// 관리자 페이지 임시 라우트
-Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+// 관리자 페이지 라우트
+Route::middleware('admin.block')->get('/admin', [AdminController::class, 'adminget'])->name('admin');
 Route::post('/adminlogin', [AdminController::class, 'adminlogin'])->name('adminlogin.post');
 Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('admin.logout');
 
@@ -120,9 +121,6 @@ Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.ma
     
 Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
-
-
-
 
 
 

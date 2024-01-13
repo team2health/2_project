@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function admin() {
+    public function adminget() {
         return view('adminpage.adminlogin');
     }
     public function adminlogin(Request $request) {
