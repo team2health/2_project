@@ -16,4 +16,5 @@ class Comment_report extends Model
     {
         return $this->belongsTo(User::class, 'u_id','u_id');
     }
+    protected $fillable =['comment_id','u_id', 'comment_reason_flg'];
 }

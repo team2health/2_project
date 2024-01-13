@@ -15,6 +15,23 @@ window.addEventListener('click', function(event) {
         closeModal();
     }
 });
+function openModals() {
+    document.getElementById('myModalcomment').style.display = 'block';
+}
+
+// 모달 닫기
+function closeModals() {
+    document.getElementById('myModalcomment').style.display = 'none';
+}
+
+// 모달 외부 클릭 시 닫기
+window.addEventListener('click', function(event) {
+    var modal = document.getElementById('myModalcomment');
+    if (event.target === modal) {
+        closeModals();
+    }
+});
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -31,9 +48,45 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 // 취소가 눌렸을 때의 처리
                 event.preventDefault(); // 기본 동작(폼 제출) 방지
-            }
+            }     
+                   
         });
     });
+// document.addEventListener('DOMContentLoaded', function () {
+//     const deleteButtons = document.querySelectorAll('.delete-comment-btn');
+//     const reportButtons = document.querySelectorAll('.detail_comment-report-btn');
+
+//     deleteButtons.forEach(button => {
+//         button.addEventListener('click', function (event) {
+//             const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+
+//             if (confirmDelete) {
+//                 // 확인이 눌렸을 때의 처리
+//                 const form = button.closest('form');
+//                 form.submit(); // 폼 제출
+//             } else {
+//                 // 취소가 눌렸을 때의 처리
+//                 event.preventDefault(); // 기본 동작(폼 제출) 방지
+//             }
+//         });
+
+
+//     // 댓글 신고 버튼에 대한 이벤트 추가
+//     reportButtons.forEach(button => {
+//         button.addEventListener('click', function () {
+//             openModals(); // 모달 열기 로직 추가
+//         });
+//     });
+
+//     // 모달 외부 클릭 시 닫기
+//     window.addEventListener('click', function(event) {
+//         var modal = document.getElementById('myModalcomment');
+//         if (event.target === modal) {
+//             closeModals();
+//         }
+//     });
+// });
+
     
     
     // 댓글 개수 업데이트
