@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
+    use SoftDeletes;
     protected $primaryKey = 'id';
     protected $fillable = [
         'user_email',

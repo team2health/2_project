@@ -201,4 +201,9 @@ class UserController extends Controller
         Mail::to($user_email)->send(new SendEmail($data));
         return '메일확인';
     }
+    public function userdestroy(Request $request){
+        $selectedIds = $request->input('id');
+        User::destroy($selectedIds);
+        return redirect()-> route('adminpage.usermanagement');
+    }
 }

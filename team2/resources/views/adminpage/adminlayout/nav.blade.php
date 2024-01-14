@@ -51,7 +51,11 @@
                 <i class="align-middle me-2" data-feather="x-circle"></i> <span class="align-middle">신고내역</span>
             </a>
         </li>
-
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('admin.usermanagement')}}">
+                <i class="align-middle" data-feather="book"></i> <span class="align-middle">유저관리</span>
+            </a>
+        </li>
 
         <li class="sidebar-header">
             Tools & Components
