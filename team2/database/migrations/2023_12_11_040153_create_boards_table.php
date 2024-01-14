@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('board_title');
             $table->string('board_content', 1000);
             $table->integer('board_hits')->default(0);
+            $table->char('board_show_flg', 1)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

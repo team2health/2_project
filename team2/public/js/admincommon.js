@@ -52,7 +52,7 @@ week.forEach(week => {
       ccount = element.cnt;
     }
   });
-  boardcnt.push(ccount);
+  commentcnt.push(ccount);
 });
 
 
@@ -136,7 +136,7 @@ option1 = {
       name: 'comment',
       type: 'line',
       stack: 'Total',
-      data: [2, 3, 4, 7, 9, 2, 3]
+      data: commentcnt
     }
   ]
 };

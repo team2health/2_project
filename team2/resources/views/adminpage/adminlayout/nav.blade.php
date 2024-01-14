@@ -61,6 +61,11 @@
                 <i class="align-middle" data-feather="book"></i> <span class="align-middle">증상관리</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('adminhashtag.get')}}">
+                <i class="align-middle" data-feather="book"></i> <span class="align-middle">해시태그 관리</span>
+            </a>
+        </li>
 
 
         <li class="sidebar-header">

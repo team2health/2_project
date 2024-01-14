@@ -13,6 +13,10 @@ use App\Models\Comment;
 use App\Models\Record;
 use App\Models\User;
 use App\Models\Symptom;
+use App\Models\Hashtag;
+use App\Models\Board_tag;
+use App\Models\favorite_tag;
+
 
 use Illuminate\Http\Request;
 
@@ -61,6 +65,7 @@ class AdminController extends Controller
                     date_format(now(), '%Y') - date_format(birthday, '%Y') AS age
                 FROM 
                     users
+                WHERE deleted_at IS NULL
             ) AS c
             GROUP BY name
             ORDER BY name;
@@ -101,6 +106,29 @@ class AdminController extends Controller
 
         return view('adminpage.index')->with('result', $result);
     }
+
+    public function adminhashtagget() {
+
+        $result = Hashtag::get();
+
+        $cnt = 0;
+        foreach ($result as $value) {
+            $result[$cnt]['board_hashtag'] = Board_tag::where('hashtag_id', $value->hashtag_id)->count();
+
+            $cnt++;
+        }
+        
+        $count = 0;
+        foreach ($result as $value) {
+            $result[$count]['favorite_hashtag'] = favorite_tag::where('hashtag_id', $value->hashtag_id)->count();
+
+            $count++;
+        }
+
+
+        return view('adminpage.hashtagmanagement')->with('result', $result);
+    }
+
     public function adminuser(){
         $userData = DB::table('users')
         ->select('id', 'user_name', 'user_email', 'created_at')

@@ -188,3 +188,7 @@
     justify-content: space-between;
     width: 30%;
 }
+
+.button-box {
+    text-align: right;
+}

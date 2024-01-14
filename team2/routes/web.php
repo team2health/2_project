@@ -57,7 +57,7 @@ Route::get('/useraddress', [MainController::class, 'useraddressget']);
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::middleware('user.validation')->post('/login', [UserController::class, 'loginpost'])->name('login.post');
 Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
-Route::middleware('Adminblock')->post('/regist', [UserController::class, 'registpost'])->name('regist.post');
+Route::middleware('user.validation')->post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);
 Route::get('/firstchkpassword', [UserController::class, 'firstchkpassword'])->middleware('auth')->name('firstchkpassword');
@@ -118,6 +118,7 @@ Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('admin
 Route::middleware(['admin.auth'])->group(function () {
 
 Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.main');
+Route::get('admin/hashtag', [AdminController::class, 'adminhashtagget'])->name('adminhashtag.get');
     
 Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
