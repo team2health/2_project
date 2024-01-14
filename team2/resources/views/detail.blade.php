@@ -11,7 +11,7 @@
         </div>
         <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>
         @if(Auth::id() !== $data->user->id)
-<button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px; alt=""></button>
+<button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>
 <form action="{{ route('boardreport', ['board_id' => $data->board_id, 'u_id' => Auth::id()]) }}" method="POST">
     
     @csrf
@@ -103,15 +103,16 @@
                             method="POST" action="{{ route('comments.destroy', $comment->comment_id) }}">
                                 @csrf
                                 @method('DELETE')
-                                @if(Auth::id() === $comment->u_id)
+                                @if(Auth::id() === $comment->u_id) 
                                 <button type="submit" class="delete-comment-btn">X</button>
+                                @endif 
                             </form>    
-                                @else
-                            <button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px; alt=""></button>
-                            <!-- <form action="{{ route('commentreport', ['comment_id' => $comment->comment_id, 'u_id' => Auth::id()]) }}" method="POST">  -->
-                                @csrf
-                                
-                                <div id="myModal" class="modal">
+                            
+                            <button type="button" class="detail_comment-report-btn" onclick="openModals()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>
+                            <form action="{{ route('commentreport', ['comment_id' => $comment->comment_id, 'u_id' => Auth::id()]) }}" method="POST"> 
+                                @csrf  
+                                @if(Auth::id() !== $comment->u_id)                              
+                                <div id="myModalcomment" class="modal">
                                     <div class="comment_modal_content">            
                                         <p><input type="radio" name="values" value="1">                                        
                                         언어폭력</p> 
@@ -130,11 +131,12 @@
                                         <p><input type="radio" name="values" value="8">
                                         마음에 들지 않습니다.</p> 
                                         <button class="detail_report" type="submit">신고</button> 
-                                        <span class="close" onclick="closeModal()">취소</span>                                    
+                                        <span class="close" onclick="closeModals()">취소</span>                                    
                                     </div>
                                 </div>
-                                <!-- </form> -->
-                            @endif                            
+                                @endif 
+                                </form>
+                                                       
                         </div>
                     </div>
                 </div>

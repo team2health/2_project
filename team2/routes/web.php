@@ -31,8 +31,8 @@ Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->nam
 Route::get('/boardcategory/{categoryId}', [BoardController::class, 'boardcategoryget']);
 Route::post('/nextboard', [BoardController::class, 'nextboardpost']);
 Route::post('/favoritenextboard', [BoardController::class, 'favoritenextboardpost']);
-Route::post('/boardreport', [BoardController::class, 'boardreport'])->name('boardreport');;
-Route::post('/commentreport', [CommentController::class, 'commentreport'])->name('commentreport');;
+Route::post('/boardreport', [BoardController::class, 'boardreport'])->name('boardreport');
+Route::post('/commentreport', [CommentController::class, 'commentreport'])->name('commentreport');
 Route::get('/lastboard', [BoardController::class, 'lastboardget'])->name('lastboard.get');
 Route::get('/hotboard', [BoardController::class, 'hotboardget'])->name('hotboard.get');
 Route::get('/favoriteboard', [BoardController::class, 'favoriteboardget'])->name('favoriteboard.get');
@@ -124,6 +124,12 @@ Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdecla
 Route::post('/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('deleteadminboard');
 
 
+Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');
+Route::delete('/admin/userdestroy', [AdminController::class, 'userdestroy'])->name('admin.userdestroy');
+Route::match(['get', 'post'],'/admin/searchUsers', [AdminController::class, 'searchUsers'])->name('admin.searchUsers');
+Route::get('/admin/symptomsmanagement', [AdminController::class, 'symptomsmng'])->name('admin.symptomsmanagement');
+Route::match(['get', 'post'],'/admin/searchsymptoms', [AdminController::class, 'searchsymptoms'])->name('admin.searchsymptoms');
+Route::delete('/admin/symptomdestroy', [AdminController::class, 'symptomdestroy'])->name('admin.symptomdestroy');
 
 
 

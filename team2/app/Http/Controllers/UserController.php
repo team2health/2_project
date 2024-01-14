@@ -200,5 +200,5 @@ class UserController extends Controller
         // $mail = new S0ignupEmail($data);
         Mail::to($user_email)->send(new SendEmail($data));
         return '메일확인';
-    }
+    }    
 }

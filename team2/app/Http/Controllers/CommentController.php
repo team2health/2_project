@@ -8,6 +8,7 @@ use App\Models\Board;
 use Illuminate\Support\Facades\Log;
 use App\Models\Comment;
 use App\Models\Comment_report;
+use App\Models\Comment_report;
 
 
 class CommentController extends Controller
@@ -32,7 +33,7 @@ class CommentController extends Controller
         return redirect()->back();
     }
     public function commentreport(Request $request){
-        dd($request);
+        // dd($request);
         // dd($request->attributes->all());
         $commentId = $request->input('comment_id');
         $userId = $request->input('u_id');
