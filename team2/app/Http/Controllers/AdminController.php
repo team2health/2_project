@@ -11,6 +11,7 @@ use App\Models\Admin;
 use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Record;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -102,11 +103,18 @@ class AdminController extends Controller
     public function adminuser(){
         $userData = DB::table('users')
         ->select('id', 'user_name', 'user_email', 'created_at')
+        ->whereNull('deleted_at')
         ->orderBy('id', 'desc')
         ->paginate(10); // 페이징 적용
 
     // 뷰를 반환할 때 조회한 사용자 정보를 함께 전달합니다.
     return view('adminpage.usermanagement')->with('data', $userData);
     }
-    
+    public function userdestroy(Request $request){
+        // dd($request);
+        $selectedIds = $request->input('id');
+        dd($selectedIds);
+        User::destroy($selectedIds);
+        return redirect()-> route('admin.usermanagement');
+    }
 }

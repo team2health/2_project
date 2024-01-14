@@ -62,7 +62,7 @@ Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);
 Route::get('/firstchkpassword', [UserController::class, 'firstchkpassword'])->middleware('auth')->name('firstchkpassword');
 Route::post('/changpasswordchk', [UserController::class, 'changpasswordchk']);
-Route::delete('/destroy',[UserController::class, 'destroy'])->name('user.destroy');
+
 Route::post('/namechk', [UserController::class, 'namechkpost']);
 Route::post('/idchk', [UserController::class, 'idchkpost']);
 
@@ -122,7 +122,7 @@ Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.ma
 Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
 Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');
-
+Route::delete('/admin/userdestroy', [AdminController::class, 'userdestroy'])->name('admin.userdestroy');
 
 
 
