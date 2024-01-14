@@ -122,6 +122,9 @@ Route::get('admin/hashtag', [AdminController::class, 'adminhashtagget'])->name('
     
 Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
+Route::post('/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('deleteadminboard');
+
+
 Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');
 Route::delete('/admin/userdestroy', [AdminController::class, 'userdestroy'])->name('admin.userdestroy');
 Route::match(['get', 'post'],'/admin/searchUsers', [AdminController::class, 'searchUsers'])->name('admin.searchUsers');

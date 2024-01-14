@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Board;
+use Illuminate\Support\Facades\Log;
 use App\Models\Comment;
 use App\Models\Comment_report;
+
 
 class CommentController extends Controller
 {
@@ -33,8 +35,8 @@ class CommentController extends Controller
         // dd($request);
         // dd($request->attributes->all());
         $commentId = $request->input('comment_id');
-    $userId = $request->input('u_id');
-    $flg=$request->input('values');
+        $userId = $request->input('u_id');
+        $flg=$request->input('values');
     // dd($boardId, $userId,$flg);
         Comment_report::create([
             'comment_id' =>$commentId ,
@@ -51,7 +53,7 @@ class CommentController extends Controller
 
     public function update(Request $request)
     {
-       
+    
     }
 
     public function destroy($comment_id)
@@ -62,7 +64,13 @@ class CommentController extends Controller
             
         Comment::destroy($comment_id);
         return redirect()-> back();
-        
+    }
 
+    public function deleteadminboard(Request $request) {
+        Log::debug($request->categoriy_id);
+        exit;
+        // if() {
+
+        // }
     }
 }

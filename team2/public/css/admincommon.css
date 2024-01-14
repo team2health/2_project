@@ -8,6 +8,9 @@
     font-family: 'NanumSquareRound';
     font-size: 1.0rem;
 }
+a {
+    color: #383838;
+}
 .custom-common-delete-btn {
     border-radius: 10px;
     height: 40px;
@@ -145,6 +148,47 @@
 .contentsmanagement-search-align div:hover {
     background: #ececec;
 }
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+} 
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    
+}
+.page_pre{
+    width: 59px;
+}
+.pagination a:hover,
+.pagination span:hover {
+     /* 호버 시 배경색 변경 */
+    color: #FF9900; /* 호버 시 글자색 변경 (예시로 검은색으로 지정) */
+}
+.pagination-current{
+    color:rgb(255, 255, 255);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #FF9900;
+    font-weight: 900;
+    margin-right: 5px;
+    text-align: center;
+}
+.pagination-link {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #e4e4e4;
+    margin-right: 5px;
+    text-align: center;
+}
+
 
 
 /* 기존 템플릿 css 수정 */
