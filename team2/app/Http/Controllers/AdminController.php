@@ -12,6 +12,7 @@ use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Record;
 use App\Models\User;
+use App\Models\Symptom;
 
 use Illuminate\Http\Request;
 
@@ -111,10 +112,64 @@ class AdminController extends Controller
     return view('adminpage.usermanagement')->with('data', $userData);
     }
     public function userdestroy(Request $request){
-        // dd($request);
-        $selectedIds = $request->input('id');
-        dd($selectedIds);
-        User::destroy($selectedIds);
-        return redirect()-> route('admin.usermanagement');
+    //     // dd($request);
+    //     $selectedIds = $request->input('id');
+    //     // dd($selectedIds);
+    //     User::destroy($selectedIds);
+    //     return redirect()-> route('admin.usermanagement');
+    // }
+    if (!$request->has('id')) {
+        // 값이 없으면 경고 메시지를 반환하거나 원하는 작업 수행
+        return back()->with('warning', '삭제할 항목을 선택해주세요.');
     }
+
+    $selectedIds = $request->input('id');
+    
+    // dd($selectedIds);
+    User::destroy($selectedIds);    
+    
+    return redirect()->route('admin.usermanagement');
+}
+    public function searchUsers(Request $request)
+    {
+        $searchKeyword = $request->input('search_keyword');
+
+        $users = User::where('user_name', 'like', "%$searchKeyword%")
+                    ->orWhere('user_email', 'like', "%$searchKeyword%")
+                    ->orderBy('id', 'desc')
+                    ->paginate(10);
+        return view('adminpage.usermanagement')->with('data', $users);
+    }
+    public function symptomsmng(){
+        $symptomData = DB::table('symptoms')
+        ->select('symptom_id', 'symptom_name',)
+        ->orderBy('symptom_id', 'desc')
+        ->paginate(10); // 페이징 적용
+
+    // 뷰를 반환할 때 조회한 사용자 정보를 함께 전달합니다.
+    return view('adminpage.symptomsmanagement')->with('data', $symptomData);
+    }
+    public function symptomdestroy(Request $request){
+        // dd($request);
+        if (!$request->has('symptom_id')) {
+            // 값이 없으면 경고 메시지를 반환하거나 원하는 작업 수행
+            return back();
+        }
+        $selectedsymptoms = $request->input('symptom_id');
+        // dd($selectedIds);
+        Symptom::destroy($selectedsymptoms);
+        return redirect()-> route('admin.symptomsmanagement');
+    }
+    public function searchsymptoms(Request $request)
+    {
+        $searchKeyword = $request->input('search_keyword_sym');
+
+        $symptoms = Symptom::where('symptom_name', 'like', "%$searchKeyword%")
+                    ->orWhere('symptom_id', 'like', "%$searchKeyword%")
+                    ->orderBy('symptom_id', 'desc')
+                    ->paginate(10);
+        return view('adminpage.symptomsmanagement')->with('data', $symptoms);
+    }
+    
+
 }

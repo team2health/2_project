@@ -56,6 +56,12 @@
                 <i class="align-middle" data-feather="book"></i> <span class="align-middle">유저관리</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('admin.symptomsmanagement')}}">
+                <i class="align-middle" data-feather="book"></i> <span class="align-middle">증상관리</span>
+            </a>
+        </li>
+
 
         <li class="sidebar-header">
             Tools & Components

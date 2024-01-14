@@ -123,8 +123,10 @@ Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
 Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');
 Route::delete('/admin/userdestroy', [AdminController::class, 'userdestroy'])->name('admin.userdestroy');
-
-
+Route::match(['get', 'post'],'/admin/searchUsers', [AdminController::class, 'searchUsers'])->name('admin.searchUsers');
+Route::get('/admin/symptomsmanagement', [AdminController::class, 'symptomsmng'])->name('admin.symptomsmanagement');
+Route::match(['get', 'post'],'/admin/searchsymptoms', [AdminController::class, 'searchsymptoms'])->name('admin.searchsymptoms');
+Route::delete('/admin/symptomdestroy', [AdminController::class, 'symptomdestroy'])->name('admin.symptomdestroy');
 
 
 

@@ -1,39 +1,36 @@
 @extends('adminpage/adminlayout.layout')
 
-@section('title','usermanagement')
+@section('title','symptomsmanagement')
 
 @section('main')
 <div class="contentsmanagement-main">
     <div class="contents-tab">
         <div class="contentsmanagement-tab-first-zone" data-order="1">
-        <form action="{{ route('admin.searchUsers') }}" method="get">
+        <form action="{{ route('admin.searchsymptoms') }}" method="get">
             @csrf
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="유저 검색" name="search_keyword">
+                <input type="text" class="form-control" placeholder="증상 검색" name="search_keyword_sym">
                 <button class="btn btn-outline-secondary" type="submit">검색</button>
             </div>
         </form>
-            <form id="deleteForm" action="{{ route('admin.userdestroy') }}" method="post">
+            <form id="deleteForm" action="{{ route('admin.symptomdestroy') }}" method="post" id="deleteForm" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
                 @csrf
                 @method('DELETE')                              
                 <table class="table table-striped">
                     <colgroup>
-                        <col width="15%;">
-                        
-                        <col width="15%;">
-                        <col width="15%;">
-                        <col width="35%;">
+                        <col width="40%;">                        
+                        <col width="40%;">
                         <col width="20%;">
+                        
                                                
                     </colgroup>
                     <thead class="contesmanagement-tr">
                         <tr>
                             
-                            <th scope="col">가입순서</th>
-                            <th scope="col">USER_name</th>                            
+                            <th scope="col">증상번호</th>
+                            <th scope="col">증상이름</th>                            
                             <th scope="col">u_email</th>
-                            <th scope="col">생성날짜</th>
-                            <th scope="col">영구강퇴</th>
+                            
                             
                         </tr>
                     </thead>
@@ -41,11 +38,10 @@
                         @forelse ($data as $item)
                         <tr>
                             
-                            <th scope="row">{{$item->id}}</th>
-                            <td>{{$item->user_name}}</td>
-                            <td>{{$item->user_email}}</td>
-                            <td>{{$item->created_at}}</td>
-                           <td><input type="checkbox" name="id[]" value="{{ $item->id }}"></td>
+                            <th scope="row">{{$item->symptom_id}}</th>
+                            <td>{{$item->symptom_name}}</td>
+                            
+                           <td><input type="checkbox" name="id[]" value="{{ $item->symptom_id}}"></td>
                         </tr>
                             @empty
                             <tr>
@@ -55,7 +51,7 @@
                     </tbody>
                 </table>
                 <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
-                <a href="{{ url()->previous() }}" style="text-decoration: none;" class="text-decoration-none admin-custom-btn custom-common-btn ">뒤로 가기</a>
+                <a href="{{ url()->previous() }}" style="text-decoration: none;" class="admin-custom-btn custom-common-btn">뒤로 가기</a>
             </form>
             <div class="modal" tabindex="-1">
                 <div class="modal-dialog">
