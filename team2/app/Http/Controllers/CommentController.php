@@ -8,7 +8,6 @@ use App\Models\Board;
 use Illuminate\Support\Facades\Log;
 use App\Models\Comment;
 use App\Models\Comment_report;
-use App\Models\Comment_report;
 
 
 class CommentController extends Controller
