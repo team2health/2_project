@@ -121,7 +121,7 @@ Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.ma
     
 Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
-
+Route::post('/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('deleteadminboard');
 
 
 

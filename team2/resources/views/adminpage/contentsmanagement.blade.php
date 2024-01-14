@@ -69,8 +69,8 @@
                         <col width="5%;">
                         <col width="10%;">
                         <col width="20%;">
-                        <col width="35%;">
-                        <col width="10%;">
+                        <col width="30%;">
+                        <col width="15%;">
                         <col width="7%;">
                         <col width="5%;">
                         <col width="5%;">
@@ -93,9 +93,19 @@
                         <tr>
                             <th><input type="checkbox"></th>
                             <th scope="row">{{$item->board_id}}</th>
-                            <td>{{$item->category_name}}</td>
-                            <td>{{$item->board_title}}</td>
-                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{$item->board_content}}</a></td>
+                            </form>
+                            <form name="deleteadminboard" method="post">
+                            <td>
+                                <select id="getCategorySelectValue" name="categoriy_id" onchange="categoryChange({{$item->board_id}})">
+                                    <option value="1" {{ ($item->category_name) == '자유게시판' ? 'selected' : '' }}>자유게시판</option>
+                                    <option value="2" {{ ($item->category_name) == '정보게시판' ? 'selected' : '' }}>정보게시판</option>
+                                    <option value="3" {{ ($item->category_name) == '질문게시판' ? 'selected' : '' }}>질문게시판</option>
+                                    <option value="4" {{ ($item->category_name) == '친목게시판' ? 'selected' : '' }}>친목게시판</option>
+                                </select>
+                            </td>
+                            </form>
+                            <td>{{Str::limit($item->board_title, 20, '...')}}</td>
+                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 35, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
                             <td>{{$item->board_hits}}</td>
@@ -107,7 +117,7 @@
                             @endforelse
                     </tbody>
                 </table>
-            </form>
+            {{-- </form> --}}
 
             {{-- 페이지네이션 --}}
             <nav aria-label="Page navigation example">

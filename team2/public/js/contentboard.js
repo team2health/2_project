@@ -1,4 +1,5 @@
 
+
 // // 게시글 탭
 // const tab = document.querySelector(".tab");
 // // const tabListItem = document.querySelectorAll(".mypage-board-show-btn");
@@ -144,3 +145,14 @@ birthDayArray.forEach(element => {
 		}
     });
 });
+
+function categoryChange(boardId) {
+
+    let form = document.getElementById('deleteadminboard');
+    let value = document.getElementById('deleteadminboard').value;
+    console.log(value);
+    console.log(form);
+    console.log(boardId);
+    form.setAttribute('action', '/deleteadminboard/'+boardId);
+    form.submit();
+}
