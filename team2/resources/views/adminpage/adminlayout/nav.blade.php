@@ -42,7 +42,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('admin.contents')}}">
+            <a class="sidebar-link" href="{{route('admin.contents', ['align_board' => 1])}}">
                 <i class="align-middle me-2" data-feather="edit"></i> <span class="align-middle">게시글/댓글</span>
             </a>
         </li>

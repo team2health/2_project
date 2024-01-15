@@ -20,10 +20,9 @@
 //             data2.forEach(element => {
 //                 // element.style.display = 'none';
 //                 element.classList.remove('tab-show');
-
 //             });
-//         firstTab.classList.add('active');
-//         secondTab.classList.remove('active');
+//         firstTab.classList.add('tab-active');
+//         secondTab.classList.remove('tab-active');
 //         tabflg = 1;
 //     } 
 // })
@@ -38,8 +37,8 @@
 //                 // element.style.display = 'none';
 //                 element.classList.remove('tab-show');
 //             });
-//         firstTab.classList.remove('active');
-//         secondTab.classList.add('active');
+//         firstTab.classList.remove('tab-active');
+//         secondTab.classList.add('tab-active');
 //         tabflg = 2;
 //     }
 // })
@@ -67,7 +66,7 @@ alignValueSet.addEventListener('click', function(){
     contentclass.classList.add('admin-display-none');
     AlignValueForm.submit();
 })
-let alignValueSet2 = document.getElementById('alignValueSet');
+let alignValueSet2 = document.getElementById('alignValueSet2');
 alignValueSet2.addEventListener('click', function(){
     contentsmanagementSearchAlignValue.setAttribute('value','1');
     let AlignValueForm = document.getElementById('AlignValueForm');
@@ -96,7 +95,9 @@ birthYearArray.forEach(element => {
         // birthYearEl의 자식 요소로 추가
             this.appendChild(YearOption);
         }
-    });
+        element.removeEventListener('focus', handler);
+    },{ once: true });
+    
 });
 
 // '검색 달' 셀렉트 박스 option 목록 동적 생성
@@ -120,7 +121,8 @@ birthMonthArray.forEach(element => {
 		// birthMonthEl의 자식 요소로 추가
 			this.appendChild(MonthOption);
         }
-    });
+        element.removeEventListener('focus', handler);
+    },{ once: true });
 });
 
 // '검색 날짜' 셀렉트 박스 option 목록 동적 생성
@@ -143,8 +145,12 @@ birthDayArray.forEach(element => {
 		// birthMonthEl의 자식 요소로 추가
 			this.appendChild(DayOption);
 		}
-    });
+        element.removeEventListener('focus', handler);
+    },{ once: true });
 });
+
+
+
 
 function categoryChange(boardId) {
 
