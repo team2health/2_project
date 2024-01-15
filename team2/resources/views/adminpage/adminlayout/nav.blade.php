@@ -131,8 +131,30 @@
 </a>
 
 <div class="navbar-collapse collapse">
+    <button type="button" class="admin-custom-btn custom-common-delete-btn1" onclick="adminmodalon(); return false;">관리자 계정 생성</button>
     <a href="{{ route('admin.logout') }}">Logout</a>
 </div>
+
+<div style="display: none;" class="admin-regist-modal" id="admin_modal">
+    <div class="admin-box">
+        <span class="admin-regist-name">관리자 계정 생성</span>
+        <span class="admin-modal-down" onclick="adminmodaloff(); return false;">X</span>
+    </div>
+    <br><br><br>
+    <div class="admin-regist-box2">
+        <div class="admin-id">관리자 아이디</div>
+        <input type="text" name="admin_id" id="admin_regist_id" class="admin-input">
+        <div class="admin-id">관리자 이름</div>
+        <input type="text" name="admin_name" id="admin_regist_name" class="admin-input">
+        <div class="admin-id">비밀번호</div>
+        <input type="password" name="admin_password" id="admin_regist_pw" class="admin-input">
+    </div>
+    <br><br><br>
+    <div class="admin-regist-button-box">
+        <button type="button" class="admin-custom-btn2 custom-common-delete-btn2" onclick="adminRegist(); return false;">생성하기</button>
+    </div>
+</div>
+
     {{-- <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">

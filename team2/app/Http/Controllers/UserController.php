@@ -24,9 +24,7 @@ class UserController extends Controller
         }
         return view('regist');
     }
-
-
-
+    
     public function registpost(Request $request) {
         
         if(!isset($request->agreement_flg)) {
@@ -100,6 +98,10 @@ class UserController extends Controller
     }
 
     public function logoutget() {
+        $id = session('id');
+        if(!isset($id)) {
+            return redirect()->route('main.get');
+        }
         Session::flush();
         Auth::logout();
         return redirect()->route('main.get');

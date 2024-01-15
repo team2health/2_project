@@ -39,5 +39,6 @@ class VerifyCsrfToken extends Middleware
         '/admin/commentsearch',
         '/hashtaginsert',
         '/pandemicinsert',
+        '/adminregist',
     ];
 }

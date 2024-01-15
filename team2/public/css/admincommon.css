@@ -275,3 +275,91 @@ a:hover {
     width: 300px;
     height: 35px;
 }
+
+.pandemic_box {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.pandemic_insert_box {
+    display: inline-block;
+}
+
+.button-box1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-index-ps-mini {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.custom-common-delete-btn1 {
+    border-radius: 10px;
+    height: 40px;
+    background-color: #d7d7d7;
+    width: 145px;
+    margin-right: 20px;
+}
+
+.custom-common-delete-btn2 {
+    border-radius: 5px;
+    height: 52px;
+    background-color: #d7d7d7;
+    width: 115px;
+    margin-right: 20px;
+    font-size: 1.2rem;
+}
+
+.admin-regist-modal {
+    width: 40vw;
+    height: 60vh;
+    position: fixed;
+    z-index: 9999;
+    background: #222e3c;
+    top: 160px;
+    left: 690px;
+    color: #fff;
+}
+
+.admin-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+.admin-regist-name {
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+
+.admin-modal-down {
+    font-size: 2rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.admin-regist-box2 {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.admin-id {
+    font-size: 1.3rem;
+}
+
+.admin-input {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.admin-regist-button-box {
+    text-align: right;
+}

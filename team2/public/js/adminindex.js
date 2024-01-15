@@ -146,34 +146,46 @@ function insertpandemic() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 
 		let PANDEMICDELETEBOX = document.getElementById('pandemicdeletebox');
 		let PANDEMICHEADER = document.createElement('div');
 		let DIV = document.createElement('div');
-		let PANDEMICSPAN = createElement('span');
-		let PANDEMICINPUT = createElement('input');
-		let PANDEMICNAME = createElement('span');
-		let PANDEMICSYMPTOM = createElement('span');
-		let PANDEMICCREATE = createElement('span');
+		let PANDEMICSPAN = document.createElement('span');
+		let PANDEMICINPUT = document.createElement('input');
+		let PANDEMICNAME = document.createElement('span');
+		let PANDEMICSYMPTOM = document.createElement('span');
+		let PANDEMICCREATE = document.createElement('span');
 
+		PANDEMICHEADER.classList = 'card-header';
+		DIV.classList='admin-index-ps';
+		PANDEMICINPUT.type = 'checkbox';
+		PANDEMICINPUT.name = 'pandemic_id[]';
+		PANDEMICINPUT.value = data.pandemic_id;
+		PANDEMICNAME.classList = 'pandemic-name1';
+		PANDEMICNAME.innerHTML = data.pandemic_name;
+		PANDEMICSYMPTOM.classList = 'pandemic-symptom1';
+		PANDEMICSYMPTOM.innerHTML = data.pandemic_symptoms;
+		
+		let DATE = new Date(data.created_at);
+		var formattedDate = DATE.getFullYear() + '-' +
+        ('0' + (DATE.getMonth() + 1)).slice(-2) + '-' +
+        ('0' + DATE.getDate()).slice(-2) + ' ' +
+        ('0' + DATE.getHours()).slice(-2) + ':' +
+        ('0' + DATE.getMinutes()).slice(-2) + ':' +
+        ('0' + DATE.getSeconds()).slice(-2);
 
-		// <div class="card-header">
-		// 		<div class="admin-index-ps">
-		// 			<span><input type="checkbox" name="pandemic_id[]" value="{{$item->pandemic_id}}"></span>
-		// 			<span class="pandemic-name1">{{$item->pandemic_name}}</span>
-		// 			<span class="pandemic-symptom1">{{$item->pandemic_symptoms}}</span>
-		// 			<span>{{$item->created_at}}</span>
-		// 		</div>
-		// </div>
+		PANDEMICCREATE.innerHTML = formattedDate;
 
-		// let DATE = new Date(data.created_at);
-		// var formattedDate = DATE.getFullYear() + '-' +
-        // ('0' + (DATE.getMonth() + 1)).slice(-2) + '-' +
-        // ('0' + DATE.getDate()).slice(-2) + ' ' +
-        // ('0' + DATE.getHours()).slice(-2) + ':' +
-        // ('0' + DATE.getMinutes()).slice(-2) + ':' +
-        // ('0' + DATE.getSeconds()).slice(-2);
+		PANDEMICDELETEBOX.prepend(PANDEMICHEADER);
+		PANDEMICHEADER.appendChild(DIV);
+		DIV.appendChild(PANDEMICSPAN);
+		PANDEMICSPAN.appendChild(PANDEMICINPUT);
+		DIV.appendChild(PANDEMICNAME);
+		DIV.appendChild(PANDEMICSYMPTOM);
+		DIV.appendChild(PANDEMICCREATE);
+
+		document.getElementById('pandemic_name_insert').value = "";
+		document.getElementById('pandemic_symptom_insert').value = "";
 	})
 	.catch(error => {
 		console.error(error.stack);

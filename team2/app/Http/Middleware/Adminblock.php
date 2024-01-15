@@ -17,10 +17,15 @@ class Adminblock
      */
     public function handle(Request $request, Closure $next)
     {
-        Log::debug(session('admin_name'));
-        if (!session()->has('admin_name')) {
+        $admin_id = session('admin_id');
+        $u_id = session('id');
+
+        if (!isset($admin_id) && !isset($u_id)) {
             return $next($request);
+        } else if (isset($admin_id)) {
+            return redirect()->route('admin.main');
         }
+
         return redirect()->back();
     }
 }
