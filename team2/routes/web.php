@@ -130,6 +130,8 @@ Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdecla
 Route::post('/admin/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('admin.deleteadminboard');
 Route::post('/admin/contentssort', [ContentsadminController::class, 'contentssort'])->name('admin.contentssort');
 Route::post('/admin/commentsearch', [ContentsadminController::class, 'commentsearch'])->name('admin.commentsearch');
+Route::post('/admin/changecategory', [ContentsadminController::class, 'changecategory'])->name('admin.changecategory');
+
 
 Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');
 Route::delete('/admin/userdestroy', [AdminController::class, 'userdestroy'])->name('admin.userdestroy');

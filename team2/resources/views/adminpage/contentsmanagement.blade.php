@@ -95,16 +95,18 @@
                             <th><input type="checkbox"></th>
                             <th scope="row">{{$item->board_id}}</th>
                 </form>
-                            <form name="deleteadminboard" method="post">
                             <td>
-                                <select id="getCategorySelectValue" name="categoriy_id" onchange="categoryChange({{$item->board_id}})">
-                                    <option value="1" {{ ($item->category_name) == '자유게시판' ? 'selected' : '' }}>자유게시판</option>
-                                    <option value="2" {{ ($item->category_name) == '정보게시판' ? 'selected' : '' }}>정보게시판</option>
-                                    <option value="3" {{ ($item->category_name) == '질문게시판' ? 'selected' : '' }}>질문게시판</option>
-                                    <option value="4" {{ ($item->category_name) == '친목게시판' ? 'selected' : '' }}>친목게시판</option>
-                                </select>
+                                <form action="/admin/changecategory" id="deleteAdminContent" method="post">
+                                    @csrf
+                                    <select id="getCategorySelectValue" name="category_id" onchange="categoryChange(); return false;">
+                                        <option value="1" {{ ($item->category_name) == '자유게시판' ? 'selected' : '' }}>자유게시판</option>
+                                        <option value="2" {{ ($item->category_name) == '정보게시판' ? 'selected' : '' }}>정보게시판</option>
+                                        <option value="3" {{ ($item->category_name) == '질문게시판' ? 'selected' : '' }}>질문게시판</option>
+                                        <option value="4" {{ ($item->category_name) == '친목게시판' ? 'selected' : '' }}>친목게시판</option>
+                                    </select>
+                                    <input type="hidden" id="chkeckCommentId" name="board_id" value="{{$item->board_id}}">
+                                </form>
                             </td>
-                            </form>
                             <td>{{Str::limit($item->board_title, 20, '...')}}</td>
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 35, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>

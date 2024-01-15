@@ -152,13 +152,9 @@ birthDayArray.forEach(element => {
 
 
 
-function categoryChange(boardId) {
-
-    let form = document.getElementById('deleteadminboard');
-    let value = document.getElementById('deleteadminboard').value;
-    console.log(value);
-    console.log(form);
-    console.log(boardId);
-    form.setAttribute('action', '/deleteadminboard/'+boardId);
+function categoryChange() {
+    let form = document.getElementById('deleteAdminContent');
+    let value = document.getElementById('getCategorySelectValue').value;
+    let chkeckCommentId = document.getElementById('chkeckCommentId');
     form.submit();
 }
