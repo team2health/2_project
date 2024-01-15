@@ -39,7 +39,7 @@ class CommentController extends Controller
         $flg=$request->input('values');
     // dd($boardId, $userId,$flg);
         Comment_report::create([
-            'comment_id' =>$commentId ,
+            'comment_id' =>$commentId,
             'u_id' => $userId,
             'comment_reason_flg' =>$flg           
         ]);  

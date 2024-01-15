@@ -131,6 +131,7 @@ Route::match(['get', 'post'],'/admin/searchUsers', [AdminController::class, 'sea
 Route::get('/admin/symptomsmanagement', [AdminController::class, 'symptomsmng'])->name('admin.symptomsmanagement');
 Route::match(['get', 'post'],'/admin/searchsymptoms', [AdminController::class, 'searchsymptoms'])->name('admin.searchsymptoms');
 Route::delete('/admin/symptomdestroy', [AdminController::class, 'symptomdestroy'])->name('admin.symptomdestroy');
+Route::post('/addsymptom', [AdminController::class, 'addsymptom'])->name('admin.addsymptom');
 
 
 

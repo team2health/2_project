@@ -16,6 +16,8 @@ use App\Models\Symptom;
 use App\Models\Hashtag;
 use App\Models\Board_tag;
 use App\Models\favorite_tag;
+use App\Models\Part;
+use App\Models\part_Symptom;
 
 
 use Illuminate\Http\Request;
@@ -150,9 +152,9 @@ class AdminController extends Controller
         // 값이 없으면 경고 메시지를 반환하거나 원하는 작업 수행
         return back()->with('warning', '삭제할 항목을 선택해주세요.');
     }
-
+    Log::debug('Request Data:', $request->all());
     $selectedIds = $request->input('id');
-    
+    Log::debug('Request Data:', $selectedIds);
     // dd($selectedIds);
     User::destroy($selectedIds);    
     
@@ -168,36 +170,117 @@ class AdminController extends Controller
                     ->paginate(10);
         return view('adminpage.usermanagement')->with('data', $users);
     }
-    public function symptomsmng(){
-        $symptomData = DB::table('symptoms')
-        ->select('symptom_id', 'symptom_name',)
-        ->orderBy('symptom_id', 'desc')
-        ->paginate(10); // 페이징 적용
+    // public function symptomsmng(){
+    //     $symptomData = DB::table('symptoms')
+    //     ->select('symptom_id', 'symptom_name',)
+    //     ->orderBy('symptom_id', 'desc')
+    //     ->paginate(10); // 페이징 적용
 
-    // 뷰를 반환할 때 조회한 사용자 정보를 함께 전달합니다.
-    return view('adminpage.symptomsmanagement')->with('data', $symptomData);
-    }
+    // // 뷰를 반환할 때 조회한 사용자 정보를 함께 전달합니다.
+    // return view('adminpage.symptomsmanagement')->with('data', $symptomData);
+    // }
+    // public function symptomsmng(){
+    //     $symptomData = DB::table('symptoms')
+    //         ->select('symptoms.symptom_id', 'symptoms.symptom_name', DB::raw('group_concat(parts.part_id) as symptom_part_ids'), DB::raw('group_concat(parts.part_name) as symptom_parts'))
+    //         ->leftJoin('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
+    //         ->leftJoin('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+    //         ->groupBy('symptoms.symptom_id', 'symptoms.symptom_name')
+    //         ->orderBy('symptoms.symptom_id', 'desc')
+    //         ->paginate(10);
+    
+    //     return view('adminpage.symptomsmanagement')->with('data', $symptomData);
+    // }
+//     public function symptomsmng()
+// {
+//     $symptomData = Symptom::with('parts')
+//         ->select('symptoms.*') // 모든 컬럼을 선택
+//         ->orderBy('symptoms.symptom_id', 'desc')
+//         ->paginate(10); // 페이징 적용
+
+//     return view('adminpage.symptomsmanagement')->with('data', $symptomData);
+// }
+public function symptomsmng()
+{
+    $symptomData = Symptom::join('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
+    ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+    ->select('symptoms.symptom_id', 'symptoms.symptom_name','parts.part_id as part_id', 'parts.part_name')
+    ->orderBy('symptoms.symptom_id', 'desc')
+    ->paginate(10);// 페이징 적용
+        // dd($symptomData);
+
+    $partsData = Part::all(); // 모든 부위 데이터를 가져옴
+
+    return view('adminpage.symptomsmanagement')->with('data', $symptomData)->with('partsData', $partsData);
+}
+    // public function symptomsmng(){
+    //     $symptomData = DB::table('symptoms')
+    //         ->select('symptoms.symptom_id', 'symptoms.symptom_name', 'parts.part_name', 'parts.part_id')
+    //         ->leftJoin('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
+    //         ->leftJoin('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+    //         ->orderBy('symptoms.symptom_id', 'desc')
+    //         ->paginate(10); // 페이징 적용
+    
+    //     return view('adminpage.symptomsmanagement')->with('data', $symptomData);
+    // }
+    // public function symptomdestroy(Request $request){
+    //     // dd($request);
+    //     if (!$request->has('symptom_id')) {
+    //         // 값이 없으면 경고 메시지를 반환하거나 원하는 작업 수행
+    //         return back();
+    //     }
+    //     $selectedsymptoms = $request->input('symptom_id');
+    //     // dd($selectedIds);
+    //     Symptom::destroy($selectedsymptoms);
+    //     return redirect()-> route('admin.symptomsmanagement');
+    // }
     public function symptomdestroy(Request $request){
-        // dd($request);
-        if (!$request->has('symptom_id')) {
-            // 값이 없으면 경고 메시지를 반환하거나 원하는 작업 수행
+        if (!$request->has('id')) {
             return back();
         }
-        $selectedsymptoms = $request->input('symptom_id');
-        // dd($selectedIds);
+        $selectedsymptoms = $request->input('id');
+        // 관련된 part_symptoms 데이터 삭제
+        Part_symptom::whereIn('symptom_id', $selectedsymptoms)->delete();
+    
+        // 증상 데이터 삭제
         Symptom::destroy($selectedsymptoms);
-        return redirect()-> route('admin.symptomsmanagement');
-    }
-    public function searchsymptoms(Request $request)
-    {
-        $searchKeyword = $request->input('search_keyword_sym');
-
-        $symptoms = Symptom::where('symptom_name', 'like', "%$searchKeyword%")
-                    ->orWhere('symptom_id', 'like', "%$searchKeyword%")
-                    ->orderBy('symptom_id', 'desc')
-                    ->paginate(10);
-        return view('adminpage.symptomsmanagement')->with('data', $symptoms);
+    
+        return redirect()->route('admin.symptomsmanagement');
     }
     
+    // public function searchsymptoms(Request $request)
+    // {
+    //     $searchKeyword = $request->input('search_keyword_sym');
 
+    //     $symptoms = Symptom::where('symptom_name', 'like', "%$searchKeyword%")
+    //                 ->orWhere('symptom_id', 'like', "%$searchKeyword%")
+    //                 ->orderBy('symptom_id', 'desc')
+    //                 ->paginate(10);
+    //     return view('adminpage.symptomsmanagement')->with('data', $symptoms);
+    // }
+    public function searchsymptoms(Request $request)
+{
+    $searchKeyword = $request->input('search_keyword_sym');
+
+    $symptoms = Symptom::join('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
+        ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+        ->where('symptoms.symptom_name', 'like', "%$searchKeyword%")
+        ->orWhere('symptoms.symptom_id', 'like', "%$searchKeyword%")
+        ->orWhere('parts.part_name', 'like', "%$searchKeyword%")
+        ->orderBy('symptoms.symptom_id', 'desc')
+        ->paginate(10);
+        $partsData = Part::all();
+
+    return view('adminpage.symptomsmanagement')->with('data', $symptoms)->with('partsData', $partsData);
+}
+
+    public function addsymptom(Request $request){        
+        $partId = $request->input('part_id');
+        $symptomname = $request->input('symptom_name');
+        $symptom = Symptom::create([            
+            'symptom_name'=> $symptomname,
+        ]);
+        $symptom->parts()->sync($partId);
+        
+        return redirect()->route('admin.symptomsmanagement');
+    }
 }
