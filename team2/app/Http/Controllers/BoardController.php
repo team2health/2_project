@@ -53,7 +53,7 @@ class BoardController extends Controller
             ->where('users.id', $u_id)
             ->where('favorite_tags.deleted_at', null)
             ->where('boards.deleted_at', null)
-            ->orderby('boards.board_id', 'desc')
+            ->orderby('boards.created_at', 'desc')
             ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
             ->limit(4)
             ->get();
@@ -113,7 +113,7 @@ class BoardController extends Controller
             return redirect()->route('login.get');
             }
 
-        $category_board=Board::where('category_id', '1',)->where('deleted_at', null)->orderBy('board_id', 'desc')->paginate(5);
+        $category_board=Board::where('category_id', '1',)->where('deleted_at', null)->orderBy('created_at', 'desc')->paginate(5);
         $category_id = Category::orderby('category_id', 'asc')->get();
         $category_name = Category::where('category_id', '1')->get();
         $result = [$category_board, $category_id, $category_name];
@@ -446,7 +446,7 @@ $flg=$request->input('values');
             return redirect()->route('login.get');
             }
         $category_board = Board::where('category_id', $categoryId)
-        ->where('deleted_at', null)->orderby('board_id', 'desc')->paginate(5);
+        ->where('deleted_at', null)->orderby('created_at', 'desc')->paginate(5);
 
         $category_id = Category::orderby('category_id', 'asc')->get();
 
@@ -461,7 +461,7 @@ $flg=$request->input('values');
 
         $result = Board::where('board_id', '<', $request->last_num)
             ->where('deleted_at', null)
-            ->orderby('board_id', 'desc')
+            ->orderby('created_at', 'desc')
             ->limit(4)
             ->get();
         
@@ -492,7 +492,7 @@ $flg=$request->input('values');
         ->where('favorite_tags.deleted_at', null)
         ->where('boards.deleted_at', null)
         ->where('boards.board_id', '<', $request->favorite_num)
-        ->orderby('boards.board_id', 'desc')
+        ->orderby('boards.created_at', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content')
         ->limit(4)
         ->get();
@@ -529,7 +529,7 @@ $flg=$request->input('values');
             return redirect()->route('login.get');
             }
 
-        $lastboard = Board::orderBy('board_id', 'desc')
+        $lastboard = Board::orderBy('created_at', 'desc')
         ->where('deleted_at', null)->paginate(5);
 
         return view('lastboard')->with('data', $lastboard);
@@ -561,7 +561,7 @@ $flg=$request->input('values');
         ->where('users.id', $u_id)
         ->where('favorite_tags.deleted_at', null)
         ->where('boards.deleted_at', null)
-        ->orderby('boards.board_id', 'desc')
+        ->orderby('boards.created_at', 'desc')
         ->groupBy('boards.board_id', 'boards.board_title', 'boards.board_content', 'boards.created_at')
         ->paginate(5);
 
@@ -570,9 +570,7 @@ $flg=$request->input('values');
             // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
             $favoriteboard[$count]['userinfo'] = Board::join('users', 'boards.u_id', '=', 'users.id')
             ->select('users.user_img', 'users.user_name')
-            ->where('boards.deleted_at', null)
             ->where('boards.board_id', $item->board_id)
-            ->orderby('boards.board_id', 'desc')
             ->get();
 
             $count++;
@@ -585,7 +583,6 @@ $flg=$request->input('values');
             $favoriteboard[$cnt]['board_tag'] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
             ->select('hashtags.hashtag_name')
             ->where('board_tags.board_id', $item->board_id)
-            ->orderby('board_tags.board_id', 'desc')
             ->get();
             
             $cnt++;

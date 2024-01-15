@@ -389,12 +389,11 @@ button {
 
 #error_login_id {
 	color: red;
-	font-size: 0.7rem;
-	line-height: 25px;
-	float: left;
-	height: 20px;
-	width: 210px;
-	margin-left: 30px;
+    font-size: 0.7rem;
+    line-height: 25px;
+    float: left;
+    height: 20px;
+    width: 157px;
 }
 
 .gender-div {

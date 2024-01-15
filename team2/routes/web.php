@@ -57,7 +57,7 @@ Route::get('/useraddress', [MainController::class, 'useraddressget']);
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::middleware('user.validation')->post('/login', [UserController::class, 'loginpost'])->name('login.post');
 Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
-Route::middleware('Adminblock')->post('/regist', [UserController::class, 'registpost'])->name('regist.post');
+Route::middleware('user.validation')->post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);
 Route::get('/firstchkpassword', [UserController::class, 'firstchkpassword'])->middleware('auth')->name('firstchkpassword');
@@ -118,6 +118,11 @@ Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('admin
 Route::middleware(['admin.auth'])->group(function () {
 
 Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.main');
+Route::delete('/pandemicdelete', [AdminController::class, 'pandemicdelete']);
+Route::post('/pandemicinsert', [AdminController::class, 'pandemicinsertpost']);
+Route::get('/admin/hashtag', [AdminController::class, 'adminhashtagget'])->name('adminhashtag.get');
+Route::delete('/hashtagdelete', [AdminController::class, 'hashtagdelete']);
+Route::post('/hashtaginsert', [AdminController::class, 'hashtaginsertpost']);
     
 Route::get('/admin/contents/{align_board?}', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/comments/{date?}', [ContentsadminController::class, 'admincomments'])->name('admin.comments');
@@ -132,6 +137,7 @@ Route::match(['get', 'post'],'/admin/searchUsers', [AdminController::class, 'sea
 Route::get('/admin/symptomsmanagement', [AdminController::class, 'symptomsmng'])->name('admin.symptomsmanagement');
 Route::match(['get', 'post'],'/admin/searchsymptoms', [AdminController::class, 'searchsymptoms'])->name('admin.searchsymptoms');
 Route::delete('/admin/symptomdestroy', [AdminController::class, 'symptomdestroy'])->name('admin.symptomdestroy');
+Route::post('/addsymptom', [AdminController::class, 'addsymptom'])->name('admin.addsymptom');
 
 
 

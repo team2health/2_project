@@ -1,6 +1,6 @@
 let LOGINUSERID = document.getElementById('login_user_email');
 let ERRORLOGINID = document.getElementById('error_login_id');
-let regex = /^[가-힣a-zA-Z0-9]{4,}$/;
+let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 let PASSWORDERROR = document.getElementById('passwordError');
 // let IDERROR = document.getElementById('idError');
@@ -26,11 +26,11 @@ function loginonload() {
 LOGINUSERID.addEventListener('input', function() {
     const value = LOGINUSERID.value;
 
-    // if (!regex.test(value)) {
-    //     ERRORLOGINID.removeAttribute('class');
-    // } else {
+    if (!regex.test(value)) {
+        ERRORLOGINID.removeAttribute('class');
+    } else {
 		ERRORLOGINID.setAttribute('class', 'not-error-id');
-	// }
+	}
 });
 
 function logingo() {

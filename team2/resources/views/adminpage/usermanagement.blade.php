@@ -54,14 +54,14 @@
                             @endforelse
                     </tbody>
                 </table>
-                <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
+                <button type="button" class="admin-custom-btn custom-common-delete-btn" data-bs-toggle="modal" data-bs-target="#confirmationModal">삭제</button>
                 <a href="{{ url()->previous() }}" style="text-decoration: none;" class="text-decoration-none admin-custom-btn custom-common-btn ">뒤로 가기</a>
             </form>
-            <div class="modal" tabindex="-1">
+            <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">삭제확인</h5>
+                            <h5 class="modal-title">삭제 확인</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-primary">확인</button>
+                            <button type="submit" class="btn btn-primary" onclick="deleteConfirmed()">확인</button>
                         </div>
                     </div>
                 </div>
@@ -113,4 +113,13 @@
                 </div>
             </nav>
         </div>
+        <script>function confirmDelete() {
+        // 여기에 삭제 전 확인 작업을 수행할 로직 추가
+        return true; // 확인되면 true 반환
+    }
+
+    function deleteConfirmed() {
+        // 여기에 실제 삭제 작업을 수행하는 로직 추가
+        document.getElementById('deleteForm').submit();
+    }</script>
 @endsection
