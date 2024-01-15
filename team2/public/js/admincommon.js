@@ -15,3 +15,29 @@ function adminmodalon() {
 function adminmodaloff() {
     ADMINMODAL.style.display = 'none';
 }
+
+function adminRegist() {
+    let ADMINID = document.getElementById('admin_regist_id').value;
+    let ADMINNAME = document.getElementById('admin_regist_name').value;
+    let ADMINPW = document.getElementById('admin_regist_pw').value;
+
+    let formData = new FormData();
+	formData.append('admin_id', ADMINID);
+	formData.append('admin_name', ADMINNAME);
+	formData.append('admin_password', ADMINPW);
+
+	fetch('/adminregist', {
+		method: 'POST',
+		body: formData,
+	})
+	.then(response => response.json())
+	.then(data => {
+        ADMINMODAL.style.display = 'none';
+        document.getElementById('admin_regist_id').value = "";
+        document.getElementById('admin_regist_name').value = "";
+        document.getElementById('admin_regist_pw').value = "";
+	})
+	.catch(error => {
+		console.error(error.stack);
+	})
+}

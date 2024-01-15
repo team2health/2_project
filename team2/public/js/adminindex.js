@@ -183,6 +183,9 @@ function insertpandemic() {
 		DIV.appendChild(PANDEMICNAME);
 		DIV.appendChild(PANDEMICSYMPTOM);
 		DIV.appendChild(PANDEMICCREATE);
+
+		document.getElementById('pandemic_name_insert').value = "";
+		document.getElementById('pandemic_symptom_insert').value = "";
 	})
 	.catch(error => {
 		console.error(error.stack);

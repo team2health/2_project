@@ -143,15 +143,15 @@
     <br><br><br>
     <div class="admin-regist-box2">
         <div class="admin-id">관리자 아이디</div>
-        <input type="text" name="admin_id" id="" class="admin-input">
+        <input type="text" name="admin_id" id="admin_regist_id" class="admin-input">
         <div class="admin-id">관리자 이름</div>
-        <input type="text" name="admin_name" id="" class="admin-input">
+        <input type="text" name="admin_name" id="admin_regist_name" class="admin-input">
         <div class="admin-id">비밀번호</div>
-        <input type="password" name="admin_password" id="" class="admin-input">
+        <input type="password" name="admin_password" id="admin_regist_pw" class="admin-input">
     </div>
     <br><br><br>
     <div class="admin-regist-button-box">
-        <button type="button" class="admin-custom-btn2 custom-common-delete-btn2">생성하기</button>
+        <button type="button" class="admin-custom-btn2 custom-common-delete-btn2" onclick="adminRegist(); return false;">생성하기</button>
     </div>
 </div>
 

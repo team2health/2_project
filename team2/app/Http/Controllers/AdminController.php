@@ -179,6 +179,17 @@ class AdminController extends Controller
         return response()->json($result);
     }
 
+    public function adminregistpost(Request $request) {
+        Log::debug($request);
+        $admin = $request->only('admin_id', 'admin_name', 'admin_password');
+
+        $admin['admin_password'] = Hash::make($admin['admin_password']);
+
+        $result = Admin::create($admin);
+
+        return response()->json($result);
+    }
+
     public function adminuser(){
         $userData = DB::table('users')
         ->select('id', 'user_name', 'user_email', 'created_at')

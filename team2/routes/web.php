@@ -123,6 +123,7 @@ Route::post('/pandemicinsert', [AdminController::class, 'pandemicinsertpost']);
 Route::get('/admin/hashtag', [AdminController::class, 'adminhashtagget'])->name('adminhashtag.get');
 Route::delete('/hashtagdelete', [AdminController::class, 'hashtagdelete']);
 Route::post('/hashtaginsert', [AdminController::class, 'hashtaginsertpost']);
+Route::post('/adminregist', [AdminController::class, 'adminregistpost']);
     
 Route::get('/admin/contents/{align_board?}', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/comments/{date?}', [ContentsadminController::class, 'admincomments'])->name('admin.comments');

@@ -45,6 +45,8 @@ function insertHashtag() {
 		HASHTAG.appendChild(HASHTAGBOARD);
 		HASHTAG.appendChild(HASHTAGFAVORITE);
 		HASHTAG.appendChild(HASHTAGCREATE);
+
+		document.getElementById('insert_hashtag').value = "";
 	})
 	.catch(error => {
 		console.error(error.stack);

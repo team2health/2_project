@@ -24,9 +24,7 @@ class UserController extends Controller
         }
         return view('regist');
     }
-
-
-
+    
     public function registpost(Request $request) {
         
         if(!isset($request->agreement_flg)) {
