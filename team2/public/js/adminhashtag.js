@@ -38,19 +38,13 @@ function insertHashtag() {
 
 		HASHTAGCREATE.innerHTML = formattedDate;
 
-		HASHTAGBODY.appendChild(HASHTAG);
+		HASHTAGBODY.prepend(HASHTAG);
 		HASHTAG.appendChild(INPUTHASHTAGBOX);
 		INPUTHASHTAGBOX.appendChild(INPUTHASHTAG);
 		HASHTAG.appendChild(HASHTAGNAME);
 		HASHTAG.appendChild(HASHTAGBOARD);
 		HASHTAG.appendChild(HASHTAGFAVORITE);
 		HASHTAG.appendChild(HASHTAGCREATE);
-		// <th scope="row"><input type="checkbox" name="hashtag_id[]" value="{{$item->hashtag_id}}"></th>
-        //                         <td>{{$item->hashtag_name}}</td>
-        //                         <td>{{$item->board_hashtag}}번 사용</td>
-        //                         <td>{{$item->favorite_hashtag}}번 사용</td>
-        //                         <td>{{$item->created_at}}</td>
-		
 	})
 	.catch(error => {
 		console.error(error.stack);

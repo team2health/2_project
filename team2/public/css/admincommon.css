@@ -227,16 +227,40 @@ a {
     justify-content: space-between;
 }
 
-.admin-index-ps-mini {
-    display: flex;
-    justify-content: space-between;
-    width: 30%;
-}
-
 .button-box {
     text-align: right;
 }
 
 .insert-hashtag-input {
+    height: 35px;
+}
+
+.pandemic-name {
+    width: 14%;
+}
+
+.pandemic-symptom {
+    width: 40%;
+}
+
+.pandemic-name1 {
+    width: 13%;
+}
+
+.pandemic-symptom1 {
+    width: 32%;
+}
+
+.pandemic-border-bottom {
+    border-bottom: 3px solid #8f8f8f;
+}
+
+.insert-pandemic-input1 {
+    width: 150px;
+    height: 35px;
+}
+
+.insert-pandemic-input2 {
+    width: 300px;
     height: 35px;
 }

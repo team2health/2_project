@@ -37,6 +37,41 @@
 					<div></div>
 				</div>
 			</div>
+			<br>
+            <div class="button-box">
+                <input type="text" id="pandemic_name_insert" name="pandemic_name" class="insert-pandemic-input1" placeholder="질병명">
+                <input type="text" id="pandemic_symptom_insert" name="pandemic_symptom" class="insert-pandemic-input2" placeholder="증상">
+                <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="insertpandemic(); return false;">+</button>
+            </div>
+			<br>
+			<div class="card-header pandemic-border-bottom">
+				<div>
+					<div class="admin-index-ps">
+						<span>선택</span>
+						<span class="pandemic-name">질병명</span>
+						<span class="pandemic-symptom">증상</span>
+						<span>생성일자</span>
+					</div>
+				</div>
+			</div>
+			<form action="/pandemicdelete" method="post" id="pandemicdeletebox">
+				@csrf
+				@method('DELETE')
+				@foreach ($result[5] as $item)
+				<div class="card-header">
+					<div class="admin-index-ps">
+						<span><input type="checkbox" name="pandemic_id[]" value="{{$item->pandemic_id}}"></span>
+						<span class="pandemic-name1">{{$item->pandemic_name}}</span>
+						<span class="pandemic-symptom1">{{$item->pandemic_symptoms}}</span>
+						<span>{{$item->created_at}}</span>
+					</div>
+				</div>
+				@endforeach
+				<br>
+				<div class="button-box">
+					<button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
+				</div>
+			</form>
 		</div>
 	</main>
 	<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>

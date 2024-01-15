@@ -35,6 +35,7 @@ class VerifyCsrfToken extends Middleware
         '/changpasswordchk',
         '/hashtagsearch',
         '/adminlogout',
-        'hashtaginsert',
+        '/hashtaginsert',
+        '/pandemicinsert',
     ];
 }

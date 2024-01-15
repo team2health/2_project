@@ -30,6 +30,7 @@
                 </thead>
                 <form action="/hashtagdelete" method="POST">
                     @csrf
+                    @method('DELETE')
                     <tbody id="hashtagbody">
                         @foreach ($result as $item)
                             <tr>

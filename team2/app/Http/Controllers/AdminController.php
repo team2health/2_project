@@ -16,6 +16,7 @@ use App\Models\Symptom;
 use App\Models\Hashtag;
 use App\Models\Board_tag;
 use App\Models\favorite_tag;
+use App\Models\Pandemic;
 
 
 use Illuminate\Http\Request;
@@ -102,14 +103,33 @@ class AdminController extends Controller
         ->groupBy('part_symptom_id')
         ->get();
 
-        Log::debug($result[4]);
+        $result[5] = Pandemic::orderBy('created_at', 'desc')->get();
 
         return view('adminpage.index')->with('result', $result);
     }
 
+    public function pandemicdelete(Request $request) {
+        foreach ($request->pandemic_id as $value) {
+            Pandemic::destroy($value);
+        }
+
+        return redirect()->route('admin.main');
+    }
+
+    public function pandemicinsertpost(Request $request) {
+        Pandemic::create([
+            'pandemic_name' => $request->pandemic_name,
+            'pandemic_symptoms' => $request->pandemic_symptom
+        ]);
+
+        $result = Pandemic::orderBy('pandemic_id', 'desc')->first();
+
+        return response()->json($result);
+    }
+
     public function adminhashtagget() {
 
-        $result = Hashtag::get();
+        $result = Hashtag::orderBy('created_at', 'desc')->get();
 
         $cnt = 0;
         foreach ($result as $value) {
@@ -129,7 +149,8 @@ class AdminController extends Controller
         return view('adminpage.hashtagmanagement')->with('result', $result);
     }
 
-    public function hashtagdeletepost(Request $request) {
+    public function hashtagdelete(Request $request) {
+        Log::debug($request);
 
         foreach ($request->hashtag_id as $value) {
             Hashtag::destroy($value);

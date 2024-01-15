@@ -47,7 +47,6 @@ week.forEach(week => {
 	commentcnt.push(ccount);
 });
 
-
 option = {
 	tooltip: {
     trigger: 'item'
@@ -121,16 +120,62 @@ series: [
     {
 		name: 'board',
 		type: 'line',
-		stack: 'Total',
 		data: boardcnt
     },
     {
 		name: 'comment',
 		type: 'line',
-		stack: 'Total',
 		data: commentcnt
     }
 ]
 };
 
 myChart1.setOption(option1);
+
+function insertpandemic() {
+	let PANDEMICNAME = document.getElementById('pandemic_name_insert').value;
+	let PANDEMICSYMPTOM = document.getElementById('pandemic_symptom_insert').value;
+
+	let formData = new FormData();
+	formData.append('pandemic_name', PANDEMICNAME);
+	formData.append('pandemic_symptom', PANDEMICSYMPTOM);
+	
+	fetch('/pandemicinsert', {
+		method: 'POST',
+		body: formData,
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+
+		let PANDEMICDELETEBOX = document.getElementById('pandemicdeletebox');
+		let PANDEMICHEADER = document.createElement('div');
+		let DIV = document.createElement('div');
+		let PANDEMICSPAN = createElement('span');
+		let PANDEMICINPUT = createElement('input');
+		let PANDEMICNAME = createElement('span');
+		let PANDEMICSYMPTOM = createElement('span');
+		let PANDEMICCREATE = createElement('span');
+
+
+		// <div class="card-header">
+		// 		<div class="admin-index-ps">
+		// 			<span><input type="checkbox" name="pandemic_id[]" value="{{$item->pandemic_id}}"></span>
+		// 			<span class="pandemic-name1">{{$item->pandemic_name}}</span>
+		// 			<span class="pandemic-symptom1">{{$item->pandemic_symptoms}}</span>
+		// 			<span>{{$item->created_at}}</span>
+		// 		</div>
+		// </div>
+
+		// let DATE = new Date(data.created_at);
+		// var formattedDate = DATE.getFullYear() + '-' +
+        // ('0' + (DATE.getMonth() + 1)).slice(-2) + '-' +
+        // ('0' + DATE.getDate()).slice(-2) + ' ' +
+        // ('0' + DATE.getHours()).slice(-2) + ':' +
+        // ('0' + DATE.getMinutes()).slice(-2) + ':' +
+        // ('0' + DATE.getSeconds()).slice(-2);
+	})
+	.catch(error => {
+		console.error(error.stack);
+	})
+}
