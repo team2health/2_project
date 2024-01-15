@@ -45,6 +45,10 @@ class AdminController extends Controller
         return redirect()->route('admin.main');
     }
     public function adminlogout() {
+        $admin_id = session('admin_id');
+        if(!isset($admin_id)) {
+            return redirect()->route('main.get');
+        }
         Session::flush();
         Auth::logout();
         return redirect()->route('main.get');

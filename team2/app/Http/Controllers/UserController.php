@@ -100,6 +100,10 @@ class UserController extends Controller
     }
 
     public function logoutget() {
+        $id = session('id');
+        if(!isset($id)) {
+            return redirect()->route('main.get');
+        }
         Session::flush();
         Auth::logout();
         return redirect()->route('main.get');
