@@ -129,6 +129,29 @@ class AdminController extends Controller
         return view('adminpage.hashtagmanagement')->with('result', $result);
     }
 
+    public function hashtagdeletepost(Request $request) {
+
+        foreach ($request->hashtag_id as $value) {
+            Hashtag::destroy($value);
+        }
+
+        return redirect()->route('adminhashtag.get');
+    }
+
+    public function hashtaginsertpost(Request $request) {
+        Hashtag::create([
+            'hashtag_name' => $request->hashtag_name
+        ]);
+
+        $result = Hashtag::orderBy('hashtag_id', 'desc')->first();
+
+        $result['board_hashtag'] = Board_tag::where('hashtag_id', $result->hashtag_id)->count();
+        $result['favorite_hashtag'] = favorite_tag::where('hashtag_id', $result->hashtag_id)->count();
+
+
+        return response()->json($result);
+    }
+
     public function adminuser(){
         $userData = DB::table('users')
         ->select('id', 'user_name', 'user_email', 'created_at')

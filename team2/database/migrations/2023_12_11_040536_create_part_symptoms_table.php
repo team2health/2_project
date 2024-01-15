@@ -14,11 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('part_symptoms', function (Blueprint $table) {
-            $table->integer('part_symptom_id');
+            $table->increments('part_symptom_id');
             $table->integer('symptom_id');
             $table->integer('part_id');
-
-            $table->primary('part_symptom_id');
         });
     }
 

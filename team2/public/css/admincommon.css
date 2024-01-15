@@ -236,3 +236,7 @@ a {
 .button-box {
     text-align: right;
 }
+
+.insert-hashtag-input {
+    height: 35px;
+}
