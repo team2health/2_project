@@ -67,10 +67,6 @@ class CommentController extends Controller
     }
 
     public function deleteadminboard(Request $request) {
-        Log::debug($request->categoriy_id);
-        exit;
-        // if() {
-
-        // }
+        
     }
 }

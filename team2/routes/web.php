@@ -124,10 +124,12 @@ Route::get('/admin/hashtag', [AdminController::class, 'adminhashtagget'])->name(
 Route::delete('/hashtagdelete', [AdminController::class, 'hashtagdelete']);
 Route::post('/hashtaginsert', [AdminController::class, 'hashtaginsertpost']);
     
-Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
+Route::get('/admin/contents/{align_board?}', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
+Route::get('/admin/comments/{date?}', [ContentsadminController::class, 'admincomments'])->name('admin.comments');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
-Route::post('/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('deleteadminboard');
-
+Route::post('/admin/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('admin.deleteadminboard');
+Route::post('/admin/contentssort', [ContentsadminController::class, 'contentssort'])->name('admin.contentssort');
+Route::post('/admin/commentsearch', [ContentsadminController::class, 'commentsearch'])->name('admin.commentsearch');
 
 Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');
 Route::delete('/admin/userdestroy', [AdminController::class, 'userdestroy'])->name('admin.userdestroy');
