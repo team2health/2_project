@@ -245,6 +245,7 @@ class AdminController extends Controller
 // }
 public function symptomsmng()
 {
+    
     $symptomData = Symptom::join('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
     ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
     ->select('symptoms.symptom_id', 'symptoms.symptom_name','parts.part_id as part_id', 'parts.part_name')
@@ -317,14 +318,44 @@ public function symptomsmng()
     return view('adminpage.symptomsmanagement')->with('data', $symptoms)->with('partsData', $partsData);
 }
 
+    // public function addsymptom(Request $request){        
+    //     $partId = $request->input('part_id');
+    //     $symptomname = $request->input('symptom_name');
+    //     // 이미 존재하는 증상을 확인
+    //     $existingSymptom = Symptom::where('symptom_name', $symptomname)->first();
+
+    //     if ($existingSymptom) {
+    //         // 이미 존재하는 경우, 기존 증상을 가져와서 새로운 부위와 연결
+    //         $existingSymptom->parts()->attach($partId);
+    //     } else {
+    //         // 존재하지 않는 경우, 새로운 증상을 생성하고 부위와 연결
+    //         $symptom = Symptom::create([
+    //             'symptom_name' => $symptomname,
+    //         ]);
+
+    //         $symptom->parts()->sync($partId);
+            
+    //         return redirect()->route('admin.symptomsmanagement');
+    //     }
+    // }
     public function addsymptom(Request $request){        
         $partId = $request->input('part_id');
         $symptomname = $request->input('symptom_name');
-        $symptom = Symptom::create([            
-            'symptom_name'=> $symptomname,
-        ]);
-        $symptom->parts()->sync($partId);
-        
+        // 이미 존재하는 증상을 확인
+        $existingSymptom = Symptom::where('symptom_name', $symptomname)->first();
+    
+        if ($existingSymptom) {
+            // 이미 존재하는 경우, 기존 증상을 가져와서 새로운 부위와 연결
+            $existingSymptom->parts()->attach($partId);
+        } else {
+            // 존재하지 않는 경우, 새로운 증상을 생성하고 부위와 연결
+            $symptom = Symptom::create([
+                'symptom_name' => $symptomname,
+            ]);
+    
+            $symptom->parts()->sync($partId);
+        }
+    
         return redirect()->route('admin.symptomsmanagement');
     }
 }
