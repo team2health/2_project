@@ -118,7 +118,11 @@ Route::get('/adminlogout', [AdminController::class, 'adminlogout'])->name('admin
 Route::middleware(['admin.auth'])->group(function () {
 
 Route::get('/admin/main', [AdminController::class, 'adminmain'])->name('admin.main');
-Route::get('admin/hashtag', [AdminController::class, 'adminhashtagget'])->name('adminhashtag.get');
+Route::delete('/pandemicdelete', [AdminController::class, 'pandemicdelete']);
+Route::post('/pandemicinsert', [AdminController::class, 'pandemicinsertpost']);
+Route::get('/admin/hashtag', [AdminController::class, 'adminhashtagget'])->name('adminhashtag.get');
+Route::delete('/hashtagdelete', [AdminController::class, 'hashtagdelete']);
+Route::post('/hashtaginsert', [AdminController::class, 'hashtaginsertpost']);
     
 Route::get('/admin/contents', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');

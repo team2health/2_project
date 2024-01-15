@@ -14,9 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hashtags', function (Blueprint $table) {
-            $table->integer('hashtag_id');
-            $table->string('hashtag_name')->unique();            
-            $table->primary('hashtag_id');
+            $table->increments('hashtag_id');
+            $table->string('hashtag_name')->unique();
             $table->timestamps(); 
             $table->softDeletes(); 
         });
