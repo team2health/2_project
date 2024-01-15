@@ -321,6 +321,16 @@ public function symptomsmng()
     // public function addsymptom(Request $request){        
     //     $partId = $request->input('part_id');
     //     $symptomname = $request->input('symptom_name');
+    //     $symptom = Symptom::create([            
+    //         'symptom_name'=> $symptomname,
+    //     ]);
+    //     $symptom->parts()->sync($partId);
+        
+    //     return redirect()->route('admin.symptomsmanagement');
+    // }
+    // public function addsymptom(Request $request){        
+    //     $partId = $request->input('part_id');
+    //     $symptomname = $request->input('symptom_name');
     //     // 이미 존재하는 증상을 확인
     //     $existingSymptom = Symptom::where('symptom_name', $symptomname)->first();
 
@@ -338,24 +348,56 @@ public function symptomsmng()
     //         return redirect()->route('admin.symptomsmanagement');
     //     }
     // }
-    public function addsymptom(Request $request){        
+    // public function addsymptom(Request $request) {
+    //     $partId = $request->input('part_id');
+    //     $symptomname = $request->input('symptom_name');
+    
+    //     // 같은 증상이 같은 부위에 이미 존재하는지 확인
+    //     $existingSamePartSymptom = Part_symptom::where('part_id', $partId)
+    //         ->whereHas('connectsymptoms', function ($query) use ($symptomname) {
+    //             $query->where('symptom_name', $symptomname);
+    //         })
+    //         ->exists();
+    
+    //     // 같은 증상이 다른 부위에 이미 존재하는지 확인
+    //     $existingDifferentPartSymptom = Part_symptom::where('part_id', '<>', $partId)
+    //         ->whereHas('connectsymptoms', function ($query) use ($symptomname) {
+    //             $query->where('symptom_name', $symptomname);
+    //         })
+    //         ->exists();
+    
+    //     if (!$existingSamePartSymptom && !$existingDifferentPartSymptom) {
+    //         // 같은 증상이 같은 부위나 다른 부위에 존재하지 않는 경우, 생성하고 연결
+    //         $symptom = Symptom::firstOrCreate(['symptom_name' => $symptomname]);
+    //         $symptom->parts()->attach($partId);
+    
+    //         return redirect()->route('admin.symptomsmanagement');
+    //     } else {
+    //         // 이미 존재하는 경우, 에러 메시지를 표시하거나 다른 조치를 취할 수 있습니다.
+    //         return redirect()->route('admin.symptomsmanagement')->withErrors('이미 동일한 증상이 해당 부위에 또는 다른 부위에 연결되어 있습니다.');
+    //     }
+    // }
+    public function addsymptom(Request $request) {
         $partId = $request->input('part_id');
         $symptomname = $request->input('symptom_name');
-        // 이미 존재하는 증상을 확인
+    
+        // 입력하려는 부위에 해당하는 증상이 symptom 테이블에 존재하는지 확인
         $existingSymptom = Symptom::where('symptom_name', $symptomname)->first();
     
         if ($existingSymptom) {
-            // 이미 존재하는 경우, 기존 증상을 가져와서 새로운 부위와 연결
-            $existingSymptom->parts()->attach($partId);
+            // 입력하려는 부위에 해당하는 증상이 이미 존재하는 경우,
+            // 해당 부위와 연결이 되어 있지 않은 경우에만 연결
+            if (!$existingSymptom->parts->contains($partId)) {
+                $existingSymptom->parts()->attach($partId);
+            }
         } else {
-            // 존재하지 않는 경우, 새로운 증상을 생성하고 부위와 연결
-            $symptom = Symptom::create([
-                'symptom_name' => $symptomname,
-            ]);
-    
-            $symptom->parts()->sync($partId);
+            // 입력하려는 부위에 해당하는 증상이 symptom 테이블에 존재하지 않는 경우,
+            // symptom 테이블에 해당 증상을 생성하고, 부위와 연결
+            $symptom = Symptom::create(['symptom_name' => $symptomname]);
+            $symptom->parts()->attach($partId);
         }
     
         return redirect()->route('admin.symptomsmanagement');
     }
+    
 }
