@@ -152,8 +152,8 @@ class BoardController extends Controller
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
-        $u_id = auth()->id();   
-        // 요청에서 게시글 데이터를 가져옵니다.     
+        $u_id = session('id');
+        // 요청에서 게시글 데이터를 가져옵니다.
         $boardData = $request->only('board_title', 'board_content');
         $boardData['category_id'] = (int)$request->input('category_id');
       
