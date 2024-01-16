@@ -26,18 +26,49 @@
 			<br><br>
 			<div class="pandemic_box">2024년 부위-증상 통계</div>
 			<br><br>
-			<div class="card-header">
+			<div class="index_display_grid">
 				<div>
-					<div class="admin-index-ps">
+					<div class="card-header pandemic-border-bottom ps-width">
 						<div class="admin-index-ps-mini">
 							<span>순위</span>
 							<span>부위 - 증상</span>
-							<span>2024년</span>
-							<span>2023년</span>
+							<span>2024년 (2023년)</span>
 						</div>
-						<span>생성일자</span>
 					</div>
-					<div></div>
+					@foreach ($result[4] as $item)
+					<div class="card-header ps-width">
+						<div class="admin-index-ps-mini">
+							<span class="index-width">{{ $loop->iteration }}</span>
+							<span class="index-width">{{ $item->part_name[0]->part_name }} - {{ $item->symptom_name[0]->symptom_name }}</span>
+							<div class="index_cnt">
+								<span>{{ $item->cnt }}회</span>
+								@if ($item->last_year > 0)
+								<span class="index-font-color-red">({{ $item->last_year }}%)</span>
+								@else
+								<span class="index-font-color-blue">({{ $item->last_year }}%)</span>
+								@endif
+							</div>
+						</div>
+					</div>
+					@endforeach
+				</div>
+				<div>
+					<div class="card-header pandemic-border-bottom ps-width">
+						<div class="admin-index-ps-mini">
+							<span>연령대</span>
+							<span>부위 - 증상</span>
+							<span>2024년(2023년)</span>
+						</div>
+					</div>
+					@foreach ($result[4] as $item)
+					<div class="card-header ps-width">
+						<div class="admin-index-ps-mini">
+							<span class="index-width"></span>
+							<span class="index-width">{{ $item->part_name[0]->part_name }}-{{ $item->symptom_name[0]->symptom_name }}</span>
+							<span class="index-width">{{ $item->cnt }}()</span>
+						</div>
+					</div>
+					@endforeach
 				</div>
 			</div>
 			<br><br><br>

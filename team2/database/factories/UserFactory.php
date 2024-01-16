@@ -19,7 +19,7 @@ class UserFactory extends Factory
     {
         return [
             'user_email' => $this->faker->unique()->safeEmail(),
-            'user_name' => $this->faker->name(),
+            'user_name' => $this->faker->unique()->name(),
             'user_password' => '$2y$10$3a6zpvZybCOQoaNepOIy8.YndwxyCQZid.MHxPt1ZhcNCfkG64obG',
             'birthday' => $this->faker->date,
             'user_address_num' => '48060',
@@ -29,8 +29,8 @@ class UserFactory extends Factory
             'agreement_flg' => '1',
             'email_verified_at' => $this->faker->date,
             'remember_token' => Str::random(10),
-            'created_at' => $this->faker->date,
-            'updated_at' =>$this->faker->date,
+            'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
+            'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
         ];
     }
 }

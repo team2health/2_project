@@ -20,5 +20,5 @@ class Part_symptom extends Model
         return $this->belongsTo(Symptom::class, 'symptom_id','symptom_id');
     }
     protected $fillable = ['symptom_id', 'part_id'];
-    use SoftDeletes;
+    // use SoftDeletes;
 }

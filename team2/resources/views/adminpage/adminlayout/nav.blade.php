@@ -149,7 +149,7 @@
         <div class="admin-id">비밀번호</div>
         <input type="password" name="admin_password" id="admin_regist_pw" class="admin-input">
     </div>
-    <br><br><br>
+    <br><br>
     <div class="admin-regist-button-box">
         <button type="button" class="admin-custom-btn2 custom-common-delete-btn2" onclick="adminRegist(); return false;">생성하기</button>
     </div>

@@ -17,7 +17,7 @@ use App\Models\Hashtag;
 use App\Models\Board_tag;
 use App\Models\favorite_tag;
 use App\Models\Part;
-use App\Models\part_Symptom;
+use App\Models\Part_symptom;
 use App\Models\Pandemic;
 
 
@@ -85,31 +85,92 @@ class AdminController extends Controller
         ->groupBy('user_gender')
         ->get();
 
-        $result[2] = Board::select(
+        $result[2] = Board::whereRaw('YEARWEEK(created_at) = YEARWEEK(CURDATE())')
+        ->select(
             DB::raw('DATE_FORMAT(created_at, "%a") AS week'),
             DB::raw('COUNT(DATE_FORMAT(created_at, "%a")) AS cnt')
         )
         ->groupBy(DB::raw('DATE_FORMAT(created_at, "%a")'))
-        ->orderByRaw("FIELD(DATE_FORMAT(created_at, '%a'), 'Mon', 'Tue', 'Wed', 'Thu', 'Fri')")
+        ->orderByRaw("FIELD(DATE_FORMAT(created_at, '%a'), 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat')")
         ->get();
 
-        $result[3] = Comment::select(
+        $result[3] = Comment::whereRaw('YEARWEEK(created_at) = YEARWEEK(CURDATE())')
+        ->select(
             DB::raw('DATE_FORMAT(created_at, "%a") AS week'),
             DB::raw('COUNT(DATE_FORMAT(created_at, "%a")) AS cnt')
         )
         ->groupBy(DB::raw('DATE_FORMAT(created_at, "%a")'))
-        ->orderByRaw("FIELD(DATE_FORMAT(created_at, '%a'), 'Mon', 'Tue', 'Wed', 'Thu', 'Fri')")
+        ->orderByRaw("FIELD(DATE_FORMAT(created_at, '%a'), 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat')")
         ->get();
 
-        $result[4] = Record::select(
-            DB::raw('part_symptom_id'),
-            DB::raw('COUNT(part_symptom_id) AS cnt')
-        )
-        ->where('created_at', '>', 20240101)
+        $result[4] = Record::whereRaw('YEAR(created_at) = YEAR(CURDATE())')
+        ->select('part_symptom_id', DB::raw('COUNT(part_symptom_id) as cnt'))
+        ->orderBy(DB::raw('COUNT(part_symptom_id)'), 'desc')
         ->groupBy('part_symptom_id')
+        ->limit(5)
         ->get();
+
+        $cnt = 0;
+        foreach ($result[4] as $value) {
+            $result[4][$cnt]['part_name'] = Part_symptom::join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+            ->select('parts.part_name')
+            ->where('part_symptoms.part_symptom_id', $value->part_symptom_id)
+            ->get();
+            
+            $result[4][$cnt]['symptom_name'] = Part_symptom::join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
+            ->select('symptoms.symptom_name')
+            ->where('part_symptoms.part_symptom_id', $value->part_symptom_id)
+            ->get();
+
+            $cnt++;
+        }
+
+        $last_year_cnt = Record::whereRaw('YEAR(created_at) = YEAR(CURDATE())-1')
+        ->select('part_symptom_id', DB::raw('COUNT(part_symptom_id) as cnt'))
+        ->orderBy(DB::raw('COUNT(part_symptom_id)'), 'desc')
+        ->groupBy('part_symptom_id')
+        ->limit(5)
+        ->get();
+
+        $c = 0;
+        foreach ($result[4] as $value) {
+            $diff = $value->cnt - $last_year_cnt[$c]->cnt;
+            $result[4][$c]['last_year'] = floor(($diff/$last_year_cnt[$c]->cnt) * 100);
+
+            $c++;
+        }
 
         $result[5] = Pandemic::orderBy('created_at', 'desc')->get();
+
+        $result[6] = DB::table(DB::raw('(
+            SELECT 
+                DISTINCT age,
+                part_symptom_id,
+                COUNT(part_symptom_id) OVER (PARTITION BY age, part_symptom_id) as count
+            FROM 
+                (
+                    SELECT 
+                        CASE
+                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 10 AND 19 THEN "10대"
+                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 20 AND 29 THEN "20대"
+                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 30 AND 39 THEN "30대"
+                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 40 AND 49 THEN "40대"
+                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 50 AND 59 THEN "50대"
+                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) >= 60 THEN "60대 이상"
+                        END as age,
+                        part_symptom_id
+                    FROM 
+                        records
+                    JOIN 
+                        users ON records.u_id = users.id
+                ) as c
+        ) as distinct_records'))
+        ->select('age', 'part_symptom_id', 'count')
+        ->orderBy('age')
+        ->orderByDesc('count')
+        ->get();
+
+            Log::debug($result[6]);
 
         return view('adminpage.index')->with('result', $result);
     }
