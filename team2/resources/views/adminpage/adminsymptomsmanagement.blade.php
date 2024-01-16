@@ -54,7 +54,7 @@
                 </table>
                 <button type="button" class="admin-custom-btn custom-common-delete-btn delete-comment-btn" onclick="confirmDelete()">삭제</button>
                 <button type="button" class="admin-custom-btn custom-common-btn" data-bs-toggle="modal" data-bs-target="#addSymptomModal">증상 추가</button>
-                <a href="{{route('admin.adminsymptomsmanagement')}}" style="text-decoration: none;" class="admin-custom-btn custom-common-btn">뒤로 가기</a>
+                <a href="{{route('admin.adminsymptomsmanagement')}}" style="text-decoration: none; line-height: 30px;" class="admin-custom-btn custom-common-btn">뒤로 가기</a>
             </form>           
             <div class="modal fade" id="addSymptomModal" tabindex="-1" role="dialog" aria-labelledby="addSymptomModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
