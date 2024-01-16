@@ -52,12 +52,12 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('admin.usermanagement')}}">
+            <a class="sidebar-link" href="{{route('admin.adminusermanagement')}}">
                 <i class="align-middle" data-feather="book"></i> <span class="align-middle">유저관리</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('admin.symptomsmanagement')}}">
+            <a class="sidebar-link" href="{{route('admin.adminsymptomsmanagement')}}">
                 <i class="align-middle" data-feather="book"></i> <span class="align-middle">증상관리</span>
             </a>
         </li>

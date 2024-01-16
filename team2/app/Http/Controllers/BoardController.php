@@ -334,6 +334,7 @@ $flg=$request->input('values');
      */
     public function update(Request $request, $board_id)
     {
+        Log::debug($request);
         // dd($request);
         if(!Auth::check()){
             return redirect()->route('login.get');
@@ -407,21 +408,40 @@ $flg=$request->input('values');
         $result->images()->save($boardImage);
     }
     }
+    // if ($request->has('imgUrl')) {
+    //     // Log::debug($request->has('imgUrl')); 
+    //     $imageIdToDelete = $request->input('imgUrl');    
+    //     $imageToDelete = Board_img::findOrFail($imageIdToDelete);    
+    //     $imagePath = public_path('board_img/' . $imageToDelete->img_address);
+    //     if (File::exists($imagePath)) {
+    //         // 파일 시스템에서 이미지 삭제
+    //         unlink($imagePath);
+    //     }
+    //     // 모델에서 이미지 삭제
+    //     $imageToDelete->delete();
+    // }
     if ($request->has('imgUrl')) {
-        Log::debug($request->has('imgUrl')); 
-        $imageIdToDelete = $request->input('imgUrl');    
-        $imageToDelete = Board_img::findOrFail($imageIdToDelete);    
-        $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-        if (File::exists($imagePath)) {
-            // 파일 시스템에서 이미지 삭제
-            unlink($imagePath);
+        $imageIdToDelete = $request->input('imgUrl');
+    
+        try {
+            $imageToDelete = Board_img::findOrFail($imageIdToDelete);
+            $imagePath = public_path('board_img/' . $imageToDelete->img_address);
+    
+            if (File::exists($imagePath)) {
+                // 파일 시스템에서 이미지 삭제
+                unlink($imagePath);
+            }
+    
+            // 모델에서 이미지 삭제
+            $imageToDelete->delete();
+        } catch (ModelNotFoundException $e) {
+            // 이미지를 찾지 못한 경우의 예외 처리
+            // 원하는 동작을 수행하거나 무시할 수 있습니다.
         }
-        // 모델에서 이미지 삭제
-        $imageToDelete->delete();
     }
 
 
-    return redirect()->route('board.show', ['board' => $result->board_id]);
+    return redirect()->route('detail', ['board' => $result->board_id]);
 }
 
     /**

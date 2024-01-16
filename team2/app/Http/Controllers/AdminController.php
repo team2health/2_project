@@ -198,7 +198,7 @@ class AdminController extends Controller
         ->paginate(10); // 페이징 적용
 
     // 뷰를 반환할 때 조회한 사용자 정보를 함께 전달합니다.
-    return view('adminpage.usermanagement')->with('data', $userData);
+    return view('adminpage.adminusermanagement')->with('data', $userData);
     }
     public function userdestroy(Request $request){
     //     // dd($request);
@@ -207,19 +207,16 @@ class AdminController extends Controller
     //     User::destroy($selectedIds);
     //     return redirect()-> route('admin.usermanagement');
     // }
-    if (!$request->has('id')) {
-        // 값이 없으면 경고 메시지를 반환하거나 원하는 작업 수행
-        return back()->with('warning', '삭제할 항목을 선택해주세요.');
-    }
-    Log::debug('Request Data:', $request->all());
+    
+    // Log::debug('Request Data:', $request->all());
     $selectedIds = $request->input('id');
-    Log::debug('Request Data:', $selectedIds);
+    // Log::debug('Request Data:', $selectedIds);
     // dd($selectedIds);
     User::destroy($selectedIds);    
     
-    return redirect()->route('admin.usermanagement');
+    return redirect()->route('admin.adminusermanagement');
 }
-    public function searchUsers(Request $request)
+    public function adminsearchUsers(Request $request)
     {
         $searchKeyword = $request->input('search_keyword');
 
@@ -227,7 +224,7 @@ class AdminController extends Controller
                     ->orWhere('user_email', 'like', "%$searchKeyword%")
                     ->orderBy('id', 'desc')
                     ->paginate(10);
-        return view('adminpage.usermanagement')->with('data', $users);
+        return view('adminpage.adminusermanagement')->with('data', $users);
     }
     // public function symptomsmng(){
     //     $symptomData = DB::table('symptoms')
@@ -258,7 +255,7 @@ class AdminController extends Controller
 
 //     return view('adminpage.symptomsmanagement')->with('data', $symptomData);
 // }
-public function symptomsmng()
+public function adminsymptomsmng()
 {
     
     $symptomData = Symptom::join('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
@@ -270,7 +267,7 @@ public function symptomsmng()
 
     $partsData = Part::all(); // 모든 부위 데이터를 가져옴
 
-    return view('adminpage.symptomsmanagement')->with('data', $symptomData)->with('partsData', $partsData);
+    return view('adminpage.adminsymptomsmanagement')->with('data', $symptomData)->with('partsData', $partsData);
 }
     // public function symptomsmng(){
     //     $symptomData = DB::table('symptoms')
@@ -293,18 +290,22 @@ public function symptomsmng()
     //     Symptom::destroy($selectedsymptoms);
     //     return redirect()-> route('admin.symptomsmanagement');
     // }
-    public function symptomdestroy(Request $request){
+    public function adminsymptomdestroy(Request $request){
         if (!$request->has('id')) {
             return back();
         }
-        $selectedsymptoms = $request->input('id');
-        // 관련된 part_symptoms 데이터 삭제
-        Part_symptom::whereIn('symptom_id', $selectedsymptoms)->delete();
-    
+        // dd($request);
+        $symptomId = $request->input('id');
+        $partSymptomId = Part_symptom::where('symptom_id', $symptomId)->value('part_symptom_id');
+        Part_symptom::where('part_symptom_id', $partSymptomId)->delete();
+        // // 관련된 part_symptoms 데이터 삭제
+        // Part_symptom::whereIn('symptom_id', $selectedsymptoms)->delete();
+        // Part_symptom::whereNotIn('symptom_id', $selectedsymptoms)->delete();
+        // Part_symptom::whereNotIn('symptom_id', $selectedsymptoms)->whereIn('part_id', $selectedParts)->delete();
         // 증상 데이터 삭제
-        Symptom::destroy($selectedsymptoms);
+        // Symptom::destroy($selectedsymptoms);
     
-        return redirect()->route('admin.symptomsmanagement');
+        return redirect()->route('admin.adminsymptomsmanagement');
     }
     
     // public function searchsymptoms(Request $request)
@@ -317,7 +318,7 @@ public function symptomsmng()
     //                 ->paginate(10);
     //     return view('adminpage.symptomsmanagement')->with('data', $symptoms);
     // }
-    public function searchsymptoms(Request $request)
+    public function adminsearchsymptoms(Request $request)
 {
     $searchKeyword = $request->input('search_keyword_sym');
 
@@ -330,7 +331,7 @@ public function symptomsmng()
         ->paginate(10);
         $partsData = Part::all();
 
-    return view('adminpage.symptomsmanagement')->with('data', $symptoms)->with('partsData', $partsData);
+    return view('adminpage.adminsymptomsmanagement')->with('data', $symptoms)->with('partsData', $partsData);
 }
 
     // public function addsymptom(Request $request){        
@@ -392,7 +393,7 @@ public function symptomsmng()
     //         return redirect()->route('admin.symptomsmanagement')->withErrors('이미 동일한 증상이 해당 부위에 또는 다른 부위에 연결되어 있습니다.');
     //     }
     // }
-    public function addsymptom(Request $request) {
+    public function adminaddsymptom(Request $request) {
         $partId = $request->input('part_id');
         $symptomname = $request->input('symptom_name');
     
@@ -412,7 +413,7 @@ public function symptomsmng()
             $symptom->parts()->attach($partId);
         }
     
-        return redirect()->route('admin.symptomsmanagement');
+        return redirect()->route('admin.adminsymptomsmanagement');
     }
     
 }

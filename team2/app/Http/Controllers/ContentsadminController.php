@@ -125,7 +125,7 @@ class ContentsadminController extends Controller
         ,'users.use'
         ,'board_reports.created_at'
     )
-    ->join('users', 'users.id','board_reports.u_id')
+    ->join('users', 'users.id','board_reports.u_id');
     
 
     Log::debug($data);

@@ -6,22 +6,22 @@
 <div class="contentsmanagement-main">
     <div class="contents-tab">
         <div class="contentsmanagement-tab-first-zone" data-order="1">
-        <form action="{{ route('admin.searchsymptoms') }}" method="get">
+        <form action="{{ route('admin.adminsearchsymptoms') }}" method="get">
             @csrf
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="증상 검색" name="search_keyword_sym">
                 <button class="btn btn-outline-secondary" type="submit">검색</button>
             </div>
         </form>
-            <form id="deleteForm" action="{{ route('admin.symptomdestroy') }}" method="post">
+            <form id="deleteForm" action="{{ route('admin.adminsymptomdestroy') }}" method="post">
                 @csrf
                 @method('DELETE')                              
                 <table class="table table-striped">
                     <colgroup>
-                        <col width="30%;">                        
-                        <col width="30%;">
-                        <col width="30%;">
-                        <col width="10%;">
+                        <col width="25%;">                        
+                        <col width="25%;">
+                        <col width="25%;">
+                        <col width="25%;">
                         
                                                
                     </colgroup>
@@ -52,27 +52,10 @@
                             @endforelse
                     </tbody>
                 </table>
-                <button type="button" class="admin-custom-btn custom-common-delete-btn" data-bs-toggle="modal" data-bs-target="#confirmationModal">삭제</button>
+                <button type="button" class="admin-custom-btn custom-common-delete-btn delete-comment-btn" onclick="confirmDelete()">삭제</button>
                 <button type="button" class="admin-custom-btn custom-common-btn" data-bs-toggle="modal" data-bs-target="#addSymptomModal">증상 추가</button>
-                <a href="{{ url()->previous() }}" style="text-decoration: none;" class="admin-custom-btn custom-common-btn">뒤로 가기</a>
-            </form>
-            <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">삭제 확인</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>정말 삭제하시겠습니까?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="submit" class="btn btn-primary" onclick="console.log('버튼이 클릭되었습니다.'); deleteConfirmed()">확인</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <a href="{{route('admin.adminsymptomsmanagement')}}" style="text-decoration: none;" class="admin-custom-btn custom-common-btn">뒤로 가기</a>
+            </form>           
             <div class="modal fade" id="addSymptomModal" tabindex="-1" role="dialog" aria-labelledby="addSymptomModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -84,7 +67,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- 증상 추가 폼 -->
-                            <form action="{{ route('admin.addsymptom') }}" method="post">
+                            <form action="{{ route('admin.adminaddsymptom') }}" method="post">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="part_id" class="form-label">부위 선택</label>
@@ -100,7 +83,7 @@
                                     <input type="text" class="form-control" id="symptom_name" name="symptom_name" required>
                                 </div>
                                 <!-- 필요한 증상 추가 폼 요소들을 여기에 추가하세요 -->
-                                <button type="submit" class="btn btn-primary">추가</button>
+                                <button type="submit" class="btn btn-primary" onclick="checkAndAddSymptom()">추가</button>
                             </form>
                         </div>
                     </div>
@@ -145,17 +128,6 @@
                 </div>
             </nav>
         </div>
-        <script>
-function confirmDelete() {
-    // 여기에 삭제 전 확인 작업을 수행할 로직 추가
-    return true; // 확인되면 true 반환
-}
+        <script src="/js/symptommanagement.js"></script>
 
-function deleteConfirmed() {
-    // 여기에 실제 삭제 작업을 수행하는 로직 추가
-    if (confirmDelete()) {
-        document.getElementById('deleteForm').submit();
-    }
-}
-</script>
 @endsection
