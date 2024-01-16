@@ -8,7 +8,7 @@
         <div class="contentsmanagement-tab-first-zone tab-show">
             <form method="post">
                 @csrf
-                <div class="contentsmanagement-board-btn-zone">
+                <div class="contentsmanagement-board-btn-zone3">
                     <div>
                         <div class="admin-custom-btn custom-common-btn" id="contentsmanagementSearchAlign">정렬</div>
                         <div class="contentsmanagement-search-align admin-display-none" id="contentsmanagementSearchAlignDiv">

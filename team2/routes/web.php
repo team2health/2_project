@@ -179,14 +179,6 @@ Route::post('/adminaddsymptom', [AdminController::class, 'adminaddsymptom'])->na
         return view('/adminpage/blank');
     })->name('blank');
     
-    Route::get('/admin/pages-sign-in', function () {
-        return view('/adminpage/pages-sign-in');
-    })->name('pages-sign-in');
-    
-    Route::get('/admin/pages-sign-up', function () {
-        return view('/adminpage/pages-sign-up');
-    })->name('pages-sign-up');
-    
     Route::get('/admin/ui-buttons', function () {
         return view('/adminpage/ui-buttons');
     })->name('ui-buttons');

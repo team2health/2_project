@@ -88,6 +88,16 @@ a:hover {
     justify-items: center;
     align-items: center;
 }
+.contentsmanagement-board-btn-zone3 {
+    display: grid;
+    margin-bottom: 10px;
+    position: absolute;
+    right: 150px;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
 .contentsmanagement-select-btn-zone {
     display: flex;
     align-items: flex-end;

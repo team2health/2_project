@@ -21,7 +21,7 @@
 </a> --}}
         </li>
 
-        <li class="sidebar-item">
+        {{-- <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('pages-sign-in')}}">
                 <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
             </a>
@@ -31,7 +31,7 @@
             <a class="sidebar-link" href="{{route('pages-sign-up')}}">
                 <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
             </a>
-        </li>
+        </li> --}}
 
         <li class="sidebar-header">
             컨텐츠 관리
