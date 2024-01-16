@@ -118,16 +118,19 @@ a:hover {
     color: aliceblue;
 }
 .contents-tab-btn {
-    background: #6883a1;
+    background: #50545a;
     width: 300px;
-    color: aliceblue;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 .contents-tab-board-btn:hover, .contents-tab-comments-btn:hover {
-    background-color: #ffb59a;
+    background-color: #ffe5dc;
+    color: #212222;
 }
 .contents-tab-board-btn, .contents-tab-comments-btn {
     padding: 20px;
+    color: #e4e4e4;
 }
 /* SECTION - start-date / end-date */
 /* .start-date {
@@ -172,7 +175,8 @@ a:hover {
 }
 
 .tab-active {
-    background-color: #ffb59a;
+    background-color: #ffe5dc;
+    color: #212222;
 }
 
 
