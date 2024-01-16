@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('symptoms', function (Blueprint $table) {
             $table->increments('symptom_id');
             $table->string('symptom_name')->unique();
+            $table->timestamps();
         });
     }
 

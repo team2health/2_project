@@ -148,13 +148,13 @@ Route::post('/admin/admindeletecomment', [ContentsadminController::class, 'admin
 Route::post('/admin/setcommentflg', [ContentsadminController::class, 'setcommentflg'])->name('setcommentflg.post');
 
 
-Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');
-Route::delete('/admin/userdestroy', [AdminController::class, 'userdestroy'])->name('admin.userdestroy');
-Route::match(['get', 'post'],'/admin/searchUsers', [AdminController::class, 'searchUsers'])->name('admin.searchUsers');
-Route::get('/admin/symptomsmanagement', [AdminController::class, 'symptomsmng'])->name('admin.symptomsmanagement');
-Route::match(['get', 'post'],'/admin/searchsymptoms', [AdminController::class, 'searchsymptoms'])->name('admin.searchsymptoms');
-Route::delete('/admin/symptomdestroy', [AdminController::class, 'symptomdestroy'])->name('admin.symptomdestroy');
-Route::post('/addsymptom', [AdminController::class, 'addsymptom'])->name('admin.addsymptom');
+Route::get('/admin/adminuser', [AdminController::class, 'adminuser'])->name('admin.adminusermanagement');
+Route::delete('/admin/adminuserdestroy', [AdminController::class, 'adminuserdestroy'])->name('admin.adminuserdestroy');
+Route::match(['get', 'post'],'/admin/adminsearchUsers', [AdminController::class, 'adminsearchUsers'])->name('admin.adminsearchUsers');
+Route::get('/admin/adminsymptomsmanagement', [AdminController::class, 'adminsymptomsmng'])->name('admin.adminsymptomsmanagement');
+Route::match(['get', 'post'],'/admin/adminsearchsymptoms', [AdminController::class, 'adminsearchsymptoms'])->name('admin.adminsearchsymptoms');
+Route::delete('/admin/adminsymptomdestroy', [AdminController::class, 'adminsymptomdestroy'])->name('admin.adminsymptomdestroy');
+Route::post('/adminaddsymptom', [AdminController::class, 'adminaddsymptom'])->name('admin.adminaddsymptom');
 
 
 

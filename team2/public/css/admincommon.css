@@ -270,8 +270,18 @@ a:hover {
     width: 32%;
 }
 
+.pandemic-symptom2 {
+    width: 25%;
+}
+
 .pandemic-border-bottom {
-    border-bottom: 3px solid #8f8f8f;
+    border-bottom: 1px solid #000;
+}
+
+.pandemic-border-bottom1 {
+    height: 48.5px;
+    color: #fff;
+    background-color: rgb(75, 75, 75);
 }
 
 .insert-pandemic-input1 {
@@ -303,7 +313,6 @@ a:hover {
 .admin-index-ps-mini {
     display: flex;
     justify-content: space-between;
-    width: 70%;
 }
 
 .custom-common-delete-btn1 {
@@ -370,6 +379,52 @@ a:hover {
 
 .admin-regist-button-box {
     text-align: right;
+}
+
+.hashtagBox {
+    width: 100%;
+}
+
+.hashtagnsbox {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+}
+
+.hashtag-margin-right {
+    margin-right: -13px;
+}
+
+.pandemic-name11 {
+    width: 14%;
+}
+
+.pandemic-symptom11 {
+    width: 25%;
+}
+
+.ps-width {
+    width: 100%;
+}
+
+.index_cnt {
+    text-align: right;
+}
+
+.index_display_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.index-font-color-red {
+    margin-left: 10px;
+    color: red;
+}
+
+.index-font-color-blue {
+    margin-left: 10px;
+    color: blue;
 }
 
 

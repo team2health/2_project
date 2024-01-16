@@ -11,19 +11,38 @@ function insertHashtag() {
 	.then(response => response.json())
 	.then(data => {
 		console.log(data);
-		let HASHTAGBODY = document.getElementById('hashtagbody');
-		let HASHTAG = document.createElement('tr');
-		let INPUTHASHTAGBOX = document.createElement('th');
+		let HASHTAGBODY = document.getElementById('hashtagdeletebox');
+		let HASHTAGHEADER = document.createElement('div');
+		let HASHTAG = document.createElement('div');
+		let HASHTAGDIV = document.createElement('div');
+		let INPUTHASHTAGBOX = document.createElement('span');
 		let INPUTHASHTAG = document.createElement('input');
-		let HASHTAGNAME = document.createElement('td')
-		let HASHTAGBOARD = document.createElement('td');
-		let HASHTAGFAVORITE = document.createElement('td');
-		let HASHTAGCREATE = document.createElement('td');
+		let HASHTAGNAME = document.createElement('span')
+		let HASHTAGBOARD = document.createElement('span');
+		let HASHTAGFAVORITE = document.createElement('span');
+		let HASHTAGCREATE = document.createElement('span');
 
-		INPUTHASHTAGBOX.scope = 'row';
+		// <div class="card-header">
+		// 	<div class="admin-index-ps">
+		// 		<div class="hashtagnsbox">
+		// 			<span><input type="checkbox" name="pandemic_id[]" value="{{$item->hashtag_id}}"></span>
+		// 			<span class="pandemic-name1">{{$item->hashtag_name}}</span>
+		// 			<span class="pandemic-symptom1 hashtag-margin-right">{{$item->board_hashtag}}번 사용</span>
+		// 			<span class="pandemic-symptom1 hashtag-margin-right">{{$item->favorite_hashtag}}번 사용</span>
+		// 		</div>
+		// 		<span>{{$item->created_at}}</span>
+		// 	</div>
+		// </div>
+
+		HASHTAGHEADER.classList = 'card-header';
+		HASHTAG.classList = 'admin-index-ps';
+		HASHTAGDIV.classList = 'hashtagnsbox';
 		INPUTHASHTAG.type = 'checkbox';
 		INPUTHASHTAG.name = 'hashtag_id[]';
 		INPUTHASHTAG.value = data.hashtag_id;
+		HASHTAGNAME.classList = 'pandemic-name1';
+		HASHTAGBOARD.classList.add('pandemic-symptom2', 'hashtag-margin-right');
+		HASHTAGFAVORITE.classList.add('pandemic-symptom2', 'hashtag-margin-right');
 		HASHTAGNAME.innerHTML = data.hashtag_name;
 		HASHTAGBOARD.innerHTML = data.board_hashtag+'번 사용';
 		HASHTAGFAVORITE.innerHTML = data.favorite_hashtag+'번 사용';
@@ -38,12 +57,14 @@ function insertHashtag() {
 
 		HASHTAGCREATE.innerHTML = formattedDate;
 
-		HASHTAGBODY.prepend(HASHTAG);
-		HASHTAG.appendChild(INPUTHASHTAGBOX);
+		HASHTAGBODY.prepend(HASHTAGHEADER);
+		HASHTAGHEADER.appendChild(HASHTAG);
+		HASHTAG.appendChild(HASHTAGDIV);
+		HASHTAGDIV.appendChild(INPUTHASHTAGBOX);
 		INPUTHASHTAGBOX.appendChild(INPUTHASHTAG);
-		HASHTAG.appendChild(HASHTAGNAME);
-		HASHTAG.appendChild(HASHTAGBOARD);
-		HASHTAG.appendChild(HASHTAGFAVORITE);
+		HASHTAGDIV.appendChild(HASHTAGNAME);
+		HASHTAGDIV.appendChild(HASHTAGBOARD);
+		HASHTAGDIV.appendChild(HASHTAGFAVORITE);
 		HASHTAG.appendChild(HASHTAGCREATE);
 
 		document.getElementById('insert_hashtag').value = "";

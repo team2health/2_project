@@ -108,10 +108,11 @@
                                 @endif 
                             </form>    
                             
-                            <button type="button" class="detail_comment-report-btn" onclick="openModals()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>
+                            
                             <form action="{{ route('commentreport', ['comment_id' => $comment->comment_id, 'u_id' => Auth::id()]) }}" method="POST"> 
                                 @csrf  
-                                @if(Auth::id() !== $comment->u_id)                              
+                                @if(Auth::id() !== $comment->u_id)    
+                                <button type="button" class="detail_comment-report-btn" onclick="openModals()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>                          
                                 <div id="myModalcomment" class="modal">
                                     <div class="comment_modal_content">            
                                         <p><input type="radio" name="values" value="1">                                        

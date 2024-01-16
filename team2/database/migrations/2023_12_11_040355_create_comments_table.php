@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('u_id');
             $table->integer('board_id');
             $table->string('comment_content');
-            $table->timestamps(); // created_at만 사용
+            $table->timestamps();
             $table->softDeletes();
         });
     }

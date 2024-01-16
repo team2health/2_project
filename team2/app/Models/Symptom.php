@@ -15,5 +15,5 @@ class Symptom extends Model
     }
     protected $fillable = ['symptom_id', 'symptom_name'];
     protected $primaryKey = 'symptom_id';
-    use SoftDeletes;
+    // use SoftDeletes;
 }

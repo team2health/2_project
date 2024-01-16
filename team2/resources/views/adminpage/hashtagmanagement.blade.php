@@ -11,7 +11,7 @@
                 <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="insertHashtag(); return false;">+</button>
             </div>
             <br>
-            <table class="table table-striped">
+            {{-- <table class="table table-striped">
                 <colgroup>
                     <col width="20%;">
                     <col width="20%;">
@@ -42,10 +42,40 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
-                <div class="button-box">
-                    <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
+                </table> --}}
+                <div class="card-header pandemic-border-bottom1">
+                    <div>
+                        <div class="admin-index-ps">
+                            <div class="hashtagnsbox">
+                                <span>선택</span>
+                                <span class="pandemic-name11">해시태그명</span>
+                                <span class="pandemic-symptom11">게시글 사용횟수</span>
+                                <span class="pandemic-symptom11">관심태그 사용횟수</span>
+                            </div>
+                            <span>생성일자</span>
+                        </div>
+                    </div>
                 </div>
+                <form action="/hashtagdelete" method="post" id="hashtagdeletebox">
+                    @csrf
+                    @method('DELETE')
+                    @foreach ($result as $item)
+                    <div class="card-header">
+                        <div class="admin-index-ps">
+                            <div class="hashtagnsbox">
+                                <span><input type="checkbox" name="hashtag_id[]" value="{{$item->hashtag_id}}"></span>
+                                <span class="pandemic-name">{{$item->hashtag_name}}</span>
+                                <span class="pandemic-symptom2 hashtag-margin-right">{{$item->board_hashtag}}번 사용</span>
+                                <span class="pandemic-symptom2 hashtag-margin-right">{{$item->favorite_hashtag}}번 사용</span>
+                            </div>
+                            <span>{{$item->created_at}}</span>
+                        </div>
+                    </div>
+                    @endforeach
+                    <br>
+                    <div class="button-box">
+                        <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
+                    </div>
                 </form>
         </div>  
     </div>  

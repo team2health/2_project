@@ -52,12 +52,12 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('admin.usermanagement')}}">
+            <a class="sidebar-link" href="{{route('admin.adminusermanagement')}}">
                 <i class="align-middle" data-feather="book"></i> <span class="align-middle">유저관리</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('admin.symptomsmanagement')}}">
+            <a class="sidebar-link" href="{{route('admin.adminsymptomsmanagement')}}">
                 <i class="align-middle" data-feather="book"></i> <span class="align-middle">증상관리</span>
             </a>
         </li>
@@ -154,7 +154,7 @@
         <div class="admin-id">비밀번호</div>
         <input type="password" name="admin_password" id="admin_regist_pw" class="admin-input">
     </div>
-    <br><br><br>
+    <br><br>
     <div class="admin-regist-button-box">
         <button type="button" class="admin-custom-btn2 custom-common-delete-btn2" onclick="adminRegist(); return false;">생성하기</button>
     </div>
