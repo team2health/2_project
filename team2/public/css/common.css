@@ -185,11 +185,3 @@ h2 {
         margin-right: 10px;
     } */
 }
-@media screen and (min-width: 800px) {
-    .footer-section {
-        margin-bottom: 0;
-    }
-    .developer-info {
-        max-width: 100%;
-    }
-}

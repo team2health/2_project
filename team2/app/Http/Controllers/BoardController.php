@@ -180,7 +180,6 @@ class BoardController extends Controller
             $board->save();
         }     
         
-        Log::debug($request);
         // dd($request->board_img);
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
         if ($request->hasfile('selectFile')) {
@@ -341,7 +340,6 @@ $flg=$request->input('values');
             }
 
         $result = Board::find($board_id);
-        // dd($result);
         $result->update([
             'board_title' => $request->input('u_title'),
             'board_content' => $request->input('u_content'),
@@ -382,7 +380,7 @@ $flg=$request->input('values');
         //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다
         $result->hashtags()->sync($hashtagIds);
         
-}  
+    }  
     if ($request->category_id) {
         //  dd($request);
         $newCategoryName = $request->input('category_id');
@@ -397,16 +395,16 @@ $flg=$request->input('values');
     // Log::debug($request);
  
     if ($request->hasFile('selectFile')) {
-    $images = $request->file('selectFile');
-//    Log::debug($images);  
-    foreach ($images as $image) {
-        $imageName = Str::uuid() . '.' . $image->extension();
-        $image->move(public_path('board_img'), $imageName);
+        $images = $request->file('selectFile');
+    //    Log::debug($images);  
+        foreach ($images as $image) {
+            $imageName = Str::uuid() . '.' . $image->extension();
+            $image->move(public_path('board_img'), $imageName);
 
-        // Save the image path to the Board_img model
-        $boardImage = new Board_img(['img_address' => $imageName]);
-        $result->images()->save($boardImage);
-    }
+            // Save the image path to the Board_img model
+            $boardImage = new Board_img(['img_address' => $imageName]);
+            $result->images()->save($boardImage);
+        }
     }
     // if ($request->has('imgUrl')) {
     //     // Log::debug($request->has('imgUrl')); 

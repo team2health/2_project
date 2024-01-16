@@ -18,7 +18,7 @@ genderdata.forEach(element => {
 	GENDERMAIN.appendChild(SPAN);
 });
 
-let week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+let week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 let boardcnt = [];
 let bcount = 0;
 
@@ -111,7 +111,7 @@ toolbox: {
 xAxis: {
     type: 'category',
     boundaryGap: false,
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 },
 yAxis: {
     type: 'value'

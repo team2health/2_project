@@ -14,6 +14,6 @@ class BoardReportSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Board_report::factory(100)->create();
     }
 }

@@ -5,12 +5,13 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Board>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Record>
  */
-class BoardFactory extends Factory
+class RecordFactory extends Factory
 {
     /**
      * Define the model's default state.
+     * 
      *
      * @return array<string, mixed>
      */
@@ -18,10 +19,7 @@ class BoardFactory extends Factory
     {
         return [
             'u_id' => $this->faker->numberBetween(1, 500),
-            'category_id' => $this->faker->numberBetween(1, 4),
-            'board_title' => $this->faker->realText(20, 2),
-            'board_content' => $this->faker->realText(100, 2),
-            'board_hits' => $this->faker->randomNumber(3),
+            'part_symptom_id' => $this->faker->numberBetween(1, 148),
             'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
             'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
         ];
