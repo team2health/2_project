@@ -53,22 +53,22 @@
         </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('admin.adminusermanagement')}}">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">유저관리</span>
+                <i class="align-middle me-2" data-feather="user"></i> <span class="align-middle">유저관리</span>
             </a>
         </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('admin.adminsymptomsmanagement')}}">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">증상관리</span>
+                <i class="align-middle me-2" data-feather="plus-square"></i> <span class="align-middle">증상관리</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('adminhashtag.get')}}">
+                <i class="align-middle me-2" data-feather="tag"></i> <span class="align-middle">해시태그</span>
             </a>
         </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('deletedcontent.get')}}">
                 <i class="align-middle me-2" data-feather="trash-2"></i> <span class="align-middle">삭제된 게시글</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('adminhashtag.get')}}">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">휴지통</span>
             </a>
         </li>
 
