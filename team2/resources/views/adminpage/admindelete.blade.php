@@ -1,6 +1,6 @@
 @extends('adminpage/adminlayout.layout')
 
-@section('title','해시태그 관리')
+@section('title','관리자 계정 삭제')
 
 @section('main')
 <div class="contentsmanagement-main">
@@ -24,22 +24,20 @@
                         </div>
                     </div>
                 </div>
-                <form action="/admin/hashtagdelete" method="post" id="hashtagdeletebox">
+                <form action="/hashtagdelete" method="post" id="hashtagdeletebox">
                     @csrf
                     @method('DELETE')
-                    @foreach ($result as $item)
                     <div class="card-header">
                         <div class="admin-index-ps">
                             <div class="hashtagnsbox">
-                                <span><input type="checkbox" name="hashtag_id[]" value="{{$item->hashtag_id}}"></span>
-                                <span class="pandemic-name">{{$item->hashtag_name}}</span>
-                                <span class="pandemic-symptom2 hashtag-margin-right">{{$item->board_hashtag}}번 사용</span>
-                                <span class="pandemic-symptom2 hashtag-margin-right">{{$item->favorite_hashtag}}번 사용</span>
+                                <span><input type="checkbox" name="hashtag_id[]" value=""></span>
+                                <span class="pandemic-name"></span>
+                                <span class="pandemic-symptom2 hashtag-margin-right">번 사용</span>
+                                <span class="pandemic-symptom2 hashtag-margin-right">번 사용</span>
                             </div>
-                            <span>{{$item->created_at}}</span>
+                            <span></span>
                         </div>
                     </div>
-                    @endforeach
                     <br>
                     <div class="button-box">
                         <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>

@@ -4,7 +4,7 @@ function insertHashtag() {
 	let formData = new FormData();
 	formData.append('hashtag_name', INSERTHASHTAG);
 
-	fetch('/hashtaginsert', {
+	fetch('/admin/hashtaginsert', {
 		method: 'POST',
 		body: formData,
 	})

@@ -140,7 +140,7 @@ function insertpandemic() {
 	formData.append('pandemic_name', PANDEMICNAME);
 	formData.append('pandemic_symptom', PANDEMICSYMPTOM);
 	
-	fetch('/pandemicinsert', {
+	fetch('/admin/pandemicinsert', {
 		method: 'POST',
 		body: formData,
 	})

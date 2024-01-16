@@ -188,8 +188,6 @@ class AdminController extends Controller
     }
 
     public function hashtagdelete(Request $request) {
-        Log::debug($request);
-
         foreach ($request->hashtag_id as $value) {
             Hashtag::destroy($value);
         }
@@ -220,6 +218,10 @@ class AdminController extends Controller
         $result = Admin::create($admin);
 
         return response()->json($result);
+    }
+
+    public function admindeleteget() {
+        return view('adminpage.admindelete');
     }
 
     public function adminuser(){
@@ -329,6 +331,8 @@ public function adminsymptomsmng()
         $symptomId = $request->input('id');
         $partSymptomId = Part_symptom::where('symptom_id', $symptomId)->value('part_symptom_id');
         Part_symptom::where('part_symptom_id', $partSymptomId)->delete();
+        Record::where('part_symptom_id', $partSymptomId)->delete();
+
         // // 관련된 part_symptoms 데이터 삭제
         // Part_symptom::whereIn('symptom_id', $selectedsymptoms)->delete();
         // Part_symptom::whereNotIn('symptom_id', $selectedsymptoms)->delete();

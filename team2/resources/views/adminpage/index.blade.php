@@ -91,7 +91,7 @@
 					</div>
 				</div>
 			</div>
-			<form action="/pandemicdelete" method="post" id="pandemicdeletebox">
+			<form action="/admin/pandemicdelete" method="post" id="pandemicdeletebox">
 				@csrf
 				@method('DELETE')
 				@foreach ($result[5] as $item)
