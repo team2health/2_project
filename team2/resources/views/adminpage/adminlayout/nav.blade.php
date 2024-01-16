@@ -11,7 +11,7 @@
 
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('admin.main')}}">
-                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">대시보드</span>
             </a>
         </li>
 
@@ -35,11 +35,6 @@
 
         <li class="sidebar-header">
             컨텐츠 관리
-        </li>
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('blank')}}">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">작업규칙넣는곳</span>
-            </a>
         </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('admin.contents')}}">
@@ -71,57 +66,6 @@
                 <i class="align-middle me-2" data-feather="trash-2"></i> <span class="align-middle">삭제된 게시글</span>
             </a>
         </li>
-
-
-        <li class="sidebar-header">
-            Tools & Components
-        </li>
-
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('ui-buttons')}}">
-                <i class="align-middle" data-feather="square"></i> <span class="align-middle">Buttons</span>
-            </a>
-        </li>
-
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('ui-forms')}}">
-                <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Forms</span>
-            </a>
-        </li>
-
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('ui-cards')}}">
-                <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Cards</span>
-            </a>
-        </li>
-
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('ui-typography')}}">
-                <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Typography</span>
-            </a>
-        </li>
-
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('icons-feather')}}">
-                <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
-            </a>
-        </li>
-
-        <li class="sidebar-header">
-            Plugins & Addons
-        </li>
-
-        <li class="sidebar-item active">
-            <a class="sidebar-link" href="{{route('charts-chartjs')}}">
-                <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
-            </a>
-        </li>
-
-        {{-- <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('maps-google')}}">
-    <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
-</a>
-        </li> --}}
     </ul>
 
     <div class="sidebar-cta">
