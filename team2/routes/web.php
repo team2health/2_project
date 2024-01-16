@@ -124,14 +124,28 @@ Route::get('/admin/hashtag', [AdminController::class, 'adminhashtagget'])->name(
 Route::delete('/hashtagdelete', [AdminController::class, 'hashtagdelete']);
 Route::post('/hashtaginsert', [AdminController::class, 'hashtaginsertpost']);
 Route::post('/adminregist', [AdminController::class, 'adminregistpost']);
-    
-Route::get('/admin/contents/{align_board?}', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
+
+
+Route::get('/admin/contents/{date?}', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
 Route::get('/admin/comments/{date?}', [ContentsadminController::class, 'admincomments'])->name('admin.comments');
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
+Route::get('/admin/commentsdeclaration', [ContentsadminController::class, 'commentsdeclaration'])->name('comments.declaration');
 Route::post('/admin/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('admin.deleteadminboard');
 Route::post('/admin/contentssort', [ContentsadminController::class, 'contentssort'])->name('admin.contentssort');
 Route::post('/admin/commentsearch', [ContentsadminController::class, 'commentsearch'])->name('admin.commentsearch');
+Route::post('/admin/contentsearch', [ContentsadminController::class, 'contentsearch'])->name('admin.contentsearch');
+Route::get('/admin/admincontentsset/{align_board?}/{start_date?}/{end_date?}', [ContentsadminController::class, 'admincontentsset'])->name('admin.admincontentsset');
 Route::post('/admin/changecategory', [ContentsadminController::class, 'changecategory'])->name('admin.changecategory');
+Route::post('/admin/deleteboard', [ContentsadminController::class, 'deleteboard'])->name('admin.deleteboard');
+Route::post('/admin/deletecomments', [ContentsadminController::class, 'deletecomments'])->name('admin.deletecomments');
+Route::get('/admin/deletedcontent', [ContentsadminController::class, 'deletedcontent'])->name('deletedcontent.get');
+Route::post('/admin/temporarilydelete', [ContentsadminController::class, 'temporarilydelete'])->name('temporarilydelete.post');
+Route::post('/admin/deletedeclarationboard', [ContentsadminController::class, 'deletedeclarationboard'])->name('deletedeclarationboard.post');
+Route::post('/admin/restoreboard', [ContentsadminController::class, 'deletedeclarationboard'])->name('deletedeclarationboard.post');
+Route::post('/admin/boardsoftdelete', [ContentsadminController::class, 'boardsoftdelete'])->name('boardsoftdelete.post');
+Route::post('/admin/boardsetshow', [ContentsadminController::class, 'boardsetshow'])->name('boardsetshow.post');
+Route::post('/admin/admindeletecomment', [ContentsadminController::class, 'admindeletecomment'])->name('admindeletecomment.post');
+Route::post('/admin/setcommentflg', [ContentsadminController::class, 'setcommentflg'])->name('setcommentflg.post');
 
 
 Route::get('/admin/user', [AdminController::class, 'adminuser'])->name('admin.usermanagement');

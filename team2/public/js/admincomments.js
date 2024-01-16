@@ -134,17 +134,6 @@ endDayArray.forEach(element => {
 });
 
 
-
-function allSelectCheckBox () {
-    let allselectcheck = document.getElementById('allselectcheck');
-    allselectcheck.addEventListener('click', function () {
-        for (let i = 0; i < 10; i++) {
-            let commentChkBox = document.getElementById('commentChkBox' + i);
-            commentChkBox.setAttribute('checked');
-        }
-    })
-}
-
 function searchCommentDate() {
     let form = document.getElementById('searchCommentDateForm');
     let startYearvalue = document.getElementById('start-year').value;
@@ -153,12 +142,7 @@ function searchCommentDate() {
     let endYearvalue = document.getElementById('end-year').value;
     let endMonthvalue = document.getElementById('end-month').value;
     let endDayvalue = document.getElementById('end-day').value;
-    console.log(startYearvalue);
-    console.log(startMonthvalue);
-    console.log(startDayvalue);
-    console.log(endYearvalue);
-    console.log(endMonthvalue);
-    console.log(endDayvalue);
+
     if(startYearvalue === '연도') {
         return false;
     } else if (startMonthvalue === '월') {
@@ -174,3 +158,13 @@ function searchCommentDate() {
     }
     form.submit();
 }
+
+// 전체 체크
+let allselectcheck = document.getElementById('allselectcheck');
+let contents = document.getElementsByClassName('contens-checkbox');
+allselectcheck.addEventListener('change', function() {
+    for(let i = 0; i < 10; i++) {
+        let isChecked = this.checked;
+        contents[i].checked = isChecked;
+    }
+})

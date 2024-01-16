@@ -6,11 +6,11 @@
 <div class="contentsmanagement-main">
     <div class="contents-tab">
         <div class="contents-tab-btn">
-            <a href="{{route('admin.contents', ['align_board' => 1])}}"><div id="contentsTaBoard" class="contents-tab-board-btn tab-active">게시글 관리</div></a>
+            <a href="{{route('admin.contents')}}"><div id="contentsTaBoard" class="contents-tab-board-btn tab-active">게시글 관리</div></a>
             <a href="{{route('admin.comments')}}"><div id="contentsTaComments" class="contents-tab-comments-btn">댓글 관리</div></a>
         </div>
         <div class="contentsmanagement-tab-first-zone tab-show">
-            <form method="post">
+            <form action="/admin/contentsearch" method="post">
                 @csrf
                 <div class="contentsmanagement-board-btn-zone">
                     <div class="boardsearch-calendar">
@@ -55,14 +55,14 @@
                 @csrf
                 <input type="hidden" id="contentsmanagementSearchAlignValue" name="align_board">
             </form>
-            <form action="#" method="post">
+            <form action="/admin/deleteboard" method="post">
                 @csrf
                 <div class="contentsmanagement-select-btn-zone">
                     <div>
                         <input type="checkbox" id="allselectcheck" name="board_name">
                         <label for="allselectcheck">전체선택</label>
                     </div>
-                    <button class="admin-custom-btn custom-common-delete-btn">삭제</button>
+                    <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
                 </div>
                 <table class="table table-striped">
                     <colgroup>
@@ -92,7 +92,7 @@
                     <tbody>
                         @forelse ($data as $item)
                         <tr>
-                            <th><input type="checkbox"></th>
+                            <th><input type="checkbox" name="board_id[]" value="{{$item->board_id}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->board_id}}</th>
                 </form>
                             <td>
@@ -104,11 +104,11 @@
                                         <option value="3" {{ ($item->category_name) == '질문게시판' ? 'selected' : '' }}>질문게시판</option>
                                         <option value="4" {{ ($item->category_name) == '친목게시판' ? 'selected' : '' }}>친목게시판</option>
                                     </select>
-                                    <input type="hidden" id="chkeckCommentId" name="board_id" value="{{$item->board_id}}">
+                                    <input type="hidden" id="chkeckCommentId" name="board_id{{$item->board_id}}" value="{{$item->board_id}}">
                                 </form>
                             </td>
                             <td>{{Str::limit($item->board_title, 20, '...')}}</td>
-                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 35, '...')}}</a></td>
+                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 50, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
                             <td>{{$item->board_hits}}</td>

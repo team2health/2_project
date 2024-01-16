@@ -42,7 +42,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('admin.contents', ['align_board' => 1])}}">
+            <a class="sidebar-link" href="{{route('admin.contents')}}">
                 <i class="align-middle me-2" data-feather="edit"></i> <span class="align-middle">게시글/댓글</span>
             </a>
         </li>
@@ -62,8 +62,13 @@
             </a>
         </li>
         <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('deletedcontent.get')}}">
+                <i class="align-middle me-2" data-feather="trash-2"></i> <span class="align-middle">삭제된 게시글</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
             <a class="sidebar-link" href="{{route('adminhashtag.get')}}">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">해시태그 관리</span>
+                <i class="align-middle" data-feather="book"></i> <span class="align-middle">휴지통</span>
             </a>
         </li>
 

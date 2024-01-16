@@ -97,7 +97,6 @@ birthYearArray.forEach(element => {
         }
         element.removeEventListener('focus', handler);
     },{ once: true });
-    
 });
 
 // '검색 달' 셀렉트 박스 option 목록 동적 생성
@@ -150,11 +149,23 @@ birthDayArray.forEach(element => {
 });
 
 
-
-
 function categoryChange() {
     let form = document.getElementById('deleteAdminContent');
     let value = document.getElementById('getCategorySelectValue').value;
     let chkeckCommentId = document.getElementById('chkeckCommentId');
     form.submit();
+}
+
+let allselectcheck = document.getElementById('allselectcheck');
+let contents = document.getElementsByClassName('contens-checkbox');
+
+allselectcheck.addEventListener('change', function() {
+    for(let i = 0; i < 10; i++) {
+        let isChecked = this.checked;
+        contents[i].checked = isChecked;
+    }
+})
+
+function deletecontents() {
+
 }

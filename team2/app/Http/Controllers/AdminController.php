@@ -260,7 +260,6 @@ class AdminController extends Controller
 // }
 public function symptomsmng()
 {
-    
     $symptomData = Symptom::join('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
     ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
     ->select('symptoms.symptom_id', 'symptoms.symptom_name','parts.part_id as part_id', 'parts.part_name')

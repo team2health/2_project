@@ -1,37 +1,35 @@
 @extends('adminpage/adminlayout.layout')
 
-@section('title','declaration')
+@section('title','게시글 신고관리')
 
 @section('main')
 <div class="declaration-main">
     <div class="contents-tab-btn">
-        <a href="{{route('admin.contents', ['align_board' => 1])}}"><div id="contentsTaBoard" class="contents-tab-board-btn">게시글 관리</div></a>
-        <a href="{{route('admin.comments')}}"><div id="contentsTaComments" class="contents-tab-comments-btn tab-active">댓글 관리</div></a>
+        <a href="{{route('contents.declaration')}}"><div id="contentsTaBoard" class="contents-tab-board-btn tab-active">게시글 신고 내역</div></a>
+        <a href="{{route('comments.declaration')}}"><div id="contentsTaComments" class="contents-tab-comments-btn">댓글 신고 내역</div></a>
     </div>
     <div class="contentsmanagement-tab-second-zone">
-        <form action="#" method="post" id="AlignValueForm">
+        <form method="post" id="setDeclationFlg">
             @csrf
-            <input type="hidden" id="contentsmanagementSearchAlignValue" name="align_board">
-        </form>
-
-        <form action="#" method="post">
-            @csrf
-            <div class="contentsmanagement-select-btn-zone">
+            <div class="contentsmanagement-select-btn-gridzone">
                 <div>
                     <input type="checkbox" id="allselectcheck">
                     <label for="allselectcheck">전체선택</label>
                 </div>
-                <button class="admin-custom-btn custom-common-delete-btn" onclick="commentsDelete(); return false;">삭제</button>
+                <button type="button" class="admin-custom-btn custom-common-btn" style="width: 160px;" onclick="setDeclarationflg(); return false;"> 신고 횟수 초기화 </button>
+                <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="deleteDeclaration(); return false;">삭제</button>
             </div>
             <table class="table table-striped">
                 <colgroup>
                     <col width="3%;">
+                    <col width="4%;">
                     <col width="20%;">
-                    <col width="45%;">
+                    <col width="32%;">
                     <col width="14%;">
-                    <col width="6%;">
-                    <col width="6%;">
-                    <col width="6%;">
+                    <col width="10%;">
+                    <col width="7%;">
+                    <col width="5%;">
+                    <col width="5%;">
                 </colgroup>
                 <thead>
                 <tr class="contesmanagement-tr">
@@ -40,6 +38,7 @@
                     <th scope="col">게시글 제목</th>
                     <th scope="col">게시글 내용</th>
                     <th scope="col">게시글 작성일</th>
+                    <th scope="col">작성자</th>
                     <th scope="col">신고 횟수</th>
                     <th scope="col">조회수</th>
                     <th scope="col">댓글수</th>
@@ -48,12 +47,15 @@
                 <tbody>
                     @forelse ($data as $item)
                         <tr>
-                            <th><input type="checkbox" value="{{$data->board_id}}" id="commentChkBox{{$item->comment_id}}"></th>
-                            <th scope="row">{{$data->board_id}}</th>
-                            <td>{{Str::limit($data->board_title, 20, '...')}}</td>
-                            <td><a href="{{ route('board.show',['board'=>$data->board_id]) }}">{{Str::limit($data->board_id, 35, '...')}}</a></td>
-                            <td>{{$data->created_at}}</td>
-                            <td>{{$data->user_email}}</td>
+                            <th><input type="checkbox" name="board_id[]" value="{{$item->board_id}}" class="contens-checkbox"></th>
+                            <th scope="row">{{$item->board_id}}</th>
+                            <td>{{Str::limit($item->board_title, 30, '...')}}</td>
+                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 50, '...')}}</a></td>
+                            <td>{{$item->created_at}}</td>
+                            <td>{{$item->user_email}}</td>
+                            <td>{{$item->total}}</td>
+                            <td>{{$item->board_hits}}</td>
+                            <td>{{$item->commenttotal}}</td>
                         </tr>
                     @empty
                     @endforelse
@@ -64,28 +66,28 @@
         {{-- 페이지네이션 --}}
         <nav aria-label="Page navigation example">
             <div class="pagination">    
-                @if ($comment->currentPage() > 1)
-                    <a href="{{ $comment->url(1) }}">&lt;&lt;</a>
-                    <a class="page_pre" href="{{ $comment->previousPageUrl() }}">이전</a>
+                @if ($data->currentPage() > 1)
+                    <a href="{{ $data->url(1) }}">&lt;&lt;</a>
+                    <a class="page_pre" href="{{ $data->previousPageUrl() }}">이전</a>
                 @endif
             
-                @for ($i = max(1, $comment->currentPage() - 2); $i <= min($comment->lastPage(), $comment->currentPage() + 2); $i++)
-                    @if ($i == $comment->currentPage())
+                @for ($i = max(1, $data->currentPage() - 2); $i <= min($data->lastPage(), $data->currentPage() + 2); $i++)
+                    @if ($i == $data->currentPage())
                         <span class="pagination-current">{{ $i }}</span>
                     @else
-                        <a href="{{ $comment->url($i) }}" class="pagination-link">{{ $i }}</a>
+                        <a href="{{ $data->url($i) }}" class="pagination-link">{{ $i }}</a>
                     @endif
                 @endfor
             
-                @if ($comment->currentPage() < $comment->lastPage())
-                    <a class="page_pre" href="{{ $comment->nextPageUrl() }}">다음</a>
-                    <a href="{{ $comment->url($comment->lastPage()) }}">&gt;&gt;</a>
+                @if ($data->currentPage() < $data->lastPage())
+                    <a class="page_pre" href="{{ $data->nextPageUrl() }}">다음</a>
+                    <a href="{{ $data->url($data->lastPage()) }}">&gt;&gt;</a>
                 @endif
             </div>
         </nav>
     </div>
 </div>
-<script src="/js/admincomments.js"></script>
+<script src="/js/declaration.js"></script>
 
 
 
