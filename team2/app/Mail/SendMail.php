@@ -20,14 +20,15 @@ class SendMail extends Mailable
      *
      * @return void
      */
-    public function __construct($email)
+    public function __construct($user_email)
     {
-        $this->email = $email;
+        $this->email = $user_email;
     }
 
     function build() {
         return $this
-        ->subject('Thank you for subscribing to our newsletter')
-        ->markdown('sendEmail');
+        ->subject('건강하시조 인증코드')
+        ->markdown('sendEmail')
+        ->with(['verification_code' => $this->email['verification_code']]);;
     }
 }

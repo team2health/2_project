@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\HashTagController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ContentsadminController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -88,8 +89,9 @@ Route::get('/seeyouagain', [MypageController::class, 'seeyouagainget'])->name('s
 
 
 // 이메일 확인 페이지 접속
-Route::get('/emailchk', [UserController::class, 'emailchk'])->name('email.get');
-Route::post('/emailchkgo', [UserController::class, 'emailchkpost'])->name('email.post');
+Route::get('/emailchk', [MailController::class, 'emailchkget'])->name('email.get');
+Route::post('/emailchkgo', [MailController::class, 'emailchkpost'])->name('email.post');
+Route::post('/emailchkset', [MailController::class, 'emailchkset'])->name('emailchk.post');
 // 이메일 확인하면 어디로 돌아가는지
 // Route::get('/email/verify', function () {
 //     return view('auth.verify-email');

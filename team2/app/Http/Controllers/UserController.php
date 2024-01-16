@@ -185,22 +185,22 @@ class UserController extends Controller
         }
     }
 
-    public function emailchkpost(Request $request) {
+    // public function emailchkpost(Request $request) {
 
-        $verification_code = mt_rand(100000, 999999);
-        $this->sendSignupEmail($request->user_email, $verification_code);
-        return redirect()->route('email.get')->with(session()->flash('email_msg','이메일 확인해보세용'));
-    }
+    //     $verification_code = mt_rand(100000, 999999);
+    //     $this->sendSignupEmail($request->user_email, $verification_code);
+    //     return redirect()->route('email.get')->with(session()->flash('email_msg','이메일 확인해보세용'));
+    // }
 
 
-    public function sendSignupEmail($user_email, $verification_code) {
-        Log::debug($user_email);
-        $data = [
-            'name' => $user_email,
-            'verification_code' => $verification_code
-        ];
-        // $mail = new S0ignupEmail($data);
-        Mail::to($user_email)->send(new SendEmail($data));
-        return '메일확인';
-    }    
+    // public function sendSignupEmail($user_email, $verification_code) {
+    //     Log::debug($user_email);
+    //     $data = [
+    //         'name' => $user_email,
+    //         'verification_code' => $verification_code
+    //     ];
+    //     // $mail = new S0ignupEmail($data);
+    //     Mail::to($user_email)->send(new SendEmail($data));
+    //     return '메일확인';
+    // }    
 }
