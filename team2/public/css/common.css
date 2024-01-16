@@ -58,12 +58,6 @@ h2 {
 
 /* footer */
 
-.footer-section {
-	position: absolute;
-	/* left: 0; */
-	/* bottom: 0; */
-    width: 100vw;
-}
 .developer-info {
 	background-color: #2f2f2f;
 	height: 155px;
@@ -134,6 +128,10 @@ h2 {
     }
     .footer-gap {
         margin: 5px 0;
+    }
+    
+    .footer-section {
+        margin-bottom: 70.8px;
     }
     /* .developer1, .developer2, .developer3 {
         margin-top: 5px;

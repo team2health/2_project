@@ -142,35 +142,6 @@ class AdminController extends Controller
 
         $result[5] = Pandemic::orderBy('created_at', 'desc')->get();
 
-        $result[6] = DB::table(DB::raw('(
-            SELECT 
-                DISTINCT age,
-                part_symptom_id,
-                COUNT(part_symptom_id) OVER (PARTITION BY age, part_symptom_id) as count
-            FROM 
-                (
-                    SELECT 
-                        CASE
-                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 10 AND 19 THEN "10대"
-                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 20 AND 29 THEN "20대"
-                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 30 AND 39 THEN "30대"
-                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 40 AND 49 THEN "40대"
-                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) BETWEEN 50 AND 59 THEN "50대"
-                            WHEN YEAR(CURDATE()) - YEAR(users.birthday) >= 60 THEN "60대 이상"
-                        END as age,
-                        part_symptom_id
-                    FROM 
-                        records
-                    JOIN 
-                        users ON records.u_id = users.id
-                ) as c
-        ) as distinct_records'))
-        ->select('age', 'part_symptom_id', 'count')
-        ->orderBy('age')
-        ->orderByDesc('count')
-        ->get();
-
-            Log::debug($result[6]);
 
         return view('adminpage.index')->with('result', $result);
     }

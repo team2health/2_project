@@ -133,7 +133,7 @@
 			<br>
 		</div>
 		<div style="color: #2C2B71" class="text-center bc-purple" id="symptomChkContainer">
-			<br>
+			<br><br><br>
 			<div><span class="text-part">#증상</span>을/를 선택해 주세요</div>
 			<br>
 			<div class="symptomChkbox-container">
@@ -167,7 +167,7 @@
 			</div>
 		</div>
 	</div>
-<br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </main>
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b402b118a5747fb73298eeccdc8b838&libraries=services"></script>

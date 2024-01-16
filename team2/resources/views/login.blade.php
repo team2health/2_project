@@ -32,5 +32,6 @@
 			{{-- <input type="hidden" id="idError" value="{{$idError}}"> --}}
 		</div>
 	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<script src="../js/login.js"></script>
 @endsection
