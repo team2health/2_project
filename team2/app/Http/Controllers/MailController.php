@@ -33,10 +33,8 @@ class MailController extends Controller
 		->get();
 
 		if(count($origin_result) > 0) {
-			Log::debug("이미 존재하는거");
 			return response()->json('1');
 		} else {
-			Log::debug("뒤진거");
 			$verification_code = mt_rand(100000, 999999);
 	
 			$data = [
