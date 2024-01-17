@@ -9,6 +9,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\Comment;
+use App\Models\Board_report;
 
 class ContentsadminController extends Controller
 {
@@ -16,7 +17,6 @@ class ContentsadminController extends Controller
     
     // 게시글 날짜 검색 
     public function contentsearch(Request $request) {
-        Log::debug('게시글 날짜를 검색해서 넘겨주는 애');
         $start_date =  $request->start_year.$request->start_month.$request->start_day;
         $end_date = $request->end_year.$request->end_month.$request->end_day;
         // $date[] = $start_date;
@@ -41,7 +41,6 @@ class ContentsadminController extends Controller
     }
 
     public function contentssort(Request $request) {
-        Log::debug('정렬 세션에 저장해서 값 넘겨주는 애');
         Log::debug($request);
 
         $result = $request->align_board;
@@ -51,8 +50,6 @@ class ContentsadminController extends Controller
     }
     
     public function admincontents($result, $date = null) {
-        Log::debug('날짜 세팅하는 애');
-        Log::debug($date);
         if (!$date) {
             $date = date('Ymd');
         }
@@ -70,16 +67,10 @@ class ContentsadminController extends Controller
     }
 
     public function admincontentsset($align_board, $start_date, $end_date) {
-        Log::debug('쿼리문 작성하는 get');
         Log::debug($align_board);
         Log::debug($start_date);
         Log::debug($end_date);
-        // $start_date = $date[0];
-        // $date_count = count($date);
-        // if($date_count > 1) {
-        //     $end_date = $date[1];
-        //     Log::debug($end_date);
-        // }
+
         $boards = DB::table('boards')
         ->select(
             'boards.board_id',
@@ -95,9 +86,6 @@ class ContentsadminController extends Controller
         ->leftJoin('comments', 'comments.board_id', 'boards.board_id')
         ->leftJoin('categories', 'categories.category_id', 'boards.category_id');
         if($end_date !== null) {
-            Log::debug('if null이 아닐 경우 실행');
-            Log::debug($start_date);
-            Log::debug($end_date);
             $boards = $boards->whereBetween('boards.created_at', [$start_date.'000000', $end_date.'235959']);
         } 
         $boards->wherenull('boards.board_show_flg')
@@ -111,15 +99,13 @@ class ContentsadminController extends Controller
             'boards.board_content'
         );
         if($align_board == '0') {
-            Log::debug('align_board가 0일 경우');
             $boards = $boards->orderBy('boards.board_hits', 'desc');
         } else {
-            Log::debug('아닐 경우');
             $boards = $boards->orderBy('boards.created_at', 'desc');
         }
-        
+
         $data = $boards->paginate(10);
-        Log::debug($data);
+
         return view('adminpage.contentsmanagement')
         ->with('data', $data);
     }
@@ -193,17 +179,23 @@ class ContentsadminController extends Controller
     ->orderBy('total', 'desc')
     ->paginate(10);
 
-    // $info = DB::table('board_reports')
-    // ->select(
-    //     'users.user_email'
-    //     ,'users.user_name'
-    //     ,'board_reports.board_reason_flg'
-    //     ,'users.id'
-    //     ,'board_reports.created_at'
-    // )
-    // ->join('users', 'users.id','board_reports.u_id')
-    // ->where('board_reports.board_report_complete','0')
-    // ->get();
+        // $cnt = 0;
+    // foreach ($data as $item) {
+    //     // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+    //     $result[$cnt]['board_id']
+    //     = Board_report::join('users','board_reports.u_id', 'users.id')
+    //     ->select(
+    //     'users.user_name'
+    //     , 'users.user_email'
+    //     , 'board_reports.board_reason_flg'
+    //     ,  DB::raw('DATE_FORMAT(board_reports.created_at, "%Y-%m-%d") as created_at')
+    //     )
+    //     ->where('board_reports.board_id', $item->board_id)
+    //     ->orderby('board_reports.created_at', 'desc')
+    //     ->get();
+    //     $cnt++;
+    // }
+
 
     return view('adminpage.declaration')->with('data', $data);
     }
@@ -367,4 +359,26 @@ class ContentsadminController extends Controller
         }
         return redirect()->route('comments.declaration');
     }
+
+    // 신고자 조회
+    public function userdeclaration(Request $request) {
+        Log::debug($request);
+
+
+        $user = DB::table('board_reports')
+        ->join('users','board_reports.u_id', 'users.id')
+        ->select(
+        'users.user_name'
+        , 'users.user_email'
+        , 'board_reports.board_reason_flg'
+        ,  'board_reports.created_at'
+        )
+        ->where('board_reports.board_id', $request->board_id)
+        ->orderby('board_reports.created_at', 'desc')
+        ->get();
+
+
+        return response()->json($user);
+
+        }
 }

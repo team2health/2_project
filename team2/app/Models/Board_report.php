@@ -9,6 +9,8 @@ class Board_report extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'board_report_id';
+
     public function boardidreport()
     {
         return $this->belongsTo(Board::class, 'board_id','board_id');

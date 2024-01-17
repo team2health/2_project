@@ -13,6 +13,7 @@ use App\Models\Pandemic;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Comment_report;
 use App\Models\Hashtag;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
