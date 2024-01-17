@@ -42,8 +42,8 @@
 			<input type="hidden" name="imgUrl" id="inputHiddenImgUrl">
 			@foreach($result->images as $image)
 			
-					<div class="detail_board_content">
-						<img src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{$image->board_img_id }}">
+					<div class="detail_board_content">						
+						<img class="detail_board_content_img" src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{$image->board_img_id }}">
 						<label for="file{{ $image->board_img_id }}">
 							<button type="button" onclick="openFile('file{{ $image->board_img_id }}')">파일변경</button>
 						</label>
@@ -54,12 +54,8 @@
 					
 				@endforeach
 				
-				<div class="insert_img_div">
-					<!-- <div id="imageContainer"> -->
-		<!-- 이미지를 추가할 부분 -->
-					<!-- </div>				 -->
-					<div id='image_zone'>
-				</div>	
+				<div class="insert_img_div">					
+					<div id='image_zone'></div>	
 				</div>
 			<div id="hashtagContainer" class="insert_hashtag" >
 					@foreach ($result->hashtags as $hashtag)
@@ -81,11 +77,11 @@
 				<!-- Input for selected hashtags -->
 				<input type="hidden" id="selectedHashtagsInput" name="hashtag"/>
 				<div class="insert_img" id="imageContainer">
-				<input type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>
-						<label for="selectFile">
-							<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
-						</label>						
-					</div>	
+					<input class="update_img" type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>
+					<label for="selectFile">
+						<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
+					</label>						
+				</div>	
 			</div>
 			<div id="hiddenHashtags" style="display: none;">
 				@foreach ($allHashtags as $hashtag)

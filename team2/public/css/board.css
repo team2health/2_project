@@ -97,6 +97,9 @@ textarea{
     border: 1px solid rgb(0, 0, 0);
     background-color: #FFF8DC;
 }
+.comment_report_stance{
+    text-align: right;
+}
 
 .board_nic_img{
     width: 48px;
@@ -198,6 +201,10 @@ textarea{
 .detail_board_content{
     width: 15%;
 }
+.detail_board_content_img{
+    width:100%;
+}
+
 #preview0,#preview1,#preview2,#preview3,#preview4,#preview5,#preview6,#preview7,#preview8,#preview9{
     width: 100%;
 }
@@ -320,17 +327,20 @@ li{
     display: inline-block;
 }
 .insert_img_div{
-    width: 100vw;
+    width: 100vW;
 }
 .insert_img>img{    
     width: 100%;
     height: auto; 
-    cursor: pointer;
-    
+    cursor: pointer;    
 }
 
 .image-box {
-    margin: 0 auto;
+    width: 150px;
+    display: inline-block;
+}
+.image-box>img{
+    width: 100%;
 }
 
 .image-btn {
