@@ -26,14 +26,15 @@ class UserController extends Controller
         return view('emailpage');
     }
 
-    public function registpageget(Request $request) {
-        Log::debug($request);
-        return view('regist')->with('request', $request);
+    public function registpageget() {
+        return view('regist');
     }
     
     public function registpost(Request $request) {
-        Log::debug($request);
-        exit;
+        Session::flush();
+        if(!session('email')){
+            return redirect()->route('regist.get');
+        }
         if(!isset($request->agreement_flg)) {
             return redirect()->route('regist.get')->with('agreement_Error', '1');
         }
@@ -75,19 +76,20 @@ class UserController extends Controller
 
     public function loginpost(Request $request) {
         $result = User::where('user_email', $request->user_email)->first();
+        if(!$result) {
+            return view('login')->with('passwordError', '0');
+        }
+        Log::debug($request);
         // 탈퇴한 사용자 로그인 알림
-
         $deleted_user = User::withTrashed()
         ->where('user_email', $request->user_email)
         ->whereNull('deleted_at')
         ->get();
+
+        Log::debug($deleted_user);
         $deleted_user = $deleted_user->count();
         if($deleted_user === 0) {
             return view('login')->with('passwordError', '2');
-        }
-
-        if(!$result) {
-            return view('login')->with('passwordError', '0');
         }
 
         if(!(Hash::check($request->user_password, $result->user_password))) {

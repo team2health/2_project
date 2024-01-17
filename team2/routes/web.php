@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Adminauth;
 use App\Http\Middleware\Adminblock;
+use App\Http\Middleware\Regist;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,7 @@ Route::get('/useraddress', [MainController::class, 'useraddressget']);
 Route::get('/login', [UserController::class, 'loginget'])->name('login.get');
 Route::middleware('admin.block')->post('/login', [UserController::class, 'loginpost'])->name('login.post');
 Route::get('/regist', [UserController::class, 'registget'])->name('regist.get');
-Route::get('/registpage/{email?}', [UserController::class, 'registpageget'])->name('registpage.get');
+Route::middleware('regist.get')->get('/registpage/{email?}', [UserController::class, 'registpageget'])->name('registpage.get');
 Route::middleware('user.validation')->post('/regist', [UserController::class, 'registpost'])->name('regist.post');
 Route::get('/logout', [UserController::class, 'logoutget'])->name('logout.get');
 Route::post('/deleteacountchk', [UserController::class, 'deleteaccountchk']);

@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'admin.auth' => \App\Http\Middleware\Adminauth::class,
         'admin.block' => \App\Http\Middleware\Adminblock::class,
         'user.validation' => \App\Http\Middleware\UserValidation::class,
+        'regist.get' => \App\Http\Middleware\Regist::class,
     ];
 }
