@@ -7,19 +7,19 @@
 	<main class="content">
 		<div class="container-fluid p-0">
 			<div id="statistics" data-results="{{ json_encode($result) }}"></div>
-			<h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
-
+			<div class="pandemic_box">연령, 댓글&게시글</div>
+			<br><br>
 			<div class="index-container">
 				<div class="index-container-mini">
 					<div class="card-header" id="main-gender">
 						<div class="col-xl-6 col-xxl-5">
-							<div id="chart" style="width: 400px; height: 300px;"></div>
+							<div id="chart" style="width: 400px; height: 280px; margin-top: 20px;"></div>
 						</div>
 					</div>
 				</div>
 				<div class="card-header index-container-mini2">
 					<div>
-						<div id="chart1" style="width: 800px; height: 300px;"></div>
+						<div id="chart1" style="width: 900px; height: 280px;"></div>
 					</div>
 				</div>
 			</div>
