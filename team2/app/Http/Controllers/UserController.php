@@ -32,6 +32,9 @@ class UserController extends Controller
     
     public function registpost(Request $request) {
         Session::flush();
+        if(!session('email')){
+            return redirect()->route('regist.get');
+        }
         if(!isset($request->agreement_flg)) {
             return redirect()->route('regist.get')->with('agreement_Error', '1');
         }
