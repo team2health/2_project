@@ -11,9 +11,7 @@ function setEamil() {
 	setEmailDiv.innerHTML = userEmaiil;
 	
 
-	let emailHiddenSet = document.createElement('div');
-	emailHiddenSet.setAttribute('type', 'hidden');
-	emailHiddenSet.setAttribute('name', 'user_email');
+	let emailHiddenSet = document.getElementById('emailHiddenSet');
 	emailHiddenSet.setAttribute('value', userEmaiil);
 
 	setEmailDiv.appendChild(emailHiddenSet);
@@ -305,43 +303,43 @@ function checkName() {
 	namechkflg = 1;
 }
 
-let inputCheckId;
-function checkId() {
-	let idChk = document.getElementById('user_email').value;
+// let inputCheckId;
+// function checkId() {
+// 	let idChk = document.getElementById('user_email').value;
 
-	if(idChk === '') {
-		alert('이메일을 입력해주세요');
-		return false;
-	} 
-	// else if(!regex2.test(idChk)) {
-	// 	alert('사용할 수 없는 이메일입니다.');
-	// 	return false;
-	// }
+// 	if(idChk === '') {
+// 		alert('이메일을 입력해주세요');
+// 		return false;
+// 	} 
+// 	// else if(!regex2.test(idChk)) {
+// 	// 	alert('사용할 수 없는 이메일입니다.');
+// 	// 	return false;
+// 	// }
 
-	const formData = new FormData();
-	formData.append('user_email', idChk);
-	fetch('/idchk', {
-		method: 'POST',
-		body: formData,
-	})
-	.then(response => response.json())
-	.then(data => {
-		if(data['idChk'] === '0') {
-			alert('사용가능한 이메일 입니다.');
-			inputCheckBtn[1].disabled = true;
-			inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
-			inputCheckId = idChk;
-			idFlg = 0;
-		} else if(data['idChk'] === '1') {
-			alert('사용할 수 없는 이메일 입니다.');
-			idFlg = 1;
-		}
-	})
-	.catch(error => {
-		console.error('오류 발생:', error);
-	})
-	idchkflg = 1;
-}
+// 	const formData = new FormData();
+// 	formData.append('user_email', idChk);
+// 	fetch('/idchk', {
+// 		method: 'POST',
+// 		body: formData,
+// 	})
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		if(data['idChk'] === '0') {
+// 			alert('사용가능한 이메일 입니다.');
+// 			inputCheckBtn[1].disabled = true;
+// 			inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
+// 			inputCheckId = idChk;
+// 			idFlg = 0;
+// 		} else if(data['idChk'] === '1') {
+// 			alert('사용할 수 없는 이메일 입니다.');
+// 			idFlg = 1;
+// 		}
+// 	})
+// 	.catch(error => {
+// 		console.error('오류 발생:', error);
+// 	})
+// 	idchkflg = 1;
+// }
 
 function agreementErrorSet () {
 	let agreementError = document.getElementById('agreementError').value;

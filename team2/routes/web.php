@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Adminauth;
 use App\Http\Middleware\Adminblock;
+use App\Http\Middleware\Regist;
 
 /*
 |--------------------------------------------------------------------------

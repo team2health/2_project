@@ -1,8 +1,8 @@
-window.addEventListener('beforeunload', function (event) {
-    event.returnValue = '';
-    let message = '페이지를 새로고침하면 변경 사항이 저장되지 않을 수 있습니다.';
-    confirm(message);
-});
+// window.addEventListener('beforeunload', function (event) {
+//     event.returnValue = '';
+//     let message = '페이지를 새로고침하면 변경 사항이 저장되지 않을 수 있습니다.';
+//     confirm(message);
+// });
 
 
 let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -32,21 +32,25 @@ function emailSendBtn() {
 	.then(response => response.json())
 	.then(data => {
         if(data) {
-            let emailSendForm = document.getElementById('emailSendForm');
-            emailSendForm.innerHTML = '';
-            let divCreate = document.createElement('div');
-            divCreate.classList.add('email-chk-end');
-            divCreate.innerHTML = data;
-            let hiddenInput = document.createElement('input');
-            hiddenInput.id = 'userEmailSet'
-            hiddenInput.setAttribute('type', 'hidden');
-            hiddenInput.setAttribute('name', 'user_email');
-            hiddenInput.setAttribute('value', data);
-            emailSendForm.appendChild(divCreate);
-            emailSendForm.appendChild(hiddenInput);
-            let verificationcodeBtn = document.getElementById('verificationcodeBtn');
-            verificationcodeBtn.removeAttribute('disabled');
-            document.getElementById('verificationChkPageFrom').style.display = 'block';
+            if( data === '1') {
+                alert('이미 존재하는 이메일입니다.');
+            } else {
+                let emailSendForm = document.getElementById('emailSendForm');
+                emailSendForm.innerHTML = '';
+                let divCreate = document.createElement('div');
+                divCreate.classList.add('email-chk-end');
+                divCreate.innerHTML = data;
+                let hiddenInput = document.createElement('input');
+                hiddenInput.id = 'userEmailSet'
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'user_email');
+                hiddenInput.setAttribute('value', data);
+                emailSendForm.appendChild(divCreate);
+                emailSendForm.appendChild(hiddenInput);
+                let verificationcodeBtn = document.getElementById('verificationcodeBtn');
+                verificationcodeBtn.removeAttribute('disabled');
+                document.getElementById('verificationChkPageFrom').style.display = 'block';
+            }
         }
 	})
 	.catch(error => {

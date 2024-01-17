@@ -26,14 +26,13 @@ class UserController extends Controller
         return view('emailpage');
     }
 
-    public function registpageget(Request $request) {
-        Log::debug($request);
-        return view('regist')->with('request', $request);
+    public function registpageget() {
+        return view('regist');
     }
     
     public function registpost(Request $request) {
-        Log::debug($request);
-        exit;
+        Session::flush();
+        
         if(!isset($request->agreement_flg)) {
             return redirect()->route('regist.get')->with('agreement_Error', '1');
         }
