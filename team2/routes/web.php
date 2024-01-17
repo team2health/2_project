@@ -127,6 +127,7 @@ Route::delete('/admin/hashtagdelete', [AdminController::class, 'hashtagdelete'])
 Route::post('/admin/hashtaginsert', [AdminController::class, 'hashtaginsertpost']);
 Route::post('/admin/adminregist', [AdminController::class, 'adminregistpost']);
 Route::get('admin/admindelete', [AdminController::class, 'admindeleteget'])->name('admindelete.get');
+Route::delete('admin/admindeletego', [AdminController::class, 'admindeletegodelete'])->name('admindeletego.delete');
 
 
 Route::get('/admin/contents/{date?}', [ContentsadminController::class, 'admincontents'])->name('admin.contents');

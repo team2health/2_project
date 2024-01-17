@@ -26,7 +26,7 @@ function adminRegist() {
 	formData.append('admin_name', ADMINNAME);
 	formData.append('admin_password', ADMINPW);
 
-	fetch('/adminregist', {
+	fetch('/admin/adminregist', {
 		method: 'POST',
 		body: formData,
 	})

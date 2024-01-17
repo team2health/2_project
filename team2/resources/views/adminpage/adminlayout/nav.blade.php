@@ -66,6 +66,11 @@
                 <i class="align-middle me-2" data-feather="trash-2"></i> <span class="align-middle">삭제된 게시글</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{route('admindelete.get')}}">
+                <i class="align-middle me-2" data-feather="user-x"></i> <span class="align-middle">관리자 계정</span>
+            </a>
+        </li>
     </ul>
 
     <div class="sidebar-cta">

@@ -60,12 +60,19 @@
 							<span>2024년(2023년)</span>
 						</div>
 					</div>
-					@foreach ($result[4] as $item)
+					@foreach ($result[6] as $item)
 					<div class="card-header ps-width">
 						<div class="admin-index-ps-mini">
-							<span class="index-width"></span>
-							<span class="index-width">{{ $item->part_name[0]->part_name }}-{{ $item->symptom_name[0]->symptom_name }}</span>
-							<span class="index-width">{{ $item->cnt }}()</span>
+							<span class="index-width">{{ $item->age_range }}</span>
+							<span class="index-width">{{ $item->part_name[0]->part_name }} - {{ $item->symptom_name[0]->symptom_name }}</span>
+							<div class="index_cnt">
+								<span>{{ $item->cnt }}회</span>
+								@if ($item->last_year > 0)
+								<span class="index-font-color-red">({{ $item->last_year }}%)</span>
+								@else
+								<span class="index-font-color-blue">({{ $item->last_year }}%)</span>
+								@endif
+							</div>
 						</div>
 					</div>
 					@endforeach

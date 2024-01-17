@@ -17,7 +17,7 @@ class Board_reportFactory extends Factory
     public function definition()
     {
         return [
-            'u_id' => $this->faker->numberBetween(1, 500),
+            'u_id' => $this->faker->numberBetween(1, 1000),
             'board_id' => $this->faker->numberBetween(1, 5000),
             'board_reason_flg' => $this->faker->numberBetween(1, 8),
             'board_report_complete' => '0',

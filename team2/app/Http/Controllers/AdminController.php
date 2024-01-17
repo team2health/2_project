@@ -142,6 +142,102 @@ class AdminController extends Controller
 
         $result[5] = Pandemic::orderBy('created_at', 'desc')->get();
 
+        $result[6] = DB::select("
+            SELECT
+                age_ranges.age_range,
+                COALESCE(tmp.part_symptom_id, 0) AS part_symptom_id,
+                COALESCE(tmp.cnt, 0) AS cnt
+            FROM
+            (
+                SELECT '10대이하' AS age_range
+                UNION SELECT '20대'
+                UNION SELECT '30대'
+                UNION SELECT '40대'
+                UNION SELECT '50대'
+                UNION SELECT '60대이상'
+            ) age_ranges
+            LEFT JOIN (
+                SELECT
+                    CASE
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 20 YEAR) AND usr.birthday < DATE_ADD(DATE(NOW()), interval 1 DAY) THEN '10대이하'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 30 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 20 YEAR) THEN '20대'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 40 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 30 YEAR) THEN '30대'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 50 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 40 YEAR) THEN '40대'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 60 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 50 YEAR) THEN '50대'
+                        ELSE '60대이상'
+                    END AS age_range,
+                    rec.part_symptom_id,
+                    COUNT(rec.part_symptom_id) AS cnt,
+                    ROW_NUMBER() OVER (PARTITION BY age_range ORDER BY cnt DESC) AS row_num
+                FROM users usr
+                JOIN records rec ON usr.id = rec.u_id
+                WHERE YEAR(rec.created_at) = YEAR(CURDATE())
+                GROUP BY age_range, rec.part_symptom_id
+            ) tmp ON age_ranges.age_range = tmp.age_range AND tmp.row_num = 1;
+        ");
+
+
+        $count = 0;
+        foreach ($result[6] as $value) {
+            $value->part_name = Part_symptom::join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+            ->select('parts.part_name')
+            ->where('part_symptoms.part_symptom_id', $value->part_symptom_id)
+            ->get();
+            
+            $value->symptom_name = Part_symptom::join('symptoms', 'part_symptoms.symptom_id', '=', 'symptoms.symptom_id')
+            ->select('symptoms.symptom_name')
+            ->where('part_symptoms.part_symptom_id', $value->part_symptom_id)
+            ->get();
+
+            $count++;
+        }
+
+        $last_year = DB::select("
+            SELECT
+                age_ranges.age_range,
+                COALESCE(tmp.part_symptom_id, 0) AS part_symptom_id,
+                COALESCE(tmp.cnt, 0) AS cnt
+            FROM
+            (
+                SELECT '10대이하' AS age_range
+                UNION SELECT '20대'
+                UNION SELECT '30대'
+                UNION SELECT '40대'
+                UNION SELECT '50대'
+                UNION SELECT '60대이상'
+            ) age_ranges
+            LEFT JOIN (
+                SELECT
+                    CASE
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 20 YEAR) AND usr.birthday < DATE_ADD(DATE(NOW()), interval 1 DAY) THEN '10대이하'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 30 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 20 YEAR) THEN '20대'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 40 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 30 YEAR) THEN '30대'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 50 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 40 YEAR) THEN '40대'
+                        WHEN usr.birthday > DATE_SUB(DATE(NOW()), INTERVAL 60 YEAR) AND usr.birthday < DATE_SUB(DATE(NOW()), INTERVAL 50 YEAR) THEN '50대'
+                        ELSE '60대이상'
+                    END AS age_range,
+                    rec.part_symptom_id,
+                    COUNT(rec.part_symptom_id) AS cnt,
+                    ROW_NUMBER() OVER (PARTITION BY age_range ORDER BY cnt DESC) AS row_num
+                FROM users usr
+                JOIN records rec ON usr.id = rec.u_id
+                WHERE YEAR(rec.created_at) = YEAR(CURDATE())-1
+                GROUP BY age_range, rec.part_symptom_id
+            ) tmp ON age_ranges.age_range = tmp.age_range AND tmp.row_num = 1;
+        ");
+
+
+        $c = 0;
+        foreach ($result[6] as $value) {
+            $diff1 = $value->cnt - $last_year[$c]->cnt;
+            if ($last_year[$c]->cnt != 0) {
+                $value->last_year = floor(($diff1 / $last_year[$c]->cnt) * 100);
+            } else {
+                $value->last_year = '0';
+            }
+            Log::debug($value->last_year);
+            $c++;
+        }
 
         return view('adminpage.index')->with('result', $result);
     }
@@ -221,7 +317,19 @@ class AdminController extends Controller
     }
 
     public function admindeleteget() {
-        return view('adminpage.admindelete');
+
+        $result = Admin::get();
+
+
+        return view('adminpage.admindelete')->with('result', $result);
+    }
+
+    public function admindeletegodelete(Request $request) {
+        foreach ($request->admin as $value) {
+            Admin::destroy($value);
+        }
+
+        return redirect()->route('admindelete.get');
     }
 
     public function adminuser(){
