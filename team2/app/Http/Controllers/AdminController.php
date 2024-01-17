@@ -107,7 +107,7 @@ class AdminController extends Controller
         ->select('part_symptom_id', DB::raw('COUNT(part_symptom_id) as cnt'))
         ->orderBy(DB::raw('COUNT(part_symptom_id)'), 'desc')
         ->groupBy('part_symptom_id')
-        ->limit(5)
+        ->limit(6)
         ->get();
 
         $cnt = 0;
@@ -129,7 +129,7 @@ class AdminController extends Controller
         ->select('part_symptom_id', DB::raw('COUNT(part_symptom_id) as cnt'))
         ->orderBy(DB::raw('COUNT(part_symptom_id)'), 'desc')
         ->groupBy('part_symptom_id')
-        ->limit(5)
+        ->limit(6)
         ->get();
 
         $c = 0;
@@ -317,8 +317,10 @@ class AdminController extends Controller
     }
 
     public function admindeleteget() {
+        // $admin_id = session('admin_id');
+        // $admin_id 
 
-        $result = Admin::get();
+        $result = Admin::whereNot('id', 1)->get();
 
 
         return view('adminpage.admindelete')->with('result', $result);
@@ -342,7 +344,7 @@ class AdminController extends Controller
     // 뷰를 반환할 때 조회한 사용자 정보를 함께 전달합니다.
     return view('adminpage.adminusermanagement')->with('data', $userData);
     }
-    public function userdestroy(Request $request){
+    public function adminuserdestroy(Request $request){
     //     // dd($request);
     //     $selectedIds = $request->input('id');
     //     // dd($selectedIds);
