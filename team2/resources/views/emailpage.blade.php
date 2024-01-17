@@ -5,26 +5,27 @@
 @section('main')
 
 <div>
-    <p><?php echo session()->get('key'); ?></p>
-    <form action="{{route('email.post')}}" method="post" class="emailchkpage-form">
+    <form action="" method="post"  class="email-check-page" id="emailChkPageForm">
         @csrf
-        <div>
-            <label for="user_email">이메일을 입력해주세요.</label>
-            <input type="email" class="login-input" placeholder="user@email.com"
-            name="user_email" id="user_email" required>
+        <div class="emailchkpage-form">
+            <div id="emailSendForm">
+                <span id="emailError" class="email-error"></span>
+                <br>
+                <label for="user_email">이메일을 입력해주세요.</label>
+                <input type="email" class="login-input" placeholder="user@email.com"
+                name="user_email" id="user_email" required>
+                <button type="button" class="mypage-btn" onclick="emailSendBtn(); return false;"> 이메일 인증하기</button>
+            </div>
         </div>
-        <button type="submit" class="mypage-btn"> 이메일 인증하기</button>
-    </form>
-    <form action="/emailchkset" method="post" class="emailchkpage-form">
-        @csrf
-        <div>
-            <label for="verificationcode">인증코드를 입력해주세요.</label>
-            <input type="text" name="verification_code" class="login-input" id="verificationcode" placeholder="인증코드">
+        <div class="emailchkpage-form">
+            <div style="display: none;" id="verificationChkPageFrom">
+                <label for="verificationcode">인증코드를 입력해주세요.</label>
+                <input type="text" name="verification_code" class="login-input" id="verificationcode" placeholder="인증코드">
+                <button type="button" id="verificationcodeBtn" class="mypage-btn" disabled onclick="emailVerifySubmit(); return false;">인증하기</button>
+            </div>
         </div>
-        <button type="submit" class="mypage-btn"> 인증하기 </button>
     </form>
-    <div>
-    </div>
 </div>
+<script src="/js/mail.js"></script>
 
 @endsection

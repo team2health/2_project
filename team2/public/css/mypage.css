@@ -339,17 +339,6 @@
 }
 
 
-/* 이메일 */
-.emailchkpage-form {
-    width: 100vw;
-    height: 300px;
-    /* margin-bottom: 300px; */
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-}
-
 @media only screen and (max-width: 800px) {
     .mypage-main {
         width: 100vw;
