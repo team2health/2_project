@@ -22,11 +22,18 @@ class UserController extends Controller
         if(Auth::check()) {
             return redirect()->route('main.get');
         }
-        return view('regist');
+        // $email = $request->input('email');
+        return view('emailpage');
+    }
+
+    public function registpageget(Request $request) {
+        Log::debug($request);
+        return view('regist')->with('request', $request);
     }
     
     public function registpost(Request $request) {
-        
+        Log::debug($request);
+        exit;
         if(!isset($request->agreement_flg)) {
             return redirect()->route('regist.get')->with('agreement_Error', '1');
         }

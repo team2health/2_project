@@ -1,3 +1,24 @@
+window.addEventListener('load', function() {
+    setEamil(); //이메일
+});
+function setEamil() {
+	let load =  window.location.href;
+	let paramsPart = load.split('/registpage/')[1];
+	let userEmaiil = decodeURIComponent(paramsPart);
+	console.log(userEmaiil);
+
+	let setEmailDiv = document.getElementById('setEmailDiv');
+	setEmailDiv.innerHTML = userEmaiil;
+	
+
+	let emailHiddenSet = document.createElement('div');
+	emailHiddenSet.setAttribute('type', 'hidden');
+	emailHiddenSet.setAttribute('name', 'user_email');
+	emailHiddenSet.setAttribute('value', userEmaiil);
+
+	setEmailDiv.appendChild(emailHiddenSet);
+}
+
 function sample4_execDaumPostcode() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -46,13 +67,13 @@ function sample4_execDaumPostcode() {
 }
 
 let USERNAME = document.getElementById('user_name');
-let USERID = document.getElementById('user_email');
+// let USERID = document.getElementById('user_email');
 let USERPASSWORD = document.getElementById('user_password');
 let USERPASSWORDCHECK = document.getElementById('user_password_check');
 // let USERADRESSF = document.getElementById('sample4_roadAddress');
 // let USERADRESSS = document.getElementById('sample4_detailAddress');
 let namechkflg = 0;
-let idchkflg = 0;
+// let idchkflg = 0;
 let nameFlg = 0;
 let idFlg = 0;
 
@@ -79,23 +100,23 @@ USERNAME.addEventListener('input', function() {
 	}
 });
 
-USERID.addEventListener('input', function() {
-    const value = USERID.value;
+// USERID.addEventListener('input', function() {
+//     const value = USERID.value;
 
-	inputCheckBtn[1].disabled = false;
-	inputCheckBtn[1].classList.replace('input-check-end', 'input-check');
+// 	inputCheckBtn[1].disabled = false;
+// 	inputCheckBtn[1].classList.replace('input-check-end', 'input-check');
 
-	if(inputCheckId == value) {
-		inputCheckBtn[1].disabled = true;
-		inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
-	}
+// 	if(inputCheckId == value) {
+// 		inputCheckBtn[1].disabled = true;
+// 		inputCheckBtn[1].classList.replace('input-check', 'input-check-end');
+// 	}
 	
-    // if (!regex2.test(value)) {
-    //     ERRORID.removeAttribute('class');
-    // } else {
-	// 	ERRORID.setAttribute('class', 'not-error-id');
-	// }
-});
+//     // if (!regex2.test(value)) {
+//     //     ERRORID.removeAttribute('class');
+//     // } else {
+// 	// 	ERRORID.setAttribute('class', 'not-error-id');
+// 	// }
+// });
 
 USERPASSWORDCHECK.addEventListener('input', function() {
     const value = USERPASSWORD.value;
@@ -196,7 +217,7 @@ birthDateEl.addEventListener('focus', function () {
 
 function registgo() {
 	let USERNAMEVALUE = document.getElementById('user_name').value;
-	let USERIDVALUE = document.getElementById('user_email').value;
+	// let USERIDVALUE = document.getElementById('user_email').value;
 	let USERPASSWORDVALUE = document.getElementById('user_password').value;
 	let USERPASSWORDCHECKVALUE = document.getElementById('user_password_check').value;
 	let USERADRESSFVALUE = document.getElementById('sample4_roadAddress').value;
@@ -211,19 +232,7 @@ function registgo() {
 	} else if(!regex.test(USERNAMEVALUE)) {
 		alert('닉네임을 다시 확인해주세요.');
 		return false;
-	} else if(nameFlg === 1) {
-        alert('사용 중인 닉네임입니다.\n닉네임을 다시 입력해주세요.');
-        return false;
-    } else if(USERIDVALUE === '') {
-		alert('이메일은 필수사항입니다.');
-		return false;
-	} else if(idchkflg === 0) {
-		alert('이메일 중복확인을 해주세요.');
-		return false;
-	} else if(idFlg === 1) {
-        alert('사용 중인 이메일입니다.\n이메일을 다시 입력해주세요.');
-        return false;
-    } else if(USERPASSWORDVALUE === '') {
+	} else if(USERPASSWORDVALUE === '') {
 		alert('비밀번호는 필수사항입니다.');
 		return false;
 	} else if(USERPASSWORDCHECKVALUE === '') {
@@ -239,6 +248,20 @@ function registgo() {
 		alert('성별을 선택해주세요.');
 		return false;
 	}
+
+	// else if(nameFlg === 1) {
+    //     alert('사용 중인 닉네임입니다.\n닉네임을 다시 입력해주세요.');
+    //     return false;
+    // } else if(USERIDVALUE === '') {
+	// 	alert('이메일은 필수사항입니다.');
+	// 	return false;
+	// } else if(idchkflg === 0) {
+	// 	alert('이메일 중복확인을 해주세요.');
+	// 	return false;
+	// } else if(idFlg === 1) {
+    //     alert('사용 중인 이메일입니다.\n이메일을 다시 입력해주세요.');
+    //     return false;
+    // }
 
 	document.getElementById('regist_form').submit();
 }
