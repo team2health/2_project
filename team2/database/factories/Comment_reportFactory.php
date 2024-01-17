@@ -17,7 +17,7 @@ class Comment_reportFactory extends Factory
     public function definition()
     {
         return [
-            'u_id' => $this->faker->numberBetween(1, 500),
+            'u_id' => $this->faker->numberBetween(1, 1000),
             'comment_id' => $this->faker->numberBetween(1, 1000),
             'comment_reason_flg' => $this->faker->numberBetween(1, 8),
             'comment_report_complete' => '0',

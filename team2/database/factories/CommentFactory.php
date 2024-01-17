@@ -17,8 +17,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'u_id' => $this->faker->numberBetween(1, 500),
-            'board_id' => $this->faker->numberBetween(1, 2000),
+            'u_id' => $this->faker->numberBetween(1, 1000),
+            'board_id' => $this->faker->numberBetween(1, 5000),
             'comment_content' => $this->faker->realText(100, 2),
             'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
             'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),

@@ -17,7 +17,7 @@ class BoardFactory extends Factory
     public function definition()
     {
         return [
-            'u_id' => $this->faker->numberBetween(1, 500),
+            'u_id' => $this->faker->numberBetween(1, 1000),
             'category_id' => $this->faker->numberBetween(1, 4),
             'board_title' => $this->faker->realText(20, 2),
             'board_content' => $this->faker->realText(100, 2),

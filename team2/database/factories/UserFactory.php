@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'user_email' => $this->faker->unique()->safeEmail(),
             'user_name' => $this->faker->unique()->name(),
             'user_password' => '$2y$10$3a6zpvZybCOQoaNepOIy8.YndwxyCQZid.MHxPt1ZhcNCfkG64obG',
-            'birthday' => $this->faker->date,
+            'birthday' => $this->faker->dateTimeBetween('1950-01-01', '2020-01-01'),
             'user_address_num' => '48060',
             'user_address' => '부산 해운대구 APEC로 30',
             'user_gender' => $this->faker->randomElement([1, 2]),
