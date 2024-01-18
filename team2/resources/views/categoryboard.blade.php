@@ -86,6 +86,6 @@
         <a href="{{ $data[0]->url($data[0]->lastPage()) }}">&gt;&gt;</a>
     @endif
 </div>
-
+<br><br><br><br><br><br><br><br>
 <script src="/js/categoryboard.js"></script>
 @endsection

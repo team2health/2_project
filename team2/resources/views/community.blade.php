@@ -53,7 +53,6 @@
             @endforelse
         </div>
     </div>    
-
         <div class="board-bc-gray">
         <div class="community_tag_container"> 
             <div class="community-favorite-show">
@@ -129,5 +128,6 @@
     </div>
     <br>
 </main>
+<br><br><br><br><br><br>
 <script src="/js/community.js"></script>
 @endsection

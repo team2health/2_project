@@ -9,7 +9,7 @@ function toggleDropdown() {
 
 // 푸터 아이콘 opacity
 let BACKURL = document.referrer;
-let footericondiv = document.querySelectorAll('.footer-icon-div');
+// let footericondiv = document.querySelectorAll('.footer-icon-div');
 function goBack() {
     window.location.href = BACKURL;
 }
