@@ -1064,7 +1064,7 @@ a .a-bordergo-hover:hover {
         margin: 10px 0 0 0;      
     }
     .insert_main{
-        margin: 20px auto;
+        margin: 20px auto 100px auto;
         width: 100vw;
     }
     #hiddenHashtags {
