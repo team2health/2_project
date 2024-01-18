@@ -29,11 +29,11 @@
                     <col width="3%;">
                     <col width="3%;">
                     <col width="5%;">
-                    <col width="14%">
+                    <col width="18%">
                     <col width="30%">
                     <col width="15%;">
                     <col width="7%;">
-                    <col width="10%;">
+                    <col width="6%;">
                     <col width="4%;">
                 </colgroup>
                 <thead>
@@ -45,7 +45,7 @@
                     <th scope="col">댓글 내용</th>
                     <th scope="col">댓글 작성일</th>
                     <th scope="col">작성자</th>
-                    <th scope="col">작성자 닉네임</th>
+                    <th scope="col">작성자</th>
                     <th scope="col">신고 횟수</th>
                 </tr>
                 </thead>
