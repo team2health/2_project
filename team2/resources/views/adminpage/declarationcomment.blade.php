@@ -30,11 +30,11 @@
                     <col width="3%;">
                     <col width="5%;">
                     <col width="18%">
-                    <col width="30%">
+                    <col width="27%">
                     <col width="15%;">
                     <col width="7%;">
                     <col width="6%;">
-                    <col width="4%;">
+                    <col width="7%;">
                 </colgroup>
                 <thead>
                 <tr class="contesmanagement-tr">
@@ -55,7 +55,7 @@
                             <th><button style="border: none;" type="button" onclick="showCommentDeclarationUser({{$item->comment_id}}); return false;">▼</button></th>
                             <th><input type="checkbox" name="comment_id[]" value="{{$item->comment_id}}" id="commentChkBox{{$index}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->comment_id}}</th>
-                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_title, 20, '...')}}</a></td>
+                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_title, 30, '...')}}</a></td>
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->comment_content, 50, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
