@@ -55,5 +55,5 @@
         <a href="{{ $data->url($data->lastPage()) }}">&gt;&gt;</a>
     @endif
 </div>
-
+<br><br><br><br><br><br><br><br>
 @endsection

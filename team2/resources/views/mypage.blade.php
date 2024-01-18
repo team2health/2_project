@@ -238,7 +238,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="mypage-logout" id="mypageLogoutBtn">
         <a href="{{ route('logout.get') }}">로그아웃</a>

@@ -65,7 +65,7 @@
 		|| Str::contains(request()->url(), 'mypage') || Str::contains(request()->url(), 'categoryboard')
 		|| Str::contains(request()->url(), 'boardcategory') || Str::contains(request()->url(), 'lastboard')
 		|| Str::contains(request()->url(), 'hotboard')	|| Str::contains(request()->url(), 'timeline')
-		|| Str::contains(request()->url(), 'favoriteboard') || (request()->path() === 'board')
+		|| Str::contains(request()->url(), 'favoriteboard') || Str::contains(request()->url(), 'board/')
 		|| Str::contains(request()->url(), 'hotboard') || Str::contains(request()->url(), 'firstchkpassword') || Str::contains(request()->url(), 'detail'))
 		<div class="header-mobile">
 			<div class="header-mobile-backBtn" onclick="goBack(); return false;"> < </div>

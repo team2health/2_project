@@ -70,6 +70,7 @@ h2 {
     font-size: 0.8rem;
     justify-items: center;
     justify-content: center;
+    margin-top: 10px;
 }
 .developer1, .developer2, .developer3 {
     margin-top: 5px;
