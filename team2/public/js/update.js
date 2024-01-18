@@ -74,32 +74,6 @@ function removeImage(imageId) {
         }
     }; 
 
-    // 탐색기에서 드래그앤 드롭 사용
-    
-    // 드롭 대상 위로 지나갈 때
-    imageZone.addEventListener('dragenter', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }, false);
-    
-    // 드롭 대상위로 지나갈때
-    imageZone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }, false);
-      
-    // 드래그 할때
-    imageZone.addEventListener('drop', function(e) {
-        var files = {};
-        e.preventDefault();
-        e.stopPropagation();
-        var dt = e.dataTransfer;
-        files = dt.files;
-        for(f of files) {
-            imageLoader(f);
-        }
-    }, false);
-
     // 첨부된 이미지를 배열에 넣고 미리보기
     var imageLoader = function(file){
         sel_files.push(file);
