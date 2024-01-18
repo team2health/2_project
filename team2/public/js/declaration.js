@@ -30,6 +30,8 @@ function SetCommentFlg() {
 }
 
 // 신고 내역 조회
+let showDeclarationUserFLg = 0;
+
 function showDeclarationUser(data) {
     let trIndex = document.getElementById('setTr'+data).value;
 
@@ -44,7 +46,7 @@ function showDeclarationUser(data) {
 	.then(data => { console.log(data);
 
         let tbody = document.querySelector('#setDeclarationUserProfile');
-        for(let i = 0; i < data.length; i++) {
+        for(let i = data.length-1; i >= 0; i--) {
 
             let tr = document.createElement('tr');
             let td1 = document.createElement('td');
@@ -59,21 +61,21 @@ function showDeclarationUser(data) {
             td2.innerHTML = data[i].user_name;
             td3.innerHTML = data[i].user_email;
             if (data[i].board_reason_flg == 1) {
-                td4.innerHTML = '신고사유1';
+                td4.innerHTML = ' 언어폭력';
             } else if ( data[i].board_reason_flg == 2) {
-                td4.innerHTML = '신고사유2';
+                td4.innerHTML = '사기';
             } else if ( data[i].board_reason_flg == 3) {
-                td4.innerHTML = '신고사유3';
+                td4.innerHTML = '허위사실 유포';
             } else if ( data[i].board_reason_flg == 4) {
-                td4.innerHTML = '신고사유4';
+                td4.innerHTML = '스팸';
             } else if ( data[i].board_reason_flg == 5) {
-                td4.innerHTML = '신고사유5';
+                td4.innerHTML = '불법 또는 규제상품 판매';
             } else if ( data[i].board_reason_flg == 6) {
-                td4.innerHTML = '신고사유6';
+                td4.innerHTML = '성희롱';
             } else if ( data[i].board_reason_flg == 7) {
-                td4.innerHTML = '신고사유7';
+                td4.innerHTML = ' 혐오감을 주는 발언 또는 상징';
             } else {
-                td4.innerHTML = '신고사유8';
+                td4.innerHTML = ' 마음에 들지 않습니다.';
             };
             td5.innerHTML = data[i].created_at
 

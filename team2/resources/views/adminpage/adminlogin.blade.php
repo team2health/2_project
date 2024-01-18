@@ -23,9 +23,14 @@
             </div>
             <button type="submit" class="btn btn-outline-dark">Login</button>
         </form>
+        @if (isset($adminPassword))
+            <input type="hidden" value="{{$adminPassword}}" id="adminPasswordChk">
+        @else
+            <input type="hidden" value="0" id="adminPasswordChk">
+        @endif
     </div>
 
-
+    <script src="/js/adminlogin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

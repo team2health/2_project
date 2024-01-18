@@ -1,3 +1,5 @@
+
+
 let sidebarItemHover = document.querySelectorAll('.sidebar-item');
 let currentPath = window.location.pathname + window.location.search;
 if(currentPath === '/admin/main') {
@@ -41,3 +43,4 @@ function adminRegist() {
 		console.error(error.stack);
 	})
 }
+
