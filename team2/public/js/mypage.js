@@ -117,7 +117,7 @@ function favoritehashdelete(data) {
         deletedfavoritehashtag.id = 'allHashtagtext' + data;
         deletefavoritespan.id = 'favoritehashtext'+data;
         deletefavoritespan.setAttribute('value', data );
-        deletefavoritespan.setAttribute('onclick', `addhashtag(${data})`);
+        deletefavoritespan.setAttribute('onclick', `hashtagFirstCheck(${data})`);
         deletefavoritespan.innerHTML = favoritehashtextget;
         deletedfavoritehashtag.appendChild(deletefavoritespan);
         
@@ -207,7 +207,7 @@ function addallfavoritetag() {
             let hashspan = document.createElement('span');
             hashtagdiv.id = 'allHashtagId'+data[i].hashtag_id;
             // hashplusbtn.setAttribute("value", data[i].hashtag_id);
-            hashspan.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
+            hashspan.setAttribute('onclick', `hashtagFirstCheck(${data[i].hashtag_id})`);
             hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
             hashspan.setAttribute('value', data[i].hashtag_id);
             hashspan.innerHTML = data[i].hashtag_name;
@@ -858,15 +858,34 @@ submitSearchHashBtn.addEventListener("keyup", function(event) {
     }
 });
 
-function inputsubmit(event) {
-    // Enter 키의 keyCode는 13
-    if (event.key === 'Enter' || event.keyCode === 13) {
-      submitSearchHash(); // 여기에 원하는 동작을 추가
-}
+
+function hashtagFirstCheck(data) {
+
+    let hashId = data;
+    let formData = new FormData();
+    formData.append('hashsearch', data);
+
+    fetch('/hashtagcheck', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => { 
+        if (data == '1') {
+            alert('이미 추가된 해시태그 입니다.')
+            return false;
+        } else if ( data == '2') {
+            addhashtag(hashId);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function submitSearchHash() {
     let searchHashResult = document.getElementById('searchHashResult');
+
     while (searchHashResult.firstChild) {
         searchHashResult.removeChild(searchHashResult.firstChild);
     }
@@ -884,6 +903,7 @@ function submitSearchHash() {
         if(data == 'nodata') {
             let creatediv = document.createElement('div');
             creatediv.innerHTML = '검색결과가 없습니다.'
+            creatediv.id = 'noSearchData';
             creatediv.style.gridColumnStart = '1';
             creatediv.style.gridColumnEnd = '4';
             creatediv.style.backgroundColor = '#e0eaff';
@@ -898,7 +918,7 @@ function submitSearchHash() {
                 let hashspan = document.createElement('span');
                 hashtagdiv.id = 'allHashtagId'+data[i].hashtag_id;
                 // hashplusbtn.setAttribute("value", data[i].hashtag_id);
-                hashspan.setAttribute('onclick', `addhashtag(${data[i].hashtag_id})`);
+                hashspan.setAttribute('onclick', `hashtagFirstCheck(${data[i].hashtag_id})`);
                 hashspan.id = 'allHashtagtext'+ data[i].hashtag_id;
                 hashspan.setAttribute('value', data[i].hashtag_id);
                 hashspan.innerHTML = data[i].hashtag_name;
@@ -910,4 +930,6 @@ function submitSearchHash() {
     .catch(error => {
         console.error('Error:', error);
     });
+    
+
 }

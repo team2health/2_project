@@ -78,6 +78,7 @@ Route::post('/newcalendarblock', [MypageController::class, 'newcalendarblock']);
 Route::post('/mypagecommentplus', [MypageController::class, 'mypagecommentplus']);
 Route::post('/mypageboardplus', [MypageController::class, 'mypageboardplus']);
 Route::post('/hashtagsearch', [MypageController::class, 'hashtagsearch']);
+Route::post('/hashtagcheck', [MypageController::class, 'hashtagcheck']);
 
 Route::post('/namechange', [MypageController::class, 'namechangepost']);
 Route::post('/userinfoupdate', [MypageController::class, 'userinfoupdatepost']);

@@ -213,8 +213,8 @@
                     <form class="mypage-hashtag-search-form" id="mypageHastagSearchForm" onsubmit="return false">
                         @csrf
                         <div class="mypage-hashtag-search-div">
-                            <input hidden='hidden'/>
-                            <input type="text" placeholder="해시태그 검색" name="hashsearch" id="hashsearch" onclick="inputsubmit(); return false;">
+                            <input hidden='hidden'>
+                            <input type="text" placeholder="해시태그 검색" name="hashsearch" id="hashsearch">
                             <button type="button" class="mypage-hashtag-search" onclick="submitSearchHash(); return false;" id="submitSearchHashBtn">
                                 <img src="/img/search.png">
                             </button>
@@ -225,7 +225,9 @@
                     @if(isset($hashtag_search))
                         <input type="hidden" value="{{$hashtag_search}}" id="hashtagSearch">
                     @endif
-                    <div id="searchHashResult" class="mypage-hashtag"></div>
+                    <div id="searchHashResult" class="mypage-hashtag">
+                        <div id="noSearchData" style="display: none; grid-column-start:1; grid-column-end: 4; background-color: #e0eaff; width:100%; justify-content: center; align-items: center;">검색결과가 없습니다.</div>
+                    </div>
                     <div id="mypageCanGetAllTag" class="mypage-can-get-all-tag">
                         <div class="mypage-can-get-all-tag-msg">
                             <img src="/img/favoritetag.png" alt="">
