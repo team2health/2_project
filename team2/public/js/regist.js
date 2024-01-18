@@ -1,21 +1,21 @@
-window.addEventListener('load', function() {
-    setEamil(); //이메일
-});
-function setEamil() {
-	let load =  window.location.href;
-	let paramsPart = load.split('/registpage/')[1];
-	let userEmaiil = decodeURIComponent(paramsPart);
-	console.log(userEmaiil);
+// window.addEventListener('load', function() {
+//     setEamil(); //이메일
+// });
+// function setEamil() {
+// 	let load =  window.location.href;
+// 	let paramsPart = load.split('/registpage/')[1];
+// 	let userEmaiil = decodeURIComponent(paramsPart);
+// 	console.log(userEmaiil);
 
-	let setEmailDiv = document.getElementById('setEmailDiv');
-	setEmailDiv.innerHTML = userEmaiil;
+// 	let setEmailDiv = document.getElementById('setEmailDiv');
+// 	setEmailDiv.innerHTML = userEmaiil;
 	
 
-	let emailHiddenSet = document.getElementById('emailHiddenSet');
-	emailHiddenSet.setAttribute('value', userEmaiil);
+// 	let emailHiddenSet = document.getElementById('emailHiddenSet');
+// 	emailHiddenSet.setAttribute('value', userEmaiil);
 
-	setEmailDiv.appendChild(emailHiddenSet);
-}
+// 	setEmailDiv.appendChild(emailHiddenSet);
+// }
 
 function sample4_execDaumPostcode() {
 	new daum.Postcode({
@@ -220,9 +220,12 @@ function registgo() {
 	let USERPASSWORDCHECKVALUE = document.getElementById('user_password_check').value;
 	let USERADRESSFVALUE = document.getElementById('sample4_roadAddress').value;
 	let GENDERINPUTVALUE = document.getElementById('gender-input');
-
+	let AGREEMENTFLG = document.getElementById('agreement_flg');
 	if(USERNAMEVALUE === '') {
 		alert('닉네임은 필수사항입니다.');
+		return false;
+	} else if(!AGREEMENTFLG.checked) { 
+		alert('이용약관 동의는 필수입니다.');
 		return false;
 	} else if(namechkflg === 0) {
 		alert('닉네임 중복확인을 해주세요.');
