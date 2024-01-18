@@ -45,7 +45,7 @@
 					<div class="detail_board_content">						
 						<img class="detail_board_content_img" src="/board_img/{{ $image->img_address }}" alt="Board Image" id="preview{{$image->board_img_id }}">
 						<label for="file{{ $image->board_img_id }}">
-							<button type="button" onclick="openFile('file{{ $image->board_img_id }}')">파일변경</button>
+							<button type="button" onclick="openFile('file{{ $image->board_img_id }}','preview{{ $image->board_img_id }}')">파일변경</button>
 						</label>
 						<input type="file" name="selectFile[]" id="file{{ $image->board_img_id }}" style="display:none;" onchange="previewImage('file{{ $image->board_img_id }}', 'preview{{ $image->board_img_id }}')" accept="image/*">
 						<button type="button" onclick="removeImage('{{ $image->board_img_id }}')">이미지 삭제</button>

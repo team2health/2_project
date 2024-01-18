@@ -398,45 +398,7 @@ $flg=$request->input('values');
                 $result->update(['category_id' => $category->category_id]);
             }
         
-    }   
-    // 기존 이미지의 ID들을 배열로 저장
-// $existingImageIdsToKeep = [];
-
-// // 현재 게시물에 이미지가 존재하는 경우에만 처리
-// if ($result->images()->exists()) {
-//     foreach ($result->images as $existingImage) {
-//         // 기존 이미지의 ID를 배열에 추가
-//         $existingImageIdsToKeep[] = $existingImage->board_img_id;
-//     }
-// }
-
-// // 새로운 이미지 업로드
-// if ($request->hasFile('selectFile')) {
-//     $images = $request->file('selectFile');
-//     foreach ($images as $image) {
-//         $imageName = Str::uuid() . '.' . $image->extension();
-//         $image->move(public_path('board_img'), $imageName);
-
-//         // 새로운 이미지를 Board_img 모델에 저장
-//         $boardImage = new Board_img(['img_address' => $imageName]);
-//         $result->images()->save($boardImage);
-//     }
-// }
-// // dd($result);
-// // 기존 이미지 중 교체된 이미지만 삭제
-// $imagesToDelete = $result->images()->whereNotIn('board_img_id', $existingImageIdsToKeep)->get();
-// // dd($imagesToDelete);
-// foreach ($imagesToDelete as $imageToDelete) {
-//     // 파일 시스템에서 이미지 삭제
-//     $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-//     if (File::exists($imagePath)) {
-//         unlink($imagePath);
-//     }
-
-//     // 데이터베이스에서 이미지 삭제
-//     $imageToDelete->delete();
-// }
- 
+    } 
     
     // Log::debug($request);
     // Log::debug("2");
@@ -453,9 +415,9 @@ $flg=$request->input('values');
         }
     }
     // Log::debug($request);
-    Log::debug("받아오는 삭제데이터");
+    // Log::debug("받아오는 삭제데이터");
     // Log::info('Request data:', $request->all());
-    Log::debug($request);
+    // Log::debug($request);
     // if ($request->imgUrl) {
     //     // Log::debug($request->has('imgUrl')); 
     //     $imageIdToDelete = $request->input('imgUrl');   
@@ -479,7 +441,8 @@ Log::debug($request);
 
 if ($request->imgUrl) {
     // 쉼표로 구분된 이미지 ID를 배열로 변환
-    $imageIdsToDelete = explode(',', $request->imgUrl);
+    $imageIdsToDelete = preg_replace('/[^0-9,]/', '', $request->imgUrl);
+    $imageIdsToDelete = explode(',',$imageIdsToDelete);
 
     foreach ($imageIdsToDelete as $imageIdToDelete) {
         Log::debug("삭제할 이미지 ID: " . $imageIdToDelete);
