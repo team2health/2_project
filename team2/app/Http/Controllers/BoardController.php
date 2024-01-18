@@ -333,6 +333,7 @@ $flg=$request->input('values');
      */
     public function update(Request $request, $board_id)
     {
+        Log::debug($request);
         // Log::info('Request data:', $request->all());
         // Log::debug($request);
         // Log::debug("6");
