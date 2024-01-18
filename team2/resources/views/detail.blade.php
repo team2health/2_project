@@ -9,61 +9,60 @@
         <div class="detail-board-created">
             {{$data->created_at}}
         </div>
-        <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>
-        @if(Auth::id() !== $data->user->id)
-<button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>
-<form action="{{ route('boardreport', ['board_id' => $data->board_id, 'u_id' => Auth::id()]) }}" method="POST">
-    
-    @csrf
-    <div id="myModal" class="modal">
-        <div class="comment_modal_content">            
-            <p><input type="radio" name="options" value="1">                                        
-            언어폭력</p> 
-            <p><input type="radio" name="options" value="2">                                        
-            사기</p> 
-            <p><input type="radio" name="options" value="3">                                        
-            허위사실 유포</p>                                             
-            <p><input type="radio" name="options" value="4">
-            스팸</p>  
-            <p><input type="radio" name="options" value="5">
-            불법 또는 규제상품 판매</p> 
-            <p><input type="radio" name="options" value="6">
-            성희롱</p> 
-            <p><input type="radio" name="options" value="7">
-            혐오감을 주는 발언 또는 상징</p> 
-            <p><input type="radio" name="options" value="8">
-            마음에 들지 않습니다.</p> 
-            <button class="detail_report" type="submit">신고</button> 
-            <span class="close" onclick="closeModal()">취소</span>                                    
+        <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>        
+    <form action="{{ route('boardreport', ['board_id' => $data->board_id, 'u_id' => Auth::id()]) }}" method="POST">    
+        @csrf
+        <div id="myModal" class="modal">
+            <div class="comment_modal_content">            
+                <p><input type="radio" name="options" value="1">                                        
+                언어폭력</p> 
+                <p><input type="radio" name="options" value="2">                                        
+                사기</p> 
+                <p><input type="radio" name="options" value="3">                                        
+                허위사실 유포</p>                                             
+                <p><input type="radio" name="options" value="4">
+                스팸</p>  
+                <p><input type="radio" name="options" value="5">
+                불법 또는 규제상품 판매</p> 
+                <p><input type="radio" name="options" value="6">
+                성희롱</p> 
+                <p><input type="radio" name="options" value="7">
+                혐오감을 주는 발언 또는 상징</p> 
+                <p><input type="radio" name="options" value="8">
+                마음에 들지 않습니다.</p> 
+                <button class="detail_report" type="submit">신고</button> 
+                <span class="close" onclick="closeModal()">취소</span>                                    
+            </div>
         </div>
-    </div>
-    </form>
-    @endif
-        <div class="last_user">
-            <div class="last-board-title">    
-                <p>{{ $data->board_title }}</p>
-            </div>
-            {{-- <div class="last-board-detail"> --}}
-                <img class="community_icon" src="{{ asset('user_img/' . optional($data->user)->user_img) }}" alt="">                                  
-                <div class="board_nic_text">
-                    <div class="detail-board-name">
-                    {{ optional($data->user)->user_name }}
-                    </div>
-                    
+    </form>    
+    <div class="last_user">
+        <div class="last-board-title">    
+            <p>{{ $data->board_title }}</p>
+            @if(Auth::id() !== $data->user->id)
+        <button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>
+        @endif
+        </div>
+        {{-- <div class="last-board-detail"> --}}
+            <img class="community_icon" src="{{ asset('user_img/' . optional($data->user)->user_img) }}" alt="">                                  
+            <div class="board_nic_text">
+                <div class="detail-board-name">
+                {{ optional($data->user)->user_name }}
                 </div>
-            {{-- </div> --}}
-            <div class="detail_content">
-                @foreach($data->images as $image)
-                <div class="detail_board_content">
-                    <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
-                </div>    
-                @endforeach          
-                <br>
-                <div>
-                    {!! $data->board_content !!}          
-                </div>                
+                
             </div>
-        </div>          
+        {{-- </div> --}}
+        <div class="detail_content">
+            @foreach($data->images as $image)
+            <div class="detail_board_content">
+                <img src="/board_img/{{ $image->img_address }}" alt="Board Image">
+            </div>    
+            @endforeach          
+            <br>
+            <div>
+                {!! $data->board_content !!}          
+            </div>                
+        </div>
+    </div>          
         <div class="detail-hashtag">
             @foreach($data->hashtags as $hashtag)
                 <span>{{ $hashtag->hashtag_name }}</span>
@@ -109,10 +108,10 @@
                             </form>    
                             
                             
-                            <form action="{{ route('commentreport', ['comment_id' => $comment->comment_id, 'u_id' => Auth::id()]) }}" method="POST"> 
+                            <form  action="{{ route('commentreport', ['comment_id' => $comment->comment_id, 'u_id' => Auth::id()]) }}" method="POST"> 
                                 @csrf  
                                 @if(Auth::id() !== $comment->u_id)    
-                                <button type="button" class="detail_comment-report-btn" onclick="openModals()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>                          
+                                <button type="button" class="detail_comment-report-btn comment_report_stance" onclick="openModals()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>                          
                                 <div id="myModalcomment" class="modal">
                                     <div class="comment_modal_content">            
                                         <p><input type="radio" name="values" value="1">                                        

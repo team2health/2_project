@@ -13,6 +13,7 @@ use App\Models\Pandemic;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Comment_report;
 use App\Models\Hashtag;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -333,7 +334,9 @@ $flg=$request->input('values');
      */
     public function update(Request $request, $board_id)
     {
+        Log::info('Request data:', $request->all());
         Log::debug($request);
+        Log::debug("6");
         // dd($request);
         if(!Auth::check()){
             return redirect()->route('login.get');
@@ -345,7 +348,9 @@ $flg=$request->input('values');
             'board_content' => $request->input('u_content'),
         ]);
         //$request에서 hashtag 파라미터의 존재 여부를 확인합니다.
-        //<input type="hidden" id="selectedHashtagsInput" name="hashtag" />        
+        //<input type="hidden" id="selectedHashtagsInput" name="hashtag" />   
+        Log::debug($request);
+        Log::debug("5");     
         if($request->hashtag) {
         // dd($request->hashtag);
         // 새로운 해시태그 추가 또는 기존 해시태그 갱신
@@ -365,7 +370,8 @@ $flg=$request->input('values');
         usort($hashtag_names, function($a, $b) {
             return strcmp($a[0], $b[0]);
         });
-
+Log::debug($request);
+Log::debug("4");
        foreach ($hashtag_names as $hashtag_name) {
         // dd($hashtag_names);
         // $hashtag_name에 해당하는 해시태그를 데이터베이스에서 찾거나 새로 생성합니다. 
@@ -381,8 +387,10 @@ $flg=$request->input('values');
         $result->hashtags()->sync($hashtagIds);
         
     }  
+     Log::debug($request);
+     Log::debug("3");
     if ($request->category_id) {
-        //  dd($request);
+         
         $newCategoryName = $request->input('category_id');
         
             $category = Category::where('category_name', $newCategoryName)->first();
@@ -390,53 +398,78 @@ $flg=$request->input('values');
                 $result->update(['category_id' => $category->category_id]);
             }
         
-    }    
-    
-    // Log::debug($request);
- 
-    if ($request->hasFile('selectFile')) {
-        $images = $request->file('selectFile');
-    //    Log::debug($images);  
-        foreach ($images as $image) {
-            $imageName = Str::uuid() . '.' . $image->extension();
-            $image->move(public_path('board_img'), $imageName);
+    }   
+    // 기존 이미지의 ID들을 배열로 저장
+$existingImageIdsToKeep = [];
 
-            // Save the image path to the Board_img model
-            $boardImage = new Board_img(['img_address' => $imageName]);
-            $result->images()->save($boardImage);
-        }
+// 현재 게시물에 이미지가 존재하는 경우에만 처리
+if ($result->images()->exists()) {
+    foreach ($result->images as $existingImage) {
+        // 기존 이미지의 ID를 배열에 추가
+        $existingImageIdsToKeep[] = $existingImage->board_img_id;
     }
-    // if ($request->has('imgUrl')) {
-    //     // Log::debug($request->has('imgUrl')); 
-    //     $imageIdToDelete = $request->input('imgUrl');    
-    //     $imageToDelete = Board_img::findOrFail($imageIdToDelete);    
-    //     $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-    //     if (File::exists($imagePath)) {
-    //         // 파일 시스템에서 이미지 삭제
-    //         unlink($imagePath);
+}
+
+// 새로운 이미지 업로드
+if ($request->hasFile('selectFile')) {
+    $images = $request->file('selectFile');
+    foreach ($images as $image) {
+        $imageName = Str::uuid() . '.' . $image->extension();
+        $image->move(public_path('board_img'), $imageName);
+
+        // 새로운 이미지를 Board_img 모델에 저장
+        $boardImage = new Board_img(['img_address' => $imageName]);
+        $result->images()->save($boardImage);
+    }
+}
+// dd($result);
+// 기존 이미지 중 교체된 이미지만 삭제
+$imagesToDelete = $result->images()->whereNotIn('board_img_id', $existingImageIdsToKeep)->get();
+// dd($imagesToDelete);
+foreach ($imagesToDelete as $imageToDelete) {
+    // 파일 시스템에서 이미지 삭제
+    $imagePath = public_path('board_img/' . $imageToDelete->img_address);
+    if (File::exists($imagePath)) {
+        unlink($imagePath);
+    }
+
+    // 데이터베이스에서 이미지 삭제
+    $imageToDelete->delete();
+}
+ 
+    
+    Log::debug($request);
+    Log::debug("2");
+    // if ($request->hasFile('selectFile')) {
+    //     $images = $request->file('selectFile');
+    // //    Log::debug($images);  
+    //     foreach ($images as $image) {
+    //         $imageName = Str::uuid() . '.' . $image->extension();
+    //         $image->move(public_path('board_img'), $imageName);
+
+    //         // Save the image path to the Board_img model
+    //         $boardImage = new Board_img(['img_address' => $imageName]);
+    //         $result->images()->save($boardImage);
     //     }
-    //     // 모델에서 이미지 삭제
-    //     $imageToDelete->delete();
     // }
-    if ($request->has('imgUrl')) {
-        $imageIdToDelete = $request->input('imgUrl');
-    
-        try {
-            $imageToDelete = Board_img::findOrFail($imageIdToDelete);
-            $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-    
-            if (File::exists($imagePath)) {
-                // 파일 시스템에서 이미지 삭제
-                unlink($imagePath);
-            }
-    
-            // 모델에서 이미지 삭제
-            $imageToDelete->delete();
-        } catch (ModelNotFoundException $e) {
-            // 이미지를 찾지 못한 경우의 예외 처리
-            // 원하는 동작을 수행하거나 무시할 수 있습니다.
+    Log::debug($request);
+    Log::debug("1");
+    Log::info('Request data:', $request->all());
+    if ($request->imgUrl) {
+        // Log::debug($request->has('imgUrl')); 
+        $imageIdToDelete = $request->input('imgUrl');    
+        $imageToDelete = Board_img::findOrFail($imageIdToDelete);    
+        $imagePath = public_path('board_img/' . $imageToDelete->img_address);
+        if (File::exists($imagePath)) {
+            // 파일 시스템에서 이미지 삭제
+            unlink($imagePath);
         }
+        // 모델에서 이미지 삭제
+        $imageToDelete->delete();
     }
+    Log::debug($request);
+    Log::debug("1");
+    
 
 
     return redirect()->route('detail', ['board' => $result->board_id]);

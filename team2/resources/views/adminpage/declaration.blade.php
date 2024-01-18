@@ -21,10 +21,11 @@
             </div>
             <table class="table table-striped">
                 <colgroup>
+                    <col width="2%;">
                     <col width="3%;">
                     <col width="4%;">
                     <col width="20%;">
-                    <col width="32%;">
+                    <col width="30%;">
                     <col width="14%;">
                     <col width="10%;">
                     <col width="7%;">
@@ -33,6 +34,7 @@
                 </colgroup>
                 <thead>
                 <tr class="contesmanagement-tr">
+                    <th></th>
                     <th></th>
                     <th scope="col">#</th>
                     <th scope="col">게시글 제목</th>
@@ -44,9 +46,11 @@
                     <th scope="col">댓글수</th>
                 </tr>
                 </thead>
-                <tbody>
-                    @forelse ($data as $item)
+                <tbody id="setDeclarationUserProfile">
+                    @forelse ($data as $index => $item)
                         <tr>
+                            <input type="hidden" value="{{$index}}" id="setTr{{$item->board_id}}">
+                            <th><button style="border: none;" type="button" onclick="showDeclarationUser({{$item->board_id}}); return false;">▼</button></th>
                             <th><input type="checkbox" name="board_id[]" value="{{$item->board_id}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->board_id}}</th>
                             <td>{{Str::limit($item->board_title, 30, '...')}}</td>

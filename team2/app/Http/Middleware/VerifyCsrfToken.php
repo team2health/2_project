@@ -42,5 +42,6 @@ class VerifyCsrfToken extends Middleware
         '/admin/adminregist',
         '/emailchkgo',
         '/emailchkset',
+        '/admin/userdeclaration',
     ];
 }

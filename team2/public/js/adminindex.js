@@ -52,7 +52,7 @@ option = {
     trigger: 'item'
 	},
 legend: {
-    top: '5%',
+    top: 0,
     left: 'center'
 	},
 series: [

@@ -19,10 +19,10 @@
                     <table class="table table-striped">
                         <colgroup>
                             <col width="15%;">
-                            <col width="15%;">
-                            <col width="15%;">
-                            <col width="35%;">
                             <col width="20%;">
+                            <col width="25%;">
+                            <col width="25%;">
+                            <col width="10%;">
                         </colgroup>
                         <thead class="contesmanagement-tr">
                             <tr>
