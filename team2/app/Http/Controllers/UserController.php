@@ -13,6 +13,7 @@ use App\Models\Board_tag;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
+use Carbon\Carbon;
 
 
 
@@ -31,13 +32,12 @@ class UserController extends Controller
     }
     
     public function registpost(Request $request) {
-        Session::flush();        
-        if(!isset($request->agreement_flg)) {
-            return redirect()->route('regist.get')->with('agreement_Error', '1');
-        }
+        $session_email = session('email');
+        $now = Carbon::now();
+        $now_set = $now->format('Y-m-d H:i:s');
         $data = $request->only('user_email', 'user_name', 'user_password', 'user_address_num', 'user_address', 'user_address_detail', 'user_gender');
 
-        $user_email = $request->user_email;
+        $user_email = $session_email;
         $user_name = $request->user_name;
         $user_password = Hash::make($request->user_password);
         $user_address_num = $request->user_address_num;
@@ -57,10 +57,10 @@ class UserController extends Controller
             'user_address_detail' => $user_address_detail,
             'user_gender' => $user_gender,
             'agreement_flg' => $agreement_flg,
-            'email_verified_at' => '1',
+            'email_verified_at' => $now_set,
             'birthday' => $birthday,
         ]);
-
+        Session::flush();
         return redirect()->route('login.get');
     }
 

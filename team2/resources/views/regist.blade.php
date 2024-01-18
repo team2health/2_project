@@ -174,8 +174,8 @@
 
 			<p style="width: 60px;" class="ptag">이메일</p><span id="error_id" class="not-error-id">한글, 영문, 숫자로 4글자 이상 입력해주세요</span>
 			<div class="input-div-box">
-				<div id="setEmailDiv" class="email-chk-end"></div>
-				<input type="hidden" name="user_email" id="emailHiddenSet">
+				<div id="setEmailDiv" class="email-chk-end">{{ session('email') }}</div>
+				<input type="hidden" name="user_email" id="emailHiddenSet" value="{{ session('email') }}">
 				{{-- <input type="email" class="login-input-short" name="user_email" id="user_email">
 				<button type="button" class="input-check" onclick="checkId(); return false;">이메일 인증</button> --}}
 			{{-- @if (isset($idError))
