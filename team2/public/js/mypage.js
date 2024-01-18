@@ -884,8 +884,8 @@ function hashtagFirstCheck(data) {
 }
 
 function submitSearchHash() {
-    let noSearchData = document.getElementById('noSearchData');
     let searchHashResult = document.getElementById('searchHashResult');
+
     while (searchHashResult.firstChild) {
         searchHashResult.removeChild(searchHashResult.firstChild);
     }
@@ -901,26 +901,18 @@ function submitSearchHash() {
     .then(data => {
         console.log(data);
         if(data == 'nodata') {
-            // let creatediv = document.createElement('div');
-            // creatediv.innerHTML = '검색결과가 없습니다.'
-            // creatediv.id = 'noSearchData';
-            // creatediv.style.gridColumnStart = '1';
-            // creatediv.style.gridColumnEnd = '4';
-            // creatediv.style.backgroundColor = '#e0eaff';
-            // creatediv.style.width = '100%';
-            // creatediv.style.justifyContent = 'center';
-            // creatediv.style.alignItems = 'center';
+            let creatediv = document.createElement('div');
+            creatediv.innerHTML = '검색결과가 없습니다.'
+            creatediv.id = 'noSearchData';
+            creatediv.style.gridColumnStart = '1';
+            creatediv.style.gridColumnEnd = '4';
+            creatediv.style.backgroundColor = '#e0eaff';
+            creatediv.style.width = '100%';
+            creatediv.style.justifyContent = 'center';
+            creatediv.style.alignItems = 'center';
 
-            // searchHashResult.appendChild(creatediv);
-
-
-            noSearchData.style.display = '';
-            
+            searchHashResult.appendChild(creatediv);
         } else {
-
-            // let noSearchData = document.getElementById('noSearchData');
-            noSearchData.style.display = 'none';
-
             for (let i = 0; i < data.length; i++) {
                 let hashtagdiv = document.createElement('div');
                 let hashspan = document.createElement('span');

@@ -13,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Models\Board_tag;
+use App\Models\Hashtag;
 
 class MypageController extends Controller
 {
@@ -436,25 +437,23 @@ class MypageController extends Controller
     }
     public function hashtagsearch(Request $request) {
 
-
         $id = session('id');
         $result = trim($request->hashsearch);
-        Log::debug($id);
-        Log::debug($result);
-        $hashget = DB::table('hashtags')
-        ->select('hashtags.hashtag_id','hashtags.hashtag_name')
-        ->join('favorite_tags', 'favorite_tags.hashtag_id', 'hashtags.hashtag_id')
-        ->where('hashtags.hashtag_name','like', '%'.$result.'%')
-        ->whereRaw('hashtags.hashtag_id NOT IN 
-        (SELECT favorite_tags.hashtag_id FROM favorite_tags 
-        WHERE favorite_tags.deleted_at is null AND favorite_tags.u_id = ?)', [$id])
-        ->orderby('hashtags.hashtag_id','asc')
-        ->distinct()
-        ->get();
-        Log::debug($hashget);
 
-        if(count($hashget) > 0){
-            return response()->json($hashget);
+        $hashtag = DB::table('hashtags as has')
+        ->select('has.hashtag_id', 'has.hashtag_name')
+        ->whereNotExists(function ($query) use ($id) {
+            $query->select(DB::raw(1))
+                ->from('favorite_tags as fat')
+                ->where('fat.u_id', '=', $id)
+                ->whereRaw('has.hashtag_id = fat.hashtag_id')
+                ->whereNull('fat.deleted_at');
+        })
+        ->where('has.hashtag_name', 'like', '%'.$result.'%')
+        ->get();
+
+        if(count($hashtag)>0){
+            return response()->json($hashtag);
         } else {
             return response()->json('nodata');
         }

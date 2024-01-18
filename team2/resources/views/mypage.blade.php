@@ -226,8 +226,7 @@
                         <input type="hidden" value="{{$hashtag_search}}" id="hashtagSearch">
                     @endif
                     <div id="searchHashResult" class="mypage-hashtag">
-                        <div id="noSearchData" style="display: none; grid-column-start:1; grid-column-end: 4;
-                        background-color: #e0eaff; width:100%; justify-content: center; align-items: center;">검색결과가 없습니다.</div>
+                        <div id="noSearchData" style="display: none; grid-column-start:1; grid-column-end: 4; background-color: #e0eaff; width:100%; justify-content: center; align-items: center;">검색결과가 없습니다.</div>
                     </div>
                     <div id="mypageCanGetAllTag" class="mypage-can-get-all-tag">
                         <div class="mypage-can-get-all-tag-msg">
