@@ -158,8 +158,8 @@
 				<div class="hospitalSearch" onclick="mapopen(); return false;">주위 병원 찾기</div>
 				<input type="hidden" name="hospitalGo" id="hospitalGo">
 			</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
-		<br><br><br><br><br><br><br><br><br>
 		<div style="color: #2C2B71" class="text-center bc-purple" id="hospitalContainer">
 			<br>
 			<div id="map" style="height:500px;"></div>

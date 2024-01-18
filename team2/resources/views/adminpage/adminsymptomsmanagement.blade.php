@@ -18,20 +18,18 @@
                 @method('DELETE')                              
                 <table class="table table-striped">
                     <colgroup>
-                        <col width="25%;">                        
+                        <col width="15%;">                        
+                        <col width="15%;">
+                        <col width="35%;">
                         <col width="25%;">
-                        <col width="25%;">
-                        <col width="25%;">
-                        
-                                               
                     </colgroup>
                     <thead class="contesmanagement-tr">
                         <tr>
                             
+                            <th scope="col">증상삭제</th>
                             <th scope="col">증상번호</th>
                             <th scope="col">증상부위</th>
                             <th scope="col">증상이름</th>
-                            <th scope="col">증상삭제</th>
 
                             
                             
@@ -40,10 +38,10 @@
                     <tbody>
                         @forelse ($data as $item)
                         <tr>                            
+                            <td><input type="checkbox" name="id[]" value="{{ $item->symptom_id}}"></td>
                             <th scope="row">{{$item->symptom_id}}</th>
                             <td>{{$item->part_name}}</td>                            
                             <td>{{$item->symptom_name}}</td>
-                            <td><input type="checkbox" name="id[]" value="{{ $item->symptom_id}}"></td>
                         </tr>
                             @empty
                             <tr>
