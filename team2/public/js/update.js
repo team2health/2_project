@@ -1,18 +1,29 @@
-let previousFile = '';
-let test = '';
-
-function openFile(fileInputId) {
+let IMGDELETE = [];
+let cnt = 0;
+function openFile(fileInputId,imageId) {
     document.getElementById(fileInputId).click();
-
-    previousFile = '';
-    test = '';
-    console.log(fileInputId);
-    test = fileInputId.replace('file', 'preview');
-    let test1 = document.getElementById(test);
-    let previousFile = test1.src;
-    let fileName = previousFile.match(/\/([^\/]+)$/)[1];
-    console.log(fileName);
+    var changeimage=document.getElementById(`preview${imageId}`);
+    if (changeimage) {
+        changeimage.parentNode.removeChild(changeimage);
+    }
+    IMGDELETE[cnt] = imageId;
+    cnt++;
+    document.getElementById('inputHiddenImgUrl').value = IMGDELETE;
+        
 }
+
+// let previousFile = '';
+// let test = '';
+
+// function openFile(fileInputId) {
+//     document.getElementById(fileInputId).click();
+//     console.log(fileInputId);
+//     test = fileInputId.replace('file', 'preview');
+//     let test1 = document.getElementById(test);
+//     let previousFile = test1.src;
+//     let fileName = previousFile.match(/\/([^\/]+)$/)[1];
+//     console.log(fileName);
+// }
 
 // 
 function previewImage(inputId, previewId) {
@@ -44,12 +55,12 @@ function previewImage(inputId, previewId) {
 //     }
 // }
 
-let IMGDELETE = [];
-let cnt = 0;
+
 
 function removeImage(imageId) {
     // 삭제하려는 이미지의 부모 요소를 찾아서 삭제
     var imageContainer = document.getElementById(`preview${imageId}`);
+    console.log(imageContainer);
     
     if (imageContainer) {
         // 이미지를 감싸는 부모 요소를 찾기
