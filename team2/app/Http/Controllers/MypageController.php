@@ -436,17 +436,22 @@ class MypageController extends Controller
     }
     public function hashtagsearch(Request $request) {
 
+
         $id = session('id');
         $result = trim($request->hashsearch);
+        Log::debug($id);
+        Log::debug($result);
         $hashget = DB::table('hashtags')
         ->select('hashtags.hashtag_id','hashtags.hashtag_name')
         ->join('favorite_tags', 'favorite_tags.hashtag_id', 'hashtags.hashtag_id')
         ->where('hashtags.hashtag_name','like', '%'.$result.'%')
         ->whereRaw('hashtags.hashtag_id NOT IN 
-        (SELECT favorite_tags.hashtag_id FROM favorite_tags WHERE favorite_tags.deleted_at is null AND favorite_tags.u_id = ?)', [$id])
+        (SELECT favorite_tags.hashtag_id FROM favorite_tags 
+        WHERE favorite_tags.deleted_at is null AND favorite_tags.u_id = ?)', [$id])
         ->orderby('hashtags.hashtag_id','asc')
         ->distinct()
         ->get();
+        Log::debug($hashget);
 
         if(count($hashget) > 0){
             return response()->json($hashget);
@@ -456,6 +461,24 @@ class MypageController extends Controller
     }
     public function seeyouagainget() {
         return view('byebye');
+    }
+
+    public function hashtagcheck(Request $request ) {
+
+        $id = session('id');
+        $hashtag = trim($request->hashsearch);
+        $result = Favorite_tag::select('favorite_tags.hashtag_id')
+        ->join('hashtags', 'hashtags.hashtag_id', '=', 'favorite_tags.hashtag_id')
+        ->where('hashtags.hashtag_id', $hashtag)
+        ->where('favorite_tags.u_id', $id)
+        ->whereNull('favorite_tags.deleted_at')
+        ->get();
+
+        if(count($result) > 0) {
+            return response()->json('1');
+        } else {
+            return response()->json('2');
+        }
     }
 
 }
