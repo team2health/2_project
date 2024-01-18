@@ -55,17 +55,19 @@ a:hover {
 
 /* admin 접속 전 로그인 화면 */
 .adminlogin-maindiv {
-    display: grid;
+    display: flex;
     width: 100vw;
-    justify-content: center;
     align-items: center;
 }
 .adminlogin-form {
-    width: 500px;
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
     height: 500px;
-    margin-top: 200px;
+    max-width: 500px;
+    flex-direction: column;
+    justify-content: center;
 }
-
 
 /* 콘텐츠 관리 페이지 테이블 */
 .contentsmanagement-board-btn-zone {
@@ -445,8 +447,11 @@ a:hover {
 /* 관리자페이지 로그인 */
 @media only screen and (max-width: 1000px) {
     .adminlogin-form {
-        width: 100%;
+        display: flex;
+        width: 90%;
+        margin: 0 auto;
         height: 500px;
-        margin-top: 200px;
+        flex-direction: column;
+        justify-content: center;
     }
 }

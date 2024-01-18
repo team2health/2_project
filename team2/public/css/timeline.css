@@ -12,8 +12,10 @@
     margin-top: 100px;
 }
 .mypage-first {
-    display: grid;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
     position: relative;
 }
 
@@ -100,7 +102,13 @@ td {
     cursor: pointer;
     text-align: center;
     display: inline-block;
+    border: 3px solid #ffa459;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     /* position: relative; */
+}
+.calendarBtn:hover {
+    background-color: rgb(255, 255, 245);
 }
 .mypage-second {
     display: inline-block;
@@ -177,7 +185,7 @@ td {
 }
 .datebardayselect {
     background-color: rgba(247, 233, 193, 0.3);
-    color: rgb(89, 0, 223);
+    color: rgb(138, 160, 228);
     font-weight: 900;
 }
 .datebartoday {
@@ -192,13 +200,10 @@ td {
         overflow: hidden;
     }
     .mypage-second {
-        width: 100%;
+        width: 90%;
     }
     .mypage-first {
-        display: flex;
         position: relative;
-        align-items: stretch;
-        justify-content: center;
     }
     /* 스크롤바 삭제 */
     .mypage-second::-webkit-scrollbar{
@@ -620,11 +625,11 @@ td {
 /* 유저 정보 수정창 */
 
 .user-info-modify {
-    margin: auto;
-    width: 98%;
     margin: 15px auto;
-    display: grid;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 500px;
     margin-top: 50px;
 }
 .profile-photo-btn {
@@ -648,7 +653,6 @@ td {
     margin: 15px 0 10px 13px;
     display: inline-block;
     margin-top: 30px;
-    font-size: 1.1rem;
 }
 .user-info-modify .user-info-btn {
     color: #000000;
@@ -870,8 +874,7 @@ td {
 .mypage-hashtag {
     margin: 0 auto;
     display: grid;
-    flex-wrap: wrap;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(7, 1fr);
     margin-bottom: 50px;
     justify-items: center;
 }
@@ -908,13 +911,6 @@ td {
         display: none;
     }
 }
-@media screen and (max-width: 800px) {
-    .mypage-third {
-        margin-bottom: 100px;
-        width: 100%;
-        min-width: 380px;
-    }
-}
 
 @media screen and (max-width: 1000px) {
     .mypagegohome {
@@ -937,4 +933,18 @@ td {
     , .mypage-content, .mypage-comment-show-btn {
         display: none;
     }
+    .mypage-hashtag {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+@media screen and (max-width: 800px) {
+    .mypage-third {
+        margin-bottom: 100px;
+        width: 100%;
+        min-width: 380px;
+    }
+    .mypage-hashtag {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
 }

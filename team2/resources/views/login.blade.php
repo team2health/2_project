@@ -15,7 +15,7 @@
 				<button type="button" class="login-button" onkeyup= "enterkey() return false" onclick="logingo(); return false;" id="loginBtn">로그인</button>
 				<br>
 				<div class="display-flex lr-text">
-					<a href="">비밀번호 찾기</a>
+					<a href=""></a>
 					<a href="/regist">회원가입</a>
 				</div>
 			</form>

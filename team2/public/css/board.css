@@ -22,7 +22,7 @@
 .last_container {
     
     margin: 10px;
-    border: 3px solid rgba(128, 128, 128, 0.369);
+    border: 1px solid rgb(57 57 57 / 50%);
     border-radius: 5px;
     
 }
@@ -35,7 +35,7 @@
 .last_user{
     display: grid;
     grid-template-columns:60px 1fr;    
-    margin: 10px;
+    margin: 25px;
     align-items: center;
 }
 .last-board-title {
@@ -44,7 +44,7 @@
     grid-column-start: 1;
     grid-column-end: 3;
     display: inline-block;
-    margin: 10px 0;
+    margin: 5px 0 15px 10px;
     display: flex;
     justify-content: space-between;
 }
@@ -53,7 +53,8 @@
     font-weight: normal;
     display: inline-block;
     float: right;
-    margin-right: 10px
+    margin-right: 10px;
+    margin-top: 7px;
 }
 .last-board-title p {
     display: inline-block;
@@ -150,9 +151,10 @@ textarea{
 
 .detail_container{
     border-radius: 10px;
-    border: 3px solid rgba(128, 128, 128, 0.369);
+    border: 2px solid rgba(128, 128, 128, 0.4);
     border-radius: 5px;
-    margin: 25px 0px ;
+    margin: 25px 0px 10px 0px;
+    padding: 10px;
 }
 
 
@@ -209,14 +211,16 @@ textarea{
     width: 100%;
 }
 .detail-hashtag {
-    margin-left: 10px;
+    margin: 0 0 10px 20px;
 }
 .detail-hashtag > span{
     border-radius: 5px;
-    padding: 3px 7px;
-    background-color: #e0e0e0;
+    padding: 7px 7px 3px 7px;
+    background-color: #f0f0f0;
     margin-bottom: 5px;
     display: inline-block;
+    font-family: 'GangwonEdu_OTFBoldA';
+    font-size: 1.2rem;
 }
 
 .board_created_at {
@@ -225,12 +229,12 @@ textarea{
 }
 
 .detail_content{
-    border: 2px solid rgba(128, 128, 128, 0.230);
+    border: 1.8px solid rgba(128, 128, 128, 0.4);
     min-height: 300px;
     grid-column-start: 1;
     grid-column-end: 3;
     margin: 10px 0;
-    padding-left: 15px;
+    padding: 10px;
 }
 .detail_content img{
     width: 100%;
@@ -244,6 +248,7 @@ textarea{
 }
 .comment_bottom{
     border-bottom: 1px solid black;
+    margin-top: 50px;
 }
 .detail_comment_insert{
     margin: 25px 0;
@@ -471,6 +476,7 @@ li{
     overflow-x: scroll;
     scroll-snap-type: x mandatory; 
     gap: 15px;
+    margin-bottom: 80px;
 }
 
 .slide {
@@ -551,7 +557,7 @@ li{
     margin: 0 10px 6px 10px;
     overflow: hidden;
     max-height: 62px;
-    color: #A7A7A7;
+    color: #5a5a5a;
     /* width: 200px; */
     font-size: 0.9rem;
 }
@@ -572,7 +578,7 @@ li{
     width: 60vW;   
     overflow-x: scroll;
     scroll-snap-type: x mandatory;  
-    margin-bottom: 30px;
+    margin-bottom: 80px;
 }
 .favorite_slider {
     display: flex;
@@ -593,7 +599,8 @@ li{
     background-color: #FFF0E6;
     margin: 20px 0 5px 0;
     border-radius: 20%;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    font-family: 'GangwonEdu_OTFBoldA';
 }
 /* .slider-container::-webkit-scrollbar {
     width: 12px; 
@@ -640,6 +647,9 @@ li{
     max-height: 6em;      
     white-space: normal;
     margin: auto 20px;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-family: 'GangwonEdu_OTFBoldA';
 }
 .community_bottom{
     display: flex;
@@ -687,7 +697,7 @@ li{
     border: 2px solid #E8E8E8;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 77% 1fr;
+    grid-template-columns: 77% 23%;
     grid-template-rows: 25px 125px;
     box-sizing: content-box;
 }
@@ -720,7 +730,7 @@ li{
     /* height: 25px; */
     overflow: hidden;
     grid-column-start: 1;
-    grid-column-end: 3;
+    /* grid-column-end: 3; */
 }
 .bordergo-hover a:hover {
     background-color:  rgba(245, 241, 238, 0.6);
@@ -775,6 +785,8 @@ a .a-bordergo-hover:hover {
     background-color: #FFF0E6;
     margin: 5px 0;
     border-radius: 20%;
+    font-family: 'GangwonEdu_OTFBoldA';
+    font-size: 1.3rem;
 }
 
 .community_aplus{
@@ -954,6 +966,7 @@ a .a-bordergo-hover:hover {
     margin-left: 10px;
     color: #888;
     display: inline-block;
+    margin: 10px 0 0 20px;
 }
 
 .detail-board-name {
@@ -1000,6 +1013,7 @@ a .a-bordergo-hover:hover {
 
 /* ---------------------------- */
 .community-home-board-img-span {
+    position: relative;
     float: right;
     grid-column-start: 2;
     grid-row-start: 2;
@@ -1199,7 +1213,6 @@ a .a-bordergo-hover:hover {
         font-size: 0.8rem;
         font-weight: normal;
         display: inline-block;
-        float: right;
         margin-right: 10px;
     }
     .detail-board-created {
@@ -1207,6 +1220,7 @@ a .a-bordergo-hover:hover {
         margin-left: 10px;
         color: #888;
         display: inline-block;
+        margin: 10px 0 0 20px;
     }
     .pagination a, .pagination span {
         display: inline-block;
@@ -1224,9 +1238,10 @@ a .a-bordergo-hover:hover {
         height: 160px;
         border: 2px solid #E8E8E8;
         display: grid;
-        grid-template-columns: 75% 15%;
+        grid-template-columns: 70% 30%;
         grid-template-rows: 25px 90px;
         box-sizing: border-box;
+        overflow: hidden;
     }
     
     .community-main-container {

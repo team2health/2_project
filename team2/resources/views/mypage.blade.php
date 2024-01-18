@@ -63,6 +63,7 @@
                     <div id="mypageContent2">
                         <form action="/userinfoupdate" class="user-info-modify" method="POST" enctype="multipart/form-data">
                             @csrf
+                                <h2>가입 정보</h2>
                                 <label class="mypage-info-label">아이디</label>
                                 <div class="user-now-address">{{$user_info[0]->user_email}}</div>
                                 <label class="mypage-info-label">우편번호</label>
@@ -74,7 +75,9 @@
                                 {{-- 선 --}}
                                 <div class="mypage-gap mypage-display-none" id="mypageGap2"></div>
 
-                                <label class="mypage-info-label">주소 변경</label>
+                                <h2>주소 변경</h2>
+                                <br>
+                                {{-- <label class="mypage-info-label">주소 변경</label> --}}
                                 <div class="adress-box">
                                     <div class="adressbox_boxa">
                                         <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" name="user_address_num" readonly>

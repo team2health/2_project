@@ -434,8 +434,8 @@ firstTab.addEventListener('click', function () {
                 element.classList.remove('tab-show');
 
             });
-        firstTab.classList.add('active');
-        secondTab.classList.remove('active');
+        firstTab.classList.add('timeline-active');
+        secondTab.classList.remove('timeline-active');
         tabflg = 1;
     } 
 })
@@ -450,8 +450,8 @@ secondTab.addEventListener('click', function () {
                 // element.style.display = 'none';
                 element.classList.remove('tab-show');
             });
-        firstTab.classList.remove('active');
-        secondTab.classList.add('active');
+        firstTab.classList.remove('timeline-active');
+        secondTab.classList.add('timeline-active');
         tabflg = 2;
     }
 })
