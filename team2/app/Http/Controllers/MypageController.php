@@ -177,7 +177,7 @@ class MypageController extends Controller
         ->select(
             'hashtags.hashtag_id'
             ,'hashtags.hashtag_name'
-        );
+        )->where('hashtags.deleted_at', null);
         
         if( isset($result2)) {
             $hashtag->whereNotIn('hashtags.hashtag_id', $result2);
@@ -378,7 +378,7 @@ class MypageController extends Controller
             'user_img' => $user_info[0]->user_img]);
 
 
-            return view('mypage')
+            return redirect()->route('mypage.get')
             ->with('data', $board_result)
             ->with('user_hashtag', $user_hashtag)
             ->with('user_info', $user_info)

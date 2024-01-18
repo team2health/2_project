@@ -1,5 +1,17 @@
+let previousFile = '';
+let test = '';
+
 function openFile(fileInputId) {
     document.getElementById(fileInputId).click();
+
+    previousFile = '';
+    test = '';
+    console.log(fileInputId);
+    test = fileInputId.replace('file', 'preview');
+    let test1 = document.getElementById(test);
+    let previousFile = test1.src;
+    let fileName = previousFile.match(/\/([^\/]+)$/)[1];
+    console.log(fileName);
 }
 
 // 
