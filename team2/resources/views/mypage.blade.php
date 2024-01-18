@@ -76,8 +76,10 @@
 
                                 <label class="mypage-info-label">주소 변경</label>
                                 <div class="adress-box">
-                                    <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" name="user_address_num" readonly>
-                                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="mypage-btn"><br>
+                                    <div class="adressbox_boxa">
+                                        <input class="adress-box-a" type="text" id="sample4_postcode" placeholder="우편번호" name="user_address_num" readonly>
+                                        <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="mypage-btn">
+                                    </div>
                                     <span id="guide" style="color:#999;display:none"></span>
                                     <input class="adress-box-b" type="text" id="sample4_roadAddress" name="user_address" placeholder="도로명주소" readonly>
                                     <br>

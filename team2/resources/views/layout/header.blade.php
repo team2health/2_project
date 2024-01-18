@@ -3,7 +3,7 @@
 	<div class="header-community-container1" id="headerMainDiv"><a href="/" class="header-main-go">main으로 이동</a></div>
 	@else
 	<div class="header-community-container" id="headerMainDiv">
-		@if ((request()->path() === '/') || (request()->path() === 'timeline') || (request()->path() === 'mypage'))
+		@if ((request()->path() === '/') || (request()->path() === 'timeline') || (request()->path() === 'firstchkpassword') || (request()->path() === 'mypage'))
 			<div class="header-community-container-mini2" id="headerThirdDiv">
 		@endif
 		@if ((request()->path() === 'lastboard') || (request()->path() === 'favoriteboard') || (request()->path() === 'hotboard')
@@ -27,7 +27,7 @@
 				@else
 					<a class="header-btn1" id="headerComunityHome" href="{{route('board.index')}}" class="header-community-nav">커뮤니티</a>
 				@endif
-					@if ((request()->path() === '/') || (request()->path() === 'timeline') || (request()->path() === 'mypage'))
+					@if ((request()->path() === '/') || (request()->path() === 'timeline') || (request()->path() === 'firstchkpassword') || (request()->path() === 'mypage'))
 						
 					@else
 						<a class="header-btn1 cate_btn header-community-nav" onclick="toggleDropdown(); return false;" id="headerCategory">카테고리</a>

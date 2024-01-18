@@ -31,6 +31,7 @@
         </div>
     </form>
 </div>
+<br><br><br><br><br><br><br><br>
 
 <script src="/js/passwordchange.js"></script>
 @endsection
