@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Board_report;
+use App\Models\Comment_report;
 
 class ContentsadminController extends Controller
 {
@@ -179,22 +180,23 @@ class ContentsadminController extends Controller
     ->orderBy('total', 'desc')
     ->paginate(10);
 
-        // $cnt = 0;
-    // foreach ($data as $item) {
-    //     // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
-    //     $result[$cnt]['board_id']
-    //     = Board_report::join('users','board_reports.u_id', 'users.id')
-    //     ->select(
-    //     'users.user_name'
-    //     , 'users.user_email'
-    //     , 'board_reports.board_reason_flg'
-    //     ,  DB::raw('DATE_FORMAT(board_reports.created_at, "%Y-%m-%d") as created_at')
-    //     )
-    //     ->where('board_reports.board_id', $item->board_id)
-    //     ->orderby('board_reports.created_at', 'desc')
-    //     ->get();
-    //     $cnt++;
-    // }
+    $cnt = 0;
+    foreach ($data as $item) {
+        // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+        $item->user
+        = Board_report::join('users','board_reports.u_id', 'users.id')
+        ->select(
+        'users.user_name'
+        , 'users.user_email'
+        , 'board_reports.board_reason_flg'
+        ,  DB::raw('DATE_FORMAT(board_reports.created_at, "%Y-%m-%d") as created_at')
+        )
+        ->where('board_reports.board_id', $item->board_id)
+        ->where('board_report_complete', '0')
+        ->orderby('board_reports.created_at', 'desc')
+        ->get();
+        $cnt++;
+    }
 
 
     return view('adminpage.declaration')->with('data', $data);
@@ -340,6 +342,24 @@ class ContentsadminController extends Controller
             , 'users.user_name')
         ->orderby('comments.created_at', 'desc')
         ->paginate(10);
+
+        $cnt = 0;
+        foreach ($comment as $item) {
+            // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
+            $item->user
+            = Comment_report::join('users','comment_reports.u_id', 'users.id')
+            ->select(
+            'users.user_name'
+            , 'users.user_email'
+            , 'comment_reports.comment_reason_flg'
+            ,  DB::raw('DATE_FORMAT(comment_reports.created_at, "%Y-%m-%d") as created_at')
+            )
+            ->where('comment_reports.comment_id', $item->comment_id)
+            ->where('comment_report_complete', '0')
+            ->orderby('comment_reports.created_at', 'desc')
+            ->get();
+            $cnt++;
+        }
 
         return view('adminpage.declarationcomment')->with('comment', $comment);
     }

@@ -19,15 +19,15 @@
                 <button type="button" class="admin-custom-btn custom-common-btn" style="width: 160px;" onclick="setDeclarationflg(); return false;"> 신고 횟수 초기화 </button>
                 <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="deleteDeclaration(); return false;">삭제</button>
             </div>
-            <table class="table table-striped">
+            <table class="table">
                 <colgroup>
                     <col width="2%;">
                     <col width="3%;">
                     <col width="4%;">
                     <col width="20%;">
                     <col width="30%;">
-                    <col width="14%;">
-                    <col width="10%;">
+                    <col width="16%;">
+                    <col width="8%;">
                     <col width="7%;">
                     <col width="5%;">
                     <col width="5%;">
@@ -48,12 +48,11 @@
                 </thead>
                 <tbody id="setDeclarationUserProfile">
                     @forelse ($data as $index => $item)
-                        <tr>
-                            <input type="hidden" value="{{$index}}" id="setTr{{$item->board_id}}">
+                        <tr id="setTr{{$item->board_id}}">
                             <th><button style="border: none;" type="button" onclick="showDeclarationUser({{$item->board_id}}); return false;">▼</button></th>
                             <th><input type="checkbox" name="board_id[]" value="{{$item->board_id}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->board_id}}</th>
-                            <td>{{Str::limit($item->board_title, 25, '...')}}</td>
+                            <td>{{Str::limit($item->board_title, 30, '...')}}</td>
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 40, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
@@ -61,6 +60,15 @@
                             <td>{{$item->board_hits}}</td>
                             <td>{{$item->commenttotal}}</td>
                         </tr>
+                        @foreach ($item->user as $user)
+                            <tr style="background-color:rgb(231, 231, 231); display:none;" id="childrenTr{{$item->board_id}}">
+                                <td>{{ $loop->iteration }} </td>
+                                <td colspan="2">{{$user->user_name}}</td>
+                                <td>{{$user->user_email}}</td>
+                                <td colspan="2" class="user-board-reason-flg">{{$user->board_reason_flg}}</td>
+                                <td colspan="4">{{$user->created_at}}</td>
+                            </tr>
+                        @endforeach
                     @empty
                     @endforelse
 

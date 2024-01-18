@@ -24,41 +24,53 @@
                 <button type="button" class="admin-custom-btn custom-common-btn" style="width: 160px;" onclick="SetCommentFlg(); return false;"> 신고 횟수 초기화 </button>
                 <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="deleteDeclarationComment(); return false;">삭제</button>
             </div>
-            <table class="table table-striped">
+            <table class="table">
                 <colgroup>
                     <col width="3%;">
+                    <col width="3%;">
                     <col width="5%;">
-                    <col width="15%">
-                    <col width="30%">
+                    <col width="18%">
+                    <col width="27%">
                     <col width="15%;">
                     <col width="7%;">
-                    <col width="10%;">
                     <col width="6%;">
+                    <col width="7%;">
                 </colgroup>
                 <thead>
                 <tr class="contesmanagement-tr">
+                    <th></th>
                     <th></th>
                     <th scope="col">#</th>
                     <th scope="col">게시글 제목</th>
                     <th scope="col">댓글 내용</th>
                     <th scope="col">댓글 작성일</th>
                     <th scope="col">작성자</th>
-                    <th scope="col">작성자 닉네임</th>
+                    <th scope="col">작성자</th>
                     <th scope="col">신고 횟수</th>
                 </tr>
                 </thead>
                 <tbody>
                     @forelse ($comment as $index => $item)
-                        <tr>
+                        <tr id="setCommentTr{{$item->comment_id}}">
+                            <th><button style="border: none;" type="button" onclick="showCommentDeclarationUser({{$item->comment_id}}); return false;">▼</button></th>
                             <th><input type="checkbox" name="comment_id[]" value="{{$item->comment_id}}" id="commentChkBox{{$index}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->comment_id}}</th>
-                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_title, 20, '...')}}</a></td>
+                            <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_title, 30, '...')}}</a></td>
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->comment_content, 50, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
                             <td>{{$item->user_name}}</td>
                             <td>{{$item->total}}</td>
                         </tr>
+                        @foreach ($item->user as $user)
+                        <tr style="background-color:rgb(231, 231, 231); display:none;" id="childrenCommentTr{{$item->comment_id}}">
+                            <td>{{ $loop->iteration }} </td>
+                            <td colspan="2">{{$user->user_name}}</td>
+                            <td>{{$user->user_email}}</td>
+                            <td colspan="2" class="user-board-reason-flg">{{$user->comment_reason_flg}}</td>
+                            <td colspan="4">{{$user->created_at}}</td>
+                        </tr>
+                        @endforeach
                     @empty
                     @endforelse
 

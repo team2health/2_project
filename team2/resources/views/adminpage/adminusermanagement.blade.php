@@ -18,29 +18,29 @@
                     @method('DELETE')
                     <table class="table table-striped">
                         <colgroup>
+                            <col width="10%;">
                             <col width="15%;">
                             <col width="20%;">
                             <col width="25%;">
                             <col width="25%;">
-                            <col width="10%;">
                         </colgroup>
                         <thead class="contesmanagement-tr">
                             <tr>
+                                <th scope="col">영구강퇴</th>
                                 <th scope="col">가입순서</th>
                                 <th scope="col">USER_name</th>
                                 <th scope="col">u_email</th>
                                 <th scope="col">생성날짜</th>
-                                <th scope="col">영구강퇴</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($data as $item)
                                 <tr>
+                                    <td><input type="checkbox" name="id[]" value="{{ $item->id }}"></td>
                                     <th scope="row">{{ $item->id }}</th>
                                     <td>{{ $item->user_name }}</td>
                                     <td>{{ $item->user_email }}</td>
                                     <td>{{ $item->created_at }}</td>
-                                    <td><input type="checkbox" name="id[]" value="{{ $item->id }}"></td>
                                 </tr>
                             @empty
                                 <tr>
