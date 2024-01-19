@@ -10,7 +10,6 @@
     <div class="block-mypage">로그인 후 이용가능합니다.</div>
     @endguest
     <div class="mypage-first">
-        <img src="/img/calendar.png" alt="" style="width: 60px; height:60px;">
         <div class="calendarBtn" id="calendarBtn" onclick="calendarshow(); return false;"></div>
         <div class="maincalendar calendarNone" id="calendarOpen">
             <table class="Calendar">
