@@ -35,7 +35,7 @@
 .last_user{
     display: grid;
     grid-template-columns:60px 1fr;    
-    margin: 25px;
+    margin: 10px;
     align-items: center;
 }
 .last-board-title {
@@ -90,8 +90,7 @@ textarea{
     padding: 20px;
 }
 .comment_content{
-    width: 89%;  
-    height: 80px;
+    width: 89%;
 }
 .comment_content:focus {
     outline: none;
