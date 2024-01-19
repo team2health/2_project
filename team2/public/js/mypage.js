@@ -295,6 +295,8 @@ let namechkflg = 0;
 NAMEINFOBTN.style.visibility = 'hidden';
 
 nameChk.addEventListener('input', function() {
+    namechkflg = 0;
+
     if(nameinput === 0) {
         nameinput = 1;
         NAMEINFOBTN.style.visibility = 'visible';
@@ -304,6 +306,7 @@ nameChk.addEventListener('input', function() {
         nameinput = 0;
         NAMEINFOBTN.style.visibility = 'hidden';
     }
+
 });
 
 function nameChange() {

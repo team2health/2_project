@@ -134,7 +134,6 @@ Route::post('/admin/deletedcontentsort', [ContentsadminController::class, 'delet
 Route::post('/admin/temporarilydelete', [ContentsadminController::class, 'temporarilydelete'])->name('temporarilydelete.post');
 Route::post('/admin/deletedeclarationboard', [ContentsadminController::class, 'deletedeclarationboard'])->name('deletedeclarationboard.post');
 Route::post('/admin/userdeclaration', [ContentsadminController::class, 'userdeclaration'])->name('userdeclaration.post');
-Route::post('/admin/restoreboard', [ContentsadminController::class, 'deletedeclarationboard'])->name('deletedeclarationboard.post');
 Route::post('/admin/boardsoftdelete', [ContentsadminController::class, 'boardsoftdelete'])->name('boardsoftdelete.post');
 Route::post('/admin/boardsetshow', [ContentsadminController::class, 'boardsetshow'])->name('boardsetshow.post');
 Route::post('/admin/admindeletecomment', [ContentsadminController::class, 'admindeletecomment'])->name('admindeletecomment.post');

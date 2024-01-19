@@ -82,6 +82,7 @@ let regex = /^[가-힣a-zA-Z0-9]{2,}$/;
 let regex2 = /^[가-힣a-zA-Z0-9]{4,}$/;
 
 USERNAME.addEventListener('input', function() {
+    namechkflg = 0;
     const value = USERNAME.value;
 
 	inputCheckBtn[0].disabled = false;
