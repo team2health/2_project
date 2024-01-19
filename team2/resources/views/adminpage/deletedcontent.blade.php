@@ -12,8 +12,8 @@
                     <div>
                         <div class="admin-custom-btn custom-common-btn" id="contentsmanagementSearchAlign">정렬</div>
                         <div class="contentsmanagement-search-align admin-display-none" id="contentsmanagementSearchAlignDiv">
-                            <div class="alignValueSet" id="alignValueSet">오래된순</div>
-                            <div class="alignValueSet" id="alignValueSet2">최신순</div>
+                            <div class="alignValueSet" id="alignValueSet3">오래된순</div>
+                            <div class="alignValueSet" id="alignValueSet4">최신순</div>
                             <input type="hidden" name="sort" id="sortValue">
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             <th scope="col">카테고리</th>
                             <th scope="col">제목</th>
                             <th scope="col">내용</th>
-                            <th scope="col">작성날짜</th>
+                            <th scope="col">삭제날짜</th>
                             <th scope="col">작성자</th>
                             <th scope="col">조회수</th>
                             <th scope="col">댓글수</th>
@@ -66,7 +66,7 @@
                             <td>{{Str::limit($item->category_name, 20, '...')}}</td>
                             <td>{{Str::limit($item->board_title, 40, '...')}}</td>
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 50, '...')}}</a></td>
-                            <td>{{$item->created_at}}</td>
+                            <td>{{$item->updated_at}}</td>
                             <td>{{$item->user_email}}</td>
                             <td>{{$item->board_hits}}</td>
                             <td>{{$item->comcount}}</td>

@@ -11,6 +11,7 @@ use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Board_report;
 use App\Models\Comment_report;
+use Carbon\Carbon;
 
 class ContentsadminController extends Controller
 {
@@ -225,12 +226,15 @@ class ContentsadminController extends Controller
 
     // 보드 flg추가 후 휴지통으로 전달
     public function deleteboard(Request $request) {
+
+        $today = Carbon::now();
+        $today_set = $today->format('Y-m-d H:i:s');
         foreach ($request['board_id'] as $board_id) {
             DB::table('boards')
             ->where('board_id', $board_id)
-            ->update(['board_show_flg' => 1]);
+            ->update(['board_show_flg' => 1, 'updated_at' => $today_set]);
         }
-            return redirect()->route('admin.contents', ['align_board' => 1]);
+        return redirect()->route('admin.contents', ['align_board' => 1]);
     }
 
     // 댓글 삭제
@@ -248,7 +252,7 @@ class ContentsadminController extends Controller
             'boards.board_id'
             ,'boards.board_title'
             ,'boards.board_content'
-            ,'boards.created_at'
+            ,'boards.updated_at'
             ,'users.user_name'
             ,'users.user_email'
             ,'boards.board_hits'
@@ -266,13 +270,13 @@ class ContentsadminController extends Controller
                 ,'boards.board_title'
                 ,'boards.board_content'
                 ,'users.user_name'
-                ,'boards.created_at'
+                ,'boards.updated_at'
                 ,'users.user_email'
                 ,'boards.board_hits'
                 ,'comments.board_id'
                 ,'categories.category_name'
                 )
-        ->orderBy('boards.created_at', 'desc')
+        ->orderBy('boards.updated_at', 'desc')
         ->paginate(10);
         return view('adminpage.deletedcontent')->with('data',$data);
     }
