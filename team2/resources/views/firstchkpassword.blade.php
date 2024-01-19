@@ -11,11 +11,11 @@
         @csrf
         <div class="password-pass-main-div">
             <div class="mypage-password-first-grid">
-                <div class="mypage-change-password-msg">비밀번호를 입력해주세요.</div>
+                {{-- <div class="mypage-change-password-msg">비밀번호를 입력해주세요.</div> --}}
                 <div class="mypage-change-password-errorMsg" id="mypageChangePasswordErrorMsg">에러메세지 출력구간</div>
             </div>
             <div class="mypage-password-second-grid">
-                <label class="mypage-info-label" for="password-change-chk">비밀번호 확인</label>
+                <label class="mypage-info-label" for="password-change-chk"> 현재 비밀번호</label>
                 <input class="password-pass" autocomplete="new-password" name="user_password" type="password" placeholder="비밀번호를 입력해주세요." id="password-change-chk">
                 <label class="mypage-info-label" for="user-new-password">새 비밀번호</label>
                 <input class="password-pass" autocomplete="new-password" name="user_new_password" type="password" placeholder="비밀번호를 입력해주세요." id="user-new-password">

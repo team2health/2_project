@@ -20,7 +20,8 @@ function emailSendBtn() {
 		emailError.innerHTML ='이메일 형식으로 작성해주세요.';
         return false;
 	} else if (emailRegex.test(emailvalue)) {
-        emailError.innerHTML ='이메일을 전송했습니다. ';
+        emailError.innerHTML ='이메일을 전송했습니다. 잠시 기다려주세요.';
+        emailError.classList.add('notice-green');
 	}
     let formData = new FormData();
     formData.append('user_email', emailvalue);
@@ -49,7 +50,7 @@ function emailSendBtn() {
                 emailSendForm.appendChild(hiddenInput);
                 let verificationcodeBtn = document.getElementById('verificationcodeBtn');
                 verificationcodeBtn.removeAttribute('disabled');
-                document.getElementById('verificationChkPageFrom').style.display = 'block';
+                document.getElementById('verificationChkPageFrom').style.display = 'flex';
             }
         }
 	})

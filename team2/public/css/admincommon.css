@@ -444,6 +444,10 @@ a:hover {
     color: blue;
 }
 
+.card-header {
+    border-color: #dee2e6;
+}
+
 /* 관리자페이지 로그인 */
 @media only screen and (max-width: 1000px) {
     .adminlogin-form {

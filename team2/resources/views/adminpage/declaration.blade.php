@@ -48,7 +48,11 @@
                 </thead>
                 <tbody id="setDeclarationUserProfile">
                     @forelse ($data as $index => $item)
-                        <tr id="setTr{{$item->board_id}}">
+                    @if($index % 2 == 1)
+                        <tr id="setCommentTr{{$item->board_id}}" style="background-color: transparent;">
+                    @else
+                        <tr id="setCommentTr{{$item->board_id}}" style="background-color: #f8f9fa;">
+                    @endif
                             <th><button style="border: none;" type="button" onclick="showDeclarationUser({{$item->board_id}}); return false;">▼</button></th>
                             <th><input type="checkbox" name="board_id[]" value="{{$item->board_id}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->board_id}}</th>
