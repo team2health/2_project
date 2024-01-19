@@ -448,6 +448,21 @@ a:hover {
     border-color: #dee2e6;
 }
 
+.age_box {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.age_box_width {
+    width: 400px;
+}
+
+.age_box_width2 {
+    width: 900px;
+}
+
 /* 관리자페이지 로그인 */
 @media only screen and (max-width: 1000px) {
     .adminlogin-form {
