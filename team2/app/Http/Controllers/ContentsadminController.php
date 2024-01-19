@@ -294,9 +294,7 @@ class ContentsadminController extends Controller
     // 게시글 플래그 등록
     public function deletedeclarationboard(Request $request) {
         foreach ($request['board_id'] as $board_id) {
-            DB::table('board_reports')
-            ->where('board_id', $board_id)
-            ->update(['board_show_flg' => '1']);
+            Board::destroy($board_id);
         }
         return redirect()->route('contents.declaration');
     }
