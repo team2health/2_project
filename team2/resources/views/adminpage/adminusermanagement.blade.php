@@ -49,9 +49,9 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <button type="button" class="admin-custom-btn custom-common-delete-btn delete-comment-btn" onclick="confirmDelete()">삭제</button>
-                    <a href="{{route('admin.adminusermanagement')}}" style="text-decoration: none; line-height: 30px;"
-                        class="text-decoration-none admin-custom-btn custom-common-btn ">뒤로 가기</a>
+                    <button type="button" class="admin-custom-btn custom-common-delete-btn delete-comment-btn" onclick="confirmDelete()" style="float:right;">삭제</button>
+                    {{-- <a href="{{route('admin.adminusermanagement')}}" style="text-decoration: none; line-height: 30px;"
+                        class="text-decoration-none admin-custom-btn custom-common-btn ">뒤로 가기</a> --}}
                 </form>
                 
 

@@ -51,7 +51,11 @@
                 </thead>
                 <tbody>
                     @forelse ($comment as $index => $item)
-                        <tr id="setCommentTr{{$item->comment_id}}">
+                    @if($index % 2 == 1)
+                        <tr id="setCommentTr{{$item->comment_id}}" style="background-color: transparent;">
+                    @else
+                        <tr id="setCommentTr{{$item->comment_id}}" style="background-color: #f8f9fa;">
+                    @endif
                             <th><button style="border: none;" type="button" onclick="showCommentDeclarationUser({{$item->comment_id}}); return false;">▼</button></th>
                             <th><input type="checkbox" name="comment_id[]" value="{{$item->comment_id}}" id="commentChkBox{{$index}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->comment_id}}</th>

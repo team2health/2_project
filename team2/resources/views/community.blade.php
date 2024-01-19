@@ -36,7 +36,7 @@
                 <div class="slide a-bordergo-hover">
                     <div>
                         <div class="hot-title">{{ $item->board_title }}</div>
-                        <div class="hot-content">{!! Str::limit($item->board_content, 130, '...') !!}</div>
+                        <div class="hot-content">{!! Str::limit($item->board_content, 85, '...') !!}</div>
                     </div>
                     <div class="community_bottom">
                         <div class="hot-info">
