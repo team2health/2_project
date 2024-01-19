@@ -43,7 +43,6 @@ class ContentsadminController extends Controller
     }
 
     public function contentssort(Request $request) {
-        Log::debug($request);
 
         $result = $request->align_board;
         // 세션에 값 저장
@@ -84,6 +83,7 @@ class ContentsadminController extends Controller
             DB::raw('count(comments.comment_id) as comcount'),
             'boards.created_at'
         )
+        ->whereNull('boards.deleted_at')
         ->leftJoin('users', 'users.id', 'boards.u_id')
         ->leftJoin('comments', 'comments.board_id', 'boards.board_id')
         ->leftJoin('categories', 'categories.category_id', 'boards.category_id');
@@ -213,16 +213,17 @@ class ContentsadminController extends Controller
 
     // 카테고리 업데이트
     public function changecategory(Request $request) {
+
+        Log::debug($request);
         $id = $request->board_id;
         $category_id = $request->category_id;
-        $record = Board::find($id);
-        if ($record) {
-            $record->update([
+        Board::find($id)->update([
                 'category_id' => $category_id,
-            ]);
+        ]);
+
             return redirect()->route('admin.contents', ['align_board' => 1]);
-        }
     }
+
 
     // 보드 flg추가 후 휴지통으로 전달
     public function deleteboard(Request $request) {
@@ -245,8 +246,8 @@ class ContentsadminController extends Controller
         }
         return redirect()->route('admin.comments');
     }
-    // 휴지통 이동
-    public function deletedcontent() {
+    // 휴지통
+    public function deletedcontent($align_board) {
         $data = DB::table('boards')
         ->select(
             'boards.board_id'
@@ -301,12 +302,14 @@ class ContentsadminController extends Controller
 
     // 게시글 플래그 삭제(유저가 다시 볼 수 있게)
     public function boardsetshow(Request $request) {
+
+        // 값이 없을 시 return 추가 예정
         foreach ($request['board_id'] as $board_id) {
             DB::table('boards')
             ->where('board_id', $board_id)
             ->update(['board_show_flg' => null]);
         }
-        return redirect()->route('deletedcontent.get');
+        return redirect()->route('deletedcontent.get', ['align_board' => '1']);
     }
 
     // 게시글 관리자 기준 삭제
@@ -314,7 +317,7 @@ class ContentsadminController extends Controller
         foreach ($request['board_id'] as $board_id) {
             board::destroy([$board_id]);
         }
-        return redirect()->route('deletedcontent.get');
+        return redirect()->route('deletedcontent.get', ['align_board' => '1']);
     }
     // 댓글 신고 페이지
     public function commentsdeclaration() {
@@ -399,8 +402,13 @@ class ContentsadminController extends Controller
         ->orderby('board_reports.created_at', 'desc')
         ->get();
 
-
         return response()->json($user);
-
         }
+
+    // 삭제된 게시글 정렬
+    public function deletedcontentsort(Request $request) {
+        Log::debug($request);
+        exit;
+        return $this->admincontents($result);
+    }
 }

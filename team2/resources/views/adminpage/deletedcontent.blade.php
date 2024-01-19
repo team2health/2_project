@@ -6,7 +6,7 @@
 <div class="contentsmanagement-main">
     <div class="contents-tab">
         <div class="contentsmanagement-tab-first-zone tab-show">
-            <form method="post">
+            <form action="/admin/deletedcontentsort" method="post" id="deletedcontentsort">
                 @csrf
                 <div class="contentsmanagement-board-btn-zone3">
                     <div>

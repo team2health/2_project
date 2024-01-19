@@ -24,19 +24,20 @@ contentsmanagementSearchAlign.addEventListener('click', function() {
 })
 
 // 정렬
-let alignValueSet = document.getElementById('alignValueSet');
-alignValueSet.addEventListener('click', function(){
-    contentsmanagementSearchAlignValue.setAttribute('value','0');
-    let AlignValueForm = document.getElementById('AlignValueForm');
+let sortValue = document.getElementById('sortValue');
+let alignValueSet3 = document.getElementById('alignValueSet3');
+alignValueSet3.addEventListener('click', function(){
+    let deletedcontentsort = document.getElementById('deletedcontentsort');
+    sortValue.setAttribute('value','0');
     contentclass.classList.add('admin-display-none');
-    AlignValueForm.submit();
+    deletedcontentsort.submit();
 })
-let alignValueSet2 = document.getElementById('alignValueSet2');
-alignValueSet2.addEventListener('click', function(){
-    contentsmanagementSearchAlignValue.setAttribute('value','1');
-    let AlignValueForm = document.getElementById('AlignValueForm');
+let alignValueSet4 = document.getElementById('alignValueSet4');
+alignValueSet4.addEventListener('click', function(){
+    sortValue.setAttribute('value','1');
+    let deletedcontentsort = document.getElementById('deletedcontentsort');
     contentclass.classList.add('admin-display-none');
-    AlignValueForm.submit();
+    deletedcontentsort.submit();
 })
 
 let form = document.getElementById('deletedContentMainForm');

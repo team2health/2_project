@@ -29,13 +29,13 @@
                     <span>-</span>
                         <div class="boardsearch-calendar">
                             <div id="searchDate" class="birthday">
-                                <select class="search-date-box" id="start-year" name="end_year">
+                                <select class="search-date-box" id="end-year" name="end_year">
                                 <option disabled selected>연도</option>
                                 </select>
-                                <select class="search-date-box" id="start-month" name="end_month">
+                                <select class="search-date-box" id="end-month" name="end_month">
                                     <option disabled selected>월</option>
                                 </select>
-                                <select class="search-date-box" id="start-day" name="end_day">
+                                <select class="search-date-box" id="end-day" name="end_day">
                                     <option disabled selected>일</option>
                                 </select>
                             </div>
@@ -96,15 +96,15 @@
                             <th scope="row">{{$item->board_id}}</th>
                 </form>
                             <td>
-                                <form action="/admin/changecategory" id="deleteAdminContent" method="post">
+                                <form action="/admin/changecategory" id="deleteAdminContent{{$item->board_id}}" method="post">
                                     @csrf
-                                    <select id="getCategorySelectValue" name="category_id" onchange="categoryChange(); return false;">
+                                    <select id="getCategorySelectValue{{$item->board_id}}" name="category_id" onchange="categoryChange({{$item->board_id}}); return false;">
                                         <option value="1" {{ ($item->category_name) == '자유게시판' ? 'selected' : '' }}>자유게시판</option>
                                         <option value="2" {{ ($item->category_name) == '정보게시판' ? 'selected' : '' }}>정보게시판</option>
-                                        <option value="3" {{ ($item->category_name) == '질문게시판' ? 'selected' : '' }}>질문게시판</option>
-                                        <option value="4" {{ ($item->category_name) == '친목게시판' ? 'selected' : '' }}>친목게시판</option>
+                                        <option value="3" {{ ($item->category_name) == '친목게시판' ? 'selected' : '' }}>친목게시판</option>
+                                        <option value="4" {{ ($item->category_name) == '질문게시판' ? 'selected' : '' }}>질문게시판</option>
                                     </select>
-                                    <input type="hidden" id="chkeckCommentId" name="board_id{{$item->board_id}}" value="{{$item->board_id}}">
+                                    <input type="hidden" name="board_id" value="{{$item->board_id}}">
                                 </form>
                             </td>
                             <td>{{Str::limit($item->board_title, 20, '...')}}</td>
