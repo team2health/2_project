@@ -347,7 +347,17 @@
         width: 100vw;
         margin: 0 auto;
     }
-
+    .mypage-password-second-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .password-pass-main-div {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .mypage-password-second-grid .mypage-info-label {
+        margin-top: 20px;
+    }
 }
 
 /* display none */

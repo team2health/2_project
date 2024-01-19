@@ -41,6 +41,7 @@
                         </div>
                     </form>
                 </div>
+                <br><br><br><br>
             </div>
         </div>
         {{-- 정보수정 --}}
