@@ -7,6 +7,10 @@
 * {
     font-family: 'NanumSquareRound';
     font-size: 1.0rem;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
 }
 a {
     color: #383838;

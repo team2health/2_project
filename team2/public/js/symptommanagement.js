@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return false;
             }
 
-            const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+            
 
             if (!confirmDelete) {
                 event.preventDefault(); // 취소가 눌렸을 때의 처리: 기본 동작(폼 제출) 방지
@@ -19,8 +19,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
     window.confirmDelete = function () {
-        document.getElementById('deleteForm').submit();
+        const selectedItems = document.querySelectorAll('input[name="id[]"]:checked');
+
+        if (selectedItems.length > 0) {
+            const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+
+            if (confirmDelete) {
+                document.getElementById('deleteForm').submit();
+            }
+        }
     };
+    
 });
 function checkAndAddSymptom() {
     const selectedPartId = document.getElementById('part_id').value;
