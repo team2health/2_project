@@ -117,12 +117,7 @@ textarea{
     color: #c3590d;
     margin-left: -7px;
 }
-.detail-comments-flex {
-    /* display: flex;
-    align-items: center; */
-    color: #848484;
-    font-size: 0.8rem;
-}
+
 .detail-comments-flex span {
     margin-right: 5px;
 }
