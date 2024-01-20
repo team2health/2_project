@@ -42,11 +42,23 @@ alignValueSet4.addEventListener('click', function(){
 
 let form = document.getElementById('deletedContentMainForm');
 function deletecontent() {
-    form.setAttribute('action', '/admin/boardsoftdelete');
-    form.submit();
+    let selectedItems = document.querySelectorAll('input[name="board_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 게시글이 없습니다.');
+        return false;
+    } else {
+        form.setAttribute('action', '/admin/boardsoftdelete');
+        form.submit();
+    }
 }
 
 function restoreBoardSet() {
-    form.setAttribute('action', '/admin/boardsetshow');
-    form.submit();
+    let selectedItems = document.querySelectorAll('input[name="board_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 게시글이 없습니다.');
+        return false;
+    } else {
+        form.setAttribute('action', '/admin/boardsetshow');
+        form.submit();
+    }
 }
