@@ -63,8 +63,6 @@ class ContentsadminController extends Controller
             return redirect()->route('admin.admincontentsset',
             ['align_board' => '1', 'start_date' => $result, 'end_date' => $date]);
         }
-        
-        
     }
 
     public function admincontentsset($align_board, $start_date, $end_date) {
@@ -252,8 +250,25 @@ class ContentsadminController extends Controller
         }
         return redirect()->route('admin.comments');
     }
+
+    public function deletedcontentdate($align_board, $date = null) {
+        if (!$date) {
+            $date = date('Ymd');
+            $oneMonthAgo = Carbon::now()->subMonth();
+            $result = $oneMonthAgo->format('Ymd');
+        }
+        return redirect()->route('deletedcontent.get',
+            ['align_board' => $align_board, 'start_date' => $result, 'end_date' => $date]);
+    }
+    public function deletedsearch(Request $request) {
+        $start_date =  $request->start_year.$request->start_month.$request->start_day;
+        $end_date = $request->end_year.$request->end_month.$request->end_day;
+
+        return redirect()->route('deletedcontent.get', 
+        ['align_board' => '1', 'start_date' => $start_date, 'end_date' => $end_date]);
+    }
     // 휴지통
-    public function deletedcontent($align_board) {
+    public function deletedcontent($align_board, $start_date, $end_date) {
 
         $query = DB::table('boards')
         ->select(
@@ -272,6 +287,8 @@ class ContentsadminController extends Controller
         ->leftJoin('categories', 'categories.category_id', 'boards.category_id')
         ->leftJoin('users','boards.u_id', 'users.id')
         ->leftJoin('comments','comments.board_id', 'boards.board_id')
+        ->where('boards.updated_at','>=', $start_date.'000000')
+        ->where('boards.updated_at','<=', $end_date.'235959')
         ->whereNotNULL('boards.board_show_flg')
         ->whereNULL('boards.deleted_at')
         ->groupBy('boards.board_id'
@@ -289,9 +306,9 @@ class ContentsadminController extends Controller
         } else if ($align_board == '1') {
             $query->orderBy('boards.updated_at', 'desc');
         }
-        
+        $date = [$start_date, $end_date];
         $data = $query->paginate(10);
-        return view('adminpage.deletedcontent')->with('data',$data);
+        return view('adminpage.deletedcontent')->with('data',$data)->with('date', $date);
     }
 
     // 게시글 플래그 1 등록
@@ -438,6 +455,6 @@ class ContentsadminController extends Controller
     // 삭제된 게시글 정렬
     public function deletedcontentsort(Request $request) {
         $result = $request->sort;
-        return $this->deletedcontent($result);
+        return $this->deletedcontentdate($result);
     }
 }

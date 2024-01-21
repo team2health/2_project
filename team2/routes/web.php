@@ -131,7 +131,9 @@ Route::get('/admin/admincontentsset/{align_board?}/{start_date?}/{end_date?}', [
 Route::post('/admin/changecategory', [ContentsadminController::class, 'changecategory'])->name('admin.changecategory');
 Route::post('/admin/deleteboard', [ContentsadminController::class, 'deleteboard'])->name('admin.deleteboard');
 Route::post('/admin/deletecomments', [ContentsadminController::class, 'deletecomments'])->name('admin.deletecomments');
-Route::get('/admin/deletedcontent/{align_board?}', [ContentsadminController::class, 'deletedcontent'])->name('deletedcontent.get');
+Route::get('/admin/deletedcontentdate', [ContentsadminController::class, 'deletedcontentdate'])->name('admin.deletedcontentdate');
+Route::get('/admin/deletedcontent/{align_board?}/{start_date?}/{end_date?}', [ContentsadminController::class, 'deletedcontent'])->name('deletedcontent.get');
+Route::post ('/admin/deletedsearch', [ContentsadminController::class, 'deletedsearch'])->name('deletedsearch.post');
 Route::post('/admin/deletedcontentsort', [ContentsadminController::class, 'deletedcontentsort'])->name('admin.deletedcontentsort');
 Route::post('/admin/temporarilydelete', [ContentsadminController::class, 'temporarilydelete'])->name('temporarilydelete.post');
 Route::post('/admin/deletedeclarationboard', [ContentsadminController::class, 'deletedeclarationboard'])->name('deletedeclarationboard.post');

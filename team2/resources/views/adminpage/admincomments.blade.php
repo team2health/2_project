@@ -84,7 +84,7 @@
                             <input type="hidden" name="sort" id="sortValue">
                         </div>
                     </div> --}}
-                </div>
+            </div>
         </form>
         <form action="#" method="post" id="AlignValueForm">
             @csrf
@@ -153,7 +153,6 @@
                         <a href="{{ $comment->url($i) }}" class="pagination-link">{{ $i }}</a>
                     @endif
                 @endfor
-            
                 @if ($comment->currentPage() < $comment->lastPage())
                     <a class="page_pre" href="{{ $comment->nextPageUrl() }}">다음</a>
                     <a href="{{ $comment->url($comment->lastPage()) }}">&gt;&gt;</a>

@@ -104,6 +104,16 @@ a:hover {
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
 }
+.contentsmanagement-board-btn-zone4 {
+    display: grid;
+    grid-template-columns: 250px 30px 250px 110px 110px 105px;
+    /* float: right; */
+    margin-bottom: 10px;
+    position: absolute;
+    right: 150px;
+    justify-items: center;
+    align-items: center;
+}
 .contentsmanagement-select-btn-zone {
     display: flex;
     align-items: flex-end;
