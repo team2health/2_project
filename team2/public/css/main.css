@@ -35,7 +35,7 @@ button {
 
 .container {
 	width: 50vw;
-	margin: 0 auto;
+	margin: 50px auto;
 }
 
 .container-category {
@@ -1100,6 +1100,7 @@ input:checked + label{
   }
 
 .progress-bar-box {
+	display: none;
 	width: 100vw;
     height: 100vh;
     position: absolute;
@@ -1108,6 +1109,13 @@ input:checked + label{
     opacity: 0.3;
 	top: 0;
 	left: 0;
+}
+
+.progress_bar_font {
+	position: relative;
+    font-size: 2.5rem;
+    color: #fff;
+    top: 260px;
 }
 
 .header-main-go {
@@ -1156,6 +1164,7 @@ input:checked + label{
 	}
 	.container {
 		width: 100vw;
+		margin: 0 auto;
 	}
 	.font-weight {
 		font-size: 1.7rem;

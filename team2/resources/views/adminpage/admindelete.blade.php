@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="/admin/admindeletego" method="post">
+                <form action="/admin/admindeletego" method="post" id="admindeleteform">
                     @csrf
                     @method('DELETE')
                     @foreach ($result as $index => $item)
@@ -40,11 +40,11 @@
                     @endforeach
                     <br>
                     <div class="button-box">
-                        <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
+                        <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="admindelete(); return false;">삭제</button>
                     </div>
                 </form>
         </div>  
     </div>  
 </div>  
-<script src="/js/adminhashtag.js"></script>
+<script src="/js/admindelete.js"></script>
 @endsection

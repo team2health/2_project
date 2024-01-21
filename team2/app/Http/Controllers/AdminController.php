@@ -139,6 +139,7 @@ class AdminController extends Controller
         foreach ($result[4] as $value) {
             $diff = $value->cnt - $last_year_cnt[$c]->cnt;
             $result[4][$c]['last_year'] = floor(($diff/$last_year_cnt[$c]->cnt) * 100);
+            $result[4][$c]['last_year_cnt'] = $last_year_cnt[$c]->cnt;
 
             $c++;
         }
@@ -238,7 +239,8 @@ class AdminController extends Controller
             } else {
                 $value->last_year = '0';
             }
-            Log::debug($value->last_year);
+            $value->last_year_cnt = $last_year[$c]->cnt;
+
             $c++;
         }
 
@@ -309,7 +311,6 @@ class AdminController extends Controller
     }
 
     public function adminregistpost(Request $request) {
-        Log::debug($request);
         $admin = $request->only('admin_id', 'admin_name', 'admin_password');
 
         $admin['admin_password'] = Hash::make($admin['admin_password']);
@@ -320,8 +321,6 @@ class AdminController extends Controller
     }
 
     public function admindeleteget() {
-        // $admin_id = session('admin_id');
-        // $admin_id 
 
         $result = Admin::whereNot('id', 1)->get();
 
@@ -355,10 +354,7 @@ class AdminController extends Controller
     //     return redirect()-> route('admin.usermanagement');
     // }
     
-    // Log::debug('Request Data:', $request->all());
     $selectedIds = $request->input('id');
-    // Log::debug('Request Data:', $selectedIds);
-    // dd($selectedIds);
     User::destroy($selectedIds);    
     
     return redirect()->route('admin.adminusermanagement');
