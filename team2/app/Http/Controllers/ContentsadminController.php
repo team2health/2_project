@@ -337,7 +337,7 @@ class ContentsadminController extends Controller
             return redirect()->route('contents.declaration');
         }
         foreach ($request['board_id'] as $board_id) {
-            // Board::destroy($board_id);
+            Board::destroy($board_id);
             
             // 신고 메일 보내는 쿼리문
             $result[] = DB::table('board_reports')
@@ -355,11 +355,7 @@ class ContentsadminController extends Controller
         $result = $result[0];
         $result = json_decode($result, true);
         foreach ($result as $index => $mail_get) {
-            Log::debug($mail_get);
-
             $id = $mail_get["id"];
-            Log::debug('아이디이ㅣㅣ');
-            Log::debug($id);
             $user = User::find($id);
             $info = [
                 'user_name' => $user->user_name
