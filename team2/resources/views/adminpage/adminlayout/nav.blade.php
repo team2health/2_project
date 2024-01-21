@@ -62,7 +62,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('deletedcontent.get', ['align_board' => '1'])}}">
+            <a class="sidebar-link" href="{{route('admin.deletedcontentdate', ['align_board' => '1'])}}">
                 <i class="align-middle me-2" data-feather="trash-2"></i> <span class="align-middle">삭제된 게시글</span>
             </a>
         </li>
