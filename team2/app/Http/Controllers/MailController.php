@@ -16,9 +16,6 @@ use Illuminate\support\Facades\DB;
 class MailController extends Controller
 {
 	function emailchkget () {
-		if(isset($data)) {
-			Log::debug($data);
-		}
 		return view('emailpage');
 	}
 

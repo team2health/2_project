@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Auth\Middleware\Adminauth as Middleware;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\User;
+use App\Mail\ComplaintMail;
 use App\Models\Comment;
 use App\Models\Board_report;
 use App\Models\Comment_report;
@@ -334,7 +337,41 @@ class ContentsadminController extends Controller
             return redirect()->route('contents.declaration');
         }
         foreach ($request['board_id'] as $board_id) {
-            Board::destroy($board_id);
+            // Board::destroy($board_id);
+            
+            // 신고 메일 보내는 쿼리문
+            $result[] = DB::table('board_reports')
+            ->select('users.id'
+            , 'boards.board_title'
+            , 'boards.board_content'
+            , 'boards.created_at')
+            ->join('users','board_reports.u_id','users.id')
+            ->join('boards', 'boards.board_id', 'board_reports.board_id')
+            ->where('boards.board_id', $board_id)
+            ->where('board_reports.board_report_complete', '0')
+            ->whereNull('users.deleted_at')
+            ->get();
+        }
+        $result = $result[0];
+        $result = json_decode($result, true);
+        foreach ($result as $index => $mail_get) {
+            Log::debug($mail_get);
+
+            $id = $mail_get["id"];
+            Log::debug('아이디이ㅣㅣ');
+            Log::debug($id);
+            $user = User::find($id);
+            $info = [
+                'user_name' => $user->user_name
+                , 'created_at' => $result[$index]["created_at"]
+                , 'board_title' => $result[$index]["board_title"]
+                , 'board_content' => $result[$index]["board_content"]
+            ];
+            if ($user) {
+                Log::debug($user->user_email);
+                Mail::to($user->user_email)->send(new ComplaintMail($info));
+            }
+            $info = [];
         }
         return redirect()->route('contents.declaration');
     }
