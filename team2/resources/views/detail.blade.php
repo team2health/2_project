@@ -132,10 +132,10 @@
                                         <p><input type="radio" name="values" value="5"> 불법 또는 규제상품 판매</p> 
                                         <p><input type="radio" name="values" value="6"> 성희롱</p> 
                                         <p><input type="radio" name="values" value="7"> 혐오감을 주는 발언 또는 상징</p> 
-                                        <p><input type="radio" name="values" value="8" onclick="console.log({{ $comment->comment_id }})"> 마음에 들지 않습니다.</p> 
+                                        <p><input type="radio" name="values" value="8"> 마음에 들지 않습니다.</p> 
                                         <input type="hidden" name="comment_id" value="{{ $comment->comment_id }}">
                                         <button class="detail_report" type="submit"  onclick="closeModals({{ $comment->comment_id }})">신고</button> 
-                                        <span class="close" onclick="closeModals({{ $comment->comment_id }})">취소</span>                                    
+                                        <span class="close" onclick="closeModals()">취소</span>                                 
                                     </div>
                                 </div>
                             </form>                                              
