@@ -253,7 +253,7 @@ a:hover {
 
 .index-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 35% 62%;
     gap: 50px;
 }
 
@@ -430,6 +430,7 @@ a:hover {
 
 .index_cnt {
     text-align: right;
+    width: 20%;
 }
 
 .index_display_grid {
@@ -466,6 +467,24 @@ a:hover {
 .age_box_width2 {
     width: 900px;
 }
+
+.psmodaldisplaynone {
+    display: none;
+}
+
+.index_rank {
+    width: 30%;
+}
+
+.index_ps {
+    width: 40%;
+}
+
+#psModal1, #psModal2, #psModal3, #psModal4 {
+    cursor: pointer;
+    background-color: #fff;
+}
+
 
 /* 관리자페이지 로그인 */
 @media only screen and (max-width: 1000px) {

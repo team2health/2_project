@@ -12,16 +12,14 @@
 					<div class="age_box">연령</div>
 					<br><br>
 					<div class="card-header" id="main-gender">
-						<div class="col-xl-6 col-xxl-5">
-							<div id="chart" style="width: 400px; height: 280px; margin-top: 20px;"></div>
-						</div>
+						<div id="chart" style="width: 100%; height: 280px; margin-top: 20px;"></div>
 					</div>
 				</div>
-				<div class="index-container-mini">
+				<div>
 					<div class="age_box">댓글&게시글</div>
 					<br><br>
 					<div class="card-header index-container-mini2">
-						<div id="chart1" style="width: 900px; height: 348px;"></div>
+						<div id="chart1" style="width: 100%; height: 348px;"></div>
 					</div>
 				</div>
 			</div>
@@ -29,23 +27,23 @@
 			<div class="pandemic_box">2024년 부위-증상 통계</div>
 			<br><br>
 			<div class="index_display_grid">
-				<div>
+				<div onclick="psModal(1); return false;" id="psModal1">
 					<div class="card-header pandemic-border-bottom ps-width">
 						<div class="admin-index-ps-mini">
-							<span>순위</span>
-							<span>부위 - 증상</span>
-							<span>2024년 (2023년)</span>
+							<span class="index_rank">순위</span>
+							<span class="index_ps">부위 - 증상</span>
+							<span class="index_cnt">2024년 (2023년)</span>
 						</div>
 					</div>
 					@foreach ($result[4] as $item)
 					<div class="card-header ps-width">
 						<div class="admin-index-ps-mini">
-							<span class="index-width">{{ $loop->iteration }}</span>
-							<span class="index-width">{{ $item->part_name[0]->part_name }} - {{ $item->symptom_name[0]->symptom_name }}</span>
+							<span class="index_rank">{{ $loop->iteration }}</span>
+							<span class="index_ps">{{ $item->part_name[0]->part_name }} - {{ $item->symptom_name[0]->symptom_name }}</span>
 							<div class="index_cnt">
 								<span>{{ $item->cnt }}회</span>
 								@if ($item->last_year > 0)
-								<span class="index-font-color-red">({{ $item->last_year }}%)</span>
+								<span class="index-font-color-red">(+{{ $item->last_year }}%)</span>
 								@else
 								<span class="index-font-color-blue">({{ $item->last_year }}%)</span>
 								@endif
@@ -54,23 +52,26 @@
 					</div>
 					@endforeach
 				</div>
-				<div>
+				<div class="psmodaldisplaynone" onclick="psModal(2); return false;" id="psModal2">
+					<div id="chart2" style="width: 762px; height: 400%;"></div>
+				</div>
+				<div onclick="psModal(3); return false;" id="psModal3">
 					<div class="card-header pandemic-border-bottom ps-width">
 						<div class="admin-index-ps-mini">
-							<span>연령대</span>
-							<span>부위 - 증상</span>
-							<span>2024년(2023년)</span>
+							<span class="index_rank">연령대</span>
+							<span class="index_ps">부위 - 증상</span>
+							<span class="index_cnt">2024년(2023년)</span>
 						</div>
 					</div>
 					@foreach ($result[6] as $item)
 					<div class="card-header ps-width">
 						<div class="admin-index-ps-mini">
-							<span class="index-width">{{ $item->age_range }}</span>
-							<span class="index-width">{{ $item->part_name[0]->part_name }} - {{ $item->symptom_name[0]->symptom_name }}</span>
+							<span class="index_rank">{{ $item->age_range }}</span>
+							<span class="index_ps">{{ $item->part_name[0]->part_name }} - {{ $item->symptom_name[0]->symptom_name }}</span>
 							<div class="index_cnt">
 								<span>{{ $item->cnt }}회</span>
 								@if ($item->last_year > 0)
-								<span class="index-font-color-red">({{ $item->last_year }}%)</span>
+								<span class="index-font-color-red">(+{{ $item->last_year }}%)</span>
 								@else
 								<span class="index-font-color-blue">({{ $item->last_year }}%)</span>
 								@endif
@@ -78,6 +79,9 @@
 						</div>
 					</div>
 					@endforeach
+				</div>
+				<div class="psmodaldisplaynone" onclick="psModal(4); return false;" id="psModal4">
+					<div id="chart3" style="width: 762px; height: 400%;"></div>
 				</div>
 			</div>
 			<br><br><br>
@@ -115,7 +119,7 @@
 				@endforeach
 				<br>
 				<div class="button-box">
-					<button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
+					<button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="pandemicdelete(); return false;">삭제</button>
 				</div>
 			</form>
 		</div>

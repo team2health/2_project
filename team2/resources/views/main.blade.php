@@ -144,9 +144,10 @@
 		</div>
 		<div style="color: #2C2B71" class="text-center bc-purple" id="resultContainer">
 		<div class="progress-bar-box" id="progress-bar-box">
-			<div class="progress-bar">
-				<div class="loader"></div>
-			</div>
+			<div class="progress_bar_font">진단 중입니다 잠시만 기다려주십시오.</div>
+				<div class="progress-bar">
+					<div class="loader"></div>
+				</div>
 		</div>
 			<br>
 			<div class="go-doctor">※정확한 진단은 의사와 상담하시길 바랍니다.※</div>

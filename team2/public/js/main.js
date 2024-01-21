@@ -12,7 +12,6 @@ let USERID = document.getElementById('main-user_id');
 let PROGRESSBOX = document.getElementById('progress-bar-box');
 let progressBarElem = document.querySelector('.progress-bar__bar');
 
-PROGRESSBOX.style.display = 'none';
 SYMPTOMCHKCONTAINER.style.display = 'none';
 RESULTCONTAINER.style.display = 'none';
 HOSPITALCONTAINER.style.display = 'none';
