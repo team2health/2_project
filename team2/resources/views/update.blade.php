@@ -5,7 +5,7 @@
 @section('main')
 
 <main class="insert_main">
-	<form class="detail_form" method="POST"  action="{{route('board.update',['board'=>$result->board_id])}}" enctype="multipart/form-data">
+	<form class="detail_form" method="POST"  action="{{route('board.update',['board'=>$result->board_id])}}" enctype="multipart/form-data" onsubmit="return validateForm()">
 		@csrf
 		@method('PUT')       
 		<div class="insert_bottom_button">
