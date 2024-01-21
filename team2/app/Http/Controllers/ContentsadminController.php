@@ -253,12 +253,16 @@ class ContentsadminController extends Controller
 
     public function deletedcontentdate($align_board, $date = null) {
         if (!$date) {
-            $date = date('Ymd');
-            $oneMonthAgo = Carbon::now()->subMonth();
-            $result = $oneMonthAgo->format('Ymd');
+            $end_date = date('Ymd');
+            $date = Carbon::now()->subMonth();
+            $start_date = $date->format('Ymd');
         }
+        if(!isset($align_board)) {
+            $align_board = '1';
+        }
+        // exit;
         return redirect()->route('deletedcontent.get',
-            ['align_board' => $align_board, 'start_date' => $result, 'end_date' => $date]);
+            ['align_board' => $align_board, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
     public function deletedsearch(Request $request) {
         $start_date =  $request->start_year.$request->start_month.$request->start_day;
