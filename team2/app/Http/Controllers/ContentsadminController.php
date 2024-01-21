@@ -54,6 +54,7 @@ class ContentsadminController extends Controller
             $oneMonthAgo = Carbon::now()->subMonth();
             $result = $oneMonthAgo->format('Ymd');
         }
+        
         if(session()->has('align_board')) {
             $align_board = session('align_board');
             return redirect()->route('admin.admincontentsset',
@@ -62,6 +63,7 @@ class ContentsadminController extends Controller
             return redirect()->route('admin.admincontentsset',
             ['align_board' => '1', 'start_date' => $result, 'end_date' => $date]);
         }
+        
         
     }
 
