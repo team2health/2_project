@@ -118,7 +118,9 @@ Route::post('/admin/adminregist', [AdminController::class, 'adminregistpost']);
 Route::get('admin/admindelete', [AdminController::class, 'admindeleteget'])->name('admindelete.get');
 Route::delete('admin/admindeletego', [AdminController::class, 'admindeletegodelete'])->name('admindeletego.delete');
 Route::get('/admin/contents/{date?}', [ContentsadminController::class, 'admincontents'])->name('admin.contents');
-Route::get('/admin/comments/{date?}', [ContentsadminController::class, 'admincomments'])->name('admin.comments');
+Route::get('/admin/comments', [ContentsadminController::class, 'admincomments'])->name('admin.comments');
+Route::get('/admin/comments/{start_date?}/{end_date?}', [ContentsadminController::class, 'admincommentsset'])->name('admin.admincommentsset');
+
 Route::get('/admin/declaration', [ContentsadminController::class, 'contentsdeclaration'])->name('contents.declaration');
 Route::get('/admin/commentsdeclaration', [ContentsadminController::class, 'commentsdeclaration'])->name('comments.declaration');
 Route::post('/admin/deleteadminboard', [ContentsadminController::class, 'deleteadminboard'])->name('admin.deleteadminboard');
