@@ -8,7 +8,7 @@ function admindelete() {
         }
     });
     if(chkflg === false) {
-        alert('관리자를 선택하여주십시오.');
+        alert('선택된 관리자가 없습니다.');
         return false;
     }
     document.getElementById('admindeleteform').submit();

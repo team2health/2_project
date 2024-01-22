@@ -84,7 +84,7 @@ function hashtagdelete() {
         }
     });
     if(chkflg === false) {
-        alert('해시태그를 선택하여주십시오.');
+        alert('선택된 해시태그가 없습니다.');
         return false;
     }
     document.getElementById('hashtagdeletebox').submit();

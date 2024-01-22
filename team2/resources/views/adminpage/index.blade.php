@@ -53,7 +53,7 @@
 					@endforeach
 				</div>
 				<div class="psmodaldisplaynone" onclick="psModal(2); return false;" id="psModal2">
-					<div id="chart2" style="width: 762px; height: 400%;"></div>
+					<div id="chart2" style="width: 700px; height: 400%;"></div>
 				</div>
 				<div onclick="psModal(3); return false;" id="psModal3">
 					<div class="card-header pandemic-border-bottom ps-width">
@@ -81,7 +81,7 @@
 					@endforeach
 				</div>
 				<div class="psmodaldisplaynone" onclick="psModal(4); return false;" id="psModal4">
-					<div id="chart3" style="width: 762px; height: 400%;"></div>
+					<div id="chart3" style="width: 700px; height: 400%;"></div>
 				</div>
 			</div>
 			<br><br><br>

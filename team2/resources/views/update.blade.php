@@ -76,6 +76,7 @@
 				
 				<!-- Input for selected hashtags -->
 				<input type="hidden" id="selectedHashtagsInput" name="hashtag"/>
+				<input type="hidden" id="hashtagflg" name="hashtagflg">
 				<div class="insert_img" id="imageContainer">
 					<input class="update_img" type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>
 					<label for="selectFile">

@@ -43,7 +43,8 @@ class BoardController extends Controller
         ->limit(10)
         ->get();
 
-        $pandemicboard = Pandemic::where('deleted_at', null)->get();
+        $pandemicboard = Pandemic::where('deleted_at', null)
+        ->orderby('created_at', 'desc')->get();
 
         $favoriteboard = User::join('favorite_tags', 'users.id', '=', 'favorite_tags.u_id')
             ->join('hashtags', 'favorite_tags.hashtag_id', '=', 'hashtags.hashtag_id')
@@ -393,7 +394,6 @@ public function boardreport(Request $request) {
      */
     public function update(Request $request, $board_id)
     {
-        Log::debug($request);
         // Log::info('Request data:', $request->all());
         // Log::debug($request);
         // Log::debug("6");
@@ -416,7 +416,6 @@ public function boardreport(Request $request) {
         // 새로운 해시태그 추가 또는 기존 해시태그 갱신
         //hashtag 파라미터의 값을 가져와서 $hashtagInput 변수에 저장합니다.
         $hashtagInput = $request->input('hashtag');
-        // dd($hashtagInput);
         //$hashtagInput 값을 쉼표로 구분하여 배열로 변환합니다. 
         //이렇게 함으로써 여러 개의 해시태그를 나누어 처리할 수 있습니다.
         $hashtag_names = explode(',', $hashtagInput);
@@ -430,8 +429,6 @@ public function boardreport(Request $request) {
         usort($hashtag_names, function($a, $b) {
             return strcmp($a[0], $b[0]);
         });
-// Log::debug($request);
-// Log::debug("4");
        foreach ($hashtag_names as $hashtag_name) {
         // dd($hashtag_names);
         // $hashtag_name에 해당하는 해시태그를 데이터베이스에서 찾거나 새로 생성합니다. 
@@ -446,9 +443,10 @@ public function boardreport(Request $request) {
         //sync 메서드는 중간 테이블을 조작하여 관계를 동기화합니다
         $result->hashtags()->sync($hashtagIds);
         
-    }  
-    //  Log::debug($request);
-    //  Log::debug("3");
+    }
+    if($request->hashtagflg === '1' && !isset($request->hashtag)) {
+        $result->hashtags()->sync([]);
+    }
     if ($request->category_id) {
          
         $newCategoryName = $request->input('category_id');
@@ -460,11 +458,8 @@ public function boardreport(Request $request) {
         
     } 
     
-    // Log::debug($request);
-    // Log::debug("2");
     if ($request->hasFile('selectFile')) {
         $images = $request->file('selectFile');
-    //    Log::debug($images);  
         foreach ($images as $image) {
             $imageName = Str::uuid() . '.' . $image->extension();
             $image->move(public_path('board_img'), $imageName);
@@ -494,10 +489,6 @@ public function boardreport(Request $request) {
     //     // 모델에서 이미지 삭제
     //     $imageToDelete->delete();
     // }
-    // Log::debug($request);
-    // Log::debug("삭제");
-    Log::debug("받아오는 삭제데이터");
-Log::debug($request);
 
 if ($request->imgUrl) {
     // 쉼표로 구분된 이미지 ID를 배열로 변환
@@ -528,7 +519,6 @@ if ($request->imgUrl) {
     }
 }
 
-Log::debug("삭제");
 
     
 
