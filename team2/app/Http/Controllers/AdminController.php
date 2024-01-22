@@ -473,6 +473,8 @@ public function adminsymptomsmng()
             ->orWhere('parts.part_name', 'like', "%$searchKeyword%")
             ->orderBy('symptoms.symptom_id', 'desc')
             ->paginate(10);
+
+            $symptoms->appends(['search_keyword_sym' => $searchKeyword]);
             $partsData = Part::all();
 
         return view('adminpage.adminsymptomsmanagement')->with('data', $symptoms)->with('partsData', $partsData);
