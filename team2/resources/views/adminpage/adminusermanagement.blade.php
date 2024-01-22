@@ -16,7 +16,7 @@
                 <form id="deleteForm" action="{{ route('admin.adminuserdestroy') }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <table class="table table-striped">
+                    <table style="background-color: #f8f9fa;" class="table">
                         <colgroup>
                             <col width="10%;">
                             <col width="15%;">
@@ -28,8 +28,8 @@
                             <tr>
                                 <th scope="col">영구강퇴</th>
                                 <th scope="col">가입순서</th>
-                                <th scope="col">USER_name</th>
-                                <th scope="col">u_email</th>
+                                <th scope="col">닉네임</th>
+                                <th scope="col">이메일</th>
                                 <th scope="col">생성날짜</th>
                             </tr>
                         </thead>

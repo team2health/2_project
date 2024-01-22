@@ -28,11 +28,7 @@
                     @csrf
                     @method('DELETE')
                     @foreach ($result as $index => $item)
-                    @if($index % 2 == 1)
-                        <div class="card-header" style="background-color: transparent;">
-                    @else
                         <div class="card-header" style="background-color: #f8f9fa;">
-                    @endif
                         <div class="admin-index-ps">
                             <div class="hashtagnsbox">
                                 <span><input type="checkbox" name="hashtag_id[]" value="{{$item->hashtag_id}}"></span>

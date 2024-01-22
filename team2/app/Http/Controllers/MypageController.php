@@ -159,7 +159,7 @@ class MypageController extends Controller
     }
 
     public function allhashget(Request $request){
-
+        
         $result = session('id');
         $user_hashtag = DB::table('favorite_tags')
         ->select(

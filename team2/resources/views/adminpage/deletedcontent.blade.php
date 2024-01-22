@@ -102,7 +102,7 @@
                     </div>
                     <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="deletecontent(); return false;">삭제</button>
                 </div>
-                <table class="table table-striped">
+                <table style="background-color: #f8f9fa;" class="table">
                     <colgroup>
                         <col width="3%;">
                         <col width="5%;">

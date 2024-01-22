@@ -244,8 +244,10 @@ function handleTagClick(tag) {
     // 클릭한 태그의 이름을 배열에 추가
     selectedHashtags.push(clickedTagName);
 
-    // 출력할 div 선택
-    var outputDiv = document.getElementById('hashtagContainer');
+        // 출력할 div 선택
+        var outputDiv = document.getElementById('hashtagContainer');
+
+        // let tagButton = document.createElement('button');
 
     // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
     var tagSpan = document.createElement('span');

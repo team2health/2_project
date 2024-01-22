@@ -19,4 +19,6 @@ class Board_tag extends Model
     }
 
     protected $fillable = ['board_id', 'hashtag_id'];
+
+    public $timestamps = false;
 }

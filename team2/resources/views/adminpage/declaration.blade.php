@@ -48,11 +48,7 @@
                 </thead>
                 <tbody id="setDeclarationUserProfile">
                     @forelse ($data as $index => $item)
-                    @if($index % 2 == 1)
-                        <tr id="setCommentTr{{$item->board_id}}" style="background-color: transparent;">
-                    @else
                         <tr id="setCommentTr{{$item->board_id}}" style="background-color: #f8f9fa;">
-                    @endif
                             <th><button style="border: none;" type="button" onclick="showDeclarationUser({{$item->board_id}}); return false;">▼</button></th>
                             <th><input type="checkbox" name="board_id[]" value="{{$item->board_id}}" class="contens-checkbox"></th>
                             <th scope="row">{{$item->board_id}}</th>
@@ -60,7 +56,7 @@
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 40, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
-                            <td>{{$item->total}}</td>
+                            <td>{{$item->detotal}}</td>
                             <td>{{$item->board_hits}}</td>
                             <td>{{$item->commenttotal}}</td>
                         </tr>

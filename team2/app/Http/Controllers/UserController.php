@@ -74,7 +74,7 @@ class UserController extends Controller
     public function loginpost(Request $request) {
         $result = User::where('user_email', $request->user_email)->first();
         if(!$result) {
-            return view('login')->with('passwordError', '0');
+            return view('login')->with('passwordError', '3');
         }
         Log::debug($request);
         // 탈퇴한 사용자 로그인 알림

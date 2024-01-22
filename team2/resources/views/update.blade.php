@@ -60,10 +60,10 @@
 			<div id="hashtagContainer" class="insert_hashtag" >
 					@foreach ($result->hashtags as $hashtag)
 						
+					<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">
 						<span class='selected-tag' data-selected-tag="{{ $hashtag->hashtag_name }}">
-							{{ $hashtag->hashtag_name }} 
-							<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">X</button>
-						</span>
+							{{ $hashtag->hashtag_name }} X
+						</span></button>
 					@endforeach
 					
 			</div>
@@ -76,6 +76,7 @@
 				
 				<!-- Input for selected hashtags -->
 				<input type="hidden" id="selectedHashtagsInput" name="hashtag"/>
+				<input type="hidden" id="hashtagflg" name="hashtagflg">
 				<div class="insert_img" id="imageContainer">
 					<input class="update_img" type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>
 					<label for="selectFile">
