@@ -35,6 +35,7 @@ function insertHashtag() {
 		// </div>
 
 		HASHTAGHEADER.classList = 'card-header';
+		HASHTAGHEADER.style.backgroundColor = '#f8f9fa';
 		HASHTAG.classList = 'admin-index-ps';
 		HASHTAGDIV.classList = 'hashtagnsbox';
 		INPUTHASHTAG.type = 'checkbox';
