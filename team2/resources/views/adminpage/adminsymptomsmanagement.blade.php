@@ -16,7 +16,7 @@
             <form id="deleteForm" action="{{ route('admin.adminsymptomdestroy') }}" method="post">
                 @csrf
                 @method('DELETE')                              
-                <table class="table table-striped">
+                <table style="background-color: #f8f9fa;" class="table">
                     <colgroup>
                         <col width="15%;">                        
                         <col width="15%;">
