@@ -16,7 +16,7 @@
             <form id="deleteForm" action="{{ route('admin.adminsymptomdestroy') }}" method="post">
                 @csrf
                 @method('DELETE')                              
-                <table class="table table-striped">
+                <table style="background-color: #f8f9fa;" class="table">
                     <colgroup>
                         <col width="15%;">                        
                         <col width="15%;">
@@ -66,6 +66,11 @@
                             <!-- 증상 추가 폼 -->
                             <form action="{{ route('admin.adminaddsymptom') }}" method="post">
                                 @csrf
+                                @if(session('error'))
+                                    <script>
+                                        alert("{{ session('error') }}");
+                                    </script>
+                                @endif
                                 <div class="mb-3">
                                     <label for="part_id" class="form-label">부위 선택</label>
                                     <select class="form-select" id="part_id" name="part_id" required>

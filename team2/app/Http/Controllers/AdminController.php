@@ -551,6 +551,9 @@ public function adminsymptomsmng()
             // 해당 부위와 연결이 되어 있지 않은 경우에만 연결
             if (!$existingSymptom->parts->contains($partId)) {
                 $existingSymptom->parts()->attach($partId);
+            }else {
+                // 이미 해당 증상과 부위가 연결되어 있는 경우 에러 메시지 출력
+                return redirect()->route('admin.adminsymptomsmanagement')->with('error', '이미 해당 증상과 부위가 연결되어 있습니다.');
             }
         } else {
             // 입력하려는 부위에 해당하는 증상이 symptom 테이블에 존재하지 않는 경우,

@@ -20,7 +20,7 @@
 			</div>
 		</div>  
 		<div class="insert_bottom_button">
-			<a href="{{url()->previous()}}"><button type="button" class="insert_btn"><</button></a>
+			<a href="{{url()->previous()}}"><button type="button" class="insert_btn_cancle"><</button></a>
 			<p>글쓰기</p>
 			<button type="submit" class="insert_btn">작성완료</button>	
 		</div>

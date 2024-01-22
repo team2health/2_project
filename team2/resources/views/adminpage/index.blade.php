@@ -28,7 +28,7 @@
 			<br><br>
 			<div class="index_display_grid">
 				<div onclick="psModal(1); return false;" id="psModal1">
-					<div class="card-header pandemic-border-bottom ps-width">
+					<div class="card-header pandemic-border-bottom ps-width index_bc_gray">
 						<div class="admin-index-ps-mini">
 							<span class="index_rank">순위</span>
 							<span class="index_ps">부위 - 증상</span>
@@ -56,7 +56,7 @@
 					<div id="chart2" style="width: 700px; height: 400%;"></div>
 				</div>
 				<div onclick="psModal(3); return false;" id="psModal3">
-					<div class="card-header pandemic-border-bottom ps-width">
+					<div class="card-header pandemic-border-bottom ps-width index_bc_gray">
 						<div class="admin-index-ps-mini">
 							<span class="index_rank">연령대</span>
 							<span class="index_ps">부위 - 증상</span>
@@ -94,7 +94,7 @@
 				</div>
             </div>
 			<br>
-			<div class="card-header pandemic-border-bottom">
+			<div class="card-header pandemic-border-bottom index_bc_gray">
 				<div>
 					<div class="admin-index-ps">
 						<span>선택</span>

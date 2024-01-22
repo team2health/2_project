@@ -9,7 +9,7 @@
 		@csrf
 		@method('PUT')       
 		<div class="insert_bottom_button">
-			<a href="{{url()->previous()}}"><button type="button" class="insert_btn"><</button></a>	
+			<a href="{{url()->previous()}}"><button type="button" class="insert_btn_cancle"><</button></a>	
 			<p>글 수정</p>	
 			<button type="submit" class="insert_btn">수정완료</button>	
 		</div>	     
@@ -60,10 +60,10 @@
 			<div id="hashtagContainer" class="insert_hashtag" >
 					@foreach ($result->hashtags as $hashtag)
 						
+					<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">
 						<span class='selected-tag' data-selected-tag="{{ $hashtag->hashtag_name }}">
-							{{ $hashtag->hashtag_name }} 
-							<button type="button" onclick="removeSelectedTag('{{ $hashtag->hashtag_name }}')">X</button>
-						</span>
+							{{ $hashtag->hashtag_name }} X
+						</span></button>
 					@endforeach
 					
 			</div>

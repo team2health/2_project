@@ -496,14 +496,14 @@ if ($request->imgUrl) {
     $imageIdsToDelete = explode(',',$imageIdsToDelete);
 
     foreach ($imageIdsToDelete as $imageIdToDelete) {
-        Log::debug("삭제할 이미지 ID: " . $imageIdToDelete);
+        // Log::debug("삭제할 이미지 ID: " . $imageIdToDelete);
 
         // 각 이미지 ID에 대한 삭제 작업 수행
         $imageToDelete = Board_img::find($imageIdToDelete);
 
         if ($imageToDelete) {
             $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-            Log::debug("이미지 경로: " . $imagePath);
+            // Log::debug("이미지 경로: " . $imagePath);
 
             if (File::exists($imagePath)) {
                 // 파일 시스템에서 이미지 삭제
@@ -514,7 +514,7 @@ if ($request->imgUrl) {
             $imageToDelete->delete();
             Log::debug("이미지 삭제 완료");
         } else {
-            Log::debug("삭제할 이미지를 찾을 수 없습니다.");
+            // Log::debug("삭제할 이미지를 찾을 수 없습니다.");
         }
     }
 }

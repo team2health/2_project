@@ -192,38 +192,85 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// function handleTagClick(tag) {
+//     var clickedTagName = tag.getAttribute('data-tag');
+
+//     // 이미 선택된 태그인지 확인
+//     if (!selectedHashtags.includes(clickedTagName)) {
+//         // 클릭한 태그의 이름을 배열에 추가
+//         selectedHashtags.push(clickedTagName);
+
+//         // 출력할 div 선택
+//         var outputDiv = document.getElementById('hashtagContainer');
+
+//         // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
+//         var tagSpan = document.createElement('span');
+//         tagSpan.className = 'selected-tag';
+//         tagSpan.setAttribute('data-selected-tag', clickedTagName);
+//         tagSpan.innerHTML = clickedTagName + ' <button type="button" onclick="removeSelectedTag(this)">X</button>';
+
+//         // span 태그를 출력 div에 추가
+//         outputDiv.appendChild(tagSpan);
+
+//         // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
+//         var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
+//         selectedHashtagsInput.value = selectedHashtags.join(',');
+//     }
+    
+//     // 기존 태그 목록에 존재하지 않는 경우에만 추가
+    
+// }
+
+// function removeSelectedTag(button) {
+//     // 삭제 버튼이 속한 span 태그를 찾아 삭제
+//     var tagSpan = button.parentNode;
+//     var clickedTagName = tagSpan.getAttribute('data-selected-tag');
+
+//     // 선택된 해시태그 배열에서 삭제
+//     selectedHashtags = selectedHashtags.filter(function (tag) {
+//         return tag !== clickedTagName;
+//     });
+
+//     // 출력할 div에서 삭제된 span 태그를 제거
+//     tagSpan.parentNode.removeChild(tagSpan);
+
+//     // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
+//     var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
+//     selectedHashtagsInput.value = selectedHashtags.join(',');
+// }
 function handleTagClick(tag) {
     var clickedTagName = tag.getAttribute('data-tag');
 
-    // 이미 선택된 태그인지 확인
-    if (!selectedHashtags.includes(clickedTagName)) {
-        // 클릭한 태그의 이름을 배열에 추가
-        selectedHashtags.push(clickedTagName);
+    // 클릭한 태그의 이름을 배열에 추가
+    selectedHashtags.push(clickedTagName);
 
         // 출력할 div 선택
         var outputDiv = document.getElementById('hashtagContainer');
 
-        // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
-        var tagSpan = document.createElement('span');
-        tagSpan.className = 'selected-tag';
-        tagSpan.setAttribute('data-selected-tag', clickedTagName);
-        tagSpan.innerHTML = clickedTagName + ' <button type="button" onclick="removeSelectedTag(this)">X</button>';
+        // let tagButton = document.createElement('button');
 
-        // span 태그를 출력 div에 추가
-        outputDiv.appendChild(tagSpan);
+    // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
+    var tagSpan = document.createElement('span');
+    tagSpan.className = 'selected-tag';
+    tagSpan.setAttribute('data-selected-tag', clickedTagName);
+    tagSpan.innerHTML = clickedTagName + ' <button type="button" onclick="removeSelectedTag(this)">X</button>';
 
-        // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
-        var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
-        selectedHashtagsInput.value = selectedHashtags.join(',');
-    }
-    
-    // 기존 태그 목록에 존재하지 않는 경우에만 추가
-    
+    // span 태그를 출력 div에 추가
+    outputDiv.appendChild(tagSpan);
+
+    // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
+    var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
+    selectedHashtagsInput.value = selectedHashtags.join(',');
+
+    // 클릭한 태그에 이벤트 리스너 추가하여 클릭시 삭제 함수 호출
+    tagSpan.addEventListener('click', function() {
+        removeSelectedTag(tagSpan);
+    });
 }
 
-function removeSelectedTag(button) {
+function removeSelectedTag(element) {
     // 삭제 버튼이 속한 span 태그를 찾아 삭제
-    var tagSpan = button.parentNode;
+    var tagSpan = element;
     var clickedTagName = tagSpan.getAttribute('data-selected-tag');
 
     // 선택된 해시태그 배열에서 삭제
@@ -238,6 +285,7 @@ function removeSelectedTag(button) {
     var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
     selectedHashtagsInput.value = selectedHashtags.join(',');
 }
+
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
     selectedCategories = [];
