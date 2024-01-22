@@ -44,5 +44,6 @@ class VerifyCsrfToken extends Middleware
         '/emailchkset',
         '/admin/userdeclaration',
         '/hashtagcheck',
+        '/admin/deletedcontentsort',
     ];
 }

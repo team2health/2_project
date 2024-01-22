@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Auth\Middleware\Adminauth as Middleware;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\User;
+use App\Mail\ComplaintMail;
 use App\Models\Comment;
 use App\Models\Board_report;
 use App\Models\Comment_report;
@@ -23,8 +26,6 @@ class ContentsadminController extends Controller
         $end_date = $request->end_year.$request->end_month.$request->end_day;
         // $date[] = $start_date;
         // $date[] = $end_date;
-        Log::debug($start_date);
-        Log::debug($end_date);
 
 
         if(session()->has('align_board')) {
@@ -43,7 +44,6 @@ class ContentsadminController extends Controller
     }
 
     public function contentssort(Request $request) {
-        Log::debug($request);
 
         $result = $request->align_board;
         // 세션에 값 저장
@@ -54,25 +54,21 @@ class ContentsadminController extends Controller
     public function admincontents($result, $date = null) {
         if (!$date) {
             $date = date('Ymd');
-        }
-        if(session()->has('align_board')) {
-            Log::debug('if문');
-            $align_board = session('align_board');
-            return redirect()->route('admin.admincontentsset',
-            ['align_board' => $align_board, 'start_date' => '19700101', 'end_date' => $date]);
-        } else {
-            Log::debug('else문');
-            return redirect()->route('admin.admincontentsset',
-            ['align_board' => '1', 'start_date' => '19700101', 'end_date' => $date]);
+            $oneMonthAgo = Carbon::now()->subMonth();
+            $result = $oneMonthAgo->format('Ymd');
         }
         
+        if(session()->has('align_board')) {
+            $align_board = session('align_board');
+            return redirect()->route('admin.admincontentsset',
+            ['align_board' => $align_board, 'start_date' => $result, 'end_date' => $date]);
+        } else {
+            return redirect()->route('admin.admincontentsset',
+            ['align_board' => '1', 'start_date' => $result, 'end_date' => $date]);
+        }
     }
 
     public function admincontentsset($align_board, $start_date, $end_date) {
-        Log::debug($align_board);
-        Log::debug($start_date);
-        Log::debug($end_date);
-
         $boards = DB::table('boards')
         ->select(
             'boards.board_id',
@@ -84,12 +80,13 @@ class ContentsadminController extends Controller
             DB::raw('count(comments.comment_id) as comcount'),
             'boards.created_at'
         )
+        ->whereNull('boards.deleted_at')
         ->leftJoin('users', 'users.id', 'boards.u_id')
         ->leftJoin('comments', 'comments.board_id', 'boards.board_id')
         ->leftJoin('categories', 'categories.category_id', 'boards.category_id');
         if($end_date !== null) {
             $boards = $boards->whereBetween('boards.created_at', [$start_date.'000000', $end_date.'235959']);
-        } 
+        }
         $boards->wherenull('boards.board_show_flg')
         ->groupBy(
             'boards.board_id',
@@ -108,22 +105,39 @@ class ContentsadminController extends Controller
 
         $data = $boards->paginate(10);
 
+        $date = [$start_date, $end_date];
         return view('adminpage.contentsmanagement')
-        ->with('data', $data);
+        ->with('data', $data)
+        ->with('date', $date);
     }
 
     public function admincomments($date = null) {
         if (!$date) {
-            $date[] = date('Y-m-d');
+            $start_date = Carbon::now()->subMonth()->format('Ymd');
+            $end_date = date('Ymd');
         }
-        return $this->admincommentsset($date);
+        return $this->admincommentsset($start_date, $end_date);
     }
-    public function admincommentsset($date) {
-        $start_date = $date[0];
-        $date_count = count($date);
-        if($date_count > 1) {
-            $end_date = $date[1];
-        }
+    // 댓글 날짜 검색
+    public function commentsearch(Request $request) {
+        $start_date =  $request->start_year.$request->start_month.$request->start_day;
+        $end_date = $request->end_year.$request->end_month.$request->end_day;
+
+        return redirect()->route('admin.admincommentsset', 
+        ['start_date' => $start_date, 'end_date' => $end_date]);
+    }
+    
+    public function admincommentsset($date, $date2) {
+
+        $start_date = $date;
+        $end_date = $date2;
+        // if(count($date) > 1) {
+        //     $start_date = $date[0];
+        //     $end_date = $date[1];
+        // } else {
+        //     $start_date = $date[0];
+        //     $end_date = date('Ymd');
+        // }
 
         $comment = DB::table('comments')
         ->select(
@@ -136,18 +150,16 @@ class ContentsadminController extends Controller
             , 'users.user_name')
         ->join('boards', 'boards.board_id', 'comments.board_id')
         ->join('users', 'users.id', 'comments.u_id')
-        ->whereNull('comments.deleted_at');
+        ->whereNull('comments.deleted_at')
+        ->where('comments.created_at','>=', $start_date.'000000')
+        ->where('comments.created_at','<=', $end_date.'235959')
+        ->orderBy('comments.created_at', 'desc')
+        ->paginate(10); 
 
-        if(isset($end_date)) {
-                $comment = $comment->where('comments.created_at','>=', $start_date.'000000');
-                $comment = $comment->where('comments.created_at','<=', $end_date.'000000');
-            } else {
-                $comment = $comment->where('comments.created_at','>=', $start_date.'23:59:59');
-            }
-            $comment =  $comment->orderBy('comments.comment_id', 'desc')->paginate(10);
-
+        $date = [$start_date, $end_date];
         return view('adminpage.admincomments')
-        ->with('comment', $comment);
+        ->with('comment', $comment)
+        ->with('date', $date);
     }
 
 
@@ -202,31 +214,25 @@ class ContentsadminController extends Controller
 
     return view('adminpage.declaration')->with('data', $data);
     }
-    // 댓글 날짜 검색
-    public function commentsearch(Request $request) {
-        $start_date =  $request->start_year.$request->start_month.$request->start_day;
-        $end_date = $request->end_year.$request->end_month.$request->end_day;
-        $date[] = $start_date;
-        $date[] = $end_date;
-        return $this->admincommentsset($date);
-    }
 
     // 카테고리 업데이트
     public function changecategory(Request $request) {
+
         $id = $request->board_id;
         $category_id = $request->category_id;
-        $record = Board::find($id);
-        if ($record) {
-            $record->update([
+        Board::find($id)->update([
                 'category_id' => $category_id,
-            ]);
-            return redirect()->route('admin.contents', ['align_board' => 1]);
-        }
+        ]);
+
+        return redirect()->route('admin.contents', ['align_board' => 1]);
     }
+
 
     // 보드 flg추가 후 휴지통으로 전달
     public function deleteboard(Request $request) {
-
+        if(!isset($request['board_id'])) {
+            return redirect()->route('admin.contents', ['align_board' => 1]);
+        }
         $today = Carbon::now();
         $today_set = $today->format('Y-m-d H:i:s');
         foreach ($request['board_id'] as $board_id) {
@@ -239,15 +245,39 @@ class ContentsadminController extends Controller
 
     // 댓글 삭제
     public function deletecomments(Request $request) {
-
+        if(!isset($request['comment_id'])) {
+            return redirect()->route('admin.comments');
+        }
         foreach ($request['comment_id'] as $comment_id) {
             Comment::destroy([$comment_id]);
         }
         return redirect()->route('admin.comments');
     }
-    // 휴지통 이동
-    public function deletedcontent() {
-        $data = DB::table('boards')
+
+    public function deletedcontentdate($align_board, $date = null) {
+        if (!$date) {
+            $end_date = date('Ymd');
+            $date = Carbon::now()->subMonth();
+            $start_date = $date->format('Ymd');
+        }
+        if(!isset($align_board)) {
+            $align_board = '1';
+        }
+        // exit;
+        return redirect()->route('deletedcontent.get',
+            ['align_board' => $align_board, 'start_date' => $start_date, 'end_date' => $end_date]);
+    }
+    public function deletedsearch(Request $request) {
+        $start_date =  $request->start_year.$request->start_month.$request->start_day;
+        $end_date = $request->end_year.$request->end_month.$request->end_day;
+
+        return redirect()->route('deletedcontent.get', 
+        ['align_board' => '1', 'start_date' => $start_date, 'end_date' => $end_date]);
+    }
+    // 휴지통
+    public function deletedcontent($align_board, $start_date, $end_date) {
+
+        $query = DB::table('boards')
         ->select(
             'boards.board_id'
             ,'boards.board_title'
@@ -264,6 +294,8 @@ class ContentsadminController extends Controller
         ->leftJoin('categories', 'categories.category_id', 'boards.category_id')
         ->leftJoin('users','boards.u_id', 'users.id')
         ->leftJoin('comments','comments.board_id', 'boards.board_id')
+        ->where('boards.updated_at','>=', $start_date.'000000')
+        ->where('boards.updated_at','<=', $end_date.'235959')
         ->whereNotNULL('boards.board_show_flg')
         ->whereNULL('boards.deleted_at')
         ->groupBy('boards.board_id'
@@ -275,14 +307,22 @@ class ContentsadminController extends Controller
                 ,'boards.board_hits'
                 ,'comments.board_id'
                 ,'categories.category_name'
-                )
-        ->orderBy('boards.updated_at', 'desc')
-        ->paginate(10);
-        return view('adminpage.deletedcontent')->with('data',$data);
+        );
+        if ($align_board == '0') {
+            $query->orderBy('boards.updated_at', 'asc');
+        } else if ($align_board == '1') {
+            $query->orderBy('boards.updated_at', 'desc');
+        }
+        $date = [$start_date, $end_date];
+        $data = $query->paginate(10);
+        return view('adminpage.deletedcontent')->with('data',$data)->with('date', $date);
     }
 
     // 게시글 플래그 1 등록
     public function temporarilydelete(Request $request) {
+        if(!isset($request['board_id'])) {
+            return redirect()->route('contents.declaration');
+        }
         foreach ($request['board_id'] as $board_id) {
             DB::table('board_reports')
             ->where('board_id', $board_id)
@@ -293,28 +333,71 @@ class ContentsadminController extends Controller
 
     // 게시글 플래그 등록
     public function deletedeclarationboard(Request $request) {
+        if(!isset($request['board_id'])) {
+            return redirect()->route('contents.declaration');
+        }
         foreach ($request['board_id'] as $board_id) {
             Board::destroy($board_id);
+            
+            // 신고 메일 보내는 쿼리문
+            $result[] = DB::table('board_reports')
+            ->select('users.id'
+            , 'boards.board_title'
+            , 'boards.board_content'
+            , 'boards.created_at')
+            ->join('users','board_reports.u_id','users.id')
+            ->join('boards', 'boards.board_id', 'board_reports.board_id')
+            ->where('boards.board_id', $board_id)
+            ->where('board_reports.board_report_complete', '0')
+            ->whereNull('users.deleted_at')
+            ->get();
+        }
+        $result = $result[0];
+        $result = json_decode($result, true);
+        foreach ($result as $index => $mail_get) {
+            $id = $mail_get["id"];
+            $user = User::find($id);
+            $info = [
+                'user_name' => $user->user_name
+                , 'created_at' => $result[$index]["created_at"]
+                , 'board_title' => $result[$index]["board_title"]
+                , 'board_content' => $result[$index]["board_content"]
+            ];
+            if ($user) {
+                Log::debug($user->user_email);
+                Mail::to($user->user_email)->send(new ComplaintMail($info));
+            }
+            $info = [];
         }
         return redirect()->route('contents.declaration');
     }
 
     // 게시글 플래그 삭제(유저가 다시 볼 수 있게)
     public function boardsetshow(Request $request) {
+
+        if(!isset($request['board_id'])) {
+            return redirect()->route('deletedcontent.get', ['align_board' => '1']);
+        }
+        // 값이 없을 시 return 추가 예정
         foreach ($request['board_id'] as $board_id) {
             DB::table('boards')
             ->where('board_id', $board_id)
             ->update(['board_show_flg' => null]);
         }
-        return redirect()->route('deletedcontent.get');
+        return redirect()->route('deletedcontent.get', ['align_board' => '1']);
     }
 
     // 게시글 관리자 기준 삭제
     public function boardsoftdelete(Request $request) {
+
+        if(!isset($request['board_id'])) {
+            return redirect()->route('deletedcontent.get', ['align_board' => '1']);
+        }
+
         foreach ($request['board_id'] as $board_id) {
             board::destroy([$board_id]);
         }
-        return redirect()->route('deletedcontent.get');
+        return redirect()->route('deletedcontent.get', ['align_board' => '1']);
     }
     // 댓글 신고 페이지
     public function commentsdeclaration() {
@@ -367,6 +450,9 @@ class ContentsadminController extends Controller
     }
 
     public function admindeletecomment(Request $request) {
+        if(!isset($request['board_id'])) {
+            return redirect()->route('comments.declaration');
+        }
         foreach ($request['comment_id'] as $comment_id) {
             Comment::destroy([$comment_id]);
         }
@@ -374,6 +460,9 @@ class ContentsadminController extends Controller
     }
 
     public function setcommentflg(Request $request) {
+        if(!isset($request['comment_id'])) {
+            return redirect()->route('comments.declaration');
+        }
         foreach ($request['comment_id'] as $comment_id) {
             DB::table('comment_reports')
             ->where('comment_id', $comment_id)
@@ -384,8 +473,6 @@ class ContentsadminController extends Controller
 
     // 신고자 조회
     public function userdeclaration(Request $request) {
-        Log::debug($request);
-
 
         $user = DB::table('board_reports')
         ->join('users','board_reports.u_id', 'users.id')
@@ -399,8 +486,12 @@ class ContentsadminController extends Controller
         ->orderby('board_reports.created_at', 'desc')
         ->get();
 
-
         return response()->json($user);
-
         }
+
+    // 삭제된 게시글 정렬
+    public function deletedcontentsort(Request $request) {
+        $result = $request->sort;
+        return $this->deletedcontentdate($result);
+    }
 }

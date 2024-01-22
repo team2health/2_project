@@ -73,3 +73,19 @@ function insertHashtag() {
 		console.error(error.stack);
 	})
 }
+
+function hashtagdelete() {
+    let checkboxes = document.querySelectorAll('input[name="hashtag_id[]"]');
+    let chkflg = false;
+
+    checkboxes.forEach(function(checkbox) {
+        if(checkbox.checked === true) {
+            chkflg = true;
+        }
+    });
+    if(chkflg === false) {
+        alert('해시태그를 선택하여주십시오.');
+        return false;
+    }
+    document.getElementById('hashtagdeletebox').submit();
+}

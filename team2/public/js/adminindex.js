@@ -1,11 +1,16 @@
-let myChart = echarts.init(document.getElementById('chart'));
 let MAINDATA = JSON.parse(document.getElementById('statistics').getAttribute('data-results'));
 let GENDERMAIN = document.getElementById('main-gender');
+let PSMODAL1 = document.getElementById('psModal1');
+let PSMODAL2 = document.getElementById('psModal2');
+let PSMODAL3 = document.getElementById('psModal3');
+let PSMODAL4 = document.getElementById('psModal4');
 
 let data = MAINDATA[0];
 let genderdata = MAINDATA[1];
 let boarddata = MAINDATA[2];
 let commentdata = MAINDATA[3];
+let psrankdata = MAINDATA[4];
+let psrankdata2 = MAINDATA[6];
 
 genderdata.forEach(element => {
 	let SPAN = document.createElement('div');
@@ -17,6 +22,22 @@ genderdata.forEach(element => {
 	SPAN.classList = 'genderList';
 	GENDERMAIN.appendChild(SPAN);
 });
+
+function psModal(index) {
+	if(index === 1) {
+		PSMODAL1.classList = 'psmodaldisplaynone';
+		PSMODAL2.removeAttribute('class');
+	} else if(index === 2) {
+		PSMODAL2.classList = 'psmodaldisplaynone';
+		PSMODAL1.removeAttribute('class');
+	} else if(index === 3) {
+		PSMODAL3.classList = 'psmodaldisplaynone';
+		PSMODAL4.removeAttribute('class');
+	} else if(index === 4) {
+		PSMODAL4.classList = 'psmodaldisplaynone';
+		PSMODAL3.removeAttribute('class');
+	}
+}
 
 let week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 let boardcnt = [];
@@ -46,6 +67,8 @@ week.forEach(week => {
 });
 	commentcnt.push(ccount);
 });
+
+let myChart = echarts.init(document.getElementById('chart'));
 
 option = {
 	tooltip: {
@@ -132,6 +155,124 @@ series: [
 
 myChart1.setOption(option1);
 
+let pscnt = [];
+let pslastyearcnt = [];
+let psname = [];
+
+psrankdata.forEach(element => {
+	pscnt.push(element.cnt);
+	pslastyearcnt.push(element.last_year_cnt);
+	psname.push(element.part_name[0].part_name+' - '+element.symptom_name[0].symptom_name);
+});
+
+let myChart2 = echarts.init(document.getElementById('chart2'));
+
+option2 = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  legend: {
+	top: 10,
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    boundaryGap: [0, 0.01]
+  },
+  yAxis: {
+    type: 'category',
+    data: psname.reverse()
+  },
+  series: [
+    {
+      name: '2023',
+      type: 'bar',
+      data: pslastyearcnt.reverse()
+    },
+    {
+      name: '2024',
+      type: 'bar',
+      data: pscnt.reverse()
+    }
+  ]
+};
+
+myChart2.setOption(option2);
+
+let pscnt2 = [];
+let pslastyearcnt2 = [];
+let psage2 = [];
+let psname2 = [];
+
+psrankdata2.forEach(element => {
+	pscnt2.push(element.cnt);
+	pslastyearcnt2.push(element.last_year_cnt);
+	psage2.push(element.age_range);
+	psname2.push(element.part_name[0].part_name+' - '+element.symptom_name[0].symptom_name);
+});
+
+let psname3 = psname2.reverse();
+
+let myChart3 = echarts.init(document.getElementById('chart3'));
+
+option3 = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    },
+    textStyle: {
+      fontSize: 14,
+    },
+	formatter: function(params) {
+		var dataIndex = params[0].dataIndex;
+
+		var customTooltip = psname3[dataIndex] + '<br>' + params[0].marker + params[0].seriesName + ' ' + params[0].value + '<br>' + params[1].marker + params[1].seriesName + '  ' + params[1].value;
+		return customTooltip;
+	  }
+  },
+  legend: {
+	top: 10,
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    boundaryGap: [0, 0.01]
+  },
+  yAxis: {
+    type: 'category',
+    data: psage2.reverse()
+  },
+  series: [
+    {
+      name: '2023',
+      type: 'bar',
+      data: pslastyearcnt2.reverse()
+    },
+    {
+      name: '2024',
+      type: 'bar',
+      data: pscnt2.reverse()
+    }
+  ]
+};
+
+myChart3.setOption(option3);
+
+
 function insertpandemic() {
 	let PANDEMICNAME = document.getElementById('pandemic_name_insert').value;
 	let PANDEMICSYMPTOM = document.getElementById('pandemic_symptom_insert').value;
@@ -190,4 +331,20 @@ function insertpandemic() {
 	.catch(error => {
 		console.error(error.stack);
 	})
+}
+
+function pandemicdelete() {
+    let checkboxes = document.querySelectorAll('input[name="pandemic_id[]"]');
+    let chkflg = false;
+
+    checkboxes.forEach(function(checkbox) {
+        if(checkbox.checked === true) {
+            chkflg = true;
+        }
+    });
+    if(chkflg === false) {
+        alert('유행하는 질병을 선택하여주십시오.');
+        return false;
+    }
+    document.getElementById('pandemicdeletebox').submit();
 }

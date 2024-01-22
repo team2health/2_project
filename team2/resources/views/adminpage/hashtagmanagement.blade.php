@@ -46,7 +46,7 @@
                     @endforeach
                     <br>
                     <div class="button-box">
-                        <button type="submit" class="admin-custom-btn custom-common-delete-btn">삭제</button>
+                        <button type="button" class="admin-custom-btn custom-common-delete-btn" onclick="hashtagdelete(); return false;">삭제</button>
                     </div>
                 </form>
         </div>  

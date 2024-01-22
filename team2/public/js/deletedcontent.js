@@ -24,28 +24,41 @@ contentsmanagementSearchAlign.addEventListener('click', function() {
 })
 
 // 정렬
-let alignValueSet = document.getElementById('alignValueSet');
-alignValueSet.addEventListener('click', function(){
-    contentsmanagementSearchAlignValue.setAttribute('value','0');
-    let AlignValueForm = document.getElementById('AlignValueForm');
+let sortValue = document.getElementById('sortValue');
+let alignValueSet3 = document.getElementById('alignValueSet3');
+alignValueSet3.addEventListener('click', function(){
+    let deletedcontentsort = document.getElementById('deletedcontentsort');
+    sortValue.setAttribute('value','0');
     contentclass.classList.add('admin-display-none');
-    AlignValueForm.submit();
+    deletedcontentsort.submit();
 })
-let alignValueSet2 = document.getElementById('alignValueSet2');
-alignValueSet2.addEventListener('click', function(){
-    contentsmanagementSearchAlignValue.setAttribute('value','1');
-    let AlignValueForm = document.getElementById('AlignValueForm');
+let alignValueSet4 = document.getElementById('alignValueSet4');
+alignValueSet4.addEventListener('click', function(){
+    sortValue.setAttribute('value','1');
+    let deletedcontentsort = document.getElementById('deletedcontentsort');
     contentclass.classList.add('admin-display-none');
-    AlignValueForm.submit();
+    deletedcontentsort.submit();
 })
 
 let form = document.getElementById('deletedContentMainForm');
 function deletecontent() {
-    form.setAttribute('action', '/admin/boardsoftdelete');
-    form.submit();
+    let selectedItems = document.querySelectorAll('input[name="board_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 게시글이 없습니다.');
+        return false;
+    } else {
+        form.setAttribute('action', '/admin/boardsoftdelete');
+        form.submit();
+    }
 }
 
 function restoreBoardSet() {
-    form.setAttribute('action', '/admin/boardsetshow');
-    form.submit();
+    let selectedItems = document.querySelectorAll('input[name="board_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 게시글이 없습니다.');
+        return false;
+    } else {
+        form.setAttribute('action', '/admin/boardsetshow');
+        form.submit();
+    }
 }

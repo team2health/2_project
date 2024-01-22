@@ -6,7 +6,9 @@
 <br><br>
 인증코드
 <br><br>
-{{ $email['verification_code'] }}
+<h2>
+    {{ $email['verification_code'] }}
+</h2>
 <br><br>
 감사합니다. 늘 건강하시길 바랍니다.
 -건강하시조 드림.

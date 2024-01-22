@@ -31,15 +31,40 @@ class CommentController extends Controller
 
         return redirect()->back();
     }
+    // public function commentreport(Request $request){
+    //     // dd($request);
+    //     // dd($request->attributes->all());
+    //     $commentId = $request->input('comment_id');
+    //     $userId = $request->input('u_id');
+    //     $flg=$request->input('values');
+    // // dd($boardId, $userId,$flg);
+    //     Comment_report::create([
+    //         'comment_id' =>$commentId,
+    //         'u_id' => $userId,
+    //         'comment_reason_flg' =>$flg           
+    //     ]);  
+    //     return redirect()->back();
+    // }
+    
     public function commentreport(Request $request){
-        // dd($request);
-        // dd($request->attributes->all());
+        Log::debug($request->all());
         $commentId = $request->input('comment_id');
-        $userId = $request->input('u_id');
-        $flg=$request->input('values');
+    $userId = $request->input('u_id');
+    Log::debug([$commentId, $userId]);
+    $mouReport = Comment_report::where('comment_id',$commentId)
+                                       ->where('u_id', $userId)
+                                       ->first();
+                                    $query = Comment_report::where('comment_id', $commentId)
+                       ->where('u_id', $userId)
+                       ->toSql();
+        if ($mouReport) {
+            // 사용자가 이미 이 게시글을 신고했음을 알림
+            return redirect()->back()->with('error', '이미 신고한 댓글입니다.');
+        }
+    $flg=$request->input('values');
     // dd($boardId, $userId,$flg);
         Comment_report::create([
-            'comment_id' =>$commentId,
+            'comment_id' =>$commentId ,
             'u_id' => $userId,
             'comment_reason_flg' =>$flg           
         ]);  

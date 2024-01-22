@@ -9,7 +9,7 @@
         <form action="{{ route('admin.adminsearchsymptoms') }}" method="get">
             @csrf
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="증상 검색" name="search_keyword_sym">
+                <input type="text" class="form-control" placeholder="증상 및 부위 검색" name="search_keyword_sym">
                 <button class="btn btn-outline-secondary" type="submit">검색</button>
             </div>
         </form>
@@ -59,8 +59,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="addSymptomModalLabel">증상 추가</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                            <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close">
                             </button>
                         </div>
                         <div class="modal-body">
@@ -80,7 +79,6 @@
                                     <label for="symptom_name" class="form-label">증상 이름</label>
                                     <input type="text" class="form-control" id="symptom_name" name="symptom_name" required>
                                 </div>
-                                <!-- 필요한 증상 추가 폼 요소들을 여기에 추가하세요 -->
                                 <button type="submit" class="btn btn-primary" onclick="checkAndAddSymptom()">추가</button>
                             </form>
                         </div>
@@ -126,6 +124,6 @@
                 </div>
             </nav>
         </div>
-        <script src="/js/symptommanagement.js"></script>
+        <script src="/js/symptommanagement.js"></script>  
 
 @endsection

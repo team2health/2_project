@@ -9,24 +9,48 @@ allselectcheck.addEventListener('change', function() {
 
 let form = document.getElementById('setDeclationFlg');
 function setDeclarationflg() {
-    form.setAttribute('action', '/admin/temporarilydelete');
-    form.submit();
+    let selectedItems = document.querySelectorAll('input[name="board_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 게시글이 없습니다.');
+        return false;
+    } else {
+        form.setAttribute('action', '/admin/temporarilydelete');
+        form.submit();
+    }
 }
 
 function deleteDeclaration() {
+    let selectedItems = document.querySelectorAll('input[name="board_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 게시글이 없습니다.');
+        return false;
+    } else {
     form.setAttribute('action', '/admin/deletedeclarationboard');
     form.submit();
+    }
 }
 
 let commentform = document.getElementById('CommentSetDeclationFlg');
 function deleteDeclarationComment() {
-    commentform.setAttribute('action', '/admin/admindeletecomment');
-    commentform.submit();
+    let selectedItems = document.querySelectorAll('input[name="comment_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 댓글이 없습니다.');
+        return false;
+    } else {
+        commentform.setAttribute('action', '/admin/admindeletecomment');
+        commentform.submit();
+    }
 }
 
 function SetCommentFlg() {
-    commentform.setAttribute('action', '/admin/setcommentflg');
-    commentform.submit();
+    let selectedItems = document.querySelectorAll('input[name="comment_id[]"]:checked');
+    if(selectedItems.length < 1) {
+        alert('선택된 댓글이 없습니다.');
+        return false;
+    } else {
+        commentform.setAttribute('action', '/admin/setcommentflg');
+        commentform.submit();
+    }
 }
 
 // 신고 내역 조회

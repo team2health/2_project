@@ -15,23 +15,45 @@ window.addEventListener('click', function(event) {
         closeModal();
     }
 });
-function openModals() {
-    document.getElementById('myModalcomment').style.display = 'block';
+// function openModals(commentId) {
+//     console.log('Received Comment ID:', commentId);
+//     document.getElementById('myModalcomment'+ commentId).style.display = 'block';
+// }
+
+// // 모달 닫기
+// function closeModals(commentId) {
+//     console.log('Closing Modals. Resetting Comment ID.');
+//     document.getElementById('myModalcomment'+ commentId).style.display = 'none';
+// }
+
+// // 모달 외부 클릭 시 닫기
+// window.addEventListener('click', function(event) {
+//     var modal = document.getElementById('myModalcomment');
+//     if (event.target === modal) {
+//         closeModals();
+//     }
+// });
+function openModals(commentId) {
+    console.log('Received Comment ID:', commentId);
+    document.getElementById('myModalcomment' + commentId).style.display = 'block';
 }
 
-// 모달 닫기
-function closeModals() {
-    document.getElementById('myModalcomment').style.display = 'none';
+function closeModals(commentId) {
+    console.log('Received Comment ID:', commentId);
+    document.getElementById('myModalcomment' + commentId).style.display = 'none';
 }
 
-// 모달 외부 클릭 시 닫기
-window.addEventListener('click', function(event) {
-    var modal = document.getElementById('myModalcomment');
-    if (event.target === modal) {
-        closeModals();
-    }
-});
+function reportComment() {
+    // 여기에서 서버로 데이터를 전송하고 필요한 처리를 수행
+    // ...
+    console.log('Reporting Comment ID:', document.querySelector('input[name="comment_id"]').value);
 
+    // 이후에 필요한 동작을 수행할 수 있습니다.
+    // 예를 들어, 모달 닫기 등의 동작을 수행할 수 있습니다.
+
+    // 여기서 false를 반환하면 form이 submit되지 않습니다.
+    return true;
+}
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -52,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    
         });
     });
+    
 // document.addEventListener('DOMContentLoaded', function () {
 //     const deleteButtons = document.querySelectorAll('.delete-comment-btn');
 //     const reportButtons = document.querySelectorAll('.detail_comment-report-btn');
@@ -162,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         newCommentItem.innerHTML = `
             <div class="last_user">
-                <img class="community_icon" src="../img/default_f.png" alt="" class="board_nic_img">
+                <img class="community_icon" src="/img/default_f.png" alt="" class="board_nic_img">
                 <div class="board_nic_text">
                     <div>
                         <span>${comment.user_name}</span>

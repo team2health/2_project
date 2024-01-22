@@ -257,10 +257,21 @@ window.addEventListener('click', function(event) {
 });
 function validateForm() {
     var selectedCategory = document.querySelector('.category-item.selected');
-    
+    var input= document.getElementById('selectFile');
+    var maxFileSize = 5 * 1024 * 1024; // 5MB
     if (!selectedCategory) {
         alert('게시판을 선택해주세요.');
         return false;
+    }
+    
+
+    for (var i = 0; i < input.files.length; i++) {
+        var fileSize = input.files[i].size;
+
+        if (fileSize > maxFileSize) {
+            alert('이미지 파일은 5MB를 초과할 수 없습니다.');
+            return false; // 업로드를 중지합니다.
+        }
     }
 
     return true;

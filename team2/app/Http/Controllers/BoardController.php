@@ -253,34 +253,94 @@ class BoardController extends Controller
     return redirect()->route('detail', ['board' => $board_id])->with(['board_detail_get'=>$board_detail_get]);
     // $boardDetail = session('data');
 }
-public function boardreport(Request $request){
-    // dd($request);
-    // dd($request->attributes->all());
+// public function boardreport(Request $request){
+//     // dd($request);
+//     // dd($request->attributes->all());
+//     $boardId = $request->input('board_id');
+// $userId = $request->input('u_id');
+// $flg=$request->input('options');
+// // dd($boardId, $userId,$flg);
+//     Board_report::create([
+//         'board_id' =>$boardId ,
+//         'u_id' => $userId,
+//         'board_reason_flg' =>$flg           
+//     ]);  
+//     return redirect()->back();
+// }
+// public function boardreport(Request $request) {
+//     $boardId = $request->input('board_id');
+//     $userId = $request->input('u_id');
+
+//     // 사용자가 이미 이 게시글을 신고했는지 확인
+//     $existingReport = Board_report::where('board_id', $boardId)
+//                                    ->where('u_id', $userId)
+//                                    ->first();
+
+//     if ($existingReport) {
+//         // 사용자가 이미 이 게시글을 신고했음을 알림
+//         return redirect()->back()->with('error', '이미 신고한 게시글입니다.');
+//     }
+
+//     $flg = $request->input('options');
+
+//     // 기존 신고가 없으면 새로운 신고 추가
+//     Board_report::create([
+//         'board_id' => $boardId,
+//         'u_id' => $userId,
+//         'board_reason_flg' => $flg
+//     ]);
+
+//     // 성공적으로 게시글을 신고한 후의 리디렉션 또는 다른 작업 수행
+//     return redirect()->back()->with('success', '게시글을 신고했습니다.');
+// }
+public function boardreport(Request $request) {
     $boardId = $request->input('board_id');
-$userId = $request->input('u_id');
-$flg=$request->input('options');
-// dd($boardId, $userId,$flg);
+    $userId = $request->input('u_id');
+
+    // 사용자가 이미 이 게시글을 신고했는지 확인
+    $existingReport = Board_report::where('board_id', $boardId)
+                                   ->where('u_id', $userId)
+                                   ->first();
+
+    if ($existingReport) {
+        // 사용자가 이미 이 게시글을 신고했음을 알림
+        return redirect()->back()->with('error', '이미 신고한 게시글입니다.');
+    }
+
+    $flg = $request->input('options');
+
+    // 기존 신고가 없으면 새로운 신고 추가
     Board_report::create([
-        'board_id' =>$boardId ,
+        'board_id' => $boardId,
         'u_id' => $userId,
-        'board_reason_flg' =>$flg           
-    ]);  
+        'board_reason_flg' => $flg
+    ]);
+
+    // 성공적으로 게시글을 신고한 후의 리디렉션 또는 다른 작업 수행
     return redirect()->back();
 }
-public function commentreport(Request $request){
-    // dd($request);
-    // dd($request->attributes->all());
-    $commentId = $request->input('comment_id');
-$userId = $request->input('u_id');
-$flg=$request->input('values');
-// dd($boardId, $userId,$flg);
-    Comment_report::create([
-        'comment_id' =>$commentId ,
-        'u_id' => $userId,
-        'comment_reason_flg' =>$flg           
-    ]);  
-    return redirect()->back();
-}
+// public function commentreport(Request $request){
+//     // dd($request);
+//     // dd($request->attributes->all());
+//     $commentId = $request->input('comment_id');
+// $userId = $request->input('u_id');
+// $mouReport = Comment_report::where('comment_id',$commentId)
+//                                    ->where('u_id', $userId)
+//                                    ->first();
+
+//     if ($mouReport) {
+//         // 사용자가 이미 이 게시글을 신고했음을 알림
+//         return redirect()->back()->with('error', '이미 신고한 댓글입니다.');
+//     }
+// $flg=$request->input('values');
+// // dd($boardId, $userId,$flg);
+//     Comment_report::create([
+//         'comment_id' =>$commentId ,
+//         'u_id' => $userId,
+//         'comment_reason_flg' =>$flg           
+//     ]);  
+//     return redirect()->back();
+// }
     
 
     /**

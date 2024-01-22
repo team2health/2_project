@@ -12,6 +12,11 @@
         <p class="detail_board_hits">조회수 : {{$data->board_hits}}</p>        
     <form action="{{ route('boardreport', ['board_id' => $data->board_id, 'u_id' => Auth::id()]) }}" method="POST">    
         @csrf
+        @if(session('error'))
+            <script>
+                alert("{{ session('error') }}");
+            </script>
+        @endif
         <div id="myModal" class="modal">
             <div class="comment_modal_content">            
                 <p><input type="radio" name="options" value="1">                                        
@@ -39,7 +44,10 @@
         <div class="last-board-title">    
             <p>{{ $data->board_title }}</p>
             @if(Auth::id() !== $data->user->id)
-        <button type="button" class="detail_comment-btn" onclick="openModal()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>
+        <button type="button" class="detail_comment-btn" onclick="openModal()">
+        <img src="/img/singo.png" style="width: 30px; height: 30px;" alt="">
+    </button>
+        
         @endif
         </div>
         {{-- <div class="last-board-detail"> --}}
@@ -107,36 +115,30 @@
                                 @endif 
                             </form>    
                             
-                            
-                            <form  action="{{ route('commentreport', ['comment_id' => $comment->comment_id, 'u_id' => Auth::id()]) }}" method="POST"> 
+                            <form  action="{{ route('commentreport', ['u_id' => Auth::id()]) }}" method="POST" onsubmit="return reportComment();"> 
                                 @csrf  
                                 @if(Auth::id() !== $comment->u_id)    
-                                <button type="button" class="detail_comment-report-btn comment_report_stance" onclick="openModals()"><img src="/img/singo.png" style="width: 30px; height: 30px;" alt=""></button>                          
-                                <div id="myModalcomment" class="modal">
+                                <button type="button" class="detail_comment-report-btn comment_report_stance" onclick="openModals({{ $comment->comment_id }})">
+                                    <img src="/img/singo.png" style="width: 30px; height: 30px;" alt="">
+                                </button>
+                                @endif
+                                
+                                <div class="modal" id="myModalcomment{{ $comment->comment_id }}">
                                     <div class="comment_modal_content">            
-                                        <p><input type="radio" name="values" value="1">                                        
-                                        언어폭력</p> 
-                                        <p><input type="radio" name="values" value="2">                                        
-                                        사기</p> 
-                                        <p><input type="radio" name="values" value="3">                                        
-                                        허위사실 유포</p>                                             
-                                        <p><input type="radio" name="values" value="4">
-                                        스팸</p>  
-                                        <p><input type="radio" name="values" value="5">
-                                        불법 또는 규제상품 판매</p> 
-                                        <p><input type="radio" name="values" value="6">
-                                        성희롱</p> 
-                                        <p><input type="radio" name="values" value="7">
-                                        혐오감을 주는 발언 또는 상징</p> 
-                                        <p><input type="radio" name="values" value="8">
-                                        마음에 들지 않습니다.</p> 
-                                        <button class="detail_report" type="submit">신고</button> 
-                                        <span class="close" onclick="closeModals()">취소</span>                                    
+                                        <p><input type="radio" name="values" value="1"> 언어폭력</p> 
+                                        <p><input type="radio" name="values" value="2"> 사기</p> 
+                                        <p><input type="radio" name="values" value="3"> 허위사실 유포</p>                                             
+                                        <p><input type="radio" name="values" value="4"> 스팸</p>  
+                                        <p><input type="radio" name="values" value="5"> 불법 또는 규제상품 판매</p> 
+                                        <p><input type="radio" name="values" value="6"> 성희롱</p> 
+                                        <p><input type="radio" name="values" value="7"> 혐오감을 주는 발언 또는 상징</p> 
+                                        <p><input type="radio" name="values" value="8"> 마음에 들지 않습니다.</p> 
+                                        <input type="hidden" name="comment_id" value="{{ $comment->comment_id }}">
+                                        <button class="detail_report" type="submit"  onclick="closeModals({{ $comment->comment_id }})">신고</button> 
+                                        <span class="close" onclick="closeModals()">취소</span>                                 
                                     </div>
                                 </div>
-                                @endif 
-                                </form>
-                                                       
+                            </form>                                              
                         </div>
                     </div>
                 </div>
