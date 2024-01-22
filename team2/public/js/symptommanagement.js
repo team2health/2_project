@@ -31,22 +31,3 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     
 });
-function checkAndAddSymptom() {
-    const selectedPartId = document.getElementById('part_id').value;
-    const newSymptomName = document.getElementById('symptom_name').value;
-
-    // 여기에서 이미 있는 증상인지 체크하는 API 호출 또는 필요한 로직 수행
-    // 아래는 임시로 alert를 통해 표시하는 예시입니다.
-    if (isExistingSymptom(selectedPartId, newSymptomName)) {
-        alert('이미 있는 증상입니다.');
-    } else {
-        // 이미 있는 증상이 아니라면 폼 제출 또는 다른 로직 수행
-        document.getElementById('adminaddsymptomForm').submit();
-    }
-}
-
-function isExistingSymptom(partId, symptomName) {
-    // 여기에서 서버 또는 로컬에서 이미 있는 증상인지 체크하는 로직을 수행
-    // 임시로 항상 이미 있는 증상으로 가정하고 true를 반환하는 예시
-    return false;
-}

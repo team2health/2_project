@@ -9,7 +9,7 @@
 		@csrf
 		@method('PUT')       
 		<div class="insert_bottom_button">
-			<a href="{{url()->previous()}}"><button type="button" class="insert_btn"><</button></a>	
+			<a href="{{url()->previous()}}"><button type="button" class="insert_btn_cancle"><</button></a>	
 			<p>글 수정</p>	
 			<button type="submit" class="insert_btn">수정완료</button>	
 		</div>	     

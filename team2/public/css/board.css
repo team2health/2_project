@@ -432,7 +432,7 @@ li{
 .insert_bottom_button>p{
     text-align: center;
 }
-.insert_btn{
+.insert_btn,.insert_btn_cancle{
     border: 1px solid rgba(128, 128, 128, 0.369);
     width: 100%;
     /* margin: 0 10px; */
@@ -974,12 +974,13 @@ a .a-bordergo-hover:hover {
 .pagination a,
 .pagination span {
     display: inline-block;
-    padding: 8px 12px;
+    padding: 8px 0;
     text-decoration: none;
     
 }
 .page_pre{
     width: 59px;
+    text-align: center;
 }
 .pagination a:hover,
 .pagination span:hover {
@@ -1218,8 +1219,12 @@ a .a-bordergo-hover:hover {
     }
     .pagination a, .pagination span {
         display: inline-block;
-        padding: 8px 10px;
+        padding: 8px 0;
         text-decoration: none;
+    }
+    .page_pre{
+        width: 59px; 
+        text-align: center;      
     }
     .community_tag > a {
         text-overflow: ellipsis;
@@ -1236,6 +1241,9 @@ a .a-bordergo-hover:hover {
         grid-template-rows: 25px 90px;
         box-sizing: border-box;
         overflow: hidden;
+    }
+    .insert_btn_cancle{
+        display: none;
     }
     
     .community-main-container {
