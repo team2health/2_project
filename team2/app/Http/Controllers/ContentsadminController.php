@@ -173,7 +173,7 @@ class ContentsadminController extends Controller
         ,'users.user_name'
         ,'users.user_email'
         ,'boards.board_hits'
-        ,DB::raw('count(board_reports.board_id) as total')
+        ,DB::raw('count(board_reports.board_id) as detotal')
         ,DB::raw('count(comments.comment_id) as commenttotal')
     )
     ->leftJoin('boards', 'board_reports.board_id', 'boards.board_id')
@@ -183,14 +183,15 @@ class ContentsadminController extends Controller
     ->wherenull('boards.deleted_at')
     ->groupBy('board_reports.board_id'
             ,'boards.board_title'
+            ,'comments.comment_id'
             ,'boards.board_content'
             ,'users.user_name'
             ,'boards.created_at'
             ,'users.user_email'
             ,'boards.board_hits'
-            ,'comments.board_id'
+            ,'board_reports.board_id'
             )
-    ->orderBy('total', 'desc')
+    ->orderBy('detotal', 'desc')
     ->paginate(10);
 
     $cnt = 0;
@@ -472,22 +473,22 @@ class ContentsadminController extends Controller
     }
 
     // 신고자 조회
-    public function userdeclaration(Request $request) {
+    // public function userdeclaration(Request $request) {
 
-        $user = DB::table('board_reports')
-        ->join('users','board_reports.u_id', 'users.id')
-        ->select(
-        'users.user_name'
-        , 'users.user_email'
-        , 'board_reports.board_reason_flg'
-        ,  'board_reports.created_at'
-        )
-        ->where('board_reports.board_id', $request->board_id)
-        ->orderby('board_reports.created_at', 'desc')
-        ->get();
+    //     $user = DB::table('board_reports')
+    //     ->join('users','board_reports.u_id', 'users.id')
+    //     ->select(
+    //     'users.user_name'
+    //     , 'users.user_email'
+    //     , 'board_reports.board_reason_flg'
+    //     ,  'board_reports.created_at'
+    //     )
+    //     ->where('board_reports.board_id', $request->board_id)
+    //     ->orderby('board_reports.created_at', 'desc')
+    //     ->get();
 
-        return response()->json($user);
-        }
+    //     return response()->json($user);
+    //     }
 
     // 삭제된 게시글 정렬
     public function deletedcontentsort(Request $request) {

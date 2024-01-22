@@ -60,7 +60,7 @@
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 40, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
-                            <td>{{$item->total}}</td>
+                            <td>{{$item->detotal}}</td>
                             <td>{{$item->board_hits}}</td>
                             <td>{{$item->commenttotal}}</td>
                         </tr>

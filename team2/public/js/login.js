@@ -11,6 +11,11 @@ window.addEventListener('load', function() {
 
 function loginonload() {
 
+	if(PASSWORDERROR.value == '3') {
+		alert('아이디와 비밀번호를 다시 확인해주세요.');
+	}
+
+
 	if(PASSWORDERROR.value == '1') {
 		alert('비밀번호가 일치하지 않습니다.');
 	}
