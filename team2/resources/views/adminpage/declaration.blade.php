@@ -60,9 +60,9 @@
                             <td><a href="{{ route('board.show',['board'=>$item->board_id]) }}">{{Str::limit($item->board_content, 40, '...')}}</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->user_email}}</td>
-                            <td>{{$item->detotal}}</td>
+                            <td>{{ isset($item->detotal) ? $item->detotal : '0' }}</td>
                             <td>{{$item->board_hits}}</td>
-                            <td>{{$item->commenttotal}}</td>
+                            <td>{{ isset($item->commenttotal) ? $item->commenttotal : '0' }}</td>
                         </tr>
                         @foreach ($item->user as $user)
                             <tr style="background-color:rgb(231, 231, 231); display:none;" id="childrenTr{{$item->board_id}}">

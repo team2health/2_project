@@ -164,37 +164,50 @@ class ContentsadminController extends Controller
 
 
     public function contentsdeclaration() {
-    $data = DB::table('board_reports')
-    ->select(
-        'board_reports.board_id'
-        ,'boards.board_title'
-        ,'boards.board_content'
-        ,'boards.created_at'
-        ,'users.user_name'
-        ,'users.user_email'
-        ,'boards.board_hits'
-        ,DB::raw('count(board_reports.board_id) as detotal')
-        ,DB::raw('count(comments.comment_id) as commenttotal')
-    )
-    ->leftJoin('boards', 'board_reports.board_id', 'boards.board_id')
-    ->leftJoin('users','boards.u_id', 'users.id')
-    ->leftJoin('comments','comments.board_id', 'boards.board_id')
-    ->where('board_reports.board_report_complete','0')
-    ->wherenull('boards.deleted_at')
-    ->groupBy('board_reports.board_id'
-            ,'boards.board_title'
-            ,'comments.comment_id'
-            ,'boards.board_content'
-            ,'users.user_name'
-            ,'boards.created_at'
-            ,'users.user_email'
-            ,'boards.board_hits'
-            ,'board_reports.board_id'
-            )
-    ->orderBy('detotal', 'desc')
-    ->paginate(10);
+        $data = DB::table('board_reports')
+        ->select(
+            'board_reports.board_id',
+            'boards.board_title',
+            'boards.board_content',
+            'boards.created_at',
+            'users.user_name',
+            'users.user_email',
+            'boards.board_hits',
+            'detotal',
+            'commenttotal'
+        )
+        ->join('boards', 'board_reports.board_id', 'boards.board_id')
+        ->join('users', 'boards.u_id', 'users.id')
+        ->leftJoin('comments', 'comments.board_id', 'boards.board_id')
+        ->leftJoin(
+            DB::raw('(SELECT board_id, COUNT(board_id) as detotal FROM board_reports GROUP BY board_id) as detotal_table'),
+            'detotal_table.board_id',
+            '=',
+            'board_reports.board_id'
+        )
+        ->leftJoin(
+            DB::raw('(SELECT board_id, COUNT(comment_id) as commenttotal FROM comments GROUP BY board_id) as commenttotal_table'),
+            'commenttotal_table.board_id',
+            '=',
+            'board_reports.board_id'
+        )
+        ->where('board_reports.board_report_complete', '0')
+        ->wherenull('boards.deleted_at')
+        ->groupBy(
+            'board_reports.board_id',
+            'boards.board_title',
+            'boards.board_content',
+            'users.user_name',
+            'boards.created_at',
+            'users.user_email',
+            'boards.board_hits',
+            'detotal',
+            'commenttotal'
+        )
+        ->orderBy('detotal', 'desc')
+        ->paginate(10);
 
-    $cnt = 0;
+
     foreach ($data as $item) {
         // $boardfavorite[] = Board_tag::join('hashtags', 'board_tags.hashtag_id' ,'=', 'hashtags.hashtag_id')
         $item->user
@@ -209,7 +222,6 @@ class ContentsadminController extends Controller
         ->where('board_report_complete', '0')
         ->orderby('board_reports.created_at', 'desc')
         ->get();
-        $cnt++;
     }
 
 
