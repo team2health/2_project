@@ -463,20 +463,22 @@ public function adminsymptomsmng()
     //     return view('adminpage.symptomsmanagement')->with('data', $symptoms);
     // }
     public function adminsearchsymptoms(Request $request)
-{
-    $searchKeyword = $request->input('search_keyword_sym');
+    {
+        $searchKeyword = $request->input('search_keyword_sym');
 
-    $symptoms = Symptom::join('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
-        ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
-        ->where('symptoms.symptom_name', 'like', "%$searchKeyword%")
-        ->orWhere('symptoms.symptom_id', 'like', "%$searchKeyword%")
-        ->orWhere('parts.part_name', 'like', "%$searchKeyword%")
-        ->orderBy('symptoms.symptom_id', 'desc')
-        ->paginate(10);
-        $partsData = Part::all();
+        $symptoms = Symptom::join('part_symptoms', 'symptoms.symptom_id', '=', 'part_symptoms.symptom_id')
+            ->join('parts', 'part_symptoms.part_id', '=', 'parts.part_id')
+            ->where('symptoms.symptom_name', 'like', "%$searchKeyword%")
+            ->orWhere('symptoms.symptom_id', 'like', "%$searchKeyword%")
+            ->orWhere('parts.part_name', 'like', "%$searchKeyword%")
+            ->orderBy('symptoms.symptom_id', 'desc')
+            ->paginate(10);
 
-    return view('adminpage.adminsymptomsmanagement')->with('data', $symptoms)->with('partsData', $partsData);
-}
+            $symptoms->appends(['search_keyword_sym' => $searchKeyword]);
+            $partsData = Part::all();
+
+        return view('adminpage.adminsymptomsmanagement')->with('data', $symptoms)->with('partsData', $partsData);
+    }
 
     // public function addsymptom(Request $request){        
     //     $partId = $request->input('part_id');
