@@ -8,10 +8,20 @@ function toggleDropdown() {
 // allHeaderDisplayNone();
 
 // 푸터 아이콘 opacity
-let BACKURL = document.referrer;
+const BACKURL = document.referrer;
+const CURRENTURL = window.location.href;
+
+
 // let footericondiv = document.querySelectorAll('.footer-icon-div');
 function goBack() {
-    window.location.href = BACKURL;
+    if (CURRENTURL.indexOf("mypage") !== -1) {
+        window.location.href = '/mypage';
+    } else if (CURRENTURL.indexOf("categoryboard") !== -1 ) {
+        window.location.href = '/board';
+    } else {
+        window.location.href = BACKURL;
+    }
+
 }
 
 // function toggleDropdown2() {

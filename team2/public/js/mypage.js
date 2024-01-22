@@ -868,22 +868,25 @@ function hashtagFirstCheck(data) {
     let formData = new FormData();
     formData.append('hashsearch', data);
 
-    fetch('/hashtagcheck', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => { 
-        if (data == '1') {
-            alert('이미 추가된 해시태그 입니다.')
-            return false;
-        } else if ( data == '2') {
-            addhashtag(hashId);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    let hashtagId = document.getElementById('allHashtagId' + data);
+    hashtagId.remove();
+    addhashtag(hashId);
+    // fetch('/hashtagcheck', {
+    //     method: 'POST',
+    //     body: formData
+    // })
+    // .then(response => response.json())
+    // .then(data => { 
+    //     if (data == '1') {
+    //         alert('이미 추가된 해시태그 입니다.')
+    //         return false;
+    //     } else if ( data == '2') {
+
+    //     }
+    // })
+    // .catch(error => {
+    //     console.error('Error:', error);
+    // });
 }
 
 function submitSearchHash() {
