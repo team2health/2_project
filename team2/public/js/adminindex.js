@@ -343,7 +343,7 @@ function pandemicdelete() {
         }
     });
     if(chkflg === false) {
-        alert('유행하는 질병을 선택하여주십시오.');
+        alert('선택된 유행하는 질병이 없습니다.');
         return false;
     }
     document.getElementById('pandemicdeletebox').submit();

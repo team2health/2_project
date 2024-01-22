@@ -12,6 +12,8 @@ function openFile(fileInputId,imageId) {
         
 }
 
+let hashtagRemoveFlg = 0;
+
 // let previousFile = '';
 // let test = '';
 
@@ -254,6 +256,8 @@ function updateSelectedTags() {
     selectedHashtagsInput.value = selectedHashtags.join(',');
 }
 function removeSelectedTag(tag) {
+    hashtagRemoveFlg = 1;
+    document.getElementById('hashtagflg').value = hashtagRemoveFlg;
     var outputDiv = document.getElementById('hashtagContainer');
     var tags = outputDiv.querySelectorAll('.selected-tag');
 
