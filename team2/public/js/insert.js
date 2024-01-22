@@ -203,6 +203,8 @@ function handleTagClick(tag) {
         // 출력할 div 선택
         var outputDiv = document.getElementById('hashtagContainer');
 
+        // let tagButton = document.createElement('button');
+
         // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
         var tagSpan = document.createElement('span');
         tagSpan.className = 'selected-tag';

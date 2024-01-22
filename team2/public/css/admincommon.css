@@ -196,6 +196,11 @@ a:hover {
     color: #212222;
 }
 
+.index_bc_gray {
+    background-color: rgb(75, 75, 75);
+    color: #fff;
+}
+
 
 /* 페이지네이션 */
 

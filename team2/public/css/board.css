@@ -414,6 +414,8 @@ li{
     padding: 3px 7px;
     display: inline-block;
     margin-right: 3px;
+    width: 67px;
+    height: 30px;
 }
 .tag:hover {
     background-color: #ffa869;
