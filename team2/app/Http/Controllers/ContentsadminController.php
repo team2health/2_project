@@ -397,7 +397,7 @@ class ContentsadminController extends Controller
             ->where('board_id', $board_id)
             ->update(['board_show_flg' => null]);
         }
-        return redirect()->route('deletedcontent.get', ['align_board' => '1']);
+        return redirect()->route('admin.deletedcontentdate', ['align_board' => '1']);
     }
 
     // 게시글 관리자 기준 삭제
@@ -410,7 +410,7 @@ class ContentsadminController extends Controller
         foreach ($request['board_id'] as $board_id) {
             board::destroy([$board_id]);
         }
-        return redirect()->route('deletedcontent.get', ['align_board' => '1']);
+        return redirect()->route('admin.deletedcontentdate', ['align_board' => '1']);
     }
     // 댓글 신고 페이지
     public function commentsdeclaration() {
