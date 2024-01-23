@@ -241,32 +241,36 @@ document.addEventListener('DOMContentLoaded', function() {
 function handleTagClick(tag) {
     var clickedTagName = tag.getAttribute('data-tag');
 
-    // 클릭한 태그의 이름을 배열에 추가
-    selectedHashtags.push(clickedTagName);
+    // Check if the tag is already in the array
+    if (!selectedHashtags.includes(clickedTagName)) {
+        // If not, add it to the array
+        selectedHashtags.push(clickedTagName);
+
+        // Rest of your existing code...
 
         // 출력할 div 선택
         var outputDiv = document.getElementById('hashtagContainer');
 
-        // let tagButton = document.createElement('button');
+        // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
+        var tagSpan = document.createElement('span');
+        tagSpan.className = 'selected-tag';
+        tagSpan.setAttribute('data-selected-tag', clickedTagName);
+        tagSpan.innerHTML = clickedTagName + ' <button type="button" onclick="removeSelectedTag(this)">X</button>';
 
-    // 추가된 태그를 span 태그로 감싸고 삭제 버튼 추가
-    var tagSpan = document.createElement('span');
-    tagSpan.className = 'selected-tag';
-    tagSpan.setAttribute('data-selected-tag', clickedTagName);
-    tagSpan.innerHTML = clickedTagName + ' <button type="button" onclick="removeSelectedTag(this)">X</button>';
+        // span 태그를 출력 div에 추가
+        outputDiv.appendChild(tagSpan);
 
-    // span 태그를 출력 div에 추가
-    outputDiv.appendChild(tagSpan);
+        // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
+        var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
+        selectedHashtagsInput.value = selectedHashtags.join(',');
 
-    // 배열에 있는 모든 해시태그를 숨겨진 인풋 필드에 설정
-    var selectedHashtagsInput = document.getElementById('selectedHashtagsInput');
-    selectedHashtagsInput.value = selectedHashtags.join(',');
-
-    // 클릭한 태그에 이벤트 리스너 추가하여 클릭시 삭제 함수 호출
-    tagSpan.addEventListener('click', function() {
-        removeSelectedTag(tagSpan);
-    });
+        // 클릭한 태그에 이벤트 리스너 추가하여 클릭시 삭제 함수 호출
+        tagSpan.addEventListener('click', function () {
+            removeSelectedTag(tagSpan);
+        });
+    }
 }
+
 
 function removeSelectedTag(element) {
     // 삭제 버튼이 속한 span 태그를 찾아 삭제
