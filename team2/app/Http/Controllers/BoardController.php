@@ -540,7 +540,7 @@ if ($request->imgUrl) {
 
         Board::destroy($board_id);
         Comment::where('board_id', $board_id)->delete();
-        return redirect()-> route('categoryboard');
+        return redirect()-> route('board.index');
     }
 
     public function boardcategoryget($categoryId) {
