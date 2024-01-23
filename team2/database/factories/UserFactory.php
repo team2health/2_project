@@ -29,8 +29,8 @@ class UserFactory extends Factory
             'agreement_flg' => '1',
             'email_verified_at' => $this->faker->date,
             'remember_token' => Str::random(10),
-            'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
-            'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
+            'created_at' => $this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
+            'updated_at' =>$this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
         ];
     }
 }

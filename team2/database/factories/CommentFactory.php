@@ -20,8 +20,8 @@ class CommentFactory extends Factory
             'u_id' => $this->faker->numberBetween(1, 1000),
             'board_id' => $this->faker->numberBetween(1, 5000),
             'comment_content' => $this->faker->realText(100, 2),
-            'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
-            'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
+            'created_at' => $this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
+            'updated_at' =>$this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
         ];
     }
 }

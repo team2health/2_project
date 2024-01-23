@@ -21,8 +21,8 @@ class Comment_reportFactory extends Factory
             'comment_id' => $this->faker->numberBetween(1, 1000),
             'comment_reason_flg' => $this->faker->numberBetween(1, 8),
             'comment_report_complete' => '0',
-            'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
-            'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
+            'created_at' => $this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
+            'updated_at' =>$this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
         ];
     }
 }

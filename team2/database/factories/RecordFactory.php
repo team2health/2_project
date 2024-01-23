@@ -20,8 +20,8 @@ class RecordFactory extends Factory
         return [
             'u_id' => $this->faker->numberBetween(1, 1000),
             'part_symptom_id' => $this->faker->numberBetween(1, 148),
-            'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
-            'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
+            'created_at' => $this->faker->dateTimeBetween('2024-01-01', '2024-01-23'),
+            'updated_at' =>$this->faker->dateTimeBetween('2024-01-01', '2024-01-23'),
         ];
     }
 }

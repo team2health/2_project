@@ -19,8 +19,8 @@ class Favorite_tagFactory extends Factory
         return [
             'hashtag_id' => $this->faker->numberBetween(1, 25),
             'u_id' => $this->faker->numberBetween(1, 1000),
-            'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
-            'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
+            'created_at' => $this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
+            'updated_at' =>$this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
         ];
     }
 }

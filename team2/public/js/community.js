@@ -62,7 +62,7 @@ function lastBoard() {
             
             for(let i = 0; i < data.length; i++) {
                 LASTBOARDURL[i] = document.createElement('a');
-                LASTBOARDDIV[i] = document.createElement('div');
+                LASTBOARDDIV[i] = document.createElement('span');
                 LASTBOARDDIV2[i] = document.createElement('div');
                 LASTBOARDDIV3[i] = document.createElement('div');                
                 LASTBOARDSPAN[i] = document.createElement('span');
@@ -75,7 +75,7 @@ function lastBoard() {
                 LASTBOARDURL[i].appendChild(LASTBOARDSPAN[i]);
                 LASTBOARDSPAN[i].appendChild(LASTBOARDIMG[i]);
     
-                LASTBOARDDIV[i].classList.add('spantag-span-display-block');
+                // LASTBOARDDIV[i].classList.add('spantag-span-display-block');
                 LASTBOARDURL[i].href = '/board/'+data[i].board_id;
                 LASTBOARDDIV2[i].classList.add('community-home-title');
                 LASTBOARDDIV2[i].innerHTML = data[i].board_title;

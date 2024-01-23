@@ -22,8 +22,8 @@ class BoardFactory extends Factory
             'board_title' => $this->faker->realText(20, 2),
             'board_content' => $this->faker->realText(100, 2),
             'board_hits' => $this->faker->randomNumber(3),
-            'created_at' => $this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
-            'updated_at' =>$this->faker->dateTimeBetween('2023-01-01', '2024-01-16'),
+            'created_at' => $this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
+            'updated_at' =>$this->faker->dateTimeBetween('2023-08-01', '2024-01-23'),
         ];
     }
 }
