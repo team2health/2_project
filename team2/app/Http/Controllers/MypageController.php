@@ -69,7 +69,9 @@ class MypageController extends Controller
                 ,'comments.comment_content'
                 ,DB::raw('DATE_FORMAT(comments.created_at, "%Y-%m-%d") as created_at')
                 ,'boards.board_title'
+                ,'categories.category_name'
             )->join('boards', 'boards.board_id', 'comments.board_id')
+            ->join('categories', 'boards.category_id', 'categories.category_id')
             ->where('comments.u_id',$result)
             ->where('comments.deleted_at', null)
             ->where('boards.deleted_at', null)
