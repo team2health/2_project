@@ -76,7 +76,6 @@ class UserController extends Controller
         //if(!$result) {
             //return view('login')->with('passwordError', '0');
         //}
-        Log::debug($request);
         // 탈퇴한 사용자 로그인 알림
         $deleted_user = User::withTrashed()
         ->where('user_email', $request->user_email)
@@ -92,12 +91,13 @@ class UserController extends Controller
             return view('login')->with('passwordError', '1');
         }
         
+        Auth::login($result);
         if(Auth::check()) {
             session($result->only('id', 'user_name', 'user_img'));
         } else {
             return view('login');
         }
-
+        
         return redirect()->route('main.get');
     }
 
@@ -144,8 +144,6 @@ class UserController extends Controller
         if (Hash::check($user_into, $result->user_password)) {
             User::destroy($id);
             return redirect()->route('seeyouagain');
-        } else {
-            Log::debug("실패");
         }
     }
     public function firstchkpassword() {
@@ -188,23 +186,4 @@ class UserController extends Controller
             return view('firstchkpassword')->with('passwordchk','1');
         }
     }
-
-    // public function emailchkpost(Request $request) {
-
-    //     $verification_code = mt_rand(100000, 999999);
-    //     $this->sendSignupEmail($request->user_email, $verification_code);
-    //     return redirect()->route('email.get')->with(session()->flash('email_msg','이메일 확인해보세용'));
-    // }
-
-
-    // public function sendSignupEmail($user_email, $verification_code) {
-    //     Log::debug($user_email);
-    //     $data = [
-    //         'name' => $user_email,
-    //         'verification_code' => $verification_code
-    //     ];
-    //     // $mail = new S0ignupEmail($data);
-    //     Mail::to($user_email)->send(new SendEmail($data));
-    //     return '메일확인';
-    // }    
 }

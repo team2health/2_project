@@ -93,75 +93,7 @@
 		};
 	}
 ('image_zone', 'selectFile');
-    
-// //  }
-// let test = []; // 전역 변수로 선언   최신
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     const fileInput = document.getElementById('fileInput');
-//     if (fileInput) {
-//         fileInput.addEventListener('change', function(event) {
-//             handleFileSelect(event);
-//         });
-//     }
-// });
-
-// function handleFileSelect(event) {
-//     const files = event.target.files;
-//     const container = document.getElementById('imageContainer');
-
-//     // CSRF 토큰을 가져옵니다.
-//     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
-//     for (const file of files) {
-//         const imageContainer = document.createElement('div');
-//         imageContainer.className = 'insert_img';
-
-//         const img = document.createElement('img');
-//         img.src = URL.createObjectURL(file);
-//         const formData = new FormData();
-
-//         // CSRF 토큰을 FormData에 추가
-//         formData.append('_token', csrfToken);
-
-//         // test 배열에 있는 이미지들을 FormData에 추가
-//         for (const file of test) {
-//             formData.append('images[]', file);
-//         }
-        
-//         // 서버로 이미지 전송
-//         fetch('/board', {
-//             method: 'POST',
-//             body: formData,
-//         })
-//         .then(response => response.json())
-//         .then(data => console.log(data))
-//         .catch(error => console.error('Error:', error));
-//         const deleteButton = document.createElement('button');
-//         deleteButton.type = 'button';
-//         deleteButton.textContent = '삭제';
-//         deleteButton.addEventListener('click', function() {
-//             // 이미지 및 해당 버튼 제거
-//             imageContainer.remove();
-//             // 저장된 파일 목록에서도 삭제
-//             const fileIndex = test.findIndex(item => item.file === file);
-//             if (fileIndex !== -1) {
-//                 test.splice(fileIndex, 1);
-//             }
-//         });
-
-//         imageContainer.appendChild(img);
-//         imageContainer.appendChild(deleteButton);
-
-//         container.appendChild(imageContainer);
-
-//         // 파일 정보와 함께 test 배열에 저장
-//         test.push({ file, imageContainer });
-//     }
-
-//     // test 배열에 저장된 정보를 활용하여 다양한 작업 수행 가능
-//     console.log(test);
-// }
 
 var selectedHashtags = [];
 

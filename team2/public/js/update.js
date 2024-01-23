@@ -14,18 +14,6 @@ function openFile(fileInputId,imageId) {
 
 let hashtagRemoveFlg = 0;
 
-// let previousFile = '';
-// let test = '';
-
-// function openFile(fileInputId) {
-//     document.getElementById(fileInputId).click();
-//     console.log(fileInputId);
-//     test = fileInputId.replace('file', 'preview');
-//     let test1 = document.getElementById(test);
-//     let previousFile = test1.src;
-//     let fileName = previousFile.match(/\/([^\/]+)$/)[1];
-//     console.log(fileName);
-// }
 
 // 
 function previewImage(inputId, previewId) {
@@ -43,26 +31,11 @@ function previewImage(inputId, previewId) {
     } 
 }
 
-// function removeImage(key) {
-//     // 삭제하려는 이미지의 부모 요소를 찾아서 삭제
-//     var imageContainer = document.getElementById(`preview${board_img_id}`);
-//     console.log(imageContainer);
-    
-//     if (imageContainer) {
-//         // 이미지를 감싸는 부모 요소를 찾기
-//         var parentContainer = imageContainer.parentNode;
-        
-//         // 부모 요소에서 이미지 삭제
-//         parentContainer.parentNode.removeChild(parentContainer);
-//     }
-// }
-
 
 
 function removeImage(imageId) {
     // 삭제하려는 이미지의 부모 요소를 찾아서 삭제
     var imageContainer = document.getElementById(`preview${imageId}`);
-    console.log(imageContainer);
     
     if (imageContainer) {
         // 이미지를 감싸는 부모 요소를 찾기
@@ -76,12 +49,8 @@ function removeImage(imageId) {
         // images = images.filter(image => image.id !== imageId);
         
         IMGDELETE[cnt] = imageId;
-        console.log(IMGDELETE);
         cnt++;
-        console.log(imageId);
         document.getElementById('inputHiddenImgUrl').value = IMGDELETE;
-        console.log('imgdelete 영역');
-        console.log(IMGDELETE);
     }
 }
 

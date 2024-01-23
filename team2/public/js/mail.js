@@ -81,11 +81,8 @@ function emailVerifySubmit() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.status === 'success') {
                 window.location.href = '/registpage/' + encodeURIComponent(data.email);
-                // let encodedEmail = encodeURIComponent(data.email);
-                // console.log(encodedEmail);
             } else {
                 alert('인증코드를 다시 확인해주세요.');
             }

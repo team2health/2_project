@@ -481,8 +481,7 @@ function recorddeletemodalopen(data) {
             body: formData,
         })
         .then(response => response.json())
-        .then(data => {
-            console.log(data)})
+        .then(data => {})
         .catch(error => {
             console.error('오류 발생:', error);
         });
