@@ -135,7 +135,7 @@ function favoritehashdelete(data) {
         })
         .then(response => response.json())
         .then(data => {
-            })
+            console.log(data)})
         .catch(error => {
             console.error('오류 발생:', error);
         });
@@ -250,8 +250,9 @@ function addhashtag(data) {
     formData.append('tag_id', data);
 
     // 추가할 해시태그 가져오기
-    let allHashtagId = document.getElementById('allHashtagId'+data);
-    allHashtagId.remove();
+    if(document.getElementById('allHashtagId'+data)) {
+        allHashtagId.remove();
+    }
     // let deletefavoritehashtext = document.getElementById('allHashtagtext'+data).value;
     let mypageHashtag = document.getElementById('mypageHashtag');
     let deletedfavoritehashtag = document.createElement('div')
@@ -905,6 +906,7 @@ function submitSearchHash() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         if(data == 'nodata') {
             let creatediv = document.createElement('div');
             creatediv.innerHTML = '검색결과가 없습니다.'
