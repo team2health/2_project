@@ -865,8 +865,8 @@ submitSearchHashBtn.addEventListener("keyup", function(event) {
 function hashtagFirstCheck(data) {
 
     let hashId = data;
-    let formData = new FormData();
-    formData.append('hashsearch', data);
+    // let formData = new FormData();
+    // formData.append('hashsearch', data);
 
     let hashtagId = document.getElementById('allHashtagId' + data);
     hashtagId.remove();
