@@ -171,7 +171,7 @@
                                     <a href="{{route('board.show', ['board' => $item->board_id])}}">
                                         <div class="mypage-comment-area">
                                             <div class="mypage-comment-boardTitle">{!! Str::limit($item->board_title, 40, '...') !!}</div>
-                                            <span class="mypage-comment-categoryName">카테고리</span>
+                                            <span class="mypage-comment-categoryName">{{$item->category_name}}</span>
                                         </div>
                                         <div class="mypage-myComment">{{Str::limit($item->comment_content, 75, '...')}}</div>
                                         <div class="mypage-myComment-date">{{$item->created_at}}</div>
