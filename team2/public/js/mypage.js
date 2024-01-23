@@ -135,7 +135,7 @@ function favoritehashdelete(data) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)})
+            })
         .catch(error => {
             console.error('오류 발생:', error);
         });
@@ -905,7 +905,6 @@ function submitSearchHash() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         if(data == 'nodata') {
             let creatediv = document.createElement('div');
             creatediv.innerHTML = '검색결과가 없습니다.'

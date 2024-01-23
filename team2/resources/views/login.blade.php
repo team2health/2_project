@@ -27,8 +27,7 @@
 			@endif
 			
 
-			
-			{{-- {{dd($passwordError)}} --}}
+						
 			{{-- <input type="hidden" id="idError" value="{{$idError}}"> --}}
 		</div>
 	</div>

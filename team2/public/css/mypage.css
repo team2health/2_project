@@ -300,7 +300,7 @@
     color: #ff5100;
 }
 .mypage-byebye {
-    background-image: url(/img/byebye.jpg);
+    /* background-image: url(/img/byebye.jpg); */
     background-position: center center;
     /* width: 100vw; */
     height: 500px;

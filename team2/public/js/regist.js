@@ -1,21 +1,3 @@
-// window.addEventListener('load', function() {
-//     setEamil(); //이메일
-// });
-// function setEamil() {
-// 	let load =  window.location.href;
-// 	let paramsPart = load.split('/registpage/')[1];
-// 	let userEmaiil = decodeURIComponent(paramsPart);
-// 	console.log(userEmaiil);
-
-// 	let setEmailDiv = document.getElementById('setEmailDiv');
-// 	setEmailDiv.innerHTML = userEmaiil;
-	
-
-// 	let emailHiddenSet = document.getElementById('emailHiddenSet');
-// 	emailHiddenSet.setAttribute('value', userEmaiil);
-
-// 	setEmailDiv.appendChild(emailHiddenSet);
-// }
 
 function sample4_execDaumPostcode() {
 	new daum.Postcode({
@@ -218,9 +200,6 @@ function registgo() {
 	let BIRTHYEAR = document.getElementById('birth-year').value;
 	let BIRTHMONTH = document.getElementById('birth-month').value;
 	let BIRTHDATE = document.getElementById('birth-day').value;
-	console.log(BIRTHYEAR);
-	console.log(BIRTHMONTH);
-	console.log(BIRTHDATE);
 	let USERNAMEVALUE = document.getElementById('user_name').value;
 	// let USERIDVALUE = document.getElementById('user_email').value;
 	let USERPASSWORDVALUE = document.getElementById('user_password').value;

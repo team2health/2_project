@@ -10,7 +10,6 @@ function insertHashtag() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 		let HASHTAGBODY = document.getElementById('hashtagdeletebox');
 		let HASHTAGHEADER = document.createElement('div');
 		let HASHTAG = document.createElement('div');

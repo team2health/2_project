@@ -43,7 +43,6 @@ class MainController extends Controller
         $birthYear = date('Y', strtotime($birthday));
     
         $age = $currentYear+1 - $birthYear;
-        Log::debug($id);
 
         // 유저 성별
         $gender = '';
