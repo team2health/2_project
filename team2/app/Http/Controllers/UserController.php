@@ -75,15 +75,13 @@ class UserController extends Controller
         $result = User::where('user_email', $request->user_email)->first();
         if(!$result) {
             return view('login')->with('passwordError', '3');
-        }
-        Log::debug($request);
+        }       
         // 탈퇴한 사용자 로그인 알림
         $deleted_user = User::withTrashed()
         ->where('user_email', $request->user_email)
         ->whereNull('deleted_at')
         ->get();
 
-        Log::debug($deleted_user);
         $deleted_user = $deleted_user->count();
         if($deleted_user === 0) {
             return view('login')->with('passwordError', '2');
@@ -93,7 +91,6 @@ class UserController extends Controller
             return view('login')->with('passwordError', '1');
         }
         
-        Auth::login($result);
         if(Auth::check()) {
             session($result->only('id', 'user_name', 'user_img'));
         } else {

@@ -347,9 +347,7 @@ class AdminController extends Controller
     return view('adminpage.adminusermanagement')->with('data', $userData);
     }
     public function adminuserdestroy(Request $request){
-    //     // dd($request);
     //     $selectedIds = $request->input('id');
-    //     // dd($selectedIds);
     //     User::destroy($selectedIds);
     //     return redirect()-> route('admin.usermanagement');
     // }
@@ -405,7 +403,6 @@ public function adminsymptomsmng()
     ->select('symptoms.symptom_id', 'symptoms.symptom_name','parts.part_id as part_id', 'parts.part_name')
     ->orderBy('symptoms.symptom_id', 'desc')
     ->paginate(10);// 페이징 적용
-        // dd($symptomData);
 
     $partsData = Part::all(); // 모든 부위 데이터를 가져옴
 
@@ -422,13 +419,11 @@ public function adminsymptomsmng()
     //     return view('adminpage.symptomsmanagement')->with('data', $symptomData);
     // }
     // public function symptomdestroy(Request $request){
-    //     // dd($request);
     //     if (!$request->has('symptom_id')) {
     //         // 값이 없으면 경고 메시지를 반환하거나 원하는 작업 수행
     //         return back();
     //     }
     //     $selectedsymptoms = $request->input('symptom_id');
-    //     // dd($selectedIds);
     //     Symptom::destroy($selectedsymptoms);
     //     return redirect()-> route('admin.symptomsmanagement');
     // }
@@ -436,7 +431,6 @@ public function adminsymptomsmng()
         if (!$request->has('id')) {
             return back();
         }
-        // dd($request);
         $symptomId = $request->input('id');
         $partSymptomId = Part_symptom::where('symptom_id', $symptomId)->value('part_symptom_id');
         Part_symptom::where('part_symptom_id', $partSymptomId)->delete();

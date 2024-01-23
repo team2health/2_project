@@ -147,9 +147,7 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {      
-        // dd($request);
-        // dd($request->all());
+    { 
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
@@ -179,32 +177,20 @@ class BoardController extends Controller
             }
             // 모델의 save 메소드를 호출하여 저장합니다.
             $board->save();
-        }     
-        
-        // dd($request->board_img);
+        }           
         // 요청에 게시글 이미지가 포함되어 있는지 확인합니다.
-        if ($request->hasfile('selectFile')) {
-            // Log::debug($request->hasfile('images'));
+        if ($request->hasfile('selectFile')) {           
             // 업로드된 이미지들을 가져옵니다.
-            $images = $request->file('selectFile'); 
-            // Log::debug($images);
+            $images = $request->file('selectFile');             
             $boardImage = [];
-            // dd($images); 
-            // Log::debug($boardImage);
             foreach ($images as $image) {
-                //dd($image);
                 // UUID와 원본 파일 확장자를 사용하여 고유한 이미지 이름을 생성합니다.                
                 $imageName = Str::uuid() . '.' . $image->extension();
                 $image->move(public_path('board_img'), $imageName);
-                // dd($imageName);
                 
                 $boardImage[]= (['img_address' => $imageName]);
-                // dd($boardImage);
                  // 현재 게시글과 이미지를 연결하고 저장합니다. 모델끼리 연결해 주어야 함
-                //  Log::debug($boardImage);
             }
-            //  return response()->json([$boardImage]);
-                
             $board->images()->createMany($boardImage);
             
         
@@ -255,12 +241,9 @@ class BoardController extends Controller
     // $boardDetail = session('data');
 }
 // public function boardreport(Request $request){
-//     // dd($request);
-//     // dd($request->attributes->all());
 //     $boardId = $request->input('board_id');
 // $userId = $request->input('u_id');
 // $flg=$request->input('options');
-// // dd($boardId, $userId,$flg);
 //     Board_report::create([
 //         'board_id' =>$boardId ,
 //         'u_id' => $userId,
@@ -321,8 +304,6 @@ public function boardreport(Request $request) {
     return redirect()->back();
 }
 // public function commentreport(Request $request){
-//     // dd($request);
-//     // dd($request->attributes->all());
 //     $commentId = $request->input('comment_id');
 // $userId = $request->input('u_id');
 // $mouReport = Comment_report::where('comment_id',$commentId)
@@ -334,7 +315,6 @@ public function boardreport(Request $request) {
 //         return redirect()->back()->with('error', '이미 신고한 댓글입니다.');
 //     }
 // $flg=$request->input('values');
-// // dd($boardId, $userId,$flg);
 //     Comment_report::create([
 //         'comment_id' =>$commentId ,
 //         'u_id' => $userId,
@@ -357,8 +337,6 @@ public function boardreport(Request $request) {
             }
 
         $result = Board::with(['user', 'images'])->find($board_id);
-
-        //  dd($result->images);
         $result->board_hits++;
         $result->timestamps = false;
         $result->save();
@@ -394,10 +372,6 @@ public function boardreport(Request $request) {
      */
     public function update(Request $request, $board_id)
     {
-        // Log::info('Request data:', $request->all());
-        // Log::debug($request);
-        // Log::debug("6");
-        // dd($request);
         if(!Auth::check()){
             return redirect()->route('login.get');
             }
@@ -408,11 +382,8 @@ public function boardreport(Request $request) {
             'board_content' => $request->input('u_content'),
         ]);
         //$request에서 hashtag 파라미터의 존재 여부를 확인합니다.
-        //<input type="hidden" id="selectedHashtagsInput" name="hashtag" />   
-        // Log::debug($request);
-        // Log::debug("5");     
+        //<input type="hidden" id="selectedHashtagsInput" name="hashtag" />  
         if($request->hashtag) {
-        // dd($request->hashtag);
         // 새로운 해시태그 추가 또는 기존 해시태그 갱신
         //hashtag 파라미터의 값을 가져와서 $hashtagInput 변수에 저장합니다.
         $hashtagInput = $request->input('hashtag');
@@ -430,7 +401,6 @@ public function boardreport(Request $request) {
             return strcmp($a[0], $b[0]);
         });
        foreach ($hashtag_names as $hashtag_name) {
-        // dd($hashtag_names);
         // $hashtag_name에 해당하는 해시태그를 데이터베이스에서 찾거나 새로 생성합니다. 
         // firstOrCreate 메서드는 주어진 조건으로 검색하여 해당하는 모델을 찾거나 생성합니다.
             // $hashtag = Hashtag::firstOrCreate(['hashtag_name' => $hashtag_name]);
@@ -469,19 +439,10 @@ public function boardreport(Request $request) {
             $result->images()->save($boardImage);
         }
     }
-    // Log::debug($request);
-    // Log::debug("받아오는 삭제데이터");
-    // Log::info('Request data:', $request->all());
-    // Log::debug($request);
     // if ($request->imgUrl) {
-    //     // Log::debug($request->has('imgUrl')); 
-    //     $imageIdToDelete = $request->input('imgUrl');   
-    //     Log::debug($imageIdToDelete); 
+    //     $imageIdToDelete = $request->input('imgUrl');
     //     $imageToDelete = Board_img::find($imageIdToDelete);   
-    //     Log::debug($imageToDelete); 
     //     $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-    //     Log::debug($imagePath);
-    //     Log::debug("패쓰 확인");
     //     if (File::exists($imagePath)) {
     //         // 파일 시스템에서 이미지 삭제
     //         unlink($imagePath);
@@ -496,14 +457,12 @@ if ($request->imgUrl) {
     $imageIdsToDelete = explode(',',$imageIdsToDelete);
 
     foreach ($imageIdsToDelete as $imageIdToDelete) {
-        // Log::debug("삭제할 이미지 ID: " . $imageIdToDelete);
 
         // 각 이미지 ID에 대한 삭제 작업 수행
         $imageToDelete = Board_img::find($imageIdToDelete);
 
         if ($imageToDelete) {
             $imagePath = public_path('board_img/' . $imageToDelete->img_address);
-            // Log::debug("이미지 경로: " . $imagePath);
 
             if (File::exists($imagePath)) {
                 // 파일 시스템에서 이미지 삭제
@@ -512,9 +471,8 @@ if ($request->imgUrl) {
 
             // 모델에서 이미지 삭제
             $imageToDelete->delete();
-            Log::debug("이미지 삭제 완료");
         } else {
-            // Log::debug("삭제할 이미지를 찾을 수 없습니다.");
+            
         }
     }
 }

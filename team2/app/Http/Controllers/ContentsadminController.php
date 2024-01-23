@@ -377,7 +377,6 @@ class ContentsadminController extends Controller
                 , 'board_content' => $result[$index]["board_content"]
             ];
             if ($user) {
-                Log::debug($user->user_email);
                 Mail::to($user->user_email)->send(new ComplaintMail($info));
             }
             $info = [];
