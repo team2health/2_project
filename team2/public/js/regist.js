@@ -215,6 +215,12 @@ birthDateEl.addEventListener('focus', function () {
 });
 
 function registgo() {
+	let BIRTHYEAR = document.getElementById('birth-year').value;
+	let BIRTHMONTH = document.getElementById('birth-month').value;
+	let BIRTHDATE = document.getElementById('birth-day').value;
+	console.log(BIRTHYEAR);
+	console.log(BIRTHMONTH);
+	console.log(BIRTHDATE);
 	let USERNAMEVALUE = document.getElementById('user_name').value;
 	// let USERIDVALUE = document.getElementById('user_email').value;
 	let USERPASSWORDVALUE = document.getElementById('user_password').value;
@@ -248,6 +254,15 @@ function registgo() {
 		return false;
 	} else if(GENDERINPUTVALUE.value === '') { 
 		alert('성별을 선택해주세요.');
+		return false;
+	} else if(BIRTHYEAR === '출생 연도') {
+		alert('생년월일은 필수사항입니다.')
+		return false;
+	} else if(BIRTHMONTH === '월') {
+		alert('생년월일은 필수사항입니다.')
+		return false;
+	} else if(BIRTHDATE === '일') {
+		alert('생년월일은 필수사항입니다.')
 		return false;
 	}
 

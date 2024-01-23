@@ -4,6 +4,7 @@ window.addEventListener('load', function() {
 
 let USERPASSWORD = document.getElementById('user_password');
 let USERPASSWORDCHECK = document.getElementById('user_password_check');
+let ERRORPASSWORDCHECK = document.getElementById('error_password_check');
 
 USERPASSWORDCHECK.addEventListener('input', function() {
     const value = USERPASSWORD.value;
@@ -20,7 +21,7 @@ function passwordChkErrorMsg () {
     let passwordChangeErrorValue = document.getElementById('passwordChangeErrorValue');
     let mypageChangePasswordErrorMsg = document.getElementById('mypageChangePasswordErrorMsg');
     let value = passwordChangeErrorValue.value;
-    console.log(value);
+
     if(value == '0') {
         mypageChangePasswordErrorMsg.innerHTML = '';
     } else if ( value == '1') {
