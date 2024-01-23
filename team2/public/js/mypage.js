@@ -251,7 +251,8 @@ function addhashtag(data) {
 
     // 추가할 해시태그 가져오기
     if(document.getElementById('allHashtagId'+data)) {
-        allHashtagId.remove();
+        let allhashtag = document.getElementById('allHashtagId'+data);
+        allhashtag.remove();
     }
     // let deletefavoritehashtext = document.getElementById('allHashtagtext'+data).value;
     let mypageHashtag = document.getElementById('mypageHashtag');
