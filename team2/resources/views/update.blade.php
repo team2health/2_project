@@ -78,7 +78,7 @@
 				<input type="hidden" id="selectedHashtagsInput" name="hashtag"/>
 				<input type="hidden" id="hashtagflg" name="hashtagflg">
 				<div class="insert_img" id="imageContainer">
-					<input class="update_img" type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple'>
+					<input class="update_img" type='file' name='selectFile[]' id='selectFile'style="display:none;" multiple='multiple' accept='image/*'>
 					<label for="selectFile">
 						<img id="addImageIcon" src="{{ asset('img/camera2.png') }}" alt="Add Image">사진
 					</label>						
