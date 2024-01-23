@@ -462,7 +462,7 @@ class ContentsadminController extends Controller
     }
 
     public function admindeletecomment(Request $request) {
-        if(!isset($request['board_id'])) {
+        if(!isset($request['comment_id'])) {
             return redirect()->route('comments.declaration');
         }
         foreach ($request['comment_id'] as $comment_id) {
