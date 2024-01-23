@@ -36,7 +36,7 @@
 			</div>		
 			<div class="insert_textarea_container">
 				<label for="u_content" >			  
-				<textarea name="u_content" id="u_content" class="insert_textarea" >{{ $result->board_content }}</textarea></label><br>
+				<textarea name="u_content" id="u_content" class="insert_textarea" placeholder="{!! $result->board_content !!}"></textarea></label><br>
 			</div>	
 			
 			<input type="hidden" name="imgUrl" id="inputHiddenImgUrl">

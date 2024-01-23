@@ -157,9 +157,9 @@ class BoardController extends Controller
         $boardData['category_id'] = (int)$request->input('category_id');
       
         // 게시글 내용에서 줄 바꿈을 HTML <br> 태그로 변환
-        // $boardData['board_content'] = nl2br($boardData['board_content']);        
+        $boardData['board_content'] = nl2br($boardData['board_content']);  
         // 게시글 데이터에 사용자 ID를 추가합니다.
-        $boardData['u_id'] = $u_id;    
+        $boardData['u_id'] = $u_id;
              
         
         // 이후에 게시글을 생성할 때 사용할 수 있습니다.
