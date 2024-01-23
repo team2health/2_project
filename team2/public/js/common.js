@@ -10,11 +10,9 @@ function toggleDropdown() {
 // 푸터 아이콘 opacity
 const BACKURL = document.referrer;
 const CURRENTURL = window.location.href;
-
-
 // let footericondiv = document.querySelectorAll('.footer-icon-div');
 function goBack() {
-    if (CURRENTURL.indexOf("mypage") !== -1) {
+    if (CURRENTURL.indexOf("mypage") !== -1 || CURRENTURL.indexOf("firstchkpassword") !== -1) {
         window.location.href = '/mypage';
     } else if (CURRENTURL.indexOf("categoryboard") !== -1 ) {
         window.location.href = '/board';
